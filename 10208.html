@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://qiniu.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "天验",
+            "enable": true,
+            "url": "https://tutorial.lengyue.video/?coupon=12ef4b1a-a3db-11ea-bb37-0242ac130002_cqx_850",
+            "src": "https://qiniu.cuiqingcai.com/bco2a.png",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "华为云",
+            "enable": false,
+            "url": "https://activity.huaweicloud.com/2020_618_promotion/index.html?bpName=5f9f98a29e2c40b780c1793086f29fe2&bindType=1&salesID=wangyubei",
+            "src": "https://qiniu.cuiqingcai.com/y42ik.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "张小鸡",
+            "enable": false,
+            "url": "http://www.zxiaoji.com/",
+            "src": "https://qiniu.cuiqingcai.com/fm72f.png",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "Luminati",
+            "src": "https://qiniu.cuiqingcai.com/ikkq9.jpg",
+            "url": "https://luminati-china.io/?affiliate=ref_5fbbaaa9647883f5c6f77095",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://qiniu.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="description" content="Docker File 解析： 构建简史 编写一个dockerfile的文件，符合dockerfile的规范 docker build 执行，获得一个自定义的镜像 docker 运行 Docker执行docker file文件的大致流程    docker 从基础镜像运行一个容器 执行一条指令并对容器作出修改 执行类似docker commit的操作提交一个新的镜像层 docker 在基于刚提交的">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="DockerFile">
+  <meta property="og:url" content="https://cuiqingcai.com/10208.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="Docker File 解析： 构建简史 编写一个dockerfile的文件，符合dockerfile的规范 docker build 执行，获得一个自定义的镜像 docker 运行 Docker执行docker file文件的大致流程    docker 从基础镜像运行一个容器 执行一条指令并对容器作出修改 执行类似docker commit的操作提交一个新的镜像层 docker 在基于刚提交的">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://qiniu.cuiqingcai.com/wp-content/uploads/2020/10/Docker-File%E9%95%9C%E5%83%8F%E8%A1%A8.png">
+  <meta property="og:image" content="https://qiniu.cuiqingcai.com/wp-content/uploads/2020/10/onbuil%E6%9E%84%E9%80%A0%E5%AE%9E%E4%BE%8B1.png">
+  <meta property="og:image" content="https://qiniu.cuiqingcai.com/wp-content/uploads/2020/10/onbuil%E6%9E%84%E9%80%A0%E5%AE%8C%E6%88%90.png">
+  <meta property="article:published_time" content="2020-10-01T04:50:54.000Z">
+  <meta property="article:modified_time" content="2021-07-13T14:55:23.080Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="崔庆才">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="PHP">
+  <meta property="article:tag" content="Java">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Spider">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Web">
+  <meta property="article:tag" content="Kubernetes">
+  <meta property="article:tag" content="深度学习">
+  <meta property="article:tag" content="机器学习">
+  <meta property="article:tag" content="数据分析">
+  <meta property="article:tag" content="网络">
+  <meta property="article:tag" content="IT">
+  <meta property="article:tag" content="技术">
+  <meta property="article:tag" content="博客">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://qiniu.cuiqingcai.com/wp-content/uploads/2020/10/Docker-File%E9%95%9C%E5%83%8F%E8%A1%A8.png">
+  <link rel="canonical" href="https://cuiqingcai.com/10208.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>DockerFile | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/10208.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="崔庆才的个人站点，记录生活的瞬间，分享学习的心得。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> DockerFile </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/Payne" class="author" itemprop="url" rel="index">Payne</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2020-10-01 12:50:54" itemprop="dateCreated datePublished" datetime="2020-10-01T12:50:54+08:00">2020-10-01</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">技术杂谈</span></a>
+                    </span>
+                  </span>
+                  <span id="/10208.html" class="post-meta-item leancloud_visitors" data-flag-title="DockerFile" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>4.5k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>4 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                  <div class="item">
+                    <a href="http://i0k.cn/4UUsd" target="_blank">
+                      <img src="https://qiniu.cuiqingcai.com/dsdhf.jpg">
+                    </a>
+                  </div>
+                </div>
+                <h1 id="Docker-File-解析："><a href="#Docker-File-解析：" class="headerlink" title="Docker File 解析："></a>Docker File 解析：</h1>
+                <h2 id="构建简史"><a href="#构建简史" class="headerlink" title="构建简史"></a>构建简史</h2>
+                <p>编写一个dockerfile的文件，符合dockerfile的规范 docker build 执行，获得一个自定义的镜像 docker 运行 Docker执行docker file文件的大致流程</p>
+                <blockquote>
+                  <p>docker 从基础镜像运行一个容器 执行一条指令并对容器作出修改 执行类似docker commit的操作提交一个新的镜像层 docker 在基于刚提交的镜像运行一个新容器 执行docker 中的下一条指令知道所有指令都执行完成</p>
+                </blockquote>
+                <h2 id="Docker-File基础知识："><a href="#Docker-File基础知识：" class="headerlink" title="Docker File基础知识："></a>Docker File基础知识：</h2>
+                <p><img src="https://qiniu.cuiqingcai.com/wp-content/uploads/2020/10/Docker-File镜像表.png" alt=""> 每条<strong>保留字</strong>指令必须为大写字母且后面要跟随至少一个参数 指令从上到下、从左至右执行 ‘#’ ：表示注释 每条指令都会创建一个新的镜像层，并对镜像进行提交</p>
+                <h2 id="Docker-File-体系结构："><a href="#Docker-File-体系结构：" class="headerlink" title="Docker File 体系结构："></a>Docker File 体系结构：</h2>
+                <h3 id="保留字指令："><a href="#保留字指令：" class="headerlink" title="保留字指令："></a>保留字指令：</h3>
+                <p>FROM：基础镜像，当前这个新的镜像是基于哪个镜像（scratch） MAINTAINER：镜像作者+邮箱 RUN：容器构建时所需要运行的命令 EXPOSE：当前容器对外暴露的端口号 WORKDIR：指定在创建容器后，终端默认登陆的进来工作目录，一个落脚点 ENV：用于构建镜像过程中设置环境变量 ADD: 拷贝加解压缩：将宿主机目录下的文件拷贝进镜像且add命令会自动处理rul和解压tar压缩包 COPY:将从构建上下文目录中&lt;源路径&gt;的文件/目录复制到新的一层的镜像内的&lt;目标路径&gt;位置</p>
+                <ul>
+                  <li>COPY src dest</li>
+                  <li>COPY [“src”,”dest”]</li>
+                </ul>
+                <p>VOLUME:容器数据卷，用于数据保存和持久化工作 CMD：</p>
+                <ul>
+                  <li>指定一个容器启动时要运行的命令</li>
+                  <li>DockerFile 中可以有多个CMD指令，<strong>但只有最后一个生效</strong>，CMD会被docker run 之后的参数替换！！！</li>
+                </ul>
+                <p>ENTRYPOINT:</p>
+                <ul>
+                  <li>指定一个容器启动时要运行的命令</li>
+                  <li>目的与CMD一样，都是在指定容器启动程序及参数</li>
+                  <li>不会被替换，被追加</li>
+                </ul>
+                <p>ONBUILD：触发器 当构建一个被继承Docker File时运行的命令，父镜像在被子继承后父镜像的onbuild被触发 <img src="https://qiniu.cuiqingcai.com/wp-content/uploads/2020/10/onbuil构造实例1.png" alt=""> <img src="https://qiniu.cuiqingcai.com/wp-content/uploads/2020/10/onbuil构造完成.png" alt=""></p>
+                <h1 id="关键字详解"><a href="#关键字详解" class="headerlink" title="关键字详解"></a>关键字详解</h1>
+                <h2 id="Dockerfile-分为四部分："><a href="#Dockerfile-分为四部分：" class="headerlink" title="Dockerfile 分为四部分："></a>Dockerfile 分为四部分：</h2>
+                <blockquote>
+                  <p>基础镜像信息、维护者信息、镜像操作指令和容器启动时执行指令。</p>
+                </blockquote>
+                <h2 id="基础镜像信息"><a href="#基础镜像信息" class="headerlink" title="基础镜像信息"></a>基础镜像信息</h2>
+                <h3 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h3>
+                <figure class="highlight dts">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="meta"># 格式</span></span><br><span class="line">FROM <span class="params">&lt;image&gt;</span> or FROM <span class="params">&lt;image&gt;</span>:<span class="params">&lt;tag&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <blockquote>
+                  <p>如果在同一个Dockerfile中创建多个镜像时，可以使用多个 <code>FROM</code> 指令（每个镜像一次）</p>
+                </blockquote>
+                <p>注意: Dockerfile每个保留字都会在docker容器中新建一层镜像层, 合理的减少镜像层以达节省资源的目的</p>
+                <figure class="highlight dockerfile">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># base</span></span><br><span class="line"><span class="keyword">FROM</span> python:<span class="number">3.7</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> pip3 install requests</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> pip3 install bs4</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> pip3 install scrapy</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># other</span></span><br><span class="line"><span class="keyword">FROM</span> python:<span class="number">3.7</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> pip3 install requests bs64 scrapy <span class="comment"># Python通过空格分隔,达到安装多个包的效果</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># batter</span></span><br><span class="line"><span class="comment"># 外部建立所安装包</span></span><br><span class="line">pip3 freeze &gt;&gt; requirements.txt </span><br><span class="line"><span class="comment"># 在Dockerfile 中</span></span><br><span class="line"><span class="keyword">FROM</span> python:<span class="number">3.7</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> pip3 install -r requirements.txt</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <blockquote>
+                  <p>分析: 达到的效果虽相同,但所用资源却不同, base 所使用的资源约为other,batter的3/5</p>
+                  <ul>
+                    <li>base 三层</li>
+                    <li>other 一层</li>
+                    <li>batter 一层</li>
+                  </ul>
+                  <ol>
+                    <li>若所需要使用到的第三方库较少,建议使用other</li>
+                    <li>在实际工程中用到的第三方库大多情况下都大于三个,方法二虽好.但所需导入的包一多,很可能出现单词拼写错误, 格式不符</li>
+                  </ol>
+                </blockquote>
+                <h2 id="维护者信息-非必须"><a href="#维护者信息-非必须" class="headerlink" title="维护者信息(非必须)"></a>维护者信息(非必须)</h2>
+                <h3 id="MAINTAINER"><a href="#MAINTAINER" class="headerlink" title="MAINTAINER"></a>MAINTAINER</h3>
+                <figure class="highlight applescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line">MAINTAINR &lt;<span class="built_in">name</span>&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="镜像操作指令-按需择选"><a href="#镜像操作指令-按需择选" class="headerlink" title="镜像操作指令(按需择选)"></a>镜像操作指令(按需择选)</h2>
+                <h3 id="COPY"><a href="#COPY" class="headerlink" title="COPY"></a>COPY</h3>
+                <blockquote>
+                  <p>作用： 复制文件指令，从上下文 目录中复制或目录， 到容器中的指定路径 同等需求下建议使用COPY</p>
+                </blockquote>
+                <figure class="highlight xml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"># 格式</span><br><span class="line">COPY <span class="tag">&lt;<span class="name">src</span>&gt;</span> <span class="tag">&lt;<span class="name">dest</span>&gt;</span></span><br><span class="line">COPY [--chown=<span class="tag">&lt;<span class="name">user</span>&gt;</span>:<span class="tag">&lt;<span class="name">group</span>&gt;</span>] <span class="tag">&lt;<span class="name">源路径1</span>&gt;</span>...  <span class="tag">&lt;<span class="name">目标路径</span>&gt;</span></span><br><span class="line">COPY [--chown=<span class="tag">&lt;<span class="name">user</span>&gt;</span>:<span class="tag">&lt;<span class="name">group</span>&gt;</span>] ["<span class="tag">&lt;<span class="name">源路径1</span>&gt;</span>",...  "<span class="tag">&lt;<span class="name">目标路径</span>&gt;</span>"]</span><br><span class="line"># [--chown=<span class="tag">&lt;<span class="name">user</span>&gt;</span>:<span class="tag">&lt;<span class="name">group</span>&gt;</span>]：可选参数，用户改变复制到容器内文件的拥有者和属组。</span><br><span class="line"># 复制本地主机的 `<span class="tag">&lt;<span class="name">src</span>&gt;</span>`（为 Dockerfile 所在目录的相对路径）到容器中的 `<span class="tag">&lt;<span class="name">dest</span>&gt;</span>`</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <blockquote>
+                  <p><strong>&lt;源路径&gt;</strong>：源文件或者源目录，这里可以是通配符表达式，其通配符规则要满足 Go 的 filepath.Match 规则。</p>
+                  <figure class="highlight dockerfile">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                        </td>
+                        <td class="code">
+                          <pre><span class="line"><span class="keyword">COPY</span><span class="bash"> hom* dir/</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> hom?.txt dir/</span></span><br></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p><strong>&lt;目标路径&gt;</strong>：容器内的指定路径，该路径不用事先建好，路径不存在的话，会自动创建。</p>
+                </blockquote>
+                <h3 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a>ADD</h3>
+                <blockquote>
+                  <p>作用： 复制文件指令，从上下文 目录中复制或目录， 到容器中的指定路径 同等需求下建议使用COPY</p>
+                </blockquote>
+                <figure class="highlight autohotkey">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"># 格式 </span><br><span class="line">ADD &lt;src&gt; &lt;dest&gt;`</span><br><span class="line"></span><br><span class="line"># 该命令将复制指定的 `&lt;src&gt;` 到容器中的 `&lt;dest&gt;`。 </span><br><span class="line"># 其中 `&lt;src&gt;` 可以是Dockerfile所在目录的一个相对路径；也可以是一个 URL；还可以是一个 tar 文件（自动解压为目录）。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <blockquote>
+                  <ul>
+                    <li>ADD 的优点：在执行 &lt;源文件&gt; 为 tar 压缩文件的话，压缩格式为 gzip, bzip2 以及 xz 的情况下，会自动复制并解压到 &lt;目标路径&gt;。</li>
+                    <li>ADD 的缺点：在不解压的前提下，无法复制 tar 压缩文件。会令镜像构建缓存失效，从而可能会令镜像构建变得比较缓慢。具体是否使用，可以根据是否需要自动解压来决定</li>
+                  </ul>
+                </blockquote>
+                <p>小结：</p>
+                <ul>
+                  <li>ADD 与 COPY 功能无明显差异， 但针对性不同</li>
+                  <li>当使用本地文件为源目录时，建议使用Copy</li>
+                  <li>当需使用压缩包中文件时构建时，建议使用Copy</li>
+                </ul>
+                <h3 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h3>
+                <blockquote>
+                  <p>作用: 用于在容器内执行命令</p>
+                </blockquote>
+                <figure class="highlight dockerfile">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> &lt;<span class="built_in">command</span>&gt; [option] <span class="comment"># 相当于shell格式</span></span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> [<span class="string">"command"</span>, <span class="string">"option1"</span>, <span class="string">'option2'</span>] <span class="comment"># 相当于 exec 格式</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a>WORKDIR</h3>
+                <blockquote>
+                  <p>作用：指定工作目录。用 WORKDIR 指定的工作目录，会在构建镜像的每一层中都存在。（WORKDIR 指定的工作(主)目录，必须是提前创建好）。 docker build 构建镜像过程中的，每一个 RUN 命令都是新建的一层。只有通过 WORKDIR 创建的目录才会一直存在。</p>
+                </blockquote>
+                <figure class="highlight dockerfile">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash">　&lt;dir&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="USE"><a href="#USE" class="headerlink" title="USE"></a>USE</h3>
+                <blockquote>
+                  <p>作用:用于指定将使用命令的用户和用户组 此处只是切换后续命令执行的用户（用户和用户组必须提前已经存在）。 由于docker 无设置,默认需在root权限下运行 正所谓权限越大能力越大,若被入侵则造成损失较于其他权限为最大 安全与灵活性 二者相对斟酌</p>
+                </blockquote>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line">USER &lt;username&gt;[:&lt;usergroup&gt;]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h3>
+                <blockquote>
+                  <p>作用:仅声明端口</p>
+                  <ul>
+                    <li>方便配置映射</li>
+                    <li>在运行时使用随机端口映射时，也就是 docker run -P 时，会自动随机映射 EXPOSE 的端口。</li>
+                  </ul>
+                </blockquote>
+                <figure class="highlight dts">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="meta"># 格式</span></span><br><span class="line">EXPORT <span class="params">&lt;port1&gt;</span> [<span class="params">&lt;prot2&gt;</span> <span class="params">&lt;prot3&gt;</span> ...]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="执行指令"><a href="#执行指令" class="headerlink" title="执行指令"></a>执行指令</h2>
+                <h3 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h3>
+                <blockquote>
+                  <p>作用: 类似于 RUN命令,但运行处不同</p>
+                  <ul>
+                    <li>RUN 在Docker build 前运行</li>
+                    <li>CMD 在docker run 后运行</li>
+                  </ul>
+                  <p>注意:</p>
+                  <ul>
+                    <li>当 Dockerfile 中存在多个 CMD 指令，<strong>仅最后一个生效。</strong></li>
+                    <li>CMD 指令指定的程序可被 docker run 命令行参数中指定要运行的程序所覆盖。</li>
+                  </ul>
+                  <p>当使用自定制镜像时,大致流程为</p>
+                  <ul>
+                    <li>编写业务代码</li>
+                    <li>构建定制镜像(docker build)</li>
+                    <li>docker 中运行业务 (Docker run)</li>
+                  </ul>
+                </blockquote>
+                <figure class="highlight dockerfile">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> &lt;ShellCommand1 [option]&gt; [&amp;&amp;ShellCommand2[option] ]</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"&lt;可执行命令或文件&gt;"</span>, <span class="string">"&lt;option1&gt;"</span>, <span class="string">"&lt;option2&gt;"</span>, ... ]</span></span><br><span class="line"><span class="comment"># 此写法为保留字 ENTRYPOINT 指令指定的程序提供默认参数</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"&lt;command1&gt;"</span>, <span class="string">"&lt;command2&gt;"</span>, <span class="string">"&lt;command3&gt;"</span>, ...]</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h3>
+                <blockquote>
+                  <p>作用: 功能与CMD相似,但不会被docker run 后的指定参数所覆盖, 命令行参数会被当作参数送给 ENTRYPOINT 指令指定的程序。 但是当docker run 使用了 —entrypoint 选项此选项的参数,可当作要运行的程序覆盖 ENTRYPOINT 指令指定的程序。 ENTRYPOINT CMD对比 同: 多个 指令，<strong>仅最后一个生效。</strong> 异: ENTRYPOINT选项的参数可当作要运行的程序覆盖 ENTRYPOINT 指令指定的程序。</p>
+                </blockquote>
+                <figure class="highlight dockerfile">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">"&lt;可执行命令或文件&gt;"</span>,<span class="string">"option1"</span>, <span class="string">"option2"</span>]</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a>ENV</h3>
+                <blockquote>
+                  <p>作用：配置容器内的环境变量，且保存，可以被后续 指令使用</p>
+                </blockquote>
+                <figure class="highlight dts">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="meta"># 格式</span></span><br><span class="line">ENV <span class="params">&lt;Key&gt;</span> <span class="params">&lt;Values&gt;</span></span><br><span class="line">ENV <span class="params">&lt;Key1&gt;</span>=<span class="params">&lt;Values1&gt;</span>, <span class="params">&lt;Key2&gt;</span>=<span class="params">&lt;Values2&gt;</span> ...</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="ARG"><a href="#ARG" class="headerlink" title="ARG"></a>ARG</h3>
+                <blockquote>
+                  <p>作用：配置容器内的环境变量，且保存，可以被后续 指令使用（与ENV功能相似） 不同：作用域不一样。ARG 设置的环境变量仅对 Dockerfile 内有效 也就是说只有 docker build 的过程中有效，构建好的镜像内不存在此环境变量。</p>
+                  <figure class="highlight armasm">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><span class="line">1</span><br></pre>
+                        </td>
+                        <td class="code">
+                          <pre><span class="line">构建命令 docker <span class="keyword">build </span>中可以用 --<span class="keyword">build-arg </span>&lt;参数名&gt;=&lt;值&gt; 来覆盖。</span><br></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                </blockquote>
+                <figure class="highlight dts">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="meta"># 格式</span></span><br><span class="line">ARG <span class="params">&lt;key&gt;</span>[=默认值], <span class="params">&lt;Value&gt;</span></span><br><span class="line"><span class="meta"># 若不写Value 则Build时为自己写的默认值</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="VOLUME"><a href="#VOLUME" class="headerlink" title="VOLUME"></a>VOLUME</h3>
+                <blockquote>
+                  <p>作用：定义匿名数据卷。在启动容器时忘记挂载数据卷，会自动挂载到匿名卷。</p>
+                  <ul>
+                    <li>避免重要的数据，因容器重启而丢失</li>
+                    <li>避免容器不断变大</li>
+                  </ul>
+                </blockquote>
+                <figure class="highlight dockerfile">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># 格式：</span></span><br><span class="line"><span class="keyword">VOLUME</span><span class="bash"> [<span class="string">"&lt;路径1&gt;"</span>, <span class="string">"&lt;路径2&gt;"</span>...]</span></span><br><span class="line"><span class="keyword">VOLUME</span><span class="bash"> &lt;路径&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在启动容器 docker run 的时候，我们可以通过 -v 参数修改挂载点。</p>
+                <h3 id="HEALTHCHECK"><a href="#HEALTHCHECK" class="headerlink" title="HEALTHCHECK"></a>HEALTHCHECK</h3>
+                <blockquote>
+                  <p>作用: 用于指定某个程序或者指令来监控 docker 容器服务的运行状态。</p>
+                </blockquote>
+                <p>格式：</p>
+                <figure class="highlight dockerfile">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">HEALTHCHECK</span><span class="bash"> [option] CMD &lt;<span class="built_in">command</span>&gt; <span class="comment">#设置检查容器健康状况的命令</span></span></span><br><span class="line"><span class="keyword">HEALTHCHECK</span><span class="bash"> NONE <span class="comment"># 如果基础镜像有健康检查指令，使用这行可以屏蔽掉其健康检查指令</span></span></span><br><span class="line"><span class="keyword">HEALTHCHECK</span><span class="bash"> [option] CMD &lt;<span class="built_in">command</span>&gt; <span class="comment"># CMD 后面跟随的命令使用</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="ONBUILD"><a href="#ONBUILD" class="headerlink" title="ONBUILD"></a>ONBUILD</h3>
+                <blockquote>
+                  <p>作用: 用于延迟构建命令的执行。 先构建一个父类镜像(ONBUILD 在父类中,但不立即执行),后子类继承此父类镜像(执行父类的ONBUILD 命令) 本次并不执行,当镜像调用它时,将执行父类中ONBUILD命令</p>
+                </blockquote>
+                <figure class="highlight dockerfile">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># 格式</span></span><br><span class="line"><span class="keyword">ONBUILD</span> &lt;其它指令&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/10207.html" rel="prev" title="Docker容器数据卷">
+                      <i class="fa fa-chevron-left"></i> Docker容器数据卷 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/10241.html" rel="next" title="近学习分布式感想随笔"> 近学习分布式感想随笔 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-File-解析："><span class="nav-number">1.</span> <span class="nav-text">Docker File 解析：</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#构建简史"><span class="nav-number">1.1.</span> <span class="nav-text">构建简史</span></a></li>
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-File基础知识："><span class="nav-number">1.2.</span> <span class="nav-text">Docker File基础知识：</span></a></li>
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-File-体系结构："><span class="nav-number">1.3.</span> <span class="nav-text">Docker File 体系结构：</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#保留字指令："><span class="nav-number">1.3.1.</span> <span class="nav-text">保留字指令：</span></a></li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#关键字详解"><span class="nav-number">2.</span> <span class="nav-text">关键字详解</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile-分为四部分："><span class="nav-number">2.1.</span> <span class="nav-text">Dockerfile 分为四部分：</span></a></li>
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#基础镜像信息"><span class="nav-number">2.2.</span> <span class="nav-text">基础镜像信息</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#FROM"><span class="nav-number">2.2.1.</span> <span class="nav-text">FROM</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#维护者信息-非必须"><span class="nav-number">2.3.</span> <span class="nav-text">维护者信息(非必须)</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#MAINTAINER"><span class="nav-number">2.3.1.</span> <span class="nav-text">MAINTAINER</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#镜像操作指令-按需择选"><span class="nav-number">2.4.</span> <span class="nav-text">镜像操作指令(按需择选)</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#COPY"><span class="nav-number">2.4.1.</span> <span class="nav-text">COPY</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#ADD"><span class="nav-number">2.4.2.</span> <span class="nav-text">ADD</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#RUN"><span class="nav-number">2.4.3.</span> <span class="nav-text">RUN</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#WORKDIR"><span class="nav-number">2.4.4.</span> <span class="nav-text">WORKDIR</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#USE"><span class="nav-number">2.4.5.</span> <span class="nav-text">USE</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#EXPOSE"><span class="nav-number">2.4.6.</span> <span class="nav-text">EXPOSE</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#执行指令"><span class="nav-number">2.5.</span> <span class="nav-text">执行指令</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#CMD"><span class="nav-number">2.5.1.</span> <span class="nav-text">CMD</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#ENTRYPOINT"><span class="nav-number">2.5.2.</span> <span class="nav-text">ENTRYPOINT</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#ENV"><span class="nav-number">2.5.3.</span> <span class="nav-text">ENV</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#ARG"><span class="nav-number">2.5.4.</span> <span class="nav-text">ARG</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#VOLUME"><span class="nav-number">2.5.5.</span> <span class="nav-text">VOLUME</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#HEALTHCHECK"><span class="nav-number">2.5.6.</span> <span class="nav-text">HEALTHCHECK</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#ONBUILD"><span class="nav-number">2.5.7.</span> <span class="nav-text">ONBUILD</span></a></li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">崔庆才的个人站点，记录生活的瞬间，分享学习的心得。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">538</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">23</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">143</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://tutorial.lengyue.video/?coupon=12ef4b1a-a3db-11ea-bb37-0242ac130002_cqx_850" target="_blank" rel="noopener">
+                <img src="https://qiniu.cuiqingcai.com/bco2a.png" style=" width: 100%;">
+              </a>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc" target="_blank" rel="noopener">
+                <img src="https://qiniu.cuiqingcai.com/0ywun.png" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/599/" style="font-size: 10px;">599</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/Bootstrap/" style="font-size: 11.25px;">Bootstrap</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11.25px;">Eclipse</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13.75px;">GitHub</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/PHP/" style="font-size: 11.25px;">PHP</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/PySpider/" style="font-size: 10px;">PySpider</a> <a href="/tags/Python/" style="font-size: 16.25px;">Python</a> <a href="/tags/Python3/" style="font-size: 12.5px;">Python3</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy/" style="font-size: 10px;">Scrapy</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/Selenium/" style="font-size: 10px;">Selenium</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/Ubuntu/" style="font-size: 11.25px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11.25px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a> <a href="/tags/WordPress/" style="font-size: 13.75px;">WordPress</a> <a href="/tags/Youtube/" style="font-size: 11.25px;">Youtube</a> <a href="/tags/object-Object/" style="font-size: 10px;">[object Object]</a> <a href="/tags/android/" style="font-size: 10px;">android</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/cocos2d-x/" style="font-size: 10px;">cocos2d-x</a> <a href="/tags/e6/" style="font-size: 10px;">e6</a> <a href="/tags/fitvids/" style="font-size: 10px;">fitvids</a> <a href="/tags/git/" style="font-size: 11.25px;">git</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/js%E9%80%86%E5%90%91/" style="font-size: 10px;">js逆向</a> <a href="/tags/kubernetes/" style="font-size: 10px;">kubernetes</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/logging/" style="font-size: 10px;">logging</a> <a href="/tags/matlab/" style="font-size: 11.25px;">matlab</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/pytube/" style="font-size: 11.25px;">pytube</a> <a href="/tags/pywin32/" style="font-size: 10px;">pywin32</a> <a href="/tags/style/" style="font-size: 10px;">style</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/uwsgi/" style="font-size: 10px;">uwsgi</a> <a href="/tags/validate-cert/" style="font-size: 10px;">validate_cert</a> <a href="/tags/vsftpd/" style="font-size: 10px;">vsftpd</a> <a href="/tags/wamp/" style="font-size: 10px;">wamp</a> <a href="/tags/wineQQ/" style="font-size: 10px;">wineQQ</a> <a href="/tags/%E4%B8%83%E7%89%9B/" style="font-size: 11.25px;">七牛</a> <a href="/tags/%E4%B8%8A%E6%B5%B7/" style="font-size: 10px;">上海</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/" style="font-size: 10px;">个人网站</a> <a href="/tags/%E4%B8%BB%E9%A2%98/" style="font-size: 10px;">主题</a> <a href="/tags/%E4%BA%91%E5%AD%98%E5%82%A8/" style="font-size: 10px;">云存储</a> <a href="/tags/%E4%BA%AC%E4%B8%9C%E4%BA%91/" style="font-size: 10px;">京东云</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" style="font-size: 12.5px;">人工智能</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 10px;">代理</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E4%BC%98%E5%8C%96/" style="font-size: 10px;">优化</a> <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" style="font-size: 10px;">位运算</a> <a href="/tags/%E5%85%AC%E4%BC%97%E5%8F%B7/" style="font-size: 10px;">公众号</a> <a href="/tags/%E5%88%86%E4%BA%AB/" style="font-size: 10px;">分享</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">分布式</a> <a href="/tags/%E5%88%9B%E4%B8%9A/" style="font-size: 10px;">创业</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 11.25px;">前端</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a> <a href="/tags/%E5%8E%9F%E7%94%9FAPP/" style="font-size: 10px;">原生APP</a> <a href="/tags/%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 12.5px;">反爬虫</a> <a href="/tags/%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">命令</a> <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80/" style="font-size: 10px;">响应式布局</a> <a href="/tags/%E5%9F%9F%E5%90%8D%E7%BB%91%E5%AE%9A/" style="font-size: 10px;">域名绑定</a> <a href="/tags/%E5%A4%A7%E4%BC%97%E7%82%B9%E8%AF%84/" style="font-size: 10px;">大众点评</a> <a href="/tags/%E5%AD%97%E4%BD%93%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">字体反爬虫</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E9%97%AE%E9%A2%98/" style="font-size: 10px;">字符问题</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" style="font-size: 10px;">学习方法</a> <a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 10px;">安卓</a> <a href="/tags/%E5%AE%9E%E7%94%A8/" style="font-size: 10px;">实用</a> <a href="/tags/%E5%B4%94%E5%BA%86%E6%89%8D/" style="font-size: 18.75px;">崔庆才</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">开发工具</a> <a href="/tags/%E5%BE%AE%E8%BD%AF/" style="font-size: 10px;">微软</a> <a href="/tags/%E6%89%8B%E6%9C%BA%E8%AE%BF%E9%97%AE/" style="font-size: 10px;">手机访问</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%95%99%E8%82%B2/" style="font-size: 10px;">教育</a> <a href="/tags/%E6%97%85%E6%B8%B8/" style="font-size: 10px;">旅游</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 10px;">日志</a> <a href="/tags/%E6%9D%9C%E5%85%B0%E7%89%B9/" style="font-size: 11.25px;">杜兰特</a> <a href="/tags/%E6%A1%8C%E9%9D%A2/" style="font-size: 10px;">桌面</a> <a href="/tags/%E6%B1%9F%E5%8D%97/" style="font-size: 10px;">江南</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 15px;">爬虫</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" style="font-size: 10px;">环境变量</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">生活笔记</a> <a href="/tags/%E7%99%BB%E5%BD%95/" style="font-size: 10px;">登录</a> <a href="/tags/%E7%9F%A5%E4%B9%8E/" style="font-size: 10px;">知乎</a> <a href="/tags/%E7%9F%AD%E4%BF%A1/" style="font-size: 10px;">短信</a> <a href="/tags/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81/" style="font-size: 10px;">短信验证码</a> <a href="/tags/%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6/" style="font-size: 10px;">笔记软件</a> <a href="/tags/%E7%AF%AE%E7%BD%91/" style="font-size: 10px;">篮网</a> <a href="/tags/%E7%BA%B8%E5%BC%A0/" style="font-size: 10px;">纸张</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 10px;">网站</a> <a href="/tags/%E8%82%89%E5%A4%B9%E9%A6%8D/" style="font-size: 10px;">肉夹馍</a> <a href="/tags/%E8%A5%BF%E5%B0%91%E7%88%B7/" style="font-size: 10px;">西少爷</a> <a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 10px;">视频</a> <a href="/tags/%E8%B0%B7%E6%AD%8C%E9%AA%8C%E8%AF%81%E7%A0%81/" style="font-size: 10px;">谷歌验证码</a> <a href="/tags/%E8%BF%90%E8%90%A5/" style="font-size: 10px;">运营</a> <a href="/tags/%E8%BF%9C%E7%A8%8B/" style="font-size: 10px;">远程</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%85%8D%E7%BD%AE/" style="font-size: 10px;">配置</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a> <a href="/tags/%E9%98%BF%E6%9D%9C/" style="font-size: 10px;">阿杜</a> <a href="/tags/%E9%9D%99%E8%A7%85/" style="font-size: 17.5px;">静觅</a> <a href="/tags/%E9%A2%A0%E8%A6%86/" style="font-size: 10px;">颠覆</a> <a href="/tags/%E9%A3%9E%E4%BF%A1/" style="font-size: 10px;">飞信</a> <a href="/tags/%E9%B8%BF%E8%92%99/" style="font-size: 10px;">鸿蒙</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">13</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">15</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">38</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">258</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">86</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">2</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/ou6mm.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://diygod.me/" target="_blank" rel="noopener">DIYgod</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.jankl.com/img/titleshu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.jankl.com/" target="_blank" rel="noopener">liberalist</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/4i7yf.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lizenghai.com/" target="_blank" rel="noopener">Python量化投资</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/shwr6.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://lanbing510.info/" target="_blank" rel="noopener">冰蓝</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/blvoh.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://lengyue.me/" target="_blank" rel="noopener">冷月</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/22uv1.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.cenchong.com/" target="_blank" rel="noopener">岑冲博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/ev9kl.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.zxiaoji.com/" target="_blank" rel="noopener">张小鸡</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.chrafz.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chrafz.com/" target="_blank" rel="noopener">张弦先生</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.503error.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.503error.com/" target="_blank" rel="noopener">张志明个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://seofangfa.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://seofangfa.com/" target="_blank" rel="noopener">方法SEO</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/lfmj3.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://frankchen.xyz/" target="_blank" rel="noopener">不正经数据科学家</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/129d8.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.bysocket.com/" target="_blank" rel="noopener">泥瓦匠BYSocket</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.xiongge.club/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.xiongge.club/" target="_blank" rel="noopener">熊哥club</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/3w4fe.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://zerlong.com/" target="_blank" rel="noopener">知语</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/262r1.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.ysir308.com/" target="_blank" rel="noopener">程序员虾说</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/8g1fk.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.laodong.me/" target="_blank" rel="noopener">老董博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/2y43o.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://bbs.nightteam.cn/" target="_blank" rel="noopener">夜幕爬虫安全论坛</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://qiniu.cuiqingcai.com/zvc3w.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.weishidong.com/" target="_blank" rel="noopener">韦世东的技术专栏</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; <span itemprop="copyrightYear">2021</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">2.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">38:36</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '779c1fa43a38368d053b8f0a6b459786',
+          proxy: 'https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>
