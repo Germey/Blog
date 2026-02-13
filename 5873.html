@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="本节来详细说明一下 Seq2Seq 模型中一个非常有用的 Attention 的机制，并结合 TensorFlow 中的 AttentionWrapper 来剖析一下其代码实现。 Seq2Seq 首先来简单说明一下 Seq2Seq 模型，如果搞过深度学习，想必一定听说过 Seq2Seq 模型，Seq2Seq 其实就是 Sequence to Sequence，也简称 S2S，也可以称之为 Enco">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Attention原理及TensorFlow AttentionWrapper源码解析">
+  <meta property="og:url" content="https://cuiqingcai.com/5873.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="本节来详细说明一下 Seq2Seq 模型中一个非常有用的 Attention 的机制，并结合 TensorFlow 中的 AttentionWrapper 来剖析一下其代码实现。 Seq2Seq 首先来简单说明一下 Seq2Seq 模型，如果搞过深度学习，想必一定听说过 Seq2Seq 模型，Seq2Seq 其实就是 Sequence to Sequence，也简称 S2S，也可以称之为 Enco">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://github.com/Germey/AI/raw/master/assets/2018-03-23-16-34-19.jpg">
+  <meta property="og:image" content="https://github.com/Germey/AI/raw/master/assets/2018-03-23-19-42-16.jpg">
+  <meta property="og:image" content="https://github.com/Germey/AI/raw/master/assets/2018-03-23-17-38-45.jpg">
+  <meta property="og:image" content="https://github.com/Germey/AI/raw/master/assets/2018-03-23-19-35-28.jpg">
+  <meta property="article:published_time" content="2018-03-24T17:41:33.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.277Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://github.com/Germey/AI/raw/master/assets/2018-03-23-16-34-19.jpg">
+  <link rel="canonical" href="https://cuiqingcai.com/5873.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>Attention原理及TensorFlow AttentionWrapper源码解析 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/5873.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> Attention原理及TensorFlow AttentionWrapper源码解析 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2018-03-25 01:41:33" itemprop="dateCreated datePublished" datetime="2018-03-25T01:41:33+08:00">2018-03-25</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/5873.html" class="post-meta-item leancloud_visitors" data-flag-title="Attention原理及TensorFlow AttentionWrapper源码解析" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>14k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>13 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>本节来详细说明一下 Seq2Seq 模型中一个非常有用的 Attention 的机制，并结合 TensorFlow 中的 AttentionWrapper 来剖析一下其代码实现。</p>
+                <h2 id="Seq2Seq"><a href="#Seq2Seq" class="headerlink" title="Seq2Seq"></a><a href="https://github.com/Germey/AI/blob/master/Attention%E5%8E%9F%E7%90%86%E5%8F%8ATensorFlow%20AttentionWrapper%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md#seq2seq" target="_blank" rel="noopener"></a>Seq2Seq</h2>
+                <p>首先来简单说明一下 Seq2Seq 模型，如果搞过深度学习，想必一定听说过 Seq2Seq 模型，Seq2Seq 其实就是 Sequence to Sequence，也简称 S2S，也可以称之为 Encoder-Decoder 模型，这个模型的核心就是编码器（Encoder）和解码器（Decoder）组成的，架构雏形是在 2014 年由论文 <a href="https://arxiv.org/abs/1406.1078" target="_blank" rel="noopener">Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation, Cho et al</a> 提出的，后来 <a href="https://arxiv.org/abs/1409.3215" target="_blank" rel="noopener">Sequence to Sequence Learning with Neural Networks, Sutskever et al</a> 算是比较正式地提出了 Sequence to Sequence 的架构，后来 <a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="noopener">Neural Machine Translation by Jointly Learning to Align and Translate, Bahdanau et al</a> 又提出了 Attention 机制，将 Seq2Seq 模型推上神坛，并横扫了非常多的任务，现在也非常广泛地用于机器翻译、对话生成、文本摘要生成等各种任务上，并取得了非常好的效果。 下面的图示意了 Seq2Seq 模型的基本架构： <a href="https://github.com/Germey/AI/blob/master/assets/2018-03-23-16-34-19.jpg" target="_blank" rel="noopener"><img src="https://github.com/Germey/AI/raw/master/assets/2018-03-23-16-34-19.jpg" alt=""></a> 可以看到图中有一个中间状态 $ c $ 向量，在 $ c $ 向量左侧的我们可以称之为编码器（Encoder），编码器这里示意的是 RNN 序列，另外 RNN 单元还可以使用 LSTM、GRU 等变体， 在编码器下方输入了 $ x_1 $、$ x_2 $、$ x_3 $、$ x_4 $，代表模型的输入内容，例如在翻译模型中可以分别代表“我爱中国”这四个字，这样经过序列处理，它就会得到最后的输出，我们将其表示为 $ c $ 向量，这样编码器的工作就完成了。在图中 $ c $ 向量的右侧部分我们可以称之为解码器（Decoder），它拿到编码器生成的 $ c $ 向量，然后再进行序列解码，得到输出结果 $ y_1 $、$ y_2 $、$ y_3 $，例如刚才输入的“我爱中国”四个字便被解码成了 “I love China”，这样就实现了翻译任务，以上就是最基本的 Seq2Seq 模型原理。 另外还有一种变体，$ c $ 向量在每次解码的时候都会作为解码器的输入，其实原理都是类似的，如图所示： <a href="https://github.com/Germey/AI/blob/master/assets/2018-03-23-19-42-16.jpg" target="_blank" rel="noopener"><img src="https://github.com/Germey/AI/raw/master/assets/2018-03-23-19-42-16.jpg" alt=""></a> 这种模型架构是通用的，所以它的适用场景也非常广泛。如机器翻译、对话生成、文本摘要、阅读理解、语音识别，也可以用在一些趣味场景中，如诗词生成、对联生成、代码生成、评论生成等等，效果都很不错。</p>
+                <h2 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a><a href="https://github.com/Germey/AI/blob/master/Attention%E5%8E%9F%E7%90%86%E5%8F%8ATensorFlow%20AttentionWrapper%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md#attention" target="_blank" rel="noopener"></a>Attention</h2>
+                <p>通过上图我们可以发现，Encoder 把所有的输入序列编码成了一个 $ c $ 向量，然后使用 $ c $ 向量来进行解码，因此，$ c $ 向量中必须包含了原始序列中的所有信息，所以它的压力其实是很大的，而且由于 RNN 容易把前面的信息“忘记”掉，所以基本的 Seq2Seq 模型，对于较短的输入来说，效果还是可以接受的，但是在输入序列比较长的时候，$ c $ 向量存不下那么多信息，就会导致生成效果大大折扣。 Attention 机制解决了这个问题，它可以使得在输入文本长的时候精确率也不会有明显下降，它是怎么做的呢？既然一个 $ c $ 向量存不了，那么就引入多个 $ c $ 向量，称之为 $ c<em>1 $、$ c_2 $、…、$ c_i $，在解码的时候，这里的 $ i $ 对应着 Decoder 的解码位次，每次解码就利用对应的 $ c_i $ 向量来解码，如图所示： <a href="https://github.com/Germey/AI/blob/master/assets/2018-03-23-17-38-45.jpg" target="_blank" rel="noopener"><img src="https://github.com/Germey/AI/raw/master/assets/2018-03-23-17-38-45.jpg" alt=""></a> 这里的每个 $ c_i $ 向量其实包含了当前所输出与输入序列各个部分重要性的相关的信息。不同的 $ c_i $ 向量里面包含的输入信息各部分的权重是不同的，先放一个示意图： <a href="https://github.com/Germey/AI/blob/master/assets/2018-03-23-19-35-28.jpg" target="_blank" rel="noopener"><img src="https://github.com/Germey/AI/raw/master/assets/2018-03-23-19-35-28.jpg" alt=""></a> 还是上面的例子，例如输入信息是“我爱中国”，输出的的理想结果应该是“I love China”，在解码的时候，应该首先需要解码出 “I” 这个字符，这时候会用到 $ c_1 $ 向量，而 $ c_1 $ 向量包含的信息中，“我”这个字的重要性更大，因此它便倾向解码输出 “I”，当解码第二个字的时候，会用到 $ c_2 $ 向量，而 $ c_2 $ 向量包含的信息中，“爱” 这个字的重要性更大，因此会解码输出 “love”，在解码第三个字的时候，会用到 $ c_3 $ 向量，而 $ c_3 $向量包含的信息中，”中国” 这两个字的权重都比较大，因此会解码输出 “China”。所以其实，Attention 注意力机制中的 $ c_i $ 向量记录了不同解码时刻应该更关注于哪部分输入数据，也实现了编码解码过程的对齐。经过实验发现，这种机制可以有效解决输入信息过长时导致信息解码效果不理想的问题，另外解码生成效果同时也有提升。 下面我们以 Bahdanau 提出的 Attention 为例来详细剖析一下 Attention 机制。 在没有引入 Attention 之前，Decoder 在某个时刻解码的时候实际上是依赖于三个部分的，首先我们知道 RNN 中，每次输出结果会依赖于隐层和输入，在 Seq2Seq 模型中，还需要依赖于 $ c $ 向量，所以这里我们设在 $ i $ 时刻，解码器解码的内容是 $ y_i $，上一次解码结果是 $ y</em>{i-1} $，隐层输出是 $ s<em>t $，所以它们满足这样的关系： $$ y_i = g(y</em>{i-1}, s<em>i, c) <script type="math/tex">同时 $ s_i $ 和 $ c $ 还满足这样的关系：</script> s_i = f(s</em>{i-1}, y<em>{i-1}, c) <script type="math/tex">即每次的隐层输出是上一个隐层和上一个输出结果和 $ c $ 向量共同计算得出的。 但是刚才说了，这样会带来一些问题，$ c $ 向量不足以包含输入内容的所有信息，尤其是在输入序列特别长的情况下，所以这里我们不再使用一个 $ c $ 向量，而是每一个解码过程对应一个 $ c_i $ 向量，所以公式改写如下：</script> y_i = g(y</em>{i-1}, s<em>i, c_i) <script type="math/tex">同时 $ s_i $ 的计算方式也变为如下公式：</script> s_i = f(s</em>{i-1}, y<em>{i-1}, c_i) $$ 所以，这里每次解码得出 $ y_i $ 时，都有与之对应的 $ c_i $ 向量。那么这个 $ c_i $ 向量又是怎么来的呢？实际上它是由编码器端每个时刻的隐含状态加权平均得到的，这里假设编码器端的的序列长度为 $ T_x $，序列位次用 $ j $ 来表示，编码器段每个时刻的隐含状态即为 $ h_1 $、$ h_2 $、…、$ h_j $、…、$ h</em>{T<em>x} $，对于解码器的第 $ i $ 时刻，对应的 $ c_i $ 表示如下： $$ c_i = \sum</em>{j=1}^{T<em>x} \alpha</em>{ij}h<em>j $$ 编码器输出的结果中，$ h_j $ 中包含了输入序列中的第 $ j $ 个词及前面的一些信息，如果是用了双向 RNN 的话，则包含的是第 $ j $ 个词即前后的一些词的信息，这里 $ \alpha</em>{ij} $ 代表了分配的权重，这代表在生成第 i 个结果的时候，对于输入信息的各个阶段的 $ hj $ 的注意力分配是不同的。 当 $ a<em>{ij} $ 的值越高，表示第 $ i $ 个输出在第 $ j $ 个输入上分配的注意力越多，这样就会导致在生成第 $ i $ 个输出的时候，受第 $ j $ 个输入的影响也就越大。 那么 $ a</em>{ij} $ 又是怎么得来的呢？其实它就又关系到第 $ i-1 $ 个输出隐藏状态 $ s<em>{i-1} $ 以及输入中的各个隐含状态 $ h_j $，公式表示如下： $$ \alpha</em>{ij} = \frac {exp(e<em>{ij})} {\sum</em>{k=1}^{T<em>x} exp(e</em>{ik})} <script type="math/tex">同时 $ e_{ij} $ 又表示为：</script> e<em>{ij} = a(s</em>{i-1}, h<em>j) = {v_a}^Ttanh(W_as</em>{i-1} + U<em>ah_j) $$ 这也就是说，这个权重就是 $ s</em>{i-1} $ 和 $ h<em>j $ 分别计算得到一个数值，然后再过一个 softmax 函数得到的，结果就是 $ \alpha</em>{ij} $。 因此 $ c<em>i $ 就可以表示为： $$ c_i = \sum</em>{j=1}^{T<em>x} softmax(a(s</em>{i-1}, h_j)) \cdot h_j $$ 以上便是整个 Attention 机制的推导过程。</p>
+                <h2 id="TensorFlow-AttentionWrapper"><a href="#TensorFlow-AttentionWrapper" class="headerlink" title="TensorFlow AttentionWrapper"></a><a href="https://github.com/Germey/AI/blob/master/Attention%E5%8E%9F%E7%90%86%E5%8F%8ATensorFlow%20AttentionWrapper%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md#tensorflow-attentionwrapper" target="_blank" rel="noopener"></a>TensorFlow AttentionWrapper</h2>
+                <p>我们了解了基本原理，但真正离程序实现出来其实还是有很大差距的，接下来我们就结合 TensorFlow 框架来了解一下 Attention 的实现机制。 在 TensorFlow 中，Attention 的相关实现代码是在 tensorflow/contrib/seq2seq/python/ops/attention_wrapper.py 文件中，这里面实现了两种 Attention 机制，分别是 BahdanauAttention 和 LuongAttention，其实现论文分别如下：</p>
+                <ul>
+                  <li><a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="noopener">Neural Machine Translation by Jointly Learning to Align and Translate, Bahdanau, et al</a></li>
+                  <li><a href="https://arxiv.org/abs/1508.04025" target="_blank" rel="noopener">Effective Approaches to Attention-based Neural Machine Translation, Luong, et al</a></li>
+                </ul>
+                <p>整个 attention_wrapper.py 文件中主要包含几个类，我们主要关注其中几个：</p>
+                <ul>
+                  <li>AttentionMechanism、_BaseAttentionMechanism、LuongAttention、BahdanauAttention 实现了 Attention 机制的逻辑。<ul>
+                      <li>AttentionMechanism 是 Attention 类的父类，继承了 object 类，内部没有任何实现。</li>
+                      <li>_BaseAttentionMechanism 继承自 AttentionMechanism 类，定义了 Attention 机制的一些公共方法实现和属性。</li>
+                      <li>LuongAttention、BahdanauAttention 均继承 _BaseAttentionMechanism 类，分别实现了上面两篇论文的 Attention 机制。</li>
+                    </ul>
+                  </li>
+                  <li>AttentionWrapperState 用来存储整个计算过程中的 state，和 RNN 中的 state 类似，只不过这里额外还存储了 attention、time 等信息。</li>
+                  <li>AttentionWrapper 主要用于对封装 RNNCell，继承自 RNNCell，封装后依然是 RNNCell 的实例，可以构建一个带有 Attention 机制的 Decoder。</li>
+                  <li>另外还有一些公共方法，例如 hardmax、safe_cumpord 等。</li>
+                </ul>
+                <p>下面我们以 BahdanauAttention 为例来说明 Attention 机制及 AttentionWrapper 的实现。</p>
+                <h3 id="BahdanauAttention"><a href="#BahdanauAttention" class="headerlink" title="BahdanauAttention"></a><a href="https://github.com/Germey/AI/blob/master/Attention%E5%8E%9F%E7%90%86%E5%8F%8ATensorFlow%20AttentionWrapper%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md#bahdanauattention" target="_blank" rel="noopener"></a>BahdanauAttention</h3>
+                <p>首先我们来介绍 BahdanauAttention 类的具体原理。 首先我们来看下它的初始化方法：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def __init__(self,</span><br><span class="line">    num_units,</span><br><span class="line">    memory,</span><br><span class="line">    <span class="attribute">memory_sequence_length</span>=None,</span><br><span class="line">    <span class="attribute">normalize</span>=<span class="literal">False</span>,</span><br><span class="line">    <span class="attribute">probability_fn</span>=None,</span><br><span class="line">    <span class="attribute">score_mask_value</span>=None,</span><br><span class="line">    <span class="attribute">dtype</span>=None,</span><br><span class="line">    <span class="attribute">name</span>=<span class="string">"BahdanauAttention"</span>):</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里一共接受八个参数，下面一一进行说明：</p>
+                <ul>
+                  <li>num<em>units：神经元节点数，我们知道在计算 $ e</em>{ij} $ 的时候，需要使用 $ s_{i-1} $ 和 $ h_j $ 来进行计算，而二者的维度可能并不是统一的，需要进行变换和统一，所以这里就有了 $ W_a $ 和 $ U_a $ 这两个系数，所以在代码中就是用 num_units 来声明了一个全连接 Dense 网络，用于统一二者的维度，以便于下一步的计算：</li>
+                </ul>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">query_layer</span>=layers_core.Dense(num_units, <span class="attribute">name</span>=<span class="string">"query_layer"</span>, <span class="attribute">use_bias</span>=<span class="literal">False</span>, <span class="attribute">dtype</span>=dtype)</span><br><span class="line"><span class="attribute">memory_layer</span>=layers_core.Dense(num_units, <span class="attribute">name</span>=<span class="string">"memory_layer"</span>, <span class="attribute">use_bias</span>=<span class="literal">False</span>, <span class="attribute">dtype</span>=dtype)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们可以看到声明了一个 query<em>layer 和 memory_layer，分别和 $ s</em>{i-1} $ 及 $ h_j $ 做全连接变换，统一维度。</p>
+                <ul>
+                  <li>memory：The memory to query; usually the output of an RNN encoder. 即解码时用到的上文信息，维度需要是 [batch_size, max_time, context_dim]。这时我们观察一下父类 _BaseAttentionMechanism 的初始化方法，实现如下：</li>
+                </ul>
+                <figure class="highlight gml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">with</span> ops.name_scope(</span><br><span class="line">    name, <span class="string">"BaseAttentionMechanismInit"</span>, nest.flatten(memory)):</span><br><span class="line">  <span class="literal">self</span>._values = _prepare_memory(</span><br><span class="line">      memory, memory_sequence_length,</span><br><span class="line">      check_inner_dims_defined=check_inner_dims_defined)</span><br><span class="line">  <span class="literal">self</span>._keys = (</span><br><span class="line">      <span class="literal">self</span>.memory_layer(<span class="literal">self</span>._values) <span class="keyword">if</span> <span class="literal">self</span>.memory_layer</span><br><span class="line">      <span class="keyword">else</span> <span class="literal">self</span>._values)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里通过 _prepare_memory() 方法对 memory 进行处理，然后调用 memory_layer 对 memory 进行全连接维度变换，变换成 [batch_size, max_time, num_units]。</p>
+                <ul>
+                  <li>memory_sequence_length：Sequence lengths for the batch entries in memory. 即 memory 变量的长度信息，类似于 dynamic_rnn 中的 sequence_length，被 _prepare_memory() 方法调用处理 memory 变量，进行 mask 操作：</li>
+                </ul>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">seq_len_mask = <span class="built_in">array</span>_ops.sequence_mask(</span><br><span class="line">    memory_sequence_length,</span><br><span class="line">    maxlen=<span class="built_in">array</span>_ops.shape(nest.flatten(memory)[<span class="number">0</span>])[<span class="number">1</span>],</span><br><span class="line">    dtype=nest.flatten(memory)[<span class="number">0</span>].dtype)</span><br><span class="line">seq_len_batch_size = (</span><br><span class="line">    memory_sequence_length.shape[<span class="number">0</span>].value</span><br><span class="line">    <span class="keyword">or</span> <span class="built_in">array</span>_ops.shape(memory_sequence_length)[<span class="number">0</span>])</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <ul>
+                  <li>normalize：Whether to normalize the energy term. 即是否要实现标准化，方法出自论文：<a href="https://arxiv.org/abs/1602.07868" target="_blank" rel="noopener">Weight Normalization: A Simple Reparameterization to Accelerate Training of Deep Neural Networks, Salimans, et al</a>。</li>
+                  <li>probability_fn：A callable function which converts the score to probabilities. 计算概率时的函数，必须是一个可调用的函数，默认使用 softmax()，还可以指定 hardmax() 等函数。</li>
+                  <li>score_mask_value：The mask value for score before passing into probability_fn. The default is -inf. Only used if memory_sequence_length is not None. 在使用 probability_fn 计算概率之前，对 score 预先进行 mask 使用的值，默认是负无穷。但这个只有在 memory_sequence_length 参数定义的时候有效。</li>
+                  <li>dtype：The data type for the query and memory layers of the attention mechanism. 数据类型，默认是 float32。</li>
+                  <li>name：Name to use when creating ops，自定义名称。</li>
+                </ul>
+                <p>接下来类里面定义了一个 <strong>call</strong>() 方法：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def <span class="constructor">__call__(<span class="params">self</span>, <span class="params">query</span>, <span class="params">previous_alignments</span>)</span>:</span><br><span class="line">    <span class="keyword">with</span> variable_scope.variable<span class="constructor">_scope(None, <span class="string">"bahdanau_attention"</span>, [<span class="params">query</span>])</span>:</span><br><span class="line">      processed_query = self.query<span class="constructor">_layer(<span class="params">query</span>)</span> <span class="keyword">if</span> self.query_layer <span class="keyword">else</span> query</span><br><span class="line">      score = <span class="constructor">_bahdanau_score(<span class="params">processed_query</span>, <span class="params">self</span>.<span class="params">_keys</span>, <span class="params">self</span>.<span class="params">_normalize</span>)</span></span><br><span class="line">    alignments = self.<span class="constructor">_probability_fn(<span class="params">score</span>, <span class="params">previous_alignments</span>)</span></span><br><span class="line">    return alignments</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里首先定义了 processed_query，这里也是通过 query_layer 过了一个全连接网络，将最后一维统一成 num_units，然后调用了 bahdanau_score() 方法，这个方法是比较重要的，主要用来计算公式中的 $ e{ij} $，传入的参数是 processed_query 以及上文中提及的 keys 变量，二者一个代表了 $ s{i-1} $，一个代表了 $ h_j $，_bahdanau_score() 方法实现如下：</p>
+                <figure class="highlight nix">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def _bahdanau_score(processed_query, keys, normalize):</span><br><span class="line">    <span class="attr">dtype</span> = processed_query.dtype</span><br><span class="line">    <span class="comment"># Get the number of hidden units from the trailing dimension of keys</span></span><br><span class="line">    <span class="attr">num_units</span> = keys.shape[<span class="number">2</span>].value <span class="literal">or</span> array_ops.shape(keys)[<span class="number">2</span>]</span><br><span class="line">    <span class="comment"># Reshape from [batch_size, ...] to [batch_size, 1, ...] for broadcasting.</span></span><br><span class="line">    <span class="attr">processed_query</span> = array_ops.expand_dims(processed_query, <span class="number">1</span>)</span><br><span class="line">    <span class="attr">v</span> = variable_scope.get_variable(</span><br><span class="line">      <span class="string">"attention_v"</span>, [num_units], <span class="attr">dtype=dtype)</span></span><br><span class="line">    <span class="keyword">if</span> normalize:</span><br><span class="line">        <span class="comment"># Scalar used in weight normalization</span></span><br><span class="line">        <span class="attr">g</span> = variable_scope.get_variable(</span><br><span class="line">            <span class="string">"attention_g"</span>, <span class="attr">dtype=dtype,</span></span><br><span class="line">            <span class="attr">initializer=math.sqrt((1.</span> / num_units)))</span><br><span class="line">        <span class="comment"># Bias added prior to the nonlinearity</span></span><br><span class="line">        <span class="attr">b</span> = variable_scope.get_variable(</span><br><span class="line">            <span class="string">"attention_b"</span>, [num_units], <span class="attr">dtype=dtype,</span></span><br><span class="line">            <span class="attr">initializer=init_ops.zeros_initializer())</span></span><br><span class="line">        <span class="comment"># normed_v = g * v / ||v||</span></span><br><span class="line">        <span class="attr">normed_v</span> = g * v * math_ops.rsqrt(</span><br><span class="line">            math_ops.reduce_sum(math_ops.square(v)))</span><br><span class="line">        return math_ops.reduce_sum(normed_v * math_ops.tanh(keys + processed_query + b), [<span class="number">2</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        return math_ops.reduce_sum(v * math_ops.tanh(keys + processed_query), [<span class="number">2</span>])</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里其实就是实现了 keys 和 processed<em>query 的加和，如果指定了 normalize 的话还需要进行额外的 normalize，结果就是公式中的 $ e</em>{ij} $，在 TensorFlow 中常用 score 变量表示。 接下来再回到 <strong>call</strong>() 方法中，这里得到了 score 变量，接下来可以对齐求 softmax() 操作，得到 $ \alpha_{ij} $：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">alignments = self.<span class="constructor">_probability_fn(<span class="params">score</span>, <span class="params">previous_alignments</span>)</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这就代表了在 $ i $ 时刻，Decoder 的时候对 Encoder 得到的每个 $ hj $ 的权重大小比例，在 TensorFlow 中常用 alignments 变量表示。 所以综上所述，BahdanauAttention 就是初始化时传入 num_units 以及 Encoder Outputs，然后调时传入 query 用即可得到权重变量 alignments。</p>
+                <h3 id="AttentionWrapperState"><a href="#AttentionWrapperState" class="headerlink" title="AttentionWrapperState"></a><a href="https://github.com/Germey/AI/blob/master/Attention%E5%8E%9F%E7%90%86%E5%8F%8ATensorFlow%20AttentionWrapper%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md#attentionwrapperstate" target="_blank" rel="noopener"></a>AttentionWrapperState</h3>
+                <p>接下来我们再看下 AttentionWrapperState 这个类，这个类其实比较简单，就是定义了 Attention 过程中可能需要保存的变量，如 cell_state、attention、time、alignments 等内容，同时也便于后期的可视化呈现，代码实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AttentionWrapperState</span><span class="params">(</span></span></span><br><span class="line"><span class="class"><span class="params">    collections.namedtuple<span class="params">(<span class="string">"AttentionWrapperState"</span>,</span></span></span></span><br><span class="line"><span class="class"><span class="params"><span class="params">                           <span class="params">(<span class="string">"cell_state"</span>, <span class="string">"attention"</span>, <span class="string">"time"</span>, <span class="string">"alignments"</span>,</span></span></span></span></span><br><span class="line"><span class="class"><span class="params"><span class="params"><span class="params">                            <span class="string">"alignment_history"</span>)</span>)</span>)</span>:</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可见它就是继承了 namedtuple 这个数据结构，其实整个 AttentionWrapperState 就像声明了一个结构体，可以传入需要的字段生成这个对象。</p>
+                <h3 id="AttentionWrapper"><a href="#AttentionWrapper" class="headerlink" title="AttentionWrapper"></a><a href="https://github.com/Germey/AI/blob/master/Attention%E5%8E%9F%E7%90%86%E5%8F%8ATensorFlow%20AttentionWrapper%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md#attentionwrapper" target="_blank" rel="noopener"></a>AttentionWrapper</h3>
+                <p>了解了 Attention 机制及 BahdanauAttention 的原理之后，最后我们再来了解一下 AttentionWrapper，可能你用过很多其他的 Wrapper，如 DropoutWrapper、ResidualWrapper 等等，它们其实都是 RNNCell 的实例，其实 AttentionWrapper 也不例外，它对 RNNCell 进行了封装，封装后依然还是 RNNCell 的实例。一个普通的 RNN 模型，你要加入 Attention，只需要在 RNNCell 外面套一层 AttentionWrapper 并指定 AttentionMechanism 的实例就好了。而且如果要更换 AttentionMechanism，只需要改变 AttentionWrapper 的参数就好了，这可谓对 Attention 的实现架构完全解耦，配置非常灵活，TF 大法好！ 接下来我们首先来看下它的初始化方法，其参数是这样的：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def __init__(self,</span><br><span class="line">    cell,</span><br><span class="line">    attention_mechanism,</span><br><span class="line">    <span class="attribute">attention_layer_size</span>=None,</span><br><span class="line">    <span class="attribute">alignment_history</span>=<span class="literal">False</span>,</span><br><span class="line">    <span class="attribute">cell_input_fn</span>=None,</span><br><span class="line">    <span class="attribute">output_attention</span>=<span class="literal">True</span>,</span><br><span class="line">    <span class="attribute">initial_cell_state</span>=None,</span><br><span class="line">    <span class="attribute">name</span>=None):</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>下面对参数进行一一说明：</p>
+                <ul>
+                  <li>cell：An instance of RNNCell. RNNCell 的实例，这里可以是单个的 RNNCell，也可以是多个 RNNCell 组成的 MultiRNNCell。</li>
+                  <li>attention_mechanism：即 AttentionMechanism 的实例，如 BahdanauAttention 对象，另外可以是多个 AttentionMechanism 组成的列表。</li>
+                  <li>attention_layer_size：是数字或者数字做成的列表，如果是 None（默认），直接使用加权计算后得到的 Attention 作为输出，如果不是 None，那么 Attention 结果还会和 Output 进行拼接并做线性变换再输出。其代码实现如下：</li>
+                </ul>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">if</span> attention_layer_size is not None:</span><br><span class="line">    attention_layer_sizes = tuple(attention_layer_size <span class="keyword">if</span> isinstance(attention_layer_size, (<span class="built_in">list</span>, tuple)) <span class="keyword">else</span> (attention_layer_size,))</span><br><span class="line">    <span class="keyword">if</span> len(attention_layer_sizes) != len(attention_mechanisms):</span><br><span class="line">        raise <span class="constructor">ValueError(<span class="string">"If provided, attention_layer_size must contain exactly one integer per attention_mechanism, saw: %d vs %d"</span> % (<span class="params">len</span>(<span class="params">attention_layer_sizes</span>)</span>, len(attention_mechanisms)))</span><br><span class="line">    self._attention_layers = tuple(layers_core.<span class="constructor">Dense(<span class="params">attention_layer_size</span>, <span class="params">name</span>=<span class="string">"attention_layer"</span>, <span class="params">use_bias</span>=False, <span class="params">dtype</span>=<span class="params">attention_mechanisms</span>[<span class="params">i</span>].<span class="params">dtype</span>)</span> for i, attention_layer_size <span class="keyword">in</span> enumerate(attention_layer_sizes))</span><br><span class="line">    self._attention_layer_size = sum(attention_layer_sizes)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    self._attention_layers = None</span><br><span class="line">    self._attention_layer_size = sum(attention_mechanism.values.get<span class="constructor">_shape()</span><span class="literal">[-<span class="number">1</span>]</span>.value for attention_mechanism <span class="keyword">in</span> attention_mechanisms) </span><br><span class="line">    </span><br><span class="line">for i, attention_mechanism <span class="keyword">in</span> enumerate(self._attention_mechanisms):</span><br><span class="line">    attention, alignments = <span class="constructor">_compute_attention(<span class="params">attention_mechanism</span>, <span class="params">cell_output</span>, <span class="params">previous_alignments</span>[<span class="params">i</span>], <span class="params">self</span>.<span class="params">_attention_layers</span>[<span class="params">i</span>] <span class="params">if</span> <span class="params">self</span>.<span class="params">_attention_layers</span> <span class="params">else</span> None)</span></span><br><span class="line">    alignment_history = previous_alignment_history<span class="literal">[<span class="identifier">i</span>]</span>.write(state.time, alignments) <span class="keyword">if</span> self._alignment_history <span class="keyword">else</span> <span class="literal">()</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <ul>
+                  <li>alignment_history：即是否将之前的 alignments 存储到 state 中，以便于后期进行可视化展示。</li>
+                  <li>cell_input_fn：将 Input 进行处理的方式，默认会将上一步的 Attention 进行 拼接操作，以免造成重复关注同样的内容。代码调用如下：</li>
+                </ul>
+                <figure class="highlight pf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">cell_inputs = <span class="literal">self</span>._cell_input_fn(inputs, <span class="keyword">state</span>.attention)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <ul>
+                  <li>output_attention：是否将 Attention 返回，如果是 False 则返回 Output，否则返回 Attention，默认是 True。</li>
+                  <li>initial_cell_state：计算时的初始状态。</li>
+                  <li>name：自定义名称。</li>
+                </ul>
+                <p>AttentionWrapper 的核心方法在它的 call() 方法，即类似于 RNNCell 的 call() 方法，AttentionWrapper 类对其进行了重载，代码实现如下：</p>
+                <figure class="highlight pf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def call(<span class="literal">self</span>, inputs, <span class="keyword">state</span>):</span><br><span class="line">    <span class="comment"># Step 1</span></span><br><span class="line">    cell_inputs = <span class="literal">self</span>._cell_input_fn(inputs, <span class="keyword">state</span>.attention)</span><br><span class="line">    <span class="comment"># Step 2</span></span><br><span class="line">    cell_state = <span class="keyword">state</span>.cell_state</span><br><span class="line">    cell_output, next_cell_state = <span class="literal">self</span>._cell(cell_inputs, cell_state)</span><br><span class="line">    <span class="comment"># Step 3</span></span><br><span class="line">    if <span class="literal">self</span>._is_multi:</span><br><span class="line">        previous_alignments = <span class="keyword">state</span>.alignments</span><br><span class="line">        previous_alignment_history = <span class="keyword">state</span>.alignment_history</span><br><span class="line">    else:</span><br><span class="line">        previous_alignments = [<span class="keyword">state</span>.alignments]</span><br><span class="line">        previous_alignment_history = [<span class="keyword">state</span>.alignment_history]</span><br><span class="line">    all_alignments = []</span><br><span class="line">    all_attentions = []</span><br><span class="line">    all_histories = []</span><br><span class="line">    <span class="keyword">for</span> i, attention_mechanism <span class="keyword">in</span> enumerate(<span class="literal">self</span>._attention_mechanisms):</span><br><span class="line">        attention, alignments = _compute_attention(attention_mechanism, cell_output, previous_alignments[i], <span class="literal">self</span>._attention_layers[i] if <span class="literal">self</span>._attention_layers else None)</span><br><span class="line">        alignment_history = previous_alignment_history[i].write(<span class="keyword">state</span>.time, alignments) if <span class="literal">self</span>._alignment_history else ()</span><br><span class="line">        all_alignments.append(alignments)</span><br><span class="line">        all_histories.append(alignment_history)</span><br><span class="line">        all_attentions.append(attention)</span><br><span class="line">    <span class="comment"># Step 4</span></span><br><span class="line">    attention = array_ops.concat(all_attentions, <span class="number">1</span>)</span><br><span class="line">    <span class="comment"># Step 5</span></span><br><span class="line">    next_state = AttentionWrapperState(</span><br><span class="line">        time=<span class="keyword">state</span>.time + <span class="number">1</span>,</span><br><span class="line">        cell_state=next_cell_state,</span><br><span class="line">        attention=attention,</span><br><span class="line">        alignments=<span class="literal">self</span>._item_or_tuple(all_alignments),</span><br><span class="line">        alignment_history=<span class="literal">self</span>._item_or_tuple(all_histories))</span><br><span class="line">    <span class="comment"># Step 6</span></span><br><span class="line">    if <span class="literal">self</span>._output_attention:</span><br><span class="line">        return attention, next_state</span><br><span class="line">    else:</span><br><span class="line">        return cell_output, next_state</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里将一些异常判断代码去除了，以便于结构看得更清晰。 首先在第一步中，调用了 _cell_input_fn() 方法，对 inputs 和 state.attention 变量进行处理，默认是使用 concat() 函数拼接，作为当前时间步的输入。因为可能前一步的 Attention 可能对当前 Attention 有帮助，以免让模型连续两次将注意力放在同一个地方。 在第二步中，其实就是调用了普通的 RNNCell 的 call() 方法，得到输出和下一步的状态。 第三步中，这时得到的输出其实并没有用上 AttentionMechanism 中的 alignments 信息，所以当前的输出信息中我们并没有跟 Encoder 的信息做 Attention，所以这里还需要调用 _compute_attention() 方法进行权重的计算，其方法实现如下：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def <span class="constructor">_compute_attention(<span class="params">attention_mechanism</span>, <span class="params">cell_output</span>, <span class="params">previous_alignments</span>, <span class="params">attention_layer</span>)</span>:</span><br><span class="line">    alignments = attention<span class="constructor">_mechanism(<span class="params">cell_output</span>, <span class="params">previous_alignments</span>=<span class="params">previous_alignments</span>)</span></span><br><span class="line">    expanded_alignments = array_ops.expand<span class="constructor">_dims(<span class="params">alignments</span>, 1)</span></span><br><span class="line">    context = math_ops.matmul(expanded_alignments, attention_mechanism.values)</span><br><span class="line">    context = array_ops.squeeze(context, <span class="literal">[<span class="number">1</span>]</span>)</span><br><span class="line">    <span class="keyword">if</span> attention_layer is not None:</span><br><span class="line">        attention = attention<span class="constructor">_layer(<span class="params">array_ops</span>.<span class="params">concat</span>([<span class="params">cell_output</span>, <span class="params">context</span>], 1)</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        attention = context</span><br><span class="line">    return attention, alignments</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这个方法接收四个参数，其中 attention<em>mechanism 就是 AttentionMechanism 的实例，cell_output 就是当前 Output，previous_alignments 是上步的 alignments 信息，调用 attention_mechanism 计算之后就会得到当前步的 alignments 信息了，即 $ \alpha</em>{ij} $。接下来再利用 alignments 信息进行加权运算，得到 attention 信息，即 $ c_{i} $，最后将二者返回。 在第四步中，就是将 attention 结果每个时间步进行 concat，得到 attention vector。 第五步中，声明 AttentionWrapperState 作为下一步的状态。 第六步，判断是否要输出 Attention，如果是，输出 Attention 及下一步状态，否则输出 Outputs 及下一步状态。 好，以上便是整个 AttentionWrapper 源码解析过程，了解了源码之后，再做模型优化的话就非常得心应手了。</p>
+                <h2 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a><a href="https://github.com/Germey/AI/blob/master/Attention%E5%8E%9F%E7%90%86%E5%8F%8ATensorFlow%20AttentionWrapper%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md#%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90" target="_blank" rel="noopener"></a>参考来源</h2>
+                <ul>
+                  <li><a href="https://arxiv.org/abs/1406.1078" target="_blank" rel="noopener">Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation, Cho et al</a></li>
+                  <li><a href="https://arxiv.org/abs/1409.3215" target="_blank" rel="noopener">Sequence to Sequence Learning with Neural Networks, Sutskever et al</a></li>
+                  <li><a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="noopener">Neural Machine Translation by Jointly Learning to Align and Translate, Bahdanau et al</a></li>
+                  <li><a href="https://arxiv.org/abs/1508.04025" target="_blank" rel="noopener">Effective Approaches to Attention-based Neural Machine Translation, Luong, et al</a></li>
+                  <li><a href="https://arxiv.org/abs/1602.07868" target="_blank" rel="noopener">Weight Normalization: A Simple Reparameterization to Accelerate Training of Deep Neural Networks, Salimans, et al</a></li>
+                  <li><a href="http://news.ifeng.com/a/20170901/51842411_0.shtml" target="_blank" rel="noopener">http://news.ifeng.com/a/20170901/51842411_0.shtml</a></li>
+                  <li><a href="https://blog.csdn.net/qsczse943062710/article/details/79539005" target="_blank" rel="noopener">https://blog.csdn.net/qsczse943062710/article/details/79539005</a></li>
+                  <li><a href="https://zhuanlan.zhihu.com/p/34393028" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34393028</a></li>
+                </ul>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/5846.html" rel="prev" title="Requests库作者另一神器Pipenv的用法">
+                      <i class="fa fa-chevron-left"></i> Requests库作者另一神器Pipenv的用法 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/5876.html" rel="next" title="SSH反向隧道搭建过程"> SSH反向隧道搭建过程 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#Seq2Seq"><span class="nav-number">1.</span> <span class="nav-text">Seq2Seq</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#Attention"><span class="nav-number">2.</span> <span class="nav-text">Attention</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow-AttentionWrapper"><span class="nav-number">3.</span> <span class="nav-text">TensorFlow AttentionWrapper</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#BahdanauAttention"><span class="nav-number">3.1.</span> <span class="nav-text">BahdanauAttention</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#AttentionWrapperState"><span class="nav-number">3.2.</span> <span class="nav-text">AttentionWrapperState</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#AttentionWrapper"><span class="nav-number">3.3.</span> <span class="nav-text">AttentionWrapper</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#参考来源"><span class="nav-number">4.</span> <span class="nav-text">参考来源</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'abbe41f62ccefe616adc41feab8d2f41',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

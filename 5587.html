@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="python">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="Redis是一个基于内存的高效的键值型非关系型数据库，存取效率极高，而且支持多种存储数据结构，使用也非常简单。本节中，我们就来介绍一下Python的Redis操作，主要介绍RedisPy这个库的用法。 1. 准备工作 在开始之前，请确保已经安装好了Redis及RedisPy库。如果要做数据导入&#x2F;导出操作的话，还需要安装RedisDump。如果没有安装，可以参考第1章。 2. Redis和Stric">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="[Python3网络爬虫开发实战] 5.3.2-Redis存储">
+  <meta property="og:url" content="https://cuiqingcai.com/5587.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="Redis是一个基于内存的高效的键值型非关系型数据库，存取效率极高，而且支持多种存储数据结构，使用也非常简单。本节中，我们就来介绍一下Python的Redis操作，主要介绍RedisPy这个库的用法。 1. 准备工作 在开始之前，请确保已经安装好了Redis及RedisPy库。如果要做数据导入&#x2F;导出操作的话，还需要安装RedisDump。如果没有安装，可以参考第1章。 2. Redis和Stric">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="article:published_time" content="2018-01-29T11:43:41.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.303Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="python">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://cuiqingcai.com/5587.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>[Python3网络爬虫开发实战] 5.3.2-Redis存储 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/5587.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> [Python3网络爬虫开发实战] 5.3.2-Redis存储 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2018-01-29 19:43:41" itemprop="dateCreated datePublished" datetime="2018-01-29T19:43:41+08:00">2018-01-29</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/5587.html" class="post-meta-item leancloud_visitors" data-flag-title="[Python3网络爬虫开发实战] 5.3.2-Redis存储" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>15k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>14 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>Redis是一个基于内存的高效的键值型非关系型数据库，存取效率极高，而且支持多种存储数据结构，使用也非常简单。本节中，我们就来介绍一下Python的Redis操作，主要介绍RedisPy这个库的用法。</p>
+                <h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h2>
+                <p>在开始之前，请确保已经安装好了Redis及RedisPy库。如果要做数据导入/导出操作的话，还需要安装RedisDump。如果没有安装，可以参考第1章。</p>
+                <h2 id="2-Redis和StrictRedis"><a href="#2-Redis和StrictRedis" class="headerlink" title="2. Redis和StrictRedis"></a>2. <code>Redis</code>和<code>StrictRedis</code></h2>
+                <p>RedisPy库提供两个类<code>Redis</code>和<code>StrictRedis</code>来实现Redis的命令操作。</p>
+                <p><code>StrictRedis</code>实现了绝大部分官方的命令，参数也一一对应，比如<code>set()</code>方法就对应Redis命令的<code>set</code>方法。而<code>Redis</code>是<code>StrictRedis</code>的子类，它的主要功能是用于向后兼容旧版本库里的几个方法。为了做兼容，它将方法做了改写，比如<code>lrem()</code>方法就将<code>value</code>和<code>num</code>参数的位置互换，这和Redis命令行的命令参数不一致。</p>
+                <p>官方推荐使用<code>StrictRedis</code>，所以本节中我们也用<code>StrictRedis类</code>的相关方法作演示。</p>
+                <h2 id="3-连接Redis"><a href="#3-连接Redis" class="headerlink" title="3. 连接Redis"></a>3. 连接Redis</h2>
+                <p>现在我们已经在本地安装了Redis并运行在6379端口，密码设置为foobared。那么，可以用如下示例连接Redis并测试：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> redis import StrictRedis</span><br><span class="line"></span><br><span class="line">redis = StrictRedis(<span class="attribute">host</span>=<span class="string">'localhost'</span>, <span class="attribute">port</span>=6379, <span class="attribute">db</span>=0, <span class="attribute">password</span>=<span class="string">'foobared'</span>)</span><br><span class="line">redis.<span class="builtin-name">set</span>(<span class="string">'name'</span>, <span class="string">'Bob'</span>)</span><br><span class="line"><span class="builtin-name">print</span>(redis.<span class="builtin-name">get</span>(<span class="string">'name'</span>))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们传入了Redis的地址、运行端口、使用的数据库和密码信息。在默认不传的情况下，这4个参数分别为<code>localhost</code>、<code>6379</code>、<code>0</code>和<code>None</code>。首先声明了一个<code>StrictRedis</code>对象，接下来调用<code>set()</code>方法，设置一个键值对，然后将其获取并打印。</p>
+                <p>运行结果如下：</p>
+                <figure class="highlight 1c">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">b'Bob'</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这说明我们连接成功，并可以执行<code>set()</code>和<code>get()</code>操作了。</p>
+                <p>当然，我们还可以使用<code>ConnectionPool</code>来连接，示例如下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> redis import StrictRedis, ConnectionPool</span><br><span class="line"></span><br><span class="line">pool = ConnectionPool(<span class="attribute">host</span>=<span class="string">'localhost'</span>, <span class="attribute">port</span>=6379, <span class="attribute">db</span>=0, <span class="attribute">password</span>=<span class="string">'foobared'</span>)</span><br><span class="line">redis = StrictRedis(<span class="attribute">connection_pool</span>=pool)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样的连接效果是一样的。观察源码可以发现，<code>StrictRedis</code>内其实就是用<code>host</code>和<code>port</code>等参数又构造了一个<code>ConnectionPool</code>，所以直接将<code>ConnectionPool</code>当作参数传给<code>StrictRedis</code>也一样。</p>
+                <p>另外，<code>ConnectionPool</code>还支持通过URL来构建。URL的格式支持有如下3种：</p>
+                <figure class="highlight dts">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">redis:</span><span class="comment">//[:password]@host:port/db</span></span><br><span class="line"><span class="symbol">rediss:</span><span class="comment">//[:password]@host:port/db</span></span><br><span class="line"><span class="symbol">unix:</span><span class="comment">//[:password]@/path/to/socket.sock?db=db</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这3种URL分别表示创建Redis TCP连接、Redis TCP+SSL连接、Redis UNIX socket连接。我们只需要构造上面任意一种URL即可，其中<code>password</code>部分如果有则可以写，没有则可以省略。下面再用URL连接演示一下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">url = <span class="string">'redis://:foobared@localhost:6379/0'</span></span><br><span class="line">pool = ConnectionPool.from_url(url)</span><br><span class="line">redis = StrictRedis(<span class="attribute">connection_pool</span>=pool)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们使用第一种连接字符串进行连接。首先，声明一个Redis连接字符串，然后调用<code>from_url()</code>方法创建<code>ConnectionPool</code>，接着将其传给<code>StrictRedis</code>即可完成连接，所以使用URL的连接方式还是比较方便的。</p>
+                <h2 id="4-键操作"><a href="#4-键操作" class="headerlink" title="4. 键操作"></a>4. 键操作</h2>
+                <p>表5-5总结了键的一些判断和操作方法。</p>
+                <p>表5-5 键的一些判断和操作方法</p>
+                <p>方法</p>
+                <p>作用</p>
+                <p>参数说明</p>
+                <p>示例</p>
+                <p>示例说明</p>
+                <p>示例结果</p>
+                <p><code>exists(name)</code></p>
+                <p>判断一个键是否存在</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.exists(&#39;name&#39;)</code></p>
+                <p>是否存在<code>name</code>这个键</p>
+                <p><code>True</code></p>
+                <p><code>delete(name)</code></p>
+                <p>删除一个键</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.delete(&#39;name&#39;)</code></p>
+                <p>删除<code>name</code>这个键</p>
+                <p>1</p>
+                <p><code>type(name)</code></p>
+                <p>判断键类型</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.type(&#39;name&#39;)</code></p>
+                <p>判断<code>name</code>这个键类型</p>
+                <p><code>b&#39;string&#39;</code></p>
+                <p><code>keys(pattern)</code></p>
+                <p>获取所有符合规则的键</p>
+                <p><code>pattern</code>：匹配规则</p>
+                <p><code>redis.keys(&#39;n*&#39;)</code></p>
+                <p>获取所有以<code>n</code>开头的键</p>
+                <p><code>[b&#39;name&#39;]</code></p>
+                <p><code>randomkey()</code></p>
+                <p>获取随机的一个键</p>
+                <p><code>randomkey()</code></p>
+                <p>获取随机的一个键</p>
+                <p><code>b&#39;name&#39;</code></p>
+                <p><code>rename(src, dst)</code></p>
+                <p>重命名键</p>
+                <p><code>src</code>：原键名；<code>dst</code>：新键名</p>
+                <p><code>redis.rename(&#39;name&#39;, &#39;nickname&#39;)</code></p>
+                <p>将<code>name</code>重命名为<code>nickname</code></p>
+                <p><code>True</code></p>
+                <p><code>dbsize()</code></p>
+                <p>获取当前数据库中键的数目</p>
+                <p><code>dbsize()</code></p>
+                <p>获取当前数据库中键的数目</p>
+                <p>100</p>
+                <p><code>expire(name, time)</code></p>
+                <p>设定键的过期时间，单位为秒</p>
+                <p><code>name</code>：键名；<code>time</code>：秒数</p>
+                <p><code>redis.expire(&#39;name&#39;, 2)</code></p>
+                <p>将<code>name</code>键的过期时间设置为2秒</p>
+                <p><code>True</code></p>
+                <p><code>ttl(name)</code></p>
+                <p>获取键的过期时间，单位为秒，-1表示永久不过期</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.ttl(&#39;name&#39;)</code></p>
+                <p>获取<code>name</code>这个键的过期时间</p>
+                <p>-1</p>
+                <p><code>move(name, db)</code></p>
+                <p>将键移动到其他数据库</p>
+                <p><code>name</code>：键名；<code>db</code>：数据库代号</p>
+                <p><code>move(&#39;name&#39;, 2)</code></p>
+                <p>将<code>name</code>移动到2号数据库</p>
+                <p><code>True</code></p>
+                <p><code>flushdb()</code></p>
+                <p>删除当前选择数据库中的所有键</p>
+                <p><code>flushdb()</code></p>
+                <p>删除当前选择数据库中的所有键</p>
+                <p><code>True</code></p>
+                <p><code>flushall()</code></p>
+                <p>删除所有数据库中的所有键</p>
+                <p><code>flushall()</code></p>
+                <p>删除所有数据库中的所有键</p>
+                <p><code>True</code></p>
+                <h2 id="5-字符串操作"><a href="#5-字符串操作" class="headerlink" title="5. 字符串操作"></a>5. 字符串操作</h2>
+                <p>Redis支持最基本的键值对形式存储，用法总结如表5-6所示。</p>
+                <p>表5-6 键值对形式存储</p>
+                <p>方法</p>
+                <p>作用</p>
+                <p>参数说明</p>
+                <p>示例</p>
+                <p>示例说明</p>
+                <p>示例结果</p>
+                <p><code>set(name, value)</code></p>
+                <p>给数据库中键为<code>name</code>的<code>string</code>赋予值<code>value</code></p>
+                <p><code>name</code>: 键名；<code>value</code>: 值</p>
+                <p><code>redis.set(&#39;name&#39;, &#39;Bob&#39;)</code></p>
+                <p>给<code>name</code>这个键的<code>value</code>赋值为<code>Bob</code></p>
+                <p><code>True</code></p>
+                <p><code>get(name)</code></p>
+                <p>返回数据库中键为<code>name</code>的<code>string</code>的<code>value</code></p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.get(&#39;name&#39;)</code></p>
+                <p>返回<code>name</code>这个键的<code>value</code></p>
+                <p><code>b&#39;Bob&#39;</code></p>
+                <p><code>getset(name, value)</code></p>
+                <p>给数据库中键为<code>name</code>的<code>string</code>赋予值<code>value</code>并返回上次的<code>value</code></p>
+                <p><code>name</code>：键名；<code>value</code>：新值</p>
+                <p><code>redis.getset(&#39;name&#39;, &#39;Mike&#39;)</code></p>
+                <p>赋值<code>name</code>为<code>Mike</code>并得到上次的<code>value</code></p>
+                <p><code>b&#39;Bob&#39;</code></p>
+                <p><code>mget(keys, *args)</code></p>
+                <p>返回多个键对应的<code>value</code></p>
+                <p><code>keys</code>：键的列表</p>
+                <p><code>redis.mget([&#39;name&#39;, &#39;nickname&#39;])</code></p>
+                <p>返回<code>name</code>和<code>nickname</code>的<code>value</code></p>
+                <p><code>[b&#39;Mike&#39;, b&#39;Miker&#39;]</code></p>
+                <p><code>setnx(name, value)</code></p>
+                <p>如果不存在这个键值对，则更新<code>value</code>，否则不变</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.setnx(&#39;newname&#39;, &#39;James&#39;)</code></p>
+                <p>如果<code>newname</code>这个键不存在，则设置值为<code>James</code></p>
+                <p>第一次运行结果是<code>True</code>，第二次运行结果是<code>False</code></p>
+                <p><code>setex(name, time, value)</code></p>
+                <p>设置可以对应的值为<code>string</code>类型的<code>value</code>，并指定此键值对应的有效期</p>
+                <p><code>name</code>: 键名；<code>time</code>: 有效期； <code>value</code>：值</p>
+                <p><code>redis.setex(&#39;name&#39;, 1, &#39;James&#39;)</code></p>
+                <p>将<code>name</code>这个键的值设为<code>James</code>，有效期为1秒</p>
+                <p><code>True</code></p>
+                <p><code>setrange(name, offset, value)</code></p>
+                <p>设置指定键的<code>value</code>值的子字符串</p>
+                <p><code>name</code>：键名；<code>offset</code>：偏移量；<code>value</code>：值</p>
+                <p><code>redis.set(&#39;name&#39;, &#39;Hello&#39;) redis.setrange(&#39;name&#39;, 6, &#39;World&#39;)</code></p>
+                <p>设置<code>name</code>为<code>Hello</code>字符串，并在<code>index</code>为6的位置补<code>World</code></p>
+                <p>11，修改后的字符串长度</p>
+                <p><code>mset(mapping)</code></p>
+                <p>批量赋值</p>
+                <p><code>mapping</code>：字典</p>
+                <p><code>redis.mset({&#39;name1&#39;: &#39;Durant&#39;, &#39;name2&#39;: &#39;James&#39;})</code></p>
+                <p>将<code>name1</code>设为<code>Durant</code>，<code>name2</code>设为<code>James</code></p>
+                <p><code>True</code></p>
+                <p><code>msetnx(mapping)</code></p>
+                <p>键均不存在时才批量赋值</p>
+                <p><code>mapping</code>：字典</p>
+                <p><code>redis.msetnx({&#39;name3&#39;: &#39;Smith&#39;, &#39;name4&#39;: &#39;Curry&#39;})</code></p>
+                <p>在<code>name3</code>和<code>name4</code>均不存在的情况下才设置二者值</p>
+                <p><code>True</code></p>
+                <p><code>incr(name, amount=1)</code></p>
+                <p>键为<code>name</code>的<code>value</code>增值操作，默认为1，键不存在则被创建并设为<code>amount</code></p>
+                <p><code>name</code>：键名；<code>amount</code>：增长的值</p>
+                <p><code>redis.incr(&#39;age&#39;, 1)</code></p>
+                <p><code>age</code>对应的值增1，若不存在，则会创建并设置为1</p>
+                <p>1，即修改后的值</p>
+                <p><code>decr(name, amount=1)</code></p>
+                <p>键为<code>name</code>的<code>value</code>减值操作，默认为1，键不存在则被创建并将<code>value</code>设置为<code>\-amount</code></p>
+                <p><code>name</code>：键名； <code>amount</code>：减少的值</p>
+                <p><code>redis.decr(&#39;age&#39;, 1)</code></p>
+                <p><code>age</code>对应的值减1，若不存在，则会创建并设置为-1</p>
+                <p>-1，即修改后的值</p>
+                <p><code>append(key, value)</code></p>
+                <p>键为<code>name</code>的<code>string</code>的值附加<code>value</code></p>
+                <p><code>key</code>：键名</p>
+                <p><code>redis.append(&#39;nickname&#39;, &#39;OK&#39;)</code></p>
+                <p>向键为<code>nickname</code>的值后追加<code>OK</code></p>
+                <p>13，即修改后的字符串长度</p>
+                <p><code>substr(name, start, end=-1)</code></p>
+                <p>返回键为<code>name</code>的<code>string</code>的子串</p>
+                <p><code>name</code>：键名；<code>start</code>：起始索引；<code>end</code>：终止索引，默认为-1，表示截取到末尾</p>
+                <p><code>redis.substr(&#39;name&#39;, 1, 4)</code></p>
+                <p>返回键为<code>name</code>的值的字符串，截取索引为1~4的字符</p>
+                <p><code>b&#39;ello&#39;</code></p>
+                <p><code>getrange(key, start, end)</code></p>
+                <p>获取键的<code>value</code>值从<code>start</code>到<code>end</code>的子字符串</p>
+                <p><code>key</code>：键名；<code>start</code>：起始索引；<code>end</code>：终止索引</p>
+                <p><code>redis.getrange(&#39;name&#39;, 1, 4)</code></p>
+                <p>返回键为<code>name</code>的值的字符串，截取索引为1~4的字符</p>
+                <p><code>b&#39;ello&#39;</code></p>
+                <h2 id="6-列表操作"><a href="#6-列表操作" class="headerlink" title="6. 列表操作"></a>6. 列表操作</h2>
+                <p>Redis还提供了列表存储，列表内的元素可以重复，而且可以从两端存储，用法如表5-7所示。</p>
+                <p>表5-7 列表操作</p>
+                <p>方法</p>
+                <p>作用</p>
+                <p>参数说明</p>
+                <p>示例</p>
+                <p>示例说明</p>
+                <p>示例结果</p>
+                <p><code>rpush(name, *values)</code></p>
+                <p>在键为<code>name</code>的列表末尾添加值为<code>value</code>的元素，可以传多个</p>
+                <p><code>name</code>：键名；<code>values</code>：值</p>
+                <p><code>redis.rpush(&#39;list&#39;, 1, 2, 3)</code></p>
+                <p>向键为<code>list</code>的列表尾添加1、2、3</p>
+                <p>3，列表大小</p>
+                <p><code>lpush(name, *values)</code></p>
+                <p>在键为<code>name</code>的列表头添加值为<code>value</code>的元素，可以传多个</p>
+                <p><code>name</code>：键名；<code>values</code>：值</p>
+                <p><code>redis.lpush(&#39;list&#39;, 0)</code></p>
+                <p>向键为<code>list</code>的列表头部添加0</p>
+                <p>4，列表大小</p>
+                <p><code>llen(name)</code></p>
+                <p>返回键为<code>name</code>的列表的长度</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.llen(&#39;list&#39;)</code></p>
+                <p>返回键为<code>list</code>的列表的长度</p>
+                <p>4</p>
+                <p><code>lrange(name, start, end)</code></p>
+                <p>返回键为<code>name</code>的列表中<code>start</code>至<code>end</code>之间的元素</p>
+                <p><code>name</code>：键名；<code>start</code>：起始索引；<code>end</code>：终止索引</p>
+                <p><code>redis.lrange(&#39;list&#39;, 1, 3)</code></p>
+                <p>返回起始索引为1终止索引为3的索引范围对应的列表</p>
+                <p><code>[b&#39;3&#39;, b&#39;2&#39;, b&#39;1&#39;]</code></p>
+                <p><code>ltrim(name, start, end)</code></p>
+                <p>截取键为<code>name</code>的列表，保留索引为<code>start</code>到<code>end</code>的内容</p>
+                <p><code>name</code>：键名；<code>start</code>：起始索引；<code>end</code>：终止索引</p>
+                <p><code>ltrim(&#39;list&#39;, 1, 3)</code></p>
+                <p>保留键为<code>list</code>的索引为1到3的元素</p>
+                <p><code>True</code></p>
+                <p><code>lindex(name, index)</code></p>
+                <p>返回键为<code>name</code>的列表中<code>index</code>位置的元素</p>
+                <p><code>name</code>：键名；<code>index</code>：索引</p>
+                <p><code>redis.lindex(&#39;list&#39;, 1)</code></p>
+                <p>返回键为<code>list</code>的列表索引为1的元素</p>
+                <p>b’2’</p>
+                <p><code>lset(name, index, value)</code></p>
+                <p>给键为<code>name</code>的列表中<code>index</code>位置的元素赋值，越界则报错</p>
+                <p><code>name</code>：键名；<code>index</code>：索引位置；<code>value</code>：值</p>
+                <p><code>redis.lset(&#39;list&#39;, 1, 5)</code></p>
+                <p>将键为<code>list</code>的列表中索引为1的位置赋值为5</p>
+                <p><code>True</code></p>
+                <p><code>lrem(name, count, value)</code></p>
+                <p>删除<code>count</code>个键的列表中值为<code>value</code>的元素</p>
+                <p><code>name</code>：键名；<code>count</code>：删除个数；<code>value</code>：值</p>
+                <p><code>redis.lrem(&#39;list&#39;, 2, 3)</code></p>
+                <p>将键为<code>list</code>的列表删除两个3</p>
+                <p>1，即删除的个数</p>
+                <p><code>lpop(name)</code></p>
+                <p>返回并删除键为<code>name</code>的列表中的首元素</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.lpop(&#39;list&#39;)</code></p>
+                <p>返回并删除名为<code>list</code>的列表中的第一个元素</p>
+                <p><code>b&#39;5&#39;</code></p>
+                <p><code>rpop(name)</code></p>
+                <p>返回并删除键为<code>name</code>的列表中的尾元素</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.rpop(&#39;list&#39;)</code></p>
+                <p>返回并删除名为<code>list</code>的列表中的最后一个元素</p>
+                <p><code>b&#39;2&#39;</code></p>
+                <p><code>blpop(keys, timeout=0)</code></p>
+                <p>返回并删除名称在<code>keys</code>中的<code>list</code>中的首个元素，如果列表为空，则会一直阻塞等待</p>
+                <p><code>keys</code>：键列表；<code>timeout</code>： 超时等待时间，0为一直等待</p>
+                <p><code>redis.blpop(&#39;list&#39;)</code></p>
+                <p>返回并删除键为<code>list</code>的列表中的第一个元素</p>
+                <p><code>[b&#39;5&#39;]</code></p>
+                <p><code>brpop(keys, timeout=0)</code></p>
+                <p>返回并删除键为<code>name</code>的列表中的尾元素，如果<code>list</code>为空，则会一直阻塞等待</p>
+                <p><code>keys</code>：键列表；<code>timeout</code>：超时等待时间，0为一直等待</p>
+                <p><code>redis.brpop(&#39;list&#39;)</code></p>
+                <p>返回并删除名为<code>list</code>的列表中的最后一个元素</p>
+                <p><code>[b&#39;2&#39;]</code></p>
+                <p><code>rpoplpush(src, dst)</code></p>
+                <p>返回并删除名称为<code>src</code>的列表的尾元素，并将该元素添加到名称为<code>dst</code>的列表头部</p>
+                <p><code>src</code>：源列表的键；<code>dst</code>：目标列表的key</p>
+                <p><code>redis.rpoplpush(&#39;list&#39;, &#39;list2&#39;)</code></p>
+                <p>将键为<code>list</code>的列表尾元素删除并将其添加到键为<code>list2</code>的列表头部，然后返回</p>
+                <p><code>b&#39;2&#39;</code></p>
+                <h2 id="7-集合操作"><a href="#7-集合操作" class="headerlink" title="7. 集合操作"></a>7. 集合操作</h2>
+                <p>Redis还提供了集合存储，集合中的元素都是不重复的，用法如表5-8所示。</p>
+                <p>表5-8 集合操作</p>
+                <p>方法</p>
+                <p>作用</p>
+                <p>参数说明</p>
+                <p>示例</p>
+                <p>示例说明</p>
+                <p>示例结果</p>
+                <p><code>sadd(name, *values)</code></p>
+                <p>向键为<code>name</code>的集合中添加元素</p>
+                <p><code>name</code>：键名；<code>values</code>：值，可为多个</p>
+                <p><code>redis.sadd(&#39;tags&#39;, &#39;Book&#39;, &#39;Tea&#39;, &#39;Coffee&#39;)</code></p>
+                <p>向键为<code>tags</code>的集合中添加<code>Book</code>、<code>Tea</code>和<code>Coffee</code>这3个内容</p>
+                <p>3，即插入的数据个数</p>
+                <p><code>srem(name, *values)</code></p>
+                <p>从键为<code>name</code>的集合中删除元素</p>
+                <p><code>name</code>：键名；<code>values</code>：值，可为多个</p>
+                <p><code>redis.srem(&#39;tags&#39;, &#39;Book&#39;)</code></p>
+                <p>从键为<code>tags</code>的集合中删除<code>Book</code></p>
+                <p>1，即删除的数据个数</p>
+                <p><code>spop(name)</code></p>
+                <p>随机返回并删除键为<code>name</code>的集合中的一个元素</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.spop(&#39;tags&#39;)</code></p>
+                <p>从键为<code>tags</code>的集合中随机删除并返回该元素</p>
+                <p><code>b&#39;Tea&#39;</code></p>
+                <p><code>smove(src, dst, value)</code></p>
+                <p>从<code>src</code>对应的集合中移除元素并将其添加到<code>dst</code>对应的集合中</p>
+                <p><code>src</code>：源集合；<code>dst</code>：目标集合；<code>value</code>：元素值</p>
+                <p><code>redis.smove(&#39;tags&#39;, &#39;tags2&#39;, &#39;Coffee&#39;)</code></p>
+                <p>从键为<code>tags</code>的集合中删除元素<code>Coffee</code>并将其添加到键为<code>tags2</code>的集合</p>
+                <p><code>True</code></p>
+                <p><code>scard(name)</code></p>
+                <p>返回键为<code>name</code>的集合的元素个数</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.scard(&#39;tags&#39;)</code></p>
+                <p>获取键为<code>tags</code>的集合中的元素个数</p>
+                <p>3</p>
+                <p><code>sismember(name, value)</code></p>
+                <p>测试<code>member</code>是否是键为<code>name</code>的集合的元素</p>
+                <p><code>name</code>：键值</p>
+                <p><code>redis.sismember(&#39;tags&#39;, &#39;Book&#39;)</code></p>
+                <p>判断<code>Book</code>是否是键为<code>tags</code>的集合元素</p>
+                <p><code>True</code></p>
+                <p><code>sinter(keys, *args)</code></p>
+                <p>返回所有给定键的集合的交集</p>
+                <p><code>keys</code>：键列表</p>
+                <p><code>redis.sinter([&#39;tags&#39;, &#39;tags2&#39;])</code></p>
+                <p>返回键为<code>tags</code>的集合和键为<code>tags2</code>的集合的交集</p>
+                <p><code>{b&#39;Coffee&#39;}</code></p>
+                <p><code>sinterstore(dest, keys, *args)</code></p>
+                <p>求交集并将交集保存到<code>dest</code>的集合</p>
+                <p><code>dest</code>：结果集合；<code>keys</code>：键列表</p>
+                <p><code>redis.sinterstore(&#39;inttag&#39;, [&#39;tags&#39;, &#39;tags2&#39;])</code></p>
+                <p>求键为<code>tags</code>的集合和键为<code>tags2</code>的集合的交集并将其保存为<code>inttag</code></p>
+                <p>1</p>
+                <p><code>sunion(keys, *args)</code></p>
+                <p>返回所有给定键的集合的并集</p>
+                <p><code>keys</code>：键列表</p>
+                <p><code>redis.sunion([&#39;tags&#39;, &#39;tags2&#39;])</code></p>
+                <p>返回键为<code>tags</code>的集合和键为<code>tags2</code>的集合的并集</p>
+                <p><code>{b&#39;Coffee&#39;, b&#39;Book&#39;, b&#39;Pen&#39;}</code></p>
+                <p><code>sunionstore(dest, keys, *args)</code></p>
+                <p>求并集并将并集保存到<code>dest</code>的集合</p>
+                <p><code>dest</code>：结果集合；<code>keys</code>：键列表</p>
+                <p><code>redis.sunionstore(&#39;inttag&#39;, [&#39;tags&#39;, &#39;tags2&#39;])</code></p>
+                <p>求键为<code>tags</code>的集合和键为<code>tags2</code>的集合的并集并将其保存为<code>inttag</code></p>
+                <p>3</p>
+                <p><code>sdiff(keys, *args)</code></p>
+                <p>返回所有给定键的集合的差集</p>
+                <p><code>keys</code>：键列表</p>
+                <p><code>redis.sdiff([&#39;tags&#39;, &#39;tags2&#39;])</code></p>
+                <p>返回键为<code>tags</code>的集合和键为<code>tags2</code>的集合的差集</p>
+                <p><code>{b&#39;Book&#39;, b&#39;Pen&#39;}</code></p>
+                <p><code>sdiffstore(dest, keys, *args)</code></p>
+                <p>求差集并将差集保存到<code>dest</code>集合</p>
+                <p><code>dest</code>：结果集合；<code>keys</code>：键列表</p>
+                <p><code>redis.sdiffstore(&#39;inttag&#39;, [&#39;tags&#39;, &#39;tags2&#39;])</code></p>
+                <p>求键为tags<code>的集合和键为</code>tags2<code>的集合的差集并将其保存为</code>inttag`</p>
+                <p>3</p>
+                <p><code>smembers(name)</code></p>
+                <p>返回键为<code>name</code>的集合的所有元素</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.smembers(&#39;tags&#39;)</code></p>
+                <p>返回键为<code>tags</code>的集合的所有元素</p>
+                <p><code>{b&#39;Pen&#39;, b&#39;Book&#39;, b&#39;Coffee&#39;}</code></p>
+                <p><code>srandmember(name)</code></p>
+                <p>随机返回键为<code>name</code>的集合中的一个元素，但不删除元素</p>
+                <p><code>name</code>：键值</p>
+                <p><code>redis.srandmember(&#39;tags&#39;)</code></p>
+                <p>随机返回键为<code>tags</code>的集合中的一个元素</p>
+                <h2 id="8-有序集合操作"><a href="#8-有序集合操作" class="headerlink" title="8. 有序集合操作"></a>8. 有序集合操作</h2>
+                <p>有序集合比集合多了一个分数字段，利用它可以对集合中的数据进行排序，其用法总结如表5-9所示。</p>
+                <p>表5-9 有序集合操作</p>
+                <p>方法</p>
+                <p>作用</p>
+                <p>参数说明</p>
+                <p>示例</p>
+                <p>示例说明</p>
+                <p>示例结果</p>
+                <p><code>zadd(name, *args, **kwargs)</code></p>
+                <p>向键为<code>name</code>的zset中添加元素member，score用于排序。如果该元素存在，则更新其顺序</p>
+                <p><code>name</code>： 键名；<code>args</code>：可变参数</p>
+                <p><code>redis.zadd(&#39;grade&#39;, 100, &#39;Bob&#39;, 98, &#39;Mike&#39;)</code></p>
+                <p>向键为<code>grade</code>的zset中添加<code>Bob</code>（其<code>score</code>为100），并添加<code>Mike</code>（其<code>score</code>为98）</p>
+                <p>2，即添加的元素个数</p>
+                <p><code>zrem(name, *values)</code></p>
+                <p>删除键为<code>name</code>的zset中的元素</p>
+                <p><code>name</code>：键名；<code>values</code>：元素</p>
+                <p><code>redis.zrem(&#39;grade&#39;, &#39;Mike&#39;)</code></p>
+                <p>从键为<code>grade</code>的zset中删除<code>Mike</code></p>
+                <p>1，即删除的元素个数</p>
+                <p><code>zincrby(name, value, amount=1)</code></p>
+                <p>如果在键为<code>name</code>的zset中已经存在元素<code>value</code>，则将该元素的<code>score</code>增加<code>amount</code>；否则向该集合中添加该元素，其<code>score</code>的值为<code>amount</code></p>
+                <p><code>name</code>：key名；<code>value</code>：元素；<code>amount</code>：增长的<code>score</code>值</p>
+                <p><code>redis.zincrby(&#39;grade&#39;, &#39;Bob&#39;, -2)</code></p>
+                <p>键为<code>grade</code>的zset中<code>Bob</code>的<code>score</code>减2</p>
+                <p>98.0，即修改后的值</p>
+                <p><code>zrank(name, value)</code></p>
+                <p>返回键为<code>name</code>的zset中元素的排名，按<code>score</code>从小到大排序，即名次</p>
+                <p><code>name</code>：键名；<code>value</code>：元素值</p>
+                <p><code>redis.zrank(&#39;grade&#39;, &#39;Amy&#39;)</code></p>
+                <p>得到键为<code>grade</code>的zset中<code>Amy</code>的排名</p>
+                <p>1</p>
+                <p><code>zrevrank(name, value)</code></p>
+                <p>返回键为<code>name</code>的zset中元素的倒数排名（按<code>score</code>从大到小排序），即名次</p>
+                <p><code>name</code>：键名；<code>value</code>：元素值</p>
+                <p><code>redis.zrevrank(&#39;grade&#39;, &#39;Amy&#39;)</code></p>
+                <p>得到键为<code>grade</code>的zset中<code>Amy</code>的倒数排名</p>
+                <p>2</p>
+                <p><code>zrevrange(name, start, end, withscores=False)</code></p>
+                <p>返回键为<code>name</code>的zset（按<code>score</code>从大到小排序）中<code>index</code>从<code>start</code>到<code>end</code>的所有元素</p>
+                <p><code>name</code>：键值；<code>start</code>：开始索引；<code>end</code>：结束索引；<code>withscores</code>：是否带<code>score</code></p>
+                <p><code>redis.zrevrange(&#39;grade&#39;, 0, 3)</code></p>
+                <p>返回键为<code>grade</code>的zset中前四名元素</p>
+                <p><code>[b&#39;Bob&#39;, b&#39;Mike&#39;, b&#39;Amy&#39;, b&#39;James&#39;]</code></p>
+                <p><code>zrangebyscore(name, min, max, start=None, num=None, withscores=False)</code></p>
+                <p>返回键为<code>name</code>的zset中<code>score</code>在给定区间的元素</p>
+                <p><code>name</code>：键名；<code>min</code>：最低<code>score</code>；<code>max</code>：最高<code>score</code>； <code>start</code>：起始索引；<code>num</code>：个数；<code>withscores</code>：是否带<code>score</code></p>
+                <p><code>redis.zrangebyscore(&#39;grade&#39;, 80, 95)</code></p>
+                <p>返回键为<code>grade</code>的zset中<code>score</code>在80和95之间的元素</p>
+                <p><code>[b&#39;Bob&#39;, b&#39;Mike&#39;, b&#39;Amy&#39;, b&#39;James&#39;]</code></p>
+                <p><code>zcount(name, min, max)</code></p>
+                <p>返回键为<code>name</code>的zset中<code>score</code>在给定区间的数量</p>
+                <p><code>name</code>：键名；<code>min</code>：最低<code>score</code>；max：最高<code>score</code></p>
+                <p><code>redis.zcount(&#39;grade&#39;, 80, 95)</code></p>
+                <p>返回键为<code>grade</code>的zset中<code>score</code>在80到95的元素个数</p>
+                <p>2</p>
+                <p><code>zcard(name)</code></p>
+                <p>返回键为<code>name</code>的zset的元素个数</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.zcard(&#39;grade&#39;)</code></p>
+                <p>获取键为<code>grade</code>的zset中元素的个数</p>
+                <p>3</p>
+                <p><code>zremrangebyrank(name, min, max)</code></p>
+                <p>删除键为<code>name</code>的zset中排名在给定区间的元素</p>
+                <p><code>name</code>：键名；<code>min</code>：最低位次；<code>max</code>：最高位次</p>
+                <p><code>redis.zremrangebyrank(&#39;grade&#39;, 0, 0)</code></p>
+                <p>删除键为<code>grade</code>的zset中排名第一的元素</p>
+                <p>1，即删除的元素个数</p>
+                <p><code>zremrangebyscore(name, min, max)</code></p>
+                <p>删除键为<code>name</code>的zset中<code>score</code>在给定区间的元素</p>
+                <p><code>name</code>：键名；<code>min</code>：最低<code>score</code>；<code>max</code>：最高<code>score</code></p>
+                <p><code>redis.zremrangebyscore(&#39;grade&#39;, 80, 90)</code></p>
+                <p>删除<code>score</code>在80到90之间的元素</p>
+                <p>1，即删除的元素个数</p>
+                <h2 id="9-散列操作"><a href="#9-散列操作" class="headerlink" title="9. 散列操作"></a>9. 散列操作</h2>
+                <p>Redis还提供了散列表的数据结构，我们可以用<code>name</code>指定一个散列表的名称，表内存储了各个键值对，用法总结如表5-10所示。</p>
+                <p>表5-10 散列操作</p>
+                <p>方法</p>
+                <p>作用</p>
+                <p>参数说明</p>
+                <p>示例</p>
+                <p>示例说明</p>
+                <p>示例结果</p>
+                <p><code>hset(name, key, value)</code></p>
+                <p>向键为<code>name</code>的散列表中添加映射</p>
+                <p><code>name</code>：键名；<code>key</code>：映射键名；<code>value</code>：映射键值</p>
+                <p><code>hset(&#39;price&#39;, &#39;cake&#39;, 5)</code></p>
+                <p>向键为<code>price</code>的散列表中添加映射关系，<code>cake</code>的值为5</p>
+                <p>1，即添加的映射个数</p>
+                <p><code>hsetnx(name, key, value)</code></p>
+                <p>如果映射键名不存在，则向键为<code>name</code>的散列表中添加映射</p>
+                <p><code>name</code>：键名；<code>key</code>：映射键名；<code>value</code>：映射键值</p>
+                <p><code>hsetnx(&#39;price&#39;, &#39;book&#39;, 6)</code></p>
+                <p>向键为<code>price</code>的散列表中添加映射关系，<code>book</code>的值为6</p>
+                <p>1，即添加的映射个数</p>
+                <p><code>hget(name, key)</code></p>
+                <p>返回键为<code>name</code>的散列表中<code>key</code>对应的值</p>
+                <p><code>name</code>：键名；<code>key</code>：映射键名</p>
+                <p><code>redis.hget(&#39;price&#39;, &#39;cake&#39;)</code></p>
+                <p>获取键为<code>price</code>的散列表中键名为<code>cake</code>的值</p>
+                <p>5</p>
+                <p><code>hmget(name, keys, *args)</code></p>
+                <p>返回键为<code>name</code>的散列表中各个键对应的值</p>
+                <p><code>name</code>：键名；<code>keys</code>：映射键名列表</p>
+                <p><code>redis.hmget(&#39;price&#39;, [&#39;apple&#39;, &#39;orange&#39;])</code></p>
+                <p>获取键为<code>price</code>的散列表中<code>apple</code>和<code>orange</code>的值</p>
+                <p><code>[b&#39;3&#39;, b&#39;7&#39;]</code></p>
+                <p><code>hmset(name, mapping)</code></p>
+                <p>向键为<code>name</code>的散列表中批量添加映射</p>
+                <p><code>name</code>：键名；<code>mapping</code>：映射字典</p>
+                <p><code>redis.hmset(&#39;price&#39;, {&#39;banana&#39;: 2, &#39;pear&#39;: 6})</code></p>
+                <p>向键为<code>price</code>的散列表中批量添加映射</p>
+                <p><code>True</code></p>
+                <p><code>hincrby(name, key, amount=1)</code></p>
+                <p>将键为<code>name</code>的散列表中映射的值增加<code>amount</code></p>
+                <p><code>name</code>：键名；<code>key</code>：映射键名；<code>amount</code>：增长量</p>
+                <p><code>redis.hincrby(&#39;price&#39;, &#39;apple&#39;, 3)</code></p>
+                <p><code>key</code>为<code>price</code>的散列表中<code>apple</code>的值增加3</p>
+                <p>6，修改后的值</p>
+                <p><code>hexists(name, key)</code></p>
+                <p>键为<code>name</code>的散列表中是否存在键名为键的映射</p>
+                <p><code>name</code>：键名；<code>key</code>：映射键名</p>
+                <p><code>redis.hexists(&#39;price&#39;, &#39;banana&#39;)</code></p>
+                <p>键为<code>price</code>的散列表中<code>banana</code>的值是否存在</p>
+                <p><code>True</code></p>
+                <p><code>hdel(name, *keys)</code></p>
+                <p>在键为<code>name</code>的散列表中，删除键名为键的映射</p>
+                <p><code>name</code>：键名；<code>keys</code>：映射键名</p>
+                <p><code>redis.hdel(&#39;price&#39;, &#39;banana&#39;)</code></p>
+                <p>从键为<code>price</code>的散列表中删除键名为<code>banana</code>的映射</p>
+                <p><code>True</code></p>
+                <p><code>hlen(name)</code></p>
+                <p>从键为<code>name</code>的散列表中获取映射个数</p>
+                <p><code>name</code>： 键名</p>
+                <p><code>redis.hlen(&#39;price&#39;)</code></p>
+                <p>从键为<code>price</code>的散列表中获取映射个数</p>
+                <p>6</p>
+                <p><code>hkeys(name)</code></p>
+                <p>从键为<code>name</code>的散列表中获取所有映射键名</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.hkeys(&#39;price&#39;)</code></p>
+                <p>从键为<code>price</code>的散列表中获取所有映射键名</p>
+                <p><code>[b&#39;cake&#39;, b&#39;book&#39;, b&#39;banana&#39;, b&#39;pear&#39;]</code></p>
+                <p><code>hvals(name)</code></p>
+                <p>从键为<code>name</code>的散列表中获取所有映射键值</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.hvals(&#39;price&#39;)</code></p>
+                <p>从键为<code>price</code>的散列表中获取所有映射键值</p>
+                <p><code>[b&#39;5&#39;, b&#39;6&#39;, b&#39;2&#39;, b&#39;6&#39;]</code></p>
+                <p><code>hgetall(name)</code></p>
+                <p>从键为<code>name</code>的散列表中获取所有映射键值对</p>
+                <p><code>name</code>：键名</p>
+                <p><code>redis.hgetall(&#39;price&#39;)</code></p>
+                <p>从键为<code>price</code>的散列表中获取所有映射键值对</p>
+                <p><code>{b&#39;cake&#39;: b&#39;5&#39;, b&#39;book&#39;: b&#39;6&#39;, b&#39;orange&#39;: b&#39;7&#39;, b&#39;pear&#39;: b&#39;6&#39;}</code></p>
+                <h2 id="10-RedisDump"><a href="#10-RedisDump" class="headerlink" title="10. RedisDump"></a>10. RedisDump</h2>
+                <p>RedisDump提供了强大的Redis数据的导入和导出功能，现在就来看下它的具体用法。</p>
+                <p>首先，确保已经安装好了RedisDump。</p>
+                <p>RedisDump提供了两个可执行命令：<code>redis-dump</code>用于导出数据，<code>redis-load</code>用于导入数据。</p>
+                <h5 id="redis-dump"><a href="#redis-dump" class="headerlink" title="redis-dump"></a><code>redis-dump</code></h5>
+                <p>首先，可以输入如下命令查看所有可选项：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">redis-dump -h</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下：</p>
+                <figure class="highlight pgsql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">Usage</span>: redis-dump [<span class="keyword">global</span> <span class="keyword">options</span>] COMMAND [command <span class="keyword">options</span>] </span><br><span class="line">    -u, <span class="comment">--uri=S                      Redis URI (e.g. redis://hostname[:port])</span></span><br><span class="line">    -d, <span class="comment">--database=S                 Redis database (e.g. -d 15)</span></span><br><span class="line">    -s, <span class="comment">--sleep=S                    Sleep for S seconds after dumping (for debugging)</span></span><br><span class="line">    -c, <span class="comment">--count=S                    Chunk size (default: 10000)</span></span><br><span class="line">    -f, <span class="comment">--filter=S                   Filter selected keys (passed directly to redis' KEYS command)</span></span><br><span class="line">    -O, <span class="comment">--without_optimizations      Disable run time optimizations</span></span><br><span class="line">    -V, <span class="comment">--version                    Display version</span></span><br><span class="line">    -D, <span class="comment">--debug</span></span><br><span class="line">        <span class="comment">--nosafe</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>其中<code>\-u</code>代表Redis连接字符串，<code>\-d</code>代表数据库代号，<code>\-s</code>代表导出之后的休眠时间，<code>\-c</code>代表分块大小，默认是10000，<code>\-f</code>代表导出时的过滤器，<code>\-O</code>代表禁用运行时优化，<code>\-V</code>用于显示版本，<code>\-D</code>表示开启调试。</p>
+                <p>我们拿本地的Redis做测试，运行在6379端口上，密码为foobared，导出命令如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">redis-dump -u :<span class="symbol">foobared@</span>localhost:<span class="number">6379</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果没有密码的话，可以不加密码前缀，命令如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">redis-dump -u localhost:<span class="number">6379</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行之后，可以将本地0至15号数据库的所有数据输出出来，例如：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;<span class="attr">"db"</span>:<span class="number">0</span>,<span class="attr">"key"</span>:<span class="string">"name"</span>,<span class="attr">"ttl"</span>:<span class="number">-1</span>,<span class="attr">"type"</span>:<span class="string">"string"</span>,<span class="attr">"value"</span>:<span class="string">"James"</span>,<span class="attr">"size"</span>:<span class="number">5</span>&#125;</span><br><span class="line">&#123;<span class="attr">"db"</span>:<span class="number">0</span>,<span class="attr">"key"</span>:<span class="string">"name2"</span>,<span class="attr">"ttl"</span>:<span class="number">-1</span>,<span class="attr">"type"</span>:<span class="string">"string"</span>,<span class="attr">"value"</span>:<span class="string">"Durant"</span>,<span class="attr">"size"</span>:<span class="number">6</span>&#125;</span><br><span class="line">&#123;<span class="attr">"db"</span>:<span class="number">0</span>,<span class="attr">"key"</span>:<span class="string">"name3"</span>,<span class="attr">"ttl"</span>:<span class="number">-1</span>,<span class="attr">"type"</span>:<span class="string">"string"</span>,<span class="attr">"value"</span>:<span class="string">"Durant"</span>,<span class="attr">"size"</span>:<span class="number">6</span>&#125;</span><br><span class="line">&#123;<span class="attr">"db"</span>:<span class="number">0</span>,<span class="attr">"key"</span>:<span class="string">"name4"</span>,<span class="attr">"ttl"</span>:<span class="number">-1</span>,<span class="attr">"type"</span>:<span class="string">"string"</span>,<span class="attr">"value"</span>:<span class="string">"HelloWorld"</span>,<span class="attr">"size"</span>:<span class="number">10</span>&#125;</span><br><span class="line">&#123;<span class="attr">"db"</span>:<span class="number">0</span>,<span class="attr">"key"</span>:<span class="string">"name5"</span>,<span class="attr">"ttl"</span>:<span class="number">-1</span>,<span class="attr">"type"</span>:<span class="string">"string"</span>,<span class="attr">"value"</span>:<span class="string">"James"</span>,<span class="attr">"size"</span>:<span class="number">5</span>&#125;</span><br><span class="line">&#123;<span class="attr">"db"</span>:<span class="number">0</span>,<span class="attr">"key"</span>:<span class="string">"name6"</span>,<span class="attr">"ttl"</span>:<span class="number">-1</span>,<span class="attr">"type"</span>:<span class="string">"string"</span>,<span class="attr">"value"</span>:<span class="string">"James"</span>,<span class="attr">"size"</span>:<span class="number">5</span>&#125;</span><br><span class="line">&#123;<span class="attr">"db"</span>:<span class="number">0</span>,<span class="attr">"key"</span>:<span class="string">"age"</span>,<span class="attr">"ttl"</span>:<span class="number">-1</span>,<span class="attr">"type"</span>:<span class="string">"string"</span>,<span class="attr">"value"</span>:<span class="string">"1"</span>,<span class="attr">"size"</span>:<span class="number">1</span>&#125;</span><br><span class="line">&#123;<span class="attr">"db"</span>:<span class="number">0</span>,<span class="attr">"key"</span>:<span class="string">"age2"</span>,<span class="attr">"ttl"</span>:<span class="number">-1</span>,<span class="attr">"type"</span>:<span class="string">"string"</span>,<span class="attr">"value"</span>:<span class="string">"-5"</span>,<span class="attr">"size"</span>:<span class="number">2</span>&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>每条数据都包含6个字段，其中<code>db</code>即数据库代号，<code>key</code>即键名，<code>ttl</code>即该键值对的有效时间，<code>type</code>即键值类型，<code>value</code>即内容，<code>size</code>即占用空间。</p>
+                <p>如果想要将其输出为JSON行文件，可以使用如下命令：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">redis-dump -u :<span class="symbol">foobared@</span>localhost:<span class="number">6379</span> &gt; ./redis_data.jl</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样就可以成功将Redis的所有数据库的所有数据导出成JSON行文件了。</p>
+                <p>另外，可以使用<code>\-d</code>参数指定某个数据库的导出，例如只导出1号数据库的内容：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">redis-dump -u :<span class="symbol">foobared@</span>localhost:<span class="number">6379</span> -d <span class="number">1</span> &gt; ./redis.data.jl</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果只想导出特定的内容，比如想导出以<code>adsl</code>开头的数据，可以加入<code>\-f</code>参数用来过滤，命令如下：</p>
+                <figure class="highlight groovy">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">redis-dump -<span class="string">u :</span>foobared<span class="meta">@localhost</span>:<span class="number">6379</span> -f <span class="string">adsl:</span>* &gt; ./redis.data.jl</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>其中<code>\-f</code>参数即Redis的<code>keys</code>命令的参数，可以写一些过滤规则。</p>
+                <h5 id="redis-load"><a href="#redis-load" class="headerlink" title="redis-load"></a><code>redis-load</code></h5>
+                <p>同样，我们可以首先输入如下命令查看所有可选项：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">redis-load -h</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下：</p>
+                <figure class="highlight livecodeserver">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">redis-<span class="built_in">load</span> <span class="comment">--help</span></span><br><span class="line">  Try: redis-<span class="built_in">load</span> [<span class="built_in">global</span> options] COMMAND [<span class="keyword">command</span> <span class="title">options</span>] </span><br><span class="line">    -u, <span class="comment">--uri=S                      Redis URI (e.g. redis://hostname[:port])</span></span><br><span class="line">    -d, <span class="comment">--database=S                 Redis database (e.g. -d 15)</span></span><br><span class="line">    -s, <span class="comment">--sleep=S                    Sleep for S seconds after dumping (for debugging)</span></span><br><span class="line">    -n, <span class="comment">--no_check_utf8</span></span><br><span class="line">    -V, <span class="comment">--version                    Display version</span></span><br><span class="line">    -D, <span class="comment">--debug</span></span><br><span class="line">        <span class="comment">--nosafe</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>其中<code>\-u</code>代表Redis连接字符串，<code>\-d</code>代表数据库代号，默认是全部，<code>\-s</code>代表导出之后的休眠时间，<code>\-n</code>代表不检测UTF-8编码，<code>\-V</code>表示显示版本，<code>\-D</code>表示开启调试。</p>
+                <p>我们可以将JSON行文件导入到Redis数据库中：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&lt; redis_data.json redis-load -u :<span class="symbol">foobared@</span>localhost:<span class="number">6379</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样就可以成功将JSON行文件导入到数据库中了。</p>
+                <p>另外，下面的命令同样可以达到同样的效果：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">cat redis_data.json | redis-load -u :<span class="symbol">foobared@</span>localhost:<span class="number">6379</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>本节中，我们不仅了解了RedisPy对Redis数据库的一些基本操作，还演示了RedisDump对数据的导入导出操作。由于其便捷性和高效性，后面我们会利用Redis实现很多架构，如维护代理池、Cookies池、ADSL拨号代理池、Scrapy-Redis分布式架构等，所以Redis的操作需要好好掌握。</p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/5081.html" rel="bookmark">[Python3网络爬虫开发实战] 1.2-请求库的安装</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/5132.html" rel="bookmark">[Python3网络爬虫开发实战] 1.2.1-Requests的安装</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/5141.html" rel="bookmark">[Python3网络爬虫开发实战] 1.2.2-Selenium的安装</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/5135.html" rel="bookmark">[Python3网络爬虫开发实战] 1.2.3-ChromeDriver的安装</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/5153.html" rel="bookmark">[Python3网络爬虫开发实战] 1.2.4-GeckoDriver的安装</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/5584.html" rel="prev" title="[Python3网络爬虫开发实战] 5.3.1-MongoDB存储">
+                      <i class="fa fa-chevron-left"></i> [Python3网络爬虫开发实战] 5.3.1-MongoDB存储 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/5590.html" rel="next" title="[Python3网络爬虫开发实战] 6-Ajax数据爬取"> [Python3网络爬虫开发实战] 6-Ajax数据爬取 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#1-准备工作"><span class="nav-number">1.</span> <span class="nav-text">1. 准备工作</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#2-Redis和StrictRedis"><span class="nav-number">2.</span> <span class="nav-text">2. Redis和StrictRedis</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#3-连接Redis"><span class="nav-number">3.</span> <span class="nav-text">3. 连接Redis</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#4-键操作"><span class="nav-number">4.</span> <span class="nav-text">4. 键操作</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#5-字符串操作"><span class="nav-number">5.</span> <span class="nav-text">5. 字符串操作</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#6-列表操作"><span class="nav-number">6.</span> <span class="nav-text">6. 列表操作</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#7-集合操作"><span class="nav-number">7.</span> <span class="nav-text">7. 集合操作</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#8-有序集合操作"><span class="nav-number">8.</span> <span class="nav-text">8. 有序集合操作</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#9-散列操作"><span class="nav-number">9.</span> <span class="nav-text">9. 散列操作</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#10-RedisDump"><span class="nav-number">10.</span> <span class="nav-text">10. RedisDump</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-5"><a class="nav-link" href="#redis-dump"><span class="nav-number">10.0.0.1.</span> <span class="nav-text">redis-dump</span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link" href="#redis-load"><span class="nav-number">10.0.0.2.</span> <span class="nav-text">redis-load</span></a></li>
+                    </ol>
+                  </li>
+                </ol>
+                </li>
+                </ol>
+                </li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'fed0b861c914687098547bda691e742c',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

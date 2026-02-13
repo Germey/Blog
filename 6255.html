@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="为何要搭建 Elasticsearch 集群 凡事都要讲究个为什么。在搭建集群之前，我们首先先问一句，为什么我们需要搭建集群？它有什么优势呢？ 高可用性 Elasticsearch 作为一个搜索引擎，我们对它的基本要求就是存储海量数据并且可以在非常短的时间内查询到我们想要的信息。所以第一步我们需要保证的就是 Elasticsearch 的高可用性，什么是高可用性呢？它通常是指，通过设计减少系统不能">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Ubuntu 搭建 Elasticsearch 6 集群流程">
+  <meta property="og:url" content="https://cuiqingcai.com/6255.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="为何要搭建 Elasticsearch 集群 凡事都要讲究个为什么。在搭建集群之前，我们首先先问一句，为什么我们需要搭建集群？它有什么优势呢？ 高可用性 Elasticsearch 作为一个搜索引擎，我们对它的基本要求就是存储海量数据并且可以在非常短的时间内查询到我们想要的信息。所以第一步我们需要保证的就是 Elasticsearch 的高可用性，什么是高可用性呢？它通常是指，通过设计减少系统不能">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-04-23-52-42.png">
+  <meta property="og:image" content="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-04-23-52-42.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-05-01-44-28.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-03-16-45-10.jpg">
+  <meta property="og:image" content="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-03-16-45-10.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-03-17-18-28.jpg">
+  <meta property="og:image" content="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-03-17-18-28.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-03-17-20-05.jpg">
+  <meta property="og:image" content="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-03-17-20-05.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-03-17-21-44.jpg">
+  <meta property="og:image" content="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-03-17-21-44.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-05-02-29-07.jpg">
+  <meta property="og:image" content="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-05-02-29-07.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-05-02-27-33.jpg">
+  <meta property="og:image" content="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-05-02-27-33.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-05-02-28-01.jpg">
+  <meta property="og:image" content="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-05-02-28-01.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-05-02-28-30.jpg">
+  <meta property="og:image" content="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-05-02-28-30.jpg">
+  <meta property="article:published_time" content="2018-08-04T18:57:01.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.294Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-04-23-52-42.png">
+  <link rel="canonical" href="https://cuiqingcai.com/6255.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>Ubuntu 搭建 Elasticsearch 6 集群流程 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/6255.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> Ubuntu 搭建 Elasticsearch 6 集群流程 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2018-08-05 02:57:01" itemprop="dateCreated datePublished" datetime="2018-08-05T02:57:01+08:00">2018-08-05</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+                    </span>
+                  </span>
+                  <span id="/6255.html" class="post-meta-item leancloud_visitors" data-flag-title="Ubuntu 搭建 Elasticsearch 6 集群流程" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>11k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>10 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <h2 id="为何要搭建-Elasticsearch-集群"><a href="#为何要搭建-Elasticsearch-集群" class="headerlink" title="为何要搭建 Elasticsearch 集群"></a>为何要搭建 Elasticsearch 集群</h2>
+                <p>凡事都要讲究个为什么。在搭建集群之前，我们首先先问一句，为什么我们需要搭建集群？它有什么优势呢？</p>
+                <h3 id="高可用性"><a href="#高可用性" class="headerlink" title="高可用性"></a>高可用性</h3>
+                <p>Elasticsearch 作为一个搜索引擎，我们对它的基本要求就是存储海量数据并且可以在非常短的时间内查询到我们想要的信息。所以第一步我们需要保证的就是 Elasticsearch 的高可用性，什么是高可用性呢？它通常是指，通过设计减少系统不能提供服务的时间。假设系统一直能够提供服务，我们说系统的可用性是 100%。如果系统在某个时刻宕掉了，比如某个网站在某个时间挂掉了，那么就可以它临时是不可用的。所以，为了保证 Elasticsearch 的高可用性，我们就应该尽量减少 Elasticsearch 的不可用时间。 那么怎样提高 Elasticsearch 的高可用性呢？这时集群的作用就体现出来了。假如 Elasticsearch 只放在一台服务器上，即单机运行，假如这台主机突然断网了或者被攻击了，那么整个 Elasticsearch 的服务就不可用了。但如果改成 Elasticsearch 集群的话，有一台主机宕机了，还有其他的主机可以支撑，这样就仍然可以保证服务是可用的。 那可能有的小伙伴就会说了，那假如一台主机宕机了，那么不就无法访问这台主机的数据了吗？那假如我要访问的数据正好存在这台主机上，那不就获取不到了吗？难道其他的主机里面也存了一份一模一样的数据？那这岂不是很浪费吗？ 为了解答这个问题，这里就引出了 Elasticsearch 的信息存储机制了。首先解答上面的问题，一台主机宕机了，这台主机里面存的数据依然是可以被访问到的，因为在其他的主机上也有备份，但备份的时候也不是整台主机备份，是分片备份的，那这里就又引出了一个概念——分片。 分片，英文叫做 Shard，顾名思义，分片就是对数据切分成了多个部分。我们知道 Elasticsearch 中一个索引（Index）相当于是一个数据库，如存某网站的用户信息，我们就建一个名为 user 的索引。但索引存储的时候并不是整个存一起的，它是被分片存储的，Elasticsearch 默认会把一个索引分成五个分片，当然这个数字是可以自定义的。分片是数据的容器，数据保存在分片内，分片又被分配到集群内的各个节点里。当你的集群规模扩大或者缩小时， Elasticsearch 会自动的在各节点中迁移分片，使得数据仍然均匀分布在集群里，所以相当于一份数据被分成了多份并保存在不同的主机上。 那这还是没解决问题啊，如果一台主机挂掉了，那么这个分片里面的数据不就无法访问了？别的主机都是存储的其他的分片。其实是可以访问的，因为其他主机存储了这个分片的备份，叫做副本，这里就引出了另外一个概念——副本。 副本，英文叫做 Replica，同样顾名思义，副本就是对原分片的复制，和原分片的内容是一样的，Elasticsearch 默认会生成一份副本，所以相当于是五个原分片和五个分片副本，相当于一份数据存了两份，并分了十个分片，当然副本的数量也是可以自定义的。这时我们只需要将某个分片的副本存在另外一台主机上，这样当某台主机宕机了，我们依然还可以从另外一台主机的副本中找到对应的数据。所以从外部来看，数据结果是没有任何区别的。 一般来说，Elasticsearch 会尽量把一个索引的不同分片存储在不同的主机上，分片的副本也尽可能存在不同的主机上，这样可以提高容错率，从而提高高可用性。 但这时假如你只有一台主机，那不就没办法了吗？分片和副本其实是没意义的，一台主机挂掉了，就全挂掉了。</p>
+                <h3 id="健康状态"><a href="#健康状态" class="headerlink" title="健康状态"></a>健康状态</h3>
+                <p>针对一个索引，Elasticsearch 中其实有专门的衡量索引健康状况的标志，分为三个等级：</p>
+                <ul>
+                  <li>green，绿色。这代表所有的主分片和副本分片都已分配。你的集群是 100% 可用的。</li>
+                  <li>yellow，黄色。所有的主分片已经分片了，但至少还有一个副本是缺失的。不会有数据丢失，所以搜索结果依然是完整的。不过，你的高可用性在某种程度上被弱化。如果更多的分片消失，你就会丢数据了。所以可把 yellow 想象成一个需要及时调查的警告。</li>
+                  <li>red，红色。至少一个主分片以及它的全部副本都在缺失中。这意味着你在缺少数据：搜索只能返回部分数据，而分配到这个分片上的写入请求会返回一个异常。</li>
+                </ul>
+                <p>如果你只有一台主机的话，其实索引的健康状况也是 yellow，因为一台主机，集群没有其他的主机可以防止副本，所以说，这就是一个不健康的状态，因此集群也是十分有必要的。</p>
+                <h3 id="存储空间"><a href="#存储空间" class="headerlink" title="存储空间"></a>存储空间</h3>
+                <p>另外，既然是群集，那么存储空间肯定也是联合起来的，假如一台主机的存储空间是固定的，那么集群它相对于单个主机也有更多的存储空间，可存储的数据量也更大。 所以综上所述，我们需要一个集群！</p>
+                <h2 id="详细了解-Elasticsearch-集群"><a href="#详细了解-Elasticsearch-集群" class="headerlink" title="详细了解 Elasticsearch 集群"></a>详细了解 Elasticsearch 集群</h2>
+                <p>接下来我们再来了解下集群的结构是怎样的。 首先我们应该清楚多台主机构成了一个集群，每台主机称作一个节点（Node）。 如图就是一个三节点的集群：</p>
+                <p><img src="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-04-23-52-42.png" alt=""><img src="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-04-23-52-42.png" alt=""></p>
+                <p>在图中，每个 Node 都有三个分片，其中 P 开头的代表 Primary 分片，即主分片，R 开头的代表 Replica 分片，即副本分片。所以图中主分片 1、2，副本分片 0 储存在 1 号节点，副本分片 0、1、2 储存在 2 号节点，主分片 0 和副本分片 1、2 储存在 3 号节点，一共是 3 个主分片和 6 个副本分片。同时我们还注意到 1 号节点还有个 MASTER 的标识，这代表它是一个主节点，它相比其他的节点更加特殊，它有权限控制整个集群，比如资源的分配、节点的修改等等。 这里就引出了一个概念就是节点的类型，我们可以将节点分为这么四个类型：</p>
+                <ul>
+                  <li>主节点：即 Master 节点。主节点的主要职责是和集群操作相关的内容，如创建或删除索引，跟踪哪些节点是群集的一部分，并决定哪些分片分配给相关的节点。稳定的主节点对集群的健康是非常重要的。默认情况下任何一个集群中的节点都有可能被选为主节点。索引数据和搜索查询等操作会占用大量的 cpu，内存，io 资源，为了确保一个集群的稳定，分离主节点和数据节点是一个比较好的选择。虽然主节点也可以协调节点，路由搜索和从客户端新增数据到数据节点，但最好不要使用这些专用的主节点。一个重要的原则是，尽可能做尽量少的工作。</li>
+                  <li>数据节点：即 Data 节点。数据节点主要是存储索引数据的节点，主要对文档进行增删改查操作，聚合操作等。数据节点对 CPU、内存、IO 要求较高，在优化的时候需要监控数据节点的状态，当资源不够的时候，需要在集群中添加新的节点。</li>
+                  <li>负载均衡节点：也称作 Client 节点，也称作客户端节点。当一个节点既不配置为主节点，也不配置为数据节点时，该节点只能处理路由请求，处理搜索，分发索引操作等，从本质上来说该客户节点表现为智能负载平衡器。独立的客户端节点在一个比较大的集群中是非常有用的，他协调主节点和数据节点，客户端节点加入集群可以得到集群的状态，根据集群的状态可以直接路由请求。</li>
+                  <li>预处理节点：也称作 Ingest 节点，在索引数据之前可以先对数据做预处理操作，所有节点其实默认都是支持 Ingest 操作的，也可以专门将某个节点配置为 Ingest 节点。</li>
+                </ul>
+                <p>以上就是节点几种类型，一个节点其实可以对应不同的类型，如一个节点可以同时成为主节点和数据节点和预处理节点，但如果一个节点既不是主节点也不是数据节点，那么它就是负载均衡节点。具体的类型可以通过具体的配置文件来设置。</p>
+                <h2 id="怎样搭建-Elasticsearch-集群"><a href="#怎样搭建-Elasticsearch-集群" class="headerlink" title="怎样搭建 Elasticsearch 集群"></a>怎样搭建 Elasticsearch 集群</h2>
+                <p>好，接下来我们就来动手搭建一个集群吧。 这里我一共拥有七台 Linux 主机，系统是 Ubuntu 16.04，都连接在一个内网中，IP 地址为：</p>
+                <figure class="highlight accesslog">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="number">10.0.0.4</span></span><br><span class="line"><span class="number">10.0.0.5</span></span><br><span class="line"><span class="number">10.0.0.6</span></span><br><span class="line"><span class="number">10.0.0.7</span></span><br><span class="line"><span class="number">10.0.0.8</span></span><br><span class="line"><span class="number">10.0.0.9</span></span><br><span class="line"><span class="number">10.0.0.10</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>每台主机的存储空间是 1TB，内存是 13GB。 下面我们来一步步介绍如何用这几台主机搭建一个 Elasticsearch 集群，这里使用的 Elasticsearch 版本是 6.3.2，另外我们还需要安装 Kibana 用来可视化监控和管理 Elasticsearch 的相关配置和数据，使得集群的管理更加方便。 环境配置如下所示：</p>
+                <p>名称</p>
+                <p>内容</p>
+                <p>主机台数</p>
+                <p>7</p>
+                <p>主机内存</p>
+                <p>13GB</p>
+                <p>主机系统</p>
+                <p>Ubuntu 16.04</p>
+                <p>存储空间</p>
+                <p>1TB</p>
+                <p>Elasticsearch 版本</p>
+                <p>6.3.2</p>
+                <p>Java 版本</p>
+                <p>1.8</p>
+                <p>Kibana 版本</p>
+                <p>6.3.2</p>
+                <h3 id="安装-Java"><a href="#安装-Java" class="headerlink" title="安装 Java"></a>安装 Java</h3>
+                <p>Elasticsearch 是基于 Lucene 的，而 Lucene 又是基于 Java 的。所以第一步我们就需要在每台主机上安装 Java。 首先更新 Apt 源：</p>
+                <figure class="highlight pgsql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo apt-<span class="keyword">get</span> <span class="keyword">update</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>然后安装 Java：</p>
+                <figure class="highlight actionscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo apt-<span class="keyword">get</span> install <span class="keyword">default</span>-jre</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>安装好了之后可以检查下 Java 的版本：</p>
+                <figure class="highlight applescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">java -<span class="built_in">version</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里的版本是 1.8，类似输出如下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">openjdk version <span class="string">"1.8.0_171"</span></span><br><span class="line">OpenJDK Runtime Environment (build 1.8.0_171-8u171-b11-0ubuntu0.16.04.1-b11)</span><br><span class="line">OpenJDK 64-Bit<span class="built_in"> Server </span>VM (build 25.171-b11, mixed mode)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果看到上面的内容就说明安装成功了。 注意一定要每台主机都要安装。</p>
+                <h2 id="安装-Elasticsearch"><a href="#安装-Elasticsearch" class="headerlink" title="安装 Elasticsearch"></a>安装 Elasticsearch</h2>
+                <p>接下来我们来安装 Elasticsearch，同样是每台主机都需要安装。 首先需要添加 Apt-key：</p>
+                <figure class="highlight sas">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">wget -qO - https://artifacts.elastic.co/GPG-<span class="meta">KEY</span>-elasticsearch | sudo apt-<span class="meta">key</span> <span class="meta">add</span> -</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>然后添加 Elasticsearch 的 Repository 定义：</p>
+                <figure class="highlight lsl">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">echo <span class="string">"deb https://artifacts.elastic.co/packages/6.x/apt stable main"</span> | sudo tee -a /etc/apt/sources.<span class="type">list</span>.d/elastic<span class="number">-6.</span>x.<span class="type">list</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>接下来安装 Elasticsearch 即可：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo apt-<span class="builtin-name">get</span> update </span><br><span class="line">sudo apt-<span class="builtin-name">get</span> install elasticsearch</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行完毕之后我们就完成了 Elasticsearch 的安装，注意还是要每台主机都要安装。</p>
+                <h3 id="配置-Elasticsearch"><a href="#配置-Elasticsearch" class="headerlink" title="配置 Elasticsearch"></a>配置 Elasticsearch</h3>
+                <p>这时我们只是每台主机都安装好了 Elasticsearch，接下来我们还需要将它们联系在一起构成一个集群。 安装完之后，Elasticsearch 的配置文件是 /etc/elasticsearch/elasticsearch.yml，接下来让我们编辑一下配置文件：</p>
+                <ul>
+                  <li>集群的名称</li>
+                </ul>
+                <p>通过 cluster.name 可以配置集群的名称，集群是一个整体，因此名称都要一致，所有主机都配置成相同的名称，配置示例：</p>
+                <figure class="highlight pgsql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">cluster</span>.name: germey-es-clusters</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <ul>
+                  <li>节点的名称</li>
+                </ul>
+                <p>通过 node.name 可以配置每个节点的名称，每个节点都是集群的一部分，每个节点名称都不要相同，可以按照顺序编号，配置示例：</p>
+                <figure class="highlight crmsh">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">node</span>.name:<span class="title"> es-node-1</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>其他的主机可以配置为 es-node-2、es-node-3 等。</p>
+                <ul>
+                  <li>是否有资格成为主节点</li>
+                </ul>
+                <p>通过 node.master 可以配置该节点是否有资格成为主节点，如果配置为 true，则主机有资格成为主节点，配置为 false 则主机就不会成为主节点，可以去当数据节点或负载均衡节点。注意这里是有资格成为主节点，不是一定会成为主节点，主节点需要集群经过选举产生。这里我配置所有主机都可以成为主节点，因此都配置为 true，配置示例： node.master: true</p>
+                <ul>
+                  <li>是否是数据节点</li>
+                </ul>
+                <p>通过 node.data 可以配置该节点是否为数据节点，如果配置为 true，则主机就会作为数据节点，注意主节点也可以作为数据节点，当 node.master 和 node.data 均为 false，则该主机会作为负载均衡节点。这里我配置所有主机都是数据节点，因此都配置为 true，配置示例： node.data: true</p>
+                <ul>
+                  <li>数据和日志路径</li>
+                </ul>
+                <p>通过 path.data 和 path.logs 可以配置 Elasticsearch 的数据存储路径和日志存储路径，可以指定任意位置，这里我指定存储到 1T 硬盘对应的路径下，另外注意一下写入权限问题，配置示例： path.data: /datadrive/elasticsearch/data path.logs: /datadrive/elasticsearch/logs</p>
+                <ul>
+                  <li>​ 设置访问的地址和端口</li>
+                </ul>
+                <p>我们需要设定 Elasticsearch 运行绑定的 Host，默认是无法公开访问的，如果设置为主机的公网 IP 或 0.0.0.0 就是可以公开访问的，这里我们可以都设置为公开访问或者部分主机公开访问，如果是公开访问就配置为：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">network</span><span class="selector-class">.host</span>: 0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果不想被公开访问就不用配置。 另外还可以配置访问的端口，默认是 9200： http.port: 9200</p>
+                <ul>
+                  <li>集群地址设置</li>
+                </ul>
+                <p>通过 discovery.zen.ping.unicast.hosts 可以配置集群的主机地址，配置之后集群的主机之间可以自动发现，这里我配置的是内网地址，配置示例：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">discovery</span><span class="selector-class">.zen</span><span class="selector-class">.ping</span><span class="selector-class">.unicast</span><span class="selector-class">.hosts</span>: <span class="selector-attr">[<span class="string">"10.0.0.4"</span>, <span class="string">"10.0.0.5"</span>, <span class="string">"10.0.0.6"</span>, <span class="string">"10.0.0.7"</span>, <span class="string">"10.0.0.8"</span>, <span class="string">"10.0.0.9"</span>, <span class="string">"10.0.0.10"</span>]</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里请改成你的主机对应的 IP 地址。</p>
+                <ul>
+                  <li>节点数目相关配置</li>
+                </ul>
+                <p>为了防止集群发生“脑裂”，即一个集群分裂成多个，通常需要配置集群最少主节点数目，通常为 (可成为主节点的主机数目 / 2) + 1，例如我这边可以成为主节点的主机数目为 7，那么结果就是 4，配置示例：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">discovery</span><span class="selector-class">.zen</span><span class="selector-class">.minimum_master_nodes</span>: 4</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>另外还可以配置当最少几个节点回复之后，集群就正常工作，这里我设置为 4，可以酌情修改，配置示例：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">gateway.recover_after_nodes: <span class="number">4</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>其他的暂时先不需要配置，保存即可。注意每台主机都需要配置。</p>
+                <h3 id="启动-Elasticsearch"><a href="#启动-Elasticsearch" class="headerlink" title="启动 Elasticsearch"></a>启动 Elasticsearch</h3>
+                <p>配置完成之后就可以在每台主机上分别启动 Elasticsearch 服务了，命令如下：</p>
+                <figure class="highlight smali">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo<span class="keyword"> system</span>ctl daemon-reload</span><br><span class="line">sudo<span class="keyword"> system</span>ctl enable elasticsearch.service</span><br><span class="line">sudo<span class="keyword"> system</span>ctl start elasticsearch.service</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>所有主机都启动之后，我们在任意主机上就可以查看到集群状态了，命令行如下：</p>
+                <figure class="highlight pf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -XGET 'http://localhost:<span class="number">9200</span>/_cluster/<span class="keyword">state</span>?pretty'</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>类似的输出如下：</p>
+                <figure class="highlight clojure">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"cluster_name"</span>: <span class="string">"germey-es-clusters"</span>,</span><br><span class="line">    <span class="string">"compressed_size_in_bytes"</span>: <span class="number">20799</span>,</span><br><span class="line">    <span class="string">"version"</span>: <span class="number">658</span>,</span><br><span class="line">    <span class="string">"state_uuid"</span>: <span class="string">"a64wCwPnSueKRtVuKx8xRw"</span>,</span><br><span class="line">    <span class="string">"master_node"</span>: <span class="string">"73BQvOC2TpSXcr-IXBcDdg"</span>,</span><br><span class="line">    <span class="string">"blocks"</span>: &#123;&#125;,</span><br><span class="line">    <span class="string">"nodes"</span>: &#123;</span><br><span class="line">        <span class="string">"I2M80AP-T7yVP_AZPA0bpA"</span>: &#123;</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"es-node-1"</span>,</span><br><span class="line">            <span class="string">"ephemeral_id"</span>: <span class="string">"KpCG4jNvTUGKNHNwKKoMrA"</span>,</span><br><span class="line">            <span class="string">"transport_address"</span>: <span class="string">"10.0.0.4:9300"</span>,</span><br><span class="line">            <span class="string">"attributes"</span>: &#123;</span><br><span class="line">                <span class="string">"ml.machine_memory"</span>: <span class="string">"7308464128"</span>,</span><br><span class="line">                <span class="string">"ml.max_open_jobs"</span>: <span class="string">"20"</span>,</span><br><span class="line">                <span class="string">"xpack.installed"</span>: <span class="string">"true"</span>,</span><br><span class="line">                <span class="string">"ml.enabled"</span>: <span class="string">"true"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">"73BQvOC2TpSXcr-IXBcDdg"</span>: &#123;</span><br><span class="line">            <span class="string">"name"</span>: <span class="string">"es-node-7"</span>,</span><br><span class="line">            <span class="string">"ephemeral_id"</span>: <span class="string">"Fs9v2XTASnGbqrM8g7IhAQ"</span>,</span><br><span class="line">            <span class="string">"transport_address"</span>: <span class="string">"10.0.0.10:9300"</span>,</span><br><span class="line">            <span class="string">"attributes"</span>: &#123;</span><br><span class="line">                <span class="string">"ml.machine_memory"</span>: <span class="string">"14695202816"</span>,</span><br><span class="line">                <span class="string">"ml.max_open_jobs"</span>: <span class="string">"20"</span>,</span><br><span class="line">                <span class="string">"xpack.installed"</span>: <span class="string">"true"</span>,</span><br><span class="line">                <span class="string">"ml.enabled"</span>: <span class="string">"true"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">....</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到这里输出了集群的相关信息，同时 nodes 字段里面包含了每个节点的详细信息，这样一个基本的集群就构建完成了。</p>
+                <h3 id="安装-Kibana"><a href="#安装-Kibana" class="headerlink" title="安装 Kibana"></a>安装 Kibana</h3>
+                <p>接下来我们需要安装一个 Kibana 来帮助可视化管理 Elasticsearch，依然还是通过 Apt 安装，只需要任意一台主机安装即可，因为集群是一体的，所以 Kibana 在任意一台主机只要能连接到 Elasticsearch 即可，安装命令如下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo apt-<span class="builtin-name">get</span> install kibana</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>安装之后修改 /etc/kibana/kibana.yml，设置公开访问和绑定的端口：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">server</span><span class="selector-class">.port</span>: 5601</span><br><span class="line"><span class="selector-tag">server</span><span class="selector-class">.host</span>: "0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span>"</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>然后启动服务：</p>
+                <figure class="highlight smali">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo<span class="keyword"> system</span>ctl daemon-reload</span><br><span class="line">sudo<span class="keyword"> system</span>ctl enable kibana.service</span><br><span class="line">sudo<span class="keyword"> system</span>ctl start kibana.service</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样我们可以在浏览器输入该台主机的 IP 加端口，查看 Kibana 管理页面了，类似如下： <img src="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-05-01-44-28.jpg" alt=""></p>
+                <p>这样 Kibana 可视化管理就配置成功了。</p>
+                <h3 id="配置认证"><a href="#配置认证" class="headerlink" title="配置认证"></a>配置认证</h3>
+                <p>现在集群已经初步搭建完成了，但是现在集群很危险，如果我们配置了可公网访问，那么它是可以被任何人操作的，比如储存数据，增删节点等，这是非常危险的，所以我们必须要设置访问权限。 在 Elasticsearch 中，配置认证是通过 X-Pack 插件实现的，幸运的是，我们不需要额外安装了，在 Elasticsearch 6.3.2 版本中，该插件是默认集成到 Elasticsearch 中的，所以我们只需要更改一部分设置就可以了。 首先我们需要升级 License，只有修改了高级版 License 才能使用 X-Pack 的权限认证功能。 在 Kibana 中访问 Management -&gt; Elasticsearch -&gt; License Management，点击右侧的升级 License 按钮，可以免费试用 30 天的高级 License，升级完成之后页面会显示如下：</p>
+                <p><img src="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-03-16-45-10.jpg" alt=""><img src="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-03-16-45-10.jpg" alt=""></p>
+                <p>另外还可以使用 API 来更新 License，详情可以参考官方文档：<a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.2/update-license.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/6.2/update-license.html</a>。 然后每台主机需要修改 /etc/elasticsearch/elasticsearch.yml 文件，开启 Auth 认证功能：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">xpack</span><span class="selector-class">.security</span><span class="selector-class">.enabled</span>: <span class="selector-tag">true</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>随后设置 elastic、kibana、logstash_system 三个用户的密码，任意一台主机修改之后，一台修改，多台生效，命令如下：</p>
+                <figure class="highlight awk">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="regexp">/usr/</span>share<span class="regexp">/elasticsearch/</span>bin<span class="regexp">/elasticsearch-setup-passwords interactive</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行之后会依次提示设置这三个用户的密码并确认，一共需要输入六次密码，完成之后就成功设置好了密码了。 修改完成之后重启 Elasticsearch 和 Kibana 服务：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">systemctl</span> <span class="selector-tag">restart</span> <span class="selector-tag">elasticsearch</span><span class="selector-class">.service</span></span><br><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">systemctl</span> <span class="selector-tag">restart</span> <span class="selector-tag">kibana</span><span class="selector-class">.service</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这时再访问 Kibana 就会跳转到登录页面了：</p>
+                <p><img src="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-03-17-18-28.jpg" alt=""><img src="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-03-17-18-28.jpg" alt=""></p>
+                <p>可以使用 elastic 用户登录，它的角色是超级管理员，登录之后就可以重新进入 Kibana 的管理页面。 我们还可以自行修改和添加账户，在 Management -&gt; Security -&gt; User/Roles 里面：</p>
+                <p><img src="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-03-17-20-05.jpg" alt=""><img src="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-03-17-20-05.jpg" alt=""></p>
+                <p>例如这里添加一个超级管理员的账户：</p>
+                <p><img src="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-03-17-21-44.jpg" alt=""><img src="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-03-17-21-44.jpg" alt=""></p>
+                <p>这样以后我们就可以使用新添加的用户来登录和访问了。 另外修改权限认证之后，Elasticsearch 也不能直接访问了，我们也必须输入用户密码才可以访问和调用其 API，保证了安全性。</p>
+                <h3 id="开启内存锁定"><a href="#开启内存锁定" class="headerlink" title="开启内存锁定"></a>开启内存锁定</h3>
+                <p>系统默认会进行内存交换，这样会导致 Elasticsearch 的性能变差，我们查看下内存锁定状态，在任意一台主机上的访问 <a href="http://ip:port/\_nodes?filter_path=\*\*.mlockall：">http://ip:port/\_nodes?filter_path=\*\*.mlockall：</a> 可以看到如下结果：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"nodes"</span>: &#123;</span><br><span class="line">        <span class="attr">"73BQvOC2TpSXcr-IXBcDdg"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"9tRr4nFDT_2rErLLQB2dIQ"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"hskSDv_JQlCUnjp_INI8Kg"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"LgaRuqXBTZaBdDGAktFWJA"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"ZcsZgowERzuvpqVbYOgOEA"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"I2M80AP-T7yVP_AZPA0bpA"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"_mSmfhUtQiqhzTKZ7u75Dw"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这代表内存交换没有开启，会影响 Elasticsearch 的性能，所以我们需要开启内存物理地址锁定，每台主机需要修改 /etc/elasticsearch/elasticsearch.yml 文件，修改如下配置：</p>
+                <figure class="highlight groovy">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">bootstrap.<span class="string">memory_lock:</span> <span class="literal">true</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>但这样修改之后重新启动是会报错的，Elasticsearch 无法正常启动，查看日志，报错如下：</p>
+                <figure class="highlight inform7">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment">[1]</span> bootstrap checks failed</span><br><span class="line"><span class="comment">[1]</span>: memory locking requested for elasticsearch process but memory <span class="keyword">is</span> not <span class="keyword">locked</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里需要修改两个地方，第一个是 /etc/security/limits.conf，添加如下内容：</p>
+                <figure class="highlight asciidoc">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="bullet">* </span>soft nofile 65536</span><br><span class="line"><span class="bullet">* </span>hard nofile 65536</span><br><span class="line"><span class="bullet">* </span>soft nproc 32000</span><br><span class="line"><span class="bullet">* </span>hard nproc 32000</span><br><span class="line"><span class="bullet">* </span>hard memlock unlimited</span><br><span class="line"><span class="bullet">* </span>soft memlock unlimited</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>另外还需要修改 /etc/systemd/system.conf，修改如下内容：</p>
+                <figure class="highlight ini">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attr">DefaultLimitNOFILE</span>=<span class="number">65536</span></span><br><span class="line"><span class="attr">DefaultLimitNPROC</span>=<span class="number">32000</span></span><br><span class="line"><span class="attr">DefaultLimitMEMLOCK</span>=infinity</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>详细的解释可以参考：<a href="https://segmentfault.com/a/1190000014891856" target="_blank" rel="noopener">https://segmentfault.com/a/1190000014891856</a>。 修改之后重启 Elasticsearch 服务：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">systemctl</span> <span class="selector-tag">restart</span> <span class="selector-tag">elasticsearch</span><span class="selector-class">.service</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>重新访问刚才的地址，即可发现每台主机的物理地址锁定都被打开了：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"nodes"</span>: &#123;</span><br><span class="line">        <span class="attr">"73BQvOC2TpSXcr-IXBcDdg"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"9tRr4nFDT_2rErLLQB2dIQ"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"hskSDv_JQlCUnjp_INI8Kg"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"LgaRuqXBTZaBdDGAktFWJA"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"ZcsZgowERzuvpqVbYOgOEA"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"I2M80AP-T7yVP_AZPA0bpA"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"_mSmfhUtQiqhzTKZ7u75Dw"</span>: &#123;</span><br><span class="line">            <span class="attr">"process"</span>: &#123;</span><br><span class="line">                <span class="attr">"mlockall"</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样我们就又解决了性能的问题。</p>
+                <h3 id="安装分词插件"><a href="#安装分词插件" class="headerlink" title="安装分词插件"></a>安装分词插件</h3>
+                <p>另外还推荐安装中文分词插件，这样可以对中文进行全文索引，安装命令如下：</p>
+                <figure class="highlight awk">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo <span class="regexp">/usr/</span>share<span class="regexp">/elasticsearch/</span>bin<span class="regexp">/elasticsearch-plugin install https:/</span><span class="regexp">/github.com/m</span>edcl<span class="regexp">/elasticsearch-analysis-ik/</span>releases<span class="regexp">/download/</span>v6.<span class="number">3.2</span><span class="regexp">/elasticsearch-analysis-ik-6.3.2.zip</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>安装完之后需要重启 Elasticsearch 服务：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">systemctl</span> <span class="selector-tag">restart</span> <span class="selector-tag">elasticsearch</span><span class="selector-class">.service</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="主机监控"><a href="#主机监控" class="headerlink" title="主机监控"></a>主机监控</h3>
+                <p>到此为止，我们的 Elasticsearch 集群就搭建完成了。 最后我们看下 Kibana 的部分功能，看下整个 Elasticsearch 有没有在正常工作。 访问 Kibana，打开 Management -&gt; Elasticsearch -&gt;Index Management，即可看到当前有的一些索引和状态：</p>
+                <p><img src="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-05-02-29-07.jpg" alt=""><img src="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-05-02-29-07.jpg" alt=""></p>
+                <p>打开 Monitoring，可以查看 Elasticsearch 和 Kibana 的状态：</p>
+                <p><img src="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-05-02-27-33.jpg" alt=""><img src="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-05-02-27-33.jpg" alt=""></p>
+                <p>进一步点击 Nodes，可以查看各个节点的状态：</p>
+                <p><img src="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-05-02-28-01.jpg" alt=""><img src="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-05-02-28-01.jpg" alt=""></p>
+                <p>打开任意节点，可以查看当前资源状况变化：</p>
+                <p><img src="https://cdn.cuiqingcai.com/wp-content/uploads/2018/08/2018-08-05-02-28-30.jpg" alt=""><img src="https://mp.weixin.qq.com/cgi-bin/assets/2018-08-05-02-28-30.jpg" alt=""></p>
+                <p>另外还有一些其他的功能如可视化、图表、搜索等等，这里就不再一一列举了，更多功能可以详细了解 Kibana。 以上都是自己在安装过程中趟过的坑，如有疏漏，还望指正。 还有更多的 Elasticsearch 相关的内容可以参考官方文档：<a href="https://www.elastic.co/guide/index.html" target="_blank" rel="noopener">https://www.elastic.co/guide/index.html</a>。</p>
+                <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2>
+                <ul>
+                  <li><a href="https://www.elastic.co/guide/en/x-pack/current/security-getting-started.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/x-pack/current/security-getting-started.html</a></li>
+                  <li><a href="https://segmentfault.com/a/1190000014891856" target="_blank" rel="noopener">https://segmentfault.com/a/1190000014891856</a></li>
+                  <li><a href="https://blog.csdn.net/a19860903/article/details/72467996" target="_blank" rel="noopener">https://blog.csdn.net/a19860903/article/details/72467996</a></li>
+                  <li><a href="https://logz.io/blog/elasticsearch-cluster-tutorial/" target="_blank" rel="noopener">https://logz.io/blog/elasticsearch-cluster-tutorial/</a></li>
+                  <li><a href="https://es.xiaoleilu.com/020_Distributed_Cluster/30_Scale_more.html" target="_blank" rel="noopener">https://es.xiaoleilu.com/020_Distributed_Cluster/30_Scale_more.html</a></li>
+                  <li><a href="https://blog.csdn.net/archer119/article/details/76589189" target="_blank" rel="noopener">https://blog.csdn.net/archer119/article/details/76589189</a></li>
+                </ul>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/6217.html" rel="prev" title="快来学习怎么可视化监控你的爬虫">
+                      <i class="fa fa-chevron-left"></i> 快来学习怎么可视化监控你的爬虫 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/6281.html" rel="next" title="如何给Azure云服务器扩展云磁盘"> 如何给Azure云服务器扩展云磁盘 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#为何要搭建-Elasticsearch-集群"><span class="nav-number">1.</span> <span class="nav-text">为何要搭建 Elasticsearch 集群</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#高可用性"><span class="nav-number">1.1.</span> <span class="nav-text">高可用性</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#健康状态"><span class="nav-number">1.2.</span> <span class="nav-text">健康状态</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#存储空间"><span class="nav-number">1.3.</span> <span class="nav-text">存储空间</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#详细了解-Elasticsearch-集群"><span class="nav-number">2.</span> <span class="nav-text">详细了解 Elasticsearch 集群</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#怎样搭建-Elasticsearch-集群"><span class="nav-number">3.</span> <span class="nav-text">怎样搭建 Elasticsearch 集群</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Java"><span class="nav-number">3.1.</span> <span class="nav-text">安装 Java</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Elasticsearch"><span class="nav-number">4.</span> <span class="nav-text">安装 Elasticsearch</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#配置-Elasticsearch"><span class="nav-number">4.1.</span> <span class="nav-text">配置 Elasticsearch</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#启动-Elasticsearch"><span class="nav-number">4.2.</span> <span class="nav-text">启动 Elasticsearch</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Kibana"><span class="nav-number">4.3.</span> <span class="nav-text">安装 Kibana</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#配置认证"><span class="nav-number">4.4.</span> <span class="nav-text">配置认证</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#开启内存锁定"><span class="nav-number">4.5.</span> <span class="nav-text">开启内存锁定</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#安装分词插件"><span class="nav-number">4.6.</span> <span class="nav-text">安装分词插件</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#主机监控"><span class="nav-number">4.7.</span> <span class="nav-text">主机监控</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'bdb6c43c333cadb75191efc2ff1d4036',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

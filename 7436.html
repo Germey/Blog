@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="舆情爬虫是网络爬虫一个比较重要的分支，舆情爬虫往往需要爬虫工程师爬取几百几千个新闻站点。比如一个新闻页面我们需要爬取其标题、正文、时间、作者等信息，如果用传统的方式来实现，每一个站点都要配置非常多的规则，如果要维护一个几百上千的站点，那人力成本简直太高了。 如果有一种方式可以在保证差不多的准确率的前提下，大幅提高提取效率的话，就需要用到智能文本提取了。 本文首先介绍一下智能文本提取的基本原理，让大">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="爬虫智能解析库 Readability 和 Newspaper 的用法">
+  <meta property="og:url" content="https://cuiqingcai.com/7436.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="舆情爬虫是网络爬虫一个比较重要的分支，舆情爬虫往往需要爬虫工程师爬取几百几千个新闻站点。比如一个新闻页面我们需要爬取其标题、正文、时间、作者等信息，如果用传统的方式来实现，每一个站点都要配置非常多的规则，如果要维护一个几百上千的站点，那人力成本简直太高了。 如果有一种方式可以在保证差不多的准确率的前提下，大幅提高提取效率的话，就需要用到智能文本提取了。 本文首先介绍一下智能文本提取的基本原理，让大">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-09-09-125723.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-09-09-125754.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-09-09-134550.png">
+  <meta property="article:published_time" content="2019-09-12T01:37:24.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.325Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/2019-09-09-125723.png">
+  <link rel="canonical" href="https://cuiqingcai.com/7436.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>爬虫智能解析库 Readability 和 Newspaper 的用法 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/7436.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 爬虫智能解析库 Readability 和 Newspaper 的用法 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2019-09-12 09:37:24" itemprop="dateCreated datePublished" datetime="2019-09-12T09:37:24+08:00">2019-09-12</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">技术杂谈</span></a>
+                    </span>
+                  </span>
+                  <span id="/7436.html" class="post-meta-item leancloud_visitors" data-flag-title="爬虫智能解析库 Readability 和 Newspaper 的用法" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>15k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>14 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>舆情爬虫是网络爬虫一个比较重要的分支，舆情爬虫往往需要爬虫工程师爬取几百几千个新闻站点。比如一个新闻页面我们需要爬取其标题、正文、时间、作者等信息，如果用传统的方式来实现，每一个站点都要配置非常多的规则，如果要维护一个几百上千的站点，那人力成本简直太高了。 如果有一种方式可以在保证差不多的准确率的前提下，大幅提高提取效率的话，就需要用到智能文本提取了。 本文首先介绍一下智能文本提取的基本原理，让大家对智能提取有基本的了解。然后介绍几个比较基础的工具包，准确率并不是很高，可以尝试一用。最后再介绍几篇比较前沿的技术供大家参考。</p>
+                <h2 id="智能文本提取"><a href="#智能文本提取" class="headerlink" title="智能文本提取"></a>智能文本提取</h2>
+                <p>目前来说，智能文本提取可以分为三类：</p>
+                <ul>
+                  <li>基于网页文档内容的提取方法</li>
+                  <li>基于 DOM 结构信息的提取方法</li>
+                  <li>基于视觉信息的提取方法</li>
+                </ul>
+                <p>基于网页文档的提取方法将 HTML 文档视为文本进行处理，适用于处理含有大量文本信息且结构简单易于处理的单记录网页，或者具有实时要求的在线分析网页应用。 这种方式主要利用自然语言处理相关技术实现，通过理解 文本语义、分析上下文、设定提取规则等，实现对大段网页文档的快速处理。其中，较为知名的方法有 TSIMMIS、Web-OQL、Serrano、FAR-SW 和 FOREST，但这些方法由于通常需要人工的参与，且存在耗时长、效率低的弊端。 基于 DOM 结构信息的方法将 HTML 文档解析为相应的 DOM 树，然后根据 DOM 树的语法结构创建提取规则， 相对于以前的方法而言有了更高的性能和准确率。 W4F 和 XWRAP 将 HTML 文档解析成 DOM 树，然后通过组件化引导用户通过人工选择或者标记生成目标包装器代码。Omini、IEPAD 和 ITE 提取 DOM 树上的关键路径， 获取其中存在的重复模式。MDR 和 DEPTA 挖掘了页面中的数据区域，得到数据记录的模式。CECWS 通过聚类算法从数据库中提取出自同一网站的一组页面，并进行 DOM 树结构的对比，删除其中的静态部分，保留动态内容作为信息提取的结果。虽然此类方法相对于上一类方法 具有较高的提取精度，且克服了对大段连续文本的依赖， 但由于网页的 DOM 树通常较深，含有大量 DOM 节点， 因此基于 DOM 结构信息的方法具有较高的时间和空间消耗。目前来说，大部分原理还是基于 DOM 节点的文本密度、标点符号密度等计算的，其准确率还是比较可观的。今天所介绍的 Readability 和 Newspaper 的库的实现原理就是类似。 目前比较先进的是基于视觉信息的网页信息提取方法，通过浏览器接口或者内核对目标网页预渲染，然后基于网页的视觉规律提取网页数据记录。经典的 VIPS 算法首先从 DOM 树中提取出所有合适的页面区域，然后根据这些页面和分割条重新构建 Web 页面的语义结构。作为对 VIPS 的拓展，ViNT、ViPER、ViDE 也成功利用了网页的视觉特征来实现数据提取。CMDR 为通过神经网络学习多记录型页面中的特征，结合基于 DOM 结构信息的 MDR 方法，挖掘社区论坛页面的数据区域。与上述方法不同，VIBS 将图像领域的 CNN 卷积神经网络运用于网页的截图，同时通过类 VIPS 算法生成视觉块，最后结合两个阶段的结果识别网页的正文区域。另外还有最新的国内提出的 VBIE 方法，基于网页视觉的基础上改进，可以实现无监督的网页信息提取。</p>
+                <blockquote>
+                  <p>以上内容主要参考自论文：《王卫红等：基于可视块的多记录型复杂网页信息提取算法》，算法可从该论文参考文献查阅。</p>
+                </blockquote>
+                <p>下面我们来介绍两个比较基础的工具包 Readability 和 Newspaper 的用法，这两个包经我测试其实准确率并不是很好，主要是让大家大致对智能解析有初步的理解。后面还会介绍一些更加强大的智能化解析算法。</p>
+                <h2 id="Readability"><a href="#Readability" class="headerlink" title="Readability"></a>Readability</h2>
+                <p>Readability 实际上是一个算法，并不是一个针对某个语言的库。其主要原理就是计算了 DOM 的文本密度，另外根据一些常见的 DOM 属性如 id、class 等计算了一些 DOM 的权重，最后分析得到了对应的 DOM 区块，进而提取出具体的文本内容。 现在搜索 Readability 其实已经找不到了，取而代之的是一个 JavaScript 工具包，叫做 mercury-parser，据我所知应该是 Readability 不维护了，换成了 mercury-parser。后者现在也做成了一个 Chrome 插件，大家可以下载使用一下。 回归正题，这次主要介绍的是 Python 的 Readability 实现，现在其实有很多开源版本，本文选取的是 <a href="https://github.com/buriy/python-readability，是基于最早的" target="_blank" rel="noopener">https://github.com/buriy/python-readability，是基于最早的</a> Python 版本的 Readability 库 <a href="https://github.com/timbertson/python-readability" target="_blank" rel="noopener">https://github.com/timbertson/python-readability</a> 二次开发的，现在已经发布到了 PyPi，大家可以直接下载安装使用。 安装很简单，通过 pip 安装即可：</p>
+                <figure class="highlight cmake">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">pip3 <span class="keyword">install</span> readability-lxml</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>安装好了之后便可以通过导入 readability 使用了，下面我们随便从网上找一个新闻页面，比如：<a href="https://tech.163.com/19/0909/08/EOKA3CFB00097U7S.html，其页面截图如下" target="_blank" rel="noopener">https://tech.163.com/19/0909/08/EOKA3CFB00097U7S.html，其页面截图如下</a>： <img src="https://cdn.cuiqingcai.com/2019-09-09-125723.png" alt="页面示例"> 我们的目的就是它的正文、标题等内容。下面我们用 Readability 试一下，示例如下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">import requests</span><br><span class="line"><span class="keyword">from</span> readability import Document</span><br><span class="line"></span><br><span class="line">url = <span class="string">'https://tech.163.com/19/0909/08/EOKA3CFB00097U7S.html'</span></span><br><span class="line">html = requests.<span class="builtin-name">get</span>(url).content</span><br><span class="line">doc = Document(html)</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'title:'</span>, doc.title())</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'content:'</span>, doc.summary(<span class="attribute">html_partial</span>=<span class="literal">True</span>))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里我们直接用 requests 库对网页进行了请求，获取了其 HTML 页面内容，赋值为 html。 然后引入了 readability 里的 Document 类，使用 html 变量对其进行初始化，然后我们分别调用了 title 方法和 summary 方法获得了其标题和正文内容。 这里 title 方法就是获取文章标题的，summary 就是获取文章正文的，但是它获取的正文可能包含一些 HTML 标签。这个 summary 方法可以接收一个 html_partial 参数，如果设置为 True，返回的结果则不会再带有 <code>&lt;html&gt;&lt;body&gt;</code> 标签。 看下运行结果：</p>
+                <figure class="highlight xml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">title: 今年iPhone只有小改进？分析师：还有其他亮点_网易科技</span><br><span class="line">content: <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"post_text"</span> <span class="attr">id</span>=<span class="string">"endText"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"otitle"</span>&gt;</span></span><br><span class="line">                        （原标题：Apple Bets More Cameras Can Keep iPhone Humming）</span><br><span class="line">                    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"f_center"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">alt</span>=<span class="string">"今年iPhone只有小改进？分析师：还有其他亮点"</span> <span class="attr">src</span>=<span class="string">"http://cms-bucket.ws.126.net/2019/09/09/d65ba32672934045a5bfadd27f704bc1.jpeg"</span>/&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>图示：苹果首席执行官蒂姆·库克(Tim Cook)在6月份举行的苹果全球开发者大会上。<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>网易科技讯 9月9日消息，据国外媒体报道，和过去的12个年头一样，新款</span><br><span class="line">... 中间省略 ...</span><br><span class="line">                    <span class="tag">&lt;<span class="name">p</span>&gt;</span>苹果还即将推出包括电视节目和视频游戏等内容的新订阅服务。分析师表示，该公司最早可能在本周宣布TV+和Arcade等服务的价格和上线时间。<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span>Strategy Analytics的尼尔·莫斯顿(Neil Mawston)表示，可穿戴设备和服务的结合将是苹果业务超越iPhone的关键。他说，上一家手机巨头诺基亚公司在试图进行类似业务转型时就陷入了困境之中。（辰辰）<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">b</span>&gt;</span>相关报道：<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://tech.163.com/19/0908/09/EOHS53RK000999LD.html"</span> <span class="attr">target</span>=<span class="string">"_self"</span> <span class="attr">urlmacroreplace</span>=<span class="string">"false"</span>&gt;</span>iPhone 11背部苹果Logo改为居中：为反向无线充电<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://tech.163.com/19/0907/08/EOF60CBC00097U7S.html"</span> <span class="attr">target</span>=<span class="string">"_self"</span> <span class="attr">urlmacroreplace</span>=<span class="string">"false"</span>&gt;</span>2019年新iPhone传言汇总，你觉得哪些能成真<span class="tag">&lt;/<span class="name">a</span>&gt;</span>  <span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>/&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">p</span>/&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ep-source cDGray"</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://tech.163.com/"</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"https://static.ws.126.net/cnews/css13/img/end_tech.png"</span> <span class="attr">alt</span>=<span class="string">"王凤枝"</span> <span class="attr">class</span>=<span class="string">"icon"</span>/&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span> 本文来源：网易科技报道  <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"ep-editor"</span>&gt;</span>责任编辑：王凤枝_NT2541<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到，标题提取是正确的。正文其实也是正确的，不过这里还包含了一些 HTML 标签，比如 <code>&lt;img&gt;</code>、<code>&lt;p&gt;</code> 等，我们可以进一步通过一些解析库来解析。 看下源码吧，比如提取标题的方法：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalize_entities</span><span class="params">(cur_title)</span>:</span></span><br><span class="line">    entities = &#123;</span><br><span class="line">        <span class="string">u'u2014'</span>:<span class="string">'-'</span>,</span><br><span class="line">        <span class="string">u'u2013'</span>:<span class="string">'-'</span>,</span><br><span class="line">        <span class="string">u'&amp;mdash;'</span>: <span class="string">'-'</span>,</span><br><span class="line">        <span class="string">u'&amp;ndash;'</span>: <span class="string">'-'</span>,</span><br><span class="line">        <span class="string">u'u00A0'</span>: <span class="string">' '</span>,</span><br><span class="line">        <span class="string">u'u00AB'</span>: <span class="string">'"'</span>,</span><br><span class="line">        <span class="string">u'u00BB'</span>: <span class="string">'"'</span>,</span><br><span class="line">        <span class="string">u'&amp;quot;'</span>: <span class="string">'"'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> c, r <span class="keyword">in</span> entities.items():</span><br><span class="line">        <span class="keyword">if</span> c <span class="keyword">in</span> cur_title:</span><br><span class="line">            cur_title = cur_title.replace(c, r)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> cur_title</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">norm_title</span><span class="params">(title)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> normalize_entities(normalize_spaces(title))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_title</span><span class="params">(doc)</span>:</span></span><br><span class="line">    title = doc.find(<span class="string">'.//title'</span>)</span><br><span class="line">    <span class="keyword">if</span> title <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> title.text <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> len(title.text) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'[no-title]'</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> norm_title(title.text)</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">def</span> <span class="title">title</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""Returns document title"""</span></span><br><span class="line">    <span class="keyword">return</span> get_title(self._html(<span class="literal">True</span>))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>title 方法实际上就是调用了一个 get_title 方法，它怎么做的？实际上就是用了一个 XPath 只解析了 <code>&lt;title&gt;</code> 标签里面的内容，别的没了。如果没有，那就返回 <code>[no-title]</code>。</p>
+                <figure class="highlight lasso">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def summary(<span class="built_in">self</span>, html_partial=<span class="literal">False</span>):</span><br><span class="line">    ruthless = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="built_in">self</span>._html(<span class="literal">True</span>)</span><br><span class="line">        for i <span class="keyword">in</span> <span class="built_in">self</span>.tags(<span class="built_in">self</span>.html, <span class="string">'script'</span>, <span class="string">'style'</span>):</span><br><span class="line">            i.drop_tree()</span><br><span class="line">        for i <span class="keyword">in</span> <span class="built_in">self</span>.tags(<span class="built_in">self</span>.html, <span class="string">'body'</span>):</span><br><span class="line">            i.<span class="built_in">set</span>(<span class="string">'id'</span>, <span class="string">'readabilityBody'</span>)</span><br><span class="line">        <span class="keyword">if</span> ruthless:</span><br><span class="line">            <span class="built_in">self</span>.remove_unlikely_candidates()</span><br><span class="line">        <span class="built_in">self</span>.transform_misused_divs_into_paragraphs()</span><br><span class="line">        candidates = <span class="built_in">self</span>.score_paragraphs()</span><br><span class="line"></span><br><span class="line">        best_candidate = <span class="built_in">self</span>.select_best_candidate(candidates)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> best_candidate:</span><br><span class="line">            article = <span class="built_in">self</span>.get_article(candidates, best_candidate,</span><br><span class="line">                                       html_partial=html_partial)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> ruthless:</span><br><span class="line">                ruthless = <span class="literal">False</span></span><br><span class="line">                continue</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                article = <span class="built_in">self</span>.html.find(<span class="string">'body'</span>)</span><br><span class="line">                <span class="keyword">if</span> article is <span class="literal">None</span>:</span><br><span class="line">                    article = <span class="built_in">self</span>.html</span><br><span class="line">        cleaned_article = <span class="built_in">self</span>.sanitize(article, candidates)</span><br><span class="line">        article_length = len(cleaned_article <span class="literal">or</span> <span class="string">''</span>)</span><br><span class="line">        retry_length = <span class="built_in">self</span>.retry_length</span><br><span class="line">        of_acceptable_length = article_length &gt;= retry_length</span><br><span class="line">        <span class="keyword">if</span> ruthless <span class="literal">and</span> <span class="literal">not</span> of_acceptable_length:</span><br><span class="line">            ruthless = <span class="literal">False</span></span><br><span class="line">            continue</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> cleaned_article</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我删除了一些冗余的调试的代码，只保留了核心的代码，其核心实现就是先去除一些干扰内容，然后找出一些疑似正文的 candidates，然后再去寻找最佳匹配的 candidates 最后提取其内容返回即可。 然后再找到获取 candidates 方法里面的 score_paragraphs 方法，又追踪到一个 score_node 方法，就是为每一个节点打分的，其实现如下：</p>
+                <figure class="highlight pgsql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def score_node(self, elem):</span><br><span class="line">   content_score = self.class_weight(elem)</span><br><span class="line">   <span class="type">name</span> = elem.tag.lower()</span><br><span class="line">   <span class="keyword">if</span> <span class="type">name</span> <span class="keyword">in</span> ["div", "article"]:</span><br><span class="line">       content_score += <span class="number">5</span></span><br><span class="line">   elif <span class="type">name</span> <span class="keyword">in</span> ["pre", "td", "blockquote"]:</span><br><span class="line">       content_score += <span class="number">3</span></span><br><span class="line">   elif <span class="type">name</span> <span class="keyword">in</span> ["address", "ol", "ul", "dl", "dd", "dt", "li", "form", "aside"]:</span><br><span class="line">       content_score -= <span class="number">3</span></span><br><span class="line">   elif <span class="type">name</span> <span class="keyword">in</span> ["h1", "h2", "h3", "h4", "h5", "h6", "th", "header", "footer", "nav"]:</span><br><span class="line">       content_score -= <span class="number">5</span></span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">       <span class="string">'content_score'</span>: content_score,</span><br><span class="line">       <span class="string">'elem'</span>: elem</span><br><span class="line">   &#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这什么意思呢？你看如果这个节点标签是 div 或者 article 等可能表征正文区块的话，就加 5 分，如果是 aside 等表示侧栏的内容就减 3 分。这些打分也没有什么非常标准的依据，可能是根据经验累积的规则。 另外还有一些方法里面引用了一些正则匹配来进行打分或者替换，其定义如下：</p>
+                <figure class="highlight gherkin">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"> REGEXES = &#123;</span><br><span class="line">    'unlikelyCandidatesRe': re.compile('combx|<span class="string">comment</span>|<span class="string">community</span>|<span class="string">disqus</span>|<span class="string">extra</span>|<span class="string">foot</span>|<span class="string">header</span>|<span class="string">menu</span>|<span class="string">remark</span>|<span class="string">rss</span>|<span class="string">shoutbox</span>|<span class="string">sidebar</span>|<span class="string">sponsor</span>|<span class="string">ad-break</span>|<span class="string">agegate</span>|<span class="string">pagination</span>|<span class="string">pager</span>|<span class="string">popup</span>|<span class="string">tweet</span>|<span class="string">twitter', re.I),</span></span><br><span class="line"><span class="string">    'okMaybeItsACandidateRe': re.compile('and</span>|<span class="string">article</span>|<span class="string">body</span>|<span class="string">column</span>|<span class="string">main</span>|<span class="string">shadow', re.I),</span></span><br><span class="line"><span class="string">    'positiveRe': re.compile('article</span>|<span class="string">body</span>|<span class="string">content</span>|<span class="string">entry</span>|<span class="string">hentry</span>|<span class="string">main</span>|<span class="string">page</span>|<span class="string">pagination</span>|<span class="string">post</span>|<span class="string">text</span>|<span class="string">blog</span>|<span class="string">story', re.I),</span></span><br><span class="line"><span class="string">    'negativeRe': re.compile('combx</span>|<span class="string">comment</span>|<span class="string">com-</span>|<span class="string">contact</span>|<span class="string">foot</span>|<span class="string">footer</span>|<span class="string">footnote</span>|<span class="string">masthead</span>|<span class="string">media</span>|<span class="string">meta</span>|<span class="string">outbrain</span>|<span class="string">promo</span>|<span class="string">related</span>|<span class="string">scroll</span>|<span class="string">shoutbox</span>|<span class="string">sidebar</span>|<span class="string">sponsor</span>|<span class="string">shopping</span>|<span class="string">tags</span>|<span class="string">tool</span>|<span class="string">widget', re.I),</span></span><br><span class="line"><span class="string">    'divToPElementsRe': re.compile('&lt;(a</span>|<span class="string">blockquote</span>|<span class="string">dl</span>|<span class="string">div</span>|<span class="string">img</span>|<span class="string">ol</span>|<span class="string">p</span>|<span class="string">pre</span>|<span class="string">table</span>|<span class="string">ul)', re.I),</span></span><br><span class="line"><span class="string">    #'replaceBrsRe': re.compile('(&lt;br[^&gt;]*&gt;[ nrt]*)&#123;2,&#125;',re.I),</span></span><br><span class="line"><span class="string">    #'replaceFontsRe': re.compile('&lt;(/?)font[^&gt;]*&gt;',re.I),</span></span><br><span class="line"><span class="string">    #'trimRe': re.compile('^s+</span>|<span class="string">s+$/'),</span></span><br><span class="line"><span class="string">    #'normalizeRe': re.compile('s&#123;2,&#125;/'),</span></span><br><span class="line"><span class="string">    #'killBreaksRe': re.compile('(&lt;brs*/?&gt;(s</span>|<span class="string">&amp;nbsp;?)*)&#123;1,&#125;/'),</span></span><br><span class="line"><span class="string">    'videoRe': re.compile('https?://(www.)?(youtube</span>|<span class="string">vimeo).com', re.I),</span></span><br><span class="line"><span class="string">    #skipFootnoteLink:      /^s*([?[a-z0-9]&#123;1,2&#125;]?</span>|<span class="string">^</span>|<span class="string">edit</span>|<span class="string">citation needed)s*$/i,</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>比如这里定义了 unlikelyCandidatesRe，就是不像 candidates 的 pattern，比如 foot、comment 等等，碰到这样的标签或 pattern 的话，在计算分数的时候都会减分，另外还有其他的 positiveRe、negativeRe 也是一样的原理，分别对匹配到的内容进行加分或者减分。 这就是 Readability 的原理，是基于一些规则匹配的打分模型，很多规则其实来源于经验的累积，分数的计算规则应该也是不断地调优得出来的。 另外其他的就没了，Readability 并没有提供提取时间、作者的方法，另外此种方法的准确率也是有限的，但多少还是省去了一些人工成本。</p>
+                <h2 id="Newspaper"><a href="#Newspaper" class="headerlink" title="Newspaper"></a>Newspaper</h2>
+                <p>另外还有一个智能解析的库，叫做 Newspaper，提供的功能更强一些，但是准确率上个人感觉和 Readability 差不太多。 这个库分为 Python2 和 Python3 两个版本，Python2 下的版本叫做 newspaper，Python3 下的版本叫做 newspaper3k，这里我们使用 Python3 版本来进行测试。 其 GitHub 地址是：<a href="https://github.com/codelucas/newspaper，官方文档地址是：[https://newspaper.readthedocs.io](https://newspaper.readthedocs.io/" target="_blank" rel="noopener">https://github.com/codelucas/newspaper，官方文档地址是：[https://newspaper.readthedocs.io](https://newspaper.readthedocs.io/</a>&gt;)。 在安装之前需要安装一些依赖库，可以参考官方的说明：<a href="https://github.com/codelucas/newspaper#get-it-now" target="_blank" rel="noopener">https://github.com/codelucas/newspaper#get-it-now</a>。 安装好必要的依赖库之后，就可以使用 pip 安装了：</p>
+                <figure class="highlight cmake">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">pip3 <span class="keyword">install</span> newspaper3k</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>安装成功之后便可以导入使用了。 下面我们先用官方提供的实例来过一遍它的用法，官方提供的示例是使用了这个链接：<a href="https://fox13now.com/2013/12/30/new-year-new-laws-obamacare-pot-guns-and-drones/，其页面截图如下" target="_blank" rel="noopener">https://fox13now.com/2013/12/30/new-year-new-laws-obamacare-pot-guns-and-drones/，其页面截图如下</a>： <img src="https://cdn.cuiqingcai.com/2019-09-09-125754.png" alt="官方示例"> 下面用一个实例来感受一下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> newspaper import Article</span><br><span class="line"></span><br><span class="line">url = <span class="string">'https://fox13now.com/2013/12/30/new-year-new-laws-obamacare-pot-guns-and-drones/'</span></span><br><span class="line">article = Article(url)</span><br><span class="line">article.download()</span><br><span class="line"><span class="comment"># print('html:', article.html)</span></span><br><span class="line"></span><br><span class="line">article.parse()</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'authors:'</span>, article.authors)</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'date:'</span>, article.publish_date)</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'text:'</span>, article.text)</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'top image:'</span>, article.top_image)</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'movies:'</span>, article.movies)</span><br><span class="line"></span><br><span class="line">article.nlp()</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'keywords:'</span>, article.keywords)</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'summary:'</span>, article.summary)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里从 newspaper 库里面先导入了 Article 这个类，然后直接传入 url 即可，首先需要调用它的 download 方法，将网页爬取下来，否则直接进行解析会抛出错误的。</p>
+                <blockquote>
+                  <p>但我总感觉这个设计挺不友好的，parse 方法不能判断下，如果没执行 download 就自动执行 download 方法吗？如果不 download 其他的不什么都干不了吗？</p>
+                </blockquote>
+                <p>好的，然后我们再执行 parse 方法进行网页的智能解析，这个功能就比较全了，能解析 authors、publish_date、text 等等，除了正文还能解析作者、发布时间等等。 另外这个库还提供了一些 NLP 的方法，比如获取关键词、获取文本摘要等等，在使用前需要先执行以下 nlp 方法。 最后运行结果如下：</p>
+                <figure class="highlight">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">authors</span>: ['Cnn Wire']</span><br><span class="line"><span class="attribute">date</span>: 2013-12-30 00:00:00</span><br><span class="line"><span class="attribute">text</span>: By Leigh Ann Caldwell</span><br><span class="line"></span><br><span class="line">WASHINGTON (CNN) — Not everyone subscribes to a New Year’s resolution, but Americans will be required to follow new laws in 2014.</span><br><span class="line"></span><br><span class="line">Some 40,000 measures taking effect range from sweeping, national mandates under Obamacare to marijuana legalization in Colorado, drone prohibition in Illinois and transgender protections in California.</span><br><span class="line"></span><br><span class="line">Although many new laws are controversial, they made it through legislatures, public referendum or city councils and represent the shifting composition of American beliefs.</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"><span class="attribute">Colorado</span>: Marijuana becomes legal in the state for buyers over 21 at a licensed retail dispensary.</span><br><span class="line"></span><br><span class="line">(Sourcing: much of this list was obtained from the National Conference of State Legislatures).</span><br><span class="line">top image: https://localtvkstu.files.wordpress.com/2012/04/national-news-e1486938949489.jpg?quality=85&amp;strip=all</span><br><span class="line"><span class="attribute">movies</span>: []</span><br><span class="line"><span class="attribute">keywords</span>: ['drones', 'national', 'guns', 'wage', 'law', 'pot', 'leave', 'family', 'states', 'state', 'latest', 'obamacare', 'minimum', 'laws']</span><br><span class="line"><span class="attribute">summary</span>: Oregon: Family leave in Oregon has been expanded to allow eligible employees two weeks of paid leave to handle the death of a family member.</span><br><span class="line"><span class="attribute">Arkansas</span>: The state becomes the latest state requiring voters show a picture ID at the voting booth.</span><br><span class="line">Minimum wage and former felon employmentWorkers in 13 states and four cities will see increases to the minimum wage.</span><br><span class="line">New Jersey residents voted to raise the state’s minimum wage by $1 to $8.25 per hour.</span><br><span class="line">California is also raising its minimum wage to $9 per hour, but workers must wait until July to see the addition.</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里省略了一些输出结果。 可以看到作者、日期、正文、关键词、标签、缩略图等信息都被打印出来了，还算是不错的。 但这个毕竟是官方的实例，肯定是好的，我们再测试一下刚才的例子，看看效果如何，网址还是：<a href="https://tech.163.com/19/0909/08/EOKA3CFB00097U7S.html，改写代码如下" target="_blank" rel="noopener">https://tech.163.com/19/0909/08/EOKA3CFB00097U7S.html，改写代码如下</a>：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> newspaper import Article</span><br><span class="line"></span><br><span class="line">url = <span class="string">'https://tech.163.com/19/0909/08/EOKA3CFB00097U7S.html'</span></span><br><span class="line">article = Article(url, <span class="attribute">language</span>=<span class="string">'zh'</span>)</span><br><span class="line">article.download()</span><br><span class="line"><span class="comment"># print('html:', article.html)</span></span><br><span class="line"></span><br><span class="line">article.parse()</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'authors:'</span>, article.authors)</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'title:'</span>, article.title)</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'date:'</span>, article.publish_date)</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'text:'</span>, article.text)</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'top image:'</span>, article.top_image)</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'movies:'</span>, article.movies)</span><br><span class="line"></span><br><span class="line">article.nlp()</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'keywords:'</span>, article.keywords)</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'summary:'</span>, article.summary)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们将链接换成了新闻的链接，另外在 Article 初始化的时候还加了一个参数 language，其值为 zh，代表中文。 然后我们看下运行结果：</p>
+                <figure class="highlight groovy">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Building prefix dict from <span class="regexp">/usr/</span>local<span class="regexp">/lib/</span>python3<span class="number">.7</span><span class="regexp">/site-packages/</span>jieba/dict.txt ...</span><br><span class="line">Dumping model to file cache <span class="regexp">/var/</span>folders<span class="regexp">/1g/</span>l2xlw12x6rncs2p9kh5swpmw0000gn<span class="regexp">/T/</span>jieba.cache</span><br><span class="line">Loading model cost <span class="number">1.7178938388824463</span> seconds.</span><br><span class="line">Prefix dict has been built succesfully.</span><br><span class="line"><span class="string">authors:</span> []</span><br><span class="line"><span class="string">title:</span> 今年iPhone只有小改进？分析师：还有其他亮点</span><br><span class="line"><span class="string">date:</span> <span class="number">2019</span><span class="number">-09</span><span class="number">-09</span> <span class="number">08</span>:<span class="number">10</span>:<span class="number">26</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line"><span class="string">text:</span> （原标题：Apple Bets More Cameras Can Keep iPhone Humming）</span><br><span class="line"></span><br><span class="line">图示：苹果首席执行官蒂姆·库克(Tim Cook)在<span class="number">6</span>月份举行的苹果全球开发者大会上。</span><br><span class="line"></span><br><span class="line">网易科技讯 <span class="number">9</span>月<span class="number">9</span>日消息，据国外媒体报道，和过去的<span class="number">12</span>个年头一样，新款iPhone将成为苹果公司本周所举行年度宣传活动的主角。但人们的注意力正转向需要推动增长的其他苹果产品和服务。</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">Strategy Analytics的尼尔·莫斯顿(Neil Mawston)表示，可穿戴设备和服务的结合将是苹果业务超越iPhone的关键。他说，上一家手机巨头诺基亚公司在试图进行类似业务转型时就陷入了困境之中。（辰辰）</span><br><span class="line"></span><br><span class="line">相关报道：</span><br><span class="line"></span><br><span class="line">iPhone <span class="number">11</span>背部苹果Logo改为居中：为反向无线充电</span><br><span class="line"></span><br><span class="line"><span class="number">2019</span>年新iPhone传言汇总，你觉得哪些能成真</span><br><span class="line">top <span class="string">image:</span> <span class="string">https:</span><span class="comment">//www.163.com/favicon.ico</span></span><br><span class="line"><span class="string">movies:</span> []</span><br><span class="line"><span class="string">keywords:</span> [<span class="string">'trust高级投资组合经理丹摩根dan'</span>, <span class="string">'iphone'</span>, <span class="string">'mawston表示可穿戴设备和服务的结合将是苹果业务超越iphone的关键他说上一家手机巨头诺基亚公司在试图进行类似业务转型时就陷入了困境之中辰辰相关报道iphone'</span>, <span class="string">'xs的销售疲软状况迫使苹果在1月份下调了业绩预期这是逾15年来的第一次据贸易公司susquehanna'</span>, <span class="string">'xs机型发布后那种令人失望的业绩重演iphone'</span>, <span class="string">'今年iphone只有小改进分析师还有其他亮点'</span>, <span class="string">'more'</span>, <span class="string">'xr和iphone'</span>, <span class="string">'morgan说他们现在没有任何真正深入的进展只是想继续让iphone这款业务继续转下去他乐观地认为今年发布的新款手机将有足够多的新功能为一个非常成熟的产品增加额外的功能让火车继续前进这种仅限于此的态度说明了苹果自2007年发布首款iphone以来所面临的挑战iphone销售占苹果公司总营收的一半以上这让苹果陷入了一个尴尬的境地既要维持核心产品的销量另一方面又需要减少对它的依赖瑞银ubs今年5月份对8000名智能手机用户进行了相关调查其发布的年度全球调查报告显示最近iphone在人脸识别技术等方面的进步并没有引起一些消费者的共鸣他们基本上都认为苹果产品没有过去几年那么独特或者惊艳品牌也没有过去几年那么有吸引力很多人使用老款手机的时间更长自己认为也没有必要升级到平均售价949美元的新款iphone苹果需要在明年销售足够多的iphone以避免像去年9月份iphone'</span>, <span class="string">'keep'</span>, <span class="string">'原标题apple'</span>]</span><br><span class="line"><span class="string">summary:</span> （原标题：Apple Bets More Cameras Can Keep iPhone Humming）图示：苹果首席执行官蒂姆·库克(Tim Cook)在<span class="number">6</span>月份举行的苹果全球开发者大会上。网易科技讯 <span class="number">9</span>月<span class="number">9</span>日消息，据国外媒体报道，和过去的<span class="number">12</span>个年头一样，新款iPhone将成为苹果公司本周所举行...亚公司在试图进行类似业务转型时就陷入了困境之中。（辰辰）相关报道：iPhone <span class="number">11</span>背部苹果Logo改为居中：为反向无线充电<span class="number">2019</span>年新iPhone传言汇总，你觉得哪些能成真</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>中间正文很长省略了一部分，可以看到运行时首先加载了一些中文的库包，比如 jieba 所依赖的词表等等。 解析结果中，日期的确是解析对了，因为这个日期格式的的确比较规整，但这里还自动给我们加了东八区的时区，贴心了。作者没有提取出来，可能是没匹配到 <code>来源</code> 两个字吧，或者词库里面没有，标题、正文的提取还算比较正确，也或许这个案例的确是比较简单。 另外对于 NLP 部分，获取的关键词比较迷，长度有点太长了。summary 也有点冗余。 另外 Newspaper 还提供了一个较为强大的功能，就是 build 构建信息源。官方的介绍其功能就是构建一个新闻源，可以根据传入的 URL 来提取相关文章、分类、RSS 订阅信息等等。 我们用实例感受一下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">import newspaper</span><br><span class="line"></span><br><span class="line">source = newspaper.build(<span class="string">'http://www.sina.com.cn/'</span>, <span class="attribute">language</span>=<span class="string">'zh'</span>)</span><br><span class="line"><span class="keyword">for</span> category <span class="keyword">in</span> source.category_urls():</span><br><span class="line">    <span class="builtin-name">print</span>(category)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> article <span class="keyword">in</span> source.articles:</span><br><span class="line">    <span class="builtin-name">print</span>(article.url)</span><br><span class="line">    <span class="builtin-name">print</span>(article.title)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> feed_url <span class="keyword">in</span> source.feed_urls():</span><br><span class="line">    <span class="builtin-name">print</span>(feed_url)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里我们传入了新浪的官网，调用了 build 方法，构建了一个 source，然后输出了相关的分类、文章、RSS 订阅等内容，运行结果如下：</p>
+                <figure class="highlight vim">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">http://cul.news.sina.<span class="keyword">com</span>.<span class="keyword">cn</span></span><br><span class="line">http://www.sina.<span class="keyword">com</span>.<span class="keyword">cn</span>/</span><br><span class="line">http://sc.sina.<span class="keyword">com</span>.<span class="keyword">cn</span></span><br><span class="line">http://jiangsu.sina.<span class="keyword">com</span>.<span class="keyword">cn</span></span><br><span class="line">http://gif.sina.<span class="keyword">com</span>.<span class="keyword">cn</span></span><br><span class="line">....</span><br><span class="line">http://<span class="keyword">tj</span>.sina.<span class="keyword">com</span>.<span class="keyword">cn</span></span><br><span class="line">http://travel.sina.<span class="keyword">com</span>.<span class="keyword">cn</span></span><br><span class="line">http://jiaoyi.sina.<span class="keyword">com</span>.<span class="keyword">cn</span></span><br><span class="line">http://cul.sina.<span class="keyword">com</span>.<span class="keyword">cn</span></span><br><span class="line">http<span class="variable">s:</span>//finance.sina.<span class="keyword">com</span>.<span class="keyword">cn</span>/roll/<span class="number">2019</span>-<span class="number">06</span>-<span class="number">12</span>/doc-ihvhiqay5022316.shtml</span><br><span class="line">经参头版：激发微观主体活力加速国企改革</span><br><span class="line">http://eladies.sina.<span class="keyword">com</span>.<span class="keyword">cn</span>/feel/xinli/<span class="number">2018</span>-<span class="number">01</span>-<span class="number">25</span>/<span class="number">0722</span>/doc-ifyqwiqk0463751.shtml</span><br><span class="line">我们别再联系了</span><br><span class="line">http://finance.sina.<span class="keyword">com</span>.<span class="keyword">cn</span>/roll/<span class="number">2018</span>-<span class="number">05</span>-<span class="number">13</span>/doc-ihamfahx2958233.shtml</span><br><span class="line">新违约时代到来！违约“常态化”下的市场出清与换血</span><br><span class="line">http://sports.sina.<span class="keyword">com</span>.<span class="keyword">cn</span>/basketball/<span class="number">2019</span>worldcup/<span class="number">2019</span>-<span class="number">09</span>-<span class="number">08</span>/doc-iicezzrq4390554.shtml</span><br><span class="line">罗健儿<span class="number">26</span>分韩国收首胜</span><br><span class="line">...</span><br><span class="line">http://travel.sina.<span class="keyword">com</span>.<span class="keyword">cn</span>/outbound/pages/<span class="number">2019</span>-<span class="number">09</span>-<span class="number">05</span>/detail-iicezzrq3622449.shtml</span><br><span class="line">菲律宾海滨大道 夜晚让人迷离</span><br><span class="line">http://travel.sina.<span class="keyword">com</span>.<span class="keyword">cn</span>/outbound/pages/<span class="number">2016</span>-<span class="number">08</span>-<span class="number">19</span>/detail-ifxvcnrv0334779.shtml</span><br><span class="line">关岛 用双脚尽情享受阳光与海滩</span><br><span class="line">http://travel.sina.<span class="keyword">com</span>.<span class="keyword">cn</span>/domestic/pages/<span class="number">2019</span>-<span class="number">09</span>-<span class="number">04</span>/detail-iicezzrq3325092.shtml</span><br><span class="line">秋行查干浩特草原</span><br><span class="line">http://travel.sina.<span class="keyword">com</span>.<span class="keyword">cn</span>/outbound/pages/<span class="number">2019</span>-<span class="number">09</span>-<span class="number">03</span>/detail-iicezueu3050710.shtml</span><br><span class="line">白羊座的土豪之城迪拜</span><br><span class="line">http://travel.sina.<span class="keyword">com</span>.<span class="keyword">cn</span>/video/baidang/<span class="number">2019</span>-<span class="number">08</span>-<span class="number">29</span>/detail-ihytcitn2747327.shtml</span><br><span class="line">肯辛顿宫藏着维多利亚的秘密</span><br><span class="line">http://<span class="keyword">cd</span>.auto.sina.<span class="keyword">com</span>.<span class="keyword">cn</span>/bdcs/<span class="number">2017</span>-<span class="number">08</span>-<span class="number">15</span>/detail-ifyixias1051586.shtml</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到它输出了非常多的类别链接，另外还有很多文章列表，由于没有 RSS 订阅内容，这里没有显示。 下面把站点换成我的博客：<a href="https://cuiqingcai.com，博客截图如下" target="_blank" rel="noopener">https://cuiqingcai.com，博客截图如下</a>： <img src="https://cdn.cuiqingcai.com/2019-09-09-134550.png" alt="博客截图"> 看看运行结果：</p>
+                <figure class="highlight dts">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">https:</span><span class="comment">//cuiqingcai.com</span></span><br><span class="line"><span class="symbol">https:</span><span class="comment">//cuiqingcai.com</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>似乎不太行啊，一篇文章都没有，RSS 也没有，可见其功能还有待优化。 Newspaper 的基本用法介绍到这里，更加详细的用法可以参考官方文档：<a href="https://newspaper.readthedocs.io" target="_blank" rel="noopener">https://newspaper.readthedocs.io</a>。个人感觉其中的智能解析可以用用，不过据我的个人经验，感觉还是很多解析不对或者解析不全的， 以上便是 Readability 和 Newspaper 的介绍。</p>
+                <h2 id="其他方案"><a href="#其他方案" class="headerlink" title="其他方案"></a>其他方案</h2>
+                <p>另外除了这两个库其实还有一些比较优秀的算法，由于我们处理的大多为中文文档，所以一些在中文上面的研究是比较有效的，在这里列几个值得借鉴的中文论文供大家参考：</p>
+                <ul>
+                  <li>洪鸿辉等，基于文本及符号密度的网页正文提取方法</li>
+                  <li>梁东等，基于支持向量机的网页正文内容提取方法</li>
+                  <li>王卫红等，基于可视块的多记录型复杂网页信息提取算法</li>
+                </ul>
+                <p>今天还看到一位大佬「青南」根据上面第一篇论文所实现的 GeneralNewsExtractor，GitHub 地址为：<a href="https://github.com/kingname/GeneralNewsExtractor，经测试准确率还不错，比" target="_blank" rel="noopener">https://github.com/kingname/GeneralNewsExtractor，经测试准确率还不错，比</a> Readability 和 Newspaper 的解析效果要好。我也跟作者进行了交流，后续可能还会基于其他的 Feature 或依赖于视觉化的方法进行优化，大家可以关注下，谢谢！</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/7440.html" rel="prev" title="谈谈 Zao 这个软件">
+                      <i class="fa fa-chevron-left"></i> 谈谈 Zao 这个软件 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/7447.html" rel="next" title="今天，大佬云集的夜幕团队正式成立了！"> 今天，大佬云集的夜幕团队正式成立了！ <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#智能文本提取"><span class="nav-number">1.</span> <span class="nav-text">智能文本提取</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#Readability"><span class="nav-number">2.</span> <span class="nav-text">Readability</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#Newspaper"><span class="nav-number">3.</span> <span class="nav-text">Newspaper</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#其他方案"><span class="nav-number">4.</span> <span class="nav-text">其他方案</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'e78d112b0a2f6b158c8844d78acce378',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

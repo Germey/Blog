@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="本篇目标    了解为什么我们需要直接调用 JavaScript   了解常见的 Python 调用 JavaScript 的库   了解一种性能更高的操作方式   知道什么场景下应该使用什么方式进行调用     通过本文的学习，在你写爬虫时，你应该会对调用 JavaScript 有一个更清晰的了解，并且你还要了解到一些你平时可能见不到的骚操作。  大家如果接触过 JavaScript 逆向的话，">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="JS 逆向的时候 Python 如何调用 JavaScript 代码？">
+  <meta property="og:url" content="https://cuiqingcai.com/9581.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="本篇目标    了解为什么我们需要直接调用 JavaScript   了解常见的 Python 调用 JavaScript 的库   了解一种性能更高的操作方式   知道什么场景下应该使用什么方式进行调用     通过本文的学习，在你写爬虫时，你应该会对调用 JavaScript 有一个更清晰的了解，并且你还要了解到一些你平时可能见不到的骚操作。  大家如果接触过 JavaScript 逆向的话，">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://images-aiyc-1301641396.cos.ap-guangzhou.myqcloud.com/20200812133011.png">
+  <meta property="og:image" content="https://images-aiyc-1301641396.cos.ap-guangzhou.myqcloud.com/20200812133024.png">
+  <meta property="og:image" content="https://images-aiyc-1301641396.cos.ap-guangzhou.myqcloud.com/20200812133028.png">
+  <meta property="og:image" content="https://images-aiyc-1301641396.cos.ap-guangzhou.myqcloud.com/20200812133032.png">
+  <meta property="article:published_time" content="2020-08-12T07:34:22.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.280Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://images-aiyc-1301641396.cos.ap-guangzhou.myqcloud.com/20200812133011.png">
+  <link rel="canonical" href="https://cuiqingcai.com/9581.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>JS 逆向的时候 Python 如何调用 JavaScript 代码？ | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/9581.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> JS 逆向的时候 Python 如何调用 JavaScript 代码？ </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/黄家宝|AI悦创" class="author" itemprop="url" rel="index">黄家宝|AI悦创</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2020-08-12 15:34:22" itemprop="dateCreated datePublished" datetime="2020-08-12T15:34:22+08:00">2020-08-12</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/9581.html" class="post-meta-item leancloud_visitors" data-flag-title="JS 逆向的时候 Python 如何调用 JavaScript 代码？" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>12k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>11 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <h2 id="本篇目标"><a href="#本篇目标" class="headerlink" title="本篇目标"></a>本篇目标</h2>
+                <ul>
+                  <li>了解为什么我们需要直接调用 JavaScript</li>
+                  <li>了解常见的 Python 调用 JavaScript 的库</li>
+                  <li>了解一种性能更高的操作方式</li>
+                  <li>知道什么场景下应该使用什么方式进行调用</li>
+                </ul>
+                <blockquote>
+                  <p>通过本文的学习，在你写爬虫时，你应该会对调用 JavaScript 有一个更清晰的了解，并且你还要了解到一些你平时可能见不到的骚操作。</p>
+                </blockquote>
+                <p>大家如果接触过 JavaScript 逆向的话，应该都知道，通常来说碰到 JS　逆向网站时会有这两种情况：</p>
+                <ul>
+                  <li>简单 JS 破解：通过 Python 代码轻松实现</li>
+                  <li>复杂的 JS 破解：代码不容易重写，使用程序直接调用 JS 运行获取结果。</li>
+                </ul>
+                <p>对于简单的 JS 来说，我们可以通过 Python 代码，直接重写，轻轻松松的就能搞定。 而对于复的 JS 代码而言呢，由于代码过于复杂，重写太费时费力，且碰到对方更新这就比较麻烦了。所以，我们一般直接使用程序去调用 JS，在 Python 层面就只是获取一个运行结果，这样做相比于重写而言就方便多了。 那么，接下来我带大家看一下两种比较简单的 JS 代码重写。 本文涉及的所有演示代码请到公众号：AI悦创，后台回复：PJS 。来获取即可！</p>
+                <h2 id="1-Base64"><a href="#1-Base64" class="headerlink" title="1. Base64"></a>1. Base64</h2>
+                <p>首先，我们先来看一下 Base64 ，Base64 是我们再写爬虫过程中经常看到的一种编码方式。这边我们来写两个例子。</p>
+                <figure class="highlight 1c">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment">// 原字符</span></span><br><span class="line">NightTeam</span><br><span class="line"><span class="comment">// 编码之后的：</span></span><br><span class="line">TmlnaHRUZWFt</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>第一个例子如上，是 NightTeam 经过编码是如上面的结果（<code>TmlnaHRUZWFt</code>），如果我们只是通过这个结果来分析的话，它的特征不是很明显。如果是见的不多或者是新手小白的同学，并不会把它往 Base64 方向去想。 然后，我们来看一下第二个例子：</p>
+                <figure class="highlight protobuf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment">// 原字符</span></span><br><span class="line">aiyuechuang</span><br><span class="line"><span class="comment">// 编码之后的：</span></span><br><span class="line">YWl5dWVjaHVhbmc=</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原字符</span></span><br><span class="line">Python3</span><br><span class="line">// 编码之后</span><br><span class="line">UHl0aG9uMw==</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>第二个例子是 aiyuechuang 编码之后的结果，它的末尾有一个等号，Python3 编码之后末尾有两个等号，这个特征相对第一个就比较明显了。一般我们看到尾号有两个等号时应该大概可以猜到这个就是 Base64 了。 然后，直接解码看一看，如果没有什么特别的话，就可以使用 Python 进行重写了。 同学可以使用以下链接 Base64 编码解码的测试学习：<a href="http://tool.alixixi.com/base64/" target="_blank" rel="noopener">http://tool.alixixi.com/base64/</a> 不过 Base64 也会有一些骚操作，碰到那种情况的时候，我们如果用 Python 重写可能有点麻烦。具体的内容我会在后面的的课程中，单独的跟大家详细的讲解。</p>
+                <h2 id="2-MD5"><a href="#2-MD5" class="headerlink" title="2. MD5"></a>2. MD5</h2>
+                <p>第二个的话就是 MD5 ，MD5 在 Javascript 中并没有标准的库，一般我们都是使用开源库去操作。</p>
+                <blockquote>
+                  <p>注意：md5 的话是 <strong>哈希</strong> 并不是加密。</p>
+                </blockquote>
+                <p>下面我来看一个 js 实现 md5 的一个例子： <a href=".3-代码包MD5JS">md5.js</a> 上面的代码时被混淆过的，但是它的主要一个特征还是比较明显的，有一个入口函数：<code>console.log(hex_md5(&quot;aiyuechuang&quot;))</code> 我们可以使用命令行运行一下结果，命令如下：</p>
+                <figure class="highlight crmsh">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">node</span> <span class="title">md5</span>.js</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <blockquote>
+                  <p>上面的代码自行复制保存为 md5.js 然后运行。</p>
+                </blockquote>
+                <p>运行结果：</p>
+                <figure class="highlight crmsh">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">$ <span class="keyword">node</span> <span class="title">md5</span>.js</span><br><span class="line">e55babec7f5d5cf7bac7872f0481bec1</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>我们数一下输出的结果的话，会发现这正好 是 32位，通常我们看到 32 位的一个英文数字混合的字符串，应该马上就能想到时 md5 了，这两个操作的话，因为在 Python 中都有对应的库，分别是：Base64 和 hashlib ，大家应该都知道这个我就不多说了。 <strong>例程：Base64 和 hashlib</strong></p>
+                <figure class="highlight armasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">import</span> <span class="keyword">base64 </span> </span><br><span class="line"><span class="keyword">str1 </span>= <span class="keyword">b'aiyuechuang'</span></span><br><span class="line"><span class="keyword">str2 </span>= <span class="keyword">base64.b64encode(str1)</span></span><br><span class="line"><span class="keyword">print(str2)</span></span><br><span class="line"><span class="keyword">str3 </span>= <span class="keyword">base64.b64decode('YWl5dWVjaHVhbmc=')</span></span><br><span class="line"><span class="keyword">print(str3)</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>输出</p>
+                <figure class="highlight cs">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">b<span class="string">'YWl5dWVjaHVhbmc='</span></span><br><span class="line">b<span class="string">'aiyuechuang'</span></span><br><span class="line">[<span class="meta">Finished in 0.2s</span>]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <figure class="highlight isbl">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="variable">import</span> <span class="variable">hashlib</span></span><br><span class="line"></span><br><span class="line"><span class="variable">data</span> = <span class="string">"aiyuechuang"</span></span><br><span class="line"><span class="variable"><span class="class">result</span></span> = <span class="variable">hashlib.md5</span>(<span class="variable">data.encode</span>(<span class="variable">encoding</span> = <span class="string">"UTF-8"</span>)).hexdigest()</span><br><span class="line"><span class="function"><span class="title">print</span>(<span class="variable"><span class="class">result</span></span>)</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>输出</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">e55babec7f5d5cf7bac7872f0481bec1</span><br><span class="line">[Finished <span class="keyword">in</span> <span class="number">0.1</span>s]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>像我们前面看到的那些代码，都是比较简单的，他们的算法部分也没有经过修改，所以我们可以使用其他语言和对应的库进行重写。 <strong>但是如果对方把算法部分做了一些改变呢？</strong> 如果代码量比较大也被混淆到看不出特征了，连操作后产生的字符串都看不出，我们就无法直接使用一个现成的库来复写操作了。 而且这种情况下的代码量太大了，直接对着代码重写成 Python 版本也不太现实，对方一更新你就得再重新看一遍，这样显然时非常麻烦的，也非常耗时。 <strong>那么有没有一种更高效的方法呢？</strong> 显然是有的，接下来我们来讲如何通过程序来直接调用 JavaScript 代码，也就是碰到复杂的 JS 时候的处理。</p>
+                <ol>
+                  <li>使用 Python 调用 JS</li>
+                  <li>一种性能更高的调用方式</li>
+                  <li>到底选择哪种方案比较好</li>
+                </ol>
+                <p>首先，我会分享一些使用 Python 调用 JavaScript 的方式，然后会介绍一种性能更高的调用。以及具体使用哪种调用方式以及怎么选择性的使用，最后我会总结一下这些方案存在的小问题。并且会告诉你如何踩坑。</p>
+                <h2 id="3-使用-Python-调用-JS"><a href="#3-使用-Python-调用-JS" class="headerlink" title="3. 使用 Python 调用 JS"></a>3. 使用 Python 调用 JS</h2>
+                <p>我们接下来首先讲一下 Python 中调用 JavaScript。</p>
+                <ul>
+                  <li>PyV8</li>
+                  <li>Js2Py</li>
+                  <li>PyExecJS</li>
+                  <li>PyminiRacer</li>
+                  <li>Selenium</li>
+                  <li>Pyppeteer</li>
+                </ul>
+                <p>Python 调用 JS 库的话，光是我了解的话，目前就有这么一堆，接下来我们就来依次来介绍这些库。</p>
+                <h3 id="3-1-PyV8"><a href="#3-1-PyV8" class="headerlink" title="3.1 PyV8"></a>3.1 PyV8</h3>
+                <ul>
+                  <li>V8 是谷歌开源的 JavaScript 引擎，被使用在了 Chrome 中</li>
+                  <li>PyV8 是 V8 引擎的一个 Python 层的包装，可以用来调用 V8 引擎执行 JS 代码</li>
+                  <li>网上有很多使用它来执行 JS 代码的文章</li>
+                  <li>年久失修，最新版本是 2010年的（<a href="https://pypi.org/project/PyV8/#history" target="_blank" rel="noopener">https://pypi.org/project/PyV8/#history</a>)</li>
+                  <li>存在内存泄漏问题，所以不建议使用</li>
+                </ul>
+                <p>首先来看一下什么是 PyV8，V8 是谷歌开源的 JavaScript 引擎，被使用在了 Chrome 浏览器中，后来因为有人想在 Python 上调用它（V8），于是就有了 PyV8。 那 PyV8 实际上是 V8 引擎的一个 Python 层的包装，可以用来调用 V8 引擎执行 JS 代码，但是这个我不推荐使用它，那我既然不推荐大家使用，我为什么又要讲它呢？ <strong>其实，是这样的：</strong> 虽然目前网上有很多文章使用它执行 JS 代码，但是这个 PyV8 实际上已经年久失修了，而且它最新的一个正式版本还是 2010年的，可见是有多久远了，链接在上方可以执行访问查看。而且，如果你实际使用过的话，你应该会发现它存在一些<strong>内存泄漏</strong>的问题。 所以，这边我拿出来说一下，避免有人踩坑。接下来我们来说一下第二个 JS2Py。</p>
+                <h3 id="3-2-Js2Py"><a href="#3-2-Js2Py" class="headerlink" title="3.2 Js2Py"></a>3.2 Js2Py</h3>
+                <ul>
+                  <li>Js2Py 是一个纯 Python 实现的 JavaScript 解释器和翻译器</li>
+                  <li>虽然 2019年依然有更新，但那也是 6月份的事情了，而且它的 issues 里面有很多的 bug 没有修复（<a href="https://github.com/PiotrDabkowski/Js2Py/issues" target="_blank" rel="noopener">https://github.com/PiotrDabkowski/Js2Py/issues</a>）。</li>
+                </ul>
+                <p>Js2Py 是一个纯 Python 实现的 JavaScript 解释器和翻译器，它和 PyV8 一样，也是有挺多文章提到这个库，然后来调用 JS 代码。 但是，Js2Py 虽然在2019年仍然更新，但那也是 6月份的事情了，而且它的 issues 里面有很多的 bug 没有修复（<a href="https://github.com/PiotrDabkowski/Js2Py/issues" target="_blank" rel="noopener">https://github.com/PiotrDabkowski/Js2Py/issues</a>）。另外，Js2Py 本身也存在一些问题，就解释器部分来说： <strong>解释器部分：</strong></p>
+                <ul>
+                  <li>性能不高</li>
+                  <li>存在一些 BUG</li>
+                </ul>
+                <p>那不仅仅就解释器部分，还有翻译器部分：</p>
+                <ul>
+                  <li>对于高度混淆的大型 JS 会转换失败</li>
+                  <li>而且转换出来的代码可读性差、性能不高</li>
+                </ul>
+                <p>总之来讲，它在各个方面来说都不太适合我们的工作场景，所以也是不建议大家使用的。</p>
+                <h3 id="3-3-PyMinRacer"><a href="#3-3-PyMinRacer" class="headerlink" title="3.3 PyMinRacer"></a>3.3 PyMinRacer</h3>
+                <ul>
+                  <li>同样是 V8 引擎的包装，和 PyV8 的效果一样</li>
+                  <li>一个继任 PyExecJS 和 PyramidV8 的库</li>
+                  <li>一个比较新的库</li>
+                </ul>
+                <p>这个库也是一个 PyV8 引擎包装，它的效果和 PyV8 的效果一样的。 而且作者号称这是一个继任 PyExecJS 和 PyramidV8 的库，乍眼一看挺唬人的，不过由于它是一个比较新的库，我这边就没有过多的尝试了，也没有再实际生产环境中使用过，所以不太清楚会有什么坑，感兴趣的朋友，大家可以自己去尝试一下。</p>
+                <h3 id="3-4-PyExecJS"><a href="#3-4-PyExecJS" class="headerlink" title="3.4 PyExecJS"></a>3.4 PyExecJS</h3>
+                <ul>
+                  <li>一个最开始诞生于 Ruby 中的库，后来被移植到了 Python 上</li>
+                  <li>较新的文章一般都会说用它来执行 JS 代码</li>
+                  <li>有多个引擎可选，但一般我们会选择使用 NodeJS 作为引擎来执行代码</li>
+                </ul>
+                <p>接下来我要说的是 PyExecJS ，这个库一个最开始诞生于 Ruby 中的库，后来人被移植到了 Python 上，目前看到一些比较新的文章都是用它来执行 JS 代码的，然后它是有多个引擎可以选择的，我们一般选择 <strong>NodeJS</strong> 作为它的一个引擎执行代码，毕竟 <strong>NodeJS</strong> 的速度是比较快的而且配置起来比较简单，那我带大家来看一下 PyExecjs 的使用。</p>
+                <h4 id="3-4-5-PyExecJS-的使用"><a href="#3-4-5-PyExecJS-的使用" class="headerlink" title="3.4.5 PyExecJS 的使用"></a>3.4.5 PyExecJS 的使用</h4>
+                <ol>
+                  <li>安装 JS 运行环境这里推荐安装 Node.js，安装方便，执行效率也高。</li>
+                </ol>
+                <p>首先我们就是要安装引擎了，这个引擎指的就是 JS 的一个运行环境，这边推荐使用 Node.js。</p>
+                <blockquote>
+                  <p>注意：虽然 Windows 上有个系统自带的 JScript，可以用来作为 PyExecjs 的引擎，但是这个 JScript 很容易与其他的引擎有一个不一样的地方，容易踩到一些奇奇怪怪的坑。所以请大家务必要安装一个其他的引擎。比如说我们这里安装 Node.js 。</p>
+                </blockquote>
+                <p>那上面装完 Nodejs 之后呢，我们就需要执行安装 PyExecjs 了：</p>
+                <ol>
+                  <li>
+                    <p>安装 PyExecJS</p>
+                    <figure class="highlight cmake">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">pip <span class="keyword">install</span> pyexecjs</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                  </li>
+                </ol>
+                <p>这边我们使用上面的 pip 就可以进行安装了。 那么我们现在环境就准备好了，可以开始运行了。</p>
+                <ol>
+                  <li>代码示例（检测运行环境）</li>
+                </ol>
+                <p>首先，我们打开 IPython 终端，执行一下一下两行代码，以下也给出了运行结果：</p>
+                <figure class="highlight crmsh">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">In</span> [<span class="number">1</span>]: import execjs</span><br><span class="line"></span><br><span class="line"><span class="keyword">In</span> [<span class="number">2</span>]: execjs.get().name <span class="comment"># 查看调用环境</span></span><br><span class="line">Out[<span class="number">2</span>]: '<span class="keyword">Node</span>.<span class="title">js</span> (V8)'</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p><code>execjs.get() # 查看调用的环境</code>用此来看看我们的库能不能检测到 nodejs，如果不能的话那就需要手动设置一下，不过一般像我上面一样正常输出 <code>node.js</code> 就可以了。 如果，你检测出来的引擎不是 <code>node.js</code> 的话，那你就需要手动设置一下了，这里有两种设置形式，我在下方给你写出来了： <strong>选择不同引擎进行解析</strong></p>
+                <figure class="highlight crmsh">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># 长期使用</span></span><br><span class="line">os.environ[<span class="string">"EXECJS_RUNTIME"</span>]=<span class="string">"Node"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 临时使用</span></span><br><span class="line">import execjs.runtime_names</span><br><span class="line"><span class="keyword">node</span><span class="title">=execjs</span>.get(execjs.runtime_names.<span class="keyword">Node</span><span class="title">)</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>由上边可知，我们有两种形式：一种是长期使用的，通过环境变量的形式，通过把环境变量改成大写的 EXECJS_RUNTIME 然后将其值赋值为 Node。 另一种的话，将它改成临时使用的一种方式，这种是直接使用 get，这种做法的话，你在使用的时候就需要使用 node 变量了，不能直接导入 PyExecjs 来直接开始使用，相对麻烦一些。 接下来，就让我们正式使用 PyExecJS 这个包吧。</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">In [<span class="number">8</span>]: <span class="keyword">import</span> execjs</span><br><span class="line"></span><br><span class="line">In [<span class="number">9</span>]: e = execjs.eval(<span class="string">'a = new Array(1, 2, 3)'</span>) # 可以直接执行 JS 代码</span><br><span class="line"></span><br><span class="line">In [<span class="number">10</span>]: print(e)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>PyExecjs 最简单的用法就是导入包，然后通过 eval 这个方法并传入简单的 JS 代码来执行。但是我们正常情况下肯定不会这么使用，因为我们的 JS 代码是比较复杂的而且 JS 代码内容也是比较多的。</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author: clela</span></span><br><span class="line"><span class="comment"># @Date:   2020-03-24 13:54:27</span></span><br><span class="line"><span class="comment"># @Last Modified by:   aiyuechuang</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2020-04-03 08:44:15</span></span><br><span class="line"><span class="comment"># @公众号：AI悦创</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">12</span>]: <span class="keyword">import</span> execjs</span><br><span class="line"></span><br><span class="line">In [<span class="number">13</span>]: jstext = <span class="string">"""</span></span><br><span class="line"><span class="string">    ...: function hello(str)&#123;return str;&#125;</span></span><br><span class="line"><span class="string">    ...: """</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">14</span>]: ctx = execjs.compile(jstext) <span class="comment"># 编译 JS 代码</span></span><br><span class="line"></span><br><span class="line">In [<span class="number">15</span>]: a = ctx.call(<span class="string">"hello"</span>, <span class="string">"hello aiyc"</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">16</span>]: print(a)</span><br><span class="line">hello aiyc</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样的话，我们一般通过使用第二种方式，第二种方式是通过使用 compile 对 JS 字符串进行编译，这个编译操作其实就是把参数（jstext）里面的那段 JS 代码给放到一个叫 Context 的上下文中，它并不是我们平时编译程序所说的编译。然后我们 调用 call 方法进行执行。 第一个参数是我们调用 JS 中的的函数名，也就是 hello。然后后面跟着的 hello aiyc 就是参数，也就是我们 JS 中需要传入到 str 的参数。如果 JS 中存在多个参数，我们就直接在后面打个逗号，然后接着写下一个参数就好了。 接下来我们来看一个具体的代码： <a href=".3-代码包PyExecjsDemo">aes_demo.js</a> 这边我准备了一个 CryptoJS 的一个 JS 文件，CryptoJS 它是一个包含各种加密哈希编码算法的一个开源库，很多网站都会用它提供的函数来生成参数，那么这边我是写了如上面这样的代码，用来调用它里面的 AES 加密参数，来加密一下我提供的字符串。</p>
+                <blockquote>
+                  <p><strong>注意</strong>：JS 代码不要放在和 Python 代码同一个文件中，尽量放在单独的 js 文件中，因为我们的 JS 文件内容比较多。然后通过读取文件的方式，</p>
+                </blockquote>
+                <p><a href=".3-代码包PyExecjsDemo">run_aes.py</a></p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># Python 文件：run_aes.py</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @时间 : 2020-04-06 00:00</span></span><br><span class="line"><span class="comment"># @作者 : AI悦创</span></span><br><span class="line"><span class="comment"># @文件名 : run_aes.py</span></span><br><span class="line"><span class="comment"># @公众号: AI悦创</span></span><br><span class="line"><span class="keyword">from</span> pprint import pprint</span><br><span class="line"></span><br><span class="line">import execjs</span><br><span class="line">import pathlib</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">js_path = pathlib.Path(os.path.abspath(os.path.dirname(__file__)))</span><br><span class="line">js_path = js_path / <span class="string">"crypto.js"</span></span><br><span class="line">with js_path.open(<span class="string">'r'</span>, <span class="attribute">encoding</span>=<span class="string">"utf-8"</span>) as f:</span><br><span class="line">   <span class="built_in"> script </span>= f.read()</span><br><span class="line"></span><br><span class="line">c = <span class="string">"1234"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 传入python中的变量</span></span><br><span class="line"><span class="builtin-name">add</span> = (<span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">aesEncrypt = function() &#123;</span></span><br><span class="line"><span class="string">    result=&#123;&#125;</span></span><br><span class="line"><span class="string">    var t = CryptoJS.MD5("login.xxx.com"),</span></span><br><span class="line"><span class="string">        i = CryptoJS.enc.Utf8.parse(t),</span></span><br><span class="line"><span class="string">        r = CryptoJS.enc.Utf8.parse("1234567812345678"),</span></span><br><span class="line"><span class="string">        u = CryptoJS.AES.encrypt('</span><span class="string">''</span> + <span class="string">"'&#123;&#125;'"</span>.format(c) + <span class="string">''</span><span class="string">',i, &#123;</span></span><br><span class="line"><span class="string">        iv: r</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">        result.t=t.toString()</span></span><br><span class="line"><span class="string">        result.i =i.toString()</span></span><br><span class="line"><span class="string">        result.r =r.toString()</span></span><br><span class="line"><span class="string">        result.u =u.toString()</span></span><br><span class="line"><span class="string">        return result</span></span><br><span class="line"><span class="string">    &#125;;</span></span><br><span class="line"><span class="string">    '</span><span class="string">''</span>)</span><br><span class="line">script =<span class="built_in"> script </span>+ add</span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">"script"</span>,script)</span><br><span class="line"></span><br><span class="line">x = execjs.compile(script)</span><br><span class="line">result = x.call(<span class="string">"aesEncrypt"</span>)</span><br><span class="line"><span class="builtin-name">print</span>(result)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我通过读取文件的方式，将 js 文件读取进来，把代码读取到我们的字符串里面，这样一方面方便我们管理，另一方面也可以直接通过代码检测自动补全功能，使用起来会比较方便。 然后，这里我们有一个小技巧，我们可以通过 format 字符串拼接的形式，将 Python 中的变量，也就是上面的变量 <code>c</code> 然后将这个变量写入到 Js 代码中，从而变相的实现了通过调用 JS 函数，在没有参数的情况下修改 JS 代码中的特定变量的值。最后我们拼接好了我我们的 JS 代码（add 和 script）。 拼完 JS 代码之后，我们这边再常规的进行一个操作，调用 Call 方法执行 aesEncrypt 这样一个函数，需要注意的是，这个代码里面 return 出来的 JS，它是一个 object，JS 中的 object 也就是 Python 中的<strong>字典</strong>。 <img src="https://images-aiyc-1301641396.cos.ap-guangzhou.myqcloud.com/20200812133011.png" alt=""> 我们实际使用时，如果需要在 Python 中拿到 object 的话，建议把它转换成一个 json 字符串，而不是直接的把结果 return 出来。 因为，有些时候 PyExecjs 对 object 的转换会出现问题，所以我们可能会拿到一些类似于将字典直接用 str 函数包裹后转为字符串的一个东西，这样的话它是无法通过正常的方式去解析的。 或者说你也可能会遇到其情况的报错，总之大家最好先转一下 json 字符串，然后再 return 避免踩坑。这是我们的一个代码。 <strong>接下来我们来说一下，PyExecJS 存在的一些问题主要有以下两点：</strong></p>
+                <ul>
+                  <li>执行大型 JS 时会有点慢（这个是因为，每次执行 JS 代码的时候，都是从命令行去调用到的 JS，所以 JS 代码越复杂的话，nodejs 的初始化时间就越长，这个基本上是无解的）</li>
+                  <li>特殊编码的输入或输出参数会出现报错的情况（因为，是从命令行调用的，所以在碰到一些特殊字符输入或输出参数或者 JS 代码本身就有一些特殊字符的情况下，就会直接执行不了，给你抛出一个异常。不过这个跟系统的命令行默认编码有一定关系，具体的话这里就不深究了，直接就说解决方案吧。）</li>
+                  <li>可以把输入或输出的参数使用 Base64 编码一下（如果看报错是 JS 代码部分导致的，那就去看看能不能删除代码中的那部分字符或者你自己 new 一个上下文对象，将那个名叫 tempfile 的参数打开，这样在调用的时候，它就直接去执行那个文件了，不过大量调用的情况下，可能会对磁盘造成一定压力。</li>
+                </ul>
+                <p>而如果参数不充分导致的话，有个很简单的方法：就是把参数使用 Base64 编码一下，因为编码之后出来的字符串，我们知道 Base64 编码之后是生成英文和数字组成的。这样就没有特殊符号了。所以就不会出现问题了。） 关于 PyExecejs 的相关东西就介绍到这里了，我们来看一些其他的内容。</p>
+                <h3 id="3-5-其他使用-Python-调用-JS-的骚操作"><a href="#3-5-其他使用-Python-调用-JS-的骚操作" class="headerlink" title="3.5 其他使用 Python 调用 JS 的骚操作"></a>3.5 其他使用 Python 调用 JS 的骚操作</h3>
+                <p>前面说的都是非浏览器环境下直接调用 JS 的操作，但是还有一些市面上根本没人提到的骚操作，其实也挺好用的，接下来我给大家介绍一下：</p>
+                <ol>
+                  <li>Selenium</li>
+                </ol>
+                <ul>
+                  <li>一个 web 自动化测试框架，可以驱动各种浏览器进行模拟人工操作</li>
+                  <li>用于渲染页面以方便提取数据或过验证码</li>
+                  <li>也可以直接驱动浏览器执行 JS</li>
+                </ul>
+                <p>这个大家是比较熟悉的，它是一个外部自动化的测试框架，可以驱动各种浏览器进行模拟人工操作，很多文章或者培训班的课程，都会提到它在爬虫方面的一个使用，比如用它采集一些动态页面，或者用来过一些滑动验证码之类的。 不过我们这里不用它来做这些事，我们要做的是用它来执行 JS 代码，因为这样的话是直接在浏览器环境下执行的 ，所以的话它是省了很多事，那么 Selenium 执行 JS 的核心代码，实际上就下面一行：</p>
+                <figure class="highlight ini">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attr">js</span> = <span class="string">"一大段 JS"</span></span><br><span class="line"><span class="attr">result</span> = browser.execute_script(js)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>我们来看一下实际的例子： <a href=".3-代码包SeleniumDemo">SeleniumDemo</a> 进入项目根目录，输入：<code>python server.py</code></p>
+                <figure class="highlight pgsql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">$ python <span class="keyword">server</span>.py</span><br><span class="line"> * Serving Flask app "server" (lazy loading)</span><br><span class="line"> * Environment: production</span><br><span class="line">   <span class="built_in">WARNING</span>: This <span class="keyword">is</span> a development <span class="keyword">server</span>. <span class="keyword">Do</span> <span class="keyword">not</span> use it <span class="keyword">in</span> a production deployment.</span><br><span class="line">   Use a production WSGI <span class="keyword">server</span> <span class="keyword">instead</span>.</span><br><span class="line"> * <span class="keyword">Debug</span> mode: <span class="keyword">on</span></span><br><span class="line"> * Restarting <span class="keyword">with</span> stat</span><br><span class="line"> * Debugger <span class="keyword">is</span> active!</span><br><span class="line"> * Debugger PIN: <span class="number">262</span><span class="number">-966</span><span class="number">-819</span></span><br><span class="line"> * Running <span class="keyword">on</span> http://<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">5002</span>/ (Press CTRL+C <span class="keyword">to</span> quit)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>访问 <code>localhost:5002</code> 我们进入网页之后，有这样的一句话： <img src="https://images-aiyc-1301641396.cos.ap-guangzhou.myqcloud.com/20200812133024.png" alt=""> <img src="https://images-aiyc-1301641396.cos.ap-guangzhou.myqcloud.com/20200812133028.png" alt=""></p>
+                <hr>
+                <p>每次刷新都会显示不同的内容，查看源代码的话，会发现这个页面中的源代码里面没有对应页面显示的那句话，而是只有一个 input 标签。 <img src="https://images-aiyc-1301641396.cos.ap-guangzhou.myqcloud.com/20200812133032.png" alt=""> 我还能观察到，input 标签里面有两个属性，一个是 id、一个是 data，这两个是比较关键的属性，然后我们还发现这里面引用了一个 js 文件，所以这个网页最终结果实际上是通过 JS 文件，然后一系列的操作生成的，那接下来我就来看看 JS 文件，做了什么工作。 <a href=".3-代码包SeleniumDemostaticjs">js</a> 我们可以看见，这个 JS 文件最后一句，有一个 <code>window.onload =doit</code> 的这样一代码，这个我们知道，当页面加载完成之后，立即执行这个 JS 方法。</p>
+                <figure class="highlight javascript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doit</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> browser_type=BrowserType();</span><br><span class="line">    <span class="built_in">console</span>.log(browser_type)</span><br><span class="line">    <span class="keyword">let</span> supporter =browser_type.supporter</span><br><span class="line">    <span class="keyword">if</span>(supporter===<span class="string">"chrome"</span>)&#123;</span><br><span class="line">        Base64.run(<span class="string">'base64'</span>, <span class="string">'data'</span>,supporter)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>然后这个方法里面做了一个这样一个操作：<code>let browser_type=BrowserType();</code> 首先去判断 <code>supporter</code> 是否等于 <code>Chrome</code> 这个 <code>supporter</code> 实际上有一个 <code>browser_type</code> 这个 <code>browser_type</code> 实际上就是检测浏览器等一系列参数，然后我们获取它里面的 <code>supporter</code> 属性，当 <code>supporter</code>（ <code>supporter =browser_type.supporter</code> ）等于 Chrome 的时候，我们再去执行这个 run 函数。</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">run: <span class="keyword">function</span> (id, attr,supporter) &#123;</span><br><span class="line">        <span class="keyword">let</span> all_str = <span class="constructor">$(<span class="params">id</span>)</span>.get<span class="constructor">Attribute(<span class="params">attr</span>)</span></span><br><span class="line">        <span class="keyword">let</span> end_index=supporter.length+<span class="number">58</span></span><br><span class="line">        <span class="module-access"><span class="module"><span class="identifier">Base64</span>.</span><span class="module"><span class="identifier">_keyStr</span> </span></span>= all_str.substring(<span class="number">0</span>, end_index)</span><br><span class="line">        <span class="keyword">let</span> charset = all_str.substring(<span class="number">64</span>, all_str.length)</span><br><span class="line">        <span class="keyword">let</span> encoded = <span class="module-access"><span class="module"><span class="identifier">Base64</span>.</span></span>decode(charset,supporter);</span><br><span class="line">        <span class="constructor">$(<span class="params">id</span>)</span>.value = encoded;</span><br><span class="line">    &#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>也就是 run 函数里面做了一系列操作，然后我传入的 id 可以通过看一下上面的函数 <code>doit</code> 可知传入的是 <code>Base64</code> 也就是说，实际上对 input 这个标签做了一个取值的操作，然后到这边我们就这整体一个过程将会用 JS 去模拟，所以这边我就不细说了。 最终会把这样的一个结果去通过 input.value 属性把值复制到 input 中，也就是我们最终看到的那样一个结果，到目前我就把这个 js 大概做了一件什么样的事情就已经讲的差不多了。接下来我们去看一下 Selenium 这边。 代码如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time : 2020-04-01 20:56</span></span><br><span class="line"><span class="comment"># @Author : aiyuehcuang</span></span><br><span class="line"><span class="comment"># @File : demo.py</span></span><br><span class="line"><span class="comment"># @Software: PyCharm</span></span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support.ui <span class="keyword">import</span> WebDriverWait</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support <span class="keyword">import</span> expected_conditions <span class="keyword">as</span> EC</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.action_chains <span class="keyword">import</span> ActionChains</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.keys <span class="keyword">import</span> Keys</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.chrome.options <span class="keyword">import</span> Options</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_text</span><span class="params">(id,attr)</span>:</span></span><br><span class="line">    <span class="comment">###  拼接字符串注意&#123;&#125;要写出&#123;&#123;&#125;&#125;</span></span><br><span class="line">    script=(<span class="string">"""</span></span><br><span class="line"><span class="string">       let bt=BrowserType();</span></span><br><span class="line"><span class="string">       let id='&#123;id&#125;';</span></span><br><span class="line"><span class="string">       let attr='&#123;attr&#125;';</span></span><br><span class="line"><span class="string">       let supporter =bt.supporter;</span></span><br><span class="line"><span class="string">    const run=function()&#123;&#123;</span></span><br><span class="line"><span class="string">    let all_str = $(id).getAttribute(attr)</span></span><br><span class="line"><span class="string">    let end_index=supporter.length+58</span></span><br><span class="line"><span class="string">    Base64._keyStr = all_str.substring(0, end_index)</span></span><br><span class="line"><span class="string">    let charset = all_str.substring(64, all_str.length)</span></span><br><span class="line"><span class="string">    let encoded = Base64.decode(charset,supporter);</span></span><br><span class="line"><span class="string">    return encoded</span></span><br><span class="line"><span class="string">&#125;&#125;</span></span><br><span class="line"><span class="string">    return run()</span></span><br><span class="line"><span class="string">    """</span>).format(id=id,attr=attr)</span><br><span class="line">    <span class="keyword">return</span> script</span><br><span class="line"></span><br><span class="line">chrome_option = Options()</span><br><span class="line">chrome_option.add_argument(<span class="string">"--headless"</span>)</span><br><span class="line">chrome_option.add_argument(<span class="string">"--disable-gpu"</span>)</span><br><span class="line">chrome_option.add_argument(<span class="string">'--ignore-certificate-errors'</span>)  <span class="comment"># SSL保存</span></span><br><span class="line">browser = webdriver.Chrome(options=chrome_option)</span><br><span class="line">wait = WebDriverWait(browser, <span class="number">10</span>)</span><br><span class="line"><span class="comment"># 启动浏览器，获取网页源代码</span></span><br><span class="line">mainUrl = <span class="string">"http://127.0.0.1:5002/"</span></span><br><span class="line">browser.get(mainUrl)</span><br><span class="line">result=browser.execute_script(get_text(<span class="string">"base64"</span>,<span class="string">"data"</span>))</span><br><span class="line">print(result)</span><br><span class="line">time.sleep(<span class="number">10</span>)</span><br><span class="line">browser.quit()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这边关键的一行代码是：通过 <code>execute_script(get_text(&quot;base64&quot;,&quot;data&quot;))</code> 这样的一句话去执行这个函数，这个函数实际上就是返回一段 JS 代码，这边实际上就是去模拟构造 run 所需要的一些参数，然后把最终的结果返回回去。 这里有两点需要注意：</p>
+                <ol>
+                  <li>如果里面存在拼接字符串的时候，注意花括号实际上要写两个</li>
+                  <li>如果需要在后面需要获取 JS 返回的值，所以我们上面的代码需要加上 return 来返回 run 函数的结果</li>
+                </ol>
+                <p>我们可以运行一下代码，输出结果如下：</p>
+                <figure class="highlight elixir">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="variable">$ </span>python demo.py</span><br><span class="line"></span><br><span class="line">DevTools listening on <span class="symbol">ws:</span>/<span class="regexp">/127.0.0.1:59507/devtools</span><span class="regexp">/browser/edbe</span>51d8<span class="number">-744</span>d<span class="number">-447</span>d<span class="number">-9304</span>-e9551a2a6421</span><br><span class="line">[0407/<span class="number">184920.601</span><span class="symbol">:INFO</span><span class="symbol">:CONSOLE</span>(<span class="number">286</span>)] <span class="string">"[object Object]"</span>, <span class="symbol">source:</span> <span class="symbol">http:</span>/<span class="regexp">/127.0.0.1:5002/static</span><span class="regexp">/js/base</span>64.js (<span class="number">286</span>)</span><br><span class="line">生活不是等待暴风雨过去，而是要学会在雨中跳舞。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>我们可以看到，我们程够获取到了结果。 这个例子因为它用到了检测浏览器的属性，而且它检测完属性之后会把属性值一直往下传，我们可以从上面的代码中看到它有很多地方使用。 所以，如果我们用 PyExecjs 来写的话，就需要修改很多参数，这样就很不方便了。因为我们需要去模拟这些浏览器参数，我这边写的例子比较简单，像那种更加复杂的。像获取更多的浏览器的一个属性的话，用 PyExecjs 再去写的时候，可能没有浏览器这样的一个环境，所以 PyExecjs 没有 Selenium 有优势。 当然，除了 Selenium 以为，还有一个叫做 Pyppeteer 的库，也是比较常见。 为了控制文章篇幅，咱们下次再续咯，记得关注公众号：AI悦创！</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/9567.html" rel="prev" title="qimingpian数据接口分析">
+                      <i class="fa fa-chevron-left"></i> qimingpian数据接口分析 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/9591.html" rel="next" title="某道词典在线翻译JS解密,完全扣js代码解密 （小白基础篇）"> 某道词典在线翻译JS解密,完全扣js代码解密 （小白基础篇） <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#本篇目标"><span class="nav-number">1.</span> <span class="nav-text">本篇目标</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#1-Base64"><span class="nav-number">2.</span> <span class="nav-text">1. Base64</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#2-MD5"><span class="nav-number">3.</span> <span class="nav-text">2. MD5</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用-Python-调用-JS"><span class="nav-number">4.</span> <span class="nav-text">3. 使用 Python 调用 JS</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-PyV8"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 PyV8</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Js2Py"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 Js2Py</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-PyMinRacer"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 PyMinRacer</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-PyExecJS"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 PyExecJS</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-5-PyExecJS-的使用"><span class="nav-number">4.4.1.</span> <span class="nav-text">3.4.5 PyExecJS 的使用</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-其他使用-Python-调用-JS-的骚操作"><span class="nav-number">4.5.</span> <span class="nav-text">3.5 其他使用 Python 调用 JS 的骚操作</span></a></li>
+                    </ol>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'a468cf6d6ed6e6f90c7124d50fcc2775',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

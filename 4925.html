@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="本文介绍下 RNN 及几种变种的结构和对应的 TensorFlow 源码实现，另外通过简单的实例来实现 TensorFlow RNN 相关类的调用。 RNN RNN，循环神经网络，Recurrent Neural Networks。人们思考问题往往不是从零开始的，比如阅读时我们对每个词的理解都会依赖于前面看到的一些信息，而不是把前面看的内容全部抛弃再去理解某处的信息。应用到深度学习上面，如果我们">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="TensorFlow RNN Cell源码解析">
+  <meta property="og:url" content="https://cuiqingcai.com/4925.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="本文介绍下 RNN 及几种变种的结构和对应的 TensorFlow 源码实现，另外通过简单的实例来实现 TensorFlow RNN 相关类的调用。 RNN RNN，循环神经网络，Recurrent Neural Networks。人们思考问题往往不是从零开始的，比如阅读时我们对每个词的理解都会依赖于前面看到的一些信息，而不是把前面看的内容全部抛弃再去理解某处的信息。应用到深度学习上面，如果我们">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-27-22-35-41.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-27-22-37-24.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-27-23-59-19.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-27-23-55-28.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-27-23-57-15.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-01-01.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-02-30.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-07-04.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-10-02.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-13-18.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-15-34.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-51-47.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-54-07.jpg">
+  <meta property="og:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-57-08.jpg">
+  <meta property="article:published_time" content="2017-12-27T17:54:02.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.293Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://germey.gitbooks.io/ai/content/assets/2017-12-27-22-35-41.jpg">
+  <link rel="canonical" href="https://cuiqingcai.com/4925.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>TensorFlow RNN Cell源码解析 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/4925.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> TensorFlow RNN Cell源码解析 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2017-12-28 01:54:02" itemprop="dateCreated datePublished" datetime="2017-12-28T01:54:02+08:00">2017-12-28</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/4925.html" class="post-meta-item leancloud_visitors" data-flag-title="TensorFlow RNN Cell源码解析" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>13k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>12 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p> 本文介绍下 RNN 及几种变种的结构和对应的 TensorFlow 源码实现，另外通过简单的实例来实现 TensorFlow RNN 相关类的调用。</p>
+                <h2 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h2>
+                <p>RNN，循环神经网络，Recurrent Neural Networks。人们思考问题往往不是从零开始的，比如阅读时我们对每个词的理解都会依赖于前面看到的一些信息，而不是把前面看的内容全部抛弃再去理解某处的信息。应用到深度学习上面，如果我们想要学习去理解一些依赖上文的信息，RNN 便可以做到，它有一个循环的操作，可以使其可以保留之前学习到的内容。 RNN 的结构如下： <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-27-22-35-41.jpg" alt=""> 在上图网络结构中，对于矩形块 A 的那部分，通过输入xt（t时刻的特征向量），它会输出一个结果ht（t时刻的状态或者输出）。网络中的循环结构使得某个时刻的状态能够传到下一个时刻。 这些循环的结构让 RNNs 看起来有些难以理解，但我们可以把 RNNs 看成是一个普通的网络做了多次复制后叠加在一起组成的，每一网络会把它的输出传递到下一个网络中。我们可以把 RNNs 在时间步上进行展开，就得到下图这样： <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-27-22-37-24.jpg" alt=""> 所以最基本的 RNN Cell 输入就是 xt，它还会输出一个隐含内容传递到下一个 Cell，同时还会生成一个结果 ht，其最基本的结构如如下： <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-27-23-59-19.jpg" alt=""> 仅仅是输入的 xt 和隐藏状态进行 concat，然后经过线性变换后经过一个 tanh 激活函数便输出了，另外隐含内容和输出结果是相同的内容。 我们来分析一下 TensorFlow 里面 RNN Cell 的实现。 TensorFlow 实现 RNN Cell 的位置在 python/ops/rnn<em>cell<em>impl.py，首先其实现了一个 RNNCell 类，继承了 Layer 类，其内部有三个比较重要的方法，state_size()、output_size()、__call</em></em>() 方法，其中 state_size() 和 output_size() 方法设置为类属性，可以当做属性来调用，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">state_size</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="string">"""size(s) of state(s) used by this cell.</span></span><br><span class="line"><span class="string">It can be represented by an Integer, a TensorShape or a tuple of Integers</span></span><br><span class="line"><span class="string">or TensorShapes.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError(<span class="string">"Abstract method"</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">output_size</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="string">"""Integer or TensorShape: size of outputs produced by this cell."""</span></span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError(<span class="string">"Abstract method"</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>分别代表 Cell 的状态和输出维度，和 Cell 中的神经元数量有关，但这里两个方法都没有实现，意思是说我们必须要实现一个子类继承 RNNCell 类并实现这两个方法。 另外对于 <strong>call</strong>() 方法，实际上就是当初始化的对象直接被调用的时候触发的方法，实现如下：</p>
+                <figure class="highlight pf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def __call__(<span class="literal">self</span>, inputs, <span class="keyword">state</span>, scope=None):</span><br><span class="line">    if scope is not None:</span><br><span class="line">        with vs.variable_scope(scope,</span><br><span class="line">                               custom_getter=<span class="literal">self</span>._rnn_get_variable) as scope:</span><br><span class="line">            return super(RNNCell, <span class="literal">self</span>).__call__(inputs, <span class="keyword">state</span>, scope=scope)</span><br><span class="line">    else:</span><br><span class="line">        with vs.variable_scope(vs.get_variable_scope(),</span><br><span class="line">                               custom_getter=<span class="literal">self</span>._rnn_get_variable):</span><br><span class="line">            return super(RNNCell, <span class="literal">self</span>).__call__(inputs, <span class="keyword">state</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>实际上是调用了父类 Layer 的 <strong>call</strong>() 方法，但父类中 <strong>call</strong>() 方法中又调用了 call() 方法，而 Layer 类的 call() 方法的实现如下：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(<span class="keyword">self</span>, inputs, **kwargs)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">return</span> inputs</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>父类的 call() 方法实现非常简单，所以要实现其真正的功能，只需要在继承 RNNCell 类的子类中实现 call() 方法即可。 接下来我们看下 RNN Cell 的最基本的实现，叫做 BasicRNNCell，其代码如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BasicRNNCell</span><span class="params">(RNNCell)</span>:</span></span><br><span class="line">  <span class="string">"""The most basic RNN cell.</span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    num_units: int, The number of units in the RNN cell.</span></span><br><span class="line"><span class="string">    activation: Nonlinearity to use.  Default: `tanh`.</span></span><br><span class="line"><span class="string">    reuse: (optional) Python boolean describing whether to reuse variables</span></span><br><span class="line"><span class="string">     in an existing scope.  If not `True`, and the existing scope already has</span></span><br><span class="line"><span class="string">     the given variables, an error is raised.</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_units, activation=None, reuse=None)</span>:</span></span><br><span class="line">    super(BasicRNNCell, self).__init__(_reuse=reuse)</span><br><span class="line">    self._num_units = num_units</span><br><span class="line">    self._activation = activation <span class="keyword">or</span> math_ops.tanh</span><br><span class="line">    self._linear = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="meta">  @property</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">state_size</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self._num_units</span><br><span class="line"></span><br><span class="line"><span class="meta">  @property</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">output_size</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self._num_units</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs, state)</span>:</span></span><br><span class="line">    <span class="string">"""Most basic RNN: output = new_state = act(W * input + U * state + B)."""</span></span><br><span class="line">    <span class="keyword">if</span> self._linear <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">      self._linear = _Linear([inputs, state], self._num_units, <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    output = self._activation(self._linear([inputs, state]))</span><br><span class="line">    <span class="keyword">return</span> output, output</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到在初始化的时候，最终要的一个参数是 num<em>units，意思就是这个 Cell 中神经元的个数，另外还有一个参数 activation 即默认使用的激活函数，默认使用的 tanh，reuse 代表该 Cell 是否可以被重新使用。 在 state<em>size()、output_size() 方法里，其返回的内容都是 num_units，即神经元的个数，接下来 call() 方法中，传入的参数为 inputs 和 state，即输入的 x 和 上一次的隐含状态，首先实例化了一个 _Linear 类，这个类实际上就是做线性变换的类，将二者传递过来，然后直接调用，就实现了 w * [inputs, state] + b 的线性变换，其中 _Linear 类的 __call</em></em>() 方法实现如下：</p>
+                <figure class="highlight vim">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def __call__(self, <span class="keyword">args</span>):</span><br><span class="line">    <span class="keyword">if</span> not self._is_sequence:</span><br><span class="line">        <span class="keyword">args</span> = [<span class="keyword">args</span>]</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(<span class="keyword">args</span>) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">res</span> = math_ops.matmul(<span class="keyword">args</span>[<span class="number">0</span>], self._weights)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">res</span> = math_ops.matmul(array_ops.concat(<span class="keyword">args</span>, <span class="number">1</span>), self._weights)</span><br><span class="line">    <span class="keyword">if</span> self._build_bia<span class="variable">s:</span></span><br><span class="line">        <span class="keyword">res</span> = nn_ops.bias_add(<span class="keyword">res</span>, self._biases)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">res</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>很明显这里传递了 [inputs, state] 作为 <strong>call</strong>() 方法的 args，会执行 concat() 和 matmul() 方法，然后接着再执行 bias_add() 方法，这样就实现了线性变换。 最后回到 BasicRNNCell 的 call() 方法中，在 _linear() 方法外面又包括了一层 _activation() 方法，即对线性变换应用一次 tanh 激活函数处理，作为输出结果。 最后返回的结果是 output 和 output，第一个代表 output，第二个代表隐状态，其值也等于 output。 我们用一个实例来感受一下：</p>
+                <figure class="highlight stylus">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line">cell = tf<span class="selector-class">.nn</span><span class="selector-class">.rnn_cell</span>.BasicRNNCell(num_units=<span class="number">128</span>)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(cell.state_size)</span></span></span><br><span class="line">inputs = tf.placeholder(tf<span class="selector-class">.float32</span>, shape=[<span class="number">32</span>, <span class="number">100</span>])</span><br><span class="line">h0 = cell.zero_state(<span class="number">32</span>, tf.float32)</span><br><span class="line">output, <span class="selector-tag">h1</span> = cell(inputs=inputs, state=h0)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(output, output.shape)</span></span></span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(h1, h1.shape)</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们首先初始化了一个神经元个数为 128 的 BasicRNNCell 类，然后构造了一个 shape 为 [32, 100] 的变量作为 inputs，其代表 batch_size 为 32, 维度为 100，随后初始化了初始隐藏状态，调用了 zero_state() 方法，然后直接调用 cell，实际上是最终调用了其 call() 方法，最后得到 output 和 h1，打印输出结果：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="number">128</span></span><br><span class="line">Tensor(<span class="string">"basic_rnn_cell/Tanh:0"</span>, shape=(<span class="number">32</span>, <span class="number">128</span>), dtype=<span class="built_in">float</span>32) (<span class="number">32</span>, <span class="number">128</span>)</span><br><span class="line">Tensor(<span class="string">"basic_rnn_cell/Tanh:0"</span>, shape=(<span class="number">32</span>, <span class="number">128</span>), dtype=<span class="built_in">float</span>32) (<span class="number">32</span>, <span class="number">128</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到，当输入变量维度为 100 的时候，经过一个 128 神经元 Cell 之后，输出维度变成了 128，其输出 shape 变成了 [32, 128]，且此时输出结果和隐藏状态是相同的。</p>
+                <h2 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h2>
+                <p>RNNs 的出现，主要是因为它们能够把以前的信息联系到现在，从而解决现在的问题。比如，利用前面的信息，能够帮助我们理解当前的内容。 有时候，我们在处理当前任务的时候，只需要看一下比较近的一些信息。比如在一个语言模型中，我们要通过上文来预测一下个词可能是什么，那么当我们看到 “the clouds are in the?”时，不需要更多的信息，我们就能够自然而然的想到下一个词应该是“sky”。在这样的情况下，我们所要预测的内容和相关信息之间的间隔很小，这种情况下 RNNs 就能够利用过去的信息， 很容易实现： <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-27-23-55-28.jpg" alt=""> 但是如果我们想依赖前文距离非常远的信息时，普通的 RNN 就非常难以做到了，随着间隔信息的增大，RNN 难以对其做关联： <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-27-23-57-15.jpg" alt=""> 但是 LSTM 可以用来解决这个问题。 LSTM，Long Short Term Memory Networks，是 RNN 的一个变种，经试验它可以用来解决更多问题，并取得了非常好的效果。 LSTM Cell 的结构如下： <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-01-01.jpg" alt=""> LSTMs 最关键的地方在于 Cell 的状态 和 结构图上面的那条横穿的水平线。 Cell 状态的传输就像一条传送带，向量从整个 Cell 中穿过，只是做了少量的线性操作。这种结构能够很轻松地实现信息从整个 Cell 中穿过而不做改变。 <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-02-30.jpg" alt=""> 若只有上面的那条水平线是没办法实现添加或者删除信息的，信息的操作是是通过一种叫做门的结构来实现的。 这里我们可以把门分为三个：遗忘门（Forget Gate）、传入门（Input Gate）、输出门（Output Gate）。</p>
+                <h3 id="遗忘门（Forget-Gate）"><a href="#遗忘门（Forget-Gate）" class="headerlink" title="遗忘门（Forget Gate）"></a>遗忘门（Forget Gate）</h3>
+                <p>首先是 LSTM 要决定让那些信息继续通过这个 Cell，这是通过 Forget Gate 的 sigmoid 神经层来实现的。它的输入是ht−1和xt，输出是一个数值都在 0，1 之间的向量，表示让 Ct−1 的各部分信息通过的比重。 0 表示“不让任何信息通过”， 1 表示“让所有信息通过”。 <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-07-04.jpg" alt=""></p>
+                <h3 id="传入门（Input-Gate）"><a href="#传入门（Input-Gate）" class="headerlink" title="传入门（Input Gate）"></a>传入门（Input Gate）</h3>
+                <p>下一步是决定让多少新的信息加入到 Cell 中来，一个叫做 Input Gate 的 sigmoid 层决定哪些信息需要更新，一个 New Input 通过 tanh 生成一个向量，也就是备选的用来更新的内容，Ct~ 。在下一步，我们把这两部分联合起来，对 Cell 的状态进行一个更新。 <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-10-02.jpg" alt=""> 在经过 Forget Gate 和 Input Gate 处理后，我们就可以对输入的 Ct-1 做更新了，即把Ct−1 更新为 Ct，首先我们把旧的状态 Ct−1 和 ft 相乘， 把一些不想保留的信息忘掉。然后加上 it∗Ct~，这部分信息就是我们要添加的新内容，这样就可以完成对 Ct-1 的更新。 <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-13-18.jpg" alt=""></p>
+                <h3 id="输出门-（Output-Gate）"><a href="#输出门-（Output-Gate）" class="headerlink" title="输出门 （Output Gate）"></a>输出门 （Output Gate）</h3>
+                <p>最后我们需要来决定输出什么值，输出主要是依赖于 Cell 的状态 Ct，但是又不仅仅依赖于 Ct，而是需要经过一个过滤的处理。首先，我们还是使用一个 sigmoid 层来决定 Ct 中的哪部分信息会被输出。然后我们把 Ct 通过一个 tanh 激活函数处理，然后把其输出和 sigmoid 计算出来的权重相乘，这样就得到了最后输出的结果。 <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-15-34.jpg" alt=""> 到了最后，其输出结果有三个内容，其中输出结果就是最上面的箭头代指的内容，即最终计算的结果，隐层包括两部分内容，一个是 Ct，一个是最下方的 ht，我们可以将其合并为一个变量来表示。 接下来我们来看下 LSTMCell 的 TensorFlow 代码实现。 首先它的类是 BasicLSTMCell 类，继承了 RNNCell 类，其初始化方法 init() 实现如下：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(<span class="keyword">self</span>, num_units, forget_bias=<span class="number">1.0</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">               state_is_tuple=True, activation=None, reuse=None)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">super</span>(BasicLSTMCell, <span class="keyword">self</span>).__init_<span class="number">_</span>(_reuse=reuse)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="symbol">state_is_tuple:</span></span><br><span class="line">      logging.warn(<span class="string">"%s: Using a concatenated state is slower and will soon be "</span></span><br><span class="line">                   <span class="string">"deprecated.  Use state_is_tuple=True."</span>, <span class="keyword">self</span>)</span><br><span class="line">    <span class="keyword">self</span>._num_units = num_units</span><br><span class="line">    <span class="keyword">self</span>._forget_bias = forget_bias</span><br><span class="line">    <span class="keyword">self</span>._state_is_tuple = state_is_tuple</span><br><span class="line">    <span class="keyword">self</span>._activation = activation <span class="keyword">or</span> math_ops.tanh</span><br><span class="line">    <span class="keyword">self</span>._linear = None</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里必须传入的参数仍然是 num_units，即神经元的个数，然后 forget_bias 是初始化 Forget Gate 的偏置大小，state_is_tuple 指的是输出状态类型是元组类型，activation 代表默认激活函数，reuse 代表是否可以被重复使用。 接下来看下 state_size() 方法和 output_size() 方法，实现如下：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">@property</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">state_size</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">return</span> (LSTMStateTuple(<span class="keyword">self</span>._num_units, <span class="keyword">self</span>._num_units)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">self</span>._state_is_tuple <span class="keyword">else</span> <span class="number">2</span> * <span class="keyword">self</span>._num_units)</span><br><span class="line"></span><br><span class="line">@property</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">output_size</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>._num_units</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里 state_size() 方法变了，因为输出的 state 需要将 Ct 和隐含状态合并，所以它需要包含两部分的内容，如果传入的参数 state_is_tuple 为 True 的话，状态会被表示成一个元组，否则会是 num_units 乘以 2 的数字，默认是元组形式。output_size() 方法则保持不变。 对于 call() 方法，其实现如下：</p>
+                <figure class="highlight nix">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def call(self, inputs, state):</span><br><span class="line">    <span class="string">""</span><span class="string">"Long short-term memory cell (LSTM).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">      inputs: `2-D` tensor with shape `[batch_size x input_size]`.</span></span><br><span class="line"><span class="string">      state: An `LSTMStateTuple` of state tensors, each shaped</span></span><br><span class="line"><span class="string">        `[batch_size x self.state_size]`, if `state_is_tuple` has been set to</span></span><br><span class="line"><span class="string">        `True`.  Otherwise, a `Tensor` shaped</span></span><br><span class="line"><span class="string">        `[batch_size x 2 * self.state_size]`.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">      A pair containing the new hidden state, and the new state (either a</span></span><br><span class="line"><span class="string">        `LSTMStateTuple` or a concatenated state, depending on</span></span><br><span class="line"><span class="string">        `state_is_tuple`).</span></span><br><span class="line"><span class="string">    "</span><span class="string">""</span></span><br><span class="line">    <span class="attr">sigmoid</span> = math_ops.sigmoid</span><br><span class="line">    <span class="comment"># Parameters of gates are concatenated into one multiply for efficiency.</span></span><br><span class="line">    <span class="keyword">if</span> self._state_is_tuple:</span><br><span class="line">        c, <span class="attr">h</span> = state</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        c, <span class="attr">h</span> = array_ops.split(<span class="attr">value=state,</span> <span class="attr">num_or_size_splits=2,</span> <span class="attr">axis=1)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> self._linear is None:</span><br><span class="line">        self.<span class="attr">_linear</span> = _Linear([inputs, h], <span class="number">4</span> * self._num_units, True)</span><br><span class="line">    <span class="comment"># i = input_gate, j = new_input, f = forget_gate, o = output_gate</span></span><br><span class="line">    i, j, f, <span class="attr">o</span> = array_ops.split(</span><br><span class="line">        <span class="attr">value=self._linear([inputs,</span> h]), <span class="attr">num_or_size_splits=4,</span> <span class="attr">axis=1)</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">new_c</span> = (</span><br><span class="line">        c * sigmoid(f + self._forget_bias) + sigmoid(i) * self._activation(j))</span><br><span class="line">    <span class="attr">new_h</span> = self._activation(new_c) * sigmoid(o)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> self._state_is_tuple:</span><br><span class="line">        <span class="attr">new_state</span> = LSTMStateTuple(new_c, new_h)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="attr">new_state</span> = array_ops.concat([new_c, new_h], <span class="number">1</span>)</span><br><span class="line">    return new_h, new_state</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>首先为了获取 c, h，需要将其从 state 中分离开来，如果传入的 state 是元组的话可以直接分解，否则需要调用 split() 方法来分解：</p>
+                <figure class="highlight pf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">if <span class="literal">self</span>._state_is_tuple:</span><br><span class="line">    c, h = <span class="keyword">state</span></span><br><span class="line">else:</span><br><span class="line">    c, h = array_ops.split(value=<span class="keyword">state</span>, num_or_size_splits=<span class="number">2</span>, axis=<span class="number">1</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>接下来定义了几个门的实现：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">i, j, f, o = array_ops.split(<span class="attribute">value</span>=self._linear([inputs, h]), <span class="attribute">num_or_size_splits</span>=4, <span class="attribute">axis</span>=1)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>放到一起来用 Linear 计算然后分成了 4 份，分别代表 Input Gate、New Input、Forget Gate、Output Gate，用 i、j、f、o 来表示，这时候四个变量都经过了线性变换，乘以权重并做了偏置操作。 接下来就是更新 Ct-1 为 Ct 和得到隐含状态输出了，都是遵循 LSTM 内部的公式实现：</p>
+                <figure class="highlight haxe">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">new</span><span class="type">_c</span> = (c * sigmoid(f + self._forget_bias) + sigmoid(i) * self._activation(j))</span><br><span class="line"><span class="keyword">new</span><span class="type">_h</span> = self._activation(<span class="keyword">new</span><span class="type">_c</span>) * sigmoid(o)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里值得注意的是还多加了一个 _forget_bias 变量，即设置了初始化偏置，以免初始输出为 0 的问题。 最后将 new_c 和 new_h 进行合并，如果要输出元组，那么就合并为元组，否则二者进行 concat 操作，返回的结果是 new_h、new_state，前者即 Cell 的输出结果，后者代表隐含状态：</p>
+                <figure class="highlight haxe">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">if</span> self._state_is_tuple:<span class="type"></span></span><br><span class="line"><span class="type">    new_state </span>= LSTMStateTuple(<span class="keyword">new</span><span class="type">_c</span>, <span class="keyword">new</span><span class="type">_h</span>)</span><br><span class="line"><span class="keyword">else</span>:<span class="type"></span></span><br><span class="line"><span class="type">    new_state </span>= array_ops.concat([<span class="keyword">new</span><span class="type">_c</span>, <span class="keyword">new</span><span class="type">_h</span>], <span class="number">1</span>)</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span><span class="type">_h</span>, <span class="keyword">new</span><span class="type">_state</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>我们再用一个实例来感受一下 BasicLSTMCell 的用法：</p>
+                <figure class="highlight stylus">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line">cell = tf<span class="selector-class">.nn</span><span class="selector-class">.rnn_cell</span>.BasicLSTMCell(num_units=<span class="number">128</span>)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(cell.state_size)</span></span></span><br><span class="line">inputs = tf.placeholder(tf<span class="selector-class">.float32</span>, shape=(<span class="number">32</span>, <span class="number">100</span>))</span><br><span class="line">h0 = cell.zero_state(<span class="number">32</span>, tf.float32)</span><br><span class="line">output, <span class="selector-tag">h1</span> = cell(inputs=inputs, state=h0)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(h1)</span></span></span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(h1.h, h1.h.shape)</span></span></span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(h1.c, h1.c.shape)</span></span></span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(output, output.shape)</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们首先初始化了一个神经元个数为 128 的 BasicRNNCell 类，然后构造了一个 shape 为 [32, 100] 的变量作为 inputs，其代表 batch_size 为 32, 维度为 100，随后初始化了初始隐藏状态，调用了 zero_state() 方法，然后直接调用 cell，实际上是最终调用了其 call() 方法，最后得到 output 和 h1，此时 h1 是一个元组，它还可以分离成 h 和 c，分别打印其对象和维度，结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">LSTMStateTuple(c=<span class="number">128</span>, h=<span class="number">128</span>)</span><br><span class="line">LSTMStateTuple(c=&lt;tf.Tensor <span class="string">'add_1:0'</span> shape=(<span class="number">32</span>, <span class="number">128</span>) dtype=<span class="built_in">float</span>32&gt;, h=&lt;tf.Tensor <span class="string">'mul_2:0'</span> shape=(<span class="number">32</span>, <span class="number">128</span>) dtype=<span class="built_in">float</span>32&gt;)</span><br><span class="line">Tensor(<span class="string">"mul_2:0"</span>, shape=(<span class="number">32</span>, <span class="number">128</span>), dtype=<span class="built_in">float</span>32) (<span class="number">32</span>, <span class="number">128</span>)</span><br><span class="line">Tensor(<span class="string">"add_1:0"</span>, shape=(<span class="number">32</span>, <span class="number">128</span>), dtype=<span class="built_in">float</span>32) (<span class="number">32</span>, <span class="number">128</span>)</span><br><span class="line">Tensor(<span class="string">"mul_2:0"</span>, shape=(<span class="number">32</span>, <span class="number">128</span>), dtype=<span class="built_in">float</span>32) (<span class="number">32</span>, <span class="number">128</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到其维度都是 [32, 128]，而且 h1.h 和 output 是相同的。 另外 LSTM 有许多变种，其中一个比较有名的就是 Gers &amp; Schmidhuber (2000) 提出的，它在原来的基础上行添加了 Peephole Connections，使得遗忘门可以受 Ct-1 的影响。 <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-51-47.jpg" alt=""> 另外还有一个变种就是将 Forget Gate 和 Input Gate 二者联合起来，做到要么遗忘老的输入新的，要么保留老的不输入新的。 <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-54-07.jpg" alt=""> 但接下来还有一个更常用的变种，俺就是 GRU，它是由 Cho, et al. (2014) 提出的，在提出的同时他还提出了 Seq2Seq 模型，为 Generation Model 做好了铺垫。</p>
+                <h3 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h3>
+                <p>GRU，Gated Recurrent Unit，在 GRU 中，只有两个门：重置门（Reset Gate）和更新门（Update Gate）。同时在这个结构中，把 Ct 和隐藏状态进行了合并，整体结构比标准的 LSTM 结构要简单，而且这个结构后来也非常流行。 <img src="https://germey.gitbooks.io/ai/content/assets/2017-12-28-00-57-08.jpg" alt=""> 接下来我们看下 TensorFlow 中 GRUCell 的实现，代码如下：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GRUCell</span>(<span class="title">RNNCell</span>):</span></span><br><span class="line">  <span class="string">""</span><span class="string">"Gated Recurrent Unit cell (cf. http://arxiv.org/abs/1406.1078).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    num_units: int, The number of units in the GRU cell.</span></span><br><span class="line"><span class="string">    activation: Nonlinearity to use.  Default: `tanh`.</span></span><br><span class="line"><span class="string">    reuse: (optional) Python boolean describing whether to reuse variables</span></span><br><span class="line"><span class="string">     in an existing scope.  If not `True`, and the existing scope already has</span></span><br><span class="line"><span class="string">     the given variables, an error is raised.</span></span><br><span class="line"><span class="string">    kernel_initializer: (optional) The initializer to use for the weight and</span></span><br><span class="line"><span class="string">    projection matrices.</span></span><br><span class="line"><span class="string">    bias_initializer: (optional) The initializer to use for the bias.</span></span><br><span class="line"><span class="string">  "</span><span class="string">""</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(<span class="keyword">self</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">               num_units,</span></span></span><br><span class="line"><span class="function"><span class="params">               activation=None,</span></span></span><br><span class="line"><span class="function"><span class="params">               reuse=None,</span></span></span><br><span class="line"><span class="function"><span class="params">               kernel_initializer=None,</span></span></span><br><span class="line"><span class="function"><span class="params">               bias_initializer=None)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">super</span>(GRUCell, <span class="keyword">self</span>).__init_<span class="number">_</span>(_reuse=reuse)</span><br><span class="line">    <span class="keyword">self</span>._num_units = num_units</span><br><span class="line">    <span class="keyword">self</span>._activation = activation <span class="keyword">or</span> math_ops.tanh</span><br><span class="line">    <span class="keyword">self</span>._kernel_initializer = kernel_initializer</span><br><span class="line">    <span class="keyword">self</span>._bias_initializer = bias_initializer</span><br><span class="line">    <span class="keyword">self</span>._gate_linear = None</span><br><span class="line">    <span class="keyword">self</span>._candidate_linear = None</span><br><span class="line"></span><br><span class="line">  @property</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">state_size</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>._num_units</span><br><span class="line"></span><br><span class="line">  @property</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">output_size</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>._num_units</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(<span class="keyword">self</span>, inputs, state)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="string">""</span><span class="string">"Gated recurrent unit (GRU) with nunits cells."</span><span class="string">""</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">self</span>._gate_linear is <span class="symbol">None:</span></span><br><span class="line">      bias_ones = <span class="keyword">self</span>._bias_initializer</span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">self</span>._bias_initializer is <span class="symbol">None:</span></span><br><span class="line">        bias_ones = init_ops.constant_initializer(<span class="number">1.0</span>, dtype=inputs.dtype)</span><br><span class="line">      with vs.variable_scope(<span class="string">"gates"</span>):  <span class="comment"># Reset gate and update gate.</span></span><br><span class="line">        <span class="keyword">self</span>._gate_linear = _Linear(</span><br><span class="line">            [inputs, state],</span><br><span class="line">            <span class="number">2</span> * <span class="keyword">self</span>._num_units,</span><br><span class="line">            True,</span><br><span class="line">            bias_initializer=bias_ones,</span><br><span class="line">            kernel_initializer=<span class="keyword">self</span>._kernel_initializer)</span><br><span class="line"></span><br><span class="line">    value = math_ops.sigmoid(<span class="keyword">self</span>._gate_linear([inputs, state]))</span><br><span class="line">    r, u = array_ops.split(value=value, num_or_size_splits=<span class="number">2</span>, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    r_state = r * state</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">self</span>._candidate_linear is <span class="symbol">None:</span></span><br><span class="line">      with vs.variable_scope(<span class="string">"candidate"</span>)<span class="symbol">:</span></span><br><span class="line">        <span class="keyword">self</span>._candidate_linear = _Linear(</span><br><span class="line">            [inputs, r_state],</span><br><span class="line">            <span class="keyword">self</span>._num_units,</span><br><span class="line">            True,</span><br><span class="line">            bias_initializer=<span class="keyword">self</span>._bias_initializer,</span><br><span class="line">            kernel_initializer=<span class="keyword">self</span>._kernel_initializer)</span><br><span class="line">    c = <span class="keyword">self</span>._activation(<span class="keyword">self</span>._candidate_linear([inputs, r_state]))</span><br><span class="line">    new_h = u * state + (<span class="number">1</span> - u) * c</span><br><span class="line">    <span class="keyword">return</span> new_h, new_h</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在 state_size()、output_size() 方法里，其返回的内容都是 num_units，即神经元的个数。 接下来 call() 方法中，因为 Reset Gate rt 和 Update Gate zt 分别用变量 r、u 表示，它们需要先对 ht-1 即 state 和 xt 做合并，然后再实现线性变换，再调用 sigmod 函数得到：</p>
+                <figure class="highlight pf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">value = math_ops.sigmoid(<span class="literal">self</span>._gate_linear([inputs, <span class="keyword">state</span>]))</span><br><span class="line">r, u = array_ops.split(value=value, num_or_size_splits=<span class="number">2</span>, axis=<span class="number">1</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>然后需要求解 ht~，首先用 rt 和 ht-1 即 state 相乘：</p>
+                <figure class="highlight pf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">r_state = r * <span class="keyword">state</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>然后将其放到线性函数里面，在调用 tanh 激活函数即可：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">c = self.<span class="constructor">_activation(<span class="params">self</span>.<span class="params">_candidate_linear</span>([<span class="params">inputs</span>, <span class="params">r_state</span>])</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>最后计算隐含状态和输出结果，二者一致：</p>
+                <figure class="highlight haxe">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">new</span><span class="type">_h</span> = u * state + (<span class="number">1</span> - u) * c</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span><span class="type">_h</span>, <span class="keyword">new</span><span class="type">_h</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样即可返回得到输出结果和隐藏状态。 我们用一个实例感受一下：</p>
+                <figure class="highlight stylus">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line">cell = tf<span class="selector-class">.nn</span><span class="selector-class">.rnn_cell</span>.GRUCell(num_units=<span class="number">128</span>)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(cell.state_size)</span></span></span><br><span class="line">inputs = tf.placeholder(tf<span class="selector-class">.float32</span>, shape=[<span class="number">32</span>, <span class="number">100</span>])</span><br><span class="line">h0 = cell.zero_state(<span class="number">32</span>, tf.float32)</span><br><span class="line">output, <span class="selector-tag">h1</span> = cell(inputs=inputs, state=h0)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(output, output.shape)</span></span></span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(h1, h1.shape)</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="number">128</span></span><br><span class="line">Tensor(<span class="string">"gru_cell/add:0"</span>, shape=(<span class="number">32</span>, <span class="number">128</span>), dtype=<span class="built_in">float</span>32) (<span class="number">32</span>, <span class="number">128</span>)</span><br><span class="line">Tensor(<span class="string">"gru_cell/add:0"</span>, shape=(<span class="number">32</span>, <span class="number">128</span>), dtype=<span class="built_in">float</span>32) (<span class="number">32</span>, <span class="number">128</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这个结果和 BasicRNNCell 并无二致，但 GRUCell 内部的结构使模型的效果更加优化，一般我们也会选取 GRUCell 来代替原生的 BasicRNNCell。</p>
+                <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+                <p>以上便是对 RNN 及一些变种的说明及代码原理分析和实例用法，此部分掌握之后对 Dynamic RNN、多层 RNN 及 RNN Cell 的改写会有很大帮助，需要好好掌握。</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/4921.html" rel="prev" title="TensorFlow MNIST高级学习">
+                      <i class="fa fa-chevron-left"></i> TensorFlow MNIST高级学习 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/4934.html" rel="next" title="TensorFlow LSTM MNIST分类"> TensorFlow LSTM MNIST分类 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#RNN"><span class="nav-number">1.</span> <span class="nav-text">RNN</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#LSTM"><span class="nav-number">2.</span> <span class="nav-text">LSTM</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#遗忘门（Forget-Gate）"><span class="nav-number">2.1.</span> <span class="nav-text">遗忘门（Forget Gate）</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#传入门（Input-Gate）"><span class="nav-number">2.2.</span> <span class="nav-text">传入门（Input Gate）</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#输出门-（Output-Gate）"><span class="nav-number">2.3.</span> <span class="nav-text">输出门 （Output Gate）</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#GRU"><span class="nav-number">2.4.</span> <span class="nav-text">GRU</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">3.</span> <span class="nav-text">结语</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '071093a9e4e3988d2c7183d31e09c6b3',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

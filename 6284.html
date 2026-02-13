@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="最近和几个朋友开发项目，期间使用了一台服务器跑模型，这台服务器是多人公用的，很多人都在上面有自己的账号，互不干涉内政，一切看起来十分井然有序。近期，这个服务器上刚挂载了一块新硬盘，是一位朋友使用 root 账号挂载的，然后将磁盘映射到某个文件夹下。然而挂载好了之后发现使用普通账号没有权限在文件夹下操作，无法创建文件，于是他干脆就直接把文件夹权限改成 777 了。我心想，这还了得，改成 777 了，">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="详解 Linux 下的用户管理、用户组管理和权限管理">
+  <meta property="og:url" content="https://cuiqingcai.com/6284.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="最近和几个朋友开发项目，期间使用了一台服务器跑模型，这台服务器是多人公用的，很多人都在上面有自己的账号，互不干涉内政，一切看起来十分井然有序。近期，这个服务器上刚挂载了一块新硬盘，是一位朋友使用 root 账号挂载的，然后将磁盘映射到某个文件夹下。然而挂载好了之后发现使用普通账号没有权限在文件夹下操作，无法创建文件，于是他干脆就直接把文件夹权限改成 777 了。我心想，这还了得，改成 777 了，">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="article:published_time" content="2018-09-04T15:20:13.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.327Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://cuiqingcai.com/6284.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>详解 Linux 下的用户管理、用户组管理和权限管理 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/6284.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 详解 Linux 下的用户管理、用户组管理和权限管理 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2018-09-04 23:20:13" itemprop="dateCreated datePublished" datetime="2018-09-04T23:20:13+08:00">2018-09-04</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                    </span>
+                  </span>
+                  <span id="/6284.html" class="post-meta-item leancloud_visitors" data-flag-title="详解 Linux 下的用户管理、用户组管理和权限管理" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>9.1k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>8 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>最近和几个朋友开发项目，期间使用了一台服务器跑模型，这台服务器是多人公用的，很多人都在上面有自己的账号，互不干涉内政，一切看起来十分井然有序。近期，这个服务器上刚挂载了一块新硬盘，是一位朋友使用 root 账号挂载的，然后将磁盘映射到某个文件夹下。然而挂载好了之后发现使用普通账号没有权限在文件夹下操作，无法创建文件，于是他干脆就直接把文件夹权限改成 777 了。我心想，这还了得，改成 777 了，其他人在里面乱改咋办？会出人命的！所以，我就这件事详细梳理了一下 Linux 下的用户、用户组、文件权限等基本知识，看完这些，以后不要动不动就把文件夹改成 777 权限了。</p>
+                <h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2>
+                <p>首选我们梳理一下 Linux 下的用户、用户组、文件权限等基本知识，然后后面通过一个案例来实际演示一下权限设置的一些操作。 首先 Linux 系统中，是有用户和用户组的概念的，用户就是身份的象征，我们必须以某一个用户身份来操作一个系统，实际上这就对应着我们登录系统时的账号。而用户组就是一些用户的集合，我们可以通过用户组来划分和统一管理某些用户。 比如我要在微信发一条朋友圈，我只想给我的亲人们看，难道我发的时候还要一个个去勾选所有的人？这未免太麻烦了。为了解决这问题，微信里面就有了标签的概念，我们可以提前给好友以标签的方式分类，发的时候直接勾选某个标签就好了，简单高效。实际上这就是用户组的概念，我们可以将某些人进行分组和归类，到时候只需要指定类别或组别就可以了，而不用一个个人去对号入座，从而节省了大量时间。 在 Linux 中，一个用户是可以属于多个组的，一个组也是可以包含多个用户的，下面我以一台 Ubuntu Linux 为例来演示一下相关的命令和操作。</p>
+                <h3 id="用户和用户组"><a href="#用户和用户组" class="headerlink" title="用户和用户组"></a>用户和用户组</h3>
+                <p>首先查看所有用户，命令如下：</p>
+                <figure class="highlight awk">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">cut -d<span class="string">':'</span> -f <span class="number">1</span> <span class="regexp">/etc/</span>passwd</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果：</p>
+                <figure class="highlight armasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">root</span></span><br><span class="line"><span class="symbol">daemon</span></span><br><span class="line"><span class="keyword">bin</span></span><br><span class="line"><span class="keyword">sys</span></span><br><span class="line"><span class="keyword">...</span></span><br><span class="line"><span class="keyword">ubuntu</span></span><br><span class="line"><span class="keyword">mysql</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里一行就是一个用户名，由于太多，部分就省略了，实际上这个命令就是从密码文件中把用户名单独列出来了。 然后查看所有用户组，命令也是类似的：</p>
+                <figure class="highlight awk">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">cut -d<span class="string">':'</span> -f <span class="number">1</span> <span class="regexp">/etc/g</span>roup</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果：</p>
+                <figure class="highlight armasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">root</span></span><br><span class="line"><span class="symbol">daemon</span></span><br><span class="line"><span class="keyword">bin</span></span><br><span class="line"><span class="keyword">sys</span></span><br><span class="line"><span class="keyword">...</span></span><br><span class="line"><span class="keyword">ubuntu</span></span><br><span class="line"><span class="keyword">mysql</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果基本是类似的，因为每个用户在被创建的时候都会自动创建一个同名的组作为其默认的用户组。 这里我是使用 ubuntu 这个账号来登录的，下面我来看下 ubuntu 这个账号是属于哪些组。 查看一个用户所属组的命令格式如下：</p>
+                <figure class="highlight xml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">gorups <span class="tag">&lt;<span class="name">username</span>&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里就是 groups 命令加上用户名就能查看该用户名所属的组了，如果不加用户名的话就默认是当前用户。 例如查看 ubuntu 这个用户所属于的组，命令如下：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">groups ubuntu</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果：</p>
+                <figure class="highlight ada">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">ubuntu : <span class="type">ubuntu</span> adm cdrom sudo dip plugdev lxd lpadmin sambashare</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>还不少，这个用户被分配到了很多组下，比如同名的组 ubuntu，还有 sudo 组，另外还有一些其他的组。 其中 sudo 组比较特殊，如果被分到了这个组里面就代表该账号拥有 root 权限，可以使用 sudo 命令。 了解了怎样查看用户所属的组，我们也应该反过来了解如何查看一个用户组里面包含哪些用户啊。 查看某个用户组下所有用户命令如下：</p>
+                <figure class="highlight sqf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="built_in">members</span> &lt;<span class="built_in">group</span>&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>不过这个命令不是自带的，需要额外安装 members 包，命令如下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo apt-<span class="builtin-name">get</span> install members</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>例如查看 sudo 用户组下的所有用户，即拥有 root 权限的用户：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">members sudo</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">ubuntu hadoop</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到拥有 root 权限的用户有两个，ubuntu 和 hadoop，当然不同的机器结果肯定是不一样的。 接下来介绍一个比较有用的命令，就是 id 命令，它可以用来查看用户的所属组别，格式如下：</p>
+                <figure class="highlight applescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="built_in">id</span> &lt;username&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>例如查看 ubuntu 用户的信息，就是这样：</p>
+                <figure class="highlight applescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="built_in">id</span> ubuntu</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">uid=<span class="number">500</span>(ubuntu) gid=<span class="number">500</span>(ubuntu) groups=<span class="number">500</span>(ubuntu),<span class="number">4</span>(adm),<span class="number">24</span>(cdrom),<span class="number">27</span>(sudo),<span class="number">30</span>(dip),<span class="number">46</span>(plugdev),<span class="number">110</span>(lxd),<span class="number">115</span>(lpadmin),<span class="number">116</span>(sambashare)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里有一个 gid，作为主工作组，后面还有个 groups，它列出了用户所在的所有组。主工作组只有一个，而后者的数量则不限。可以看到用户组的结果和使用 groups 命令看到的结果是一致的。 接下来我们再来了解一下如何创建一个用户和怎样为用户分配组别。 添加一个用户命令格式如下：</p>
+                <figure class="highlight armasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">sudo</span> <span class="keyword">adduser </span>&lt;username&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>比如我要添加一个用户 cqc，命令就可以这么写：</p>
+                <figure class="highlight armasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">sudo</span> <span class="keyword">adduser </span>cqc</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里使用的命令前面都带有 sudo，因为毕竟是系统级别的操作。 添加一个组的命令格式如下：</p>
+                <figure class="highlight xml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo groupadd <span class="tag">&lt;<span class="name">group</span>&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>格式是类似的，后面跟一个组的名称就可以了，例如我要为我的实验室创建一个用户组，那么就可以使用如下命令：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">sudo groupadd lab</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>创建完了用户和组，那得把它们关联起来吧，关联的意思就是把某个用户加入到某个组里面，命令格式如下：</p>
+                <figure class="highlight xml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo adduser <span class="tag">&lt;<span class="name">username</span>&gt;</span> <span class="tag">&lt;<span class="name">group</span>&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>或者使用 usermod 命令：</p>
+                <figure class="highlight xml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo usermod -G <span class="tag">&lt;<span class="name">group</span>&gt;</span> <span class="tag">&lt;<span class="name">username</span>&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果要添加多个组的话，可以通过 -a 选项指定多个名称：</p>
+                <figure class="highlight smali">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo usermod -aG &lt;group1,group2,group3..&gt; &lt;username&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>例如我要将 cqc 用户添加到 sudo 用户组中，命令就是：</p>
+                <figure class="highlight armasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">sudo</span> <span class="keyword">adduser </span>cqc sudo</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>或：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">sudo usermod -G sudo cqc</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样就为用户和用户组做好关联了。</p>
+                <h3 id="文件权限管理"><a href="#文件权限管理" class="headerlink" title="文件权限管理"></a>文件权限管理</h3>
+                <p>了解了这些之后，我们再来了解一下文件权限的相关知识，下面我们先随便找一个目录，查看一下文件的列表。 列出某个目录下文件详细信息的命令如下：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">ll</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>或者使用：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">ls -l</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>比如我这里列出了 /etc/nginx 目录下的文件列表：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">total <span class="number">80</span></span><br><span class="line">drwxr-xr-x   <span class="number">7</span> root root  <span class="number">4096</span> Jun <span class="number">21</span> <span class="number">22</span>:<span class="number">16</span> ./</span><br><span class="line">drwxr-xr-x <span class="number">103</span> root root  <span class="number">4096</span> Sep  <span class="number">4</span> <span class="number">18</span>:<span class="number">04</span> ../</span><br><span class="line">drwxr-xr-x   <span class="number">2</span> root root  <span class="number">4096</span> Jul <span class="number">12</span>  <span class="number">2017</span> conf.d/</span><br><span class="line">-rw-r--r--   <span class="number">1</span> root root  <span class="number">1077</span> Feb <span class="number">12</span>  <span class="number">2017</span> fastcgi.conf</span><br><span class="line">-rw-r--r--   <span class="number">1</span> root root  <span class="number">1007</span> Feb <span class="number">12</span>  <span class="number">2017</span> fastcgi_params</span><br><span class="line">-rw-r--r--   <span class="number">1</span> root root  <span class="number">2837</span> Feb <span class="number">12</span>  <span class="number">2017</span> koi-utf</span><br><span class="line">-rw-r--r--   <span class="number">1</span> root root  <span class="number">2223</span> Feb <span class="number">12</span>  <span class="number">2017</span> koi-win</span><br><span class="line">-rw-r--r--   <span class="number">1</span> root root  <span class="number">3957</span> Feb <span class="number">12</span>  <span class="number">2017</span> mime.types</span><br><span class="line">-rw-r--r--   <span class="number">1</span> root root  <span class="number">1505</span> Jun <span class="number">21</span> <span class="number">20</span>:<span class="number">24</span> nginx.conf</span><br><span class="line">-rw-r--r--   <span class="number">1</span> root root <span class="number">12288</span> Jun <span class="number">21</span> <span class="number">20</span>:<span class="number">44</span> .nginx.conf.swp</span><br><span class="line">-rw-r--r--   <span class="number">1</span> root root   <span class="number">180</span> Feb <span class="number">12</span>  <span class="number">2017</span> proxy_params</span><br><span class="line">-rw-r--r--   <span class="number">1</span> root root   <span class="number">636</span> Feb <span class="number">12</span>  <span class="number">2017</span> scgi_params</span><br><span class="line">drwxr-xr-x   <span class="number">2</span> root root  <span class="number">4096</span> Jun <span class="number">21</span> <span class="number">22</span>:<span class="number">42</span> sites-available/</span><br><span class="line">drwxr-xr-x   <span class="number">2</span> root root  <span class="number">4096</span> Jun <span class="number">21</span> <span class="number">19</span>:<span class="number">08</span> sites-enabled/</span><br><span class="line">drwxr-xr-x   <span class="number">2</span> root root  <span class="number">4096</span> Jun <span class="number">21</span> <span class="number">19</span>:<span class="number">08</span> snippets/</span><br><span class="line">-rw-r--r--   <span class="number">1</span> root root   <span class="number">664</span> Feb <span class="number">12</span>  <span class="number">2017</span> uwsgi_params</span><br><span class="line">drwxr-xr-x   <span class="number">2</span> root root  <span class="number">4096</span> Jun <span class="number">22</span> <span class="number">02</span>:<span class="number">44</span> vhosts/</span><br><span class="line">-rw-r--r--   <span class="number">1</span> root root  <span class="number">3071</span> Feb <span class="number">12</span>  <span class="number">2017</span> win-utf</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>我们注意到了每一行都是一个文件或文件夹的信息，一共包括七列：</p>
+                <ul>
+                  <li>第一列是文件的权限信息</li>
+                  <li>第二列表示该文件夹连接的文件数</li>
+                  <li>第三列表示文件所属用户</li>
+                  <li>第四列表示文件所属用户组</li>
+                  <li>第五列表示文件大小（字节）</li>
+                  <li>第六列表示最后修改日期</li>
+                  <li>第七列表示文件名</li>
+                </ul>
+                <p>其中第一列的文件权限信息是非常重要的，它由十个字符组成：</p>
+                <ul>
+                  <li>第一个字符代表文件的类型，有三种，- 代表这是一个文件，d 代表这是一个文件夹，l 代表这是一个链接。</li>
+                  <li>第 2-4 个字符代表文件所有者对该文件的权限，r 就是读，w 就是写，x 就是执行，如果是文件夹的话，执行就意味着查看文件夹下的内容，例如 rw- 就代表文件所有者可以对该文件进行读取和写入。</li>
+                  <li>第 5-7 个字符代表文件所属组对该文件的权限，含义是一样的，如 r-x 就代表该文件所属组内的所有用户对该文件有读取和执行的权限。</li>
+                  <li>第 8-10 个字符代表是其他用户对该文件的权限，含义也是一样的，如 r— 就代表非所有者，非用户组的用户只拥有对该文件的读取权限。</li>
+                </ul>
+                <p>我们可以使用 chmod 命令来改变文件或目录的权限，有这么几种用法。 一种是数字权限命名，rwx 对应一个二进制数字，如 101 就代表拥有读取和执行的权限，而转为十进制的话，r 就代表 4，w 就代表 2，x 就代表 1，然后三个数字加起来就和二进制数字对应起来了。如 7=4+2+1，这就对应着 rwx；5=4+1，这就对应着 r-x。所以，相应地 777 就代表了 rwxrwxrwx，即所有者、所属用户组、其他用户对该文件都拥有读取、写入、执行的权限，这是相当危险的！ 赋予权限的命令如下：</p>
+                <figure class="highlight xml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo chmod <span class="tag">&lt;<span class="name">permission</span>&gt;</span> <span class="tag">&lt;<span class="name">file</span>&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>例如我要为一个 file.txt 赋予 777 权限，就写成：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo chmod <span class="number">777</span> file.txt</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>另外我们也可以使用代号来赋予权限，代号有 u、g、o、a 四中，分别代表所有者权限，用户组权限，其他用户权限和所有用户权限，这些代号后面通过 + 和 - 符号来控制权限的添加和移除，再后面跟上权限类型就好，例如：</p>
+                <figure class="highlight sas">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo chmod u-<span class="meta">x</span> <span class="meta">file</span>.txt</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>就是给所有者移除 x 权限，也就是执行权限。</p>
+                <figure class="highlight applescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo chmod g+w <span class="built_in">file</span>.txt</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>就是为用户组添加 w 权限，即写入权限。 另外如果是文件夹的话还可以对文件夹进行递归赋权限操作，如：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo chmod -R <span class="number">777</span> share</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>就是将 share 文件夹和其内所有内容都赋予 777 权限。 好，有了权限的标识，那我们还得把用户和用户组与文件关联起来啊，这里使用的命令就是 chown 和 chgrp 命令。 命令格式如下：</p>
+                <figure class="highlight xml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo chown <span class="tag">&lt;<span class="name">username</span>&gt;</span> <span class="tag">&lt;<span class="name">file</span>&gt;</span></span><br><span class="line">sudo chgrp <span class="tag">&lt;<span class="name">group</span>&gt;</span> <span class="tag">&lt;<span class="name">file</span>&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>例如我要将 file.txt 的所有者换成 cqc，那就可以使用如下命令：</p>
+                <figure class="highlight applescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo chown cqc <span class="built_in">file</span>.txt</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果我要将 file.txt 所属用户组换成 lab，那就可以使用如下命令：</p>
+                <figure class="highlight stata">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo chgrp <span class="keyword">lab</span> <span class="keyword">file</span>.txt</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>另外同样可以使用 -R 来进行递归操作，如将 share 文件夹及其内所有内容的所有者都换成 cqc，命令如下：</p>
+                <figure class="highlight perl">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo <span class="keyword">chown</span> -R cqc share/</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>好，了解了 chown、chgrp、chmod 之后，我们就可以灵活地对文件权限进行控制了。</p>
+                <h2 id="实战演示"><a href="#实战演示" class="headerlink" title="实战演示"></a>实战演示</h2>
+                <p>可能上面说起来有点抽象，下面我们以一个实例来演示一下权限控制的流程，通过这个流程，相信理解以上的命令都不在话下了。 首先情况是这样的，我要在某台主机上共享一些文件给我实验室的人，但这台主机上还有其他非实验室的人在使用，我只想让实验室的人查看和修改这些文件，其他人不行。 另外我自己的账号要有最高权限来管理这些文件的共享权限，即要有 root 权限。 现在我已经登录了一个 ubuntu 的账号，是系统初始化的，拥有 root 权限。 下面我就模拟创建三个账号和一个用户组，来得到如下效果：</p>
+                <ul>
+                  <li>账号 cqc 是我自己使用的账号，拥有最高权限，可以自由调整文件权限信息，可以自由为某个用户分配用户组。</li>
+                  <li>账号 lbd 是我实验室的人员，没有 root 权限，但能查看和修改我共享的文件。</li>
+                  <li>账号 slb 不是我实验室的人员，没有 root 权限，也不能修改我共享的文件。</li>
+                </ul>
+                <h3 id="创建自己的账户"><a href="#创建自己的账户" class="headerlink" title="创建自己的账户"></a>创建自己的账户</h3>
+                <p>首先我先为自己创建一个账户，添加一个 cqc 的用户：</p>
+                <figure class="highlight armasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">sudo</span> <span class="keyword">adduser </span>cqc</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行之后会提示输入密码和其他信息：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Adding<span class="built_in"> user </span>`cqc<span class="string">' ...</span></span><br><span class="line"><span class="string">Adding new group `cqc'</span> (1002) <span class="built_in">..</span>.</span><br><span class="line">Adding new<span class="built_in"> user </span>`cqc<span class="string">' (1002) with group `cqc'</span> <span class="built_in">..</span>.</span><br><span class="line">Creating home directory `/home/cqc<span class="string">' ...</span></span><br><span class="line"><span class="string">Copying files from `/etc/skel'</span> <span class="built_in">..</span>.</span><br><span class="line">Enter new UNIX password: </span><br><span class="line">Retype new UNIX password: </span><br><span class="line">passwd: password updated successfully</span><br><span class="line">Changing the<span class="built_in"> user </span>information <span class="keyword">for</span> cqc</span><br><span class="line">Enter the new value, <span class="keyword">or</span> press ENTER <span class="keyword">for</span> the default</span><br><span class="line">        Full Name []: </span><br><span class="line">        Room Number []: </span><br><span class="line">        Work Phone []: </span><br><span class="line">        Home Phone []: </span><br><span class="line">        Other []: </span><br><span class="line">Is the information correct? [Y/n]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这时候发现一个同名的组就被创建了，查看下 cqc 所在的组：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">groups cqc</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight ada">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">cqc : <span class="type">cqc</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>再用 id 命令查看下信息：</p>
+                <figure class="highlight applescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="built_in">id</span> cqc</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight lisp">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">uid=1002(<span class="name">cqc</span>) gid=1002(<span class="name">cqc</span>) groups=1002(<span class="name">cqc</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到当前 cqc 只属于 cqc 用户组。 接下来我们创建一个用户组，叫做 lab，来标明我的实验室，命令如下：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">sudo groupadd lab</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>然后查看下用户组里面的成员：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">members lab</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>没有任何结果，说明我们创建了一个空的组，没有任何成员。 然后我们将刚才创建的 cqc 加入到该组中，因为我自己也属于该实验室，肯定也要加进来，命令如下：</p>
+                <figure class="highlight armasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">sudo</span> <span class="keyword">adduser </span>cqc lab</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Adding<span class="built_in"> user </span>`cqc<span class="string">' to group `lab'</span> <span class="built_in">..</span>.</span><br><span class="line">Adding<span class="built_in"> user </span>cqc <span class="keyword">to</span><span class="built_in"> group </span>lab</span><br><span class="line">Done.</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>然后查看下组内成员：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">members lab</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">cqc</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样 lab 组内就有了 cqc 这个用户了。 别忘了 cqc 还需要拥有 root 权限，所以我们还需要将 cqc 添加到 sudo 组内，命令如下：</p>
+                <figure class="highlight armasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">sudo</span> <span class="keyword">adduser </span>cqc sudo</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Adding<span class="built_in"> user </span>`cqc<span class="string">' to group `sudo'</span> <span class="built_in">..</span>.</span><br><span class="line">Adding<span class="built_in"> user </span>cqc <span class="keyword">to</span><span class="built_in"> group </span>sudo</span><br><span class="line">Done.</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样就成功加入到 sudo 组了，cqc 也就是我的账户就可以使用 sudo 命令了。 查看下用户状态：</p>
+                <figure class="highlight applescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="built_in">id</span> cqc</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">uid</span>=1002(cqc) <span class="attribute">gid</span>=1002(cqc) <span class="attribute">groups</span>=1002(cqc),27(sudo),1003(lab)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样 cqc 就属于三个用户组了，既是实验室成员，又拥有 root 权限。 上面的分配用户组的命令我们也可以使用 usermod 来实现：</p>
+                <figure class="highlight nginx">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">sudo</span> usermod -aG sudo,lab cqc</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样就添加到多个组了。</p>
+                <h3 id="添加实验室用户"><a href="#添加实验室用户" class="headerlink" title="添加实验室用户"></a>添加实验室用户</h3>
+                <p>接下来，再添加实验室的另外一个人员 lbd，然后将其添加到 lab 组中，流程是类似的，命令如下：</p>
+                <figure class="highlight mipsasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo <span class="keyword">adduser </span><span class="keyword">lbd</span></span><br><span class="line"><span class="keyword">sudo </span><span class="keyword">adduser </span><span class="keyword">lbd </span>lab</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行完毕之后，id 命令查看其信息：</p>
+                <figure class="highlight applescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="built_in">id</span> lbd</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">uid</span>=1004(lbd) <span class="attribute">gid</span>=1005(lbd) <span class="attribute">groups</span>=1005(lbd),1003(lab)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样就成功创建 lbd，并将其添加到实验室 lab 组了。</p>
+                <h3 id="添加非实验室用户"><a href="#添加非实验室用户" class="headerlink" title="添加非实验室用户"></a>添加非实验室用户</h3>
+                <p>最后另外添加一个用户 slb，非实验室成员，只创建账户就好了，命令如下：</p>
+                <figure class="highlight armasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">sudo</span> <span class="keyword">adduser </span>slb</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>但是我们不把他加入 lab 组中。 查看他的状态：</p>
+                <figure class="highlight applescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="built_in">id</span> slb</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight lisp">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">uid=1003(<span class="name">slb</span>) gid=1004(<span class="name">slb</span>) groups=1004(<span class="name">slb</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>所以三人的状态是这样的：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">id cqc</span><br><span class="line"><span class="attribute">uid</span>=1002(cqc) <span class="attribute">gid</span>=1002(cqc) <span class="attribute">groups</span>=1002(cqc),27(sudo),1003(lab)</span><br><span class="line">id lbd</span><br><span class="line"><span class="attribute">uid</span>=1004(lbd) <span class="attribute">gid</span>=1005(lbd) <span class="attribute">groups</span>=1005(lbd),1003(lab)</span><br><span class="line">id slb</span><br><span class="line"><span class="attribute">uid</span>=1003(slb) <span class="attribute">gid</span>=1004(slb) <span class="attribute">groups</span>=1004(slb)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="文件权限分配"><a href="#文件权限分配" class="headerlink" title="文件权限分配"></a>文件权限分配</h3>
+                <p>接下来我们创建一个文件夹来共享实验室数据，放在 /srv 目录下。然后调用 mkdir 命令创建名称为 share 的文件夹，命令如下：</p>
+                <figure class="highlight dos">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="built_in">cd</span> /srv</span><br><span class="line">sudo <span class="built_in">mkdir</span> share</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>注意这里我还是使用 ubuntu 账户来创建的。 先看下当前目录权限：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">ls -l</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">total <span class="number">12</span></span><br><span class="line">drwxr-xr-x  <span class="number">3</span> root root <span class="number">4096</span> Sep  <span class="number">4</span> <span class="number">18</span>:<span class="number">17</span> ./</span><br><span class="line">drwxr-xr-x <span class="number">24</span> root root <span class="number">4096</span> Sep  <span class="number">4</span> <span class="number">18</span>:<span class="number">17</span> ../</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> root root <span class="number">4096</span> Sep  <span class="number">4</span> <span class="number">18</span>:<span class="number">17</span> share/</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到 share 文件的所有者是 root，用户组也是 root，权限是 755，即只有 root 拥有修改权限，其他的只有读取和执行权限。 然后进入 share 文件夹创建一个 names.txt：</p>
+                <figure class="highlight vim">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">cd</span> share</span><br><span class="line">sudo <span class="keyword">vi</span> names.txt</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>编辑内容如下：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">cqc</span></span><br><span class="line"><span class="attribute">lbd</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>保存完毕之后，这时查看一下文件权限，如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">-rw-r----- <span class="number">1</span> root root    <span class="number">8</span> Sep  <span class="number">4</span> <span class="number">20</span>:<span class="number">00</span> names.txt</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>权限是 640，这表明只有所有者 root 拥有写入的权限，所在组只有读的权限。 这时开启另外一个终端，登录 cqc 账号，实际上是不能查看和修改任何该文件的内容的，下面的修改和读取命令都会提示权限不够：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">vi</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br><span class="line"><span class="selector-tag">cat</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>为什么呢？因为该文件是刚才由 ubuntu 账号使用 sudo 命令创建的，因此文件的所有者是 root，并不是 cqc，因此即使文件的权限是 640，那也就不能使用文件所有者的权限，而且 cqc 也不属于 root 组，所以也不能使用文件组的权限了，因此什么都看不了，什么都改不了。 但 cqc 属于 sudo 组啊，可以利用 sudo 命令临时获取 root 权限，临时以 root 的身份来操作该文件，这样就可以来查看和修改文件了，因此下面的命令是有效的：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">vi</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">cat</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>但这样还是需要使用 sudo 才能修改，很不方便。 这时如果我们把文件的所有者改成 cqc，情况那就不一样了。 使用 ubuntu 账号，对 names.txt 更改其所有者为 cqc，改的命令如下：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">chown</span> <span class="selector-tag">cqc</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这时查看下文件信息：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">-rw-r----- <span class="number">1</span> cqc  root    <span class="number">8</span> Sep  <span class="number">4</span> <span class="number">20</span>:<span class="number">29</span> names.txt</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到所有者信息已经变成了 cqc，这样 cqc 账号再直接查看和修改，那就可以了，不再需要 sudo 命令：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">vi</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br><span class="line"><span class="selector-tag">cat</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样就不会有权限提示，当然加上 sudo 更是没问题。 好，接下来 lbd 呢？我们登录试试修改。 首先当前的文件状态是这样的：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">-rw-r----- <span class="number">1</span> cqc  root    <span class="number">8</span> Sep  <span class="number">4</span> <span class="number">20</span>:<span class="number">31</span> names.txt</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>lbd 不是所有者了，因此前面的 rw- 权限是没什么用的，但他属于 lab 组，而该文件对于用户组的权限是 r—，也就是读取权限。 我们使用 lbd 账号来尝试看下文件的内容：</p>
+                <figure class="highlight vim">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">cat</span> names.txt </span><br><span class="line"><span class="keyword">ca</span><span class="variable">t:</span> names.tx<span class="variable">t:</span> Permission denied</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>很遗憾，又没有权限。因为什么？因为这个文件的用户组并不是 lab 啊，而 lbd 这个用户又不属于 root 组，所以没有任何权限。 那咋办？将文件的用户组改成 lab 就好了，使用 ubuntu 账号或 cqc 账号来操作：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">chgrp</span> <span class="selector-tag">lab</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样就成功将文件所属用户组改成 lab 了，接下来再使用 lbd 账号查看下文件内容：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">cat</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>就成功读取了。 然而 lbd 现在是没有写入权限的，因为对于用户组来说，该文件的权限是 r—，如果要获取写入权限，我们可以使用如下命令：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">chmod</span> <span class="selector-tag">g</span>+<span class="selector-tag">w</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>或：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo chmod <span class="number">660</span> names.txt</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样就相当于赋予了 rw- 权限，下面我们再使用 lbd 账号尝试修改这个文件：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">vi</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>就没问题了。 那么对于非实验室同学 slb 呢？它没有任何权限，我们登录 slb 账号尝试修改和读取该文件：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">cat</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br><span class="line"><span class="selector-tag">vi</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>均无权限。 所以说，这样我们就成功为实验室的人员赋予了权限，而非实验室的人则没有任何权限。 如果我要为 slb 赋予读取权限咋办呢？很简单，添加一下就好了：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">chmod</span> <span class="selector-tag">o</span>+<span class="selector-tag">r</span> <span class="selector-tag">names</span><span class="selector-class">.txt</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这就是为其他用户添加了读取权限。这时 slb 就可以读取文件，但不能修改文件，也是比较安全的。 好，如果我的文件非常多呢？比如十几二十个，都放在 share 文件夹内，那不能一个个进行权限设置吧？ 这时候我们只需要针对文件夹进行操作即可，下面的命令就可以为 share 文件夹赋予 775 权限，即所有者 cqc 和所在组 lab 可对其进行查看和修改，其他的人只能看不能改：</p>
+                <figure class="highlight pgsql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo chmod -R <span class="number">775</span> <span class="keyword">share</span>/</span><br><span class="line">sudo chown -R cqc <span class="keyword">share</span>/</span><br><span class="line">sudo chgrp -R lab <span class="keyword">share</span>/</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>注意文件夹一般都会赋予 x 权限，不然连进入文件夹的权限都没有。这也就是文件夹一般会赋予 775、755，而文件会赋予 664、600、644、640 的原因了。 赋予 775 权限之后，share 的权限就变成了：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">drwxrwxr-x  <span class="number">2</span> cqc  lab  <span class="number">4096</span> Sep  <span class="number">4</span> <span class="number">20</span>:<span class="number">31</span> share/</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样其他用户就只能看，不能改，这样普通文件就没什么问题了。 如文件夹内包含了可执行文件，还可以单独为其他用户针对可执行文件去除 x 权限，如去除 Python 文件的可执行权限：</p>
+                <figure class="highlight nginx">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">sudo</span> chmod o-x <span class="regexp">*.py</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>好了，到现在为止，我们就得心应手地完成了权限控制了！ 相信如果你耐心看完的话，什么用户管理、权限管理，都不在话下！</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/6281.html" rel="prev" title="如何给Azure云服务器扩展云磁盘">
+                      <i class="fa fa-chevron-left"></i> 如何给Azure云服务器扩展云磁盘 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/6289.html" rel="next" title="破解网站登录加密--RSA"> 破解网站登录加密--RSA <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">1.</span> <span class="nav-text">基本操作</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#用户和用户组"><span class="nav-number">1.1.</span> <span class="nav-text">用户和用户组</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#文件权限管理"><span class="nav-number">1.2.</span> <span class="nav-text">文件权限管理</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#实战演示"><span class="nav-number">2.</span> <span class="nav-text">实战演示</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#创建自己的账户"><span class="nav-number">2.1.</span> <span class="nav-text">创建自己的账户</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#添加实验室用户"><span class="nav-number">2.2.</span> <span class="nav-text">添加实验室用户</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#添加非实验室用户"><span class="nav-number">2.3.</span> <span class="nav-text">添加非实验室用户</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#文件权限分配"><span class="nav-number">2.4.</span> <span class="nav-text">文件权限分配</span></a></li>
+                    </ol>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'c1a12eb60de584b2bcd7cec52029c913',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

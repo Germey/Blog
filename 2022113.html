@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="爬虫,网络爬虫,2022,Python 爬虫,JavaScript,逆向,Hook">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有《P">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="【2022 年】Python3 爬虫教程 - JavaScript Hook 的用法">
+  <meta property="og:url" content="https://cuiqingcai.com/2022113.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有《P">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/vyqt9.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/4u47o.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/w2zuf.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/pqq74.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/h09sh.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/neccv.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/ztakd.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/icog3.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/dz078.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/acsk0.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/n0or9.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/ev1me.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/17rng.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/0wuj4.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/94afz.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/wif60.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/db9n7.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/vn5bl.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/jvx5f.png">
+  <meta property="article:published_time" content="2022-03-11T07:33:52.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.308Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="网络爬虫">
+  <meta property="article:tag" content="2022">
+  <meta property="article:tag" content="Python 爬虫">
+  <meta property="article:tag" content="JavaScript">
+  <meta property="article:tag" content="逆向">
+  <meta property="article:tag" content="Hook">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/vyqt9.png">
+  <link rel="canonical" href="https://cuiqingcai.com/2022113.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>【2022 年】Python3 爬虫教程 - JavaScript Hook 的用法 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/2022113.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 【2022 年】Python3 爬虫教程 - JavaScript Hook 的用法 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2022-03-11 15:33:52" itemprop="dateCreated datePublished" datetime="2022-03-11T15:33:52+08:00">2022-03-11</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span> ， <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a>
+                    </span>
+                  </span>
+                  <span id="/2022113.html" class="post-meta-item leancloud_visitors" data-flag-title="【2022 年】Python3 爬虫教程 - JavaScript Hook 的用法" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>8.6k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>8 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <blockquote>
+                  <p>系列文章总目录：<a href="https://cuiqingcai.com/17777.html">【2022 年】Python3 爬虫学习教程</a>，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">《Python3 网络爬虫开发实战（第二版）》</a>一书了，<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">点击了解详情</a>。</p>
+                </blockquote>
+                <p>在 JavaScript 逆向的时候，我们经常需要追踪某些方法的堆栈调用情况。但在很多情况下，一些 JavaScript 的变量或者方法名经过混淆之后是非常难以捕捉的。上一节我们介绍了一些断点调试、调用栈查看等技巧，但仅仅凭借这些技巧还不足以应对多数 JavaScript 逆向。</p>
+                <p>本节我们再来介绍一个比较常用的 JavaScript 逆向技巧 —— Hook 技术。</p>
+                <h2 id="1-Hook-技术"><a href="#1-Hook-技术" class="headerlink" title="1. Hook 技术"></a>1. Hook 技术</h2>
+                <p>Hook 技术中文又叫作钩子技术，指在程序运行的过程中，对其中的某个方法进行重写，在原先的方法前后加入我们自定义的代码。相当于在系统没有调用该函数之前，钩子程序就先捕获该消息，得到控制权，这时钩子函数既可以加工处理（改变）该函数的执行行为，也可以强制结束消息的传递。</p>
+                <p>要对 JavaScript 代码进行 Hook 操作，就需要额外在页面中执行一些自定义的有关 Hook 逻辑的代码。那么问题来了？怎样才能在浏览器中方便地执行我们所期望执行的 JavaScript 代码呢？在这里推荐一个插件，叫作 Tampermonkey。这个插件的功能非常强大，利用它我们几乎可以在网页中执行任何 JavaScript 代码，实现我们想要的功能。</p>
+                <p>下面我们就来介绍一下这个插件的使用方法，并结合一个实际案例，介绍一下这个插件在 JavaScript Hook 中的用途。</p>
+                <h2 id="2-Tampermonkey"><a href="#2-Tampermonkey" class="headerlink" title="2. Tampermonkey"></a>2. Tampermonkey</h2>
+                <p>Tampermonkey，中文也叫作“油猴”，它是一款浏览器插件，支持 Chrome。利用它我们可以在浏览器加载页面时自动执行某些 JavaScript 脚本。由于执行的是 JavaScript，所以我们几乎可以在网页中完成任何我们想实现的效果，如自动爬虫、自动修改页面、自动响应事件等。</p>
+                <p>其实，Tampermonkey 的用途远远不止这些，只要我们想要的功能能用 JavaScript 实现，Tampermonkey 就可以帮我们做到。比如我们可以将 Tampermonkey 应用到 JavaScript 逆向分析中，去帮助我们更方便地分析一些 JavaScript 加密和混淆代码。</p>
+                <h2 id="3-安装"><a href="#3-安装" class="headerlink" title="3. 安装"></a>3. 安装</h2>
+                <p>首先我们需要安装 Tampermonkey，这里我们使用的浏览器是 Chrome。直接在 Chrome 应用商店或者在 Tampermonkey 的官网 <a href="https://www.tampermonkey.net/" target="_blank" rel="noopener">https://www.tampermonkey.net/</a> 下载安装即可。</p>
+                <p>安装完成之后，在 Chrome 浏览器的右上角会出现 Tampermonkey 的图标，这就代表安装成功了，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/vyqt9.png" alt=""></p>
+                <h2 id="4-获取脚本"><a href="#4-获取脚本" class="headerlink" title="4. 获取脚本"></a>4. 获取脚本</h2>
+                <p>Tampermonkey 运行的是 JavaScript 脚本，每个网站都能有对应的脚本运行，不同的脚本能完成不同的功能。这些脚本我们可以自定义，也可以用已经写好的很多脚本，毕竟有些轮子有了，我们就不需要再去造了。</p>
+                <p>我们可以在 <a href="https://greasyfork.org/zh-CN/scripts" target="_blank" rel="noopener">https://greasyfork.org/zh-CN/scripts</a> 找到一些非常实用的脚本，如全网视频去广告、百度云全网搜索等，大家可以体验一下。</p>
+                <h2 id="5-脚本编写"><a href="#5-脚本编写" class="headerlink" title="5. 脚本编写"></a>5. 脚本编写</h2>
+                <p>除了使用别人已经写好的脚本，我们也可以自己编写脚本来实现想要的功能。编写脚本难不难呢？其实就是写 JavaScript 代码，只要懂一些 JavaScript 的语法就好了。另外我们需要遵循脚本的一些写作规范，其中就包括一些参数的设置。</p>
+                <p>下面我们就简单实现一个小的脚本。首先我们可以点击 Tampermonkey 插件图标，再点击“管理面板”按钮，打开脚本管理页面，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/4u47o.png" alt=""></p>
+                <p>脚本管理页面如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/w2zuf.png" alt=""></p>
+                <p>在这里显示了我们已经有的一些 Tampermonkey 脚本，包括我们自行创建的，也包括从第三方网站下载安装的。另外这里提供了编辑、调试、删除等管理功能，在这里可以方便地对脚本进行管理。</p>
+                <p>接下来我们来创建一个新的脚本，点击左侧的“+”号，会显示如图所示的页面。</p>
+                <p><img src="https://cdn.cuiqingcai.com/pqq74.png" alt=""></p>
+                <p>初始化的代码如下：</p>
+                <figure class="highlight javascript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         New Userscript</span></span><br><span class="line"><span class="comment">// @namespace    http://tampermonkey.net/</span></span><br><span class="line"><span class="comment">// @version      0.1</span></span><br><span class="line"><span class="comment">// @description  try to take over the world!</span></span><br><span class="line"><span class="comment">// @author       You</span></span><br><span class="line"><span class="comment">// @match        https://www.tampermonkey.net/documentation.php?ext=dhdg</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">  "use strict"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Your code here...</span></span><br><span class="line">&#125;)();</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在上面这段代码里，最前面是一些注释，它们非常有用，这部分内容叫作 <code>UserScript Header</code> ，我们可以在里面配置一些脚本的信息，如名称、版本、描述、生效站点等等。</p>
+                <p>下面简单介绍一下 <code>UserScript Header</code> 的一些参数定义。</p>
+                <ul>
+                  <li>
+                    <p><code>@name</code>：脚本的名称，就是在控制面板显示的脚本名称。</p>
+                  </li>
+                  <li>
+                    <p><code>@namespace</code>：脚本的命名空间。</p>
+                  </li>
+                  <li>
+                    <p><code>@version</code>：脚本的版本，主要是做版本更新时用。</p>
+                  </li>
+                  <li>
+                    <p><code>@author</code>：作者。</p>
+                  </li>
+                  <li>
+                    <p><code>@description</code>：脚本描述。</p>
+                  </li>
+                  <li>
+                    <p><code>@homepage</code>、 <code>@homepageURL</code>、 <code>@website</code>、<code>@source</code>：作者主页，用于在 Tampermonkey 选项页面上从脚本名称点击跳转。请注意，如果 <code>@namespace</code> 标记以 <code>http://</code>开头，此处也要一样。</p>
+                  </li>
+                  <li>
+                    <p><code>@icon</code>、 <code>@iconURL</code> 、<code>@defaulticon</code>：低分辨率图标。</p>
+                  </li>
+                  <li>
+                    <p><code>@icon64</code> 、 <code>@icon64URL</code>：64 × 64 高分辨率图标。</p>
+                  </li>
+                  <li>
+                    <p><code>@updateURL</code>：检查更新的网址，需要定义 <code>@version</code>。</p>
+                  </li>
+                  <li>
+                    <p><code>@downloadURL</code>：更新下载脚本的网址，如果定义成 <code>none</code> 就不会检查更新。</p>
+                  </li>
+                  <li>
+                    <p><code>@supportURL</code>：报告问题的网址。</p>
+                  </li>
+                  <li>
+                    <p><code>@include</code>：生效页面，可以配置多个，但注意这里并不支持 URL Hash。</p>
+                    <p>例如：</p>
+                    <figure class="highlight jboss-cli">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="string">//</span> @include http:<span class="string">//www.tampermonkey.net/</span>*</span><br><span class="line"><span class="string">//</span> @include http:<span class="string">//</span>*</span><br><span class="line"><span class="string">//</span> @include https:<span class="string">//</span>*</span><br><span class="line"><span class="string">//</span> @include *</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                  </li>
+                  <li>
+                    <p><code>@match</code>：约等于 <code>@include</code> 标签，可以配置多个。</p>
+                  </li>
+                  <li>
+                    <p><code>@exclude</code>：不生效页面，可配置多个，优先级高于 <code>@include</code> 和 <code>@match</code>。</p>
+                  </li>
+                  <li>
+                    <p><code>@require</code>：附加脚本网址，相当于引入外部的脚本，这些脚本会在自定义脚本执行之前执行，比如引入一些必须的库，如 jQuery 等，这里可以支持配置多个 <code>@require</code> 参数。</p>
+                    <p>例如：</p>
+                    <figure class="highlight vim">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">// @require http<span class="variable">s:</span>//code.jquery.<span class="keyword">com</span>/jquery-<span class="number">2.1</span>.<span class="number">4</span>.<span class="built_in">min</span>.js</span><br><span class="line">// @require http<span class="variable">s:</span>//code.jquery.<span class="keyword">com</span>/jquery-<span class="number">2.1</span>.<span class="number">3</span>.<span class="built_in">min</span>.js#sha256=<span class="number">23456</span>...</span><br><span class="line">// @require http<span class="variable">s:</span>//code.jquery.<span class="keyword">com</span>/jquery-<span class="number">2.1</span>.<span class="number">2</span>.<span class="built_in">min</span>.js#md5=<span class="number">34567</span>...,<span class="built_in">sha256</span>=<span class="number">6789</span>...</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                  </li>
+                  <li>
+                    <p><code>@resource</code>：预加载资源，可通过 <code>GM_getResourceURL</code> 和 <code>GM_getResourceText</code> 读取。</p>
+                  </li>
+                  <li>
+                    <p><code>@connect</code>：允许被 <code>GM_xmlhttpRequest</code> 访问的域名，每行 1 个。</p>
+                  </li>
+                  <li>
+                    <p><code>@run-at</code>：脚本注入的时刻，如页面刚加载时，某个事件发生后等。</p>
+                    <ul>
+                      <li><code>document-start</code>：尽可能地早执行此脚本。</li>
+                      <li><code>document-body</code>：DOM 的 body 出现时执行。</li>
+                      <li><code>document-end</code>：<code>DOMContentLoaded</code> 事件发生时或发生后执行。</li>
+                      <li><code>document-idle</code>：<code>DOMContentLoaded</code> 事件发生后执行，即 DOM 加载完成之后执行，这是默认的选项。</li>
+                      <li><code>context-menu</code>：如果在浏览器上下文菜单（仅限桌面 Chrome 浏览器）中点击该脚本，则会注入该脚本。注意：如果使用此值，则将忽略所有 <code>@include</code> 和 <code>@exclude</code> 语句。</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p><code>@grant</code>：用于添加 GM 函数到白名单，相当于授权某些 GM 函数的使用权限。</p>
+                    <p>例如：</p>
+                    <figure class="highlight pgsql">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">// @<span class="keyword">grant</span> GM_setValue</span><br><span class="line">// @<span class="keyword">grant</span> GM_getValue</span><br><span class="line">// @<span class="keyword">grant</span> GM_setClipboard</span><br><span class="line">// @<span class="keyword">grant</span> unsafeWindow</span><br><span class="line">// @<span class="keyword">grant</span> <span class="keyword">window</span>.<span class="keyword">close</span></span><br><span class="line">// @<span class="keyword">grant</span> <span class="keyword">window</span>.focus</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>如果没有定义过 <code>@grant</code> 选项，Tampermonkey 会猜测所需要的函数使用情况。</p>
+                  </li>
+                  <li>
+                    <p><code>@noframes</code>：此标记使脚本在主页面上运行，但不会在 iframe 上运行。</p>
+                  </li>
+                  <li>
+                    <p><code>@nocompat</code>：由于部分代码可能是为专门的浏览器所写，通过此标记，Tampermonkey 会知道脚本可以运行的浏览器。</p>
+                    <p>例如：</p>
+                    <figure class="highlight 1c">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="comment">// @nocompat Chrome</span></span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>这样就指定了脚本只在 Chrome 浏览器中运行。</p>
+                  </li>
+                </ul>
+                <p>除此之外，Tampermonkey 还定义了一些 API，使得我们可以方便地完成某个操作。</p>
+                <ul>
+                  <li><code>GM_log</code>：将日志输出到控制台。</li>
+                  <li><code>GM_setValue</code>：将参数内容保存到 Storage 中。</li>
+                  <li><code>GM_addValueChangeListener</code>：为某个变量添加监听，当这个变量的值改变时，就会触发回调。</li>
+                  <li><code>GM_xmlhttpRequest</code>：发起 Ajax 请求。</li>
+                  <li><code>GM_download</code>：下载某个文件到磁盘。</li>
+                  <li><code>GM_setClipboard</code>：将某个内容保存到粘贴板。</li>
+                </ul>
+                <p>还有很多其他的 API，大家可以到 <a href="https://www.tampermonkey.net/documentation.php" target="_blank" rel="noopener">https://www.tampermonkey.net/documentation.php</a> 查看更多的内容。</p>
+                <p>在 <code>UserScript Header</code> 下方是 JavaScript 函数和调用的代码，其中 <code>&#39;use strict&#39;</code> 标明代码使用 JavaScript 的严格模式。在严格模式下，可以消除 Javascript 语法的一些不合理、不严谨之处，减少一些怪异行为，如不能直接使用未声明的变量，这样可以保证代码的运行安全，同时提高编译器的效率，提高运行速度。在下方 <code>// Your code here...</code> 处就可以编写自己的代码了。</p>
+                <h2 id="6-实战分析"><a href="#6-实战分析" class="headerlink" title="6. 实战分析"></a>6. 实战分析</h2>
+                <p>下面我们通过一个简单的 JavaScript 逆向案例来演示一下如何实现 JavaScript 的 Hook 操作，轻松找到某个方法执行的位置，从而快速定位逆向入口。</p>
+                <p>接下来我们来看一个简单的网站：<a href="https://login1.scrape.center/，这个网站的结构非常简单，就是一个用户名密码登录。但是不同的是，点击登录的时候，表单提交" target="_blank" rel="noopener">https://login1.scrape.center/，这个网站的结构非常简单，就是一个用户名密码登录。但是不同的是，点击登录的时候，表单提交</a> POST 的内容并不是单纯的用户名和密码，而是一个加密后的 token。</p>
+                <p>页面如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/h09sh.png" alt="image-20210509215948819"></p>
+                <p>我们输入用户名密码，都为 admin，点击登录按钮，观察一下网络请求的变化。</p>
+                <p>可以看到如下结果如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/neccv.png" alt="image-20210509220046359"></p>
+                <p>我们不需要关心 Response 的结果和状态，主要看 Request 的内容就好了。</p>
+                <p>可以看到，点击登录按钮时，发起了了一个 POST 请求，内容为：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;<span class="string">"token"</span>:<span class="string">"eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiJ9"</span>&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>嗯，确实，没有诸如 <code>username</code> 和 <code>password</code> 的内容了，那怎么模拟登录呢？</p>
+                <p>模拟登录的前提当然就是找到当前 token 生成的逻辑了，那么问题来了，到底这个 token 和用户名、密码是什么关系呢？我们怎么来找寻其中的蛛丝马迹呢？</p>
+                <p>这里我们就可能思考了，本身输入的是用户名和密码，但提交的时候却变成了一个 token，经过观察并结合一些经验可以看出，token 的内容非常像 Base64 编码。这就代表，网站可能首先将用户名密码混为了一个新的字符串，然后经过了一次 Base64 编码，最后将其赋值为 token 来提交了。所以，初步观察我们可以得出这么多信息。</p>
+                <p>好，那就来验证一下吧！探究网站 JavaScript 代码里面是如何实现的。</p>
+                <p>首先我们看一下网站的源码，打开 Sources 面板，看起来都是 Webpack 打包之后的内容，经过了一些混淆，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/ztakd.png" alt="image-20210509222556397"></p>
+                <p>这么多混淆代码，总不能一点点扒着看吧？那么遇到这种情形，这怎么去找 token 的生成位置呢？</p>
+                <p>解决方法其实有两种，一种就是前文所讲的 Ajax 断点，另一种就是 Hook。</p>
+                <h3 id="Ajax-断点"><a href="#Ajax-断点" class="headerlink" title="Ajax 断点"></a>Ajax 断点</h3>
+                <p>由于这个请求正好是一个 Ajax 请求，所以我们可以添加一个 XHR 断点监听，把 POST 的网址加到断点监听上面。在 Sources 面板右侧添加一个 XHR 断点，匹配内容就填当前域名就好了，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/icog3.png" alt="image-20210509223127936"></p>
+                <p>这时候如果我们再次点击登录按钮，发起一次 Ajax 请求，就可以进入断点了，然后再看堆栈信息，就可以一步步找到编码的入口了。</p>
+                <p>再次点击登录按钮，页面就进入断点状态停下来了，结果如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/dz078.png" alt="image-20210509223337762"></p>
+                <p>一步步找，最后可以找到入口其实是在 <code>onSubmit</code> 方法那里。但实际上我们观察到，这里的断点的栈顶还包括了一些类似 async Promise 等无关的内容，而我们真正想找的是用户名和密码经过处理，再进行 Base64 编码的地方，这些请求的调用实际上和我们找寻的入口没有很大的关系。</p>
+                <p>另外，如果我们想找的入口位置并不伴随这一次 Ajax 请求，这个方法就没法用了。</p>
+                <p>所以下面我们再来看另一个方法 —— Hook。</p>
+                <h3 id="Hook-Function"><a href="#Hook-Function" class="headerlink" title="Hook Function"></a>Hook Function</h3>
+                <p>所以这里介绍第二种可以快速定位入口的方法，那就是使用 Tampermonkey 自定义 JavaScript，实现某个 JavaScript 方法的 Hook。Hook 哪里呢？很明显，Hook Base64 编码的位置就好了。</p>
+                <p>那么这里就涉及一个小知识点：JavaScript 里面的 Base64 编码是怎么实现的？</p>
+                <p>没错，就是 <code>btoa</code> 方法，在 JavaScript 中该方法用于将字符串编码成 Base64 字符串，因此我们来 Hook <code>btoa</code> 方法就好了。</p>
+                <p>好，这里我们新建一个 Tampermonkey 脚本，内容如下：</p>
+                <figure class="highlight javascript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment">// ==UserScript==</span></span><br><span class="line"><span class="comment">// @name         HookBase64</span></span><br><span class="line"><span class="comment">// @namespace    https://login1.scrape.center/</span></span><br><span class="line"><span class="comment">// @version      0.1</span></span><br><span class="line"><span class="comment">// @description  Hook Base64 encode function</span></span><br><span class="line"><span class="comment">// @author       Germey</span></span><br><span class="line"><span class="comment">// @match        https://login1.scrape.center/</span></span><br><span class="line"><span class="comment">// @grant        none</span></span><br><span class="line"><span class="comment">// ==/UserScript==</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">  "use strict"</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">hook</span>(<span class="params">object, attr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> func = object[attr];</span><br><span class="line">    object[attr] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"hooked"</span>, object, attr);</span><br><span class="line">      <span class="keyword">var</span> ret = func.apply(object, <span class="built_in">arguments</span>);</span><br><span class="line">      <span class="keyword">debugger</span>;</span><br><span class="line">      <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  hook(<span class="built_in">window</span>, <span class="string">"btoa"</span>);</span><br><span class="line">&#125;)();</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>首先我们定义了一些 <code>UserScript Header</code>，包括 <code>@name</code>和<code>@match</code>等，这里比较重要的就是<code>@name</code>，表示脚本名称；另外一个就是 <code>@match</code>，它代表脚本生效的网址。</p>
+                <p>脚本的内容如上面代码所示。我们定义了一个 <code>hook</code>方法，传入 <code>object</code> 和 <code>attr</code> 参数，意思就是 Hook <code>object</code> 对象的 <code>attr</code>参数。例如我们如果想 Hook <code>alert</code> 方法，那就把 <code>object</code> 设置为 <code>window</code>，把 <code>attr</code> 设置为字符串 <code>alert</code> 。这里我们想要 Hook Base64 的编码方法，而在 JavaScript 中，Based64 编码是用 <code>btoa</code> 方法实现的，所以这里我们就只需要 Hook <code>window</code> 对象的 <code>btoa</code> 方法就好了。</p>
+                <p>那么 Hook 是怎么实现的呢？我们来看已下，首先一句 <code>var func = object[attr]</code>，相当于我们先把它赋值为一个变量，我们调用 <code>func</code> 方法就可以实现和原来相同的功能。接着，我们直接改写这个方法的定义，将 <code>object[attr]</code> 改写成一个新的方法，在新的方法中，通过 <code>func.apply</code> 方法又重新调用了原来的方法。这样我们就可以保证前后方法的执行效果是不受什么影响的，之前这个方法该干啥就还是干啥。</p>
+                <p>但是和之前不同的是，我们自定义方法之后，现在可以在 <code>func</code> 方法执行的前后，再加入自己的代码，如 <code>console.log</code> 将信息输出到控制台，<code>debugger</code> 进入断点等。在这个过程中，我们先临时保存下来了 <code>func</code> 方法，然后定义一个新的方法，接管程序控制权，在其中自定义我们想要的实现，同时在新的方法里面重新调回 <code>func</code> 方法，保证前后结果是不受影响的。所以，我们达到了在不影响原有方法效果的前提下，实现在方法前后自定义的功能，这就是 Hook 的过程。</p>
+                <p>最后，我们调用 <code>hook</code> 方法，传入 <code>window</code> 对象和 <code>btoa</code> 字符串，保存。</p>
+                <p>接下来刷新下页面，这时候我们就可以看到这个脚本在当前页面生效了，可以发现 Tempermonkey 插件面板提示了已经启用，同时在 Sources 面板下的 Page 选项卡可以观察到我们定义的 JavaScript 脚本被执行了，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/acsk0.png" alt="image-20210509223942108"></p>
+                <p>然后输入用户名、密码，点击提交，成功进入了断点模式停下来了，代码就卡在了我们自定义的 <code>debugger</code> 这一行代码的位置，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/n0or9.png" alt="image-20210509224216857"></p>
+                <p>成功 Hook 住了，这说明 JavaScript 代码在执行过程中调用到了 <code>btoa</code> 方法。</p>
+                <p>这时看一下控制台，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/ev1me.png" alt="image-20210509224328452"></p>
+                <p>这里也输出了 <code>window</code> 对象和 <code>btoa</code> 方法，验证正确。</p>
+                <p>这样，我们就顺利找到了 Base64 编码操作这个路口，然后看一下堆栈信息，也已经不会出现 async、Promise 这样的调用了，很清晰地呈现了 <code>btoa</code> 方法逐层调用的过程，非常清晰明了，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/17rng.png" alt="image-20210509224356222"></p>
+                <p>另外再观察下 Local 面板，看看 <code>arguments</code> 变量是怎样的，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/0wuj4.png" alt="image-20210509224448758"></p>
+                <p>可以说一目了然了，<code>arguments</code> 就是指传给 <code>btoa</code> 方法的参数，<code>ret</code> 就是 <code>btoa</code> 方法返回的结果，可以看到 <code>arguments</code> 就是 <code>username</code> 和 <code>password</code> 通过 JSON 序列化之后的字符串，经过 Base64 编码之后得到的值恰好就是 Ajax 请求参数 <code>token</code> 的值。</p>
+                <p>结果几乎也明了了，我们还可以通过调用栈找到 <code>onSubmit</code> 方法的处理源码：</p>
+                <figure class="highlight javascript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">onSubmit: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> e = c.encode(<span class="built_in">JSON</span>.stringify(<span class="keyword">this</span>.form));</span><br><span class="line">  <span class="keyword">this</span>.$http.post(a[<span class="string">"a"</span>].state.url.root, &#123;</span><br><span class="line">    token: e</span><br><span class="line">  &#125;).then((<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  	<span class="built_in">console</span>.log(<span class="string">"data"</span>, e)</span><br><span class="line">  &#125;))</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>仔细看看，<code>encode</code> 方法其实就是调用了一下 <code>btoa</code>方法，就是一个 Base64 编码的过程，答案其实已经很明了了。</p>
+                <p>当然我们还可以进一步打断点验证一下流程，比如在调用 <code>encode</code> 方法的一行打断点，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/94afz.png" alt="image-20210509224938312"></p>
+                <p>打完断点之后，可以点击 Resume 按钮恢复 JavaScript 的执行，跳过当前 Tempermonkey 定义的断点位置，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/wif60.png" alt="image-20210509225049534"></p>
+                <p>然后重新再点击登录按钮，可以看到这时候就停在了当前打断点的位置了，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/db9n7.png" alt="image-20210509225531743"></p>
+                <p>这时候可以在 Watch 面板下输入 <code>this.form</code>，验证此处是否为在表单中输入的用户名密码，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/vn5bl.png" alt="image-20210509225732574"></p>
+                <p>没问题，然后逐步调试。我们还可以可以观察到，下一步就跳到了我们 Hook 的位置，这说明调用了 <code>btoa</code> 方法，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/jvx5f.png" alt="image-20210509225907721"></p>
+                <p>返回的结果正好就是 token 的值。</p>
+                <p>所以，验证到这里，已经非常清晰了，整体逻辑就是对登录表单的用户名和密码进行了 JSON 序列化，然后调用了 <code>encode</code> 也就是 <code>btoa</code> 方法，并赋值为了 <code>token</code> 发起登录的 Ajax 请求，逆向完成。</p>
+                <p>我们通过 Tampermonkey 自定义 JavaScript 脚本的方式，实现了某个方法调用的 Hook，使得我们能快速定位到加密入口的位置，非常方便。</p>
+                <p>以后如果观察出一些门道，可以多使用这种方法来尝试，如 Hook <code>encode</code> 方法、<code>decode</code>方法、<code>stringify</code> 方法、<code>log</code> 方法、<code>alert</code> 方法等，简单又高效。</p>
+                <h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2>
+                <p>以上便是通过 Tampermonkey 实现简单 Hook 的基础操作，当然这仅仅是一个常见的基础案例，我们可以从中总结出一些 Hook 的基本门道。</p>
+                <p>由于本节涉及到一些专有名词，部分内容参考如下：</p>
+                <ul>
+                  <li>博客 - Hook 技术：<a href="https://www.jianshu.com/p/3382cc765b39" target="_blank" rel="noopener">https://www.jianshu.com/p/3382cc765b39</a>。</li>
+                  <li>官网 - Tampermonkey 官网：<a href="http://www.tampermonkey.net/" target="_blank" rel="noopener">http://www.tampermonkey.net/</a></li>
+                  <li>文档 - Base64 编码：<a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/btoa" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/btoa</a></li>
+                </ul>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/2022112.html" rel="bookmark">【2022 年】Python3 爬虫教程 - JavaScript 逆向调试常用技巧</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/2022114.html" rel="bookmark">【2022 年】Python3 爬虫教程 - Python 模拟执行 JavaScript</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/2022111.html" rel="bookmark">【2022 年】Python3 爬虫教程 - JavaScript 网站加密和混淆技术简介</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/2022104.html" rel="bookmark">【2022 年】Python3 爬虫教程 - ADSL 拨号代理的使用</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202291.html" rel="bookmark">【2022 年】Python3 爬虫教程 - OCR 识别图形验证码</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+                  <a href="/tags/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 网络爬虫</a>
+                  <a href="/tags/2022/" rel="tag"><i class="fa fa-tag"></i> 2022</a>
+                  <a href="/tags/Python-%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> Python 爬虫</a>
+                  <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+                  <a href="/tags/%E9%80%86%E5%90%91/" rel="tag"><i class="fa fa-tag"></i> 逆向</a>
+                  <a href="/tags/Hook/" rel="tag"><i class="fa fa-tag"></i> Hook</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/2022112.html" rel="prev" title="【2022 年】Python3 爬虫教程 - JavaScript 逆向调试常用技巧">
+                      <i class="fa fa-chevron-left"></i> 【2022 年】Python3 爬虫教程 - JavaScript 逆向调试常用技巧 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/2022114.html" rel="next" title="【2022 年】Python3 爬虫教程 - Python 模拟执行 JavaScript"> 【2022 年】Python3 爬虫教程 - Python 模拟执行 JavaScript <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#1-Hook-技术"><span class="nav-number">1.</span> <span class="nav-text">1. Hook 技术</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#2-Tampermonkey"><span class="nav-number">2.</span> <span class="nav-text">2. Tampermonkey</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#3-安装"><span class="nav-number">3.</span> <span class="nav-text">3. 安装</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#4-获取脚本"><span class="nav-number">4.</span> <span class="nav-text">4. 获取脚本</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#5-脚本编写"><span class="nav-number">5.</span> <span class="nav-text">5. 脚本编写</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#6-实战分析"><span class="nav-number">6.</span> <span class="nav-text">6. 实战分析</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Ajax-断点"><span class="nav-number">6.1.</span> <span class="nav-text">Ajax 断点</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Hook-Function"><span class="nav-number">6.2.</span> <span class="nav-text">Hook Function</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#7-总结"><span class="nav-number">7.</span> <span class="nav-text">7. 总结</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'aee4ee685832c4a04d76724db12e6e48',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

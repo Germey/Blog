@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="其实拿这个网站当教程刚开始我是拒绝、换其他网站吧，又没什么动力···· 然后就··········· 上一篇 Scrapy 带大家玩了 Spider 今天带带大家玩的东西有两点、第一 CrawlSpider、第二 Scrapy 登录。 目标站点：www.haoduofuli.wang  Go Go Go！开整！ 还记得第一步要干啥？ 创建项目文件啊！没有 Scrapy 环境的小伙伴们请参考第一篇安">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="小白进阶之Scrapy第二篇（登录篇）">
+  <meta property="og:url" content="https://cuiqingcai.com/3952.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="其实拿这个网站当教程刚开始我是拒绝、换其他网站吧，又没什么动力···· 然后就··········· 上一篇 Scrapy 带大家玩了 Spider 今天带带大家玩的东西有两点、第一 CrawlSpider、第二 Scrapy 登录。 目标站点：www.haoduofuli.wang  Go Go Go！开整！ 还记得第一步要干啥？ 创建项目文件啊！没有 Scrapy 环境的小伙伴们请参考第一篇安">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161021225948.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/9555112.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161021223818.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/12/%E5%90%83%E6%83%8A%E8%A1%A8%E6%83%851.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ%E6%88%AA%E5%9B%BE20170122164117.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-011812.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/12/%E8%A1%A8%E6%83%852.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-013435.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-013823.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161021224219.gif">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-020745.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161022193315.gif">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ%E6%88%AA%E5%9B%BE20170122101749.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ%E6%88%AA%E5%9B%BE20170122103140.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ%E6%88%AA%E5%9B%BE20170122104241.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ%E6%88%AA%E5%9B%BE20170122105258.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ%E6%88%AA%E5%9B%BE20170122165743.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ%E6%88%AA%E5%9B%BE20170122170041.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-232839.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-230207.png">
+  <meta property="article:published_time" content="2017-01-22T15:34:39.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.320Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161021225948.jpg">
+  <link rel="canonical" href="https://cuiqingcai.com/3952.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>小白进阶之Scrapy第二篇（登录篇） | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/3952.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 小白进阶之Scrapy第二篇（登录篇） </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/哎哟卧槽" class="author" itemprop="url" rel="index">哎哟卧槽</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2017-01-22 23:34:39" itemprop="dateCreated datePublished" datetime="2017-01-22T23:34:39+08:00">2017-01-22</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/3952.html" class="post-meta-item leancloud_visitors" data-flag-title="小白进阶之Scrapy第二篇（登录篇）" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>10k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>9 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p><a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021225948.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021225948.jpg" alt="QQ图片20161021225948"></a>其实拿这个网站当教程刚开始我是拒绝、换其他网站吧，又没什么动力···· 然后就··········· 上一篇 Scrapy 带大家玩了 Spider 今天带带大家玩的东西有两点、第一 CrawlSpider、第二 Scrapy 登录。 目标站点：www.haoduofuli.wang <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/9555112.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/9555112.jpg" alt="9555112"></a> Go Go Go！开整！ 还记得第一步要干啥？ 创建项目文件啊！没有 Scrapy 环境的小伙伴们请参考第一篇安装一下环境哦！ 打开你的命令行界面（Windows 是 CMD）使用切换目录的命令到你需要的存放项目文件的磁盘目录</p>
+                <figure class="highlight properties">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attr">D</span>:<span class="string"></span></span><br><span class="line"><span class="attr">scrapy</span> <span class="string">startproject haoduofuli</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>好了 我在 D 盘创建了一个叫做 haoduofuli 的项目。 用 Pycharm 打开这个目录开始我们的爬取之路 Come on！ 下一步我们该做什么记得吧？当然是在 items.py 中声明字段了！方便我们在 Spider 中保存获取的内容并通过 Pipline 进行保存（items.py 本质上是一个 dict 字典） 我在 items.py 中声明了以下类容：</p>
+                <figure class="highlight mipsasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Define here the models for your scraped items</span></span><br><span class="line">#</span><br><span class="line"><span class="comment"># See documentation in:</span></span><br><span class="line"><span class="comment"># http://doc.scrapy.org/en/latest/topics/items.html</span></span><br><span class="line"></span><br><span class="line">import <span class="keyword">scrapy</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">class </span>HaoduofuliItem(<span class="keyword">scrapy.Item):</span></span><br><span class="line"><span class="keyword"> </span>   <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    <span class="comment"># name = scrapy.Field()</span></span><br><span class="line"></span><br><span class="line">    category = <span class="keyword">scrapy.Field() </span><span class="comment">#类型</span></span><br><span class="line">    title = <span class="keyword">scrapy.Field() </span> <span class="comment">#标题</span></span><br><span class="line">    imgurl = <span class="keyword">scrapy.Field() </span><span class="comment">#图片的地址</span></span><br><span class="line">    yunlink = <span class="keyword">scrapy.Field() </span>   <span class="comment">#百度云盘的连接</span></span><br><span class="line">    password = <span class="keyword">scrapy.Field() </span>  <span class="comment">#百度云盘的密码</span></span><br><span class="line">    url = <span class="keyword">scrapy.Field() </span>   <span class="comment">#页面的地址</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>至于为啥声明的这些类容：各位自己去网站上观察一下、（主要是吧，贴在这儿的话 估计这博文就要被人道主义销毁了） 别忘记上一篇博文教大家的那种在 IDE 中运行 Scrapy 的方法哦！ 好上面的我们搞定、开始下一步编写 Spider 啦！ <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021223818.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021223818.jpg" alt="QQ图片20161021223818"></a> 在 spiders 文件夹中新建一个文件 haoduofuli.py（还不清楚目录和作用的小哥儿快去看看 Scrapy 的第一篇） 首先导入以下包:</p>
+                <figure class="highlight clean">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> scrapy.spiders <span class="keyword">import</span> CrawlSpider, Rule, Request ##CrawlSpider与Rule配合使用可以骑到历遍全站的作用、Request干啥的我就不解释了</span><br><span class="line"><span class="keyword">from</span> scrapy.linkextractors <span class="keyword">import</span> LinkExtractor ##配合Rule进行URL规则匹配</span><br><span class="line"><span class="keyword">from</span> haoduofuli.items <span class="keyword">import</span> HaoduofuliItem ##不解释</span><br><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> FormRequest ##Scrapy中用作登录使用的一个包</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>详细介绍请参考：<a href="http://scrapy-chs.readthedocs.io/zh_CN/latest/topics/spiders.html" target="_blank" rel="noopener">http://scrapy-chs.readthedocs.io/zh_CN/latest/topics/spiders.html</a> 中的：CrawlSpider、爬取规则(Crawling rules)、pare_start_url(response)|(此方法重写 start_urls)、以及 Spider 中 start_requests()方法的重写。 下面我带大家简单的玩玩儿顺便获取我们想要的东西。 前面提到了我们需要获取全站的资源、如果使用 Spider 的话就需要写大量的代码（当然只是相对而言的大量代码）！但是我们还有另一个选择那就是今天要说的 CrawlSpider！ <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/12/吃惊表情1.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/12/吃惊表情1.jpg" alt="吃惊表情1"></a> 首先我们新建一个函数 继承 CrawlSpider（上一篇博文是继承 Spider 哦！） 见证奇迹的时刻到了!</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> scrapy.spiders <span class="keyword">import</span> CrawlSpider, Rule, Request <span class="comment">##CrawlSpider与Rule配合使用可以骑到历遍全站的作用、Request干啥的我就不解释了</span></span><br><span class="line"><span class="keyword">from</span> scrapy.linkextractors <span class="keyword">import</span> LinkExtractor <span class="comment">##配合Rule进行URL规则匹配</span></span><br><span class="line"><span class="keyword">from</span> haoduofuli.items <span class="keyword">import</span> HaoduofuliItem <span class="comment">##不解释</span></span><br><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> FormRequest <span class="comment">##Scrapy中用作登录使用的一个包</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myspider</span><span class="params">(CrawlSpider)</span>:</span></span><br><span class="line"></span><br><span class="line">    name = <span class="string">'haoduofuli'</span></span><br><span class="line">    allowed_domains = [<span class="string">'haoduofuli.wang'</span>]</span><br><span class="line">    start_urls = [<span class="string">'http://www.haoduofuli.wang'</span>]</span><br><span class="line"></span><br><span class="line">    rules = (</span><br><span class="line">        Rule(LinkExtractor(allow=(<span class="string">'\.html'</span>,)), callback=<span class="string">'parse_item'</span>, follow=<span class="literal">True</span>),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_item</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        print(response.url)</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>是不是很厉害！加上中间的空行也就不到二十行代码啊！就把整个网站历遍了！So Easy！！ 上面的几行代码的意思 很明了了啊！我只说说 rules 这一块儿 表示所有 response 都会通过这个规则进行过滤匹配、匹配啥？当然是后缀为.html 的 URL 了、callback=’parse<em>item’表示将获取到的 response 交给 parse_item 函数处理（这儿要注意了、不要使用 parse 函数、因为 CrawlSpider 使用的 parse 来实现逻辑、如果你使用了 parse 函数、CrawlSpider 会运行失败。）、follow=True 表示跟进匹配到的 URL（顺便说一句 allow 的参数支持正则表达式、虽然我也用得不熟、不过超级好使） 至于我这儿的 allow 的参数为啥是’.\html’；大伙儿自己观察一下我们需要获取想要信息的页面的 URL 是不是都是以.html 结束的？明白了吧！ 然后 rules 的大概运作方式是下面这样： <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122164117.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122164117.png" alt="QQ截图20170122164117"></a> 图很清晰明了了（本人也是初学、如有错误 还请各位及时留言 我好纠正。）中间的数据流向是靠引擎来完成的。 好了 我们来看看效果如何： <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-011812.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-011812.png" alt="QQ20170122-011812"></a> 这是我们返回 response 的 URL、一水儿的 URL 啊！完美！下面就可以进行提取数据了（诶！不对啊怎么没有没什么提取工具啊！还记得上篇博文说的不？下载器返回的 response 是支持 Xpath 的哦！我们直接使用 Xpath 来提取数据就行啦！） <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/12/表情2.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/12/表情2.jpg" alt="表情2"></a> 那么问题来了！Xpath 没用过啊！不会用啊！这可咋整啊！别怕！草鸡简单的！！来不着急！ 先大声跟我念：Google 大法好啊！ 哈哈哈 没错、我们需要 Chrome（至于为啥不用 Firefox、因为不知道为啥 Firefox 的 Xpath 有时和 Chrome 的结构不一样 有些时候提取不到数据、Chrome 则没什么问题） 来来！跟着我的节奏来！包你五分钟学会使用 Xpath！学不会也没关系、毕竟你也不能顺着网线来打我啊！ 第一步：打开你的 Chrome 浏览器 挑选上面任意一个 URL 打开进入我们提取数据的页面（不贴图 容易被 Say GoogBay）： 第二步：打开 Chrome 的调试模式找到我们需要提取的内容（如何快速找到呢？还不知道的小哥儿 我只能说你实在是太水了） 点击下面红圈的箭头 然后去网页上点击你需要的内容就 哔！的一下跳过去了！ <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-013435.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-013435.png" alt="QQ20170122-013435"></a> 第三步：在跳转的那一行就是你想要提取内容的一行（背景色完全区别于其它行！！）右键 Copy ——Copy XPath: 就像下面我提取标题： <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-013823.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-013823.png" alt="QQ20170122-013823"></a> 你会得到这样的内容： //</em>[@id=”post<em>content”]/p[1] 意思是：在根节点下面的有一个 id 为 post_content 的标签里面的第一个 p 标签（p[1]） 如果你需要提取的是这个标签的文本你需要在后面加点东西变成下面这样： //</em>[@id=”post_content”]/p[1]/text() 后面加上 text()标签就是提取文本 如果要提取标签里面的属性就把 text()换成@属性比如： //*[@id=”post_content”]/p[1]/@src So Easy！XPath 提取完毕！来看看怎么用的！那就更简单了！！！！ response.xpath(‘你 Copy 的 XPath’).extract()[‘要取第几个值’] 注意 XPath 提取出来的默认是 List。 <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021224219.gif" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021224219.gif" alt="QQ图片20161021224219"></a> 看完上面这一段 估计还没有五分钟吧 ！好了 XPath 掌握了！我们来开始取我们想要的东西吧！现在我们的代码应该变成这样了：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> scrapy.spiders <span class="keyword">import</span> CrawlSpider, Rule, Request <span class="comment">##CrawlSpider与Rule配合使用可以骑到历遍全站的作用、Request干啥的我就不解释了</span></span><br><span class="line"><span class="keyword">from</span> scrapy.linkextractors <span class="keyword">import</span> LinkExtractor <span class="comment">##配合Rule进行URL规则匹配</span></span><br><span class="line"><span class="keyword">from</span> haoduofuli.items <span class="keyword">import</span> HaoduofuliItem <span class="comment">##不解释</span></span><br><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> FormRequest <span class="comment">##Scrapy中用作登录使用的一个包</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myspider</span><span class="params">(CrawlSpider)</span>:</span></span><br><span class="line"></span><br><span class="line">    name = <span class="string">'haoduofuli'</span></span><br><span class="line">    allowed_domains = [<span class="string">'haoduofuli.wang'</span>]</span><br><span class="line">    start_urls = [<span class="string">'http://www.haoduofuli.wang'</span>]</span><br><span class="line"></span><br><span class="line">    rules = (</span><br><span class="line">        Rule(LinkExtractor(allow=(<span class="string">'\.html'</span>,)), callback=<span class="string">'parse_item'</span>, follow=<span class="literal">True</span>),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_item</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        item = HaoduofuliItem()</span><br><span class="line">        item[<span class="string">'url'</span>] = response.url</span><br><span class="line">        item[<span class="string">'category'</span>] = response.xpath(<span class="string">'//*[@id="content"]/div[1]/div[1]/span[2]/a/text()'</span>).extract()[<span class="number">0</span>]</span><br><span class="line">        item[<span class="string">'title'</span>] = response.xpath(<span class="string">'//*[@id="content"]/div[1]/h1/text()'</span>).extract()[<span class="number">0</span>]</span><br><span class="line">        item[<span class="string">'imgurl'</span>] = response.xpath(<span class="string">'//*[@id="post_content"]/p/img/@src'</span>).extract()</span><br><span class="line">        <span class="keyword">return</span> item</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>我们来跑一下！简直完美！ <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-020745.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-020745.png" alt="QQ20170122-020745"></a> 关于 imgurl 那个 XPath： 你先随便找一找图片的地址 Copy XPath 类似得到这样的： //<em>[@id=”post_content”]/p[2]/img 你瞅瞅网页会发现每一个有几张图片 每张地址都在一个 p 标签下的 img 标签的 src 属性中 把这个 2 去掉变成： //</em>[@id=”post_content”]/p/img 就变成了所有 p 标签下的 img 标签了！加上 /@src 后所有图片就获取到啦！（不加[0]是因为我们要所有的地址、加了 就只能获取一个了！） 关于 XPath 更多的用法与功能详解，建议大家去看看 w3cschool (^o^)/ 第一部分完工、开始第二部分的工作吧!登！录! <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161022193315.gif" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161022193315.gif" alt="QQ图片20161022193315"></a> 毕竟这些都不是我们要的重点！我们要的是资源 资源啊！能下载东西的地方！如果不是为了资源 那么爬虫将毫无意义（给工钱的另算）。 但是下载资源是隐藏的，需要登录才能看见（别找我要帐号、我也是借的别人的。） 我们先来看看这个网站是怎么登录的，使用 Firefox 打开www.haoduofuli.wang/login.php（为啥是Firefox、因为个人感觉Firefox的表单界面看起来很爽啊！哈哈哈） 打开页面之后开启调试模式（怎么开不说了）—开启持续日志（不然跳转之后没了） <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122101749.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122101749.png" alt="QQ截图20170122101749"></a> 然后选择网络—选中 html 和 XHR（这样页面类容就会少很多、又不会缺少我们需要的东西） <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122103140.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122103140.png" alt="QQ截图20170122103140"></a> 现在开始登录（顺手把记住登录也勾上）！调试窗口不要关啊！！！！登录完毕之后你会发现出现一些内容 我们找到其中方法为 post 的请求、然后选择 参数 就能看到我们需要的登录表单啦！ <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122104241.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122104241.png" alt="QQ截图20170122104241"></a> 我划掉的是帐号密码、这个位置应该显示你的帐号密码（这是很简单的一个登录表单、不通用但是思路是一样的。）找到了我们想要的东西我们开始登录吧 首先要知道 Scrapy 登录是如何实现的？ 借助于 FromRequests 这个包实现的（前面已经导入过了），下面开整。不需要太大的改动只需增加一些函数 就可以轻而易举的实现的登录。 将我们的 start_urls 中的地址换掉换成我们我们的登陆地址www.haoduofuli.wang/login.php变成这样：</p>
+                <figure class="highlight clean">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> scrapy.spiders <span class="keyword">import</span> CrawlSpider, Rule, Request ##CrawlSpider与Rule配合使用可以骑到历遍全站的作用、Request干啥的我就不解释了</span><br><span class="line"><span class="keyword">from</span> scrapy.linkextractors <span class="keyword">import</span> LinkExtractor ##配合Rule进行URL规则匹配</span><br><span class="line"><span class="keyword">from</span> haoduofuli.items <span class="keyword">import</span> HaoduofuliItem ##不解释</span><br><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> FormRequest ##Scrapy中用作登录使用的一个包</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">account = <span class="string">'你的账号'</span></span><br><span class="line">password = <span class="string">'你的密码'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> myspider(CrawlSpider):</span><br><span class="line"></span><br><span class="line">    name = <span class="string">'haoduofuli'</span></span><br><span class="line">    allowed_domains = [<span class="string">'haoduofuli.wang'</span>]</span><br><span class="line">    start_urls = [<span class="string">'http://www.haoduofuli.wang/wp-login.php'</span>]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>那么问题来了！参考上面的流程图你会发现、这丫的没法登录表单没法写啊！start_urls 返回的 responses 就直接给 rules 进行处理了诶！我们需要一个什么方法来截断 start_urls 返回的 responses 方便我们把登录的表单提交上去！那么问题来了 ！该用啥？ 答案是：parse_start_url(response)这方法；此方法作用是当 start_url 返回 responses 时调用这个方法。官方解释如下： <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122105258.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122105258.png" alt="QQ截图20170122105258"></a> 然后呢？当然是构造表单并通过 FormRequests 提交了！所以我们的程序现在就应该变成这样子了:</p>
+                <figure class="highlight clean">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> scrapy.spiders <span class="keyword">import</span> CrawlSpider, Rule, Request ##CrawlSpider与Rule配合使用可以骑到历遍全站的作用、Request干啥的我就不解释了</span><br><span class="line"><span class="keyword">from</span> scrapy.linkextractors <span class="keyword">import</span> LinkExtractor ##配合Rule进行URL规则匹配</span><br><span class="line"><span class="keyword">from</span> haoduofuli.items <span class="keyword">import</span> HaoduofuliItem ##不解释</span><br><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> FormRequest ##Scrapy中用作登录使用的一个包</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">account = <span class="string">'你的帐号'</span></span><br><span class="line">password = <span class="string">'你的密码'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> myspider(CrawlSpider):</span><br><span class="line"></span><br><span class="line">    name = <span class="string">'haoduofuli'</span></span><br><span class="line">    allowed_domains = [<span class="string">'haoduofuli.wang'</span>]</span><br><span class="line">    start_urls = [<span class="string">'http://www.haoduofuli.wang/wp-login.php'</span>]</span><br><span class="line"></span><br><span class="line">    def parse_start_url(self, response):</span><br><span class="line">        ###</span><br><span class="line">        如果你登录的有验证码之类的，你就可以在此处加入各种处理方法；</span><br><span class="line">        比如提交给打码平台，或者自己手动输入、再或者pil处理之类的</span><br><span class="line">        ###</span><br><span class="line">        formdate = &#123;</span><br><span class="line">                <span class="string">'log'</span>: account,</span><br><span class="line">                <span class="string">'pwd'</span>: password,</span><br><span class="line">                <span class="string">'rememberme'</span>: <span class="string">"forever"</span>,</span><br><span class="line">                <span class="string">'wp-submit'</span>: <span class="string">"登录"</span>,</span><br><span class="line">                <span class="string">'redirect_to'</span>: <span class="string">"http://www.haoduofuli.wang/wp-admin/"</span>,</span><br><span class="line">                <span class="string">'testcookie'</span>: <span class="string">"1"</span></span><br><span class="line">         &#125;</span><br><span class="line">        return [FormRequest.from_response(response, formdata=formdate, callback=self.after_login)]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>最后一句的意思是提交表单 formdate 并将回调 after_login 函数处理后续内容（一般用来判断是否登录成功） 然后开始请求我们需要爬取的页面 现在就变成这样了！</p>
+                <figure class="highlight scala">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">from scrapy.spiders <span class="keyword">import</span> <span class="type">CrawlSpider</span>, <span class="type">Rule</span>, <span class="type">Request</span> ##<span class="type">CrawlSpider</span>与<span class="type">Rule</span>配合使用可以骑到历遍全站的作用、<span class="type">Request</span>干啥的我就不解释了</span><br><span class="line">from scrapy.linkextractors <span class="keyword">import</span> <span class="type">LinkExtractor</span> ##配合<span class="type">Rule</span>进行<span class="type">URL</span>规则匹配</span><br><span class="line">from haoduofuli.items <span class="keyword">import</span> <span class="type">HaoduofuliItem</span> ##不解释</span><br><span class="line">from scrapy <span class="keyword">import</span> <span class="type">FormRequest</span> ##<span class="type">Scrapy</span>中用作登录使用的一个包</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">account = '你的帐号'</span><br><span class="line">password = '你的密码'</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myspider</span>(<span class="params"><span class="type">CrawlSpider</span></span>)</span>:</span><br><span class="line"></span><br><span class="line">    name = <span class="symbol">'haoduoful</span>i'</span><br><span class="line">    allowed_domains = [<span class="symbol">'haoduofuli</span>.wang']</span><br><span class="line">    start_urls = [<span class="symbol">'http</span>:<span class="comment">//www.haoduofuli.wang/wp-login.php']</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_start_url</span></span>(self, response):</span><br><span class="line">        ###</span><br><span class="line">        如果你登录的有验证码之类的，你就可以在此处加入各种处理方法；</span><br><span class="line">        比如提交给打码平台，或者自己手动输入、再或者pil处理之类的</span><br><span class="line">        ###</span><br><span class="line">        formdate = &#123;</span><br><span class="line">                <span class="symbol">'lo</span>g': account,</span><br><span class="line">                <span class="symbol">'pw</span>d': password,</span><br><span class="line">                <span class="symbol">'rememberm</span>e': <span class="string">"forever"</span>,</span><br><span class="line">                <span class="symbol">'wp</span>-submit': <span class="string">"登录"</span>,</span><br><span class="line">                <span class="symbol">'redirect_t</span>o': <span class="string">"http://www.haoduofuli.wang/wp-admin/"</span>,</span><br><span class="line">                <span class="symbol">'testcooki</span>e': <span class="string">"1"</span></span><br><span class="line">         &#125;</span><br><span class="line">        <span class="keyword">return</span> [<span class="type">FormRequest</span>.from_response(response, formdata=formdate, callback=self.after_login)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">after_login</span></span>(self, response):</span><br><span class="line">        ###</span><br><span class="line">        可以在此处加上判断来确认是否登录成功、进行其他动作。</span><br><span class="line">        ###</span><br><span class="line">        lnk = <span class="symbol">'http</span>:<span class="comment">//www.haoduofuli.wang'</span></span><br><span class="line">        <span class="keyword">return</span> <span class="type">Request</span>(lnk)</span><br><span class="line"></span><br><span class="line">    rules = (</span><br><span class="line">        <span class="type">Rule</span>(<span class="type">LinkExtractor</span>(allow=('\.html',)), callback=<span class="symbol">'parse_ite</span>m', follow=<span class="type">True</span>),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_item</span></span>(self, response):</span><br><span class="line">        item = <span class="type">HaoduofuliItem</span>()</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            item[<span class="symbol">'categor</span>y'] = response.xpath('<span class="comment">//*[@id="content"]/div[1]/div[1]/span[2]/a/text()').extract()[0]</span></span><br><span class="line">            item[<span class="symbol">'titl</span>e'] = response.xpath('<span class="comment">//*[@id="content"]/div[1]/h1/text()').extract()[0]</span></span><br><span class="line">            item[<span class="symbol">'imgur</span>l'] = response.xpath('<span class="comment">//*[@id="post_content"]/p/img/@src').extract()</span></span><br><span class="line">            item[<span class="symbol">'yunlin</span>k'] = response.xpath('<span class="comment">//*[@id="post_content"]/blockquote/a/@href').extract()[0]</span></span><br><span class="line">            item[<span class="symbol">'passwor</span>d'] = response.xpath('<span class="comment">//*[@id="post_content"]/blockquote/font/text()').extract()[0]</span></span><br><span class="line">            <span class="keyword">return</span> item</span><br><span class="line">        except:</span><br><span class="line">            item[<span class="symbol">'categor</span>y'] = response.xpath('<span class="comment">//*[@id="content"]/div[1]/div[1]/span[2]/a/text()').extract()[0]</span></span><br><span class="line">            item[<span class="symbol">'titl</span>e'] = response.xpath('<span class="comment">//*[@id="content"]/div[1]/h1/text()').extract()[0]</span></span><br><span class="line">            item[<span class="symbol">'imgur</span>l'] = response.xpath('<span class="comment">//*[@id="post_content"]/p/img/@src').extract()</span></span><br><span class="line">            item[<span class="symbol">'yunlin</span>k'] = response.xpath('<span class="comment">//*[@id="post_content"]/blockquote/p/a/@href).extract()[0]</span></span><br><span class="line">            item[<span class="symbol">'passwor</span>d'] = response.xpath('<span class="comment">//*[@id="post_content"]/blockquote/p/span/text()').extract()[0]</span></span><br><span class="line">            <span class="keyword">return</span> item</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>return Request（lnk）就表示我们的开始页面了 至于为啥多了一个 try 判断；完全是因为 这站长不守规矩啊！有些页面不一样·····我能怎么办 我也很无奈啊！ 都是被逼的。囧 好了！Spider 写完啦！但是我们的工作还没完！！！网站是靠什么知道这个 request 是否是登录用户发出的？答案是 Cookie！ 所以我们需要 下载器 在下载网页之前在 request 中加入 Cookie 来向网站证明我们是登录用户身份；才能获取到需要登录才能查看的信息！ 这个该怎么做？现在 Scrapy 的中间件派上用场了！ 关于 Cookie 中间件参考：<a href="http://scrapy-chs.readthedocs.io/zh_CN/latest/topics/downloader-middleware.html#module-scrapy.contrib.downloadermiddleware.cookies" target="_blank" rel="noopener">http://scrapy-chs.readthedocs.io/zh_CN/latest/topics/downloader-middleware.html#module-scrapy.contrib.downloadermiddleware.cookies</a> 我们需要做的就是在 settings.py 中的 DOWNLOADER_MIDDLEWARES 开启这个中间件：scrapy.downloadermiddlewares.cookies.CookiesMiddleware 请注意！！！！！！ 每一个中间件会对 request 进行操作、你所做的操作可能会依赖于前一个中间件、所以每个中间件的顺序就异常的重要。具体该设置多少请参考： <a href="http://scrapy-chs.readthedocs.io/zh_CN/latest/topics/settings.html#std:setting-DOWNLOADER_MIDDLEWARES_BASE" target="_blank" rel="noopener">http://scrapy-chs.readthedocs.io/zh_CN/latest/topics/settings.html#std:setting-DOWNLOADER_MIDDLEWARES_BASE</a> <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122165743.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122165743.png" alt="QQ截图20170122165743"></a> 中的值设置！！这点务必注意···如果不清楚依赖关系 请按照上图的值设置。 从上面可以看出 Cookie 中间件的值为 700 、我们在 settings.py 设置也应该为 700 <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122170041.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ截图20170122170041.png" alt="QQ截图20170122170041"></a> 我注释掉的请无视掉！！！ 做好这些以后 Scrapy 运作的整个流程大概就变成了下面这样： <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-232839.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-232839.png" alt="QQ20170122-232839"></a></p>
+                <figure class="highlight kotlin">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">return</span> Request(lnk) 这一个请求也算作 初始URL 只不过 不是start_urls的返回response 所以不会调用parse_start_url函数哦！</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p><a href="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-230207.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2017/01/QQ20170122-230207.png" alt="QQ20170122-230207"></a> 跑一下！效果杠杠滴！！！至于后面的数据持久化（如何保存数据、大家请自行解决哦！比毕竟上一篇博文讲过了、） 这种更适合使用 MongoDB 存储 超级简单好使。 至此本篇博文结束。 这个还有一个分布式的版本、现在不想写了··· 等年后再写吧。 另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。另外我真的一个资源都没看。</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/3801.html" rel="prev" title="使用Python收集获取Linux系统主机信息">
+                      <i class="fa fa-chevron-left"></i> 使用Python收集获取Linux系统主机信息 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/3992.html" rel="next" title="Mac下升级PHP版本至7.1"> Mac下升级PHP版本至7.1 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '38e0223ced23e96a908d347f083c63aa',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

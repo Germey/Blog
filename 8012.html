@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="人工智能">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="人工智能技术（以下称 AI）是人类优秀的发现和创造之一，它代表着至少几十年的未来。在传统的编程中，工程师将自己的想法和业务变成代码，计算机会根据代码设定的逻辑运行。与之不同的是，AI 使计算机有了「属于自己的思想」，它就像生物一样，能够「看」、「听」、「说」、「动」、「理解」、「分辨」和「思考」。  AI 在图像识别和文本处理方面的效果尤为突出，且已经应用到人类的生活中，例如人脸识别、对话、车牌识">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="实战！手把手带你搭建图像分类 AI 服务">
+  <meta property="og:url" content="https://cuiqingcai.com/8012.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="人工智能技术（以下称 AI）是人类优秀的发现和创造之一，它代表着至少几十年的未来。在传统的编程中，工程师将自己的想法和业务变成代码，计算机会根据代码设定的逻辑运行。与之不同的是，AI 使计算机有了「属于自己的思想」，它就像生物一样，能够「看」、「听」、「说」、「动」、「理解」、「分辨」和「思考」。  AI 在图像识别和文本处理方面的效果尤为突出，且已经应用到人类的生活中，例如人脸识别、对话、车牌识">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krv9b06uj309q0a2gma.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks0uuxckj30fu09mt97.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krzm9n5pj30zq0ee0x3.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krb83b8aj31800osth4.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks2pv2iwj31tq0s8gsj.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks3o2wyfj30h209ajsx.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks4nckjyj30qq08aacn.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks5vlpo0j30ek088gm9.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks6xmjhfj316y0godlw.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks7ujxpwj31to0b440n.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ksaaafekj31ve0u0gu1.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks9j6iguj31qe0dsdi2.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks8i8yrpj31kv0u0wn2.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks907u59j31m90u0468.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kr80qn02j31so0u045b.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kr8u1cu5j31g90u0aqf.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kr948a21j312s0jktaw.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kr9gpk16j31iu0iyn0j.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kr9o03hfj321o0m4aeb.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kra1rz5jj32200ogn26.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kranz44wj31wm0u0n1w.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krb83b8aj31800osth4.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krbj4ng2j31p90u0qgn.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krbt7olrj30jc0nct9q.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krc7gotwj30m207sdgg.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krcjd7aoj31bs0u0aen.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krd9a59rj31820u078z.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kre5gknwj31le0u00z8.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kredfp9pj314d0u0101.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kreijel6j314m0u0qb3.jpg">
+  <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kreq9m0oj31510u0qbd.jpg">
+  <meta property="article:published_time" content="2019-11-05T11:56:04.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.319Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="人工智能">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krv9b06uj309q0a2gma.jpg">
+  <link rel="canonical" href="https://cuiqingcai.com/8012.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>实战！手把手带你搭建图像分类 AI 服务 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/8012.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 实战！手把手带你搭建图像分类 AI 服务 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/韦世东学算法和反爬虫" class="author" itemprop="url" rel="index">韦世东学算法和反爬虫</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2019-11-05 19:56:04" itemprop="dateCreated datePublished" datetime="2019-11-05T19:56:04+08:00">2019-11-05</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">技术杂谈</span></a>
+                    </span>
+                  </span>
+                  <span id="/8012.html" class="post-meta-item leancloud_visitors" data-flag-title="实战！手把手带你搭建图像分类 AI 服务" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>4.3k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>4 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>人工智能技术（以下称 AI）是人类优秀的发现和创造之一，它代表着至少几十年的未来。在传统的编程中，工程师将自己的想法和业务变成代码，计算机会根据代码设定的逻辑运行。与之不同的是，AI 使计算机有了「属于自己的思想」，它就像生物一样，能够「看」、「听」、「说」、「动」、「理解」、「分辨」和「思考」。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krv9b06uj309q0a2gma.jpg" alt=""> AI 在图像识别和文本处理方面的效果尤为突出，且已经应用到人类的生活中，例如人脸识别、对话、车牌识别、城市智慧大脑项目中的目标检测和目标分类等。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks0uuxckj30fu09mt97.jpg" alt=""> <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krzm9n5pj30zq0ee0x3.jpg" alt=""> 接下来，我们将了解图像分类的需求、完成任务的前提条件和任务实践。</p>
+                <h2 id="图像分类以及目标检测的需求"><a href="#图像分类以及目标检测的需求" class="headerlink" title="图像分类以及目标检测的需求"></a>图像分类以及目标检测的需求</h2>
+                <p>AI 的能力和应用都非常广泛，这里我们主要讨论的是图像分类。 图像分类，其实是对图像中主要目标的识别和归类。例如在很多张随机图片中分辨出哪一张中有直升飞机、哪一张中有狗。或者给定一张图片，让计算机分辨图像中主要目标的类别。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krb83b8aj31800osth4.jpg" alt=""> 目标检测，指的是检测目标在图片中的位置。例如智慧交通项目中，路面监控摄像头拍摄画面中车辆的位置。目标检测涉及两种技术：分类和定位。也就是说先判定图片中是否存在指定的目标，然后还需要确定目标在图片中的位置。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks2pv2iwj31tq0s8gsj.jpg" alt=""> 这样的技术将会应用在人脸识别打卡、视频监控警报、停车场、高速收费站和城市智慧交通等项目当中。</p>
+                <h2 id="计算机识图的步骤"><a href="#计算机识图的步骤" class="headerlink" title="计算机识图的步骤"></a>计算机识图的步骤</h2>
+                <p>我们可以将计算机的看作是一个小朋友，它在拥有「分辨」的能力之前，必须经历「看」和「认识」这两个步骤，在看过很多图片后，它就会形成自己的「认知」，也就是获得了「分辨」能力。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks3o2wyfj30h209ajsx.jpg" alt=""> 简单来说，AI 工程师必须准备很多张不同的图片，并且将一大部分图片中的目标标注出来，然后让计算机提取每张图片中的特征，最后就会形成「认知」。 想一想，你还小的时候，是如何分辨鸭子和鹅的呢？ <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks4nckjyj30qq08aacn.jpg" alt=""> 是不是根据它们的特征进行判断的？</p>
+                <h2 id="学习和编程实现任务需要的条件"><a href="#学习和编程实现任务需要的条件" class="headerlink" title="学习和编程实现任务需要的条件"></a>学习和编程实现任务需要的条件</h2>
+                <p>了解完需求和步骤之后，我们还需要准备一些条件：</p>
+                <ul>
+                  <li>首先，你必须是一名 IT 工程师。</li>
+                  <li>然后你有一定的数学和统计学习基础。</li>
+                  <li>你还得了解计算机处理图像的方式。</li>
+                  <li>如果图片较多，你需要一台拥有较高算力 GPU 的计算机，否则计算机的「学习」速度会非常慢。</li>
+                </ul>
+                <p>具备以上条件后，再通过短时间（几天或一周）的学习，我们就能够完成图像分类的任务。 讨论个额外的话题，人人都能够做 AI 工程师吗？ AI 的门槛是比较高的，首先得具备高等数学、统计学习和编程等基础，然后要有很强的学习能力。对于 IT 工程师来说：</p>
+                <ul>
+                  <li>编程基础是没有问题的</li>
+                  <li>学习能力看个人，但花时间、下功夫肯定会有进步</li>
+                  <li>高等数学基础，得好好补</li>
+                  <li>统计学习基础，也得好好补</li>
+                  <li>经济上无压力</li>
+                </ul>
+                <p>如果你想要成为一名 AI 工程师，那么「高学历」几乎是必备的。无论是一线互联网企业或者新崛起的 AI 独角兽，它们为 AI 工程师设立的学历门槛都是「硕士」。除非特别优秀的、才华横溢的大专或本科生，否则是不可能有机会进入这样的企业做 AI 工程师的。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks5vlpo0j30ek088gm9.jpg" alt=""> AI 在硬件、软件、数据资料和人才方面都是很费钱的，普通的 IT 工程师也就是学习了解一下，远远达不到产品商用的要求。 普通的中小企业，极少有资质和经济能力吸引高学历且优秀的 AI 工程师，这就导致了资源的聚拢和倾斜。 想要将图像分类技术商用，在让计算机经历「看」、「认识」的步骤并拥有「分辨」能力后，还要将其转换为 Web 服务。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks6xmjhfj316y0godlw.jpg" alt=""> 但我只想将人脸识别或者图像分类的功能集成到我的项目当中，就那么困难吗？ 我只是一个很小的企业，想要在原来普通的视频监控系统中增加「家人识别」、「陌生人警报」、「火灾警报」和「生物闯入提醒」等功能，没有上述的条件和经济投入，就不能实现了吗？ 我好苦恼！ 有什么好办法吗？</p>
+                <h2 id="ModelArts-简介和条件"><a href="#ModelArts-简介和条件" class="headerlink" title="ModelArts 简介和条件"></a>ModelArts 简介和条件</h2>
+                <p>ModelArts 是华为云推出的产品，它是面向开发者的一站式 AI 开发平台。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks7ujxpwj31to0b440n.jpg" alt=""> 它为机器学习与深度学习提供海量数据预处理及半自动化标注、大规模分布式 Training、自动化模型生成，及端-边-云模型按需部署能力，帮助用户快速创建和部署模型，管理全周期 AI 工作流。 它为用户提供了以下可选模式：</p>
+                <ul>
+                  <li>零编码经验、零 AI 经验的自动学习模式</li>
+                  <li>有 AI 研发经验的全流程开发模式</li>
+                </ul>
+                <p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ksaaafekj31ve0u0gu1.jpg" alt=""> <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks9j6iguj31qe0dsdi2.jpg" alt=""> 同时，它将 AI 开发的整个过程都集成了进来。例如数据标注、模型训练、参数优化、服务部署、开放接口等，这就是「全周期 AI 工作流」。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks8i8yrpj31kv0u0wn2.jpg" alt=""> 还有，平台上的操作都是可视化的。 这些条件对于想要将 AI 技术应用于产品，但无奈条件不佳的个人开发者和企业提供了机会，这很重要！可以说 <a href="[https://www.huaweicloud.com/product/modelarts.html](https://www.huaweicloud.com/product/modelarts.html">ModelArts</a>) 缩短了 AI 商用的时间，降低了对应的经济成本、时间成本和人力成本。 更贴心的是，华为云 <a href="[https://www.huaweicloud.com/product/modelarts.html](https://www.huaweicloud.com/product/modelarts.html">ModelArts</a>) 为用户准备了很多的教程。即使用户没有经验，但只要按照教程指引进行操作，也能够实现自己的 AI 需求。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8ks907u59j31m90u0468.jpg" alt=""> 想想就美滋滋，太棒了！ 赶紧体验一下！</p>
+                <h2 id="图像分类服务实践"><a href="#图像分类服务实践" class="headerlink" title="图像分类服务实践"></a>图像分类服务实践</h2>
+                <p>这次我们以零 AI 基础和零编码经验的自动学习模式演示如何搭建一个图像分类的 AI 服务。</p>
+                <h3 id="前期准备和相关设置"><a href="#前期准备和相关设置" class="headerlink" title="前期准备和相关设置"></a>前期准备和相关设置</h3>
+                <p>首先打开华为云官网，将鼠标移动导航栏的「EI 企业智能」菜单上，并在弹出的选项中选择「AI 开发平台 ModelArts」。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kr80qn02j31so0u045b.jpg" alt=""> 进入到 <a href="[https://www.huaweicloud.com/product/modelarts.html](https://www.huaweicloud.com/product/modelarts.html">ModelArts</a>) 主页后，可以浏览一下关于 <a href="[https://www.huaweicloud.com/product/modelarts.html](https://www.huaweicloud.com/product/modelarts.html">ModelArts</a>) 的介绍。 点击 Banner 处的「进入控制台」按钮，页面会跳转到 ModelArts 控制台。控制台大体分为几个区域： <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kr8u1cu5j31g90u0aqf.jpg" alt=""> 区域 2 自动学习模式中有图像分类，将鼠标移动到图标上，并点击弹出的「开始体验」按钮。如果是华为云的新用户，网页会提示我们输入访问密钥和私有访问密钥。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kr948a21j312s0jktaw.jpg" alt=""> 没有密钥的开发者可以点击页面给出的链接并按照指引获取密钥，得到两种密钥后将其填入框中，点击「确定」按钮即可。 此时正式进入项目创建流程中，点击「图像分类」中的「创建项目」按钮（华为云为用户准备了对应的教程，很贴心）。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kr9gpk16j31iu0iyn0j.jpg" alt=""> 在创建项目的页面中，我们需要填两三项配置。要注意的是，项目是按需计费的，这次我们只是体验，也没有训练和存储太多数据，所以费用很低，大家不用担心。 项目名称可以根据需求设定一个容易记的，案例中我将其设定为 ImageCLF-Test-Pro。在训练数据的存储选择处，点击输入框中的文件夹图标，在弹出的选项卡中新建 obs 桶 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kr9o03hfj321o0m4aeb.jpg" alt=""> 并在创建的桶中新建文件夹 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kra1rz5jj32200ogn26.jpg" alt=""> 最后输入描述，并点击页面右下角的「创建项目」按钮即可。</p>
+                <h3 id="上传图片和标注"><a href="#上传图片和标注" class="headerlink" title="上传图片和标注"></a>上传图片和标注</h3>
+                <p>项目创建好之后，我们需要准备用于训练的多张图片，图片尽量清晰、种类超过 2 类、每种分类的图片数量不少于 5 张。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kranz44wj31wm0u0n1w.jpg" alt=""> 当然，数据越多、形态越丰富、标注越准确，那么训练结果就会越好，AI 服务的体验就会越好。 这里我准备了一些直升机、坦克和狗的图片，共 45 张。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krb83b8aj31800osth4.jpg" alt=""> 将其批量导入后勾选同类型的图片，一次性为多张图添加标签。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krbj4ng2j31p90u0qgn.jpg" alt=""> 依次将 3 类图片标注后，左侧图片标注的「未标注」选项卡中的图就会清空，而「已标注」选项卡中可以看到标注好的图片。</p>
+                <h3 id="训练设置"><a href="#训练设置" class="headerlink" title="训练设置"></a>训练设置</h3>
+                <p>右侧的标签栏会显示每种分类和对应的图片数量，下方的训练设置可以让我们设置训练时长的上限，高级设置中还有推理时间。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krbt7olrj30jc0nct9q.jpg" alt=""> 这个我们不必理解它的作用，可以按照默认值进行，也可以稍微调整，例如将训练时长的上限改为 0.2。</p>
+                <h3 id="开始训练"><a href="#开始训练" class="headerlink" title="开始训练"></a>开始训练</h3>
+                <p>设置好后点击「开始训练」按钮就会进入训练状态，耐心等待一段时间（图片越少训练时间越短）。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krc7gotwj30m207sdgg.jpg" alt=""> 训练页左侧会显示训练状态，例如初始化、运行中和运行成功/失败等。训练完成后，右侧会给出运行时长、准确率、评估结果和训练参数等信息。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krcjd7aoj31bs0u0aen.jpg" alt=""></p>
+                <h3 id="服务的自动化部署"><a href="#服务的自动化部署" class="headerlink" title="服务的自动化部署"></a>服务的自动化部署</h3>
+                <p>我们的目的是搭建一个图像分类的 AI 服务，所以在训练结束后点击左侧的「部署」按钮，此时会进入自动化部署的流程。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8krd9a59rj31820u078z.jpg" alt=""> 稍微等待些许时间（本次约 10 分钟）后，页面提示部署完成，同时页面将会分为 3 栏。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kre5gknwj31le0u00z8.jpg" alt=""> 左侧 1 区为部署状态和控制。中间 2 区可以在线测试图片分类，右侧 3 区会显示在线测试的结果（包括准确率），右侧 4 区提供了 API 接口，方便我们将其集成到 Web 应用当中。</p>
+                <h3 id="在线预测，训练结果测试"><a href="#在线预测，训练结果测试" class="headerlink" title="在线预测，训练结果测试"></a>在线预测，训练结果测试</h3>
+                <p>我们来测试一下，准备几张没有经过标注的图片，图片中可以包含狗、直升机和坦克。点击中间 2 区的「上传」按钮并选择一张图片，然后点击「预测」按钮。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kredfp9pj314d0u0101.jpg" alt=""> 1 秒中不到，右侧 3 区就会返回本次预测的结果：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"predicted_label"</span>: <span class="string">"狗"</span>,</span><br><span class="line">    <span class="attr">"scores"</span>: [</span><br><span class="line">        [</span><br><span class="line">            <span class="string">"狗"</span>,</span><br><span class="line">            <span class="string">"0.840"</span></span><br><span class="line">        ],</span><br><span class="line">        [</span><br><span class="line">            <span class="string">"直升机"</span>,</span><br><span class="line">            <span class="string">"0.084"</span></span><br><span class="line">        ],</span><br><span class="line">        [</span><br><span class="line">            <span class="string">"坦克"</span>,</span><br><span class="line">            <span class="string">"0.076"</span></span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这次我们上传的是包含狗的图片，返回的预测结果中显示本次预测的标签是「狗」，并且列出了可信度较高的几个类别和对应的可信度（1 为 100% 肯定），其中最高的是 「0.840-狗」。 这次上传直升机的图片试试。 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kreijel6j314m0u0qb3.jpg" alt=""> 返回的预测结果如下：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"predicted_label"</span>: <span class="string">"直升机"</span>,</span><br><span class="line">    <span class="attr">"scores"</span>: [</span><br><span class="line">        [</span><br><span class="line">            <span class="string">"直升机"</span>,</span><br><span class="line">            <span class="string">"0.810"</span></span><br><span class="line">        ],</span><br><span class="line">        [</span><br><span class="line">            <span class="string">"狗"</span>,</span><br><span class="line">            <span class="string">"0.114"</span></span><br><span class="line">        ],</span><br><span class="line">        [</span><br><span class="line">            <span class="string">"坦克"</span>,</span><br><span class="line">            <span class="string">"0.075"</span></span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>再试试坦克 <img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g8kreq9m0oj31510u0qbd.jpg" alt=""> 返回的预测结果如下：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"predicted_label"</span>: <span class="string">"坦克"</span>,</span><br><span class="line">    <span class="attr">"scores"</span>: [</span><br><span class="line">        [</span><br><span class="line">            <span class="string">"坦克"</span>,</span><br><span class="line">            <span class="string">"0.818"</span></span><br><span class="line">        ],</span><br><span class="line">        [</span><br><span class="line">            <span class="string">"狗"</span>,</span><br><span class="line">            <span class="string">"0.092"</span></span><br><span class="line">        ],</span><br><span class="line">        [</span><br><span class="line">            <span class="string">"直升机"</span>,</span><br><span class="line">            <span class="string">"0.090"</span></span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>从几次测试的结果可以看出，预测的结果非常准确，而且给出的可信度也比较高。这次准备的图片并不是很多，形态也不是很丰富，但预测效果却非常好，不得不说华为云 ModelArts 开发团队为此做了很多的优化，甚至比我自己（深度学习入门水平）编写代码用卷积神经网络训练和预测的结果要好。 如果想要将其集成到 Web 应用中，只需要根据页面给出的「接口调用指南」的指引进行操作即可。</p>
+                <h3 id="释放资源"><a href="#释放资源" class="headerlink" title="释放资源"></a>释放资源</h3>
+                <p>如果不是真正商用，仅仅作为学习和练习，那么在操作完成后记得点击左侧 1 区的「停止」按钮。然后在华为云导航栏中的搜索框输入「OBS」，点击搜索结果后跳转到 OBS 主页，接着再 OBS 主页点击「管理控制台」，进入到 OBS 控制台中，删除之前创建的桶即可。这样就不会导致资源占用，也不会产生费用了。</p>
+                <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3>
+                <p>体验了一下 ModelArts，我感觉非常奈斯！ 每处都有提示或教程指引，操作过程流畅，没有出现卡顿、报错等问题。 批量数据标注太好用了！批量导入、批量标注，自动计数，舒服！ 训练速度很快，应该是用了云 GPU，这样就算我的电脑没有显卡也能够快速完成训练。 以前还在考虑，学习 AI 是否需要准备更强的硬件设备，现在好了，在 ModelArts 上操作，就不用考虑这些条件了。 本次我们体验的是自动学习，也就是简洁易用的傻瓜式操作。对于专业的 AI 工程师来说，可以选择全流程开发模式。批量数据标注、本地代码编写、本地调试、云端训练、云端部署等一气呵成。 棒！ 有兴趣的开发者可以前往华为云 <a href="[https://www.huaweicloud.com/product/modelarts.html](https://www.huaweicloud.com/product/modelarts.html">ModelArts</a>) 体验。</p>
+                <hr>
+                <p>备注：文中配图均出自互联网，通过搜索引擎而来。</p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/30025.html" rel="bookmark">GitHub 新出的功能！可以帮我们自动写代码</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/30026.html" rel="bookmark">我又找到了一个破解谷歌验证码的新方案！</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"><i class="fa fa-tag"></i> 人工智能</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/7844.html" rel="prev" title="[Python3网络爬虫开发实战] 9.5-使用代理爬取微信公众号文章">
+                      <i class="fa fa-chevron-left"></i> [Python3网络爬虫开发实战] 9.5-使用代理爬取微信公众号文章 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/8063.html" rel="next" title="利用深度学习识别验证码缺口"> 利用深度学习识别验证码缺口 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#图像分类以及目标检测的需求"><span class="nav-number">1.</span> <span class="nav-text">图像分类以及目标检测的需求</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#计算机识图的步骤"><span class="nav-number">2.</span> <span class="nav-text">计算机识图的步骤</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#学习和编程实现任务需要的条件"><span class="nav-number">3.</span> <span class="nav-text">学习和编程实现任务需要的条件</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#ModelArts-简介和条件"><span class="nav-number">4.</span> <span class="nav-text">ModelArts 简介和条件</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#图像分类服务实践"><span class="nav-number">5.</span> <span class="nav-text">图像分类服务实践</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备和相关设置"><span class="nav-number">5.1.</span> <span class="nav-text">前期准备和相关设置</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#上传图片和标注"><span class="nav-number">5.2.</span> <span class="nav-text">上传图片和标注</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#训练设置"><span class="nav-number">5.3.</span> <span class="nav-text">训练设置</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#开始训练"><span class="nav-number">5.4.</span> <span class="nav-text">开始训练</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#服务的自动化部署"><span class="nav-number">5.5.</span> <span class="nav-text">服务的自动化部署</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#在线预测，训练结果测试"><span class="nav-number">5.6.</span> <span class="nav-text">在线预测，训练结果测试</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#释放资源"><span class="nav-number">5.7.</span> <span class="nav-text">释放资源</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">5.8.</span> <span class="nav-text">小结</span></a></li>
+                    </ol>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '2c26eaee2308b36662d4fdd57125ab48',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

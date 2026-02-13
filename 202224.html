@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="爬虫,Python爬虫,爬虫教程,网络爬虫,2022,基础案例">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="爬虫系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="【2022 年】Python3 爬虫教程 - 基础爬虫案例爬取实战">
+  <meta property="og:url" content="https://cuiqingcai.com/202224.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="爬虫系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/ub4f5.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/km8us.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/q295l.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/gi0nt.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/97yn6.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/r63xq.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/6j55t.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/yse4w.png">
+  <meta property="article:published_time" content="2022-02-14T01:23:56.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.310Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="网络爬虫">
+  <meta property="article:tag" content="2022">
+  <meta property="article:tag" content="基础案例">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/ub4f5.png">
+  <link rel="canonical" href="https://cuiqingcai.com/202224.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>【2022 年】Python3 爬虫教程 - 基础爬虫案例爬取实战 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/202224.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 【2022 年】Python3 爬虫教程 - 基础爬虫案例爬取实战 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2022-02-14 09:23:56" itemprop="dateCreated datePublished" datetime="2022-02-14T09:23:56+08:00">2022-02-14</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span> ， <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a>
+                    </span>
+                  </span>
+                  <span id="/202224.html" class="post-meta-item leancloud_visitors" data-flag-title="【2022 年】Python3 爬虫教程 - 基础爬虫案例爬取实战" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>15k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>14 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <blockquote>
+                  <p>爬虫系列文章总目录：<a href="https://cuiqingcai.com/17777.html">【2022 年】Python3 爬虫学习教程</a>，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">《Python3 网络爬虫开发实战（第二版）》</a>一书了，<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">点击了解详情</a>。</p>
+                </blockquote>
+                <p>在前面我们已经学习了 requests、正则表达式的基本用法，但我们还没有完整地实现一个爬取案例，这一节，我们就来实现一个完整的网站爬虫，把前面学习的知识点串联起来，同时加深对这些知识点的理解。</p>
+                <h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h2>
+                <p>在本节开始之前，我们需要做好如下的准备工作：</p>
+                <ul>
+                  <li>安装好 Python3，最低为 3.6 版本，并能成功运行 Python3 程序。</li>
+                  <li>了解 Python HTTP 请求库 requests 的基本用法。</li>
+                  <li>了解正则表达式的用法和 Python 中正则表达式库 re 的基本用法。</li>
+                </ul>
+                <p>以上内容在前面的章节中均有讲解，如尚未准备好建议先熟悉一下这些内容。</p>
+                <h2 id="2-爬取目标"><a href="#2-爬取目标" class="headerlink" title="2. 爬取目标"></a>2. 爬取目标</h2>
+                <p>本节我们以一个基本的静态网站作为案例进行爬取，需要爬取的链接为 <a href="https://ssr1.scrape.center/" target="_blank" rel="noopener">https://ssr1.scrape.center/</a>，这个网站里面包含了一些电影信息，界面如下：</p>
+                <p><img src="https://cdn.cuiqingcai.com/ub4f5.png" alt=""></p>
+                <p>这里首页展示了一个个电影的列表，每部电影包含了它的封面、名称、分类、上映时间、评分等内容，同时列表页还支持翻页，点击相应的页码我们就能进入到对应的新列表页。</p>
+                <p>如果我们点开其中一部电影，会进入到电影的详情页面，比如我们把第一个电影《霸王别姬》打开，会得到如下的页面：</p>
+                <p><img src="https://cdn.cuiqingcai.com/km8us.png" alt=""></p>
+                <p>这里显示的内容更加丰富、包括剧情简介、导演、演员等信息。</p>
+                <p>我们本节要完成的目标是：</p>
+                <ul>
+                  <li>用 requests 爬取这个站点每一页的电影列表，顺着列表再爬取每个电影的详情页。</li>
+                  <li>用 pyquery 和正则表达式提取每部电影的名称、封面、类别、上映时间、评分、剧情简介等内容。</li>
+                  <li>把以上爬取的内容存入 MongoDB 数据库。</li>
+                  <li>使用多进程实现爬取的加速。</li>
+                </ul>
+                <p>好，那我们现在就开始吧。</p>
+                <h2 id="3-爬取列表页"><a href="#3-爬取列表页" class="headerlink" title="3. 爬取列表页"></a>3. 爬取列表页</h2>
+                <p>好，第一步的爬取我们肯定要从列表页入手，我们首先观察一下列表页的结构和翻页规则。在浏览器中访问 <a href="https://ssr1.scrape.center/" target="_blank" rel="noopener">https://ssr1.scrape.center/</a>，然后打开浏览器开发者工具，我们观察每一个电影信息区块对应的 HTML 以及进入到详情页的 URL 是怎样的，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/q295l.png" alt=""></p>
+                <p>可以看到每部电影对应的区块都是一个 div 节点，它的 class 属性都有 el-card 这个值。每个列表页有 10 个这样的 div 节点，也就对应着 10 部电影的信息。</p>
+                <p>好，我们再分析下从列表页是怎么进入到详情页的，我们选中电影的名称，看下结果：</p>
+                <p><img src="https://cdn.cuiqingcai.com/gi0nt.png" alt=""></p>
+                <p>可以看到这个名称实际上是一个 h2 节点，其内部的文字就是电影的标题。再看，h2 节点的外面包含了一个 a 节点，这个 a 节点带有 href 属性，这就是一个超链接，其中 href 的值为 <code>/detail/1</code>，这是一个相对网站的根 URL <a href="https://ssr1.scrape.center/" target="_blank" rel="noopener">https://ssr1.scrape.center/</a> 的路径，加上网站的根 URL 就构成了 <a href="https://ssr1.scrape.center/detail/1" target="_blank" rel="noopener">https://ssr1.scrape.center/detail/1</a> ，也就是这部电影的详情页的 URL。这样我们只需要提取到这个 href 属性就能构造出详情页的 URL 并接着爬取了。</p>
+                <p>好的，那接下来我们来分析下翻页的逻辑，我们拉到页面的最下方，可以看到分页页码，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/97yn6.png" alt=""></p>
+                <p>这里观察到一共有 100 条数据，10 页的内容，因此页码最多是 10。</p>
+                <p>接着我们点击第二页，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/r63xq.png" alt=""></p>
+                <p>可以看到网页的 URL 变成了 <a href="https://ssr1.scrape.center/page/2" target="_blank" rel="noopener">https://ssr1.scrape.center/page/2</a>，相比根 URL 多了 <code>/page/2</code> 这部分内容。网页的结构还是和原来一模一样，可以和第一页一样处理。</p>
+                <p>接着我们查看第三页、第四页等内容，可以发现有这么一个规律，其 URL 最后分别变成了 <code>/page/3</code>、<code>/page/4</code>。所以，<code>/page</code> 后面跟的就是列表页的页码，当然第一页也是一样，我们在根 URL 后面加上 <code>/page/1</code> 也是能访问的，只不过网站做了一下处理，默认的页码是 1，所以显示第一页的内容。</p>
+                <p>好，分析到这里，逻辑基本就清晰了。</p>
+                <p>所以，我们要完成列表页的爬取，可以这么实现：</p>
+                <ul>
+                  <li>遍历页码构造 10 页的索引页 URL。</li>
+                  <li>从每个索引页分析提取出每个电影的详情页 URL。</li>
+                </ul>
+                <p>好，那么我们写代码来实现一下吧。</p>
+                <p>首先，我们需要先定义一些基础的变量，并引入一些必要的库，写法如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urljoin</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.INFO,</span><br><span class="line">                    format=<span class="string">'%(asctime)s - %(levelname)s: %(message)s'</span>)</span><br><span class="line"></span><br><span class="line">BASE_URL = <span class="string">'https://ssr1.scrape.center'</span></span><br><span class="line">TOTAL_PAGE = <span class="number">10</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们引入了 requests 用来爬取页面，logging 用来输出信息，re 用来实现正则表达式解析，urljoin 用来做 URL 的拼接。</p>
+                <p>接着我们定义了下日志输出级别和输出格式，接着定义了 BASE_URL 为当前站点的根 URL，TOTAL_PAGE 为需要爬取的总页码数量。</p>
+                <p>好，定义好了之后，我们来实现一个页面爬取的方法吧，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scrape_page</span><span class="params">(url)</span>:</span></span><br><span class="line">    logging.info(<span class="string">'scraping %s...'</span>, url)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url)</span><br><span class="line">        <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">            <span class="keyword">return</span> response.text</span><br><span class="line">        logging.error(<span class="string">'get invalid status code %s while scraping %s'</span>, response.status_code, url)</span><br><span class="line">    <span class="keyword">except</span> requests.RequestException:</span><br><span class="line">        logging.error(<span class="string">'error occurred while scraping %s'</span>, url, exc_info=<span class="literal">True</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>考虑到我们不仅要爬取列表页，还要爬取详情页，所以在这里我们定义一个较通用的爬取页面的方法，叫做 scrape_page，它接收一个 url 参数，返回页面的 html 代码。这里首先判断了状态码是不是 200，如果是，则直接返回页面的 HTML 代码，如果不是，则会输出错误日志信息。另外这里实现了 requests 的异常处理，如果出现了爬取异常，则会输出对应的错误日志信息，我们将 logging 的 error 方法的 exc_info 参数设置为 True 则可以打印出 Traceback 错误堆栈信息。</p>
+                <p>好了，有了 scrape_page 方法之后，我们给这个方法传入一个 url，正常情况下它就可以返回页面的 HTML 代码了。</p>
+                <p>接着在这个基础上，我们来定义列表页的爬取方法吧，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scrape_index</span><span class="params">(page)</span>:</span></span><br><span class="line">    index_url = <span class="string">f'<span class="subst">&#123;BASE_URL&#125;</span>/page/<span class="subst">&#123;page&#125;</span>'</span></span><br><span class="line">    <span class="keyword">return</span> scrape_page(index_url)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>方法名称叫做 scrape_index，这个实现就很简单了，这个方法会接收一个 page 参数，即列表页的页码，我们在方法里面实现列表页的 URL 拼接，然后调用 scrape_page 方法爬取即可，这样就能得到列表页的 HTML 代码了。</p>
+                <p>获取了 HTML 代码之后，下一步就是解析列表页，并得到每部电影的详情页的 URL 了，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_index</span><span class="params">(html)</span>:</span></span><br><span class="line">    pattern = re.compile(<span class="string">'&lt;a.*?href="(.*?)".*?class="name"&gt;'</span>)</span><br><span class="line">    items = re.findall(pattern, html)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> items:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">        detail_url = urljoin(BASE_URL, item)</span><br><span class="line">        logging.info(<span class="string">'get detail url %s'</span>, detail_url)</span><br><span class="line">        <span class="keyword">yield</span> detail_url</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里我们定义了 parse_index 方法，它接收一个 html 参数，即列表页的 HTML 代码。</p>
+                <p>在 parse_index 方法里面，我们首先定义了一个提取标题超链接 href 属性的正则表达式，内容为：</p>
+                <figure class="highlight cs">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&lt;a.*?href=<span class="string">"(.*?)"</span>.*?<span class="keyword">class</span>=<span class="string">"name"</span>&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里我们使用非贪婪通用匹配正则表达式 <code>.*?</code> 来匹配任意字符，同时在 href 属性的引号之间使用了分组匹配 <code>(.*?)</code> 正则表达式，这样 href 的属性值我们便能在匹配结果里面获取到了。紧接着，正则表达式后面紧跟了 <code>class=&quot;name&quot;</code> 来标示这个 <code>&lt;a&gt;</code> 节点是代表电影名称的节点。</p>
+                <p>好，现在有了正则表达式，那么怎么提取列表页所有的 href 值呢？使用 re 的 findall 方法就好了，第一个参数传入这个正则表达式构造的 pattern 对象，第二个参数传入 html，这样 findall 方法便会搜索 html 中所有能匹配该正则表达式的内容，然后把匹配到的结果返回，最后赋值为 items。</p>
+                <p>如果 items 为空，那么我们可以直接返回空的列表，如果 items 不为空，那么我们直接遍历处理即可。</p>
+                <p>遍历 items 得到的 item 就是我们在上文所说的类似 <code>/detail/1</code> 这样的结果。由于这并不是一个完整的 URL，所以我们需要借助 urljoin 方法把 BASE_URL 和 href 拼接起来，获得详情页的完整 URL，得到的结果就类似 <a href="https://ssr1.scrape.center/detail/1" target="_blank" rel="noopener">https://ssr1.scrape.center/detail/1</a> 这样的完整的 URL 了，最后 yield 返回即可。</p>
+                <p>这样我们通过调用 parse_index 方法并传入列表页的 HTML 代码就可以获得该列表页所有电影的详情页 URL 了。</p>
+                <p>好，接下来我们把上面的方法串联调用一下，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> page <span class="keyword">in</span> range(<span class="number">1</span>, TOTAL_PAGE + <span class="number">1</span>):</span><br><span class="line">        index_html = scrape_index(page)</span><br><span class="line">        detail_urls = parse_index(index_html)</span><br><span class="line">        logging.info(<span class="string">'detail urls %s'</span>, list(detail_urls))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们定义了 main 方法来完成上面所有方法的调用，首先使用 range 方法遍历了一下页码，得到的 page 就是 1-10，接着把 page 变量传给 scrape_index 方法，得到列表页的 HTML，赋值为 index_html 变量。接下来再将 index_html 变量传给 parse_index 方法，得到列表页所有电影的详情页 URL，赋值为 detail_urls，结果是一个生成器，我们调用 list 方法就可以将其输出出来。</p>
+                <p>好，我们运行一下上面的代码，结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">50</span>,<span class="number">505</span> - INFO: scraping https:<span class="comment">//ssr1.scrape.center/page/1...</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">51</span>,<span class="number">949</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/1</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">51</span>,<span class="number">950</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/2</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">51</span>,<span class="number">950</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/3</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">51</span>,<span class="number">950</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/4</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">51</span>,<span class="number">950</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/5</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">51</span>,<span class="number">950</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/6</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">51</span>,<span class="number">950</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/7</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">51</span>,<span class="number">950</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/8</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">51</span>,<span class="number">950</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/9</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">51</span>,<span class="number">950</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/10</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">51</span>,<span class="number">951</span> - INFO: detail urls [<span class="string">'https://ssr1.scrape.center/detail/1'</span>, <span class="string">'https://ssr1.scrape.center/detail/2'</span>, <span class="string">'https://ssr1.scrape.center/detail/3'</span>, <span class="string">'https://ssr1.scrape.center/detail/4'</span>, <span class="string">'https://ssr1.scrape.center/detail/5'</span>, <span class="string">'https://ssr1.scrape.center/detail/6'</span>, <span class="string">'https://ssr1.scrape.center/detail/7'</span>, <span class="string">'https://ssr1.scrape.center/detail/8'</span>, <span class="string">'https://ssr1.scrape.center/detail/9'</span>, <span class="string">'https://ssr1.scrape.center/detail/10'</span>]</span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">51</span>,<span class="number">951</span> - INFO: scraping https:<span class="comment">//ssr1.scrape.center/page/2...</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">52</span>,<span class="number">842</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/11</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">22</span>:<span class="number">39</span>:<span class="number">52</span>,<span class="number">842</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/12</span></span><br><span class="line">...</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>由于输出内容比较多，这里只贴了一部分。</p>
+                <p>可以看到，这里程序首先爬取了第一页列表页，然后得到了对应详情页的每个 URL，接着再接着爬第二页、第三页，一直到第十页，依次输出了每一页的详情页 URL。这样，我们就成功获取到了所有电影的详情页 URL 啦。</p>
+                <h2 id="4-爬取详情页"><a href="#4-爬取详情页" class="headerlink" title="4. 爬取详情页"></a>4. 爬取详情页</h2>
+                <p>现在我们已经可以成功获取所有详情页 URL 了，那么下一步当然就是解析详情页并提取出我们想要的信息了。</p>
+                <p>我们首先观察一下详情页的 HTML 代码吧，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/6j55t.png" alt=""></p>
+                <p>经过分析，我们想要提取的内容和对应的节点信息如下：</p>
+                <ul>
+                  <li>封面：是一个 img 节点，其 class 属性为 cover。</li>
+                  <li>名称：是一个 h2 节点，其内容便是名称。</li>
+                  <li>类别：是 span 节点，其内容便是类别内容，其外侧是 button 节点，再外侧则是 class 为 categories 的 div 节点。</li>
+                  <li>上映时间：是 span 节点，其内容包含了上映时间，其外侧是包含了 class 为 info 的 div 节点。另外提取结果中还多了「上映」二字，我们可以用正则表达式把日期提取出来。</li>
+                  <li>评分：是一个 p 节点，其内容便是评分，p 节点的 class 属性为 score。</li>
+                  <li>剧情简介：是一个 p 节点，其内容便是剧情简介，其外侧是 class 为 drama 的 div 节点。</li>
+                </ul>
+                <p>看似有点复杂是吧，不用担心，有了正则表达式，我们可以轻松搞定。</p>
+                <p>接着我们来实现一下代码吧。</p>
+                <p>刚才我们已经成功获取了详情页 URL，接着当然是定义一个详情页的爬取方法了，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scrape_detail</span><span class="params">(url)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> scrape_page(url)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里定义了一个 scrape_detail 方法，接收一个 url 参数，并通过调用 scrape_page 方法获得网页源代码。由于我们刚才已经实现了 scrape_page 方法，所以在这里我们不用再写一遍页面爬取的逻辑了，直接调用即可，做到了代码复用。</p>
+                <p>另外有人会说，这个 scrape_detail 方法里面只调用了 scrape_page 方法，别没有别的功能，那爬取详情页直接用 scrape_page 方法不就好了，还有必要再单独定义 scrape_detail 方法吗？有必要，单独定义一个 scrape_detail 方法在逻辑上会显得更清晰，而且以后如果我们想要对 scrape_detail 方法进行改动，比如添加日志输出，比如增加预处理，都可以在 scrape_detail 里面实现，而不用改动 scrape_page 方法，灵活性会更好。</p>
+                <p>好了，详情页的爬取方法已经实现了，接着就是详情页的解析了，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_detail</span><span class="params">(html)</span>:</span></span><br><span class="line">    cover_pattern = re.compile(<span class="string">'class="item.*?&lt;img.*?src="(.*?)".*?class="cover"&gt;'</span>, re.S)</span><br><span class="line">    name_pattern = re.compile(<span class="string">'&lt;h2.*?&gt;(.*?)&lt;/h2&gt;'</span>)</span><br><span class="line">    categories_pattern = re.compile(<span class="string">'&lt;button.*?category.*?&lt;span&gt;(.*?)&lt;/span&gt;.*?&lt;/button&gt;'</span>, re.S)</span><br><span class="line">    published_at_pattern = re.compile(<span class="string">'(\d&#123;4&#125;-\d&#123;2&#125;-\d&#123;2&#125;)\s?上映'</span>)</span><br><span class="line">    drama_pattern = re.compile(<span class="string">'&lt;div.*?drama.*?&gt;.*?&lt;p.*?&gt;(.*?)&lt;/p&gt;'</span>, re.S)</span><br><span class="line">    score_pattern = re.compile(<span class="string">'&lt;p.*?score.*?&gt;(.*?)&lt;/p&gt;'</span>, re.S)</span><br><span class="line">    cover = re.search(cover_pattern, html).group(<span class="number">1</span>).strip() <span class="keyword">if</span> re.search(cover_pattern, html) <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">    name = re.search(name_pattern, html).group(<span class="number">1</span>).strip() <span class="keyword">if</span> re.search(name_pattern, html) <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">    categories = re.findall(categories_pattern, html) <span class="keyword">if</span> re.findall(categories_pattern, html) <span class="keyword">else</span> []</span><br><span class="line">    published_at = re.search(published_at_pattern, html).group(<span class="number">1</span>) <span class="keyword">if</span> re.search(published_at_pattern, html) <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">    drama = re.search(drama_pattern, html).group(<span class="number">1</span>).strip() <span class="keyword">if</span> re.search(drama_pattern, html) <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">    score = float(re.search(score_pattern, html).group(<span class="number">1</span>).strip()) <span class="keyword">if</span> re.search(score_pattern, html) <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="string">'cover'</span>: cover,</span><br><span class="line">        <span class="string">'name'</span>: name,</span><br><span class="line">        <span class="string">'categories'</span>: categories,</span><br><span class="line">        <span class="string">'published_at'</span>: published_at,</span><br><span class="line">        <span class="string">'drama'</span>: drama,</span><br><span class="line">        <span class="string">'score'</span>: score</span><br><span class="line">    &#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们定义了 parse_detail 方法用于解析详情页，它接收一个参数为 html，解析其中的内容，并以字典的形式返回结果。每个字段的解析情况如下所述：</p>
+                <ul>
+                  <li>cover：封面，其值是带有 cover 这个 class 的 img 节点的 src 属性的值 ，所有直接 src 的内容使用 <code>(.*?)</code> 来表示即可，在 img 节点的前面我们再加上一些区分位置的标识符，如 item。由于结果只有一个，写好正则表达式后用 search 方法提取即可。</li>
+                  <li>name：名称，其值是 h2 节点的文本值，我们直接在 h2 标签的中间使用 <code>(.*?)</code> 表示即可。由于结果只有一个，写好正则表达式后同样用 search 方法提取即可。</li>
+                  <li>categories：类别，我们注意到每个 category 的值都是 button 节点里面的 span 节点的值，所以我们写好表示 button 节点的正则表达式后，再直接在其内部的 span 标签的中间使用 <code>(.*?)</code> 表示即可。由于结果有多个，所以这里使用 findall 方法提取，结果是一个列表。</li>
+                  <li>published_at：上映时间，由于每个上映时间信息都包含了「上映」二字，另外日期又都是一个规整的格式，所以对于这个上映时间的提取，我们直接使用标准年月日的正则表达式 <code>(\d{4}-\d{2}-\d{2})</code> 表示即可。由于结果只有一个，直接使用 search 方法提取即可。</li>
+                  <li>drama：直接提取 class 为 drama 的节点内部的 p 节点的文本即可，同样用 search 方法可以提取。</li>
+                  <li>score：直接提取 class 为 score 的 p 节点的文本即可，但由于提取结果是字符串，所以我们还需要把它转成浮点数，即 float 类型。</li>
+                </ul>
+                <p>最后，上述的字段提取完毕之后，构造一个字典返回即可。</p>
+                <p>这样，我们就成功完成了详情页的提取和分析了。</p>
+                <p>最后，main 方法稍微改写一下，增加这两个方法的调用，改写如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> page <span class="keyword">in</span> range(<span class="number">1</span>, TOTAL_PAGE + <span class="number">1</span>):</span><br><span class="line">        index_html = scrape_index(page)</span><br><span class="line">        detail_urls = parse_index(index_html)</span><br><span class="line">        <span class="keyword">for</span> detail_url <span class="keyword">in</span> detail_urls:</span><br><span class="line">            detail_html = scrape_detail(detail_url)</span><br><span class="line">            data = parse_detail(detail_html)</span><br><span class="line">            logging.info(<span class="string">'get detail data %s'</span>, data)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们首先遍历了 detail_urls，获取了每个详情页的 URL，然后依次调用了 scrape_detail 和 parse_detail 方法，最后得到了每个详情页的提取结果，赋值为 data 并输出。</p>
+                <p>运行结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">23</span>:<span class="number">37</span>:<span class="number">35</span>,<span class="number">936</span> - INFO: scraping https:<span class="comment">//ssr1.scrape.center/page/1...</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">23</span>:<span class="number">37</span>:<span class="number">36</span>,<span class="number">833</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/1</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">23</span>:<span class="number">37</span>:<span class="number">36</span>,<span class="number">833</span> - INFO: scraping https:<span class="comment">//ssr1.scrape.center/detail/1...</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">23</span>:<span class="number">37</span>:<span class="number">39</span>,<span class="number">985</span> - INFO: <span class="keyword">get</span> detail data &#123;<span class="string">'cover'</span>: <span class="string">'https://p0.meituan.net/movie/ce4da3e03e655b5b88ed31b5cd7896cf62472.jpg@464w_644h_1e_1c'</span>, <span class="string">'name'</span>: <span class="string">'霸王别姬 - Farewell My Concubine'</span>, <span class="string">'categories'</span>: [<span class="string">'剧情'</span>, <span class="string">'爱情'</span>], <span class="string">'published_at'</span>: <span class="string">'1993-07-26'</span>, <span class="string">'drama'</span>: <span class="string">'影片借一出《霸王别姬》的京戏，牵扯出三个人之间一段随时代风云变幻的爱恨情仇。段小楼（张丰毅 饰）与程蝶衣（张国荣 饰）是一对打小一起长大的师兄弟，两人一个演生，一个饰旦，一向配合天衣无缝，尤其一出《霸王别姬》，更是誉满京城，为此，两人约定合演一辈子《霸王别姬》。但两人对戏剧与人生关系的理解有本质不同，段小楼深知戏非人生，程蝶衣则是人戏不分。段小楼在认为该成家立业之时迎娶了名妓菊仙（巩俐 饰），致使程蝶衣认定菊仙是可耻的第三者，使段小楼做了叛徒，自此，三人围绕一出《霸王别姬》生出的爱恨情仇战开始随着时代风云的变迁不断升级，终酿成悲剧。'</span>, <span class="string">'score'</span>: <span class="number">9.5</span>&#125;</span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">23</span>:<span class="number">37</span>:<span class="number">39</span>,<span class="number">985</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/2</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">23</span>:<span class="number">37</span>:<span class="number">39</span>,<span class="number">985</span> - INFO: scraping https:<span class="comment">//ssr1.scrape.center/detail/2...</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">23</span>:<span class="number">37</span>:<span class="number">41</span>,<span class="number">061</span> - INFO: <span class="keyword">get</span> detail data &#123;<span class="string">'cover'</span>: <span class="string">'https://p1.meituan.net/movie/6bea9af4524dfbd0b668eaa7e187c3df767253.jpg@464w_644h_1e_1c'</span>, <span class="string">'name'</span>: <span class="string">'这个杀手不太冷 - Léon'</span>, <span class="string">'categories'</span>: [<span class="string">'剧情'</span>, <span class="string">'动作'</span>, <span class="string">'犯罪'</span>], <span class="string">'published_at'</span>: <span class="string">'1994-09-14'</span>, <span class="string">'drama'</span>: <span class="string">'里昂（让·雷诺 饰）是名孤独的职业杀手，受人雇佣。一天，邻居家小姑娘马蒂尔德（纳塔丽·波特曼 饰）敲开他的房门，要求在他那里暂避杀身之祸。原来邻居家的主人是警方缉毒组的眼线，只因贪污了一小包毒品而遭恶警（加里·奥德曼 饰）杀害全家的惩罚。马蒂尔德 得到里昂的留救，幸免于难，并留在里昂那里。里昂教小女孩使枪，她教里昂法文，两人关系日趋亲密，相处融洽。 女孩想着去报仇，反倒被抓，里昂及时赶到，将女孩救回。混杂着哀怨情仇的正邪之战渐次升级，更大的冲突在所难免……'</span>, <span class="string">'score'</span>: <span class="number">9.5</span>&#125;</span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-08</span> <span class="number">23</span>:<span class="number">37</span>:<span class="number">41</span>,<span class="number">062</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/3</span></span><br><span class="line">...</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>由于内容较多，这里省略了后续内容。</p>
+                <p>可以看到，这里我们就成功提取出来了每部电影的基本信息了，包括封面、名称、类别等等。</p>
+                <h2 id="5-保存数据"><a href="#5-保存数据" class="headerlink" title="5. 保存数据"></a>5. 保存数据</h2>
+                <p>好，成功提取到详情页信息之后，我们下一步就要把数据保存起来了。由于我们到现在我们还没有学习数据库的存储，所以现在我们临时先将数据保存成文本格式，在这里我们可以一个条目一个 JSON 文本。</p>
+                <p>定义保存数据的方法如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> makedirs</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> exists</span><br><span class="line"></span><br><span class="line">RESULTS_DIR = <span class="string">'results'</span></span><br><span class="line">exists(RESULTS_DIR) <span class="keyword">or</span> makedirs(RESULTS_DIR)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_data</span><span class="params">(data)</span>:</span></span><br><span class="line">    name = data.get(<span class="string">'name'</span>)</span><br><span class="line">    data_path = <span class="string">f'<span class="subst">&#123;RESULTS_DIR&#125;</span>/<span class="subst">&#123;name&#125;</span>.json'</span></span><br><span class="line">    json.dump(data, open(data_path, <span class="string">'w'</span>, encoding=<span class="string">'utf-8'</span>), ensure_ascii=<span class="literal">False</span>, indent=<span class="number">2</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里我们首先定义了数据保存的文件夹 RESULTS_DIR，然后判断了下这个文件夹是否存在，如果不存在则创建。</p>
+                <p>接着，我们定义了保存数据的方法 save_data，首先我们获取了数据的 name 字段，即电影的名称，我们将电影的名称当做 JSON 文件的名称，接着构造了 JSON 文件的路径，然后用 json 的 dump 方法将数据保存成文本格式。在 dump 的方法设置了两个参数，一个是 ensure_ascii 设置为 False，可以保证的中文字符在文件中能以正常的中文文本呈现，而不是 unicode 字符；另一个 indent 为 2，则是设置了 JSON 数据的结果有两行缩进，让 JSON 数据的格式显得更加美观。</p>
+                <p>好的，那么接下来 main 方法稍微改写一下就好了，改写如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> page <span class="keyword">in</span> range(<span class="number">1</span>, TOTAL_PAGE + <span class="number">1</span>):</span><br><span class="line">        index_html = scrape_index(page)</span><br><span class="line">        detail_urls = parse_index(index_html)</span><br><span class="line">        <span class="keyword">for</span> detail_url <span class="keyword">in</span> detail_urls:</span><br><span class="line">            detail_html = scrape_detail(detail_url)</span><br><span class="line">            data = parse_detail(detail_html)</span><br><span class="line">            logging.info(<span class="string">'get detail data %s'</span>, data)</span><br><span class="line">            logging.info(<span class="string">'saving data to json file'</span>)</span><br><span class="line">            save_data(data)</span><br><span class="line">            logging.info(<span class="string">'data saved successfully'</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里就是加了 save_data 方法的调用，并加了一些日志信息。</p>
+                <p>重新运行，我们看下输出结果：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-09</span> <span class="number">01</span>:<span class="number">10</span>:<span class="number">27</span>,<span class="number">094</span> - INFO: scraping https:<span class="comment">//ssr1.scrape.center/page/1...</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-09</span> <span class="number">01</span>:<span class="number">10</span>:<span class="number">28</span>,<span class="number">019</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/1</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-09</span> <span class="number">01</span>:<span class="number">10</span>:<span class="number">28</span>,<span class="number">019</span> - INFO: scraping https:<span class="comment">//ssr1.scrape.center/detail/1...</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-09</span> <span class="number">01</span>:<span class="number">10</span>:<span class="number">29</span>,<span class="number">183</span> - INFO: <span class="keyword">get</span> detail data &#123;<span class="string">'cover'</span>: <span class="string">'https://p0.meituan.net/movie/ce4da3e03e655b5b88ed31b5cd7896cf62472.jpg@464w_644h_1e_1c'</span>, <span class="string">'name'</span>: <span class="string">'霸王别姬 - Farewell My Concubine'</span>, <span class="string">'categories'</span>: [<span class="string">'剧情'</span>, <span class="string">'爱情'</span>], <span class="string">'published_at'</span>: <span class="string">'1993-07-26'</span>, <span class="string">'drama'</span>: <span class="string">'影片借一出《霸王别姬》的京戏，牵扯出三个人之间一段随时代风云变幻的爱恨情仇。段小楼（张丰毅 饰）与程蝶衣（张国荣 饰）是一对打小一起长大的师兄弟，两人一个演生，一个饰旦，一向配合天衣无缝，尤其一出《霸王别姬》，更是誉满京城，为此，两人约定合演一辈子《霸王别姬》。但两人对戏剧与人生关系的理解有本质不同，段小楼深知戏非人生，程蝶衣则是人戏不分。段小楼在认为该成家立业之时迎娶了名妓菊仙（巩俐 饰），致使程蝶衣认定菊仙是可耻的第三者，使段小楼做了叛徒，自此，三人围绕一出《霸王别姬》生出的爱恨情仇战开始随着时代风云的变迁不断升级，终酿成悲剧。'</span>, <span class="string">'score'</span>: <span class="number">9.5</span>&#125;</span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-09</span> <span class="number">01</span>:<span class="number">10</span>:<span class="number">29</span>,<span class="number">183</span> - INFO: saving data to json file</span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-09</span> <span class="number">01</span>:<span class="number">10</span>:<span class="number">29</span>,<span class="number">288</span> - INFO: data saved successfully</span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-09</span> <span class="number">01</span>:<span class="number">10</span>:<span class="number">29</span>,<span class="number">288</span> - INFO: <span class="keyword">get</span> detail url https:<span class="comment">//ssr1.scrape.center/detail/2</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-09</span> <span class="number">01</span>:<span class="number">10</span>:<span class="number">29</span>,<span class="number">288</span> - INFO: scraping https:<span class="comment">//ssr1.scrape.center/detail/2...</span></span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-09</span> <span class="number">01</span>:<span class="number">10</span>:<span class="number">30</span>,<span class="number">250</span> - INFO: <span class="keyword">get</span> detail data &#123;<span class="string">'cover'</span>: <span class="string">'https://p1.meituan.net/movie/6bea9af4524dfbd0b668eaa7e187c3df767253.jpg@464w_644h_1e_1c'</span>, <span class="string">'name'</span>: <span class="string">'这个杀手不太冷 - Léon'</span>, <span class="string">'categories'</span>: [<span class="string">'剧情'</span>, <span class="string">'动作'</span>, <span class="string">'犯罪'</span>], <span class="string">'published_at'</span>: <span class="string">'1994-09-14'</span>, <span class="string">'drama'</span>: <span class="string">'里昂（让·雷诺 饰）是名孤独的职业杀手，受人雇佣。一天，邻居家小姑娘马蒂尔德（纳塔丽·波特曼 饰）敲开他的房门，要求在他那里暂避杀身之祸。原来邻居家的主人是警方缉毒组的眼线，只因贪污了一小包毒品而遭恶警（加里·奥德曼 饰）杀害全家的惩罚。马蒂尔德 得到里昂的留救，幸免于难，并留在里昂那里。里昂教小女孩使枪，她教里昂法文，两人关系日趋亲密，相处融洽。 女孩想着去报仇，反倒被抓，里昂及时赶到，将女孩救回。混杂着哀怨情仇的正邪之战渐次升级，更大的冲突在所难免……'</span>, <span class="string">'score'</span>: <span class="number">9.5</span>&#125;</span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-09</span> <span class="number">01</span>:<span class="number">10</span>:<span class="number">30</span>,<span class="number">250</span> - INFO: saving data to json file</span><br><span class="line"><span class="number">2020</span><span class="number">-03</span><span class="number">-09</span> <span class="number">01</span>:<span class="number">10</span>:<span class="number">30</span>,<span class="number">253</span> - INFO: data saved successfully</span><br><span class="line">...</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>通过运行结果可以发现，这里成功输出了将数据存储到 JSON 文件的信息。</p>
+                <p>运行完毕之后我们可以观察下本地的结果，可以看到 results 文件夹下就多了 100 个 JSON 文件，每部电影数据都是一个 JSON 文件，文件名就是电影名，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/yse4w.png" alt=""></p>
+                <h2 id="6-多进程加速"><a href="#6-多进程加速" class="headerlink" title="6. 多进程加速"></a>6. 多进程加速</h2>
+                <p>由于整个的爬取是单进程的，而且只能逐条爬取，速度稍微有点慢，我们有没有方法来对整个爬取过程进行加速呢？</p>
+                <p>在前面我们讲了多进程的基本原理和使用方法，下面我们就来实践一下多进程的爬取吧。</p>
+                <p>由于一共有 10 页详情页，这 10 页内容是互不干扰的，所以我们可以一页开一个进程来爬取。而且由于这 10 个列表页页码正好可以提前构造成一个列表，所以我们可以选用多进程里面的进程池 Pool 来实现这个过程。</p>
+                <p>这里我们需要改写下 main 方法的调用，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> multiprocessing</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(page)</span>:</span></span><br><span class="line">    index_html = scrape_index(page)</span><br><span class="line">    detail_urls = parse_index(index_html)</span><br><span class="line">    <span class="keyword">for</span> detail_url <span class="keyword">in</span> detail_urls:</span><br><span class="line">        detail_html = scrape_detail(detail_url)</span><br><span class="line">        data = parse_detail(detail_html)</span><br><span class="line">        logging.info(<span class="string">'get detail data %s'</span>, data)</span><br><span class="line">        logging.info(<span class="string">'saving data to json data'</span>)</span><br><span class="line">        save_data(data)</span><br><span class="line">        logging.info(<span class="string">'data saved successfully'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    pool = multiprocessing.Pool()</span><br><span class="line">    pages = range(<span class="number">1</span>, TOTAL_PAGE + <span class="number">1</span>)</span><br><span class="line">    pool.map(main, pages)</span><br><span class="line">    pool.close()</span><br><span class="line">    pool.join()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们首先给 main 方法添加了一个参数 page，用以表示列表页的页码。接着我们声明了一个进程池，并声明了 pages 为所有需要遍历的页码，即 1-10。最后调用 map 方法，第一个参数就是需要被调用的参数，第二个参数就是 pages，即需要遍历的页码。</p>
+                <p>这样 pages 就会被依次遍历，把 1-10 这 10 个页码分别传递给 main 方法，并把每次的调用变成一个进程，加入到进程池中执行，进程池会根据当前运行环境来决定运行多少进程。比如我的机器的 CPU 有 8 个核，那么进程池的大小会默认设定为 8，这样就会同时有 8 个进程并行执行。</p>
+                <p>运行输出结果和之前类似，但是可以明显看到加了多进程执行之后，爬取速度快了非常多。可以清空一下之前的爬取数据，可以发现数据依然可以被正常保存成 JSON 文件。</p>
+                <h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2>
+                <p>好了，到现在为止，我们就完成了全站电影数据的爬取并实现了存储和优化。</p>
+                <p>我们本节用到的库有 requests、multiprocessing、re、logging 等，通过这个案例实战，我们把前面学习到的知识都串联了起来，其中的一些实现方法可以好好思考和体会，也希望这个案例能够让你对爬虫的实现有更实际的了解。</p>
+                <p>本节代码：<a href="https://github.com/Python3WebSpider/ScrapeSsr1。" target="_blank" rel="noopener">https://github.com/Python3WebSpider/ScrapeSsr1。</a></p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/5052.html" rel="bookmark">Python3网络爬虫开发实战教程</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202212.html" rel="bookmark">【2022 年】Python3 爬虫教程 - HTTP 基本原理</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202213.html" rel="bookmark">【2022 年】Python3 爬虫教程 - Web网页基础</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202221.html" rel="bookmark">【2022 年】Python3 爬虫教程 - urllib 爬虫初体验</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202215.html" rel="bookmark">【2022 年】Python3 爬虫教程 - 1.5 代理的基本原理</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+                  <a href="/tags/Python%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> Python爬虫</a>
+                  <a href="/tags/%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 爬虫教程</a>
+                  <a href="/tags/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 网络爬虫</a>
+                  <a href="/tags/2022/" rel="tag"><i class="fa fa-tag"></i> 2022</a>
+                  <a href="/tags/%E5%9F%BA%E7%A1%80%E6%A1%88%E4%BE%8B/" rel="tag"><i class="fa fa-tag"></i> 基础案例</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/202222.html" rel="prev" title="【2022 年】Python3 爬虫教程 - 方便好用的 requests">
+                      <i class="fa fa-chevron-left"></i> 【2022 年】Python3 爬虫教程 - 方便好用的 requests </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/202243.html" rel="next" title="【2022 年】Python3 爬虫教程 - 高效实用的 MongoDB 文档存储"> 【2022 年】Python3 爬虫教程 - 高效实用的 MongoDB 文档存储 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#1-准备工作"><span class="nav-number">1.</span> <span class="nav-text">1. 准备工作</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#2-爬取目标"><span class="nav-number">2.</span> <span class="nav-text">2. 爬取目标</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#3-爬取列表页"><span class="nav-number">3.</span> <span class="nav-text">3. 爬取列表页</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#4-爬取详情页"><span class="nav-number">4.</span> <span class="nav-text">4. 爬取详情页</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#5-保存数据"><span class="nav-number">5.</span> <span class="nav-text">5. 保存数据</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#6-多进程加速"><span class="nav-number">6.</span> <span class="nav-text">6. 多进程加速</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#7-总结"><span class="nav-number">7.</span> <span class="nav-text">7. 总结</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'ad9e555bb7d920d5a58d204c7501c02f',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

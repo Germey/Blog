@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="爬虫,爬虫教程,网络爬虫,2022,Ajax,实战">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有《P">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="【2022 年】Python3 爬虫教程 - Ajax 案例爬取实战">
+  <meta property="og:url" content="https://cuiqingcai.com/202253.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有《P">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/add5o.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/lyy4e.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/y712p.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/p2u8d.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/dpns6.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/x22b1.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/1ro2i.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/0ldhk.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/tuum6.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/y1o4n.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/bzc8x.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/imum3.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/ammal.png">
+  <meta property="article:published_time" content="2022-02-16T09:42:44.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.308Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="网络爬虫">
+  <meta property="article:tag" content="2022">
+  <meta property="article:tag" content="Ajax">
+  <meta property="article:tag" content="实战">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/add5o.png">
+  <link rel="canonical" href="https://cuiqingcai.com/202253.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>【2022 年】Python3 爬虫教程 - Ajax 案例爬取实战 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/202253.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 【2022 年】Python3 爬虫教程 - Ajax 案例爬取实战 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2022-02-16 17:42:44" itemprop="dateCreated datePublished" datetime="2022-02-16T17:42:44+08:00">2022-02-16</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span> ， <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a>
+                    </span>
+                  </span>
+                  <span id="/202253.html" class="post-meta-item leancloud_visitors" data-flag-title="【2022 年】Python3 爬虫教程 - Ajax 案例爬取实战" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>11k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>10 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <blockquote>
+                  <p>系列文章总目录：<a href="https://cuiqingcai.com/17777.html">【2022 年】Python3 爬虫学习教程</a>，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">《Python3 网络爬虫开发实战（第二版）》</a>一书了，<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">点击了解详情</a>。</p>
+                </blockquote>
+                <p>在上一节中我们已经学习了 Ajax 的基本原理和分析方法，这一节我们来结合一个实际的案例来看一下 Ajax 分析和爬取页面的具体实现。</p>
+                <h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h2>
+                <p>在本节开始之前，我们需要做好如下准备工作：</p>
+                <ul>
+                  <li>安装好 Python 3（最低为 3.6 版本），并成功运行 Python 3 程序。</li>
+                  <li>了解 Python HTTP 请求库 requests 的基本用法。</li>
+                  <li>了解 Ajax 基础知识和分析 Ajax 的基本方法。</li>
+                </ul>
+                <p>以上内容在前面的章节中均有讲解，如尚未准备好，建议先熟悉一下这些内容。</p>
+                <h2 id="2-爬取目标"><a href="#2-爬取目标" class="headerlink" title="2. 爬取目标"></a>2. 爬取目标</h2>
+                <p>本节我们以一个示例网站来试验一下 Ajax 的爬取，其链接为：<a href="https://spa1.scrape.center/，该示例网站的数据请求是通过" target="_blank" rel="noopener">https://spa1.scrape.center/，该示例网站的数据请求是通过</a> Ajax 完成的，页面的内容是通过 JavaScript 渲染出来的，页面如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/add5o.png" alt="image-20210705004644681"></p>
+                <p>可能大家看着这个页面似曾相识，心想这不就是上一个案例的网站吗？但其实不是。这个网站的后台实现逻辑和数据加载方式完全不同。只不过最后呈现的样式是一样的。</p>
+                <p>这个网站同样支持翻页，可以点击最下方的页码来切换到下一页，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/lyy4e.png" alt="image-20210705004704636"></p>
+                <p>点击每一个电影的链接进入详情页，页面结构也是完全一样的，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/y712p.png" alt="image-20210705004718813"></p>
+                <p>我们需要爬取的数据也是和原来相同的，包括电影的名称、封面、类别、上映日期、评分、剧情简介等信息。</p>
+                <p>本节中我们需要完成的目标如下。</p>
+                <ul>
+                  <li>分析页面数据的加载逻辑。</li>
+                  <li>用 requests 实现 Ajax 数据的爬取。</li>
+                  <li>将每部电影的数据保存成一个 JSON 数据文件。</li>
+                </ul>
+                <p>由于本节主要讲解 Ajax，所以对于数据存储和加速部分就不再展开详细实现，主要是讲解 Ajax 的分析和爬取实现。</p>
+                <p>好，我们现在就开始吧。</p>
+                <h2 id="3-初步探索"><a href="#3-初步探索" class="headerlink" title="3. 初步探索"></a>3. 初步探索</h2>
+                <p>首先，我们先尝试用之前的 requests 来直接提取页面，看看会得到怎样的结果。用最简单的代码实现一下 requests 获取首页源码的过程，代码如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">'https://spa1.scrape.center/'</span></span><br><span class="line">html = requests.get(url).text</span><br><span class="line">print(html)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下：</p>
+                <figure class="highlight html">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">en</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">utf-8</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">X-UA-Compatible</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">viewport</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1"</span>&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">icon</span> <span class="attr">href</span>=<span class="string">/favicon.ico</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>Scrape | Movie<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">/css/chunk-700f70e1.1126d090.css</span> <span class="attr">rel</span>=<span class="string">prefetch</span>&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">/css/chunk-d1db5eda.0ff76b36.css</span> <span class="attr">rel</span>=<span class="string">prefetch</span>&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">/js/chunk-700f70e1.0548e2b4.js</span> <span class="attr">rel</span>=<span class="string">prefetch</span>&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">/js/chunk-d1db5eda.b564504d.js</span> <span class="attr">rel</span>=<span class="string">prefetch</span>&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">/css/app.ea9d802a.css</span> <span class="attr">rel</span>=<span class="string">preload</span> <span class="attr">as</span>=<span class="string">style</span>&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">/js/app.1435ecd5.js</span> <span class="attr">rel</span>=<span class="string">preload</span> <span class="attr">as</span>=<span class="string">script</span>&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">/js/chunk-vendors.77daf991.js</span> <span class="attr">rel</span>=<span class="string">preload</span> <span class="attr">as</span>=<span class="string">script</span>&gt;</span><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">/css/app.ea9d802a.css</span> <span class="attr">rel</span>=<span class="string">stylesheet</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;<span class="name">noscript</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>We're sorry but portal doesn't work properly without JavaScript enabled. Please enable it to continue.<span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">noscript</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">app</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">/js/chunk-vendors.77daf991.js</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">/js/app.1435ecd5.js</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到，爬取结果就只有这么一点 HTML 内容，而我们在浏览器中打开这个页面，却能看到如图所示的结果：</p>
+                <p><img src="https://cdn.cuiqingcai.com/p2u8d.png" alt="image-20210705004644681"></p>
+                <p>在 HTML 中，我们只能看到在源码中引用了一些 JavaScript 和 CSS 文件，并没有观察到有任何电影数据信息。</p>
+                <p>如果遇到这样的情况，这说明我们现在看到的整个页面便是 JavaScript 渲染得到的，浏览器执行了 HTML 中所引用的 JavaScript 文件，JavaScript 通过调用一些数据加载和页面渲染方法，才最终呈现了图中所示的结果。</p>
+                <p>在一般情况下，这些数据都是通过 Ajax 来加载的， JavaScript 在后台调用这些 Ajax 数据接口，得到数据之后，再把数据进行解析并渲染呈现出来，得到最终的页面。所以说，要想爬取这个页面，我们可以直接爬取 Ajax 接口获取数据就好了。</p>
+                <p>在上一节中，我们已经了解了 Ajax 分析的基本方法，下面我们就来分析一下 Ajax 接口的逻辑并实现数据爬取吧。</p>
+                <h2 id="4-爬取列表页"><a href="#4-爬取列表页" class="headerlink" title="4. 爬取列表页"></a>4. 爬取列表页</h2>
+                <p>首先我们来分析一下列表页的 Ajax 接口逻辑，打开浏览器开发者工具，切换到 Network 面板，勾选上 Preserve Log 并切换到 XHR 选项卡，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/dpns6.png" alt="image-20210705004826230"></p>
+                <p>接着重新刷新页面，再点击第二页、第三页、第四页的按钮，这时候可以观察到页面上的数据发生了变化，同时开发者工具下方就监听到了几个 Ajax 请求，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/x22b1.png" alt="image-20210705004904893"></p>
+                <p>由于我们切换了 4 页，每次翻页也出现了对应的 Ajax 请求，我们可以点击查看其请求详情。观察其请求的 URL 和参数以及响应内容是怎样的，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/1ro2i.png" alt="image-20210705004957327"></p>
+                <p>这里我们点开了最后个结果，观察到其 Ajax 接口请求的 URL 地址为：<a href="https://spa1.scrape.center/api/movie/?limit=10&amp;offset=40，这里有两个参数，一个是" target="_blank" rel="noopener">https://spa1.scrape.center/api/movie/?limit=10&amp;offset=40，这里有两个参数，一个是</a> <code>limit</code>，这里是 10；一个是 <code>offset</code>，这里也是 40。</p>
+                <p>通过多个 Ajax 接口的参数，我们可以观察到这么一个规律：<code>limit</code> 一直为 10，这就正好对应着每页 10 条数据；<code>offset</code> 在依次变大，页面每加 1 页，<code>offset</code> 就加 10，这就代表着页面的数据偏移量，比如第二页的 <code>offset</code> 为 10 则代表着跳过 10 条数据，返回从 11 条数据开始的结果，再加上 <code>limit</code> 的限制，那就是第 11 条至第 20 条数据的结果。</p>
+                <p>接着我们再观察一下响应的数据，切换到 Preview 选项卡，结果如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/0ldhk.png" alt="image-20210705005115792"></p>
+                <p>可以看到，结果就是一些 JSON 数据，它有一个 <code>results</code> 字段，是一个列表，列表中每一个元素都是一个字典。观察一下字典的内容，这里我们正好可以看到有对应的电影数据的字段了，如 <code>name</code>、<code>alias</code>、<code>cover</code>、<code>categories</code>，对比下浏览器中的真实数据，各个内容完全一致，而且这个数据已经非常结构化了，完全就是我们想要爬取的数据，真的是得来全不费工夫。</p>
+                <p>这样的话，我们只需要把所有页面的 Ajax 接口构造出来，所有列表页的数据我们都可以轻松获取到了。</p>
+                <p>我们先定义一些准备工作，导入一些所需的库并定义一些配置，代码如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.INFO,</span><br><span class="line">                    format=<span class="string">'%(asctime)s - %(levelname)s: %(message)s'</span>)</span><br><span class="line"></span><br><span class="line">INDEX_URL = <span class="string">'https://spa1.scrape.center/api/movie/?limit=&#123;limit&#125;&amp;offset=&#123;offset&#125;'</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们引入了 requests 和 logging 库，并定义了 logging 的基本配置，接着我们定义了 <code>INDEX_URL</code>，这里把 <code>limit</code> 和 <code>offset</code> 预留出来了变成了占位符，可以动态传入参数构造一个完整的列表页 URL。</p>
+                <p>下面我们来实现一下详情页的爬取。还是和原来一样，我们先定义一个通用的爬取方法，其代码如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scrape_api</span><span class="params">(url)</span>:</span></span><br><span class="line">    logging.info(<span class="string">'scraping %s...'</span>, url)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(url)</span><br><span class="line">        <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">            <span class="keyword">return</span> response.json()</span><br><span class="line">        logging.error(<span class="string">'get invalid status code %s while scraping %s'</span>, response.status_code, url)</span><br><span class="line">    <span class="keyword">except</span> requests.RequestException:</span><br><span class="line">        logging.error(<span class="string">'error occurred while scraping %s'</span>, url, exc_info=<span class="literal">True</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们定义了一个 <code>scrape_api</code> 方法，和之前不同的是，这个方法专门用来处理 JSON 接口，最后的 <code>response</code> 调用的是 <code>json</code> 方法，它可以解析响应的内容并将其转化成 JSON 字符串。</p>
+                <p>接着在这个基础之上，我们定义一个爬取列表页的方法，其代码如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">LIMIT = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scrape_index</span><span class="params">(page)</span>:</span></span><br><span class="line">    url = INDEX_URL.format(limit=LIMIT, offset=LIMIT * (page - <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> scrape_api(url)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们定义了一个 <code>scrape_index</code> 方法，它接收一个参数 <code>page</code>，该参数代表列表页的页码。</p>
+                <p>这里我们先构造了一个 <code>url</code>，通过字符串的 <code>format</code> 方法，传入 <code>limit</code> 和 <code>offset</code> 的值。这里 <code>limit</code> 就直接使用了全局变量 <code>LIMIT</code> 的值；<code>offset</code> 则是动态计算的，就是页码数减一再乘以 <code>limit</code>，比如第一页 <code>offset</code> 就是 0，第二页 <code>offset</code> 就是 10，以此类推。构造好了 <code>url</code> 之后，直接调用 <code>scrape_api</code> 方法并返回结果即可。</p>
+                <p>这样我们就完成了列表页的爬取，每次请求都会得到一页 10 部的电影数据。</p>
+                <p>由于这时爬取到的数据已经是 JSON 类型了，所以我们不用像之前那样去解析 HTML 代码来提取数据了，爬到的数据就是我们想要的结构化数据，因此解析这一步就可以直接省略啦。</p>
+                <p>到此为止，我们能成功爬取列表页并提取出电影列表信息了。</p>
+                <h2 id="5-爬取详情页"><a href="#5-爬取详情页" class="headerlink" title="5. 爬取详情页"></a>5. 爬取详情页</h2>
+                <p>这时候我们已经可以拿到每一页的电影数据了，但是看看这些数据实际上还缺少了一些我们想要的信息，如剧情简介等信息，所以需要进一步进入到详情页来获取这些内容。</p>
+                <p>这时候点击任意一部电影，如《教父》，进入其详情页，这时可以发现页面的 URL 已经变成了 <a href="https://spa1.scrape.center/detail/40" target="_blank" rel="noopener">https://spa1.scrape.center/detail/40</a>，页面也成功展示了详情页的信息，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/tuum6.png" alt="image-20210705005243372"></p>
+                <p>另外，我们也可以观察到在开发者工具中又出现了一个 Ajax 请求，其 URL 为 <a href="https://spa1.scrape.center/api/movie/40/" target="_blank" rel="noopener">https://spa1.scrape.center/api/movie/40/</a>，通过 Preview 选项卡也能看到 Ajax 请求对应响应的信息，如图 所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/y1o4n.png" alt="image-20200601141202684"><br>稍加观察就可以发现，Ajax 请求的 URL 后面有一个参数是可变的，这个参数就是电影的 <code>id</code>，这里是 40，对应《教父》这部电影。</p>
+                <p>如果我们想要获取 <code>id</code> 为 50 的电影，只需要把 URL 最后的参数改成 50 即可，即 <a href="https://spa1.scrape.center/api/movie/50/" target="_blank" rel="noopener">https://spa1.scrape.center/api/movie/50/</a>，请求这个新的 URL 我们就能获取 <code>id</code> 为 50 的电影所对应的数据了。</p>
+                <p>同样，响应结果也是结构化的 JSON 数据，字段也非常规整，我们直接爬取即可。</p>
+                <p>现在分析好了详情页的数据提取逻辑，那么怎么和列表页关联起来呢？这个 <code>id</code> 哪里来呢？我们回过头来再看看列表页的接口返回数据，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/bzc8x.png" alt=""></p>
+                <p>可以看到，列表页原本的返回数据就带了 <code>id</code> 这个字段，所以我们只需要拿列表页结果中的 <code>id</code> 来构造详情页的 Ajax 请求的 URL 就好了。</p>
+                <p>接着，我们就先定义一个详情页的爬取逻辑，代码如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">DETAIL_URL = <span class="string">'https://spa1.scrape.center/api/movie/&#123;id&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scrape_detail</span><span class="params">(id)</span>:</span></span><br><span class="line">    url = DETAIL_URL.format(id=id)</span><br><span class="line">    <span class="keyword">return</span> scrape_api(url)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们定义了一个 <code>scrape_detail</code> 方法，它接收一个参数 <code>id</code>。这里的实现也非常简单，先根据定义好的 <code>DETAIL_URL</code> 加 <code>id</code> 构造一个真实的详情页 Ajax 请求的 URL，然后直接调用 <code>scrape_api</code> 方法传入这个 <code>url</code> 即可。</p>
+                <p>接着，我们定义一个总的调用方法，将以上方法串联调用起来，代码如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">TOTAL_PAGE = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> page <span class="keyword">in</span> range(<span class="number">1</span>, TOTAL_PAGE + <span class="number">1</span>):</span><br><span class="line">        index_data = scrape_index(page)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> index_data.get(<span class="string">'results'</span>):</span><br><span class="line">            id = item.get(<span class="string">'id'</span>)</span><br><span class="line">            detail_data = scrape_detail(id)</span><br><span class="line">            logging.info(<span class="string">'detail data %s'</span>, detail_data)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们定义了一个 <code>main</code> 方法，首先遍历获取了页码 <code>page</code>，然后把 <code>page</code> 当参数传递给了 <code>scrape_index</code> 方法，得到列表页的数据。接着我们遍历每个列表页的每个结果，获取到每部电影的 <code>id</code>，然后把 <code>id</code> 当作参数传递给 <code>scrape_detail</code> 方法来爬取每部电影的详情数据，并将其赋值为 <code>detail_data</code>，输出即可。</p>
+                <p>运行结果如下：</p>
+                <figure class="highlight 1c">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="number">2020</span>-<span class="number">03</span>-<span class="number">19</span> <span class="number">02</span>:<span class="number">51</span>:<span class="number">55</span>,<span class="number">981</span> - INFO: scraping https:<span class="comment">//spa1.scrape.center/api/movie/?limit=10&amp;offset=0...</span></span><br><span class="line"><span class="number">2020</span>-<span class="number">03</span>-<span class="number">19</span> <span class="number">02</span>:<span class="number">51</span>:<span class="number">56</span>,<span class="number">446</span> - INFO: scraping https:<span class="comment">//spa1.scrape.center/api/movie/1...</span></span><br><span class="line"><span class="number">2020</span>-<span class="number">03</span>-<span class="number">19</span> <span class="number">02</span>:<span class="number">51</span>:<span class="number">56</span>,<span class="number">638</span> - INFO: detail data &#123;'id': <span class="number">1</span>, 'name': '霸王别姬', 'alias': 'Farewell My Concubine', 'cover': 'https://p0.meituan.net/movie/ce4da3e03e655b5b88ed31b5cd<span class="number">7896</span>cf<span class="number">6247</span>2.jpg@464w_644h_1e_1c', 'categories': ['剧情', '爱情'], 'regions': ['中国大陆', '中国香港'], 'actors': [&#123;'name': '张国荣', 'role': '程蝶衣', ...&#125;, ...], 'directors': [&#123;'name': '陈凯歌', 'image': 'https://p0.meituan.net/movie/8f<span class="number">93722520500950</span>67e0e8d58ef3d<span class="number">93915640</span>7.jpg@128w_170h_1e_1c'&#125;], 'score': <span class="number">9.5</span>, 'rank': <span class="number">1</span>, 'minute': <span class="number">171</span>, 'drama': '影片借一出《霸王别姬》的京戏，牵扯出三个人之间一段随时代风云变幻的爱恨情仇。段小楼（张丰毅 饰）与程蝶衣（张国荣 饰）是一对打小一起长大的师兄弟，...', 'photos': [...], 'published_at': '<span class="number">1993-07-26</span>', 'updated_at': '<span class="number">2020-03-07</span>T16:31:36.<span class="number">967843</span>Z'&#125;</span><br><span class="line"><span class="number">2020</span>-<span class="number">03</span>-<span class="number">19</span> <span class="number">02</span>:<span class="number">51</span>:<span class="number">56</span>,<span class="number">640</span> - INFO: scraping https:<span class="comment">//spa1.scrape.center/api/movie/2...</span></span><br><span class="line"><span class="number">2020</span>-<span class="number">03</span>-<span class="number">19</span> <span class="number">02</span>:<span class="number">51</span>:<span class="number">56</span>,<span class="number">813</span> - INFO: detail data &#123;'id': <span class="number">2</span>, 'name': '这个杀手不太冷', 'alias': 'Léon', 'cover': 'https://p1.meituan.net/movie/6bea9af<span class="number">4524</span>dfbd0b668eaa7e187c3df<span class="number">767253</span>.jpg@464w_644h_1e_1c', 'categories': ['剧情', '动作', '犯罪'], 'regions': ['法国'], 'actors': [&#123;'name': '让·雷诺', 'role': '莱昂 Leon', ...&#125;, ...], 'directors': [&#123;'name': '吕克·贝松', 'image': 'https://p0.meituan.net/movie/0e7d67e343bd<span class="number">3372</span>a<span class="number">714093</span>e<span class="number">834002</span>8d<span class="number">4049</span>6.jpg@128w_170h_1e_1c'&#125;], 'score': <span class="number">9.5</span>, 'rank': <span class="number">3</span>, 'minute': <span class="number">110</span>, 'drama': '里昂（让·雷诺 饰）是名孤独的职业杀手，受人雇佣。一天，邻居家小姑娘马蒂尔德（纳塔丽·波特曼 饰）敲开他的房门，要求在他那里暂避杀身之祸。...', 'photos': [...], 'published_at': '<span class="number">1994-09-14</span>', 'updated_at': '<span class="number">2020-03-07</span>T16:31:43.<span class="number">826235</span>Z'&#125;</span><br><span class="line">...</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>由于内容较多，这里省略了部分内容。</p>
+                <p>可以看到，其实整个爬取工作就已经完成了，这里会顺次爬取每一页列表页 Ajax 接口，然后去顺次爬取每部电影的详情页 Ajax 接口，打印出每部电影的 Ajax 接口响应数据，而且都是 JSON 格式。这样，所有电影的详情数据都会被我们爬取到啦。</p>
+                <h2 id="6-保存数据"><a href="#6-保存数据" class="headerlink" title="6. 保存数据"></a>6. 保存数据</h2>
+                <p>好，成功提取到详情页信息之后，我们下一步就要把数据保存起来了。在前面我们学习了 MongoDB 的相关操作，接下来我们就把数据保存到 MongoDB 吧。</p>
+                <p>在这之前，请确保现在有一个可以正常连接和使用的 MongoDB 数据库，这里我就以本地 localhost 的 M 哦能够 DB 数据库为例来进行操作，其运行在 27017 端口上，无用户名和密码。</p>
+                <p>将数据导入 MongoDB 需要用到 PyMongo 这个库。接下来我们把它们引入一下，然后同时定义一下 MongoDB 的连接配置，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">MONGO_CONNECTION_STRING = <span class="string">'mongodb://localhost:27017'</span></span><br><span class="line">MONGO_DB_NAME = <span class="string">'movies'</span></span><br><span class="line">MONGO_COLLECTION_NAME = <span class="string">'movies'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line">client = pymongo.MongoClient(MONGO_CONNECTION_STRING)</span><br><span class="line">db = client[<span class="string">'movies'</span>]</span><br><span class="line">collection = db[<span class="string">'movies'</span>]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里我们声明了几个变量，介绍如下：</p>
+                <ul>
+                  <li>MONGO_CONNECTION_STRING：MongoDB 的连接字符串，里面定义了 MongoDB 的基本连接信息，如 host、port，还可以定义用户名密码等内容。</li>
+                  <li>MONGO_DB_NAME：MongoDB 数据库的名称。</li>
+                  <li>MONGO_COLLECTION_NAME：MongoDB 的集合名称。</li>
+                </ul>
+                <p>这里我们用 MongoClient 声明了一个连接对象，然后依次声明了存储的数据库和集合。</p>
+                <p>接下来，我们再实现一个将数据保存到 MongoDB 的方法，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_data</span><span class="params">(data)</span>:</span></span><br><span class="line">    collection.update_one(&#123;</span><br><span class="line">        <span class="string">'name'</span>: data.get(<span class="string">'name'</span>)</span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        <span class="string">'$set'</span>: data</span><br><span class="line">    &#125;, upsert=<span class="literal">True</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里我们声明了一个 save_data 方法，它接收一个 data 参数，也就是我们刚才提取的电影详情信息。在方法里面，我们调用了 update_one 方法，第一个参数是查询条件，即根据 name 进行查询；第二个参数就是 data 对象本身，就是所有的数据，这里我们用 <code>$set</code> 操作符表示更新操作；第三个参数很关键，这里实际上是 upsert 参数，如果把这个设置为 True，则可以做到存在即更新，不存在即插入的功能，更新会根据第一个参数设置的 name 字段，所以这样可以防止数据库中出现同名的电影数据。</p>
+                <blockquote>
+                  <p>注：实际上电影可能有同名，但该场景下的爬取数据没有同名情况，当然这里更重要的是实现 MongoDB 的去重操作。</p>
+                </blockquote>
+                <p>好的，那么接下来 main 方法稍微改写一下就好了，改写如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> page <span class="keyword">in</span> range(<span class="number">1</span>, TOTAL_PAGE + <span class="number">1</span>):</span><br><span class="line">        index_data = scrape_index(page)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> index_data.get(<span class="string">'results'</span>):</span><br><span class="line">            id = item.get(<span class="string">'id'</span>)</span><br><span class="line">            detail_data = scrape_detail(id)</span><br><span class="line">            logging.info(<span class="string">'detail data %s'</span>, detail_data)</span><br><span class="line">            save_data(detail_data)</span><br><span class="line">            logging.info(<span class="string">'data saved successfully'</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里就是加了 save_data 方法的调用，并加了一些日志信息。</p>
+                <p>重新运行，我们看下输出结果：</p>
+                <figure class="highlight 1c">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="number">2020</span>-<span class="number">03</span>-<span class="number">19</span> <span class="number">02</span>:<span class="number">51</span>:<span class="number">06</span>,<span class="number">323</span> - INFO: scraping https:<span class="comment">//spa1.scrape.center/api/movie/?limit=10&amp;offset=0...</span></span><br><span class="line"><span class="number">2020</span>-<span class="number">03</span>-<span class="number">19</span> <span class="number">02</span>:<span class="number">51</span>:<span class="number">06</span>,<span class="number">440</span> - INFO: scraping https:<span class="comment">//spa1.scrape.center/api/movie/1...</span></span><br><span class="line"><span class="number">2020</span>-<span class="number">03</span>-<span class="number">19</span> <span class="number">02</span>:<span class="number">51</span>:<span class="number">06</span>,<span class="number">551</span> - INFO: detail data &#123;'id': <span class="number">1</span>, 'name': '霸王别姬', 'alias': 'Farewell My Concubine', 'cover': 'https://p0.meituan.net/movie/ce4da3e03e655b5b88ed31b5cd<span class="number">7896</span>cf<span class="number">6247</span>2.jpg@464w_644h_1e_1c', 'categories': ['剧情', '爱情'], 'regions': ['中国大陆', '中国香港'], 'actors': [&#123;'name': '张国荣', 'role': '程蝶衣', 'image': 'https://p0.meituan.net/movie/5de69a492dcbd3f4b<span class="number">014503</span>d4e95d46c<span class="number">2883</span>7.jpg@128w_170h_1e_1c'&#125;, ..., &#123;'name': '方征', 'role': '嫖客', 'image': 'https://p1.meituan.net/movie/<span class="number">39687137</span>b23bc<span class="number">9727</span>b47fd24bdcc579b<span class="number">9761</span>8.jpg@128w_170h_1e_1c'&#125;], 'directors': [&#123;'name': '陈凯歌', 'image': 'https://p0.meituan.net/movie/8f<span class="number">93722520500950</span>67e0e8d58ef3d<span class="number">93915640</span>7.jpg@128w_170h_1e_1c'&#125;], 'score': <span class="number">9.5</span>, 'rank': <span class="number">1</span>, 'minute': <span class="number">171</span>, 'drama': '影片借一出《霸王别姬》的京戏，牵扯出三个人之间一段随时代风云变幻的爱恨情仇。段小楼（张丰毅 饰）与程蝶衣（张国荣 饰）是一对打小一起长大的师兄弟，两人一个演生，一个饰旦，一向配合天衣无缝，尤其一出《霸王别姬》，更是誉满京城，为此，两人约定合演一辈子《霸王别姬》。但两人对戏剧与人生关系的理解有本质不同，段小楼深知戏非人生，程蝶衣则是人戏不分。段小楼在认为该成家立业之时迎娶了名妓菊仙（巩俐 饰），致使程蝶衣认定菊仙是可耻的第三者，使段小楼做了叛徒，自此，三人围绕一出《霸王别姬》生出的爱恨情仇战开始随着时代风云的变迁不断升级，终酿成悲剧。', 'photos': ['https://p0.meituan.net/movie/45be<span class="number">438368</span>bb291e501dc<span class="number">523092</span>f0ac<span class="number">819342</span>4.jpg@106w_106h_1e_1c', ..., 'https://p0.meituan.net/movie/0d<span class="number">95210742</span>9db<span class="number">3029</span>b64bf4f25bd<span class="number">76266169</span>6.jpg@106w_106h_1e_1c'], 'published_at': '<span class="number">1993-07-26</span>', 'updated_at': '<span class="number">2020-03-07</span>T16:31:36.<span class="number">967843</span>Z'&#125;</span><br><span class="line"><span class="number">2020</span>-<span class="number">03</span>-<span class="number">19</span> <span class="number">02</span>:<span class="number">51</span>:<span class="number">06</span>,<span class="number">583</span> - INFO: data saved successfully</span><br><span class="line"><span class="number">2020</span>-<span class="number">03</span>-<span class="number">19</span> <span class="number">02</span>:<span class="number">51</span>:<span class="number">06</span>,<span class="number">583</span> - INFO: scraping https:<span class="comment">//spa1.scrape.center/api/movie/2...</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>由于输出内容较多，这里省略了部分内容。</p>
+                <p>我们可以看到这里我们成功爬取到了数据，并且提示了数据存储成功的信息，没有任何报错信息。</p>
+                <p>接下来我们使用 Robo 3T 连接 MongoDB 数据库看下爬取的结果，由于我使用的是本地的 MongoDB，所以在 Robo 3T 里面我直接输入 localhost 的连接信息即可，这里请替换成自己的 MongoDB 连接信息，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/imum3.png" alt=""></p>
+                <p>连接之后我们便可以在 movies 这个数据库，movies 这个集合下看到我们刚才爬取的数据了，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/ammal.png" alt=""></p>
+                <p>可以看到数据就是以 JSON 格式存储的，一条数据就对应一部电影的信息，各种嵌套信息也一目了然，同时第三列还有数据类型标识。</p>
+                <p>这样就证明我们的数据就成功存储到 MongoDB 里了。</p>
+                <h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2>
+                <p>本节中我们通过一个案例来体会了 Ajax 分析和爬取的基本流程，希望大家通过本节能够更加熟悉 Ajax 的分析和爬取实现。</p>
+                <p>另外，我们也观察到，由于 Ajax 接口大部分返回的是 JSON 数据，所以在一定程度上可以避免一些数据提取的工作，这也在一定程度上减轻了工作量。</p>
+                <p>本节代码：<a href="https://github.com/Python3WebSpider/ScrapeSpa1。" target="_blank" rel="noopener">https://github.com/Python3WebSpider/ScrapeSpa1。</a></p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202252.html" rel="bookmark">【2022 年】Python3 爬虫教程 - Ajax 分析方法</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202251.html" rel="bookmark">【2022 年】Python3 爬虫教程 - 什么是Ajax？</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/5052.html" rel="bookmark">Python3网络爬虫开发实战教程</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202212.html" rel="bookmark">【2022 年】Python3 爬虫教程 - HTTP 基本原理</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202213.html" rel="bookmark">【2022 年】Python3 爬虫教程 - Web网页基础</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+                  <a href="/tags/%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 爬虫教程</a>
+                  <a href="/tags/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 网络爬虫</a>
+                  <a href="/tags/2022/" rel="tag"><i class="fa fa-tag"></i> 2022</a>
+                  <a href="/tags/Ajax/" rel="tag"><i class="fa fa-tag"></i> Ajax</a>
+                  <a href="/tags/%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> 实战</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/202251.html" rel="prev" title="【2022 年】Python3 爬虫教程 - 什么是Ajax？">
+                      <i class="fa fa-chevron-left"></i> 【2022 年】Python3 爬虫教程 - 什么是Ajax？ </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/202262.html" rel="next" title="【2022 年】Python3 爬虫教程 - 新兴动态渲染工具 Playwright 的使用"> 【2022 年】Python3 爬虫教程 - 新兴动态渲染工具 Playwright 的使用 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#1-准备工作"><span class="nav-number">1.</span> <span class="nav-text">1. 准备工作</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#2-爬取目标"><span class="nav-number">2.</span> <span class="nav-text">2. 爬取目标</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#3-初步探索"><span class="nav-number">3.</span> <span class="nav-text">3. 初步探索</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#4-爬取列表页"><span class="nav-number">4.</span> <span class="nav-text">4. 爬取列表页</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#5-爬取详情页"><span class="nav-number">5.</span> <span class="nav-text">5. 爬取详情页</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#6-保存数据"><span class="nav-number">6.</span> <span class="nav-text">6. 保存数据</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#7-总结"><span class="nav-number">7.</span> <span class="nav-text">7. 总结</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'dae47a36a7b08e53bf146617afcecbca',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

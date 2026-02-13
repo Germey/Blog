@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="9.4 ADSL 拨号代理 我们尝试维护过一个代理池。代理池可以挑选出许多可用代理，但是常常其稳定性不高、响应速度慢，而且这些代理通常是公共代理，可能不止一人同时使用，其 IP 被封的概率很大。另外，这些代理可能有效时间比较短，虽然代理池一直在筛选，但如果没有及时更新状态，也有可能获取到不可用的代理。 如果要追求更加稳定的代理，就需要购买专有代理或者自己搭建代理服务器。但是服务器一般都是固定的 I">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="[Python3网络爬虫开发实战] 9.4–ADSL 拨号代理">
+  <meta property="og:url" content="https://cuiqingcai.com/8361.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="9.4 ADSL 拨号代理 我们尝试维护过一个代理池。代理池可以挑选出许多可用代理，但是常常其稳定性不高、响应速度慢，而且这些代理通常是公共代理，可能不止一人同时使用，其 IP 被封的概率很大。另外，这些代理可能有效时间比较短，虽然代理池一直在筛选，但如果没有及时更新状态，也有可能获取到不可用的代理。 如果要追求更加稳定的代理，就需要购买专有代理或者自己搭建代理服务器。但是服务器一般都是固定的 I">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-052822.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-052827.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-052841.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-052851.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-052902.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-052948.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-052912.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-053042.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-053047.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-053052.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-053057.jpg">
+  <meta property="article:published_time" content="2019-12-03T03:07:04.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.305Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/2019-10-20-052822.jpg">
+  <link rel="canonical" href="https://cuiqingcai.com/8361.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>[Python3网络爬虫开发实战] 9.4–ADSL 拨号代理 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/8361.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> [Python3网络爬虫开发实战] 9.4–ADSL 拨号代理 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2019-12-03 11:07:04" itemprop="dateCreated datePublished" datetime="2019-12-03T11:07:04+08:00">2019-12-03</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/8361.html" class="post-meta-item leancloud_visitors" data-flag-title="[Python3网络爬虫开发实战] 9.4–ADSL 拨号代理" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>10k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>9 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <h1 id="9-4-ADSL-拨号代理"><a href="#9-4-ADSL-拨号代理" class="headerlink" title="9.4 ADSL 拨号代理"></a>9.4 ADSL 拨号代理</h1>
+                <p>我们尝试维护过一个代理池。代理池可以挑选出许多可用代理，但是常常其稳定性不高、响应速度慢，而且这些代理通常是公共代理，可能不止一人同时使用，其 IP 被封的概率很大。另外，这些代理可能有效时间比较短，虽然代理池一直在筛选，但如果没有及时更新状态，也有可能获取到不可用的代理。 如果要追求更加稳定的代理，就需要购买专有代理或者自己搭建代理服务器。但是服务器一般都是固定的 IP，我们总不能搭建 100 个代理就用 100 台服务器吧，这显然是不现实的。 所以，ADSL 动态拨号主机就派上用场了。下面我们来了解一下 ADSL 拨号代理服务器的相关设置。</p>
+                <h3 id="1-什么是-ADSL"><a href="#1-什么是-ADSL" class="headerlink" title="1. 什么是 ADSL"></a>1. 什么是 ADSL</h3>
+                <p>ADSL（Asymmetric Digital Subscriber Line，非对称数字用户环路），它的上行和下行带宽不对称，它采用频分复用技术把普通的电话线分成了电话、上行和下行 3 个相对独立的信道，从而避免了相互之间的干扰。 ADSL 通过拨号的方式上网，需要输入 ADSL 账号和密码，每次拨号就更换一个 IP。IP 分布在多个 A 段，如果 IP 都能使用，则意味着 IP 量级可达千万。如果我们将 ADSL 主机作为代理，每隔一段时间主机拨号就换一个 IP，这样可以有效防止 IP 被封禁。另外，主机的稳定性很好，代理响应速度很快。</p>
+                <h3 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2. 准备工作"></a>2. 准备工作</h3>
+                <p>首先需要成功安装 Redis 数据库并启动服务，另外还需要安装 requests、redis-py、Tornado 库。如果没有安装，读者可以参考第一章的安装说明。</p>
+                <h3 id="3-购买主机"><a href="#3-购买主机" class="headerlink" title="3. 购买主机"></a>3. 购买主机</h3>
+                <p>我们先购买一台动态拨号 VPS 主机，这样的主机服务商相当多。在这里使用了云立方，官方网站：<a href="http://www.yunlifang.cn/dynamicvps.asp" target="_blank" rel="noopener">http://www.yunlifang.cn/dynamicvps.asp</a>。 建议选择电信线路。可以自行选择主机配置，主要考虑带宽是否满足需求。 然后进入拨号主机的后台，预装一个操作系统，如图 9-10 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-052822.jpg" alt=""> 图 9-10 预装操作系统 推荐安装 CentOS 7 系统。 然后找到远程管理面板  远程连接的用户名和密码，也就是 SSH 远程连接服务器的信息。比如我使用的 IP 和端口是 153.36.65.214:20063，用户名是 root。命令行下输入如下内容：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">ssh <span class="symbol">root@</span><span class="number">153.36</span><span class="number">.65</span><span class="number">.214</span> -p <span class="number">20063</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>输入管理密码，就可以连接上远程服务器了。 进入之后，我们发现一个可用的脚本文件 ppp.sh，这是拨号初始化的脚本。运行此脚本会提示输入拨号的用户名和密码，然后它就开始各种拨号配置。一次配置成功，后面拨号就不需要重复输入用户名和密码。 运行 ppp.sh 脚本，输入用户名、密码等待它的配置完成，如图 9-11 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-052827.jpg" alt=""> 图 9-11 配置页面 提示成功之后就可以进行拨号了。注意，在拨号之前测试 ping 任何网站都是不通的，因为当前网络还没联通。输入如下拨号命令：</p>
+                <figure class="highlight crmsh">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">adsl-<span class="literal">start</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>拨号命令成功运行，没有报错信息，耗时约几秒。接下来再去 ping 外网就可以通了。 如果要停止拨号，可以输入如下命令：</p>
+                <figure class="highlight arduino">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">adsl-<span class="built_in">stop</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>之后，可以发现又连不通网络了，如图 9-12 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-052841.jpg" alt=""> 图 9-12 拨号建立连接 断线重播的命令就是二者组合起来，先执行 adsl-stop，再执行 adsl-start。每次拨号，ifconfig 命令观察主机的 IP，发现主机的 IP 一直在变化，网卡名称叫作 ppp0，如图 9-13 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-052851.jpg" alt=""> 图 9-13 网络设备信息 接下来，我们要做两件事：一是怎样将主机设置为代理服务器，二是怎样实时获取拨号主机的 IP。</p>
+                <h3 id="4-设置代理服务器"><a href="#4-设置代理服务器" class="headerlink" title="4. 设置代理服务器"></a>4. 设置代理服务器</h3>
+                <p>在 Linux 下搭建 HTTP 代理服务器，推荐 TinyProxy 和 Squid，配置都非常简单。在这里我们以 TinyProxy 为例来讲解一下怎样搭建代理服务器。</p>
+                <h4 id="安装-TinyProxy"><a href="#安装-TinyProxy" class="headerlink" title="安装 TinyProxy"></a>安装 TinyProxy</h4>
+                <p>第一步就是安装 TinyProxy 软件。在这里我使用的系统是 CentOS，所以使用 yum 来安装。如果是其他系统，如 Ubuntu，可以选择 apt-get 等命令安装。 命令行执行 yum 安装指令：</p>
+                <figure class="highlight sql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">yum <span class="keyword">install</span> -y epel-<span class="keyword">release</span></span><br><span class="line">yum <span class="keyword">update</span> -y</span><br><span class="line">yum <span class="keyword">install</span> -y tinyproxy</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行完成之后就可以完成 tinyproxy 的安装了。</p>
+                <h4 id="配置-TinyProxy"><a href="#配置-TinyProxy" class="headerlink" title="配置 TinyProxy"></a>配置 TinyProxy</h4>
+                <p>TinyProxy 安装完成之后还要配置一下才可以用作代理服务器。我们需要编辑配置文件，此文件一般的路径是 /etc/tinyproxy/tinyproxy.conf。 可以看到有一行</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Port <span class="number">8888</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里可以设置代理的端口，默认是 8888。 继续向下找到如下代码：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Allow <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这行代码表示被允许连接的主机 IP。如果希望连接任何主机，那就直接将这行代码注释即可。在这里我们选择直接注释，也就是任何主机都可以使用这台主机作为代理服务器。 修改为如下代码：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"># Allow <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>设置完成之后重启 TinyProxy 即可：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">systemctl</span> <span class="selector-tag">enable</span> <span class="selector-tag">tinyproxy</span><span class="selector-class">.service</span></span><br><span class="line"><span class="selector-tag">systemctl</span> <span class="selector-tag">restart</span> <span class="selector-tag">tinyproxy</span><span class="selector-class">.service</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>防火墙开放该端口：</p>
+                <figure class="highlight pgsql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">iptables -I <span class="keyword">INPUT</span> -p tcp <span class="comment">--dport 8888 -j ACCEPT</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>当然如果想直接关闭防火墙也可以：</p>
+                <figure class="highlight arduino">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">systemctl <span class="built_in">stop</span> firewalld.service</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样我们就完成了 TinyProxy 的配置了。</p>
+                <h4 id="验证-TinyProxy"><a href="#验证-TinyProxy" class="headerlink" title="验证 TinyProxy"></a>验证 TinyProxy</h4>
+                <p>首先，用 ifconfig 查看当前主机的 IP。比如，当前我的主机拨号 IP 为 112.84.118.216，在其他的主机运行测试一下。 用 curl 命令设置代理请求 httpbin，检测代理是否生效。</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -x <span class="number">112.84</span><span class="number">.118</span><span class="number">.216</span>:<span class="number">8888</span> httpbin.org/<span class="keyword">get</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如图 9-14 所示： <img src="https://cdn.cuiqingcai.com/2019-10-20-052902.jpg" alt=""> 图 9-14 运行结果 如果有正常的结果输出，并且 origin 的值为代理 IP 的地址，就证明 TinyProxy 配置成功了。</p>
+                <h3 id="5-动态获取-IP"><a href="#5-动态获取-IP" class="headerlink" title="5. 动态获取 IP"></a>5. 动态获取 IP</h3>
+                <p>现在可以执行命令让主机动态切换 IP，也在主机上搭建了代理服务器。我们只需要知道拨号后的 IP 就可以使用代理。 我们考虑到，在一台主机拨号切换 IP 的间隙代理是不可用的，在这拨号的几秒时间内如果有第二台主机顶替第一台主机，那就可以解决拨号间隙代理无法使用的问题了。所以我们要设计的架构必须要考虑支持多主机的问题。 假如有 10 台拨号主机同时需要维护，而爬虫需要使用这 10 台主机的代理，那么在爬虫端维护的开销是非常大的。如果爬虫在不同的机器上运行，那么每个爬虫必须要获得这 10 台拨号主机的配置，这显然是不理想的。 为了更加方便地使用代理，我们可以像上文的代理池一样定义一个统一的代理接口，爬虫端只需要配置代理接口即可获取可用代理。要搭建一个接口，就势必需要一台服务器，而接口的数据从哪里获得呢，当然最理想的还是选择数据库。 比如我们需要同时维护 10 台拨号主机，每台拨号主机都会定时拨号，那这样每台主机在某个时刻可用的代理只有一个，所以我们没有必要存储之前的拨号代理，因为重新拨号之后之前的代理已经不能用了，所以只需要将之前的代理更新其内容就好了。数据库要做的就是定时对每台主机的代理进行更新，而更新时又需要拨号主机的唯一标识，根据主机标识查出这条数据，然后将这条数据对应的代理更新。 所以数据库端就需要存储一个主机标识到代理的映射关系。那么很自然地我们就会想到关系型数据库，如 MySQL 或者 Redis 的 Hash 存储，只需存储一个映射关系，不需要很多字段，而且 Redis 比 MySQL 效率更高、使用更方便，所以最终选定的存储方式就是 Redis 的 Hash。</p>
+                <h3 id="6-存储模块"><a href="#6-存储模块" class="headerlink" title="6. 存储模块"></a>6. 存储模块</h3>
+                <p>那么接下来我们要做可被远程访问的 Redis 数据库，各个拨号机器只需要将各自的主机标识和当前 IP 和端口（也就是代理）发送给数据库就好了。 先定义一个操作 Redis 数据库的类，示例如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> redis</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment"># Redis 数据库 IP</span></span><br><span class="line">REDIS_HOST = <span class="string">'remoteaddress'</span></span><br><span class="line"><span class="comment"># Redis 数据库密码，如无则填 None</span></span><br><span class="line">REDIS_PASSWORD = <span class="string">'foobared'</span></span><br><span class="line"><span class="comment"># Redis 数据库端口</span></span><br><span class="line">REDIS_PORT = <span class="number">6379</span></span><br><span class="line"><span class="comment"># 代理池键名</span></span><br><span class="line">PROXY_KEY = <span class="string">'adsl'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RedisClient</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD, proxy_key=PROXY_KEY)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        初始化 Redis 连接</span></span><br><span class="line"><span class="string">        :param host: Redis 地址</span></span><br><span class="line"><span class="string">        :param port: Redis 端口</span></span><br><span class="line"><span class="string">        :param password: Redis 密码</span></span><br><span class="line"><span class="string">        :param proxy_key: Redis 哈希表名</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.db = redis.StrictRedis(host=host, port=port, password=password, decode_responses=<span class="literal">True</span>)</span><br><span class="line">        self.proxy_key = proxy_key</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set</span><span class="params">(self, name, proxy)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        设置代理</span></span><br><span class="line"><span class="string">        :param name: 主机名称</span></span><br><span class="line"><span class="string">        :param proxy: 代理</span></span><br><span class="line"><span class="string">        :return: 设置结果</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> self.db.hset(self.proxy_key, name, proxy)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        获取代理</span></span><br><span class="line"><span class="string">        :param name: 主机名称</span></span><br><span class="line"><span class="string">        :return: 代理</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> self.db.hget(self.proxy_key, name)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        获取代理总数</span></span><br><span class="line"><span class="string">        :return: 代理总数</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> self.db.hlen(self.proxy_key)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">remove</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        删除代理</span></span><br><span class="line"><span class="string">        :param name: 主机名称</span></span><br><span class="line"><span class="string">        :return: 删除结果</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> self.db.hdel(self.proxy_key, name)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">names</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        获取主机名称列表</span></span><br><span class="line"><span class="string">        :return: 获取主机名称列表</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> self.db.hkeys(self.proxy_key)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">proxies</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        获取代理列表</span></span><br><span class="line"><span class="string">        :return: 代理列表</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> self.db.hvals(self.proxy_key)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">random</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        随机获取代理</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        proxies = self.proxies()</span><br><span class="line">        <span class="keyword">return</span> random.choice(proxies)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">all</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        获取字典</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span><span class="keyword">return</span> self.db.hgetall(self.proxy_key)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里定义了一个 RedisClient 类，在<strong>init</strong>() 方法中初始化了 Redis 连接，其中 REDIS_HOST 就是远程 Redis 的地址，REDIS_PASSWORD 是密码，REDIS_PORT 是端口，PROXY_KEY 是存储代理的散列表的键名。 接下来定义了一个 set() 方法，这个方法用来向散列表添加映射关系。映射是从主机标识到代理的映射，比如一台主机的标识为 adsl1，当前的代理为 118.119.111.172:8888，那么散列表中就会存储一个 key 为 adsl1、value 为 118.119.111.172:8888 的映射，Hash 结构如图 9-15 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-052948.jpg" alt=""> 图 9-15 Hash 结构 如果有多台主机，只需要向 Hash 中添加映射即可。 另外，get() 方法就是从散列表中取出某台主机对应的代理。remove() 方法则是从散列表中移除对应的主机的代理。还有 names()、proxies()、all() 方法则是分别获取散列表中的主机列表、代理列表及所有主机代理映射。count() 方法则是返回当前散列表的大小，也就是可用代理的数目。 最后还有一个比较重要的方法 random()，它随机从散列表中取出一个可用代理，类似前面代理池的思想，确保每个代理都能被取到。 如果要对数据库进行操作，只需要初始化 RedisClient 对象，然后调用它的 set() 或者 remove() 方法，即可对散列表进行设置和删除。</p>
+                <h3 id="7-拨号模块"><a href="#7-拨号模块" class="headerlink" title="7. 拨号模块"></a>7. 拨号模块</h3>
+                <p>接下来要做的就是拨号，并把新的 IP 保存到 Redis 散列表里。 首先是拨号定时，它分为定时拨号和非定时拨号两种选择。 非定时拨号：最好的方法就是向该主机发送一个信号，然后主机就启动拨号，但这样做的话，我们首先要搭建一个重新拨号的接口，如搭建一个 Web 接口，请求该接口即进行拨号，但开始拨号之后，此时主机的状态就从在线转为离线，而此时的 Web 接口也就相应失效了，拨号过程无法再连接，拨号之后接口的 IP 也变了，所以我们无法通过接口来方便地控制拨号过程和获取拨号结果，下次拨号还得改变拨号请求接口，所以非定时拨号的开销还是比较大的。 定时拨号：我们只需要在拨号主机上运行定时脚本即可，每隔一段时间拨号一次，更新 IP，然后将 IP 在 Redis 散列表中更新即可，非常简单易用，另外可以适当将拨号频率调高一点，减少短时间内 IP 被封的可能性。 在这里选择定时拨号。 接下来就是获取 IP。获取拨号后的 IP 非常简单，只需要调用 ifconfig 命令，然后解析出对应网卡的 IP 即可。 获取了 IP 之后，我们还需要进行有效性检测。拨号主机可以自己检测，比如可以利用 requests 设置自身的代理请求外网，如果成功，那么证明代理可用，然后再修改 Redis 散列表，更新代理。 需要注意，由于在拨号的间隙拨号主机是离线状态，而此时 Redis 散列表中还存留了上次的代理，一旦这个代理被取用了，该代理是无法使用的。为了避免这个情况，每台主机在拨号之前还需要将自身的代理从 Redis 散列表中移除。 这样基本的流程就理顺了，我们用如下代码实现：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">import re</span><br><span class="line">import time</span><br><span class="line">import requests</span><br><span class="line"><span class="keyword">from</span> requests.exceptions import ConnectionError, ReadTimeout</span><br><span class="line"><span class="keyword">from</span> db import RedisClient</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拨号网卡</span></span><br><span class="line">ADSL_IFNAME = <span class="string">'ppp0'</span></span><br><span class="line"><span class="comment"># 测试 URL</span></span><br><span class="line">TEST_URL = <span class="string">'http://www.baidu.com'</span></span><br><span class="line"><span class="comment"># 测试超时时间</span></span><br><span class="line">TEST_TIMEOUT = 20</span><br><span class="line"><span class="comment"># 拨号间隔</span></span><br><span class="line">ADSL_CYCLE = 100</span><br><span class="line"><span class="comment"># 拨号出错重试间隔</span></span><br><span class="line">ADSL_ERROR_CYCLE = 5</span><br><span class="line"><span class="comment"># ADSL 命令</span></span><br><span class="line">ADSL_BASH = <span class="string">'adsl-stop;adsl-start'</span></span><br><span class="line"><span class="comment"># 代理运行端口</span></span><br><span class="line">PROXY_PORT = 8888</span><br><span class="line"><span class="comment"># 客户端唯一标识</span></span><br><span class="line">CLIENT_NAME = <span class="string">'adsl1'</span></span><br><span class="line"></span><br><span class="line">class Sender():</span><br><span class="line">    def get_ip(self, <span class="attribute">ifname</span>=ADSL_IFNAME):</span><br><span class="line">        <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">        获取本机 IP</span></span><br><span class="line"><span class="string">        :param ifname: 网卡名称</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        "</span><span class="string">""</span></span><br><span class="line">        (status, output) = subprocess.getstatusoutput(<span class="string">'ifconfig'</span>)</span><br><span class="line">        <span class="keyword">if</span> status == 0:</span><br><span class="line">            pattern = re.compile(ifname + <span class="string">'.*?inet.*?(d+.d+.d+.d+).*?netmask'</span>, re.S)</span><br><span class="line">            result = re.search(pattern, output)</span><br><span class="line">            <span class="keyword">if</span> result:</span><br><span class="line">               <span class="built_in"> ip </span>= result.group(1)</span><br><span class="line">                return ip</span><br><span class="line"></span><br><span class="line">    def test_proxy(self, proxy):</span><br><span class="line">        <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">        测试代理</span></span><br><span class="line"><span class="string">        :param proxy: 代理</span></span><br><span class="line"><span class="string">        :return: 测试结果</span></span><br><span class="line"><span class="string">        "</span><span class="string">""</span></span><br><span class="line">        try:</span><br><span class="line">            response = requests.<span class="builtin-name">get</span>(TEST_URL, proxies=&#123;</span><br><span class="line">                <span class="string">'http'</span>: <span class="string">'http://'</span> + proxy,</span><br><span class="line">                <span class="string">'https'</span>: <span class="string">'https://'</span> + proxy</span><br><span class="line">            &#125;, <span class="attribute">timeout</span>=TEST_TIMEOUT)</span><br><span class="line">            <span class="keyword">if</span> response.status_code == 200:</span><br><span class="line">                return <span class="literal">True</span></span><br><span class="line">        except (ConnectionError, ReadTimeout):</span><br><span class="line">            return <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    def remove_proxy(self):</span><br><span class="line">        <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">        移除代理</span></span><br><span class="line"><span class="string">        :return: None</span></span><br><span class="line"><span class="string">        "</span><span class="string">""</span></span><br><span class="line">        self.redis = RedisClient()</span><br><span class="line">        self.redis.<span class="builtin-name">remove</span>(CLIENT_NAME)</span><br><span class="line">        <span class="builtin-name">print</span>(<span class="string">'Successfully Removed Proxy'</span>)</span><br><span class="line"></span><br><span class="line">    def set_proxy(self, proxy):</span><br><span class="line">        <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">        设置代理</span></span><br><span class="line"><span class="string">        :param proxy: 代理</span></span><br><span class="line"><span class="string">        :return: None</span></span><br><span class="line"><span class="string">        "</span><span class="string">""</span></span><br><span class="line">        self.redis = RedisClient()</span><br><span class="line">        <span class="keyword">if</span> self.redis.<span class="builtin-name">set</span>(CLIENT_NAME, proxy):</span><br><span class="line">            <span class="builtin-name">print</span>(<span class="string">'Successfully Set Proxy'</span>, proxy)</span><br><span class="line"></span><br><span class="line">    def adsl(self):</span><br><span class="line">        <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">        拨号主进程</span></span><br><span class="line"><span class="string">        :return: None</span></span><br><span class="line"><span class="string">        "</span><span class="string">""</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="builtin-name">print</span>(<span class="string">'ADSL Start, Remove Proxy, Please wait'</span>)</span><br><span class="line">            self.remove_proxy()</span><br><span class="line">            (status, output) = subprocess.getstatusoutput(ADSL_BASH)</span><br><span class="line">            <span class="keyword">if</span> status == 0:</span><br><span class="line">                <span class="builtin-name">print</span>(<span class="string">'ADSL Successfully'</span>)</span><br><span class="line">               <span class="built_in"> ip </span>= self.get_ip()</span><br><span class="line">                <span class="keyword">if</span> ip:</span><br><span class="line">                    <span class="builtin-name">print</span>(<span class="string">'Now IP'</span>, ip)</span><br><span class="line">                    <span class="builtin-name">print</span>(<span class="string">'Testing Proxy, Please Wait'</span>)</span><br><span class="line">                   <span class="built_in"> proxy </span>= <span class="string">'&#123;ip&#125;:&#123;port&#125;'</span>.format(<span class="attribute">ip</span>=ip, <span class="attribute">port</span>=PROXY_PORT)</span><br><span class="line">                    <span class="keyword">if</span> self.test_proxy(proxy):</span><br><span class="line">                        <span class="builtin-name">print</span>(<span class="string">'Valid Proxy'</span>)</span><br><span class="line">                        self.set_proxy(proxy)</span><br><span class="line">                        <span class="builtin-name">print</span>(<span class="string">'Sleeping'</span>)</span><br><span class="line">                        time.sleep(ADSL_CYCLE)</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        <span class="builtin-name">print</span>(<span class="string">'Invalid Proxy'</span>)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="builtin-name">print</span>(<span class="string">'Get IP Failed, Re Dialing'</span>)</span><br><span class="line">                    time.sleep(ADSL_ERROR_CYCLE)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="builtin-name">print</span>(<span class="string">'ADSL Failed, Please Check'</span>)</span><br><span class="line">                time.sleep(ADSL_ERROR_CYCLE)</span><br><span class="line">def <span class="builtin-name">run</span>():</span><br><span class="line">    sender = Sender()</span><br><span class="line">    sender.adsl()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里定义了一个 Sender 类，它的主要作用是执行定时拨号，并将新的 IP 测试通过之后更新到远程 Redis 散列表里。 主方法是 adsl() 方法，它首先是一个无限循环，循环体内就是拨号的逻辑。 adsl() 方法首先调用了 remove_proxy() 方法，将远程 Redis 散列表中本机对应的代理移除，避免拨号时本主机的残留代理被取到。 接下来利用 subprocess 模块来执行拨号脚本，拨号脚本很简单，就是 stop 之后再 start，这里将拨号的命令直接定义成了 ADSL_BASH。 随后程序又调用 get_ip() 方法，通过 subprocess 模块执行获取 IP 的命令 ifconfig，然后根据网卡名称获取了当前拨号网卡的 IP 地址，即拨号后的 IP。 再接下来就需要测试代理有效性了。程序首先调用了 test_proxy() 方法，将自身的代理设置好，使用 requests 库来用代理连接 TEST_URL。在此 TEST_URL 设置为百度，如果请求成功，则证明代理有效。 如果代理有效，再调用 set_proxy() 方法将 Redis 散列表中本机对应的代理更新，设置时需要指定本机唯一标识和本机当前代理。本机唯一标识可随意配置，其对应的变量为 CLIENT_NAME，保证各台拨号主机不冲突即可。本机当前代理则由拨号后的新 IP 加端口组合而成。通过调用 RedisClient 的 set() 方法，参数 name 为本机唯一标识，proxy 为拨号后的新代理，执行之后便可以更新散列表中的本机代理了。 建议至少配置两台主机，这样在一台主机的拨号间隙还有另一台主机的代理可用。拨号主机的数量不限，越多越好。 在拨号主机上执行拨号脚本，示例输出如图 9-16 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-052912.jpg" alt=""> 图 9-16 示例输出 首先移除了代理，再进行拨号，拨号完成之后获取新的 IP，代理检测成功之后就设置到 Redis 散列表中，然后等待一段时间再重新进行拨号。 我们添加了多台拨号主机，这样就有多个稳定的定时更新的代理可用了。Redis 散列表会实时更新各台拨号主机的代理，如图 9-17 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-053042.jpg" alt=""> 图 9-17 Hash 结构 图中所示是四台 ADSL 拨号主机配置并运行后的散列表的内容，表中的代理都是可用的。</p>
+                <h3 id="8-接口模块"><a href="#8-接口模块" class="headerlink" title="8. 接口模块"></a>8. 接口模块</h3>
+                <p>目前为止，我们已经成功实时更新拨号主机的代理。不过还缺少一个模块，那就是接口模块。像之前的代理池一样，我们也定义一些接口来获取代理，如 random 获取随机代理、count 获取代理个数等。 我们选用 Tornado 来实现，利用 Tornado 的 Server 模块搭建 Web 接口服务，示例如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> tornado.ioloop</span><br><span class="line"><span class="keyword">import</span> tornado.web</span><br><span class="line"><span class="keyword">from</span> tornado.web <span class="keyword">import</span> RequestHandler, Application</span><br><span class="line"></span><br><span class="line"><span class="comment"># API 端口</span></span><br><span class="line">API_PORT = <span class="number">8000</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainHandler</span><span class="params">(RequestHandler)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initialize</span><span class="params">(self, redis)</span>:</span></span><br><span class="line">        self.redis = redis</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, api=<span class="string">''</span>)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> api:</span><br><span class="line">            links = [<span class="string">'random'</span>, <span class="string">'proxies'</span>, <span class="string">'names'</span>, <span class="string">'all'</span>, <span class="string">'count'</span>]</span><br><span class="line">            self.write(<span class="string">'&lt;h4&gt;Welcome to ADSL Proxy API&lt;/h4&gt;'</span>)</span><br><span class="line">            <span class="keyword">for</span> link <span class="keyword">in</span> links:</span><br><span class="line">                self.write(<span class="string">'&lt;a href='</span> + link + <span class="string">'&gt;'</span> + link + <span class="string">'&lt;/a&gt;&lt;br&gt;'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> api == <span class="string">'random'</span>:</span><br><span class="line">            result = self.redis.random()</span><br><span class="line">            <span class="keyword">if</span> result:</span><br><span class="line">                self.write(result)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> api == <span class="string">'names'</span>:</span><br><span class="line">            result = self.redis.names()</span><br><span class="line">            <span class="keyword">if</span> result:</span><br><span class="line">                self.write(json.dumps(result))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> api == <span class="string">'proxies'</span>:</span><br><span class="line">            result = self.redis.proxies()</span><br><span class="line">            <span class="keyword">if</span> result:</span><br><span class="line">                self.write(json.dumps(result))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> api == <span class="string">'all'</span>:</span><br><span class="line">            result = self.redis.all()</span><br><span class="line">            <span class="keyword">if</span> result:</span><br><span class="line">                self.write(json.dumps(result))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> api == <span class="string">'count'</span>:</span><br><span class="line">            self.write(str(self.redis.count()))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">server</span><span class="params">(redis, port=API_PORT, address=<span class="string">''</span>)</span>:</span></span><br><span class="line">    application = Application([(<span class="string">r'/'</span>, MainHandler, dict(redis=redis)),</span><br><span class="line">        (<span class="string">r'/(.*)'</span>, MainHandler, dict(redis=redis)),</span><br><span class="line">    ])</span><br><span class="line">    application.listen(port, address=address)</span><br><span class="line">    print(<span class="string">'ADSL API Listening on'</span>, port)</span><br><span class="line">    tornado.ioloop.IOLoop.instance().start()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里定义了 5 个接口，random 获取随机代理，names 获取主机列表，proxies 获取代理列表，all 获取代理映射，count 获取代理数量。 程序启动之后便会在 API_PORT 端口上运行 Web 服务，主页面如图 9-18 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-053047.jpg" alt=""> 图 9-18 主页面 访问 proxies 接口可以获得所有代理列表，如图 9-19 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-053052.jpg" alt=""> 图 9-19 代理列表 访问 random 接口可以获取随机可用代理，如图 9-20 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-053057.jpg" alt=""> 图 9-20 随机代理 我们只需将接口部署到服务器上，即可通过 Web 接口获取可用代理，获取方式和代理池类似。</p>
+                <h3 id="9-本节代码"><a href="#9-本节代码" class="headerlink" title="9. 本节代码"></a>9. 本节代码</h3>
+                <p>本节代码地址为：<a href="https://github.com/Python3WebSpider/AdslProxy" target="_blank" rel="noopener">https://github.com/Python3WebSpider/AdslProxy</a>。</p>
+                <h3 id="10-结语"><a href="#10-结语" class="headerlink" title="10. 结语"></a>10. 结语</h3>
+                <p>本节介绍了 ADSL 拨号代理的搭建过程。通过这种代理，我们可以无限次更换 IP，而且线路非常稳定，抓取效果好很多。</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/8353.html" rel="prev" title="[Python3网络爬虫开发实战] 13.4–Spider 的用法">
+                      <i class="fa fa-chevron-left"></i> [Python3网络爬虫开发实战] 13.4–Spider 的用法 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/8364.html" rel="next" title="[Python3网络爬虫开发实战] 13.1–Scrapy 框架介绍"> [Python3网络爬虫开发实战] 13.1–Scrapy 框架介绍 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#9-4-ADSL-拨号代理"><span class="nav-number">1.</span> <span class="nav-text">9.4 ADSL 拨号代理</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是-ADSL"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 什么是 ADSL</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#2-准备工作"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 准备工作</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-购买主机"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 购买主机</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#4-设置代理服务器"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. 设置代理服务器</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#安装-TinyProxy"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">安装 TinyProxy</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#配置-TinyProxy"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">配置 TinyProxy</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#验证-TinyProxy"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">验证 TinyProxy</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#5-动态获取-IP"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. 动态获取 IP</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#6-存储模块"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. 存储模块</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#7-拨号模块"><span class="nav-number">1.0.7.</span> <span class="nav-text">7. 拨号模块</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#8-接口模块"><span class="nav-number">1.0.8.</span> <span class="nav-text">8. 接口模块</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#9-本节代码"><span class="nav-number">1.0.9.</span> <span class="nav-text">9. 本节代码</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#10-结语"><span class="nav-number">1.0.10.</span> <span class="nav-text">10. 结语</span></a></li>
+                    </ol>
+                  </li>
+                </ol>
+                </li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '89bfd0d3fc990bb95ba275c57f24d754',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="验证码,爬虫,网络爬虫,2022,Python 爬虫,OpenCV">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="爬虫系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="【2022 年】Python3 爬虫教程 - OpenCV 图像匹配识别滑动验证码缺口">
+  <meta property="og:url" content="https://cuiqingcai.com/202292.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="爬虫系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/imm7t.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/6s9pe.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/6c095.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/eu5ko.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/hpetq.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/egiex.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/r9g5i.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/6s7ys.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/e361d.png">
+  <meta property="article:published_time" content="2022-03-01T00:55:45.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.308Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="验证码">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="网络爬虫">
+  <meta property="article:tag" content="2022">
+  <meta property="article:tag" content="Python 爬虫">
+  <meta property="article:tag" content="OpenCV">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/imm7t.png">
+  <link rel="canonical" href="https://cuiqingcai.com/202292.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>【2022 年】Python3 爬虫教程 - OpenCV 图像匹配识别滑动验证码缺口 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/202292.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 【2022 年】Python3 爬虫教程 - OpenCV 图像匹配识别滑动验证码缺口 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2022-03-01 08:55:45" itemprop="dateCreated datePublished" datetime="2022-03-01T08:55:45+08:00">2022-03-01</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span> ， <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a>
+                    </span>
+                  </span>
+                  <span id="/202292.html" class="post-meta-item leancloud_visitors" data-flag-title="【2022 年】Python3 爬虫教程 - OpenCV 图像匹配识别滑动验证码缺口" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>6.9k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>6 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <blockquote>
+                  <p>爬虫系列文章总目录：<a href="https://cuiqingcai.com/17777.html">【2022 年】Python3 爬虫学习教程</a>，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">《Python3 网络爬虫开发实战（第二版）》</a>一书了，<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">点击了解详情</a>。</p>
+                </blockquote>
+                <p>上一节我们学习了利用 OCR 技术对图形验证码进行识别的方法，但随着互联网技术的发展，各种新型验证码层出不穷，最具有代表性的便是滑动验证码了。</p>
+                <p>本节我们首先介绍下滑动验证码的验证流程，然后介绍一个简易的利用图像处理技术来识别滑动验证码缺口的方法。</p>
+                <h2 id="1-滑动验证码"><a href="#1-滑动验证码" class="headerlink" title="1. 滑动验证码"></a>1. 滑动验证码</h2>
+                <p>说起滑动验证码，比较有代表性的服务商有极验、网易易盾等，验证码效果如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/imm7t.png" alt="极验"></p>
+                <p><img src="https://cdn.cuiqingcai.com/6s9pe.png" alt="网易易盾"></p>
+                <p>验证码下方通常会有一个滑轨，同时带有文字提示「拖动滑块完成拼图」，我们需要按住滑轨上的滑块向右拖拽，这时候验证码最左侧的滑块便会跟随滑轨上的滑块向右移动，在验证码右侧会有一个滑块缺口，我们需要恰好将滑块拖动到目标缺口处，这时候就算验证成功了，验证成功的效果如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/6c095.png" alt="image-20210418114633889"></p>
+                <p>所以，如果我们想要用爬虫来自动化完成这一流程的话，关键步骤有如下两个：</p>
+                <ul>
+                  <li>识别出目标缺口的位置</li>
+                  <li>将缺口滑动到对应位置</li>
+                </ul>
+                <p>其中第二步的实现有多种方式，比如我们可以用 Selenium 等自动化工具模拟完成这个流程，验证并登录成功之后获取对应的 Cookies 或 Token 等信息再进行后续的操作，但这种方法运行效率会比较低。另一种方法便是直接逆向验证码背后的 JavaScript 逻辑，将缺口信息直接传给 JavaScript 代码执行获取一些类似“密钥”的信息，再利用这些“密钥”进行下一步的操作。</p>
+                <blockquote>
+                  <p>注意：由于某些出于安全考虑的原因，本书不会再介绍第二步的具体操作，而是只针对于第一步的技术问题进行讲解。</p>
+                </blockquote>
+                <p>因此，本节只会针对于第一步即如何识别出目标缺口的位置进行介绍，即给定一张验证码图片，如何用图像识别的方法识别出缺口的位置。</p>
+                <h2 id="2-基本原理"><a href="#2-基本原理" class="headerlink" title="2.基本原理"></a>2.基本原理</h2>
+                <p>本节我们会介绍利用 OpenCV 进行缺口识别的方法，输入一张带有缺口的验证码图片，输出缺口的位置（一般为缺口左侧横坐标）。</p>
+                <p>比如输入的验证码图片如下：</p>
+                <p><img src="https://cdn.cuiqingcai.com/eu5ko.png" alt="captcha"></p>
+                <p>最后输出的识别结果如下：</p>
+                <p><img src="https://cdn.cuiqingcai.com/hpetq.png" alt="image_label"></p>
+                <p>本节介绍的方法是利用 OpenCV 进行基本的图像处理来实现的，主要步骤包括：</p>
+                <ul>
+                  <li>对验证码图片进行高斯模糊滤波处理，消除部分噪声干扰</li>
+                  <li>对验证码图片应用边缘检测算法，通过调整相应阈值识别出滑块边缘</li>
+                  <li>对上一步得到的各个边缘轮廓信息，通过对比面积、位置、周长等特征筛选出最可能的轮廓位置，得到缺口位置。</li>
+                </ul>
+                <h2 id="3-准备工作"><a href="#3-准备工作" class="headerlink" title="3.准备工作"></a>3.准备工作</h2>
+                <p>在本节开始之前请确保已经安装好了 python-opencv 库，安装方式如下：</p>
+                <figure class="highlight cmake">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">pip3 <span class="keyword">install</span> python-opencv</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果安装出现问题，可以参考详细的安装步骤：<a href="https://setup.scrape.center/python-opencv。" target="_blank" rel="noopener">https://setup.scrape.center/python-opencv。</a></p>
+                <p>另外建议提前准备一张滑动验证码图片，样例图片下载地址：<a href="https://github.com/Python3WebSpider/CrackSlideCaptcha/blob/cv/captcha.png，当然也可以从" target="_blank" rel="noopener">https://github.com/Python3WebSpider/CrackSlideCaptcha/blob/cv/captcha.png，当然也可以从</a> <a href="https://captcha1.scrape.center/" target="_blank" rel="noopener">https://captcha1.scrape.center/</a> 自行截取，最终的图片如上文所示。</p>
+                <h2 id="4-基础知识"><a href="#4-基础知识" class="headerlink" title="4.基础知识"></a>4.基础知识</h2>
+                <p>在真正开始介绍之前，我们先需要了解一些 OpenCV 的基础 API，以帮助我们更好地理解整个原理。</p>
+                <h3 id="高斯滤波"><a href="#高斯滤波" class="headerlink" title="高斯滤波"></a>高斯滤波</h3>
+                <p>高斯滤波是用来去除图像中的一些噪声的，基本效果其实就是把一张图像变得模糊化，减少一些图像噪声干扰，从而为下一步的边缘检测做好铺垫。</p>
+                <p>OpenCV 提供了一个用于实现高斯模糊的方法，叫做 GaussianBlur，方法声明如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GaussianBlur</span><span class="params">(src, ksize, sigmaX, dst=None, sigmaY=None, borderType=None)</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>比较重要的参数介绍如下：</p>
+                <ul>
+                  <li>src：即需要被处理的图像。</li>
+                  <li>ksize：进行高斯滤波处理所用的高斯内核大小，它需要是一个元组，包含 x 和 y 两个维度。</li>
+                  <li>sigmaX：表示高斯核函数在 X 方向的的标准偏差。</li>
+                  <li>sigmaY：表示高斯核函数在 Y 方向的的标准偏差，若 sigmaY 为 0，就将它设为 sigmaX，如果 sigmaX 和 sigmaY 都是 0，那么 sigmaX 和 sigmaY 就通过 ksize 计算得出。</li>
+                </ul>
+                <p>这里 ksize 和 sigmaX 是必传参数，对本节样例图片，ksize 我们可以取 <code>(5, 5)</code>，sigmaX 可以取 0。</p>
+                <p>经过高斯滤波处理后，图像会变得模糊，效果如下：</p>
+                <p><img src="https://cdn.cuiqingcai.com/egiex.png" alt="image_gaussian_blur"></p>
+                <h3 id="边缘检测"><a href="#边缘检测" class="headerlink" title="边缘检测"></a>边缘检测</h3>
+                <p>由于验证码目标缺口通常具有比较明显的边缘，所以借助于一些边缘检测算法并通过调整阈值是可以找出它的位置的。目前应用比较广泛的边缘检测算法是 Canny，它是 John F. Canny 于 1986 年开发出来的一个多级边缘检测算法，效果还是不错的，OpenCV 也对此算法进行了实现，方法名称就叫做 Canny，声明如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Canny</span><span class="params">(image, threshold1, threshold2, edges=None, apertureSize=None, L2gradient=None)</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>比较重要的参数介绍如下：</p>
+                <ul>
+                  <li>image：即需要被处理的图像。</li>
+                  <li>threshold1、threshold2：两个阈值，分别为最小和最大判定临界点。</li>
+                  <li>apertureSize：用于查找图像渐变的 Sobel 内核的大小。</li>
+                  <li>L2gradient：指定用于查找梯度幅度的等式。</li>
+                </ul>
+                <p>通常来说，我们只需要设定 threshold1 和 threshold2 即可，其数值大小需要视不同图像而定，比如本节样例图片可以分别取 200 和 450。</p>
+                <p>经过边缘检测算法处理后，一些比较明显的边缘信息会被保留下来，效果如下：</p>
+                <p><img src="https://cdn.cuiqingcai.com/r9g5i.png" alt="image-20210418142819176"></p>
+                <h3 id="轮廓提取"><a href="#轮廓提取" class="headerlink" title="轮廓提取"></a>轮廓提取</h3>
+                <p>进行边缘检测处理后，我们可以看到图像中会保留有比较明显的边缘信息，下一步我们可以用 OpenCV 将边缘轮廓提取出来，这里需要用到 findContours 方法，方法声明如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findContours</span><span class="params">(image, mode, method, contours=None, hierarchy=None, offset=None)</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>比较重要的参数介绍如下：</p>
+                <ul>
+                  <li>image：即需要被处理的图像。</li>
+                  <li>mode：定义轮廓的检索模式，详情见 OpenCV 的 RetrievalModes 的介绍。</li>
+                  <li>method：定义轮廓的近似方法，详情见 OpenCV 的 ContourApproximationModes 的介绍。</li>
+                </ul>
+                <p>在这里，我们选取 mode 为 RETR_CCOMP，method 为 CHAIN_APPROX_SIMPLE，具体的选型标准可以参考 OpenCV 的文档介绍，这里不再展开讲解。</p>
+                <h3 id="外接矩形"><a href="#外接矩形" class="headerlink" title="外接矩形"></a>外接矩形</h3>
+                <p>提取到轮廓之后，为了方便进行判定，我们可以将轮廓的外界矩形计算出来，这样方便我们根据面积、位置、周长等参数进行判定，以得出该轮廓是不是目标滑块的轮廓。</p>
+                <p>计算外接矩形使用的方法是 boundingRect，方法声明如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">boundingRect</span><span class="params">(array)</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>只有一个参数：</p>
+                <ul>
+                  <li>array：可以是一个灰度图或者 2D 点集，这里可以传入轮廓信息。</li>
+                </ul>
+                <p>经过轮廓信息和外接矩形判定之后，我们可以得到类似如下结果：</p>
+                <p><img src="https://cdn.cuiqingcai.com/6s7ys.png" alt="image-20210418142752172"></p>
+                <p>可以看到这样就能成功获取各个轮廓的外接矩形，接下来我们根据外接矩形的面积、和位置就能筛选出缺口对应的位置了。</p>
+                <h3 id="轮廓面积"><a href="#轮廓面积" class="headerlink" title="轮廓面积"></a>轮廓面积</h3>
+                <p>现在已经得到了各个外接矩形，但是很明显有些矩形不是我们想要的，我们可以根据面积、周长等来进行筛选，这里就需要用到计算面积的方法，叫做 contourArea，方法定义如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">contourArea</span><span class="params">(contour, oriented=None)</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>参数介绍如下：</p>
+                <ul>
+                  <li>contour：轮廓信息。</li>
+                  <li>oriented：面向区域标识符。有默认值 False。若为 True，该函数返回一个带符号的面积值，正负取决于轮廓的方向（顺时针还是逆时针）。若为 False，表示以绝对值返回。</li>
+                </ul>
+                <p>返回结果就是轮廓的面积。</p>
+                <h3 id="轮廓周长"><a href="#轮廓周长" class="headerlink" title="轮廓周长"></a>轮廓周长</h3>
+                <p>同样，周长的计算也有对应的方法，叫做 arcLength，方法定义如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">arcLength</span><span class="params">(curve, closed)</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>参数介绍如下：</p>
+                <ul>
+                  <li>curve：轮廓信息。</li>
+                  <li>closed：表示轮廓是否封闭。</li>
+                </ul>
+                <p>返回结果就是轮廓的周长。</p>
+                <p>以上内容介绍了一些 OpenCV 内置方法，了解了这些方法的用法，我们可以对下文的具体实现有更透彻的理解。</p>
+                <h2 id="5-缺口识别"><a href="#5-缺口识别" class="headerlink" title="5.缺口识别"></a>5.缺口识别</h2>
+                <p>接下来我们就开始真正实现一下缺口识别算法了。</p>
+                <p>首先我们定义高斯滤波、边缘检测、轮廓提取的三个方法，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">GAUSSIAN_BLUR_KERNEL_SIZE = (<span class="number">5</span>, <span class="number">5</span>)</span><br><span class="line">GAUSSIAN_BLUR_SIGMA_X = <span class="number">0</span></span><br><span class="line">CANNY_THRESHOLD1 = <span class="number">200</span></span><br><span class="line">CANNY_THRESHOLD2 = <span class="number">450</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_gaussian_blur_image</span><span class="params">(image)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> cv2.GaussianBlur(image, GAUSSIAN_BLUR_KERNEL_SIZE, GAUSSIAN_BLUR_SIGMA_X)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_canny_image</span><span class="params">(image)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> cv2.Canny(image, CANNY_THRESHOLD1, CANNY_THRESHOLD2)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_contours</span><span class="params">(image)</span>:</span></span><br><span class="line">    contours, _ = cv2.findContours(image, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line">    <span class="keyword">return</span> contours</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>三个方法介绍如下：</p>
+                <ul>
+                  <li>get_gaussian_blur_image：传入待处理图像信息，返回高斯滤波处理后的图像，ksize 定义为 <code>(5, 5)</code>，sigmaX 定义为 0。</li>
+                  <li>get_canny_image：传入待处理图像信息，返回边缘检测处理后的图像，threshold1 和 threshold2 分别定义为 200 和 450。</li>
+                  <li>get_contours：传入待处理图像信息，返回检测到的轮廓信息，这里 mode 设定为 RETR_CCOMP，method 设定为 CHAIN_APPROX_SIMPLE。</li>
+                </ul>
+                <p>原始待识别验证码命名为 captcha.png，接下来我们分别调用以上方法对验证码进行处理：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">image_raw = cv2.imread(<span class="string">'captcha.png'</span>)</span><br><span class="line">image_height, image_width, _ = image_raw.shape</span><br><span class="line">image_gaussian_blur = get_gaussian_blur_image(image_raw)</span><br><span class="line">image_canny = get_canny_image(image_gaussian_blur)</span><br><span class="line">contours = get_contours(image_canny)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>原始图片我们命名为 image_raw 变量，读取图片之后获取其宽高像素信息，接着调用了 get_gaussian_blur_image 方法进行高斯滤波处理，返回结果命名为 image_gaussian_blur，接着将 image_gaussian_blur 传给 get_canny_image 方法进行边缘检测处理，返回结果命名为 image_canny，接着调用 get_contours 方法得到各个边缘的轮廓信息，赋值为 contours 变量。</p>
+                <p>好，得到各个轮廓信息之后，我们便需要根据各个轮廓的外接矩形的面积、周长、位置来筛选我们想要结果了。</p>
+                <p>所以，我们需要先确定怎么来筛选，比如面积我们可以设定一个范围，周长设定一个范围，缺口位置设定一个范围，通过实际测量，我们可以得出目标缺口的外接矩形的高度大约是验证码高度的 0.25 倍，宽度大约是验证码宽度的 0.15 倍。在允许误差 20% 的情况下，根据验证码的宽高信息我们大约可以计算出面积、周长的范围，同时缺口位置（缺口左侧）也有一个最小偏移值，比如最小偏移是验证码宽度的 0.2 倍，最大偏移是验证码宽度的 0.85 倍。综合这些内容，我们可以定义三个阈值方法：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_contour_area_threshold</span><span class="params">(image_width, image_height)</span>:</span></span><br><span class="line">    contour_area_min = (image_width * <span class="number">0.15</span>) * (image_height * <span class="number">0.25</span>) * <span class="number">0.8</span></span><br><span class="line">    contour_area_max = (image_width * <span class="number">0.15</span>) * (image_height * <span class="number">0.25</span>) * <span class="number">1.2</span></span><br><span class="line">    <span class="keyword">return</span> contour_area_min, contour_area_max</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_arc_length_threshold</span><span class="params">(image_width, image_height)</span>:</span></span><br><span class="line">    arc_length_min = ((image_width * <span class="number">0.15</span>) + (image_height * <span class="number">0.25</span>)) * <span class="number">2</span> * <span class="number">0.8</span></span><br><span class="line">    arc_length_max = ((image_width * <span class="number">0.15</span>) + (image_height * <span class="number">0.25</span>)) * <span class="number">2</span> * <span class="number">1.2</span></span><br><span class="line">    <span class="keyword">return</span> arc_length_min, arc_length_max</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_offset_threshold</span><span class="params">(image_width)</span>:</span></span><br><span class="line">    offset_min = <span class="number">0.2</span> * image_width</span><br><span class="line">    offset_max = <span class="number">0.85</span> * image_width</span><br><span class="line">    <span class="keyword">return</span> offset_min, offset_max</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>三个方法介绍如下：</p>
+                <ul>
+                  <li>get_contour_area_threshold：定义目标轮廓的下限和上限面积，分别为 contour_area_min 和 contour_area_max。</li>
+                  <li>get_arc_length_threshold：定义目标轮廓的下限和上限周长，分别为 arc_length_min 和 arc_length_max。</li>
+                  <li>get_offset_threshold：定义目标轮廓左侧的下限和上限偏移量，分别为 offset_min 和 offset_max。</li>
+                </ul>
+                <p>最后我们只需要遍历各个轮廓信息，根据上述限定条件进行筛选，最后得出目标轮廓信息即可，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">contour_area_min, contour_area_max = get_contour_area_threshold(image_width, image_height)</span><br><span class="line">arc_length_min, arc_length_max = get_arc_length_threshold(image_width, image_height)</span><br><span class="line">offset_min, offset_max = get_offset_threshold(image_width)</span><br><span class="line">offset = <span class="literal">None</span></span><br><span class="line"><span class="keyword">for</span> contour <span class="keyword">in</span> contours:</span><br><span class="line">    x, y, w, h = cv2.boundingRect(contour)</span><br><span class="line">    <span class="keyword">if</span> contour_area_min &lt; cv2.contourArea(contour) &lt; contour_area_max <span class="keyword">and</span> \</span><br><span class="line">            arc_length_min &lt; cv2.arcLength(contour, <span class="literal">True</span>) &lt; arc_length_max <span class="keyword">and</span> \</span><br><span class="line">            offset_min &lt; x &lt; offset_max:</span><br><span class="line">        cv2.rectangle(image_raw, (x, y), (x + w, y + h), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line">        offset = x</span><br><span class="line">cv2.imwrite(<span class="string">'image_label.png'</span>, image_raw)</span><br><span class="line">print(<span class="string">'offset'</span>, offset)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们首先调用了 get_contour_area_threshold、get_arc_length_threshold、get_offset_threshold 方法获取了轮廓的判定阈值，然后遍历了 contours 根据这些阈值进行了筛选，最终得到的外接矩形的 x 值就是目标缺口的偏移量。</p>
+                <p>同时目标缺口的外接矩形我们也调用了 rectangle 方法进行了标注，最终将其保存为 image_label.png 图像。</p>
+                <p>最终运行结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">offset <span class="number">163</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>同时得到输出的 image_label.png 文件如下：</p>
+                <p><img src="https://cdn.cuiqingcai.com/e361d.png" alt="image_label"></p>
+                <p>这样我们就成功提取出来了目标滑块的位置了，本节的问题得以解决。</p>
+                <blockquote>
+                  <p>注意：出于安全考虑，本书只针对于第一步 - 识别验证码缺口位置的的技术问题进行讲解，关于怎样去模拟滑动或者绕过验证码，本书不再进行介绍，可以自行搜索相关资料探索。</p>
+                </blockquote>
+                <h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2>
+                <p>本节我们介绍了利用 OpenCV 来识别滑动验证码缺口的方法，其中涉及到了一些关键的图像处理和识别技术，如高斯模糊、边缘检测、轮廓提取等算法。了解了基本的图像识别技术后，我们可以举一反三，将其应用到其他类型的工作上，也会很有帮助。</p>
+                <p>本节代码：<a href="https://github.com/Python3WebSpider/CrackSlideCaptcha/tree/cv，注意这里是" target="_blank" rel="noopener">https://github.com/Python3WebSpider/CrackSlideCaptcha/tree/cv，注意这里是</a> cv 分支。</p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202293.html" rel="bookmark">【2022 年】Python3 爬虫教程 - 深度学习识别滑动验证码缺口</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/2022104.html" rel="bookmark">【2022 年】Python3 爬虫教程 - ADSL 拨号代理的使用</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/2022113.html" rel="bookmark">【2022 年】Python3 爬虫教程 - JavaScript Hook 的用法</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/2022112.html" rel="bookmark">【2022 年】Python3 爬虫教程 - JavaScript 逆向调试常用技巧</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202291.html" rel="bookmark">【2022 年】Python3 爬虫教程 - OCR 识别图形验证码</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/%E9%AA%8C%E8%AF%81%E7%A0%81/" rel="tag"><i class="fa fa-tag"></i> 验证码</a>
+                  <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+                  <a href="/tags/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 网络爬虫</a>
+                  <a href="/tags/2022/" rel="tag"><i class="fa fa-tag"></i> 2022</a>
+                  <a href="/tags/Python-%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> Python 爬虫</a>
+                  <a href="/tags/OpenCV/" rel="tag"><i class="fa fa-tag"></i> OpenCV</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/202291.html" rel="prev" title="【2022 年】Python3 爬虫教程 - OCR 识别图形验证码">
+                      <i class="fa fa-chevron-left"></i> 【2022 年】Python3 爬虫教程 - OCR 识别图形验证码 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/36054.html" rel="next" title="缓解拖延症的好办法"> 缓解拖延症的好办法 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#1-滑动验证码"><span class="nav-number">1.</span> <span class="nav-text">1. 滑动验证码</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#2-基本原理"><span class="nav-number">2.</span> <span class="nav-text">2.基本原理</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#3-准备工作"><span class="nav-number">3.</span> <span class="nav-text">3.准备工作</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#4-基础知识"><span class="nav-number">4.</span> <span class="nav-text">4.基础知识</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#高斯滤波"><span class="nav-number">4.1.</span> <span class="nav-text">高斯滤波</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#边缘检测"><span class="nav-number">4.2.</span> <span class="nav-text">边缘检测</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#轮廓提取"><span class="nav-number">4.3.</span> <span class="nav-text">轮廓提取</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#外接矩形"><span class="nav-number">4.4.</span> <span class="nav-text">外接矩形</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#轮廓面积"><span class="nav-number">4.5.</span> <span class="nav-text">轮廓面积</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#轮廓周长"><span class="nav-number">4.6.</span> <span class="nav-text">轮廓周长</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#5-缺口识别"><span class="nav-number">5.</span> <span class="nav-text">5.缺口识别</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#6-总结"><span class="nav-number">6.</span> <span class="nav-text">6. 总结</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '9bca0f4a8f0f39cb5c90c3d35128a6bc',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

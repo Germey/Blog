@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="最近我在公司负责的业务已经正式投入上线了，既然是线上环境，那么就需要保证其可用性。 我负责的业务其中就包括一个 Web Service，我需要保证 Service 的每个接口都是可用的，如果某个时间流量大了或者服务器挂掉了，那需要第一时间通知到我。 这时候可能我有这些需求：    定时测试和监控服务器每个接口是否是可用的，包括返回的数据、状态码是不是正确的。   我可以随时查看到每个接口的响应时间">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="如何用 JMeter + Kubernetes + Prometheus + Grafana + Alert Manager 实时监控你的服务器">
+  <meta property="og:url" content="https://cuiqingcai.com/9205.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="最近我在公司负责的业务已经正式投入上线了，既然是线上环境，那么就需要保证其可用性。 我负责的业务其中就包括一个 Web Service，我需要保证 Service 的每个接口都是可用的，如果某个时间流量大了或者服务器挂掉了，那需要第一时间通知到我。 这时候可能我有这些需求：    定时测试和监控服务器每个接口是否是可用的，包括返回的数据、状态码是不是正确的。   我可以随时查看到每个接口的响应时间">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2020-04-14-072518.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2020-04-14-073257.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2020-04-14-074606.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2020-04-14-075007.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2020-04-14-085848.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2020-04-14-092834.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2020-04-14-093102.png">
+  <meta property="article:published_time" content="2020-04-21T04:51:08.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.318Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/2020-04-14-072518.png">
+  <link rel="canonical" href="https://cuiqingcai.com/9205.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>如何用 JMeter + Kubernetes + Prometheus + Grafana + Alert Manager 实时监控你的服务器 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/9205.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 如何用 JMeter + Kubernetes + Prometheus + Grafana + Alert Manager 实时监控你的服务器 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2020-04-21 12:51:08" itemprop="dateCreated datePublished" datetime="2020-04-21T12:51:08+08:00">2020-04-21</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">技术杂谈</span></a>
+                    </span>
+                  </span>
+                  <span id="/9205.html" class="post-meta-item leancloud_visitors" data-flag-title="如何用 JMeter + Kubernetes + Prometheus + Grafana + Alert Manager 实时监控你的服务器" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>7.9k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>7 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>最近我在公司负责的业务已经正式投入上线了，既然是线上环境，那么就需要保证其可用性。 我负责的业务其中就包括一个 Web Service，我需要保证 Service 的每个接口都是可用的，如果某个时间流量大了或者服务器挂掉了，那需要第一时间通知到我。 这时候可能我有这些需求：</p>
+                <ol>
+                  <li>定时测试和监控服务器每个接口是否是可用的，包括返回的数据、状态码是不是正确的。</li>
+                  <li>我可以随时查看到每个接口的响应时间、可用率等信息，最好是有可视化的图表呈现，一目了然。</li>
+                  <li>如果接口的错误率超过某一阈值一段时间，及时通知我，包括电话、短信或邮件。</li>
+                  <li>需要主动去监测接口的可用性，注意这里是主动监测而不是被动监测，不是等用户用的时候报错才提醒我。比如在没有用户用的时候，我也能及时知道每个接口的可用性。</li>
+                </ol>
+                <blockquote>
+                  <p>其实，国内的一些服务商已经提供了这些功能，即主动型服务监控，比如「监控宝」，但我并不想用这些服务，一是需要额外花钱，二是数据上并不安全，三是我需要把我的服务集成到公司内部的监控体系下。</p>
+                </blockquote>
+                <p>有了这些需求，我就结合公司内部现有的一些基础设施先确定一个技术选型，然后实施就好了。 目前公司内部使用的一套监控体系是基于 Kubernetes + Prometheus + Grafana + Alert Manager 的，那么基于我的需求来分析下我怎样利用这一套体系来搭建我想要的监控设施。 解决方案分析：</p>
+                <ol>
+                  <li>首先关于第四个需求比较特殊，现有的监控体系其实已经可以做到服务的被动监测，比如某个 Service 的 API 被调用了，那么相应的调用数据都会被汇总到 Prometheus 上面，Prometheus 里面会计算接口调用的可用率，如果一段时间内如果错误率超过一定阈值，那就报警，追错误的时候去查下 log 就好了。但其实这个不能做到主动监测，比如在凌晨三四点，当没有用户使用的时候，如果这时候服务器出现问题了，我也需要第一时间能知道，所以我需要有一个定时的主动监测程序来实时监测我的所有接口是否是可用的。要做到主动监控，那我一定需要一个接口监测程序定时运行并校验每个接口的结果，这里我选用的就是开源的 JMeter，它大多数情况下是被用来做压测的，但绝对能满足接口调用和检测的需求，只要我定时跑 JMeter 来检测就好了。</li>
+                  <li>关于第一个需求，我需要监测我的每个接口都是可用的，包括返回的数据也需要是想要的结果。这时候我们可能想到直接跑一些 test case 之类的，但这些其实大多数都是在部署或运行时校验的，如果我要实时跑或者 test case 有 update 了，也不太方便。另外为了写接口测试的时候，如果没有现成的工具，我们可能得写一堆代码，每个接口都写一个，包括 GET 请求的 URL 参数、POST 请求的 Body 信息等等，然后校验接口的返回结果是不是对的，也太麻烦了。所以我们需要找到一个可用的工具来帮助我们快速地完成这些功能。所以，我选择的 JMeter 也提供了可视化界面，我只需要配置一些接口和参数即可，另外它还带有定时器、断言、动态参数、多线程等功能，这样我们也可以做到并发测试、随机等待、动态构造请求参数、返回结果判断等功能了。</li>
+                  <li>其次再说第二个和第三个需求，其实用现有的 Prometheus + Grafana 就能解决了，这里最关键的则是我的接口监控结果能发给 Prometheus 才行。既然我选用了 JMeter，那么我怎样把 JMeter 的数据发送给 Prometheus 呢？这里需要借助于 JMeter 的一个插件 jmeter-prometheus-plugin，<a href="https://github.com/johrstrom/jmeter-prometheus-plugin，利用它就能将" target="_blank" rel="noopener">https://github.com/johrstrom/jmeter-prometheus-plugin，利用它就能将</a> JMeter 变成一个 Data Exporter，Prometheus 来抓取就好了。</li>
+                </ol>
+                <p>所以，综上所述，我利用的一套服务监控体系就是 JMeter + Kubernetes + Prometheus + Grafana + Alert Manager，那么就开干吧。 这里先放一张图，看下最终的监控 Grafana 面板吧： <img src="https://cdn.cuiqingcai.com/2020-04-14-072518.png" alt="image-20200414152517273"> 这里一些接口的名称和 URL 我就打码了，这里我可以在 Grafana 中每时每刻都看到每个接口的可用率、响应（包括平均、最快、最慢）时间、状态码等信息，这些信息就是 JMeter 定时检测得到的结果，监控数据转到 Prometheus 里面然后经过 Grafana 可视化出来，并能通过一些指标来实现报警机制。 感兴趣的话，可以继续往下看哈。 为了达成这些功能，我需要解决如下问题：</p>
+                <ul>
+                  <li>如何使用 JMeter 来测试每个接口的使用情况。</li>
+                  <li>JMeter 如何和 Prometheus 对接起来，即如何集成 jmeter-prometheus-plugin 到 JMeter。</li>
+                  <li>JMeter 怎样去部署，部署到哪里。</li>
+                  <li>可视化数据怎样来呈现。</li>
+                  <li>错误状态怎样来快速查看。</li>
+                  <li>出错通知如何实现，比如打电话、发邮件等等。</li>
+                </ul>
+                <p>下面我们就来一个个总结说一下。</p>
+                <blockquote>
+                  <p>由于内容比较多，整个流程我实践下来然后测试通总共花了两天左右的时间，在这里就不完全展开说了，只提关键点了。</p>
+                </blockquote>
+                <h2 id="JMeter-测试"><a href="#JMeter-测试" class="headerlink" title="JMeter 测试"></a>JMeter 测试</h2>
+                <p>第一步那就是用 JMeter 来完成接口的测试了，接口的调用形式肯定都有相应的规范的，比如 GET 请求设置啥参数，POST 请求发送什么数据，我们利用 JMeter 都能方便地配置。 JMeter 是有 GUI 的，我们在编写的时候在 GUI 里面设置就好了，界面样例如下所示： <img src="https://cdn.cuiqingcai.com/2020-04-14-073257.png" alt="JMeter界面（图源：https://www.jianshu.com/p/0349441da3c4）"> 这里提示几点可能用到的东西：</p>
+                <ul>
+                  <li>动态参数，JMeter 里面是支持动态参数设置的，比如循环测试 id 从 1 到 100，或者动态 POST 的数据替换，都是可以做到的，这个可以满足你花样测试接口的需求。</li>
+                  <li>定时器，JMeter 里面有很多 Timer，可以设置各种各样的延时操作，比如每 3 分钟测一次，随机等待多少秒测一次都行。</li>
+                  <li>断言，测试了接口之后，我们不仅要知道是否是可用的，同时也要判断其结果是不是正确的，如果返回状态码是正确的但是结果不对，那也白搭，所以可以使用断言来检查返回结果。</li>
+                </ul>
+                <p>关于 JMeter 的功能这里就不再展开讲了，反正几乎你想实现的任何测试功能都可以实现，具体的用法可以参考 JMeter 的官方文档：<a href="https://jmeter.apache.org/usermanual/get-started.html" target="_blank" rel="noopener">https://jmeter.apache.org/usermanual/get-started.html</a>。 嗯，写好了之后，可以用 JMeter 在本地进行测试，测试好了时候，可以把 JMeter 的这个 Test Plan 存成一个 jmx 文件，留作后面备用。</p>
+                <h2 id="对接-Prometheus"><a href="#对接-Prometheus" class="headerlink" title="对接 Prometheus"></a>对接 Prometheus</h2>
+                <p>接下来就是如何把数据对接到 Prometheus 里面了。 默认情况下，JMeter 是能导出数据到诸如 InfluxDB 这样的数据库的，借助于它自带的 Listener 即可实现。它并不带导出到 Prometheus 的功能。 这里我们就需要借助于 jmeter-prometheus-plugin 这个插件了，其 GitHub 地址是 <a href="https://github.com/johrstrom/jmeter-prometheus-plugin，具体的用法可以参考其官方说明" target="_blank" rel="noopener">https://github.com/johrstrom/jmeter-prometheus-plugin，具体的用法可以参考其官方说明</a>。 这里提示几点：</p>
+                <ul>
+                  <li>jmeter-prometheus-plugin 安装的时候把 jar 文件放到 JMeter 目录下就好了，jar 文件可以直接看这里下载：<a href="https://github.com/johrstrom/jmeter-prometheus-plugin#programatically" target="_blank" rel="noopener">https://github.com/johrstrom/jmeter-prometheus-plugin#programatically</a>。</li>
+                  <li>安装好这个插件之后，需要增加一个 Listener，然后配置各种导出字段和参数，可以参考这个 jmx 文件的配置：<a href="https://github.com/johrstrom/jmeter-prometheus-plugin/blob/master/docs/examples/simple_prometheus_example.jmx，可以把这个" target="_blank" rel="noopener">https://github.com/johrstrom/jmeter-prometheus-plugin/blob/master/docs/examples/simple_prometheus_example.jmx，可以把这个</a> jmx 打开，然后把 Listener 拷贝到你的 Test Plan 即可。</li>
+                  <li>jmeter-prometheus-plugin 这个插件会把 JMeter 变成一个 Data Exporter，而不是通过 Prometheus Push Gateway 来主动推送监控信息，所以它会在本地启动一个端口，默认是 9270。</li>
+                </ul>
+                <p>Listener 的配置示例如图所示： <img src="https://cdn.cuiqingcai.com/2020-04-14-074606.png" alt="JMeter Listener"> 这里字段名如 jsr223_rt_as_summary 可以自行修改，比如这里我就统一修改为了 jmeter_test_xxx 这样的字段。 配置完成之后，运行 JMeter 之后，我们就能在 <a href="http://localhost:9270" target="_blank" rel="noopener">http://localhost:9270</a> 上看到 Exporter 的信息，如图所示： <img src="https://cdn.cuiqingcai.com/2020-04-14-075007.png" alt="image-20200414155005999"> 这里面就包含了 JMeter 的一些接口测试结果，包括成功次数、失败次数、状态码等等，另外还有 JVM、处理器等各种环境信息。 部署之后把对应的 URL 交由 Prometheus 就可以把监控数据收集到 Prometheus 里面了。</p>
+                <h2 id="部署-JMeter"><a href="#部署-JMeter" class="headerlink" title="部署 JMeter"></a>部署 JMeter</h2>
+                <p>完成上述两步，我们就能成功测试 Service 的每个接口并能生成测试结果的 Exporter 了。 那么 JMeter 写好了，怎么来部署呢？可以用 crontab，放某台服务器上，不过这里最理想的方式当然是部署到 Kubernetes 里面了。 这里就需要把 JMeter 打包成一个镜像了，GitHub 找来找去没找到几个合适的，另外也没有把 jmeter-prometheus-plugin 包括进去，那只有自己来了。 我基于 <a href="https://github.com/justb4/docker-jmeter" target="_blank" rel="noopener">https://github.com/justb4/docker-jmeter</a> 进行了二次改写，最后打包了一个镜像，已经开源了，地址为：<a href="https://github.com/Germey/JMeterMonitor，镜像名称为" target="_blank" rel="noopener">https://github.com/Germey/JMeterMonitor，镜像名称为</a> germey/jmeter，这里就不再展开讲细节了，有点复杂。 运行所需要的 docker-compose 文件如下：</p>
+                <figure class="highlight less">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">version</span>: <span class="string">'3'</span></span><br><span class="line"><span class="attribute">services</span>:</span><br><span class="line">  <span class="attribute">jmeter</span>:</span><br><span class="line">    <span class="attribute">restart</span>: always</span><br><span class="line">    <span class="attribute">image</span>: <span class="string">'germey/jmeter'</span></span><br><span class="line">    <span class="attribute">volumes</span>:</span><br><span class="line">      - ./<span class="attribute">jmx</span>:/app</span><br><span class="line">    <span class="attribute">command</span>:</span><br><span class="line">      - sample.jmx</span><br><span class="line">    <span class="attribute">ports</span>:</span><br><span class="line">      - <span class="string">"80:80"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我把本地的 jmx 文件夹 mount 到了 Docker 的 app 文件夹，所以这里在运行时需要在项目文件夹下新建 jmx 文件夹，用于存放 jmx 文件，把刚才写好的 jmx 文件放过来就好了。 另外 command 就是 jmx 文件的名称，这里需要修改成你的 jmx 文件。 另外部署到 Kubernetes 的话可以参考这里的 yml 文件：<a href="https://github.com/Germey/JMeterMonitor/tree/master/kubernetes" target="_blank" rel="noopener">https://github.com/Germey/JMeterMonitor/tree/master/kubernetes</a>。</p>
+                <h2 id="Prometheus-收集数据"><a href="#Prometheus-收集数据" class="headerlink" title="Prometheus 收集数据"></a>Prometheus 收集数据</h2>
+                <p>在成功部署 JMeter 之后呢，它肯定会提供一个 Web Service 来暴露 JMeter 的测试数据。 如果部署好了 Prometheus 之后，可以把它放在 Prometheus 的 scrape_configs，比如 Service 的 URL 为 jmeter-monitor.com，可以修改 prometheus.yml：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">global:</span><br><span class="line">  scrape_interval:     15s # By default, scrape targets every 15 seconds.</span><br><span class="line"></span><br><span class="line">  # Attach these labels <span class="keyword">to</span> any time series <span class="keyword">or</span> alerts when communicating with</span><br><span class="line">  # external systems (federation, remote storage, Alertmanager).</span><br><span class="line">  external_labels:</span><br><span class="line">    monitor: <span class="string">'codelab-monitor'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># A scrape configuration containing exactly one endpoint to scrape:</span></span><br><span class="line"><span class="comment"># Here it's Prometheus itself.</span></span><br><span class="line">scrape_configs:</span><br><span class="line">  # The job name is added as a label `<span class="attribute">job</span>=&lt;job_name&gt;` <span class="keyword">to</span> any timeseries scraped <span class="keyword">from</span> this config.</span><br><span class="line">  - job_name: <span class="string">'jmeter-monitor'</span></span><br><span class="line"></span><br><span class="line">    # Override the global<span class="built_in"> default </span><span class="keyword">and</span> scrape targets <span class="keyword">from</span> this job every 5 seconds.</span><br><span class="line">    scrape_interval: 5s</span><br><span class="line"></span><br><span class="line">    static_configs:</span><br><span class="line">      - targets: [<span class="string">'jmeter-monitor.com'</span>]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>其具体的配置字段可以参见：<a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/" target="_blank" rel="noopener">https://prometheus.io/docs/prometheus/latest/configuration/configuration/</a>。 另外呢，这种方式其实并不怎么好，修改 Prometheus 挺麻烦的，推荐使用 Helm + Prometheus-Operator 来安装 Prometheus，然后修改 values.yml 即可修改配置文件了，比如修改 <a href="https://github.com/helm/charts/blob/master/stable/prometheus-operator/values.yaml" target="_blank" rel="noopener">https://github.com/helm/charts/blob/master/stable/prometheus-operator/values.yaml</a> 里面的 additionalScrapeConfigs 即可。</p>
+                <h2 id="Grafana-可视化"><a href="#Grafana-可视化" class="headerlink" title="Grafana 可视化"></a>Grafana 可视化</h2>
+                <p>Prometheus 收集完数据之后，我们可以将其可视化出来了。 比如这里有些字段，jmeter_test_can_fail_success 代表成功请求的次数，jmeter_test_can_fail_total 代表总的测试次数。 那么就可以用一个表达式来计算 Error Rate 了：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">1- jmeter_test_can_fail_success&#123;<span class="attribute">instance</span>=<span class="string">"<span class="variable">$instance</span>"</span>&#125; / jmeter_test_can_fail_total&#123;<span class="attribute">instance</span>=<span class="string">"<span class="variable">$instance</span>"</span>&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>效果如下： <img src="https://cdn.cuiqingcai.com/2020-04-14-085848.png" alt="image-20200414165846578"> 这里就能实时可视化展示出来错误率了，更多的一些配置可以自行修改这些表达式进行定制。 最后我配置成的一些监控面板如下所示： <img src="https://cdn.cuiqingcai.com/2020-04-14-092834.png" alt="image-20200414172832205"> 这样我要是什么时候想看 Service 接口的情况，随时上来看就好了。</p>
+                <h2 id="报警"><a href="#报警" class="headerlink" title="报警"></a>报警</h2>
+                <p>对于报警来说，可以使用两种方式配置，一个是直接使用 Grafana 自带的报警机制，另外是可以通过 Alert Manager，后者功能更加强大，推荐使用后者。 对于 Alert Manager 来说，其监控的规则这里推荐使用 Prometheus-Operator 里面自带的 PrometheusRule 来实现，比如可以定义这么一个 PrometheusRule：</p>
+                <figure class="highlight smali">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">apiVersion: monitoring.coreos.com/v1</span><br><span class="line">kind: PrometheusRule</span><br><span class="line">metadata:</span><br><span class="line">  labels:</span><br><span class="line">    app: monitor</span><br><span class="line">  name: monitor-rules</span><br><span class="line">spec:</span><br><span class="line">  groups:</span><br><span class="line">  - name: monitor</span><br><span class="line">    rules:</span><br><span class="line">    - alert: ServiceErroring</span><br><span class="line">      labels:</span><br><span class="line">        severity: warning</span><br><span class="line">      annotations:</span><br><span class="line">        message: Service 连续5分钟错误率过高。</span><br><span class="line">      expr: |</span><br><span class="line">        avg(1- jmeter_test_can_fail_success&#123;job=<span class="string">"service-monitor"</span>&#125; / jmeter_test_can_fail_total&#123;job=<span class="string">"service-monitor"</span>&#125;) &gt; 0</span><br><span class="line">      for: 5m</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样配置好一个 PrometheusRule 之后，Prometheus 会自动应用这个 Rule 然后监控。 报警方式的话可以通过配置 Alert Manger 的 Receiver 来实现，包括打电话、邮件、短信等等，配置规则可以见：<a href="https://prometheus.io/docs/alerting/configuration/" target="_blank" rel="noopener">https://prometheus.io/docs/alerting/configuration/</a>。 目前我是利用了组内已经提供的报警机制，组内已经对接好了电话、短信、邮件报警，并可以把每个人的信息进行管理和分组，然后应用到某个报警规则里面，这样一旦有问题，就可以实现报警啦。 另外对于一些规则的管理，我们可以使用一些开源的 Dashboard 来管理，如 Krama，<a href="https://github.com/prymitive/karma，利用它我们可以方便配置、禁用和筛选一些报警规则，界面如下" target="_blank" rel="noopener">https://github.com/prymitive/karma，利用它我们可以方便配置、禁用和筛选一些报警规则，界面如下</a>： <img src="https://cdn.cuiqingcai.com/2020-04-14-093102.png" alt="image-20200414173101030"> 不过公司内部已经实现了一套了，对接了公司的员工账号，更加方便，所以我就没有再用这个了。</p>
+                <h2 id="定时重启"><a href="#定时重启" class="headerlink" title="定时重启"></a>定时重启</h2>
+                <p>这里另外遇到了一个问题，就是 JMeter 导出的监控数据是不断累积的，而监控的数据则是需要监控最近几分钟的数据，这样一旦发生了 Error，那么 Error Rate 由于历史数据的原因，在服务恢复之后永远不会降为 0，这就导致一些问题。另外如果 JMeter 如果一直运行，其占用的内存会越来越大。 所以一个最好的方式就是定时将 JMeter 重启，这样可以定时清空历史监控数据，保证在新的一段时间内测试获取到最近的监控数据，而不是混杂历史数据。 这里重启就可以利用 Kubernetes 的 Cronjob，比如我们可以每隔 10 分钟让 JMeter 重启一次，类似配置如下：</p>
+                <figure class="highlight less">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">apiVersion</span>: batch/v1beta1</span><br><span class="line"><span class="attribute">kind</span>: CronJob</span><br><span class="line"><span class="attribute">metadata</span>:</span><br><span class="line">  <span class="attribute">name</span>: jmeter-monitor</span><br><span class="line"><span class="attribute">spec</span>:</span><br><span class="line">  <span class="attribute">successfulJobsHistoryLimit</span>: <span class="number">0</span></span><br><span class="line">  <span class="attribute">failedJobsHistoryLimit</span>: <span class="number">0</span></span><br><span class="line">  <span class="attribute">concurrencyPolicy</span>: Replace</span><br><span class="line">  <span class="attribute">schedule</span>: <span class="string">"*/10 * * * *"</span></span><br><span class="line">  <span class="attribute">jobTemplate</span>:</span><br><span class="line">    <span class="attribute">spec</span>:</span><br><span class="line">      <span class="attribute">template</span>:</span><br><span class="line">        <span class="attribute">metadata</span>:</span><br><span class="line">          <span class="attribute">labels</span>:</span><br><span class="line">            <span class="attribute">service</span>: jmeter-monitor</span><br><span class="line">        <span class="attribute">spec</span>:</span><br><span class="line">          <span class="attribute">containers</span>:</span><br><span class="line">            - <span class="attribute">args</span>:</span><br><span class="line">                - jmeter-monitor.jmx</span><br><span class="line">              <span class="attribute">image</span>: germey/<span class="attribute">jmeter</span>:<span class="number">1</span></span><br><span class="line">              <span class="attribute">name</span>: jmeter-monitor</span><br><span class="line">              <span class="attribute">volumeMounts</span>:</span><br><span class="line">                - <span class="attribute">mountPath</span>: /app</span><br><span class="line">                  <span class="attribute">name</span>: jmeter-storage</span><br><span class="line">              <span class="attribute">ports</span>:</span><br><span class="line">                - <span class="attribute">containerPort</span>: <span class="number">80</span></span><br><span class="line">              <span class="attribute">imagePullPolicy</span>: IfNotPresent</span><br><span class="line">              <span class="attribute">resources</span>:</span><br><span class="line">                <span class="attribute">requests</span>:</span><br><span class="line">                  <span class="attribute">memory</span>: <span class="string">"4Gi"</span></span><br><span class="line">                  <span class="attribute">cpu</span>: <span class="string">"250m"</span></span><br><span class="line">                <span class="attribute">limits</span>:</span><br><span class="line">                  <span class="attribute">memory</span>: <span class="string">"4Gi"</span></span><br><span class="line">                  <span class="attribute">cpu</span>: <span class="string">"250m"</span></span><br><span class="line">          <span class="attribute">restartPolicy</span>: OnFailure</span><br><span class="line">          <span class="attribute">volumes</span>:</span><br><span class="line">            - <span class="attribute">name</span>: jmeter-storage</span><br><span class="line">              <span class="attribute">persistentVolumeClaim</span>:</span><br><span class="line">                <span class="attribute">claimName</span>: jmeter</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里有几个地方值得注意：</p>
+                <ul>
+                  <li>一个是 concurrencyPolicy，这里配置为 Replace，意思是重启后新建的 Pod 会替换原来的 Pod，保证 JMeter 的 Pod 只有一个。</li>
+                  <li>另外一个是 imagePullPolicy 配置为 IfNotPresent，这样可以每次重启的时候不用重新拉镜像。</li>
+                </ul>
+                <p>这样的话，就能避免发生错误的时候 Error Rate 无法降为 0 的状态了。 好了，到此为止呢，我们就介绍完了使用 JMeter + Kubernetes + Prometheus + Grafana + Alert Manager 进行监控的整体思路了，希望对大家有帮助。 另外由于内容比较多，这里很多地方没有展开讲解，比如 JMeter 的配置、Grafana 的配置、Prometheus-Operator 的配置、Alert Manager 的配置等等，不知道大家敢不敢兴趣，如果感兴趣的话，后面可以继续深入写一个小系列来讲解哈。</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/9202.html" rel="prev" title="说说拖延症">
+                      <i class="fa fa-chevron-left"></i> 说说拖延症 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/9212.html" rel="next" title="虚拟环境搭建"> 虚拟环境搭建 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#JMeter-测试"><span class="nav-number">1.</span> <span class="nav-text">JMeter 测试</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#对接-Prometheus"><span class="nav-number">2.</span> <span class="nav-text">对接 Prometheus</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#部署-JMeter"><span class="nav-number">3.</span> <span class="nav-text">部署 JMeter</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#Prometheus-收集数据"><span class="nav-number">4.</span> <span class="nav-text">Prometheus 收集数据</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#Grafana-可视化"><span class="nav-number">5.</span> <span class="nav-text">Grafana 可视化</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#报警"><span class="nav-number">6.</span> <span class="nav-text">报警</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#定时重启"><span class="nav-number">7.</span> <span class="nav-text">定时重启</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '848bd26e95e36327645c286f6ed97a93',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

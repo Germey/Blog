@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="本文转载自：陈文管的博客-微信公众号文章爬取之：微信自动化 本文内容详细介绍微信公众号历史文章自动化浏览脚本的实现，配合服务端对公众号文章数据爬取来实现微信公众号文章数据的采集。服务端爬取实现见：微信公众号文章爬取之：服务端数据采集。 背景：在团队的学习方面需要每周收集开发方面的博客文章，汇总输出每周的技术周报。周报小组成员收集的文章大多数是来自微信公众号，公众号的内容相对网页博客内容质量还是比较">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="微信公众号文章爬取之：微信自动化">
+  <meta property="og:url" content="https://cuiqingcai.com/6763.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="本文转载自：陈文管的博客-微信公众号文章爬取之：微信自动化 本文内容详细介绍微信公众号历史文章自动化浏览脚本的实现，配合服务端对公众号文章数据爬取来实现微信公众号文章数据的采集。服务端爬取实现见：微信公众号文章爬取之：服务端数据采集。 背景：在团队的学习方面需要每周收集开发方面的博客文章，汇总输出每周的技术周报。周报小组成员收集的文章大多数是来自微信公众号，公众号的内容相对网页博客内容质量还是比较">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/06/wechat-gzh-spider-system.png">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/06/android-device-monitor-1024x583.jpg">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/06/wechat-x5-debug-169x300.jpg">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/06/chrome-inspect-1024x585.jpg">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/06/chrome-inspect-developer-tools-1024x635.jpg">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/06/wechat-webview-detail-1024x801.jpg">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/06/wechat-deviceInfo-169x300.jpg">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/06/appium-setting-1024x884.jpg">
+  <meta property="article:published_time" content="2019-07-02T03:08:21.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.321Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/06/wechat-gzh-spider-system.png">
+  <link rel="canonical" href="https://cuiqingcai.com/6763.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>微信公众号文章爬取之：微信自动化 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/6763.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 微信公众号文章爬取之：微信自动化 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2019-07-02 11:08:21" itemprop="dateCreated datePublished" datetime="2019-07-02T11:08:21+08:00">2019-07-02</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/6763.html" class="post-meta-item leancloud_visitors" data-flag-title="微信公众号文章爬取之：微信自动化" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>30k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>28 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>本文转载自：<a href="https://www.chenwenguan.com/wechat-browse-automation/" target="_blank" rel="noopener">陈文管的博客-微信公众号文章爬取之：微信自动化</a> 本文内容详细介绍微信公众号历史文章自动化浏览脚本的实现，配合服务端对公众号文章数据爬取来实现微信公众号文章数据的采集。服务端爬取实现见：<a href="https://www.chenwenguan.com/wechat-spider-server/" target="_blank" rel="noopener">微信公众号文章爬取之：服务端数据采集</a>。 背景：在团队的学习方面需要每周收集开发方面的博客文章，汇总输出每周的技术周报。周报小组成员收集的文章大多数是来自微信公众号，公众号的内容相对网页博客内容质量还是比较高的。既然数据的来源是确定的，收集汇总的流程是确定的，那么就把这个流程自动化，把人工成本降低到0。</p>
+                <h3 id="一、方案选取"><a href="#一、方案选取" class="headerlink" title="一、方案选取"></a>一、方案选取</h3>
+                <h4 id="1、数据源选取"><a href="#1、数据源选取" class="headerlink" title="1、数据源选取"></a>1、数据源选取</h4>
+                <p>主要是爬取的数据来源选取，网上资料看的较多是爬取搜狗微信的内容，但是第三方平台（包括新榜、清博等 ）的公众号文章数据更新做不到实时，而且数据也不全，还要和各种反爬措施斗智斗勇，浪费时间精力的事情划不来。最直接的方式当然是直接爬取微信公众号历史文章里面的内容。 在前期预研主要参考的资料是知乎专栏：<a href="https://zhuanlan.zhihu.com/c_65943221" target="_blank" rel="noopener">微信公众号内容的批量采集与应用</a> 。 上面的方案是借助阿里巴巴开源的<a href="http://anyproxy.io/cn/" target="_blank" rel="noopener">AnyProxy</a>工具，AnyProxy作为一个中间人在微信客户端和服务器之间的交互过程中做数据截获和转发。获取到公众号文章的实际链接地址之后转发到自己的服务器进行保存，整个数据采集的自动化程度较大取决于微信客户端的自动化浏览实现。</p>
+                <h4 id="2、自动化方案选取"><a href="#2、自动化方案选取" class="headerlink" title="2、自动化方案选取"></a>2、自动化方案选取</h4>
+                <p>如果是比较简单的安卓应用自动化操作的实现，一般直接使用AccessibilityService就行，UIAutomator也是基于AccessibilityService来实现的，但是AccessibilityService不支持WebView的操作，因为微信公众号历史文章页面是用WebView来加载的，要实现自动化必须同时支持安卓原生和WebView两个上下文环境的操作。 经过现有的几个自动化方案实现对比，最便利又具备极佳扩展性的方案就是使用<a href="http://appium.io/" target="_blank" rel="noopener">Appium</a>。</p>
+                <ul>
+                  <li>Appium是开源的移动端自动化测试框架；</li>
+                  <li>支持Native App、Hybird App、Web App；</li>
+                  <li>支持Android、iOS、Firefox OS；</li>
+                  <li>跨平台，可以在Mac，Windows以及Linux系统上；</li>
+                  <li>用Appium自动化测试不需要重新编译App；</li>
+                  <li>支持Java、python、ruby、C#、Objective C、PHP等主流语言;</li>
+                </ul>
+                <p>更多资料参考：<a href="https://www.cnblogs.com/zeo-to-one/p/6618611.html" target="_blank" rel="noopener">Android自动化测试框架</a></p>
+                <p><a href="https://www.chenwenguan.com/wechat-browse-automation/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/06/wechat-gzh-spider-system.png" alt="公众号文章爬取系统架构图"></a></p>
+                <p>公众号文章爬取系统架构图</p>
+                <h3 id="二、Appium安装配置（Mac）"><a href="#二、Appium安装配置（Mac）" class="headerlink" title="二、Appium安装配置（Mac）"></a>二、Appium安装配置（Mac）</h3>
+                <p>Appium程序的安装，我这边不是使用brew命令安装的方式，直接从<a href="https://bitbucket.org/appium/appium.app/downloads/" target="_blank" rel="noopener">BitBucket</a>下载Appium安装包，也可以从<a href="https://github.com/appium/appium-desktop/releases" target="_blank" rel="noopener">Github</a>上下载。这边使用BitBucket 1.5.3版本。 Appium1.5.0之后的版本，需要在终端安装doctor，在终端输入命令：npm install -g appium-doctor，安装完毕之后，在终端输入命令：appium-doctor，查看所需的各个配置是否都已经安装配置完毕。下面是我这边在终端输出得到的结果：</p>
+                <figure class="highlight sql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">info AppiumDoctor Appium Doctor v.1.4.3</span><br><span class="line">info AppiumDoctor <span class="comment">### Diagnostic starting ###</span></span><br><span class="line">info AppiumDoctor  ✔ The Node.js binary was found at: /Users/chenwenguan/.nvm/versions/node/v8.9.3/bin/node</span><br><span class="line">info AppiumDoctor  ✔ Node version is 8.9.3</span><br><span class="line">info AppiumDoctor  ✔ Xcode is installed at: /Library/Developer/CommandLineTools</span><br><span class="line">info AppiumDoctor  ✔ Xcode Command Line Tools are installed.</span><br><span class="line">info AppiumDoctor  ✔ DevToolsSecurity is enabled.</span><br><span class="line">info AppiumDoctor  ✔ The Authorization DB is <span class="keyword">set</span> up properly.</span><br><span class="line">WARN AppiumDoctor  ✖ Carthage was <span class="keyword">NOT</span> <span class="keyword">found</span>!</span><br><span class="line">info AppiumDoctor  ✔ HOME <span class="keyword">is</span> <span class="keyword">set</span> <span class="keyword">to</span>: /<span class="keyword">Users</span>/chenwenguan</span><br><span class="line">WARN AppiumDoctor  ✖ ANDROID_HOME <span class="keyword">is</span> <span class="keyword">NOT</span> <span class="keyword">set</span>!</span><br><span class="line">WARN AppiumDoctor  ✖ JAVA_HOME <span class="keyword">is</span> <span class="keyword">NOT</span> <span class="keyword">set</span>!</span><br><span class="line">WARN AppiumDoctor  ✖ adb could <span class="keyword">not</span> be <span class="keyword">found</span> because ANDROID_HOME <span class="keyword">is</span> <span class="keyword">NOT</span> <span class="keyword">set</span>!</span><br><span class="line">WARN AppiumDoctor  ✖ android could <span class="keyword">not</span> be <span class="keyword">found</span> because ANDROID_HOME <span class="keyword">is</span> <span class="keyword">NOT</span> <span class="keyword">set</span>!</span><br><span class="line">WARN AppiumDoctor  ✖ emulator could <span class="keyword">not</span> be <span class="keyword">found</span> because ANDROID_HOME <span class="keyword">is</span> <span class="keyword">NOT</span> <span class="keyword">set</span>!</span><br><span class="line">WARN AppiumDoctor  ✖ <span class="keyword">Bin</span> <span class="keyword">directory</span> <span class="keyword">for</span> $JAVA_HOME <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">set</span></span><br><span class="line">info AppiumDoctor <span class="comment">### Diagnostic completed, 7 fixes needed. ###</span></span><br><span class="line">info AppiumDoctor </span><br><span class="line">info AppiumDoctor <span class="comment">### Manual Fixes Needed ###</span></span><br><span class="line">info AppiumDoctor The configuration cannot be automatically <span class="keyword">fixed</span>, please <span class="keyword">do</span> the <span class="keyword">following</span> <span class="keyword">first</span>:</span><br><span class="line">WARN AppiumDoctor - Please <span class="keyword">install</span> Carthage. Visit https://github.com/Carthage/Carthage<span class="comment">#installing-carthage for more information.</span></span><br><span class="line">WARN AppiumDoctor - Manually configure ANDROID_HOME.</span><br><span class="line">WARN AppiumDoctor - Manually configure JAVA_HOME.</span><br><span class="line">WARN AppiumDoctor - Manually configure ANDROID_HOME <span class="keyword">and</span> run appium-doctor again.</span><br><span class="line">WARN AppiumDoctor - <span class="keyword">Add</span> <span class="string">'$JAVA_HOME/bin'</span> <span class="keyword">to</span> your <span class="keyword">PATH</span> environment</span><br><span class="line">info AppiumDoctor <span class="comment">###</span></span><br><span class="line">info AppiumDoctor </span><br><span class="line">info AppiumDoctor Bye! Run appium-doctor again <span class="keyword">when</span> <span class="keyword">all</span> <span class="keyword">manual</span> fixes have been applied!</span><br><span class="line">info AppiumDoctor</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>上面打叉的都是没配置好的，在终端输入命令安装Carthage ：brew install carthage</p>
+                <p>输入命令查看JDK安装路径：/usr/libexec/java_home -V</p>
+                <figure class="highlight groovy">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="number">1.8</span><span class="number">.0</span>_60, <span class="string">x86_64:</span> <span class="string">"Java SE 8"</span> <span class="regexp">/Library/</span>Java<span class="regexp">/JavaVirtualMachines/</span>jdk1<span class="number">.8</span><span class="number">.0</span>_60.jdk<span class="regexp">/Contents/</span>Home</span><br><span class="line"><span class="regexp">/Library/</span>Java<span class="regexp">/JavaVirtualMachines/</span>jdk1<span class="number">.8</span><span class="number">.0</span>_60.jdk<span class="regexp">/Contents/</span>Home</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>需要把上面的路径配置到环境变量中，ANDROID_HOME就是Android SDK的安装路径。</p>
+                <p>输入命令打开配置文件： open ~/.bash_profile，在文件中添加如下内容：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home  </span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$JAVA_HOME</span>/bin:$PATH  </span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">ANDROID_HOME</span>=/Users/chenwenguan/Library/Android/sdk</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>输入命令让配置立即生效：source ~/.bash_profile</p>
+                <p>更多安装配置资料可参考：<a href="http://www.cnblogs.com/zoeya/p/6022481.html" target="_blank" rel="noopener">Mac上搭建Appium环境过程以及遇到的问题</a></p>
+                <h3 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS</h3>
+                <p>在首次使用Appium时可能会出现一个错误：</p>
+                <figure class="highlight sas">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Could <span class="meta">not</span> detect Mac OS <span class="meta">X</span> Version <span class="meta">from</span> sw_vers <span class="meta">output</span>: <span class="string">'10.13.2</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在终端输入命令：</p>
+                <figure class="highlight gradle">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">grep</span> -rl <span class="string">"Could not detect Mac OS X Version from sw_vers output"</span> <span class="regexp">/Applications/</span>Appium.app<span class="regexp">/</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>得到如下结果：</p>
+                <figure class="highlight crystal">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">/Applications/Appium.app/<span class="regexp">/Contents/</span>Resources/node_modules/appium-support/<span class="class"><span class="keyword">lib</span>/<span class="title">system</span>.<span class="title">js</span></span></span><br><span class="line">/Applications/Appium.app/<span class="regexp">/Contents/</span>Resources/node_modules/appium-support/build/<span class="class"><span class="keyword">lib</span>/<span class="title">system</span>.<span class="title">js</span></span></span><br><span class="line">/Applications/Appium.app/<span class="regexp">/Contents/</span>Resources/node_modules/appium/node_modules/appium-support/<span class="class"><span class="keyword">lib</span>/<span class="title">system</span>.<span class="title">js</span></span></span><br><span class="line">/Applications/Appium.app/<span class="regexp">/Contents/</span>Resources/node_modules/appium/node_modules/appium-support/build/<span class="class"><span class="keyword">lib</span>/<span class="title">system</span>.<span class="title">js</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>打开上面四个路径下的文件，添加当前的Appium版本参数，具体内容可参考：<a href="https://blog.csdn.net/smallHorseDaDa/article/details/72865685?locationNum=12&amp;fps=1" target="_blank" rel="noopener">在Mac OS 10.12 上安装配置appium</a></p>
+                <h3 id="三、具体代码实现"><a href="#三、具体代码实现" class="headerlink" title="三、具体代码实现"></a>三、具体代码实现</h3>
+                <p>预研资料主要参考这篇博文：<a href="https://testerhome.com/topics/6954" target="_blank" rel="noopener">Appium 微信 webview 的自动化技术</a> 自动化实现的原理就是通过ID或者模糊匹配找到相应的控件，之后对这个控件做点击、滑动等操作。如果要对微信WebView做自动化，必须能够获取到WebView里面的对象，如果是Android原生的控件可以通过AndroidStudio里面的Android Device Monitor来查看控件的id、类名等各种属性。</p>
+                <h4 id="1、Android原生控件属性参数值的获取"><a href="#1、Android原生控件属性参数值的获取" class="headerlink" title="1、Android原生控件属性参数值的获取"></a>1、Android原生控件属性参数值的获取</h4>
+                <p>在AndroidStudio打开Monitor工具：Tools-&gt;Android-&gt;Android Device Monitor 按照下图的步骤查看控件的ID等属性，后续在代码实现中会用到。</p>
+                <p><a href="https://www.chenwenguan.com/wechat-browse-automation/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/06/android-device-monitor-1024x583.jpg" alt="Android Device Monitor"></a></p>
+                <p>Android Device Monitor</p>
+                <h4 id="2、WebView属性参数值的获取"><a href="#2、WebView属性参数值的获取" class="headerlink" title="2、WebView属性参数值的获取"></a>2、WebView属性参数值的获取</h4>
+                <p>如果是在安卓真机上，需要打开WebView的调试模式才能读取到WebView的各个属性，在微信里面可以在任意聊天窗口输入debugx5.qq.com，这是微信x5内核调试页面，在信息模块中勾选打开TBS内核Inspector调试功能。</p>
+                <p><a href="https://www.chenwenguan.com/wechat-browse-automation/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/06/wechat-x5-debug-169x300.jpg" alt="微信X5内核调试页面"></a></p>
+                <p>微信X5内核调试页面</p>
+                <p>之后还要在真机上<strong>安装Chrome浏览器</strong>，如果是在虚拟机上无需做此操作。 接下来在Chrome浏览器中输入：<a href="chrome://inspect/">chrome://inspect</a> ，我这边使用的是虚拟机，真机上也一样，进入到公众号历史文章页面，这边就会显示相应可检视的WebView页面，点击inspect，进入到Developer Tools页面。</p>
+                <p><a href="https://www.chenwenguan.com/wechat-browse-automation/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/06/chrome-inspect-1024x585.jpg" alt="chrome inspect页面"></a></p>
+                <p>chrome inspect页面</p>
+                <p>如果进入到Developer Tools页面显示一片空白，是因为chrome inspect需要加载 <a href="https://chrome-devtools-frontend.appspot.com" target="_blank" rel="noopener">https://chrome-devtools-frontend.appspot.com</a> 上的资源，所以需要翻墙，把appstop.com 加入翻墙代理白名单，或者直接全局应用翻墙VPN，具体可参考：<a href="https://github.com/HuarenYu/note/issues/1" target="_blank" rel="noopener">使用chrome remote debug时打开inspect时出现一片空白</a> 下面是美团技术团队历史文章列表的详细结构信息，具体的文章列表项在weui-panel-&gt;weui-panel__bd appmsg_history_container-&gt;js_profile_history_container-&gt;weui_msg_card_list路径下。</p>
+                <p><a href="https://www.chenwenguan.com/wechat-browse-automation/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/06/chrome-inspect-developer-tools-1024x635.jpg" alt="Chrome inspect查看WebView详细内容"></a></p>
+                <p>Chrome inspect查看WebView详细内容</p>
+                <p>继续展开节点查看文章详细结构信息，这边可以看到每篇文章的ID都是以“WXAPPMSG100″开头的，类名都是“weui_media_box”开头，一开始的实现是通过模糊匹配ID来查找历史文章列表项数据，但在测试过程中出现来一个异常，后来发现，如果是纯文本类型的文章，也就是只有一段话的文章，它是没有ID的，所以不能通过ID来模糊匹配。</p>
+                <p><a href="https://www.chenwenguan.com/wechat-browse-automation/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/06/wechat-webview-detail-1024x801.jpg" alt="公众号历史文章列表项详细结构"></a></p>
+                <p>公众号历史文章列表项详细结构</p>
+                <p>之后就把现有的四种公众号文章类型都找来出来，找它们的共性，虽然ID不一定有，但是class类型值一定有，四种类型值如下，这样就可以通过class类型值来匹配查找数据了。</p>
+                <figure class="highlight ada">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"> * weui_media_box appmsg js_appmsg : 文章</span><br><span class="line"> * weui_media_box text js_appmsg : 文本</span><br><span class="line"> * weui_media_box img js_appmsg : 图片</span><br><span class="line">* weui_media_box appmsg audio_msg_primary js_appmsg playing : 语音</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h4 id="3、具体代码实现"><a href="#3、具体代码实现" class="headerlink" title="3、具体代码实现"></a>3、具体代码实现</h4>
+                <p>整体自动化是按照如下顺序：通讯录页面-&gt;点击公众号进入公众号列表页面-&gt;公众号列表项选择一个点击-&gt;公众号页面-&gt;公众号消息页面-&gt;点击“全部消息”进入公众号历史文章页面-&gt;根据设置的时间类型（一周之内、一个月之内、一年之内或者全部）逐个点击历史文章列表项，完毕之后返回公众号列表页面，继续下一个公众号浏览的操作；</p>
+                <h5 id="1）初始化"><a href="#1）初始化" class="headerlink" title="1）初始化"></a>1）初始化</h5>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">private</span> static AndroidDriver get<span class="constructor">Driver()</span> throws MalformedURLException &#123;</span><br><span class="line">        DesiredCapabilities capability = <span class="keyword">new</span> <span class="constructor">DesiredCapabilities()</span>;</span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"platformName"</span>, <span class="string">"emulator-5554"</span>)</span>;</span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"platformVersion"</span>, <span class="string">"4.4.4"</span>)</span>;</span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"deviceName"</span>, <span class="string">"MuMu"</span>)</span>;</span><br><span class="line">         <span class="comment">/**</span></span><br><span class="line"><span class="comment">          * 真机上platformName使用"Android"</span></span><br><span class="line"><span class="comment">          */</span></span><br><span class="line">         <span class="comment">/*</span></span><br><span class="line"><span class="comment">         capability.setCapability("platformName", "Android");</span></span><br><span class="line"><span class="comment">         capability.setCapability("platformVersion", "6.0");</span></span><br><span class="line"><span class="comment">         capability.setCapability("deviceName", "FRD-AL00");</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"unicodeKeyboard"</span>,<span class="string">"True"</span>)</span>;</span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"resetKeyboard"</span>,<span class="string">"True"</span>)</span>;</span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"app"</span>, <span class="string">""</span>)</span>;</span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"appPackage"</span>, <span class="string">"com.tencent.mm"</span>)</span>;</span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"appActivity"</span>, <span class="string">".ui.LauncherUI"</span>)</span>;</span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"fastReset"</span>, <span class="params">false</span>)</span>;</span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"fullReset"</span>, <span class="params">false</span>)</span>;</span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"noReset"</span>, <span class="params">true</span>)</span>;</span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"newCommandTimeout"</span>, 2000)</span>;</span><br><span class="line">         <span class="comment">/**</span></span><br><span class="line"><span class="comment">          * 必须加这句，否则webView和native来回切换会有问题</span></span><br><span class="line"><span class="comment">          */</span></span><br><span class="line">         capability.set<span class="constructor">Capability(<span class="string">"recreateChromeDriverSessions"</span>, <span class="params">true</span>)</span>;</span><br><span class="line">         <span class="comment">/**</span></span><br><span class="line"><span class="comment">          * 关键是加上这段</span></span><br><span class="line"><span class="comment">          */</span></span><br><span class="line">         ChromeOptions options = <span class="keyword">new</span> <span class="constructor">ChromeOptions()</span>;</span><br><span class="line">         options.set<span class="constructor">ExperimentalOption(<span class="string">"androidProcess"</span>, <span class="string">"com.tencent.mm:tools"</span>)</span>;</span><br><span class="line">         capability.set<span class="constructor">Capability(ChromeOptions.CAPABILITY, <span class="params">options</span>)</span>;</span><br><span class="line">         String url = <span class="string">"http://127.0.0.1:4723/wd/hub"</span>;</span><br><span class="line">         mDriver = <span class="keyword">new</span> AndroidDriver&lt;&gt;(<span class="keyword">new</span> <span class="constructor">URL(<span class="params">url</span>)</span>, capability);</span><br><span class="line">         return mDriver;</span><br><span class="line">     &#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果是虚拟机则platformName使用具体的虚拟机名称，如果是真机使用“Android”，platformVersion和deviceName可以使用工程安装APK之后查看详细信息，对应的参数就是显示的系统版本和设备名称。</p>
+                <p><a href="https://www.chenwenguan.com/wechat-browse-automation/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/06/wechat-deviceInfo-169x300.jpg" alt="设备信息"></a></p>
+                <p>设备信息</p>
+                <p>URL参数是在Appium里面设置的，确保”<a href="http://127.0.0.1:4723/wd/hub”字符串中的服务器地址和端口与Appium设置一致。" target="_blank" rel="noopener">http://127.0.0.1:4723/wd/hub”字符串中的服务器地址和端口与Appium设置一致。</a></p>
+                <p><a href="https://www.chenwenguan.com/wechat-browse-automation/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/06/appium-setting-1024x884.jpg" alt="Appium URL参数设置"></a></p>
+                <p>Appium URL参数设置</p>
+                <h5 id="2）列表滑动和元素获取"><a href="#2）列表滑动和元素获取" class="headerlink" title="2）列表滑动和元素获取"></a>2）列表滑动和元素获取</h5>
+                <p>不管是WebView还是Android原生ListView的滑动都需要在Android原生上下文环境下操作driver.context(“NATIVE_APP”); 滑动操作都可以通过如下代码实现，通过滑动前后的PageSource对比可以知道列表是否已经滑动到底部。</p>
+                <figure class="highlight arduino">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * 滑动列表加载下一页数据</span></span><br><span class="line"><span class="comment">      *</span></span><br><span class="line"><span class="comment">      * @param driver</span></span><br><span class="line"><span class="comment">      * @return</span></span><br><span class="line"><span class="comment">      * @throws InterruptedException</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isScrollToBottom</span><span class="params">(AndroidDriver driver)</span> throws InterruptedException </span>&#123;</span><br><span class="line">         <span class="keyword">int</span> <span class="built_in">width</span> = driver.manage().window().getSize().<span class="built_in">width</span>;</span><br><span class="line">         <span class="keyword">int</span> <span class="built_in">height</span> = driver.manage().window().getSize().<span class="built_in">height</span>;</span><br><span class="line">         <span class="keyword">String</span> beforeswipe = driver.getPageSource();</span><br><span class="line">         driver.swipe(<span class="built_in">width</span> / <span class="number">2</span>, <span class="built_in">height</span> * <span class="number">3</span> / <span class="number">4</span>, <span class="built_in">width</span> / <span class="number">2</span>, <span class="built_in">height</span> / <span class="number">4</span>, <span class="number">1000</span>);</span><br><span class="line">         <span class="comment">/**</span></span><br><span class="line"><span class="comment">          * 设置8s超时，网络较差情况下时间过短加载不出内容</span></span><br><span class="line"><span class="comment">          */</span></span><br><span class="line">         mDriver.manage().timeouts().implicitlyWait(<span class="number">8000</span>, TimeUnit.MILLISECONDS);</span><br><span class="line">         <span class="keyword">String</span> afterswipe = driver.getPageSource();</span><br><span class="line">         <span class="comment">/**</span></span><br><span class="line"><span class="comment">          * 已经到底部</span></span><br><span class="line"><span class="comment">          */</span></span><br><span class="line">         <span class="keyword">if</span> (beforeswipe.equals(afterswipe)) &#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">     &#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p><strong>TIPS：</strong> <strong>如果是Android原生的ListView读取到的数据是在屏幕上显示的数据，超过屏幕的数据是获取不到的，如果是WebView的列表获取的数据是所有已加载的数据，不管是否在屏幕显示范围内。</strong> 获取公众号列表数据逻辑代码如下，”com.tencent.mm:id/a0y”是具体的公众号名称TextView的ID。</p>
+                <figure class="highlight abnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">List&lt;WebElement&gt; elementList = mDriver.findElementsById(<span class="string">"com.tencent.mm:id/a0y"</span>)<span class="comment">;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>获取历史文章列表数据逻辑代码如下，div是节点，上面说到公众号四种类型的文章都是以’weui_media_box’类名开头的，通过模糊匹配class类名以’weui_media_box’开始的元素来过滤出所有的公众号文章列表项。</p>
+                <figure class="highlight lasso">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="built_in">List</span>&lt;WebElement&gt; msgHistory = driver.findElements(<span class="keyword">By</span>.xpath(<span class="string">"//div[starts-with(@class,'weui_media_box')]"</span>));</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h5 id="3）元素定位方式"><a href="#3）元素定位方式" class="headerlink" title="3）元素定位方式"></a>3）元素定位方式</h5>
+                <p>如果一定需要模糊匹配就使用By.xpath()的方式，因为Android APK应用如果有增加或减少了布局字符串资源或者控件，编译之后生成的ID可能会不一样，这边说的ID是指通过Android Device Monitor查看的布局ID，不是实际的布局代码控件id，布局控件id除非命名改动，否则不会变化。所以<strong>不同版本的微信客户端生成的ID很可能会不一样</strong>，如果要批量实现自动化最好使用模糊匹配的方式，但By.xpath()方式查找定位元素是遍历页面的所有元素，会比较耗时，也容易出现异常。 在测试过程中执行</p>
+                <figure class="highlight less">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">driver</span><span class="selector-class">.findElement</span>(By.xpath(<span class="string">"//android.widget.ImageView[@content-desc='返回']"</span>))<span class="selector-class">.click</span>();</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>时候经常出现如下错误，改为</p>
+                <figure class="highlight less">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">driver</span><span class="selector-class">.findElementById</span>(<span class="string">"com.tencent.mm:id/ht"</span>)<span class="selector-class">.click</span>();</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>异常消失，猜测原因就是因为By.xpath()方法查找比较耗时导致。</p>
+                <figure class="highlight stylus">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.WebDriverException</span>: An unknown server-side error occurred while processing the command. (WARNING: The server did not provide any stacktrace information)</span><br><span class="line"> Command duration or timeout: <span class="number">1.41</span> seconds</span><br><span class="line"> Build info: version: <span class="string">'2.44.0'</span>, revision: <span class="string">'76d78cf'</span>, <span class="selector-tag">time</span>: <span class="string">'2014-10-23 20:02:37'</span></span><br><span class="line"> System info: host: <span class="string">'wenguanchen-MacBook-Pro.local'</span>, ip: <span class="string">'30.85.214.6'</span>, os<span class="selector-class">.name</span>: <span class="string">'Mac OS X'</span>, os<span class="selector-class">.arch</span>: <span class="string">'x86_64'</span>, os<span class="selector-class">.version</span>: <span class="string">'10.13.2'</span>, java<span class="selector-class">.version</span>: <span class="string">'1.8.0_112-release'</span></span><br><span class="line"> Driver info: io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.android</span>.AndroidDriver</span><br><span class="line"> Capabilities [&#123;appPackage=com<span class="selector-class">.tencent</span><span class="selector-class">.mm</span>, noReset=true, dontStopAppOnReset=true, deviceName=emulator-<span class="number">5554</span>, fullReset=false, platform=LINUX, deviceUDID=emulator-<span class="number">5554</span>, desired=&#123;app=, appPackage=com<span class="selector-class">.tencent</span><span class="selector-class">.mm</span>, recreateChromeDriverSessions=true, noReset=true, dontStopAppOnReset=true, deviceName=MuMu, fullReset=false, appActivity=<span class="selector-class">.ui</span><span class="selector-class">.LauncherUI</span>, platformVersion=<span class="number">4.4</span>.<span class="number">4</span>, automationName=Appium, unicodeKeyboard=true, fastReset=false, chromeOptions=&#123;args=[], extensions=[], androidProcess=com<span class="selector-class">.tencent</span><span class="selector-class">.mm</span>:tools&#125;, platformName=Android, resetKeyboard=true&#125;, platformVersion=<span class="number">4.4</span>.<span class="number">4</span>, webStorageEnabled=false, automationName=Appium, takesScreenshot=true, javascriptEnabled=true, unicodeKeyboard=true, platformName=Android, resetKeyboard=true, app=, networkConnectionEnabled=true, recreateChromeDriverSessions=true, warnings=&#123;&#125;, databaseEnabled=false, appActivity=<span class="selector-class">.ui</span><span class="selector-class">.LauncherUI</span>, locationContextEnabled=false, fastReset=false, chromeOptions=&#123;args=[], extensions=[], androidProcess=com<span class="selector-class">.tencent</span><span class="selector-class">.mm</span>:tools&#125;&#125;]</span><br><span class="line"> Session ID: <span class="number">592813</span>d6-<span class="number">7</span>c6e-<span class="number">4</span>a3c-<span class="number">8183</span>-e5f93d1d3bf0</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeConstructorAccessorImpl</span>.newInstance0(Native Method)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeConstructorAccessorImpl</span>.newInstance(NativeConstructorAccessorImpl<span class="selector-class">.java</span>:<span class="number">62</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.DelegatingConstructorAccessorImpl</span>.newInstance(DelegatingConstructorAccessorImpl<span class="selector-class">.java</span>:<span class="number">45</span>)</span><br><span class="line">  at java<span class="selector-class">.lang</span><span class="selector-class">.reflect</span><span class="selector-class">.Constructor</span>.newInstance(Constructor<span class="selector-class">.java</span>:<span class="number">423</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.ErrorHandler</span>.createThrowable(ErrorHandler<span class="selector-class">.java</span>:<span class="number">204</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.ErrorHandler</span>.throwIfResponseFailed(ErrorHandler<span class="selector-class">.java</span>:<span class="number">156</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.RemoteWebDriver</span>.execute(RemoteWebDriver<span class="selector-class">.java</span>:<span class="number">599</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.DefaultGenericMobileDriver</span>.execute(DefaultGenericMobileDriver<span class="selector-class">.java</span>:<span class="number">27</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.AppiumDriver</span>.execute(AppiumDriver<span class="selector-class">.java</span>:<span class="number">1</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.android</span><span class="selector-class">.AndroidDriver</span>.execute(AndroidDriver<span class="selector-class">.java</span>:<span class="number">1</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.RemoteWebDriver</span>.findElement(RemoteWebDriver<span class="selector-class">.java</span>:<span class="number">352</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.RemoteWebDriver</span>.findElementByXPath(RemoteWebDriver<span class="selector-class">.java</span>:<span class="number">449</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.DefaultGenericMobileDriver</span>.findElementByXPath(DefaultGenericMobileDriver<span class="selector-class">.java</span>:<span class="number">99</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.AppiumDriver</span>.findElementByXPath(AppiumDriver<span class="selector-class">.java</span>:<span class="number">1</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.android</span><span class="selector-class">.AndroidDriver</span>.findElementByXPath(AndroidDriver<span class="selector-class">.java</span>:<span class="number">1</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span>.By<span class="variable">$ByXPath</span>.findElement(By<span class="selector-class">.java</span>:<span class="number">357</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.RemoteWebDriver</span>.findElement(RemoteWebDriver<span class="selector-class">.java</span>:<span class="number">344</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.DefaultGenericMobileDriver</span>.findElement(DefaultGenericMobileDriver<span class="selector-class">.java</span>:<span class="number">37</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.AppiumDriver</span>.findElement(AppiumDriver<span class="selector-class">.java</span>:<span class="number">1</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.android</span><span class="selector-class">.AndroidDriver</span>.findElement(AndroidDriver<span class="selector-class">.java</span>:<span class="number">1</span>)</span><br><span class="line">  at com<span class="selector-class">.example</span><span class="selector-class">.AppiumAutoScan</span>.getArticleDetail(AppiumAutoScan<span class="selector-class">.java</span>:<span class="number">335</span>)</span><br><span class="line">  at com<span class="selector-class">.example</span><span class="selector-class">.AppiumAutoScan</span>.launchBrowser(AppiumAutoScan<span class="selector-class">.java</span>:<span class="number">96</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span>.invoke0(Native Method)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span>.invoke(NativeMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">62</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.DelegatingMethodAccessorImpl</span>.invoke(DelegatingMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">43</span>)</span><br><span class="line">  at java<span class="selector-class">.lang</span><span class="selector-class">.reflect</span><span class="selector-class">.Method</span>.invoke(Method<span class="selector-class">.java</span>:<span class="number">498</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.model</span>.FrameworkMethod$<span class="number">1</span>.runReflectiveCall(FrameworkMethod<span class="selector-class">.java</span>:<span class="number">45</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.internal</span><span class="selector-class">.runners</span><span class="selector-class">.model</span><span class="selector-class">.ReflectiveCallable</span>.run(ReflectiveCallable<span class="selector-class">.java</span>:<span class="number">15</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.model</span><span class="selector-class">.FrameworkMethod</span>.invokeExplosively(FrameworkMethod<span class="selector-class">.java</span>:<span class="number">42</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.internal</span><span class="selector-class">.runners</span><span class="selector-class">.statements</span><span class="selector-class">.InvokeMethod</span>.evaluate(InvokeMethod<span class="selector-class">.java</span>:<span class="number">20</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.ParentRunner</span>.runLeaf(ParentRunner<span class="selector-class">.java</span>:<span class="number">263</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.BlockJUnit4ClassRunner</span>.runChild(BlockJUnit4ClassRunner<span class="selector-class">.java</span>:<span class="number">68</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.BlockJUnit4ClassRunner</span>.runChild(BlockJUnit4ClassRunner<span class="selector-class">.java</span>:<span class="number">47</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span>.ParentRunner$<span class="number">3</span>.run(ParentRunner<span class="selector-class">.java</span>:<span class="number">231</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span>.ParentRunner$<span class="number">1</span>.schedule(ParentRunner<span class="selector-class">.java</span>:<span class="number">60</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.ParentRunner</span>.runChildren(ParentRunner<span class="selector-class">.java</span>:<span class="number">229</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.ParentRunner</span>.access$<span class="number">000</span>(ParentRunner<span class="selector-class">.java</span>:<span class="number">50</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span>.ParentRunner$<span class="number">2</span>.evaluate(ParentRunner<span class="selector-class">.java</span>:<span class="number">222</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.ParentRunner</span>.run(ParentRunner<span class="selector-class">.java</span>:<span class="number">300</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runner</span><span class="selector-class">.JUnitCore</span>.run(JUnitCore<span class="selector-class">.java</span>:<span class="number">157</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.junit4</span><span class="selector-class">.JUnit4IdeaTestRunner</span>.startRunnerWithArgs(JUnit4IdeaTestRunner<span class="selector-class">.java</span>:<span class="number">117</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.junit4</span><span class="selector-class">.JUnit4IdeaTestRunner</span>.startRunnerWithArgs(JUnit4IdeaTestRunner<span class="selector-class">.java</span>:<span class="number">42</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.rt</span><span class="selector-class">.execution</span><span class="selector-class">.junit</span><span class="selector-class">.JUnitStarter</span>.prepareStreamsAndStart(JUnitStarter<span class="selector-class">.java</span>:<span class="number">262</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.rt</span><span class="selector-class">.execution</span><span class="selector-class">.junit</span><span class="selector-class">.JUnitStarter</span>.main(JUnitStarter<span class="selector-class">.java</span>:<span class="number">84</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span>.invoke0(Native Method)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span>.invoke(NativeMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">62</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.DelegatingMethodAccessorImpl</span>.invoke(DelegatingMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">43</span>)</span><br><span class="line">  at java<span class="selector-class">.lang</span><span class="selector-class">.reflect</span><span class="selector-class">.Method</span>.invoke(Method<span class="selector-class">.java</span>:<span class="number">498</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.rt</span><span class="selector-class">.execution</span><span class="selector-class">.application</span><span class="selector-class">.AppMain</span>.main(AppMain<span class="selector-class">.java</span>:<span class="number">147</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果容易出现如下异常，则是因为页面的内容还未加载完毕，可以通过</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">mDriver</span><span class="selector-class">.manage</span>()<span class="selector-class">.timeouts</span>()<span class="selector-class">.implicitlyWait</span>(8000, <span class="selector-tag">TimeUnit</span><span class="selector-class">.MILLISECONDS</span>);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>方法设置下超时等待时间，等待页面内容加载完毕，具体超时时间可自己调试看看设置一个合适的值。</p>
+                <figure class="highlight stylus">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.StaleElementReferenceException</span>: stale element reference: element is not attached to the page document</span><br><span class="line">   (Session info: webview=<span class="number">33.0</span>.<span class="number">0.0</span>)</span><br><span class="line">   (Driver info: chromedriver=<span class="number">2.20</span>.<span class="number">353124</span> (<span class="number">035346203162</span>d32c80f1dce587c8154a1efa0c3b),platform=Mac OS X <span class="number">10.13</span>.<span class="number">2</span> x86_64) (WARNING: The server did not provide any stacktrace information)</span><br><span class="line"> Command duration or timeout: <span class="number">2.41</span> seconds</span><br><span class="line"> For documentation on this error, please visit: http:<span class="comment">//seleniumhq.org/exceptions/stale_element_reference.html</span></span><br><span class="line"> Build info: version: <span class="string">'2.44.0'</span>, revision: <span class="string">'76d78cf'</span>, <span class="selector-tag">time</span>: <span class="string">'2014-10-23 20:02:37'</span></span><br><span class="line"> System info: host: <span class="string">'wenguanchen-MacBook-Pro.local'</span>, ip: <span class="string">'30.85.214.81'</span>, os<span class="selector-class">.name</span>: <span class="string">'Mac OS X'</span>, os<span class="selector-class">.arch</span>: <span class="string">'x86_64'</span>, os<span class="selector-class">.version</span>: <span class="string">'10.13.2'</span>, java<span class="selector-class">.version</span>: <span class="string">'1.8.0_112-release'</span></span><br><span class="line"> Driver info: io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.android</span>.AndroidDriver</span><br><span class="line"> Capabilities [&#123;appPackage=com<span class="selector-class">.tencent</span><span class="selector-class">.mm</span>, noReset=true, dontStopAppOnReset=true, deviceName=emulator-<span class="number">5554</span>, fullReset=false, platform=LINUX, deviceUDID=emulator-<span class="number">5554</span>, desired=&#123;app=, appPackage=com<span class="selector-class">.tencent</span><span class="selector-class">.mm</span>, recreateChromeDriverSessions=true, noReset=true, dontStopAppOnReset=true, deviceName=MuMu, fullReset=false, appActivity=<span class="selector-class">.ui</span><span class="selector-class">.LauncherUI</span>, platformVersion=<span class="number">4.4</span>.<span class="number">4</span>, automationName=Appium, unicodeKeyboard=true, fastReset=false, chromeOptions=&#123;args=[], extensions=[], androidProcess=com<span class="selector-class">.tencent</span><span class="selector-class">.mm</span>:tools&#125;, platformName=Android, resetKeyboard=true&#125;, platformVersion=<span class="number">4.4</span>.<span class="number">4</span>, webStorageEnabled=false, automationName=Appium, takesScreenshot=true, javascriptEnabled=true, unicodeKeyboard=true, platformName=Android, resetKeyboard=true, app=, networkConnectionEnabled=true, recreateChromeDriverSessions=true, warnings=&#123;&#125;, databaseEnabled=false, appActivity=<span class="selector-class">.ui</span><span class="selector-class">.LauncherUI</span>, locationContextEnabled=false, fastReset=false, chromeOptions=&#123;args=[], extensions=[], androidProcess=com<span class="selector-class">.tencent</span><span class="selector-class">.mm</span>:tools&#125;&#125;]</span><br><span class="line"> Session ID: b5e933e1-<span class="number">0</span>ddf-<span class="number">421</span>d-<span class="number">9144</span>-e423a7bb25b1</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeConstructorAccessorImpl</span>.newInstance0(Native Method)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeConstructorAccessorImpl</span>.newInstance(NativeConstructorAccessorImpl<span class="selector-class">.java</span>:<span class="number">62</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.DelegatingConstructorAccessorImpl</span>.newInstance(DelegatingConstructorAccessorImpl<span class="selector-class">.java</span>:<span class="number">45</span>)</span><br><span class="line">  at java<span class="selector-class">.lang</span><span class="selector-class">.reflect</span><span class="selector-class">.Constructor</span>.newInstance(Constructor<span class="selector-class">.java</span>:<span class="number">423</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.ErrorHandler</span>.createThrowable(ErrorHandler<span class="selector-class">.java</span>:<span class="number">204</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.ErrorHandler</span>.throwIfResponseFailed(ErrorHandler<span class="selector-class">.java</span>:<span class="number">156</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.RemoteWebDriver</span>.execute(RemoteWebDriver<span class="selector-class">.java</span>:<span class="number">599</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.DefaultGenericMobileDriver</span>.execute(DefaultGenericMobileDriver<span class="selector-class">.java</span>:<span class="number">27</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.AppiumDriver</span>.execute(AppiumDriver<span class="selector-class">.java</span>:<span class="number">1</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.android</span><span class="selector-class">.AndroidDriver</span>.execute(AndroidDriver<span class="selector-class">.java</span>:<span class="number">1</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.RemoteWebElement</span>.execute(RemoteWebElement<span class="selector-class">.java</span>:<span class="number">268</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.DefaultGenericMobileElement</span>.execute(DefaultGenericMobileElement<span class="selector-class">.java</span>:<span class="number">27</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.MobileElement</span>.execute(MobileElement<span class="selector-class">.java</span>:<span class="number">1</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.android</span><span class="selector-class">.AndroidElement</span>.execute(AndroidElement<span class="selector-class">.java</span>:<span class="number">1</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.RemoteWebElement</span>.getText(RemoteWebElement<span class="selector-class">.java</span>:<span class="number">152</span>)</span><br><span class="line">  at com<span class="selector-class">.example</span><span class="selector-class">.AppiumAutoScan</span>.getArticleDetail(AppiumAutoScan<span class="selector-class">.java</span>:<span class="number">294</span>)</span><br><span class="line">  at com<span class="selector-class">.example</span><span class="selector-class">.AppiumAutoScan</span>.launchBrowser(AppiumAutoScan<span class="selector-class">.java</span>:<span class="number">110</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span>.invoke0(Native Method)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span>.invoke(NativeMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">62</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.DelegatingMethodAccessorImpl</span>.invoke(DelegatingMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">43</span>)</span><br><span class="line">  at java<span class="selector-class">.lang</span><span class="selector-class">.reflect</span><span class="selector-class">.Method</span>.invoke(Method<span class="selector-class">.java</span>:<span class="number">498</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.model</span>.FrameworkMethod$<span class="number">1</span>.runReflectiveCall(FrameworkMethod<span class="selector-class">.java</span>:<span class="number">45</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.internal</span><span class="selector-class">.runners</span><span class="selector-class">.model</span><span class="selector-class">.ReflectiveCallable</span>.run(ReflectiveCallable<span class="selector-class">.java</span>:<span class="number">15</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.model</span><span class="selector-class">.FrameworkMethod</span>.invokeExplosively(FrameworkMethod<span class="selector-class">.java</span>:<span class="number">42</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.internal</span><span class="selector-class">.runners</span><span class="selector-class">.statements</span><span class="selector-class">.InvokeMethod</span>.evaluate(InvokeMethod<span class="selector-class">.java</span>:<span class="number">20</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.ParentRunner</span>.runLeaf(ParentRunner<span class="selector-class">.java</span>:<span class="number">263</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.BlockJUnit4ClassRunner</span>.runChild(BlockJUnit4ClassRunner<span class="selector-class">.java</span>:<span class="number">68</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.BlockJUnit4ClassRunner</span>.runChild(BlockJUnit4ClassRunner<span class="selector-class">.java</span>:<span class="number">47</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span>.ParentRunner$<span class="number">3</span>.run(ParentRunner<span class="selector-class">.java</span>:<span class="number">231</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span>.ParentRunner$<span class="number">1</span>.schedule(ParentRunner<span class="selector-class">.java</span>:<span class="number">60</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.ParentRunner</span>.runChildren(ParentRunner<span class="selector-class">.java</span>:<span class="number">229</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.ParentRunner</span>.access$<span class="number">000</span>(ParentRunner<span class="selector-class">.java</span>:<span class="number">50</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span>.ParentRunner$<span class="number">2</span>.evaluate(ParentRunner<span class="selector-class">.java</span>:<span class="number">222</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.ParentRunner</span>.run(ParentRunner<span class="selector-class">.java</span>:<span class="number">300</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runner</span><span class="selector-class">.JUnitCore</span>.run(JUnitCore<span class="selector-class">.java</span>:<span class="number">157</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.junit4</span><span class="selector-class">.JUnit4IdeaTestRunner</span>.startRunnerWithArgs(JUnit4IdeaTestRunner<span class="selector-class">.java</span>:<span class="number">117</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.junit4</span><span class="selector-class">.JUnit4IdeaTestRunner</span>.startRunnerWithArgs(JUnit4IdeaTestRunner<span class="selector-class">.java</span>:<span class="number">42</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.rt</span><span class="selector-class">.execution</span><span class="selector-class">.junit</span><span class="selector-class">.JUnitStarter</span>.prepareStreamsAndStart(JUnitStarter<span class="selector-class">.java</span>:<span class="number">262</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.rt</span><span class="selector-class">.execution</span><span class="selector-class">.junit</span><span class="selector-class">.JUnitStarter</span>.main(JUnitStarter<span class="selector-class">.java</span>:<span class="number">84</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span>.invoke0(Native Method)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span>.invoke(NativeMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">62</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.DelegatingMethodAccessorImpl</span>.invoke(DelegatingMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">43</span>)</span><br><span class="line">  at java<span class="selector-class">.lang</span><span class="selector-class">.reflect</span><span class="selector-class">.Method</span>.invoke(Method<span class="selector-class">.java</span>:<span class="number">498</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.rt</span><span class="selector-class">.execution</span><span class="selector-class">.application</span><span class="selector-class">.AppMain</span>.main(AppMain<span class="selector-class">.java</span>:<span class="number">147</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>更多元素定位方法可参考官网：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="string">http://selenium-python.readthedocs.io/locating-elements.html#locating-by-id</span>](<span class="link">http://selenium-python.readthedocs.io/locating-elements.html#locating-by-id</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h5 id="4）chromedriver相关问题"><a href="#4）chromedriver相关问题" class="headerlink" title="4）chromedriver相关问题"></a>4）chromedriver相关问题</h5>
+                <p>在2017年6月微信热更新升级了X5内核之后，真机上切换到WebView上下文环境就出问题了，具体见这篇博文的评论<a href="https://testerhome.com/topics/6954" target="_blank" rel="noopener">Appium 微信 webview 的自动化技术</a> 和 <a href="https://testerhome.com/topics/8990" target="_blank" rel="noopener">Appium 微信小程序，driver.context (“WEBVIEW_com.tencent.mm:tools”) 切换 webview 报错</a> 看评论是通过降低chromedriver版本的方式来避免异常，但是在试过降低版本到20之后还是不行，更新到最新的版本也不行，于是放弃在真机上实现自动化，在模拟器中跑起来的速度也还可以接受。 在真机上跑的时候，切换到WebView上下文环境，程序控制台输出no such session异常，异常信息如下：</p>
+                <figure class="highlight stylus">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.SessionNotFoundException</span>: no such session</span><br><span class="line">   (Driver info: chromedriver=<span class="number">2.21</span>.<span class="number">371459</span> (<span class="number">36</span>d3d07f660ff2bc1bf28a75d1cdabed0983e7c4),platform=Mac OS X <span class="number">10.13</span>.<span class="number">2</span> x86_64) (WARNING: The server did not provide any stacktrace information)</span><br><span class="line"> Command duration or timeout: <span class="number">14</span> milliseconds</span><br><span class="line"> Build info: version: <span class="string">'2.44.0'</span>, revision: <span class="string">'76d78cf'</span>, <span class="selector-tag">time</span>: <span class="string">'2014-10-23 20:02:37'</span></span><br><span class="line"> System info: host: <span class="string">'wenguanchen-MacBook-Pro.local'</span>, ip: <span class="string">'192.168.1.102'</span>, os<span class="selector-class">.name</span>: <span class="string">'Mac OS X'</span>, os<span class="selector-class">.arch</span>: <span class="string">'x86_64'</span>, os<span class="selector-class">.version</span>: <span class="string">'10.13.2'</span>, java<span class="selector-class">.version</span>: <span class="string">'1.8.0_112-release'</span></span><br><span class="line"> Driver info: io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.android</span>.AndroidDriver</span><br><span class="line"> Capabilities [&#123;appPackage=com<span class="selector-class">.tencent</span><span class="selector-class">.mm</span>, noReset=true, dontStopAppOnReset=true, deviceName=<span class="number">55</span>CDU16C07009329, fullReset=false, platform=LINUX, deviceUDID=<span class="number">55</span>CDU16C07009329, desired=&#123;app=, appPackage=com<span class="selector-class">.tencent</span><span class="selector-class">.mm</span>, recreateChromeDriverSessions=True, noReset=true, dontStopAppOnReset=true, deviceName=FRD-AL00, fullReset=false, appActivity=<span class="selector-class">.ui</span><span class="selector-class">.LauncherUI</span>, platformVersion=<span class="number">6.0</span>, automationName=Appium, unicodeKeyboard=true, fastReset=false, chromeOptions=&#123;args=[], extensions=[], androidProcess=com<span class="selector-class">.tencent</span><span class="selector-class">.mm</span>:tools&#125;, platformName=Android, resetKeyboard=true&#125;, platformVersion=<span class="number">6.0</span>, webStorageEnabled=false, automationName=Appium, takesScreenshot=true, javascriptEnabled=true, unicodeKeyboard=true, platformName=Android, resetKeyboard=true, app=, networkConnectionEnabled=true, recreateChromeDriverSessions=True, warnings=&#123;&#125;, databaseEnabled=false, appActivity=<span class="selector-class">.ui</span><span class="selector-class">.LauncherUI</span>, locationContextEnabled=false, fastReset=false, chromeOptions=&#123;args=[], extensions=[], androidProcess=com<span class="selector-class">.tencent</span><span class="selector-class">.mm</span>:tools&#125;&#125;]</span><br><span class="line"> Session ID: e2e50190-<span class="number">398</span>b-<span class="number">4</span>fa2-bc66-db1097201e3f</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeConstructorAccessorImpl</span>.newInstance0(Native Method)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeConstructorAccessorImpl</span>.newInstance(NativeConstructorAccessorImpl<span class="selector-class">.java</span>:<span class="number">62</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.DelegatingConstructorAccessorImpl</span>.newInstance(DelegatingConstructorAccessorImpl<span class="selector-class">.java</span>:<span class="number">45</span>)</span><br><span class="line">  at java<span class="selector-class">.lang</span><span class="selector-class">.reflect</span><span class="selector-class">.Constructor</span>.newInstance(Constructor<span class="selector-class">.java</span>:<span class="number">423</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.ErrorHandler</span>.createThrowable(ErrorHandler<span class="selector-class">.java</span>:<span class="number">204</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.ErrorHandler</span>.throwIfResponseFailed(ErrorHandler<span class="selector-class">.java</span>:<span class="number">162</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.RemoteWebDriver</span>.execute(RemoteWebDriver<span class="selector-class">.java</span>:<span class="number">599</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.DefaultGenericMobileDriver</span>.execute(DefaultGenericMobileDriver<span class="selector-class">.java</span>:<span class="number">27</span>)</span><br><span class="line">  at io<span class="selector-class">.appium</span><span class="selector-class">.java_client</span><span class="selector-class">.AppiumDriver</span>.execute(AppiumDriver<span class="selector-class">.java</span>:<span class="number">272</span>)</span><br><span class="line">  at org<span class="selector-class">.openqa</span><span class="selector-class">.selenium</span><span class="selector-class">.remote</span><span class="selector-class">.RemoteWebDriver</span>.getPageSource(RemoteWebDriver<span class="selector-class">.java</span>:<span class="number">459</span>)</span><br><span class="line">  at com<span class="selector-class">.example</span><span class="selector-class">.AppiumAutoScan</span>.getArticleDetail(AppiumAutoScan<span class="selector-class">.java</span>:<span class="number">238</span>)</span><br><span class="line">  at com<span class="selector-class">.example</span><span class="selector-class">.AppiumAutoScan</span>.launchBrowser(AppiumAutoScan<span class="selector-class">.java</span>:<span class="number">78</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span>.invoke0(Native Method)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span>.invoke(NativeMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">62</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.DelegatingMethodAccessorImpl</span>.invoke(DelegatingMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">43</span>)</span><br><span class="line">  at java<span class="selector-class">.lang</span><span class="selector-class">.reflect</span><span class="selector-class">.Method</span>.invoke(Method<span class="selector-class">.java</span>:<span class="number">498</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.model</span>.FrameworkMethod$<span class="number">1</span>.runReflectiveCall(FrameworkMethod<span class="selector-class">.java</span>:<span class="number">45</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.internal</span><span class="selector-class">.runners</span><span class="selector-class">.model</span><span class="selector-class">.ReflectiveCallable</span>.run(ReflectiveCallable<span class="selector-class">.java</span>:<span class="number">15</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.model</span><span class="selector-class">.FrameworkMethod</span>.invokeExplosively(FrameworkMethod<span class="selector-class">.java</span>:<span class="number">42</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.internal</span><span class="selector-class">.runners</span><span class="selector-class">.statements</span><span class="selector-class">.InvokeMethod</span>.evaluate(InvokeMethod<span class="selector-class">.java</span>:<span class="number">20</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.ParentRunner</span>.runLeaf(ParentRunner<span class="selector-class">.java</span>:<span class="number">263</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.BlockJUnit4ClassRunner</span>.runChild(BlockJUnit4ClassRunner<span class="selector-class">.java</span>:<span class="number">68</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.BlockJUnit4ClassRunner</span>.runChild(BlockJUnit4ClassRunner<span class="selector-class">.java</span>:<span class="number">47</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span>.ParentRunner$<span class="number">3</span>.run(ParentRunner<span class="selector-class">.java</span>:<span class="number">231</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span>.ParentRunner$<span class="number">1</span>.schedule(ParentRunner<span class="selector-class">.java</span>:<span class="number">60</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.ParentRunner</span>.runChildren(ParentRunner<span class="selector-class">.java</span>:<span class="number">229</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.ParentRunner</span>.access$<span class="number">000</span>(ParentRunner<span class="selector-class">.java</span>:<span class="number">50</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span>.ParentRunner$<span class="number">2</span>.evaluate(ParentRunner<span class="selector-class">.java</span>:<span class="number">222</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runners</span><span class="selector-class">.ParentRunner</span>.run(ParentRunner<span class="selector-class">.java</span>:<span class="number">300</span>)</span><br><span class="line">  at org<span class="selector-class">.junit</span><span class="selector-class">.runner</span><span class="selector-class">.JUnitCore</span>.run(JUnitCore<span class="selector-class">.java</span>:<span class="number">157</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.junit4</span><span class="selector-class">.JUnit4IdeaTestRunner</span>.startRunnerWithArgs(JUnit4IdeaTestRunner<span class="selector-class">.java</span>:<span class="number">117</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.junit4</span><span class="selector-class">.JUnit4IdeaTestRunner</span>.startRunnerWithArgs(JUnit4IdeaTestRunner<span class="selector-class">.java</span>:<span class="number">42</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.rt</span><span class="selector-class">.execution</span><span class="selector-class">.junit</span><span class="selector-class">.JUnitStarter</span>.prepareStreamsAndStart(JUnitStarter<span class="selector-class">.java</span>:<span class="number">262</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.rt</span><span class="selector-class">.execution</span><span class="selector-class">.junit</span><span class="selector-class">.JUnitStarter</span>.main(JUnitStarter<span class="selector-class">.java</span>:<span class="number">84</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span>.invoke0(Native Method)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.NativeMethodAccessorImpl</span>.invoke(NativeMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">62</span>)</span><br><span class="line">  at sun<span class="selector-class">.reflect</span><span class="selector-class">.DelegatingMethodAccessorImpl</span>.invoke(DelegatingMethodAccessorImpl<span class="selector-class">.java</span>:<span class="number">43</span>)</span><br><span class="line">  at java<span class="selector-class">.lang</span><span class="selector-class">.reflect</span><span class="selector-class">.Method</span>.invoke(Method<span class="selector-class">.java</span>:<span class="number">498</span>)</span><br><span class="line">  at com<span class="selector-class">.intellij</span><span class="selector-class">.rt</span><span class="selector-class">.execution</span><span class="selector-class">.application</span><span class="selector-class">.AppMain</span>.main(AppMain<span class="selector-class">.java</span>:<span class="number">147</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在Appium端输出的异常信息如下：</p>
+                <figure class="highlight sql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[debug] [AndroidDriver] Found webviews: ["WEBVIEW_com.tencent.mm:tools","WEBVIEW_com.tencent.mm"]</span><br><span class="line">[debug] [AndroidDriver] Available contexts: ["NATIVE_APP","WEBVIEW_com.tencent.mm:tools","WEBVIEW_com.tencent.mm"]</span><br><span class="line">[debug] [AndroidDriver] Connecting to chrome-backed webview context 'WEBVIEW_com.tencent.mm:tools'</span><br><span class="line">[debug] [Chromedriver] Changed state to 'starting'</span><br><span class="line">[Chromedriver] <span class="keyword">Set</span> chromedriver <span class="built_in">binary</span> <span class="keyword">as</span>: /Applications/Appium.app/<span class="keyword">Contents</span>/Resources/node_modules/appium/node_modules/appium-android-driver/node_modules/appium-chromedriver/chromedriver/mac/chromedriver</span><br><span class="line">[Chromedriver] Killing <span class="keyword">any</span> <span class="keyword">old</span> chromedrivers, running: pkill <span class="number">-15</span> -f <span class="string">"/Applications/Appium.app/Contents/Resources/node_modules/appium/node_modules/appium-android-driver/node_modules/appium-chromedriver/chromedriver/mac/chromedriver.*--port=9515"</span></span><br><span class="line">[Chromedriver] <span class="keyword">No</span> <span class="keyword">old</span> chromedrivers seemed <span class="keyword">to</span> exist</span><br><span class="line">[Chromedriver] Spawning chromedriver <span class="keyword">with</span>: /Applications/Appium.app/<span class="keyword">Contents</span>/Resources/node_modules/appium/node_modules/appium-android-driver/node_modules/appium-chromedriver/chromedriver/mac/chromedriver <span class="comment">--url-base=wd/hub --port=9515 --adb-port=5037</span></span><br><span class="line">[Chromedriver] [STDOUT] <span class="keyword">Starting</span> ChromeDriver <span class="number">2.21</span><span class="number">.371459</span> (<span class="number">36</span>d3d07f660ff2bc1bf28a75d1cdabed0983e7c4) <span class="keyword">on</span> port <span class="number">9515</span></span><br><span class="line"><span class="keyword">Only</span> <span class="keyword">local</span> connections <span class="keyword">are</span> allowed.</span><br><span class="line">[JSONWP Proxy] Proxying [<span class="keyword">GET</span> /<span class="keyword">status</span>] <span class="keyword">to</span> [<span class="keyword">GET</span> <span class="keyword">http</span>://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">9515</span>/wd/hub/<span class="keyword">status</span>] <span class="keyword">with</span> <span class="keyword">no</span> <span class="keyword">body</span></span><br><span class="line">[Chromedriver] [STDERR] [warn] kq_init: detected broken kqueue; not using.: Undefined error: 0</span><br><span class="line">[JSONWP Proxy] Got response <span class="keyword">with</span> <span class="keyword">status</span> <span class="number">200</span>: <span class="string">"&#123;\"</span>sessionId\<span class="string">":\"</span>\<span class="string">",\"</span>stat...</span><br><span class="line">[JSONWP Proxy] Proxying [POST /<span class="keyword">session</span>] <span class="keyword">to</span> [POST <span class="keyword">http</span>://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">9515</span>/wd/hub/<span class="keyword">session</span>] <span class="keyword">with</span> <span class="keyword">body</span>: &#123;<span class="string">"desiredCapabilities"</span>:&#123;<span class="string">"ch...</span></span><br><span class="line"><span class="string">[JSONWP Proxy] Got response with status 200: &#123;"</span>sessionId<span class="string">":"</span><span class="number">166</span>cee263fc87...</span><br><span class="line">[debug] [Chromedriver] <span class="keyword">Changed</span> state <span class="keyword">to</span> <span class="string">'online'</span></span><br><span class="line"> [MJSONWP] Responding <span class="keyword">to</span> <span class="keyword">client</span> <span class="keyword">with</span> driver.setContext() <span class="keyword">result</span>: <span class="literal">null</span></span><br><span class="line"> [<span class="keyword">HTTP</span>] &lt;<span class="comment">-- POST /wd/hub/session/82b9d81c-f725-473d-8d55-ddbc1f92c100/context 200 903 ms - 76 </span></span><br><span class="line"> [<span class="keyword">HTTP</span>] <span class="comment">--&gt; GET /wd/hub/session/82b9d81c-f725-473d-8d55-ddbc1f92c100/context &#123;&#125;</span></span><br><span class="line"> [MJSONWP] <span class="keyword">Calling</span> AppiumDriver.getCurrentContext() <span class="keyword">with</span> args: [<span class="string">"82b9d81c-f725-473d-8d55-d...</span></span><br><span class="line"><span class="string"> [MJSONWP] Responding to client with driver.getCurrentContext() result: "</span>WEBVIEW_com.tencent.mm:tools<span class="string">"</span></span><br><span class="line"><span class="string"> [HTTP] &lt;-- GET /wd/hub/session/82b9d81c-f725-473d-8d55-ddbc1f92c100/context 200 2 ms - 102 </span></span><br><span class="line"><span class="string"> [HTTP] --&gt; GET /wd/hub/session/82b9d81c-f725-473d-8d55-ddbc1f92c100/source &#123;&#125;</span></span><br><span class="line"><span class="string"> [MJSONWP] Driver proxy active, passing request on via HTTP proxy</span></span><br><span class="line"><span class="string"> [JSONWP Proxy] Proxying [GET /wd/hub/session/82b9d81c-f725-473d-8d55-ddbc1f92c100/source] to [GET http://127.0.0.1:9515/wd/hub/session/166cee263fc8757cbcb5576a52f7229e/source] with body: &#123;&#125;</span></span><br><span class="line"><span class="string"> [JSONWP Proxy] Got response with status 200: "</span>&#123;\<span class="string">"sessionId\"</span>:\<span class="string">"166cee263...</span></span><br><span class="line"><span class="string"> [JSONWP Proxy] Replacing sessionId 166cee263fc8757cbcb5576a52f7229e with 82b9d81c-f725-473d-8d55-ddbc1f92c100</span></span><br><span class="line"><span class="string"> [HTTP] &lt;-- GET /wd/hub/session/82b9d81c-f725-473d-8d55-ddbc1f92c100/source 200 8 ms - 220</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果要替换chromedriver的版本，可以从Appium上输出的Log信息找到chromedriver的路径，在终端依次执行如下命令打开chromedriver所在的文件夹。</p>
+                <figure class="highlight groovy">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">cd <span class="regexp">/Applications/</span>Appium.app<span class="regexp">/Contents/</span>Resources<span class="regexp">/node_modules/</span>appium<span class="regexp">/node_modules/</span>appium-android-driver<span class="regexp">/node_modules/</span>appium-chromedriver<span class="regexp">/chromedriver/</span>mac/</span><br><span class="line">open .</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>相应的chromedriver和Chrome版本对应信息和下载地址可以参考： <a href="https://blog.csdn.net/huilan_same/article/details/51896672" target="_blank" rel="noopener">selenium之 chromedriver与chrome版本映射表</a></p>
+                <h5 id="5）程序使用的JAR包"><a href="#5）程序使用的JAR包" class="headerlink" title="5）程序使用的JAR包"></a>5）程序使用的JAR包</h5>
+                <p>自动化脚本程序要跑起来需要两个压缩包，java-client-3.1.0.jar 和 selenium-server-standalone-2.44.0.jar ，试过使用这两个JAR包的最新版本，会有一些奇奇怪怪的问题，这两个版本的JAR包够用了。 java-client-3.1.0.jar 可以从Appium官网下载：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="string">http://appium.io/downloads.html</span>](<span class="link">http://appium.io/downloads.html</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>selenium-server-standalone-2.44.0.jar 可以从selenium官网下载：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="string">http://selenium-release.storage.googleapis.com/index.html</span>](<span class="link">http://selenium-release.storage.googleapis.com/index.html</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h5 id="6）虚拟机"><a href="#6）虚拟机" class="headerlink" title="6）虚拟机"></a>6）虚拟机</h5>
+                <p>我这边使用的是网易MuMu虚拟机，基于Android 4.4.4平台，在我自己的Mac上跑着没问题，同一个版本安装到公司的Mac上就跑不起来，一打开就崩。后面虚拟机自动升级到了Android6.0.1，脚本跑了就有异常，而且每次打开的时候经常卡死在加载页面，system so库报异常。所以最好还是基于Android4.X的版本上运行脚本，Mac上没有一个通用稳定的虚拟机，自己下几个看看是否能用，个人测试各类型的虚拟机结果如下： 1）网易MuMu：在Mac上还是比较好用的，但是最新的版本是6.0.1，初始化经常卡死，无法回退到4.4.4平台版本，脚本在Android6.0平台上切换到WebView的上下文环境异常，升级ChromeDriver版本和Appium版本也无法解决此问题。 2）GenyMotion：微信安装之后无法打开，一直闪退，页面滑动在Mac上巨难操作。 3）天天模拟器：下载的DMG安装文件根本无法打开。 4）夜神模拟器：还是比较好用的，但是Appium adb无法连上虚拟机，从Log来看一直在重启adb， 最后程序中断。 5）逍遥安卓：没有Mac版本。 6）BlueStack：无法安装，安装过程中异常退出，多次重试还是一样。 综上，如果是在Mac上运行虚拟机，目前测试有效的是网易MuMu 基于Android 4.4.4 平台的版本，其他版本和虚拟机都有各种问题。 另：附上Android WebView 历史版本下载地址（需要翻墙）：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="string">https://cn.apkhere.com/app/com.google.android.webview</span>](<span class="link">https://cn.apkhere.com/app/com.google.android.webview</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>WebView 和对应的ChromeDriver版本见Appium GitHub chromedriver说明文档：</p>
+                <figure class="highlight awk">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[https:<span class="regexp">//gi</span>thub.com<span class="regexp">/appium/</span>appium<span class="regexp">/blob/m</span>aster<span class="regexp">/docs/</span>en<span class="regexp">/writing-running-appium/</span>web<span class="regexp">/chromedriver.md](https:/</span><span class="regexp">/github.com/</span>appium<span class="regexp">/appium/</span>blob<span class="regexp">/master/</span>docs<span class="regexp">/en/</span>writing-running-appium<span class="regexp">/web/</span>chromedriver.md)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h5 id="7）编译IDE"><a href="#7）编译IDE" class="headerlink" title="7）编译IDE"></a>7）编译IDE</h5>
+                <p>不做Android开发的可以下载Eclipse IDE，在Eclipse下运行Java程序还比较方便，拷贝工程源码中的三份文件即可</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">java-client<span class="number">-3.1</span><span class="number">.0</span>.jar </span><br><span class="line">selenium-server-standalone<span class="number">-2.44</span><span class="number">.0</span>.jar  </span><br><span class="line">AppiumWeChatAuto/appiumauto/src/main/java/com/example/AppiumAutoScan.java</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>Eclipse IDE下载地址：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="string">http://www.eclipse.org/downloads/packages/</span>](<span class="link">http://www.eclipse.org/downloads/packages/</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>Java版本和对应的Eclipse IDE版本参考：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="string">http://wiki.eclipse.org/Eclipse/Installation</span>](<span class="link">http://wiki.eclipse.org/Eclipse/Installation</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h5 id="8）GitHub工程源码"><a href="#8）GitHub工程源码" class="headerlink" title="8）GitHub工程源码"></a>8）GitHub工程源码</h5>
+                <p><strong>源码GitHub地址：</strong></p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="string">https://github.com/wenguan0927/AppiumWeChatAuto</span>](<span class="link">https://github.com/wenguan0927/AppiumWeChatAuto</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行Android工程查看设备信息的时候Edit Configurations切换到app，运行自动化脚本的时候切换到AppiumAutoScan。支持按最近一周，一个月，一年或爬取所有历史文章，checkTimeLimit()传入不同限制时间类型的参数即可。</p>
+                <h3 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h3>
+                <p>Appium 官方文档：<a href="http://appium.io/docs/cn/about-appium/intro/" target="_blank" rel="noopener">http://appium.io/docs/cn/about-appium/intro/</a></p>
+                <p><a href="https://www.cnblogs.com/7chentest/p/6396551.html" target="_blank" rel="noopener">Appium 常用API</a></p>
+                <p><a href="https://blog.csdn.net/qq_19636353/article/details/53731254" target="_blank" rel="noopener">Appium自动化测试–使用Chrome调试模式获取App混合应用H5界面元素</a></p>
+                <p><a href="https://testerhome.com/topics/6954" target="_blank" rel="noopener">Appium 微信 webview 的自动化技术</a></p>
+                <p><a href="https://anikikun.gitbooks.io/appium-girls-tutorial/content/index.html" target="_blank" rel="noopener">Appium Girls 学习手册</a></p>
+                <p><a href="https://cloud.tencent.com/developer/article/1007014" target="_blank" rel="noopener">Appium：轻松玩转app+webview混合应用自动化测试</a></p>
+                <p><a href="https://testerhome.com/topics/8990" target="_blank" rel="noopener">Appium 微信小程序，driver.context (“WEBVIEW_com.tencent.mm:tools”) 切换 webview 报错</a></p>
+                <p><a href="https://blog.csdn.net/TalorSwfit20111208/article/details/71050135" target="_blank" rel="noopener">Appium 事件监听</a></p>
+                <p><a href="https://juejin.im/post/5acb49126fb9a028cc6186f1" target="_blank" rel="noopener">妙用AccessibilityService黑科技实现微信自动加好友拉人进群聊</a></p>
+                <p><a href="https://blog.csdn.net/damnivictory/article/details/54629305" target="_blank" rel="noopener">Appium自动化测试Android</a></p>
+                <p><a href="https://my.oschina.net/outcat/blog/491529?p=2" target="_blank" rel="noopener">Windows下部署Appium教程（Android App自动化测试框架搭建）</a></p>
+                <p><a href="http://bbs.mb.qq.com/thread-243399-1-1.html" target="_blank" rel="noopener">微信、手Q、Qzone之x5内核inspect调试解决方案</a></p>
+                <p><a href="https://blog.csdn.net/huilan_same/article/details/51896672" target="_blank" rel="noopener">selenium之 chromedriver与chrome版本映射表</a></p>
+                <p><a href="https://blog.csdn.net/smallHorseDaDa/article/details/72865685?locationNum=12&amp;fps=1" target="_blank" rel="noopener">（Android开发自测）在Mac OS 10.12 上安装配置appium</a></p>
+                <p><a href="https://www.jianshu.com/p/ef01ce654302" target="_blank" rel="noopener">辅助功能 AccessibilityService笔记</a></p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/6761.html" rel="prev" title="微信公众号文章爬取之：服务端数据采集">
+                      <i class="fa fa-chevron-left"></i> 微信公众号文章爬取之：服务端数据采集 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/6702.html" rel="next" title="对崔庆才的个人采访记录"> 对崔庆才的个人采访记录 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#一、方案选取"><span class="nav-number">1.</span> <span class="nav-text">一、方案选取</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-4"><a class="nav-link" href="#1、数据源选取"><span class="nav-number">1.1.</span> <span class="nav-text">1、数据源选取</span></a></li>
+                      <li class="nav-item nav-level-4"><a class="nav-link" href="#2、自动化方案选取"><span class="nav-number">1.2.</span> <span class="nav-text">2、自动化方案选取</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#二、Appium安装配置（Mac）"><span class="nav-number">2.</span> <span class="nav-text">二、Appium安装配置（Mac）</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#TIPS"><span class="nav-number">3.</span> <span class="nav-text">TIPS</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#三、具体代码实现"><span class="nav-number">4.</span> <span class="nav-text">三、具体代码实现</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-4"><a class="nav-link" href="#1、Android原生控件属性参数值的获取"><span class="nav-number">4.1.</span> <span class="nav-text">1、Android原生控件属性参数值的获取</span></a></li>
+                      <li class="nav-item nav-level-4"><a class="nav-link" href="#2、WebView属性参数值的获取"><span class="nav-number">4.2.</span> <span class="nav-text">2、WebView属性参数值的获取</span></a></li>
+                      <li class="nav-item nav-level-4"><a class="nav-link" href="#3、具体代码实现"><span class="nav-number">4.3.</span> <span class="nav-text">3、具体代码实现</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#1）初始化"><span class="nav-number">4.3.1.</span> <span class="nav-text">1）初始化</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#2）列表滑动和元素获取"><span class="nav-number">4.3.2.</span> <span class="nav-text">2）列表滑动和元素获取</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#3）元素定位方式"><span class="nav-number">4.3.3.</span> <span class="nav-text">3）元素定位方式</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#4）chromedriver相关问题"><span class="nav-number">4.3.4.</span> <span class="nav-text">4）chromedriver相关问题</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#5）程序使用的JAR包"><span class="nav-number">4.3.5.</span> <span class="nav-text">5）程序使用的JAR包</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#6）虚拟机"><span class="nav-number">4.3.6.</span> <span class="nav-text">6）虚拟机</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#7）编译IDE"><span class="nav-number">4.3.7.</span> <span class="nav-text">7）编译IDE</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#8）GitHub工程源码"><span class="nav-number">4.3.8.</span> <span class="nav-text">8）GitHub工程源码</span></a></li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#四、参考资料"><span class="nav-number">5.</span> <span class="nav-text">四、参考资料</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'ab774b4a8e761609418ac1ffb262b24b',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

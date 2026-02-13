@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="爬虫,网络爬虫,2022,ADSL,代理,Python 爬虫">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有《P">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="【2022 年】Python3 爬虫教程 - ADSL 拨号代理的使用">
+  <meta property="og:url" content="https://cuiqingcai.com/2022104.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有《P">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/x96x4.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/otm60.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/tkgo8.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/76h1i.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/q9khx.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/zfg87.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/yzu81.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/1j4aq.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/9ogwc.png">
+  <meta property="article:published_time" content="2022-03-05T01:33:45.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.307Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="网络爬虫">
+  <meta property="article:tag" content="2022">
+  <meta property="article:tag" content="ADSL">
+  <meta property="article:tag" content="代理">
+  <meta property="article:tag" content="Python 爬虫">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/x96x4.png">
+  <link rel="canonical" href="https://cuiqingcai.com/2022104.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>【2022 年】Python3 爬虫教程 - ADSL 拨号代理的使用 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/2022104.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 【2022 年】Python3 爬虫教程 - ADSL 拨号代理的使用 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2022-03-05 09:33:45" itemprop="dateCreated datePublished" datetime="2022-03-05T09:33:45+08:00">2022-03-05</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span> ， <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a>
+                    </span>
+                  </span>
+                  <span id="/2022104.html" class="post-meta-item leancloud_visitors" data-flag-title="【2022 年】Python3 爬虫教程 - ADSL 拨号代理的使用" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>7.8k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>7 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <blockquote>
+                  <p>系列文章总目录：<a href="https://cuiqingcai.com/17777.html">【2022 年】Python3 爬虫学习教程</a>，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">《Python3 网络爬虫开发实战（第二版）》</a>一书了，<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">点击了解详情</a>。</p>
+                </blockquote>
+                <p>我们在前面尝试维护过一个代理池，代理池可以挑选出许多可用代理，但是常常其稳定性不高、响应速度慢，而且这些代理通常是公共代理，可能不止一人同时使用，其 IP 被封的概率很大。另外，这些代理可能有效时间比较短，虽然代理池一直在筛选，但如果没有及时更新状态，也有可能获取到不可用的代理。</p>
+                <p>上一节我们也了解了付费代理的使用，付费代理的质量相对免费代理就会好不少，这的确已经是一个相对不错的方案了，但本节要介绍的方案可以使我们既能不断更换代理，又可以保证代理的稳定性。</p>
+                <p>在一些付费代理套餐中，大家可能会注意到有这样的一个套餐 - 独享代理或私密代理，这种其实就是用了专用服务器搭建了代理服务，相对一般的付费代理来说，其稳定性更好，速度也更快，同时 IP 可以动态变化。这种独享代理或私密代理的 IP 切换大多数都是基于 ADSL 拨号机制来实现的，一台云主机每拨号一次就可以换一个 IP，同时云主机上搭建了代理服务，我们就可以直接使用该云主机的 HTTP 代理来进行数据爬取了。</p>
+                <p>本节我们就来实际操作一下搭建 ADSL 拨号代理服务的方法。</p>
+                <h2 id="1-什么是-ADSL"><a href="#1-什么是-ADSL" class="headerlink" title="1. 什么是 ADSL"></a>1. 什么是 ADSL</h2>
+                <p>ADSL，英文全称是 Asymmetric Digital Subscriber Line，即非对称数字用户环路。它的上行和下行带宽不对称，它采用频分复用技术把普通的电话线分成了电话、上行和下行 3 个相对独立的信道，从而避免了相互之间的干扰。</p>
+                <p>ADSL 通过拨号的方式上网，拨号时需要输入 ADSL 账号和密码，每次拨号就更换一个 IP。IP 分布在多个 A 段，如果 IP 都能使用，则意味着 IP 量级可达千万。如果我们将 ADSL 主机作为代理，每隔一段时间云主机拨号就换一个 IP，这样可以有效防止 IP 被封禁。另外，由于我们是直接使用专有的云主机搭建的代理服务，所以其代理的稳定性相对更好，代理响应速度也相对更快。</p>
+                <h2 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2. 准备工作"></a>2. 准备工作</h2>
+                <p>在本节开始之前，我们需要先购买几台 ADSL 代理云主机，建议 2 台或以上。因为云主机在拨号的一瞬间服务器正在切换 IP，所以拨号之后代理是不可用的状态，所以需要 2 台及以上云主机来做负载均衡。</p>
+                <p>ADSL 代理云主机的服务商还是比较多的，个人推荐的有阿斯云、云立方等，其官网分别为：</p>
+                <ul>
+                  <li>阿斯云：<a href="https://asiyun.cn/" target="_blank" rel="noopener">https://asiyun.cn/</a></li>
+                  <li>云立方：<a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">https://www.yunlifang.cn/</a></li>
+                </ul>
+                <p>本节案例中，我们以阿斯云为例，购买了一台电信型同时安装了 CentOS Linux 系统的云主机。</p>
+                <p>购买成功之后，我们可以在后台找到服务器的连接 IP、端口、用户名、密码，拨号所用的用户名和密码，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/x96x4.png" alt="image-20210711154649835"></p>
+                <p>然后找到远程管理面板 − 远程连接的用户名和密码，也就是 SSH 远程连接服务器的信息。比如我使用的 IP 和端口是 zhongweidx01.jsq.bz:30042，用户名是 root，命令行下输入如下内容：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">ssh root@zhongweidx01.jsq.bz -p 30042</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>输入连接密码，就可以连接上远程服务器了，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/otm60.png" alt="image-20210711122126383"></p>
+                <p>登录成功之后，我们便可以开始本节的正式内容了。</p>
+                <h2 id="3-测试拨号"><a href="#3-测试拨号" class="headerlink" title="3. 测试拨号"></a>3. 测试拨号</h2>
+                <p>云主机默认已经配置了拨号相关的信息，如宽带用户名和密码等，所以我们无需额外进行配置，只需要调用相应的拨号命令即可实现拨号和 IP 地址的切换。</p>
+                <p>我们可以输入如下拨号命令来进行拨号：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">pppoe-start</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>拨号命令成功运行，没有报错信息，耗时约几秒，结束之后整个主机就获得了一个有效的 IP 地址。</p>
+                <p>如果要停止拨号，可以输入如下命令：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">pppoe-stop</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行完该命令后，网络就会断开，之前的 IP 地址也会被释放。</p>
+                <blockquote>
+                  <p>注意：不同的云主机的拨号命令可能不同，如云立方主机的拨号命令为 <code>adsl-start</code> 和 <code>adsl-stop</code>，请以官方文档的说明为准。</p>
+                </blockquote>
+                <p>所以，如果要想切换 IP，我们只需要将上面的两个命令组合起来，先执行 <code>pppoe-stop</code>，再执行 <code>pppoe-start</code>。每次拨号，<code>ifconfig</code> 命令观察主机的 IP，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/tkgo8.png" alt="image-20210711123026267"></p>
+                <p>可以看到，这里我们执行了停止和开始拨号的命令之后，通过 <code>ifconfig</code> 命令获取的网卡信息的 IP 地址就变化了，所以我们成功实现了 IP 地址的切换。</p>
+                <p>好，那如果我们要想将这台云主机设置为可以实时变化 IP 的代理服务器的话，主要就有这几件事情：</p>
+                <ul>
+                  <li>在云主机上运行代理服务软件，使之可以提供 HTTP 代理服务</li>
+                  <li>实现云主机定时拨号更换 IP</li>
+                  <li>实时获取云主机的代理 IP 和端口信息</li>
+                </ul>
+                <p>接下来我们就来完成这几部分内容吧。</p>
+                <h2 id="4-设置代理服务器"><a href="#4-设置代理服务器" class="headerlink" title="4. 设置代理服务器"></a>4. 设置代理服务器</h2>
+                <p>当前我们使用的云主机使用的是 Linux 的 CentOS 系统，目前它是无法作为一个 HTTP 代理服务器来使用的，因为该云主机上面目前并没有运行相关的代理软件。要想让该云主机提供 HTTP 代理服务，我们需要在其上面安装并运行相关的代理服务。</p>
+                <p>那什么软件能提供这种代理服务呢？目前业界比较流行的有 Squid 和 TinyProxy，配置完成之后它们会在特定端口上运行一个 HTTP 代理。知道了该云主机当前的 IP 之后，我们就能使用该云主机上 Squid 或 TinyProxy 提供的 HTTP 代理了。</p>
+                <p>这里我们以 Squid 为例来进行一下配置。</p>
+                <p>首先我们安装一下 Squid，在 CentOS 的安装命令如下：</p>
+                <figure class="highlight gml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo yum -<span class="symbol">y</span> update</span><br><span class="line">yum -<span class="symbol">y</span> install squid</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行完之后，我们便可以成功安装好 Squid 了。</p>
+                <p>如果要想启动 Squid，可以运行如下命令：</p>
+                <figure class="highlight crmsh">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">systemctl <span class="literal">start</span> squid</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果想配置开机自动启动，可以运行如下命令：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">systemctl <span class="builtin-name">enable</span> squid</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>Squid 成功运行之后，我们可以使用如下命令查看当前 Squid 的运行状态：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">systemctl status squid</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如图所示，我们可以看到 Squid 就成功运行了：</p>
+                <p><img src="https://cdn.cuiqingcai.com/76h1i.png" alt="image-20210711132337727"></p>
+                <p>默认情况下，Squid 会运行在 3128 端口，也就是相当于在云主机的 127.0.0.1:3128 上启动了代理服务，接下来我们可以来测试下 Squid 的代理效果，在该台云主机上运行 curl 命令请求 <a href="https://httpbin.org，并配置使用云主机的代理：">https://httpbin.org，并配置使用云主机的代理：</a></p>
+                <figure class="highlight livecodeserver">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -x <span class="keyword">http</span>://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">3128</span> <span class="keyword">https</span>://httpbin.org/<span class="built_in">get</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里 curl 的 -x 参数代表设置 HTTP 代理，由于这是在云主机上运行的，所以代理直接设置为了 <a href="http://127.0.0.1:3128。">http://127.0.0.1:3128。</a></p>
+                <p>运行完毕之后，我们再运行下 ifconfig 获取下当前云主机的 IP，运行结果如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/q9khx.png" alt="image-20210711133237708"></p>
+                <p>可以看到返回结果的 origin 字段的 IP 就和 ifconfig 获取的 IP 地址是一致的。</p>
+                <p>接下来，我们在自己本机上（非云主机）运行如下命令测试下代理的连通情况，这里 IP 就需要更换为云主机本身的 IP 了，刚才可以看到云主机当前拨号的 IP 是 106.45.104.166，所以需要运行如下命令：</p>
+                <figure class="highlight livecodeserver">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -x <span class="keyword">http</span>://<span class="number">106.45</span><span class="number">.104</span><span class="number">.166</span>:<span class="number">3128</span> <span class="keyword">https</span>://httpbin.org/<span class="built_in">get</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>然而发现并没有对应的输出结果，代理连接失败。</p>
+                <p>其实原因在于默认情况下 Squid 并没有开启允许外网访问，我们可以进行 Squid 的相关配置，如更改当前代理运行端口、允许连接的 IP，配置高匿代理等等，这些都需要修改 <code>/etc/squid/squid.conf</code> 文件。</p>
+                <p>要允许公网访问，最简单的方案就是将 <code>/etc/squid/squid.conf</code> 中的该行：</p>
+                <figure class="highlight ada">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">http_access deny <span class="keyword">all</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>修改为：</p>
+                <figure class="highlight ada">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">http_access allow <span class="keyword">all</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>意思是允许来自所有 IP 的请求连接。</p>
+                <p>另外还需要在配置文件的开头 acl 配置的部分添加该行内容：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">acl all src <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">0</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>另外我们还想将 Squid 配置成高度匿名代理，这样目标网站就无从通过一些参数如 X-Forwarded-For 来得知爬虫机本身的 IP 了，所以在配置文件中再添加如下配置：</p>
+                <figure class="highlight ada">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">request_header_access Via deny <span class="keyword">all</span></span><br><span class="line">request_header_access X-Forwarded-<span class="keyword">For</span> deny <span class="keyword">all</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>另外有的云主机厂商可能默认封禁了 Squid 的 3128 端口，建议更换一个端口，比如 3328，修改改行：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">http_port <span class="number">3128</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>修改为：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">http_port <span class="number">3328</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>修改完配置之后保存配置文件，然后重新启动 Squid 即可：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">systemctl restart squid</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这时候在本机上（非云主机）重新运行刚才的 curl 命令，同时更改下端口：</p>
+                <figure class="highlight livecodeserver">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -x <span class="keyword">http</span>://<span class="number">106.45</span><span class="number">.104</span><span class="number">.166</span>:<span class="number">3328</span> <span class="keyword">https</span>://httpbin.org/<span class="built_in">get</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>即可得到返回结果：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"args"</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">"headers"</span>: &#123;</span><br><span class="line">    <span class="attr">"Accept"</span>: <span class="string">"*/*"</span>,</span><br><span class="line">    <span class="attr">"Host"</span>: <span class="string">"httpbin.org"</span>,</span><br><span class="line">    <span class="attr">"User-Agent"</span>: <span class="string">"curl/7.64.1"</span>,</span><br><span class="line">    <span class="attr">"X-Amzn-Trace-Id"</span>: <span class="string">"Root=1-60ea8fc0-0701b1494e4680b95889cdb1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"origin"</span>: <span class="string">"106.45.104.166"</span>,</span><br><span class="line">  <span class="attr">"url"</span>: <span class="string">"https://httpbin.org/get"</span></span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这时候我们就可以在本机上直接使用云主机的代理了！</p>
+                <h2 id="5-动态获取-IP"><a href="#5-动态获取-IP" class="headerlink" title="5. 动态获取 IP"></a>5. 动态获取 IP</h2>
+                <p>现在我们已经可以执行命令让主机动态切换 IP 了，同时也在主机上搭建好代理服务器了，接下来我们只需要知道拨号后的 IP 就可以使用代理了。</p>
+                <p>那怎么动态获取拨号主机的 IP 呢？又怎么来维护这些代理呢？怎么保证获取到的代理一定是可用的呢？这时候我们可能想到一些问题：</p>
+                <ul>
+                  <li>如果我们只有一台拨号云主机并设置了定时拨号的话，那么在拨号的几秒时间内，该云主机提供的代理服务是不可用的。</li>
+                  <li>如果我们不用定时拨号的方法，而想要在爬虫端控制拨号云主机的拨号操作的话，爬虫端还需要单独的逻辑来处理拨号和重连的问题，这会带来额外的开销。</li>
+                </ul>
+                <p>综合考虑下来，一个比较好的解决方案是：</p>
+                <ul>
+                  <li>为了不增加爬虫端的逻辑开销，爬虫端应该无需关心拨号云主机的拨号操作，我们只需要保证爬虫通过某个接口获取到的代理是可用的就行了，拨号云主机的代理的维护逻辑和爬虫是毫不相关的。</li>
+                  <li>
+                    <p>为了解决一台拨号云主机在拨号时代理不可用的问题，我们需要有多台云主机同时提供代理服务，我们可以将不同云主机的拨号时段错开，当一台云主机正在拨号时，我们可以用其他云主机顶替。</p>
+                  </li>
+                  <li>
+                    <p>为了更加方便地维护和使用代理，我们可以像前文介绍的代理池一样把这些云主机的代理统一维护起来，所有拨号云主机的代理统一存储到一个公共的 Redis 数据库中，可以使用 Redis 的 Hash 存储方式，存好每台云主机和对应代理的映射关系。拨号云主机拨号前将自己对应的代理内容清空，拨号成功之后再将代理更新，这样 Redis 数据库中的代理就一定是实时可用的代理了。</p>
+                  </li>
+                </ul>
+                <p>利用这种思路，我们要做的其实就有如下几点：</p>
+                <ul>
+                  <li>配置一个可以公网访问的 Redis 数据库，每台云主机可以将自己的代理存储到对应的 Redis 数据库中，由该 Redis 数据库维护这些代理。</li>
+                  <li>申请多台拨号云主机并按照上文所述配置好 Squid 代理服务，每台云主机设置定时拨号来更换 IP。</li>
+                  <li>每台云主机在拨号前删除 Redis 数据库中原来的代理，拨号成功之后测试一下代理的可用性，将最新的代理更新到 Redis 数据库中即可。</li>
+                </ul>
+                <p>OK，接下来我们就来操作一下吧。</p>
+                <p>由于云主机要进行 Redis 数据库的操作，所以我们可以使用 Python 来实现，所以先在云主机上装下 Python：</p>
+                <figure class="highlight cmake">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">yum -y <span class="keyword">install</span> python3</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>关于自动拨号、连接 Redis 数据库、获取本机代理、设置 Redis 数据库的操作，我已经写好了一个 Python 的包并发布到 PyPi 了，我们可以直接使用这个包来完成如上的功能，这个包叫做 adslproxy，可以在云主机上使用 pip3 来安装：</p>
+                <figure class="highlight cmake">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">pip3 <span class="keyword">install</span> adslproxy</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>安装完毕之后，我们可以使用 export 命令设置下环境变量：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">REDIS_HOST</span>=&lt;Redis数据库的地址&gt;</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">REDIS_PORT</span>=&lt;Redis数据库的端口&gt;</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">REDIS_PASSWORD</span>=&lt;Redis数据库的密码&gt;</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PROXY_PORT</span>=&lt;拨号云主机配置的代理端口&gt;</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">DIAL_BASH</span>=&lt;拨号脚本&gt;</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">DIAL_IFNAME</span>=&lt;网卡名称&gt;</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">CLIENT_NAME</span>=&lt;云主机的唯一标识&gt;</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">DIAL_CYCLE</span>=&lt;拨号间隔&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里 REDIS_HOST、REDIS_PORT、REDIS_PASSWORD 就是远程 Redis 的连接信息，就不再赘述了。PROXY_PORT 就是云主机上代理服务的端口，我们已经设置为了 3328。DIAL_BASH 就是拨号的命令，即 <code>pppoe-stop;pppoe-start</code>，当然该脚本的内容不同的云主机厂商可能不同，以实际为准。DIAL_IFNAME 即拨号云主机上的网卡名称，程序可以通过获取该网卡的信息来获取当前拨号主机的 IP 地址，通过上述操作可以发现，网卡名称叫做 ppp0，当然这个名称也是以实际为准。CLIENT_NAME 就是云主机的唯一标识，用来在 Redis 中存储主机和代理的映射，因为我们有多台云主机，所以不同云主机的名称应该设置为不同的字符串，比如 adsl1、adsl2 等等。</p>
+                <p>这里我们设置如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/zfg87.png" alt="image-20210711152355780"></p>
+                <p>设置好环境变量之后，我们就可以运行 adslproxy 命令来进行拨号了，命令如下：</p>
+                <figure class="highlight autoit">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">adslproxy <span class="built_in">send</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">2021-07-11 15:30:03.062 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:loop:90 - Starting dial<span class="built_in">..</span>.</span><br><span class="line">2021-07-11 15:30:03.063 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:run:99 - Dial started, <span class="builtin-name">remove</span> proxy</span><br><span class="line">2021-07-11 15:30:03.063 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:remove_proxy:62 - Removing adsl1<span class="built_in">..</span>.</span><br><span class="line">2021-07-11 15:30:04.065 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:remove_proxy:69 - Removed adsl1 successfully</span><br><span class="line">2021-07-11 15:30:05.373 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:run:111 - <span class="builtin-name">Get</span> new<span class="built_in"> IP </span>106.45.105.33</span><br><span class="line">2021-07-11 15:30:15.552 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:run:120 - Valid<span class="built_in"> proxy </span>106.45.105.33:3328</span><br><span class="line">2021-07-11 15:30:16.501 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:set_proxy:82 - Successfully <span class="builtin-name">set</span><span class="built_in"> proxy </span>106.45.105.33:3328</span><br><span class="line">2021-07-11 15:33:36.678 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:loop:90 - Starting dial<span class="built_in">..</span>.</span><br><span class="line">2021-07-11 15:33:36.679 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:run:99 - Dial started, <span class="builtin-name">remove</span> proxy</span><br><span class="line">2021-07-11 15:33:36.680 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:remove_proxy:62 - Removing adsl1<span class="built_in">..</span>.</span><br><span class="line">2021-07-11 15:33:37.214 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:remove_proxy:69 - Removed adsl1 successfully</span><br><span class="line">2021-07-11 15:33:38.617 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:run:111 - <span class="builtin-name">Get</span> new<span class="built_in"> IP </span>106.45.105.219</span><br><span class="line">2021-07-11 15:33:48.750 | <span class="builtin-name">INFO</span>     | adslproxy.sender.sender:run:120 - Valid<span class="built_in"> proxy </span>106.45.105.219:3328</span><br><span class="line"><span class="built_in">..</span>.</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们就可以看到，因为云主机在拨号之后当前代理就会失效了，所以在拨号之前程序先尝试从 Redis 中删除当前云主机的代理。接下来就开始执行拨号操作，拨号成功之后验证一下代理是可用的，然后再将该代理存储到 Redis 数据库中。循环往复运行，我们就达到了定时更换 IP 的效果，同时 Redis 数据库中也是实时可用的代理。</p>
+                <p>最后按照同样的配置，我们可以购买多台拨号云主机并进行如上同样的设置，这样就有多个稳定的定时更新的代理可用了，Redis 中会实时更新各台云主机的代理，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/yzu81.jpg" alt=""></p>
+                <p>图中所示是四台 ADSL 拨号云主机配置并运行后 Redis 数据库中的内容，其中的代理都是实时可用的。</p>
+                <h2 id="6-使用代理"><a href="#6-使用代理" class="headerlink" title="6. 使用代理"></a>6. 使用代理</h2>
+                <p>那怎么使用代理呢？我们可以在任意可以公网访问的云主机上连接刚才的 Redis 数据库并搭建一个 API 服务即可。怎么搭建呢？我们可以同样使用刚才的 adslproxy 库，该库也提供了 API 服务的功能。</p>
+                <p>为了方便测试，我们在本机进行测试，安装好 adslproxy 包之后，然后设置好 REDIS 相关的环境变量：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">REDIS_HOST</span>=&lt;Redis数据库的地址&gt;</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">REDIS_PORT</span>=&lt;Redis数据库的端口&gt;</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">REDIS_PASSWORD</span>=&lt;Redis数据库的密码&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>然后运行如下命令启动即可：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="number">2020</span><span class="number">-07</span><span class="number">-11</span> <span class="number">16</span>:<span class="number">31</span>:<span class="number">58.651</span> | INFO     | adslproxy.server.server:serve:<span class="number">68</span> - API listening on http:<span class="comment">//0.0.0.0:8425</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到 API 服务就在 8425 端口上运行了，我们打开浏览器即可访问首页，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/1j4aq.png" alt="image-20210711153319974"></p>
+                <p>其中最重要的就是 random 接口了，我们使用 random 接口即可获取 Redis 数据库中的一个随机代理，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/9ogwc.png" alt="image-20210711153419543"></p>
+                <p>测试下可用性也没有问题，这样爬虫就可以使用这个代理来进行数据爬取了。</p>
+                <p>最后，我们将 API 服务部署一下，这个 ADSL 代理服务就可以像代理池一样被使用了，每请求一次 API 就可以获取一个实时可用代理，不同的时间段这个代理就会实时更换，而且连接稳定速度又快，实在是网络爬虫的最佳搭档。</p>
+                <h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2>
+                <p>本节我们介绍了 ADSL 拨号代理的搭建过程。通过这种代理，我们可以无限次更换 IP，而且线路非常稳定，爬虫抓取效果也会好很多。</p>
+                <p>本节代码：<a href="https://github.com/Python3WebSpider/AdslProxy" target="_blank" rel="noopener">https://github.com/Python3WebSpider/AdslProxy</a>。</p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/2022102.html" rel="bookmark">【2022 年】Python3 爬虫教程 - 代理的使用方法</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/2022103.html" rel="bookmark">【2022 年】Python3 爬虫教程 - 高效代理池的维护</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/2022113.html" rel="bookmark">【2022 年】Python3 爬虫教程 - JavaScript Hook 的用法</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/2022112.html" rel="bookmark">【2022 年】Python3 爬虫教程 - JavaScript 逆向调试常用技巧</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202291.html" rel="bookmark">【2022 年】Python3 爬虫教程 - OCR 识别图形验证码</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+                  <a href="/tags/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 网络爬虫</a>
+                  <a href="/tags/2022/" rel="tag"><i class="fa fa-tag"></i> 2022</a>
+                  <a href="/tags/ADSL/" rel="tag"><i class="fa fa-tag"></i> ADSL</a>
+                  <a href="/tags/%E4%BB%A3%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 代理</a>
+                  <a href="/tags/Python-%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> Python 爬虫</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/2022103.html" rel="prev" title="【2022 年】Python3 爬虫教程 - 高效代理池的维护">
+                      <i class="fa fa-chevron-left"></i> 【2022 年】Python3 爬虫教程 - 高效代理池的维护 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/2022111.html" rel="next" title="【2022 年】Python3 爬虫教程 - JavaScript 网站加密和混淆技术简介"> 【2022 年】Python3 爬虫教程 - JavaScript 网站加密和混淆技术简介 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是-ADSL"><span class="nav-number">1.</span> <span class="nav-text">1. 什么是 ADSL</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#2-准备工作"><span class="nav-number">2.</span> <span class="nav-text">2. 准备工作</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#3-测试拨号"><span class="nav-number">3.</span> <span class="nav-text">3. 测试拨号</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#4-设置代理服务器"><span class="nav-number">4.</span> <span class="nav-text">4. 设置代理服务器</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#5-动态获取-IP"><span class="nav-number">5.</span> <span class="nav-text">5. 动态获取 IP</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#6-使用代理"><span class="nav-number">6.</span> <span class="nav-text">6. 使用代理</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#7-总结"><span class="nav-number">7.</span> <span class="nav-text">7. 总结</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '965bc3bd0e9410fdc6ea180b1e2a10ad',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

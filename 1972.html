@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="2022 年最新 Python3 网络爬虫教程 大家好，我是崔庆才，由于爬虫技术不断迭代升级，一些旧的教程已经过时、案例已经过期，最前沿的爬虫技术比如异步、JavaScript 逆向、安卓逆向、智能解析、WebAssembly、大规模分布式、Kubernetes 等技术层出不穷，我最近新出了一套最新最全面的 Python3 网络爬虫系列教程。    博主自荐：截止 2022 年，可以将最前沿最全面">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Python爬虫实战六之抓取爱问知识人问题并保存至数据库">
+  <meta property="og:url" content="https://cuiqingcai.com/1972.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="2022 年最新 Python3 网络爬虫教程 大家好，我是崔庆才，由于爬虫技术不断迭代升级，一些旧的教程已经过时、案例已经过期，最前沿的爬虫技术比如异步、JavaScript 逆向、安卓逆向、智能解析、WebAssembly、大规模分布式、Kubernetes 等技术层出不穷，我最近新出了一套最新最全面的 Python3 网络爬虫系列教程。    博主自荐：截止 2022 年，可以将最前沿最全面">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2015/09/20150908222744.png">
+  <meta property="article:published_time" content="2015-09-08T14:24:33.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.290Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2015/09/20150908222744.png">
+  <link rel="canonical" href="https://cuiqingcai.com/1972.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>Python爬虫实战六之抓取爱问知识人问题并保存至数据库 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/1972.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> Python爬虫实战六之抓取爱问知识人问题并保存至数据库 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2015-09-08 22:24:33" itemprop="dateCreated datePublished" datetime="2015-09-08T22:24:33+08:00">2015-09-08</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/1972.html" class="post-meta-item leancloud_visitors" data-flag-title="Python爬虫实战六之抓取爱问知识人问题并保存至数据库" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>18k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>16 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <h2 id="2022-年最新-Python3-网络爬虫教程"><a href="#2022-年最新-Python3-网络爬虫教程" class="headerlink" title="2022 年最新 Python3 网络爬虫教程"></a>2022 年最新 Python3 网络爬虫教程</h2>
+                <p>大家好，我是崔庆才，由于爬虫技术不断迭代升级，一些旧的教程已经过时、案例已经过期，最前沿的爬虫技术比如异步、JavaScript 逆向、安卓逆向、智能解析、WebAssembly、大规模分布式、Kubernetes 等技术层出不穷，我最近新出了一套最新最全面的 Python3 网络爬虫系列教程。</p>
+                <blockquote>
+                  <p>博主自荐：截止 2022 年，可以将最前沿最全面的爬虫技术都涵盖的教程，如异步、JavaScript 逆向、安卓逆向、智能解析、WebAssembly、大规模分布式、Kubernetes 等，市面上目前就这一套了。</p>
+                </blockquote>
+                <p>最新教程对旧的爬虫技术内容进行了全面更新，搭建了全新的案例平台进行全面讲解，保证案例稳定有效不过期。</p>
+                <p>教程请移步：</p>
+                <p><a href="https://cuiqingcai.com/17777.html">【2022 版】Python3 网络爬虫学习教程</a></p>
+                <p>如下为原文。</p>
+                <p>大家好，本次为大家带来的是抓取爱问知识人的问题并将问题和答案保存到数据库的方法，涉及的内容包括：</p>
+                <ul>
+                  <li>Urllib 的用法及异常处理</li>
+                  <li>Beautiful Soup 的简单应用</li>
+                  <li>MySQLdb 的基础用法</li>
+                  <li>正则表达式的简单应用</li>
+                </ul>
+                <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2>
+                <p>在这之前，我们需要先配置一下环境，我的 Python 的版本为 2.7，需要额外安装的库有两个，一个是 Beautiful Soup，一个是 MySQLdb，在这里附上两个库的下载地址， <a href="https://pypi.python.org/pypi/beautifulsoup4/4.3.2" target="_blank" rel="noopener">Beautiful Soup</a> <a href="http://sourceforge.net/projects/mysql-python/" target="_blank" rel="noopener">MySQLdb</a> 大家可以下载之后通过如下命令安装</p>
+                <figure class="highlight vim">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">python</span> setup.<span class="keyword">py</span> install</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>环境配置好之后，我们便可以开心地撸爬虫了</p>
+                <h2 id="框架思路"><a href="#框架思路" class="headerlink" title="框架思路"></a>框架思路</h2>
+                <p>首先我们随便找一个分类地址，<a href="http://iask.sina.com.cn/c/978-all-1.html" target="_blank" rel="noopener">外语学习 - 爱问知识人</a>，打开之后可以看到一系列的问题列表。 我们在这个页面需要获取的东西有： 总的页码数，每一页的所有问题链接。 接下来我们需要遍历所有的问题，来抓取每一个详情页面，提取问题，问题内容，回答者，回答时间，回答内容。 最后，我们需要把这些内容存储到数据库中。</p>
+                <h2 id="要点简析"><a href="#要点简析" class="headerlink" title="要点简析"></a>要点简析</h2>
+                <p>其实大部分内容相信大家会了前面的内容，这里的爬虫思路已经融汇贯通了，这里就说一下一些扩展的功能</p>
+                <h3 id="1-日志输出"><a href="#1-日志输出" class="headerlink" title="1.日志输出"></a>1.日志输出</h3>
+                <p>日志输出，我们要输出时间和爬取的状态，比如像下面这样：</p>
+                <blockquote>
+                  <p>[2015-08-10 03:05:20] 113011 号问题存在其他答案 我个人认为应该是樱桃沟很美的 [2015-08-10 03:05:20] 保存到数据库,此问题的 ID 为 113011 [2015-08-10 03:05:20] 当前爬取第 2 的内容,发现一个问题 百度有一个地方，花儿带着芳香，水儿流淌奔腾是什么意思 多多帮忙哦 回答数量 1 [2015-08-10 03:05:19] 保存到数据库,此问题的 ID 为 113010</p>
+                </blockquote>
+                <p>所以，我们需要引入时间函数，然后写一个获取当前时间的函数</p>
+                <figure class="highlight pgsql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> <span class="type">time</span></span><br><span class="line"></span><br><span class="line">#获取当前时间</span><br><span class="line">def getCurrentTime(self):</span><br><span class="line">    <span class="keyword">return</span> <span class="type">time</span>.strftime(<span class="string">'[%Y-%m-%d %H:%M:%S]'</span>,<span class="type">time</span>.<span class="built_in">localtime</span>(<span class="type">time</span>.time()))</span><br><span class="line"></span><br><span class="line">#获取当前时间</span><br><span class="line">def getCurrentDate(self):</span><br><span class="line">    <span class="keyword">return</span> <span class="type">time</span>.strftime(<span class="string">'%Y-%m-%d'</span>,<span class="type">time</span>.<span class="built_in">localtime</span>(<span class="type">time</span>.time()))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>以上分别是获取带具体时间和获取日期的函数，在输出时，我们可以在输出语句的前面调用这函数即可。 然后我们需要将缓冲区设置输出到 log 中，在程序的最前面加上这两句即可</p>
+                <figure class="highlight ini">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attr">f_handler</span>=open(<span class="string">'out.log'</span>, <span class="string">'w'</span>)</span><br><span class="line"><span class="attr">sys.stdout</span>=f_handler</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样，所有的 print 语句输出的内容就会保存到 out.log 文件中了。</p>
+                <h3 id="2-页码保存"><a href="#2-页码保存" class="headerlink" title="2.页码保存"></a>2.页码保存</h3>
+                <p>爬虫爬取过程中可能出现各种各样的错误，这样会导致爬虫的中断，如果我们重新运行爬虫，那么就会导致爬虫从头开始运行了，这样显然是不合理的。所以，我们需要把当前爬取的页面保存下来，比如可以保存到文本中，假如爬虫中断了，重新运行爬虫，读取文本文件的内容，接着爬取即可。 大家可以稍微参考一下函数的实现：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment">#主函数</span></span><br><span class="line">def main(self):</span><br><span class="line">    <span class="attribute">f_handler</span>=open('out.log', <span class="string">'w'</span>)</span><br><span class="line">    sys.<span class="attribute">stdout</span>=f_handler</span><br><span class="line">   <span class="built_in"> page </span>= open(<span class="string">'page.txt'</span>, <span class="string">'r'</span>)</span><br><span class="line">    content = page.readline()</span><br><span class="line">    start_page = int(content.strip()) - 1</span><br><span class="line">    page.close()</span><br><span class="line">    <span class="builtin-name">print</span> self.getCurrentTime(),<span class="string">"开始页码"</span>,start_page</span><br><span class="line">    <span class="builtin-name">print</span> self.getCurrentTime(),<span class="string">"爬虫正在启动,开始爬取爱问知识人问题"</span></span><br><span class="line">    self.total_num = self.getTotalPageNum()</span><br><span class="line">    <span class="builtin-name">print</span> self.getCurrentTime(),<span class="string">"获取到目录页面个数"</span>,self.total_num,<span class="string">"个"</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> start_page:</span><br><span class="line">        start_page = self.total_num</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(1,start_page):</span><br><span class="line">        <span class="builtin-name">print</span> self.getCurrentTime(),<span class="string">"正在抓取第"</span>,start_page-x+1,<span class="string">"个页面"</span></span><br><span class="line">        try:</span><br><span class="line">            self.getQuestions(start_page-x+1)</span><br><span class="line">        except urllib2.URLError, e:</span><br><span class="line">            <span class="keyword">if</span> hasattr(e, <span class="string">"reason"</span>):</span><br><span class="line">                <span class="builtin-name">print</span> self.getCurrentTime(),<span class="string">"某总页面内抓取或提取失败,错误原因"</span>, e.reason</span><br><span class="line">        except Exception,e:</span><br><span class="line">            <span class="builtin-name">print</span> self.getCurrentTime(),<span class="string">"某总页面内抓取或提取失败,错误原因:"</span>,e</span><br><span class="line">        <span class="keyword">if</span> start_page-x+1 &lt; start_page:</span><br><span class="line">            <span class="attribute">f</span>=open('page.txt','w')</span><br><span class="line">            f.write(str(start_page-x+1))</span><br><span class="line">            <span class="builtin-name">print</span> self.getCurrentTime(),<span class="string">"写入新页码"</span>,start_page-x+1</span><br><span class="line">            f.close()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样，不管我们爬虫中途遇到什么错误，妈妈也不会担心了</p>
+                <h3 id="3-页面处理"><a href="#3-页面处理" class="headerlink" title="3.页面处理"></a>3.页面处理</h3>
+                <p>页面处理过程中，我们可能遇到各种各样奇葩的 HTML 代码，和上一节一样，我们沿用一个页面处理类即可。</p>
+                <figure class="highlight vbnet">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">import re</span><br><span class="line"></span><br><span class="line"><span class="meta">#处理页面标签类</span></span><br><span class="line"><span class="keyword">class</span> Tool:</span><br><span class="line"></span><br><span class="line">    <span class="meta">#将超链接广告剔除</span></span><br><span class="line">    removeADLink = re.compile(<span class="comment">'<span class="doctag">&lt;div class="link_layer.*?&lt;/div&gt;</span>')</span></span><br><span class="line">    <span class="meta">#去除img标签,1-7位空格,&amp;nbsp;</span></span><br><span class="line">    removeImg = re.compile(<span class="comment">'<span class="doctag">&lt;img.*?&gt;</span>| &#123;1,7&#125;|&amp;nbsp;')</span></span><br><span class="line">    <span class="meta">#删除超链接标签</span></span><br><span class="line">    removeAddr = re.compile(<span class="comment">'<span class="doctag">&lt;a.*?&gt;</span>|<span class="doctag">&lt;/a&gt;</span>')</span></span><br><span class="line">    <span class="meta">#把换行的标签换为\n</span></span><br><span class="line">    replaceLine = re.compile(<span class="comment">'<span class="doctag">&lt;tr&gt;</span>|<span class="doctag">&lt;div&gt;</span>|<span class="doctag">&lt;/div&gt;</span>|<span class="doctag">&lt;/p&gt;</span>')</span></span><br><span class="line">    <span class="meta">#将表格制表&lt;td&gt;替换为\t</span></span><br><span class="line">    replaceTD= re.compile(<span class="comment">'<span class="doctag">&lt;td&gt;</span>')</span></span><br><span class="line">    <span class="meta">#将换行符或双换行符替换为\n</span></span><br><span class="line">    replaceBR = re.compile(<span class="comment">'<span class="doctag">&lt;br&gt;</span><span class="doctag">&lt;br&gt;</span>|<span class="doctag">&lt;br&gt;</span>')</span></span><br><span class="line">    <span class="meta">#将其余标签剔除</span></span><br><span class="line">    removeExtraTag = re.compile(<span class="comment">'<span class="doctag">&lt;.*?&gt;</span>')</span></span><br><span class="line">    <span class="meta">#将多行空行删除</span></span><br><span class="line">    removeNoneLine = re.compile(<span class="comment">'\n+')</span></span><br><span class="line"></span><br><span class="line">    def replace(self,x):</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.removeADLink,<span class="string">""</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.removeImg,<span class="string">""</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.removeAddr,<span class="string">""</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.replaceLine,<span class="string">"\n"</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.replaceTD,<span class="string">"\t"</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.replaceBR,<span class="string">"\n"</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.removeExtraTag,<span class="string">""</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.removeNoneLine,<span class="string">"\n"</span>,x)</span><br><span class="line">        <span class="meta">#strip()将前后多余内容删除</span></span><br><span class="line">        <span class="keyword">return</span> x.strip()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>我们可以用一段含有 HTML 代码的文字，经过调用 replace 方法之后，各种冗余的 HTML 代码就会处理好了。 比如我们这么一段代码：</p>
+                <figure class="highlight javascript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&lt;article <span class="class"><span class="keyword">class</span></span>=<span class="string">"article-content"</span>&gt;</span><br><span class="line">&lt;h2&gt;前言&lt;<span class="regexp">/h2&gt;</span></span><br><span class="line"><span class="regexp">&lt;p&gt;最近发现MySQL服务隔三差五就会挂掉，导致我的网站和爬虫都无法正常运作。自己的网站是基于MySQL，在做爬虫存取一些资料的时候也是基于MySQL，数据量一大了，MySQL它就有点受不了了，时不时会崩掉，虽然我自己有网站监控和邮件通知，但是好多时候还是需要我来手动连接我的服务器重新启动一下我的MySQL，这样简直太不友好了，所以，我就觉定自己写个脚本，定时监控它，如果发现它挂掉了就重启它。&lt;/</span>p&gt;</span><br><span class="line">&lt;p&gt;好了，闲言碎语不多讲，开始我们的配置之旅。&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;p&gt;运行环境：&lt;strong&gt;Ubuntu Linux 14.04&lt;/</span>strong&gt;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;h2&gt;编写Shell脚本&lt;/</span>h2&gt;</span><br><span class="line">&lt;p&gt;首先，我们要编写一个shell脚本，脚本主要执行的逻辑如下：&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;p&gt;显示mysqld进程状态，如果判断进程未在运行，那么输出日志到文件，然后启动mysql服务，如果进程在运行，那么不执行任何操作，可以选择性输出监测结果。&lt;/</span>p&gt;</span><br><span class="line">&lt;p&gt;可能大家对于shell脚本比较陌生，在这里推荐官方的shell脚本文档来参考一下&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">&lt;p&gt;&lt;a href="http:/</span><span class="regexp">/wiki.ubuntu.org.cn/</span>Shell%E7%BC%<span class="number">96</span>%E7%A8%<span class="number">8</span>B%E5%<span class="number">9</span>F%BA%E7%A1%<span class="number">80</span><span class="string">" data-original-title="</span><span class="string">" title="</span><span class="string">"&gt;Ubuntu Shell 编程基础&lt;/a&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="string">&lt;p&gt;shell脚本的后缀为sh，在任何位置新建一个脚本文件，我选择在 /etc/mysql 目录下新建一个 listen.sh 文件。&lt;/p&gt;</span></span><br><span class="line"><span class="string">&lt;p&gt;执行如下命令：&lt;/p&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>经过处理后便会变成如下的样子：</p>
+                <figure class="highlight dockerfile">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">前言</span><br><span class="line">最近发现MySQL服务隔三差五就会挂掉，导致我的网站和爬虫都无法正常运作。自己的网站是基于MySQL，在做爬虫存取一些资料的时候也是基于MySQL，数据量一大了，MySQL它就有点受不了了，时不时会崩掉，虽然我自己有网站监控和邮件通知，但是好多时候还是需要我来手动连接我的服务器重新启动一下我的MySQL，这样简直太不友好了，所以，我就觉定自己写个脚本，定时监控它，如果发现它挂掉了就重启它。</span><br><span class="line">好了，闲言碎语不多讲，开始我们的配置之旅。</span><br><span class="line">运行环境：UbuntuLinux14.<span class="number">04</span></span><br><span class="line">编写<span class="keyword">Shell</span><span class="bash">脚本</span></span><br><span class="line">首先，我们要编写一个<span class="keyword">shell</span><span class="bash">脚本，脚本主要执行的逻辑如下：</span></span><br><span class="line">显示mysqld进程状态，如果判断进程未在运行，那么输出日志到文件，然后启动mysql服务，如果进程在运行，那么不执行任何操作，可以选择性输出监测结果。</span><br><span class="line">可能大家对于<span class="keyword">shell</span><span class="bash">脚本比较陌生，在这里推荐官方的shell脚本文档来参考一下</span></span><br><span class="line">UbuntuShell编程基础</span><br><span class="line"><span class="keyword">shell</span><span class="bash">脚本的后缀为sh，在任何位置新建一个脚本文件，我选择在/etc/mysql目录下新建一个listen.sh文件。</span></span><br><span class="line">执行如下命令：</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>经过上面的处理，所有乱乱的代码都会被处理好了。</p>
+                <h3 id="4-保存到数据库"><a href="#4-保存到数据库" class="headerlink" title="4.保存到数据库"></a>4.保存到数据库</h3>
+                <p>在这里，我们想实现一个通用的方法，就是把存储的一个个内容变成字典的形式，然后执行插入语句的时候，自动构建对应的 sql 语句，插入数据。 比如我们构造如下的字典：</p>
+                <figure class="highlight prolog">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">#构造最佳答案的字典</span><br><span class="line">good_ans_dict = &#123;</span><br><span class="line">        <span class="string">"text"</span>: good_ans[<span class="number">0</span>],</span><br><span class="line">        <span class="string">"answerer"</span>: good_ans[<span class="number">1</span>],</span><br><span class="line">        <span class="string">"date"</span>: good_ans[<span class="number">2</span>],</span><br><span class="line">        <span class="string">"is_good"</span>: str(good_ans[<span class="number">3</span>]),</span><br><span class="line">        <span class="string">"question_id"</span>: str(insert_id)</span><br><span class="line">        &#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>构造 sql 语句并插入到数据库的方法如下：</p>
+                <figure class="highlight php">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment">#插入数据</span></span><br><span class="line">    def insertData(<span class="keyword">self</span>, table, my_dict):</span><br><span class="line">         <span class="keyword">try</span>:</span><br><span class="line">             <span class="keyword">self</span>.db.set_character_set(<span class="string">'utf8'</span>)</span><br><span class="line">             cols = <span class="string">', '</span>.join(my_dict.keys())</span><br><span class="line">             values = <span class="string">'"," '</span>.join(my_dict.values())</span><br><span class="line">             sql = <span class="string">"INSERT INTO %s (%s) VALUES (%s)"</span> % (table, cols, <span class="string">'"'</span>+values+<span class="string">'"'</span>)</span><br><span class="line">             <span class="keyword">try</span>:</span><br><span class="line">                 result = <span class="keyword">self</span>.cur.execute(sql)</span><br><span class="line">                 insert_id = <span class="keyword">self</span>.db.insert_id()</span><br><span class="line">                 <span class="keyword">self</span>.db.commit()</span><br><span class="line">                 <span class="comment">#判断是否执行成功</span></span><br><span class="line">                 <span class="keyword">if</span> result:</span><br><span class="line">                     <span class="keyword">return</span> insert_id</span><br><span class="line">                 <span class="keyword">else</span>:</span><br><span class="line">                     <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">             except MySQLdb.Error,e:</span><br><span class="line">                 <span class="comment">#发生错误时回滚</span></span><br><span class="line">                 <span class="keyword">self</span>.db.rollback()</span><br><span class="line">                 <span class="comment">#主键唯一，无法插入</span></span><br><span class="line">                 <span class="keyword">if</span> <span class="string">"key 'PRIMARY'"</span> in e.args[<span class="number">1</span>]:</span><br><span class="line">                     <span class="keyword">print</span> <span class="keyword">self</span>.getCurrentTime(),<span class="string">"数据已存在，未插入数据"</span></span><br><span class="line">                 <span class="keyword">else</span>:</span><br><span class="line">                     <span class="keyword">print</span> <span class="keyword">self</span>.getCurrentTime(),<span class="string">"插入数据失败，原因 %d: %s"</span> % (e.args[<span class="number">0</span>], e.args[<span class="number">1</span>])</span><br><span class="line">         except MySQLdb.Error,e:</span><br><span class="line">             <span class="keyword">print</span> <span class="keyword">self</span>.getCurrentTime(),<span class="string">"数据库错误，原因%d: %s"</span> % (e.args[<span class="number">0</span>], e.args[<span class="number">1</span>])</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们只需要传入那个字典，便会构建出对应字典键值和键名的 sql 语句，完成插入。</p>
+                <h3 id="5-PHP-读取日志"><a href="#5-PHP-读取日志" class="headerlink" title="5.PHP 读取日志"></a>5.PHP 读取日志</h3>
+                <p>我们将运行结果输出到了日志里，那么怎么查看日志呢？很简单，在这里提供两种方法 方法一： PHP 倒序输出所有日志内容</p>
+                <figure class="highlight xml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span> = <span class="string">"5"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">            $fp = file(<span class="string">"out.log"</span>);</span></span><br><span class="line"><span class="php">            <span class="keyword">if</span> ($fp) &#123;</span></span><br><span class="line"><span class="php">                <span class="keyword">for</span>($i = count($fp) - <span class="number">1</span>;$i &gt;= <span class="number">0</span>; $i --)</span></span><br><span class="line"><span class="php">                <span class="keyword">echo</span> $fp[$i].<span class="string">"&lt;br&gt;"</span>;</span></span><br><span class="line"><span class="php">            &#125;</span></span><br><span class="line"><span class="php">        <span class="meta">?&gt;</span></span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>此方法可以看到所有的输入日志，但是如果日志太大了，那么就会报耗费内存太大，无法输出。为此我们就有了第二种方法，利用 linux 命令，输出后十行内容。 方法二：</p>
+                <figure class="highlight xml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span> = <span class="string">"5"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">			$ph = popen(<span class="string">'tail -n 100 out.log'</span>,<span class="string">'r'</span>);</span></span><br><span class="line"><span class="php">			<span class="keyword">while</span>($r = fgets($ph))&#123;</span></span><br><span class="line"><span class="php">				<span class="keyword">echo</span> $r.<span class="string">"&lt;br&gt;"</span>;</span></span><br><span class="line"><span class="php">			&#125;</span></span><br><span class="line"><span class="php">			pclose($ph);</span></span><br><span class="line"><span class="php">		<span class="meta">?&gt;</span></span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>上面两种方法都是 5 秒刷新一次网页来查看最新的日志。</p>
+                <h2 id="源代码放送"><a href="#源代码放送" class="headerlink" title="源代码放送"></a>源代码放送</h2>
+                <p>好了，闲言碎语不多讲，直接上源码了</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">spider</span><span class="selector-class">.py</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> types</span><br><span class="line"><span class="keyword">import</span> page</span><br><span class="line"><span class="keyword">import</span> mysql</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Spider</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#初始化</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.page_num = <span class="number">1</span></span><br><span class="line">        self.total_num = <span class="literal">None</span></span><br><span class="line">        self.page_spider = page.Page()</span><br><span class="line">        self.mysql = mysql.Mysql()</span><br><span class="line"></span><br><span class="line">    <span class="comment">#获取当前时间</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getCurrentTime</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> time.strftime(<span class="string">'[%Y-%m-%d %H:%M:%S]'</span>,time.localtime(time.time()))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#获取当前时间</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getCurrentDate</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> time.strftime(<span class="string">'%Y-%m-%d'</span>,time.localtime(time.time()))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#通过网页的页码数来构建网页的URL</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getPageURLByNum</span><span class="params">(self, page_num)</span>:</span></span><br><span class="line">        page_url = <span class="string">"http://iask.sina.com.cn/c/978-all-"</span> + str(page_num) + <span class="string">".html"</span></span><br><span class="line">        <span class="keyword">return</span> page_url</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#通过传入网页页码来获取网页的HTML</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getPageByNum</span><span class="params">(self, page_num)</span>:</span></span><br><span class="line">        request = urllib2.Request(self.getPageURLByNum(page_num))</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = urllib2.urlopen(request)</span><br><span class="line">        <span class="keyword">except</span> urllib2.URLError, e:</span><br><span class="line">            <span class="keyword">if</span> hasattr(e, <span class="string">"code"</span>):</span><br><span class="line">                <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"获取页面失败,错误代号"</span>, e.code</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            <span class="keyword">if</span> hasattr(e, <span class="string">"reason"</span>):</span><br><span class="line">                <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"获取页面失败,原因"</span>, e.reason</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            page =  response.read().decode(<span class="string">"utf-8"</span>)</span><br><span class="line">            <span class="keyword">return</span> page</span><br><span class="line"></span><br><span class="line">    <span class="comment">#获取所有的页码数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getTotalPageNum</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"正在获取目录页面个数,请稍候"</span></span><br><span class="line">        page = self.getPageByNum(<span class="number">1</span>)</span><br><span class="line">        <span class="comment">#匹配所有的页码数,\u4e0b\u4e00\u9875是下一页的UTF8编码</span></span><br><span class="line">        pattern = re.compile(<span class="string">u'&lt;span class="more".*?&gt;.*?&lt;span.*?&lt;a href.*?class=""&gt;(.*?)&lt;/a&gt;\s*&lt;a.*?\u4e0b\u4e00\u9875&lt;/a&gt;'</span>, re.S)</span><br><span class="line">        match = re.search(pattern, page)</span><br><span class="line">        <span class="keyword">if</span> match:</span><br><span class="line">            <span class="keyword">return</span> match.group(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"获取总页码失败"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#分析问题的代码,得到问题的提问者,问题内容,回答个数,提问时间</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getQuestionInfo</span><span class="params">(self, question)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> type(question) <span class="keyword">is</span> types.StringType:</span><br><span class="line">            question = str(question)</span><br><span class="line">        <span class="comment">#print question</span></span><br><span class="line">        pattern = re.compile(<span class="string">u'&lt;span.*?question-face.*?&gt;.*?&lt;img.*?alt="(.*?)".*?&lt;/span&gt;.*?&lt;a href="(.*?)".*?&gt;(.*?)&lt;/a&gt;.*?answer_num.*?&gt;(\d*).*?&lt;/span&gt;.*?answer_time.*?&gt;(.*?)&lt;/span&gt;'</span>, re.S)</span><br><span class="line">        match = re.search(pattern, question)</span><br><span class="line">        <span class="keyword">if</span> match:</span><br><span class="line">            <span class="comment">#获得提问者</span></span><br><span class="line">            author = match.group(<span class="number">1</span>)</span><br><span class="line">            <span class="comment">#问题链接</span></span><br><span class="line">            href = match.group(<span class="number">2</span>)</span><br><span class="line">            <span class="comment">#问题详情</span></span><br><span class="line">            text = match.group(<span class="number">3</span>)</span><br><span class="line">            <span class="comment">#回答个数</span></span><br><span class="line">            ans_num = match.group(<span class="number">4</span>)</span><br><span class="line">            <span class="comment">#回答时间</span></span><br><span class="line">            time = match.group(<span class="number">5</span>)</span><br><span class="line">            time_pattern = re.compile(<span class="string">'\d&#123;4&#125;\-\d&#123;2&#125;\-\d&#123;2&#125;'</span>, re.S)</span><br><span class="line">            time_match = re.search(time_pattern, time)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> time_match:</span><br><span class="line">                time = self.getCurrentDate()</span><br><span class="line">            <span class="keyword">return</span> [author, href, text, ans_num, time]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#获取全部问题</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getQuestions</span><span class="params">(self, page_num)</span>:</span></span><br><span class="line">        <span class="comment">#获得目录页面的HTML</span></span><br><span class="line">        page = self.getPageByNum(page_num)</span><br><span class="line">        soup = BeautifulSoup(page)</span><br><span class="line">        <span class="comment">#分析获得所有问题</span></span><br><span class="line">        questions = soup.select(<span class="string">"div.question_list ul li"</span>)</span><br><span class="line">        <span class="comment">#遍历每一个问题</span></span><br><span class="line">        <span class="keyword">for</span> question <span class="keyword">in</span> questions:</span><br><span class="line">            <span class="comment">#获得问题的详情</span></span><br><span class="line">            info = self.getQuestionInfo(question)</span><br><span class="line">            <span class="keyword">if</span> info:</span><br><span class="line">                <span class="comment">#得到问题的URL</span></span><br><span class="line">                url = <span class="string">"http://iask.sina.com.cn/"</span> + info[<span class="number">1</span>]</span><br><span class="line">                <span class="comment">#通过URL来获取问题的最佳答案和其他答案</span></span><br><span class="line">                ans = self.page_spider.getAnswer(url)</span><br><span class="line">                <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"当前爬取第"</span>,page_num,<span class="string">"的内容,发现一个问题"</span>,info[<span class="number">2</span>],<span class="string">"回答数量"</span>,info[<span class="number">3</span>]</span><br><span class="line">                <span class="comment">#构造问题的字典,插入问题</span></span><br><span class="line">                ques_dict = &#123;</span><br><span class="line">                            <span class="string">"text"</span>: info[<span class="number">2</span>],</span><br><span class="line">                            <span class="string">"questioner"</span>: info[<span class="number">0</span>],</span><br><span class="line">                            <span class="string">"date"</span>: info[<span class="number">4</span>],</span><br><span class="line">                            <span class="string">"ans_num"</span>: info[<span class="number">3</span>],</span><br><span class="line">                            <span class="string">"url"</span>: url</span><br><span class="line">                            &#125;</span><br><span class="line">                <span class="comment">#获得插入的问题的自增ID</span></span><br><span class="line">                insert_id = self.mysql.insertData(<span class="string">"iask_questions"</span>,ques_dict)</span><br><span class="line">                <span class="comment">#得到最佳答案</span></span><br><span class="line">                good_ans = ans[<span class="number">0</span>]</span><br><span class="line">                <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"保存到数据库,此问题的ID为"</span>,insert_id</span><br><span class="line">                <span class="comment">#如果存在最佳答案,那么就插入</span></span><br><span class="line">                <span class="keyword">if</span> good_ans:</span><br><span class="line">                    <span class="keyword">print</span> self.getCurrentTime(),insert_id,<span class="string">"号问题存在最佳答案"</span>,good_ans[<span class="number">0</span>]</span><br><span class="line">                    <span class="comment">#构造最佳答案的字典</span></span><br><span class="line">                    good_ans_dict = &#123;</span><br><span class="line">                            <span class="string">"text"</span>: good_ans[<span class="number">0</span>],</span><br><span class="line">                            <span class="string">"answerer"</span>: good_ans[<span class="number">1</span>],</span><br><span class="line">                            <span class="string">"date"</span>: good_ans[<span class="number">2</span>],</span><br><span class="line">                            <span class="string">"is_good"</span>: str(good_ans[<span class="number">3</span>]),</span><br><span class="line">                            <span class="string">"question_id"</span>: str(insert_id)</span><br><span class="line">                            &#125;</span><br><span class="line">                    <span class="comment">#插入最佳答案</span></span><br><span class="line">                    <span class="keyword">if</span> self.mysql.insertData(<span class="string">"iask_answers"</span>,good_ans_dict):</span><br><span class="line">                        <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"保存最佳答案成功"</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"保存最佳答案失败"</span></span><br><span class="line">                <span class="comment">#获得其他答案</span></span><br><span class="line">                other_anses = ans[<span class="number">1</span>]</span><br><span class="line">                <span class="comment">#遍历每一个其他答案</span></span><br><span class="line">                <span class="keyword">for</span> other_ans <span class="keyword">in</span> other_anses:</span><br><span class="line">                    <span class="comment">#如果答案存在</span></span><br><span class="line">                    <span class="keyword">if</span> other_ans:</span><br><span class="line">                        <span class="keyword">print</span> self.getCurrentTime(),insert_id,<span class="string">"号问题存在其他答案"</span>,other_ans[<span class="number">0</span>]</span><br><span class="line">                        <span class="comment">#构造其他答案的字典</span></span><br><span class="line">                        other_ans_dict = &#123;</span><br><span class="line">                                <span class="string">"text"</span>: other_ans[<span class="number">0</span>],</span><br><span class="line">                                <span class="string">"answerer"</span>: other_ans[<span class="number">1</span>],</span><br><span class="line">                                <span class="string">"date"</span>: other_ans[<span class="number">2</span>],</span><br><span class="line">                                <span class="string">"is_good"</span>: str(other_ans[<span class="number">3</span>]),</span><br><span class="line">                                <span class="string">"question_id"</span>: str(insert_id)</span><br><span class="line">                                &#125;</span><br><span class="line">                        <span class="comment">#插入这个答案</span></span><br><span class="line">                        <span class="keyword">if</span> self.mysql.insertData(<span class="string">"iask_answers"</span>,other_ans_dict):</span><br><span class="line">                            <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"保存其他答案成功"</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"保存其他答案失败"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#主函数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(self)</span>:</span></span><br><span class="line">        f_handler=open(<span class="string">'out.log'</span>, <span class="string">'w'</span>)</span><br><span class="line">        sys.stdout=f_handler</span><br><span class="line">        page = open(<span class="string">'page.txt'</span>, <span class="string">'r'</span>)</span><br><span class="line">        content = page.readline()</span><br><span class="line">        start_page = int(content.strip()) - <span class="number">1</span></span><br><span class="line">        page.close()</span><br><span class="line">        <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"开始页码"</span>,start_page</span><br><span class="line">        <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"爬虫正在启动,开始爬取爱问知识人问题"</span></span><br><span class="line">        self.total_num = self.getTotalPageNum()</span><br><span class="line">        <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"获取到目录页面个数"</span>,self.total_num,<span class="string">"个"</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> start_page:</span><br><span class="line">            start_page = self.total_num</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,start_page):</span><br><span class="line">            <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"正在抓取第"</span>,start_page-x+<span class="number">1</span>,<span class="string">"个页面"</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                self.getQuestions(start_page-x+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">except</span> urllib2.URLError, e:</span><br><span class="line">                <span class="keyword">if</span> hasattr(e, <span class="string">"reason"</span>):</span><br><span class="line">                    <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"某总页面内抓取或提取失败,错误原因"</span>, e.reason</span><br><span class="line">            <span class="keyword">except</span> Exception,e:</span><br><span class="line">                <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"某总页面内抓取或提取失败,错误原因:"</span>,e</span><br><span class="line">            <span class="keyword">if</span> start_page-x+<span class="number">1</span> &lt; start_page:</span><br><span class="line">                f=open(<span class="string">'page.txt'</span>,<span class="string">'w'</span>)</span><br><span class="line">                f.write(str(start_page-x+<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">print</span> self.getCurrentTime(),<span class="string">"写入新页码"</span>,start_page-x+<span class="number">1</span></span><br><span class="line">                f.close()</span><br><span class="line"></span><br><span class="line">spider = Spider()</span><br><span class="line">spider.main()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">page</span><span class="selector-class">.py</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <figure class="highlight properties">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="attr">import</span> <span class="string">urllib</span></span><br><span class="line"><span class="attr">import</span> <span class="string">urllib2</span></span><br><span class="line"><span class="attr">import</span> <span class="string">re</span></span><br><span class="line"><span class="attr">import</span> <span class="string">time</span></span><br><span class="line"><span class="attr">import</span> <span class="string">types</span></span><br><span class="line"><span class="attr">import</span> <span class="string">tool</span></span><br><span class="line"><span class="attr">from</span> <span class="string">bs4 import BeautifulSoup</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#抓取分析某一问题和答案</span></span><br><span class="line"><span class="attr">class</span> <span class="string">Page:</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">def</span> <span class="string">__init__(self):</span></span><br><span class="line">        <span class="meta">self.tool</span> = <span class="string">tool.Tool()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">    #获取当前时间</span></span><br><span class="line">    <span class="attr">def</span> <span class="string">getCurrentDate(self):</span></span><br><span class="line">        <span class="attr">return</span> <span class="string">time.strftime('%Y-%m-%d',time.localtime(time.time()))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">    #获取当前时间</span></span><br><span class="line">    <span class="attr">def</span> <span class="string">getCurrentTime(self):</span></span><br><span class="line">        <span class="attr">return</span> <span class="string">time.strftime('[%Y-%m-%d %H:%M:%S]',time.localtime(time.time()))</span></span><br><span class="line"></span><br><span class="line"><span class="comment">    #通过页面的URL来获取页面的代码</span></span><br><span class="line">    <span class="attr">def</span> <span class="string">getPageByURL(self, url):</span></span><br><span class="line">        <span class="attr">try</span>:<span class="string"></span></span><br><span class="line">            <span class="attr">request</span> = <span class="string">urllib2.Request(url)</span></span><br><span class="line">            <span class="attr">response</span> = <span class="string">urllib2.urlopen(request)</span></span><br><span class="line">            <span class="attr">return</span> <span class="string">response.read().decode("utf-8")</span></span><br><span class="line">        <span class="attr">except</span> <span class="string">urllib2.URLError, e:</span></span><br><span class="line">            <span class="attr">if</span> <span class="string">hasattr(e, "code"):</span></span><br><span class="line">                <span class="attr">print</span> <span class="string">self.getCurrentTime(),"获取问题页面失败,错误代号", e.code</span></span><br><span class="line">                <span class="attr">return</span> <span class="string">None</span></span><br><span class="line">            <span class="attr">if</span> <span class="string">hasattr(e, "reason"):</span></span><br><span class="line">                <span class="attr">print</span> <span class="string">self.getCurrentTime(),"获取问题页面失败,原因", e.reason</span></span><br><span class="line">                <span class="attr">return</span> <span class="string">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">    #传入一个List,返回它的标签里的内容,如果为空返回None</span></span><br><span class="line">    <span class="attr">def</span> <span class="string">getText(self, html):</span></span><br><span class="line">        <span class="attr">if</span> <span class="string">not type(html) is types.StringType:</span></span><br><span class="line">            <span class="attr">html</span> = <span class="string">str(html)</span></span><br><span class="line"><span class="comment">        #提取出&lt;pre&gt;标签里的内容</span></span><br><span class="line">        <span class="attr">pattern</span> = <span class="string">re.compile('&lt;pre.*?&gt;(.*?)&lt;/pre&gt;', re.S)</span></span><br><span class="line">        <span class="attr">match</span> = <span class="string">re.search(pattern, html)</span></span><br><span class="line"><span class="comment">        #如果匹配成功</span></span><br><span class="line">        <span class="attr">if</span> <span class="string">match:</span></span><br><span class="line">            <span class="attr">return</span> <span class="string">match.group(1)</span></span><br><span class="line">        <span class="attr">else</span>:<span class="string"></span></span><br><span class="line">            <span class="attr">return</span> <span class="string">None</span></span><br><span class="line"></span><br><span class="line"><span class="comment">    #传入最佳答案的HTML,分析出回答者和回答时间</span></span><br><span class="line">    <span class="attr">def</span> <span class="string">getGoodAnswerInfo(self, html):</span></span><br><span class="line">        <span class="attr">pattern</span> = <span class="string">re.compile('"answer_tip.*?&lt;a.*?&gt;(.*?)&lt;/a&gt;.*?&lt;span class="time.*?&gt;.*?\|(.*?)&lt;/span&gt;', re.S)</span></span><br><span class="line">        <span class="attr">match</span> = <span class="string">re.search(pattern, html)</span></span><br><span class="line"><span class="comment">        #如果匹配,返回回答者和回答时间</span></span><br><span class="line">        <span class="attr">if</span> <span class="string">match:</span></span><br><span class="line">            <span class="attr">time</span> = <span class="string">match.group(2)</span></span><br><span class="line">            <span class="attr">time_pattern</span> = <span class="string">re.compile('\d&#123;2&#125;\-\d&#123;2&#125;\-\d&#123;2&#125;', re.S)</span></span><br><span class="line">            <span class="attr">time_match</span> = <span class="string">re.search(time_pattern, time)</span></span><br><span class="line">            <span class="attr">if</span> <span class="string">not time_match:</span></span><br><span class="line">                <span class="attr">time</span> = <span class="string">self.getCurrentDate()</span></span><br><span class="line">            <span class="attr">else</span>:<span class="string"></span></span><br><span class="line">                <span class="attr">time</span> = <span class="string">"20"+time</span></span><br><span class="line">            <span class="attr">return</span> <span class="string">[match.group(1),time]</span></span><br><span class="line">        <span class="attr">else</span>:<span class="string"></span></span><br><span class="line">            <span class="attr">return</span> <span class="string">[None,None]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">    #获得最佳答案</span></span><br><span class="line">    <span class="attr">def</span> <span class="string">getGoodAnswer(self, page):</span></span><br><span class="line">        <span class="attr">soup</span> = <span class="string">BeautifulSoup(page)</span></span><br><span class="line">        <span class="attr">text</span> = <span class="string">soup.select("div.good_point div.answer_text pre")</span></span><br><span class="line">        <span class="attr">if</span> <span class="string">len(text) &gt; 0:</span></span><br><span class="line"><span class="comment">            #获得最佳答案的内容</span></span><br><span class="line">            <span class="attr">ansText</span> = <span class="string">self.getText(str(text[0]))</span></span><br><span class="line">            <span class="attr">ansText</span> = <span class="string">self.tool.replace(ansText)</span></span><br><span class="line"><span class="comment">            #获得最佳答案的回答者信息</span></span><br><span class="line">            <span class="attr">info</span> = <span class="string">soup.select("div.good_point div.answer_tip")</span></span><br><span class="line">            <span class="attr">ansInfo</span> = <span class="string">self.getGoodAnswerInfo(str(info[0]))</span></span><br><span class="line"><span class="comment">            #将三者组合成一个List</span></span><br><span class="line">            <span class="attr">answer</span> = <span class="string">[ansText, ansInfo[0], ansInfo[1],1]</span></span><br><span class="line">            <span class="attr">return</span> <span class="string">answer</span></span><br><span class="line">        <span class="attr">else</span>:<span class="string"></span></span><br><span class="line"><span class="comment">            #如果不存在最佳答案,那么就返回空</span></span><br><span class="line">            <span class="attr">return</span> <span class="string">None</span></span><br><span class="line"></span><br><span class="line"><span class="comment">    #传入回答者HTML,分析出回答者,回答时间</span></span><br><span class="line">    <span class="attr">def</span> <span class="string">getOtherAnswerInfo(self, html):</span></span><br><span class="line">        <span class="attr">if</span> <span class="string">not type(html) is types.StringType:</span></span><br><span class="line">            <span class="attr">html</span> = <span class="string">str(html)</span></span><br><span class="line">        <span class="attr">pattern</span> = <span class="string">re.compile('"author_name.*?&gt;(.*?)&lt;/a&gt;.*?answer_t"&gt;(.*?)&lt;/span&gt;', re.S)</span></span><br><span class="line">        <span class="attr">match</span> = <span class="string">re.search(pattern, html)</span></span><br><span class="line"><span class="comment">        #获得每一个回答的回答者信息和回答时间</span></span><br><span class="line">        <span class="attr">if</span> <span class="string">match:</span></span><br><span class="line">            <span class="attr">time</span> = <span class="string">match.group(2)</span></span><br><span class="line">            <span class="attr">time_pattern</span> = <span class="string">re.compile('\d&#123;2&#125;\-\d&#123;2&#125;\-\d&#123;2&#125;', re.S)</span></span><br><span class="line">            <span class="attr">time_match</span> = <span class="string">re.search(time_pattern, time)</span></span><br><span class="line">            <span class="attr">if</span> <span class="string">not time_match:</span></span><br><span class="line">                <span class="attr">time</span> = <span class="string">self.getCurrentDate()</span></span><br><span class="line">            <span class="attr">else</span>:<span class="string"></span></span><br><span class="line">                <span class="attr">time</span> = <span class="string">"20"+time</span></span><br><span class="line">            <span class="attr">return</span> <span class="string">[match.group(1),time]</span></span><br><span class="line">        <span class="attr">else</span>:<span class="string"></span></span><br><span class="line">            <span class="attr">return</span> <span class="string">[None,None]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">    #获得其他答案</span></span><br><span class="line">    <span class="attr">def</span> <span class="string">getOtherAnswers(self, page):</span></span><br><span class="line">        <span class="attr">soup</span> = <span class="string">BeautifulSoup(page)</span></span><br><span class="line">        <span class="attr">results</span> =  <span class="string">soup.select("div.question_box li.clearfix .answer_info")</span></span><br><span class="line"><span class="comment">        #所有答案,包含好多个List,每个List包含了回答内容,回答者,回答时间</span></span><br><span class="line">        <span class="attr">answers</span> = <span class="string">[]</span></span><br><span class="line">        <span class="attr">for</span> <span class="string">result in results:</span></span><br><span class="line"><span class="comment">            #获得回答内容</span></span><br><span class="line">            <span class="attr">ansSoup</span> = <span class="string">BeautifulSoup(str(result))</span></span><br><span class="line">            <span class="attr">text</span> = <span class="string">ansSoup.select(".answer_txt span pre")</span></span><br><span class="line">            <span class="attr">ansText</span> = <span class="string">self.getText(str(text[0]))</span></span><br><span class="line">            <span class="attr">ansText</span> = <span class="string">self.tool.replace(ansText)</span></span><br><span class="line"><span class="comment">            #获得回答者和回答时间</span></span><br><span class="line">            <span class="attr">info</span> = <span class="string">ansSoup.select(".answer_tj")</span></span><br><span class="line">            <span class="attr">ansInfo</span> = <span class="string">self.getOtherAnswerInfo(info[0])</span></span><br><span class="line"><span class="comment">            #将三者组合成一个List</span></span><br><span class="line">            <span class="attr">answer</span> = <span class="string">[ansText, ansInfo[0], ansInfo[1],0]</span></span><br><span class="line"><span class="comment">            #加入到answers</span></span><br><span class="line">            <span class="attr">answers.append(answer)</span></span><br><span class="line">        <span class="attr">return</span> <span class="string">answers</span></span><br><span class="line"></span><br><span class="line"><span class="comment">     #主函数</span></span><br><span class="line">    <span class="attr">def</span> <span class="string">getAnswer(self, url):</span></span><br><span class="line">        <span class="attr">if</span> <span class="string">not url:</span></span><br><span class="line">            <span class="attr">url</span> = <span class="string">"http://iask.sina.com.cn/b/gQiuSNCMV.html"</span></span><br><span class="line">        <span class="attr">page</span> = <span class="string">self.getPageByURL(url)</span></span><br><span class="line">        <span class="attr">good_ans</span> = <span class="string">self.getGoodAnswer(page)</span></span><br><span class="line">        <span class="attr">other_ans</span> = <span class="string">self.getOtherAnswers(page)</span></span><br><span class="line">        <span class="attr">return</span> <span class="string">[good_ans,other_ans]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">page</span> = <span class="string">Page()</span></span><br><span class="line"><span class="attr">page.getAnswer(None)</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">tool</span><span class="selector-class">.py</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <figure class="highlight vbnet">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="meta">#-*- coding:utf-8 -*-</span></span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line"><span class="meta">#处理页面标签类</span></span><br><span class="line"><span class="keyword">class</span> Tool:</span><br><span class="line"></span><br><span class="line">    <span class="meta">#将超链接广告剔除</span></span><br><span class="line">    removeADLink = re.compile(<span class="comment">'<span class="doctag">&lt;div class="link_layer.*?&lt;/div&gt;</span>')</span></span><br><span class="line">    <span class="meta">#去除img标签,1-7位空格,&amp;nbsp;</span></span><br><span class="line">    removeImg = re.compile(<span class="comment">'<span class="doctag">&lt;img.*?&gt;</span>| &#123;1,7&#125;|&amp;nbsp;')</span></span><br><span class="line">    <span class="meta">#删除超链接标签</span></span><br><span class="line">    removeAddr = re.compile(<span class="comment">'<span class="doctag">&lt;a.*?&gt;</span>|<span class="doctag">&lt;/a&gt;</span>')</span></span><br><span class="line">    <span class="meta">#把换行的标签换为\n</span></span><br><span class="line">    replaceLine = re.compile(<span class="comment">'<span class="doctag">&lt;tr&gt;</span>|<span class="doctag">&lt;div&gt;</span>|<span class="doctag">&lt;/div&gt;</span>|<span class="doctag">&lt;/p&gt;</span>')</span></span><br><span class="line">    <span class="meta">#将表格制表&lt;td&gt;替换为\t</span></span><br><span class="line">    replaceTD= re.compile(<span class="comment">'<span class="doctag">&lt;td&gt;</span>')</span></span><br><span class="line">    <span class="meta">#将换行符或双换行符替换为\n</span></span><br><span class="line">    replaceBR = re.compile(<span class="comment">'<span class="doctag">&lt;br&gt;</span><span class="doctag">&lt;br&gt;</span>|<span class="doctag">&lt;br&gt;</span>')</span></span><br><span class="line">    <span class="meta">#将其余标签剔除</span></span><br><span class="line">    removeExtraTag = re.compile(<span class="comment">'<span class="doctag">&lt;.*?&gt;</span>')</span></span><br><span class="line">    <span class="meta">#将多行空行删除</span></span><br><span class="line">    removeNoneLine = re.compile(<span class="comment">'\n+')</span></span><br><span class="line"></span><br><span class="line">    def replace(self,x):</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.removeADLink,<span class="string">""</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.removeImg,<span class="string">""</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.removeAddr,<span class="string">""</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.replaceLine,<span class="string">"\n"</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.replaceTD,<span class="string">"\t"</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.replaceBR,<span class="string">"\n"</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.removeExtraTag,<span class="string">""</span>,x)</span><br><span class="line">        x = re.<span class="keyword">sub</span>(self.removeNoneLine,<span class="string">"\n"</span>,x)</span><br><span class="line">        <span class="meta">#strip()将前后多余内容删除</span></span><br><span class="line">        <span class="keyword">return</span> x.strip()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">mysql</span><span class="selector-class">.py</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import MySQLdb</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mysql</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#获取当前时间</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getCurrentTime</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">return</span> time.strftime(<span class="string">'[%Y-%m-%d %H:%M:%S]'</span>,time.localtime(time.time()))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#数据库初始化</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="symbol">try:</span></span><br><span class="line">            <span class="keyword">self</span>.db = MySQLdb.connect(<span class="string">'ip'</span>,<span class="string">'username'</span>,<span class="string">'password'</span>,<span class="string">'db_name'</span>)</span><br><span class="line">            <span class="keyword">self</span>.cur = <span class="keyword">self</span>.db.cursor()</span><br><span class="line">        except MySQLdb.Error,<span class="symbol">e:</span></span><br><span class="line">             print <span class="keyword">self</span>.getCurrentTime(),<span class="string">"连接数据库错误，原因%d: %s"</span> % (e.args[<span class="number">0</span>], e.args[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment">#插入数据</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insertData</span><span class="params">(<span class="keyword">self</span>, table, my_dict)</span></span><span class="symbol">:</span></span><br><span class="line">         <span class="symbol">try:</span></span><br><span class="line">             <span class="keyword">self</span>.db.set_character_set(<span class="string">'utf8'</span>)</span><br><span class="line">             cols = <span class="string">', '</span>.join(my_dict.keys())</span><br><span class="line">             values = <span class="string">'"," '</span>.join(my_dict.values())</span><br><span class="line">             sql = <span class="string">"INSERT INTO %s (%s) VALUES (%s)"</span> % (table, cols, <span class="string">'"'</span>+values+<span class="string">'"'</span>)</span><br><span class="line">             <span class="symbol">try:</span></span><br><span class="line">                 result = <span class="keyword">self</span>.cur.execute(sql)</span><br><span class="line">                 insert_id = <span class="keyword">self</span>.db.insert_id()</span><br><span class="line">                 <span class="keyword">self</span>.db.commit()</span><br><span class="line">                 <span class="comment">#判断是否执行成功</span></span><br><span class="line">                 <span class="keyword">if</span> <span class="symbol">result:</span></span><br><span class="line">                     <span class="keyword">return</span> insert_id</span><br><span class="line">                 <span class="symbol">else:</span></span><br><span class="line">                     <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">             except MySQLdb.Error,<span class="symbol">e:</span></span><br><span class="line">                 <span class="comment">#发生错误时回滚</span></span><br><span class="line">                 <span class="keyword">self</span>.db.rollback()</span><br><span class="line">                 <span class="comment">#主键唯一，无法插入</span></span><br><span class="line">                 <span class="keyword">if</span> <span class="string">"key 'PRIMARY'"</span> <span class="keyword">in</span> e.args[<span class="number">1</span>]<span class="symbol">:</span></span><br><span class="line">                     print <span class="keyword">self</span>.getCurrentTime(),<span class="string">"数据已存在，未插入数据"</span></span><br><span class="line">                 <span class="symbol">else:</span></span><br><span class="line">                     print <span class="keyword">self</span>.getCurrentTime(),<span class="string">"插入数据失败，原因 %d: %s"</span> % (e.args[<span class="number">0</span>], e.args[<span class="number">1</span>])</span><br><span class="line">         except MySQLdb.Error,<span class="symbol">e:</span></span><br><span class="line">             print <span class="keyword">self</span>.getCurrentTime(),<span class="string">"数据库错误，原因%d: %s"</span> % (e.args[<span class="number">0</span>], e.args[<span class="number">1</span>])</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>数据库建表 SQL 如下：</p>
+                <figure class="highlight sql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`iask_answers`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'自增ID'</span>,</span><br><span class="line">  <span class="string">`text`</span> <span class="built_in">text</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'回答内容'</span>,</span><br><span class="line">  <span class="string">`question_id`</span> <span class="built_in">int</span>(<span class="number">18</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'问题ID'</span>,</span><br><span class="line">  <span class="string">`answerer`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'回答者'</span>,</span><br><span class="line">  <span class="string">`date`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'回答时间'</span>,</span><br><span class="line">  <span class="string">`is_good`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'是否是最佳答案'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`iask_questions`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'问题ID'</span>,</span><br><span class="line">  <span class="string">`text`</span> <span class="built_in">text</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'问题内容'</span>,</span><br><span class="line">  <span class="string">`questioner`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'提问者'</span>,</span><br><span class="line">  <span class="string">`date`</span> <span class="built_in">date</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'提问时间'</span>,</span><br><span class="line">  <span class="string">`ans_num`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'回答数量'</span>,</span><br><span class="line">  <span class="string">`url`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'问题链接'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>  <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行的时候执行如下命令即可</p>
+                <figure class="highlight vim">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">nohup <span class="keyword">python</span> spider.<span class="keyword">py</span> &amp;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>代码写的不好，仅供大家学习参考使用，如有问题，欢迎留言交流。</p>
+                <h2 id="运行结果查看"><a href="#运行结果查看" class="headerlink" title="运行结果查看"></a>运行结果查看</h2>
+                <p>我们把 PHP 文件和 log 文件放在同一目录下，运行 PHP 文件，便可以看到如下的内容： <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2015/09/20150908222744.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2015/09/20150908222744.png" alt="20150908222744"></a> 小伙伴们赶快试一下吧。</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/1981.html" rel="prev" title="Ubuntu Linux下定时监测MySQL进程终止时自动重启的方法">
+                      <i class="fa fa-chevron-left"></i> Ubuntu Linux下定时监测MySQL进程终止时自动重启的方法 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/2036.html" rel="next" title="Ubuntu Linux配置Nginx+MySQL+PHP+phpMyAdmin详细步骤"> Ubuntu Linux配置Nginx+MySQL+PHP+phpMyAdmin详细步骤 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#2022-年最新-Python3-网络爬虫教程"><span class="nav-number">1.</span> <span class="nav-text">2022 年最新 Python3 网络爬虫教程</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置"><span class="nav-number">2.</span> <span class="nav-text">环境配置</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#框架思路"><span class="nav-number">3.</span> <span class="nav-text">框架思路</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#要点简析"><span class="nav-number">4.</span> <span class="nav-text">要点简析</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#1-日志输出"><span class="nav-number">4.1.</span> <span class="nav-text">1.日志输出</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#2-页码保存"><span class="nav-number">4.2.</span> <span class="nav-text">2.页码保存</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-页面处理"><span class="nav-number">4.3.</span> <span class="nav-text">3.页面处理</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#4-保存到数据库"><span class="nav-number">4.4.</span> <span class="nav-text">4.保存到数据库</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#5-PHP-读取日志"><span class="nav-number">4.5.</span> <span class="nav-text">5.PHP 读取日志</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#源代码放送"><span class="nav-number">5.</span> <span class="nav-text">源代码放送</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#运行结果查看"><span class="nav-number">6.</span> <span class="nav-text">运行结果查看</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '6defe15520567e2c7d084f036f3e8e34',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

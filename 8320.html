@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="12.3 pyspider 用法详解 前面我们了解了 pyspider 的基本用法，我们通过非常少的代码和便捷的可视化操作就完成了一个爬虫的编写，本节我们来总结一下它的详细用法。 1. 命令行 上面的实例通过如下命令启动 pyspider：                         1                       pyspider all                 命令">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="[Python3网络爬虫开发实战] 12.3-pyspider 用法详解">
+  <meta property="og:url" content="https://cuiqingcai.com/8320.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="12.3 pyspider 用法详解 前面我们了解了 pyspider 的基本用法，我们通过非常少的代码和便捷的可视化操作就完成了一个爬虫的编写，本节我们来总结一下它的详细用法。 1. 命令行 上面的实例通过如下命令启动 pyspider：                         1                       pyspider all                 命令">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-11-27-033806.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-11-27-033821.jpg">
+  <meta property="article:published_time" content="2019-11-30T01:22:31.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.299Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/2019-11-27-033806.png">
+  <link rel="canonical" href="https://cuiqingcai.com/8320.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>[Python3网络爬虫开发实战] 12.3-pyspider 用法详解 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/8320.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> [Python3网络爬虫开发实战] 12.3-pyspider 用法详解 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2019-11-30 09:22:31" itemprop="dateCreated datePublished" datetime="2019-11-30T09:22:31+08:00">2019-11-30</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/8320.html" class="post-meta-item leancloud_visitors" data-flag-title="[Python3网络爬虫开发实战] 12.3-pyspider 用法详解" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>8.5k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>8 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <h1 id="12-3-pyspider-用法详解"><a href="#12-3-pyspider-用法详解" class="headerlink" title="12.3 pyspider 用法详解"></a>12.3 pyspider 用法详解</h1>
+                <p>前面我们了解了 pyspider 的基本用法，我们通过非常少的代码和便捷的可视化操作就完成了一个爬虫的编写，本节我们来总结一下它的详细用法。</p>
+                <h3 id="1-命令行"><a href="#1-命令行" class="headerlink" title="1. 命令行"></a>1. 命令行</h3>
+                <p>上面的实例通过如下命令启动 pyspider：</p>
+                <figure class="highlight ada">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">pyspider <span class="keyword">all</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>命令行还有很多可配制参数，完整的命令行结构如下所示：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">pyspider</span> <span class="selector-attr">[OPTIONS]</span> <span class="selector-tag">COMMAND</span> <span class="selector-attr">[ARGS]</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>其中，OPTIONS 为可选参数，它可以指定如下参数。</p>
+                <figure class="highlight ada">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Options:</span><br><span class="line">  -c, <span class="comment">--config FILENAME    指定配置文件名称</span></span><br><span class="line">  <span class="comment">--logging-config TEXT    日志配置文件名称，默认: pyspider/pyspider/logging.conf</span></span><br><span class="line">  <span class="comment">--debug                  开启调试模式</span></span><br><span class="line">  <span class="comment">--queue-maxsize INTEGER  队列的最大长度</span></span><br><span class="line">  <span class="comment">--taskdb TEXT            taskdb 的数据库连接字符串，默认: sqlite</span></span><br><span class="line">  <span class="comment">--projectdb TEXT         projectdb 的数据库连接字符串，默认: sqlite</span></span><br><span class="line">  <span class="comment">--resultdb TEXT          resultdb 的数据库连接字符串，默认: sqlite</span></span><br><span class="line">  <span class="comment">--message-queue TEXT     消息队列连接字符串，默认: multiprocessing.Queue</span></span><br><span class="line">  <span class="comment">--phantomjs-proxy TEXT   PhantomJS 使用的代理，ip:port 的形式</span></span><br><span class="line">  <span class="comment">--data-path TEXT         数据库存放的路径</span></span><br><span class="line">  <span class="comment">--version                pyspider 的版本</span></span><br><span class="line">  <span class="comment">--help                   显示帮助信息</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>例如，-c 可以指定配置文件的名称，这是一个常用的配置，配置文件的样例结构如下所示：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"taskdb"</span>: <span class="string">"mysql+taskdb://username:password@host:port/taskdb"</span>,</span><br><span class="line">  <span class="attr">"projectdb"</span>: <span class="string">"mysql+projectdb://username:password@host:port/projectdb"</span>,</span><br><span class="line">  <span class="attr">"resultdb"</span>: <span class="string">"mysql+resultdb://username:password@host:port/resultdb"</span>,</span><br><span class="line">  <span class="attr">"message_queue"</span>: <span class="string">"amqp://username:password@host:port/%2F"</span>,</span><br><span class="line">  <span class="attr">"webui"</span>: &#123;</span><br><span class="line">    <span class="attr">"username"</span>: <span class="string">"some_name"</span>,</span><br><span class="line">    <span class="attr">"password"</span>: <span class="string">"some_passwd"</span>,</span><br><span class="line">    <span class="attr">"need-auth"</span>: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果要配置 pyspider WebUI 的访问认证，可以新建一个 pyspider.json，内容如下所示：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"webui"</span>: &#123;</span><br><span class="line">    <span class="attr">"username"</span>: <span class="string">"root"</span>,</span><br><span class="line">    <span class="attr">"password"</span>: <span class="string">"123456"</span>,</span><br><span class="line">    <span class="attr">"need-auth"</span>: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样我们通过在启动时指定配置文件来配置 pyspider WebUI 的访问认证，用户名为 root，密码为 123456，命令如下所示：</p>
+                <figure class="highlight pgsql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">pyspider -c pyspider.json <span class="keyword">all</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行之后打开：<a href="http://localhost:5000/" target="_blank" rel="noopener">http://localhost:5000/</a>，页面如 12-26 所示： <img src="https://cdn.cuiqingcai.com/2019-11-27-033806.png" alt=""> 图 12-26 运行页面 也可以单独运行 pyspider 的某一个组件。 运行 Scheduler 的命令如下所示：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">pyspider<span class="built_in"> scheduler </span>[OPTIONS]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行时也可以指定各种配置，参数如下所示：</p>
+                <figure class="highlight brainfuck">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment">Options:</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">xmlrpc</span> <span class="comment">/</span>--<span class="comment">no</span><span class="literal">-</span><span class="comment">xmlrpc</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">xmlrpc</span><span class="literal">-</span><span class="comment">host</span> <span class="comment">TEXT</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">xmlrpc</span><span class="literal">-</span><span class="comment">port</span> <span class="comment">INTEGER</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">inqueue</span><span class="literal">-</span><span class="comment">limit</span> <span class="comment">INTEGER</span>  <span class="comment">任务队列的最大长度，如果满了则新的任务会被忽略</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">delete</span><span class="literal">-</span><span class="comment">time</span> <span class="comment">INTEGER</span>    <span class="comment">设置为</span> <span class="comment">delete</span> <span class="comment">标记之前的删除时间</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">active</span><span class="literal">-</span><span class="comment">tasks</span> <span class="comment">INTEGER</span>   <span class="comment">当前活跃任务数量配置</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">loop</span><span class="literal">-</span><span class="comment">limit</span> <span class="comment">INTEGER</span>     <span class="comment">单轮最多调度的任务数量</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">scheduler</span><span class="literal">-</span><span class="comment">cls</span> <span class="comment">TEXT</span>     <span class="comment">Scheduler</span> <span class="comment">使用的类</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">help</span>                   <span class="comment">显示帮助信息</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行 Fetcher 的命令如下所示：</p>
+                <figure class="highlight apache">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">pyspider</span> fetcher<span class="meta"> [OPTIONS]</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>参数配置如下所示：</p>
+                <figure class="highlight brainfuck">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment">Options:</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">xmlrpc</span> <span class="comment">/</span>--<span class="comment">no</span><span class="literal">-</span><span class="comment">xmlrpc</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">xmlrpc</span><span class="literal">-</span><span class="comment">host</span> <span class="comment">TEXT</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">xmlrpc</span><span class="literal">-</span><span class="comment">port</span> <span class="comment">INTEGER</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">poolsize</span> <span class="comment">INTEGER</span>      <span class="comment">同时请求的个数</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">proxy</span> <span class="comment">TEXT</span>            <span class="comment">使用的代理</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">user</span><span class="literal">-</span><span class="comment">agent</span> <span class="comment">TEXT</span>       <span class="comment">使用的</span> <span class="comment">User</span><span class="literal">-</span><span class="comment">Agent</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">timeout</span> <span class="comment">TEXT</span>          <span class="comment">超时时间</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">fetcher</span><span class="literal">-</span><span class="comment">cls</span> <span class="comment">TEXT</span>      <span class="comment">Fetcher</span> <span class="comment">使用的类</span></span><br><span class="line"><span class="comment"></span>  --<span class="comment">help</span>                  <span class="comment">显示帮助信息</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行 Processer 的命令如下所示：</p>
+                <figure class="highlight apache">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">pyspider</span> processor<span class="meta"> [OPTIONS]</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>参数配置如下所示：</p>
+                <figure class="highlight ada">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Options:</span><br><span class="line">  <span class="comment">--processor-cls TEXT  Processor 使用的类</span></span><br><span class="line">  <span class="comment">--help                显示帮助信息</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行 WebUI 的命令如下所示：</p>
+                <figure class="highlight apache">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">pyspider</span> webui<span class="meta"> [OPTIONS]</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>参数配置如下所示：</p>
+                <figure class="highlight ada">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Options:</span><br><span class="line">  <span class="comment">--host TEXT            运行地址</span></span><br><span class="line">  <span class="comment">--port INTEGER         运行端口</span></span><br><span class="line">  <span class="comment">--cdn TEXT             JS 和 CSS 的 CDN 服务器</span></span><br><span class="line">  <span class="comment">--scheduler-rpc TEXT   Scheduler 的 xmlrpc 路径</span></span><br><span class="line">  <span class="comment">--fetcher-rpc TEXT     Fetcher 的 xmlrpc 路径</span></span><br><span class="line">  <span class="comment">--max-rate FLOAT       每个项目最大的 rate 值</span></span><br><span class="line">  <span class="comment">--max-burst FLOAT      每个项目最大的 burst 值</span></span><br><span class="line">  <span class="comment">--username TEXT        Auth 验证的用户名</span></span><br><span class="line">  <span class="comment">--password TEXT        Auth 验证的密码</span></span><br><span class="line">  <span class="comment">--need-auth            是否需要验证</span></span><br><span class="line">  <span class="comment">--webui-instance TEXT  运行时使用的 Flask 应用</span></span><br><span class="line">  <span class="comment">--help                 显示帮助信息</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里的配置和前面提到的配置文件参数是相同的。如果想要改变 WebUI 的端口为 5001，单独运行如下命令：</p>
+                <figure class="highlight ada">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">pyspider webui <span class="comment">--port 5001</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>或者可以将端口配置到 JSON 文件中，配置如下所示：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"webui"</span>: &#123;<span class="attr">"port"</span>: <span class="number">5001</span>&#125;</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>使用如下命令启动同样可以达到相同的效果：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">pyspider</span> <span class="selector-tag">-c</span> <span class="selector-tag">pyspider</span><span class="selector-class">.json</span> <span class="selector-tag">webui</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样就可以在 5001 端口上运行 WebUI 了。</p>
+                <h3 id="2-crawl-方法"><a href="#2-crawl-方法" class="headerlink" title="2. crawl() 方法"></a>2. crawl() 方法</h3>
+                <p>在前面的例子中，我们使用 crawl() 方法实现了新请求的生成，但是只指定了 URL 和 Callback。这里将详细介绍一下 crawl() 方法的参数配置。</p>
+                <h4 id="url"><a href="#url" class="headerlink" title="url"></a>url</h4>
+                <p>url 是爬取时的 URL，可以定义为单个 URL 字符串，也可以定义成 URL 列表。</p>
+                <h4 id="callback"><a href="#callback" class="headerlink" title="callback"></a>callback</h4>
+                <p>callback 是回调函数，指定了该 URL 对应的响应内容用哪个方法来解析，如下所示：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_start</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'http://scrapy.org/'</span>, callback=<span class="keyword">self</span>.index_page)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里指定了 callback 为 index_page，就代表爬取 <a href="http://scrapy.org/" target="_blank" rel="noopener">http://scrapy.org/</a> 链接得到的响应会用 index_page() 方法来解析。 index_page() 方法的第一个参数是响应对象，如下所示：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index_page</span><span class="params">(<span class="keyword">self</span>, response)</span></span><span class="symbol">:</span></span><br><span class="line">    pass</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>方法中的 response 参数就是请求上述 URL 得到的响应对象，我们可以直接在 index_page() 方法中实现页面的解析。</p>
+                <h4 id="age"><a href="#age" class="headerlink" title="age"></a>age</h4>
+                <p>age 是任务的有效时间。如果某个任务在有效时间内且已经被执行，则它不会重复执行，如下所示：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_start</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'http://www.example.org/'</span>, callback=<span class="keyword">self</span>.callback,</span><br><span class="line">               age=<span class="number">10</span>*<span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>或者可以这样设置：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">@config(age=<span class="number">10</span> * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">callback</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    pass</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>默认的有效时间为 10 天。</p>
+                <h4 id="priority"><a href="#priority" class="headerlink" title="priority"></a>priority</h4>
+                <p>priority 是爬取任务的优先级，其值默认是 0，priority 的数值越大，对应的请求会越优先被调度，如下所示：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index_page</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'http://www.example.org/page.html'</span>, callback=<span class="keyword">self</span>.index_page)</span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'http://www.example.org/233.html'</span>, callback=<span class="keyword">self</span>.detail_page,</span><br><span class="line">               priority=<span class="number">1</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>第二个任务会优先调用，233.html 这个链接优先爬取。</p>
+                <h4 id="exetime"><a href="#exetime" class="headerlink" title="exetime"></a>exetime</h4>
+                <p>exetime 参数可以设置定时任务，其值是时间戳，默认是 0，即代表立即执行，如下所示：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">import time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_start</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'http://www.example.org/'</span>, callback=<span class="keyword">self</span>.callback,</span><br><span class="line">               exetime=time.time()+<span class="number">30</span>*<span class="number">60</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样该任务会在 30 分钟之后执行。</p>
+                <h4 id="retries"><a href="#retries" class="headerlink" title="retries"></a>retries</h4>
+                <p>retries 可以定义重试次数，其值默认是 3。</p>
+                <h4 id="itag"><a href="#itag" class="headerlink" title="itag"></a>itag</h4>
+                <p>itag 参数设置判定网页是否发生变化的节点值，在爬取时会判定次当前节点是否和上次爬取到的节点相同。如果节点相同，则证明页面没有更新，就不会重复爬取，如下所示：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index_page</span><span class="params">(<span class="keyword">self</span>, response)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> response.doc(<span class="string">'.item'</span>).items()<span class="symbol">:</span></span><br><span class="line">        <span class="keyword">self</span>.crawl(item.find(<span class="string">'a'</span>).attr.url, callback=<span class="keyword">self</span>.detail_page,</span><br><span class="line">                   itag=item.find(<span class="string">'.update-time'</span>).text())</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里设置了更新时间这个节点的值为 itag，在下次爬取时就会首先检测这个值有没有发生变化，如果没有变化，则不再重复爬取，否则执行爬取。</p>
+                <h4 id="auto-recrawl"><a href="#auto-recrawl" class="headerlink" title="auto_recrawl"></a>auto_recrawl</h4>
+                <p>当开启时，爬取任务在过期后会重新执行，循环时间即定义的 age 时间长度，如下所示：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def on_start(self):</span><br><span class="line">    self.crawl(<span class="string">'http://www.example.org/'</span>, <span class="attribute">callback</span>=self.callback,</span><br><span class="line">               <span class="attribute">age</span>=5*60*60, <span class="attribute">auto_recrawl</span>=<span class="literal">True</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里定义了 age 有效期为 5 小时，设置了 auto_recrawl 为 True，这样任务就会每 5 小时执行一次。</p>
+                <h4 id="method"><a href="#method" class="headerlink" title="method"></a>method</h4>
+                <p>method 是 HTTP 请求方式，它默认是 GET。如果想发起 POST 请求，可以将 method 设置为 POST。</p>
+                <h4 id="params"><a href="#params" class="headerlink" title="params"></a>params</h4>
+                <p>我们可以方便地使用 params 来定义 GET 请求参数，如下所示：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_start</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'http://httpbin.org/get'</span>, callback=<span class="keyword">self</span>.callback,</span><br><span class="line">               params=&#123;<span class="string">'a'</span>: <span class="number">123</span>, <span class="string">'b'</span>: <span class="string">'c'</span>&#125;)</span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'http://httpbin.org/get?a=123&amp;b=c'</span>, callback=<span class="keyword">self</span>.callback)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里两个爬取任务是等价的。</p>
+                <h4 id="data"><a href="#data" class="headerlink" title="data"></a>data</h4>
+                <p>data 是 POST 表单数据。当请求方式为 POST 时，我们可以通过此参数传递表单数据，如下所示：</p>
+                <figure class="highlight oxygene">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def on_start(<span class="keyword">self</span>):</span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'http://httpbin.org/post'</span>, callback=<span class="keyword">self</span>.callback,</span><br><span class="line">               <span class="function"><span class="keyword">method</span>='<span class="title">POST</span>', <span class="title">data</span>=<span class="comment">&#123;'a': 123, 'b': 'c'&#125;</span>)</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h4 id="files"><a href="#files" class="headerlink" title="files"></a>files</h4>
+                <p>files 是上传的文件，需要指定文件名，如下所示：</p>
+                <figure class="highlight oxygene">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def on_start(<span class="keyword">self</span>):</span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'http://httpbin.org/post'</span>, callback=<span class="keyword">self</span>.callback,</span><br><span class="line">               <span class="function"><span class="keyword">method</span>='<span class="title">POST</span>', <span class="title">files</span>=<span class="comment">&#123;field: &#123;filename: 'content'&#125;</span>&#125;)</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h4 id="user-agent"><a href="#user-agent" class="headerlink" title="user_agent"></a>user_agent</h4>
+                <p>user_agent 是爬取使用的 User-Agent。</p>
+                <h4 id="headers"><a href="#headers" class="headerlink" title="headers"></a>headers</h4>
+                <p>headers 是爬取时使用的 Headers，即 Request Headers。</p>
+                <h4 id="cookies"><a href="#cookies" class="headerlink" title="cookies"></a>cookies</h4>
+                <p>cookies 是爬取时使用的 Cookies，为字典格式。</p>
+                <h4 id="connect-timeout"><a href="#connect-timeout" class="headerlink" title="connect_timeout"></a>connect_timeout</h4>
+                <p>connect_timeout 是在初始化连接时的最长等待时间，它默认是 20 秒。</p>
+                <h4 id="timeout"><a href="#timeout" class="headerlink" title="timeout"></a>timeout</h4>
+                <p>timeout 是抓取网页时的最长等待时间，它默认是 120 秒。</p>
+                <h4 id="allow-redirects"><a href="#allow-redirects" class="headerlink" title="allow_redirects"></a>allow_redirects</h4>
+                <p>allow_redirects 确定是否自动处理重定向，它默认是 True。</p>
+                <h4 id="validate-cert"><a href="#validate-cert" class="headerlink" title="validate_cert"></a>validate_cert</h4>
+                <p>validate_cert 确定是否验证证书，此选项对 HTTPS 请求有效，默认是 True。</p>
+                <h4 id="proxy"><a href="#proxy" class="headerlink" title="proxy"></a>proxy</h4>
+                <p>proxy 是爬取时使用的代理，它支持用户名密码的配置，格式为 username:password@hostname:port，如下所示：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_start</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'http://httpbin.org/get'</span>, callback=<span class="keyword">self</span>.callback, proxy=<span class="string">'127.0.0.1:9743'</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>也可以设置 craw_config 来实现全局配置，如下所示：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">class</span> <span class="symbol">Handler</span>(<span class="symbol">BaseHandler</span>):</span><br><span class="line">    <span class="symbol">crawl_config</span> = &#123;<span class="string">'proxy'</span>: <span class="string">'127.0.0.1:9743'</span>&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h4 id="fetch-type"><a href="#fetch-type" class="headerlink" title="fetch_type"></a>fetch_type</h4>
+                <p>fetch_type 开启 PhantomJS 渲染。如果遇到 JavaScript 渲染的页面，指定此字段即可实现 PhantomJS 的对接，pyspider 将会使用 PhantomJS 进行网页的抓取，如下所示：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_start</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'https://www.taobao.com'</span>, callback=<span class="keyword">self</span>.index_page, fetch_type=<span class="string">'js'</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样我们就可以实现淘宝页面的抓取了，得到的结果就是浏览器中看到的效果。</p>
+                <h4 id="js-script"><a href="#js-script" class="headerlink" title="js_script"></a>js_script</h4>
+                <p>js_script 是页面加载完毕后执行的 JavaScript 脚本，如下所示：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_start</span><span class="params">(self)</span>:</span></span><br><span class="line">    self.crawl(<span class="string">'http://www.example.org/'</span>, callback=self.callback,</span><br><span class="line">               fetch_type=<span class="string">'js'</span>, js_script=<span class="string">'''</span></span><br><span class="line"><span class="string">               function() &#123;window.scrollTo(0,document.body.scrollHeight);</span></span><br><span class="line"><span class="string">                   return 123;</span></span><br><span class="line"><span class="string">               &#125;</span></span><br><span class="line"><span class="string">               '''</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>页面加载成功后将执行页面混动的 JavaScript 代码，页面会下拉到最底部。</p>
+                <h4 id="js-run-at"><a href="#js-run-at" class="headerlink" title="js_run_at"></a>js_run_at</h4>
+                <p>js_run_at 代表 JavaScript 脚本运行的位置，是在页面节点开头还是结尾，默认是结尾，即 document-end。</p>
+                <h4 id="js-viewport-width-js-viewport-height"><a href="#js-viewport-width-js-viewport-height" class="headerlink" title="js_viewport_width/js_viewport_height"></a>js_viewport_width/js_viewport_height</h4>
+                <p>js_viewport_width/js_viewport_height 是 JavaScript 渲染页面时的窗口大小。</p>
+                <h4 id="load-images"><a href="#load-images" class="headerlink" title="load_images"></a>load_images</h4>
+                <p>load_images 在加载 JavaScript 页面时确定是否加载图片，它默认是否。</p>
+                <h4 id="save"><a href="#save" class="headerlink" title="save"></a>save</h4>
+                <p>save 参数非常有用，可以在不同的方法之间传递参数，如下所示：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_start</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'http://www.example.org/'</span>, callback=<span class="keyword">self</span>.callback,</span><br><span class="line">               save=&#123;<span class="string">'page'</span>: <span class="number">1</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">callback</span><span class="params">(<span class="keyword">self</span>, response)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">return</span> response.save[<span class="string">'page'</span>]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样，在 on_start() 方法中生成 Request 并传递额外的参数 page，在回调函数里可以通过 response 变量的 save 字段接收到这些参数值。</p>
+                <h4 id="cancel"><a href="#cancel" class="headerlink" title="cancel"></a>cancel</h4>
+                <p>cancel 是取消任务，如果一个任务是 ACTIVE 状态的，则需要将 force_update 设置为 True。</p>
+                <h4 id="force-update"><a href="#force-update" class="headerlink" title="force_update"></a>force_update</h4>
+                <p>即使任务处于 ACTIVE 状态，那也会强制更新状态。 以上便是 crawl() 方法的参数介绍，更加详细的描述可以参考：<a href="http://docs.pyspider.org/en/latest/apis/self.crawl/" target="_blank" rel="noopener">http://docs.pyspider.org/en/latest/apis/self.crawl/</a>。</p>
+                <h3 id="3-任务区分"><a href="#3-任务区分" class="headerlink" title="3. 任务区分"></a>3. 任务区分</h3>
+                <p>在 pyspider 判断两个任务是否是重复的是使用的是该任务对应的 URL 的 MD5 值作为任务的唯一 ID，如果 ID 相同，那么两个任务就会判定为相同，其中一个就不会爬取了。很多情况下请求的链接可能是同一个，但是 POST 的参数不同。这时可以重写 task_id() 方法，改变这个 ID 的计算方式来实现不同任务的区分，如下所示：</p>
+                <figure class="highlight gradle">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> pyspider.libs.utils <span class="keyword">import</span> md5string</span><br><span class="line"><span class="keyword">def</span> get_taskid(self, <span class="keyword">task</span>):</span><br><span class="line">    <span class="keyword">return</span> md5string(<span class="keyword">task</span>[<span class="string">'url'</span>]+json.dumps(<span class="keyword">task</span>[<span class="string">'fetch'</span>].get(<span class="string">'data'</span>, <span class="string">''</span>)))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里重写了 get_taskid() 方法，利用 URL 和 POST 的参数来生成 ID。这样一来，即使 URL 相同，但是 POST 的参数不同，两个任务的 ID 就不同，它们就不会被识别成重复任务。</p>
+                <h3 id="4-全局配置"><a href="#4-全局配置" class="headerlink" title="4. 全局配置"></a>4. 全局配置</h3>
+                <p>pyspider 可以使用 crawl_config 来指定全局的配置，配置中的参数会和 crawl() 方法创建任务时的参数合并。如要全局配置一个 Headers，可以定义如下代码：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Handler</span><span class="params">(BaseHandler)</span>:</span></span><br><span class="line">    crawl_config = &#123;</span><br><span class="line">        <span class="string">'headers'</span>: &#123;<span class="string">'User-Agent'</span>: <span class="string">'GoogleBot'</span>,&#125;</span><br><span class="line">    &#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="5-定时爬取"><a href="#5-定时爬取" class="headerlink" title="5. 定时爬取"></a>5. 定时爬取</h3>
+                <p>我们可以通过 every 属性来设置爬取的时间间隔，如下所示：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">@every(minutes=<span class="number">24</span> * <span class="number">60</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_start</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> <span class="symbol">urllist:</span></span><br><span class="line">        <span class="keyword">self</span>.crawl(url, callback=<span class="keyword">self</span>.index_page)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里设置了每天执行一次爬取。 在上文中我们提到了任务的有效时间，在有效时间内爬取不会重复。所以要把有效时间设置得比重复时间更短，这样才可以实现定时爬取。 例如，下面的代码就无法做到每天爬取：</p>
+                <figure class="highlight ruby">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">@every(minutes=<span class="number">24</span> * <span class="number">60</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_start</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">self</span>.crawl(<span class="string">'http://www.example.org/'</span>, callback=<span class="keyword">self</span>.index_page)</span><br><span class="line"></span><br><span class="line">@config(age=<span class="number">10</span> * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index_page</span><span class="params">(<span class="keyword">self</span>)</span></span><span class="symbol">:</span></span><br><span class="line">    pass</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里任务的过期时间为 10 天，而自动爬取的时间间隔为 1 天。当第二次尝试重新爬取的时候，pyspider 会监测到此任务尚未过期，便不会执行爬取，所以我们需要将 age 设置得小于定时时间。</p>
+                <h3 id="6-项目状态"><a href="#6-项目状态" class="headerlink" title="6. 项目状态"></a>6. 项目状态</h3>
+                <p>每个项目都有 6 个状态，分别是 TODO、STOP、CHECKING、DEBUG、RUNNING、PAUSE。</p>
+                <ul>
+                  <li>TODO：它是项目刚刚被创建还未实现时的状态。</li>
+                  <li>STOP：如果想停止某项目的抓取，可以将项目的状态设置为 STOP。</li>
+                  <li>CHECKING：正在运行的项目被修改后就会变成 CHECKING 状态，项目在中途出错需要调整的时候会遇到这种情况。</li>
+                  <li>DEBUG/RUNNING：这两个状态对项目的运行没有影响，状态设置为任意一个，项目都可以运行，但是可以用二者来区分项目是否已经测试通过。</li>
+                  <li>PAUSE：当爬取过程中出现连续多次错误时，项目会自动设置为 PAUSE 状态，并等待一定时间后继续爬取。</li>
+                </ul>
+                <h3 id="7-抓取进度"><a href="#7-抓取进度" class="headerlink" title="7. 抓取进度"></a>7. 抓取进度</h3>
+                <p>在抓取时，可以看到抓取的进度，progress 部分会显示 4 个进度条，如图 12-27 所示。 <img src="https://cdn.cuiqingcai.com/2019-11-27-033821.jpg" alt=""> 图 12-27 抓取进度 progress 中的 5m、1h、1d 指的是最近 5 分、1 小时、1 天内的请求情况，all 代表所有的请求情况。 蓝色的请求代表等待被执行的任务，绿色的代表成功的任务，黄色的代表请求失败后等待重试的任务，红色的代表失败次数过多而被忽略的任务，从这里我们可以直观看到爬取的进度和请求情况。</p>
+                <h3 id="8-删除项目"><a href="#8-删除项目" class="headerlink" title="8. 删除项目"></a>8. 删除项目</h3>
+                <p>pyspider 中没有直接删除项目的选项。如要删除任务，那么将项目的状态设置为 STOP，将分组的名称设置为 delete，等待 24 小时，则项目会自动删除。</p>
+                <h3 id="9-结语"><a href="#9-结语" class="headerlink" title="9. 结语"></a>9. 结语</h3>
+                <p>以上内容便是 pyspider 的常用用法。如要了解更多，可以参考 pyspider 的官方文档：<a href="http://docs.pyspider.org/" target="_blank" rel="noopener">http://docs.pyspider.org/</a>。</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/8317.html" rel="prev" title="[Python3网络爬虫开发实战] 12.2-pyspider 的基本使用">
+                      <i class="fa fa-chevron-left"></i> [Python3网络爬虫开发实战] 12.2-pyspider 的基本使用 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/8333.html" rel="next" title="[Python3网络爬虫开发实战] 13.1-Scrapy 框架介绍"> [Python3网络爬虫开发实战] 13.1-Scrapy 框架介绍 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#12-3-pyspider-用法详解"><span class="nav-number">1.</span> <span class="nav-text">12.3 pyspider 用法详解</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#1-命令行"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 命令行</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#2-crawl-方法"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. crawl() 方法</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#url"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">url</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#callback"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">callback</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#age"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">age</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#priority"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">priority</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#exetime"><span class="nav-number">1.0.2.5.</span> <span class="nav-text">exetime</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#retries"><span class="nav-number">1.0.2.6.</span> <span class="nav-text">retries</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#itag"><span class="nav-number">1.0.2.7.</span> <span class="nav-text">itag</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#auto-recrawl"><span class="nav-number">1.0.2.8.</span> <span class="nav-text">auto_recrawl</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#method"><span class="nav-number">1.0.2.9.</span> <span class="nav-text">method</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#params"><span class="nav-number">1.0.2.10.</span> <span class="nav-text">params</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#data"><span class="nav-number">1.0.2.11.</span> <span class="nav-text">data</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#files"><span class="nav-number">1.0.2.12.</span> <span class="nav-text">files</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#user-agent"><span class="nav-number">1.0.2.13.</span> <span class="nav-text">user_agent</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#headers"><span class="nav-number">1.0.2.14.</span> <span class="nav-text">headers</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#cookies"><span class="nav-number">1.0.2.15.</span> <span class="nav-text">cookies</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#connect-timeout"><span class="nav-number">1.0.2.16.</span> <span class="nav-text">connect_timeout</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#timeout"><span class="nav-number">1.0.2.17.</span> <span class="nav-text">timeout</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#allow-redirects"><span class="nav-number">1.0.2.18.</span> <span class="nav-text">allow_redirects</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#validate-cert"><span class="nav-number">1.0.2.19.</span> <span class="nav-text">validate_cert</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#proxy"><span class="nav-number">1.0.2.20.</span> <span class="nav-text">proxy</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#fetch-type"><span class="nav-number">1.0.2.21.</span> <span class="nav-text">fetch_type</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#js-script"><span class="nav-number">1.0.2.22.</span> <span class="nav-text">js_script</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#js-run-at"><span class="nav-number">1.0.2.23.</span> <span class="nav-text">js_run_at</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#js-viewport-width-js-viewport-height"><span class="nav-number">1.0.2.24.</span> <span class="nav-text">js_viewport_width&#x2F;js_viewport_height</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#load-images"><span class="nav-number">1.0.2.25.</span> <span class="nav-text">load_images</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#save"><span class="nav-number">1.0.2.26.</span> <span class="nav-text">save</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#cancel"><span class="nav-number">1.0.2.27.</span> <span class="nav-text">cancel</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#force-update"><span class="nav-number">1.0.2.28.</span> <span class="nav-text">force_update</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-任务区分"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 任务区分</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#4-全局配置"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. 全局配置</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#5-定时爬取"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. 定时爬取</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#6-项目状态"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. 项目状态</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#7-抓取进度"><span class="nav-number">1.0.7.</span> <span class="nav-text">7. 抓取进度</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#8-删除项目"><span class="nav-number">1.0.8.</span> <span class="nav-text">8. 删除项目</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#9-结语"><span class="nav-number">1.0.9.</span> <span class="nav-text">9. 结语</span></a></li>
+                    </ol>
+                  </li>
+                </ol>
+                </li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '8f745d847081344a3a05086cc1ac71ba',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

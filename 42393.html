@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="Producer,Audios">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="本文将介绍一种 Producer Audios Generation API 对接说明，它是可以通过输入自定义参数来生成 Producer 官方的音乐。 申请流程 要使用 API，需要先到 Producer Audios Generation API 对应页面申请对应的服务，进入页面之后，点击「Acquire」按钮，如图所示：  如果你尚未登录或注册，会自动跳转到登录页面邀请您来注册和登录，登录注">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Producer Audios Generation API 对接说明">
+  <meta property="og:url" content="https://cuiqingcai.com/42393.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="本文将介绍一种 Producer Audios Generation API 对接说明，它是可以通过输入自定义参数来生成 Producer 官方的音乐。 申请流程 要使用 API，需要先到 Producer Audios Generation API 对应页面申请对应的服务，进入页面之后，点击「Acquire」按钮，如图所示：  如果你尚未登录或注册，会自动跳转到登录页面邀请您来注册和登录，登录注">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.acedata.cloud/q6ytrc.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/lg9bb0.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/0217zy.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/ruovz5.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/seyxxa.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/z7r5fd.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/6xl82z.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/bxzfrw.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/z7r5fd.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/r3ux6z.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/fsww0u.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/bxslxt.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/nojowk.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/z7r5fd.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/mzo9iw.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/877x6c.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/7l6976.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/pvi2n3.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/bk9ino.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/p5b1vg.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/fnpgvc.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/oq5iv5.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/tbcnai.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/wuzd4y.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/k0kf0y.png">
+  <meta property="article:published_time" content="2026-02-09T02:01:15.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.286Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="Producer">
+  <meta property="article:tag" content="Audios">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.acedata.cloud/q6ytrc.png">
+  <link rel="canonical" href="https://cuiqingcai.com/42393.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>Producer Audios Generation API 对接说明 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/42393.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> Producer Audios Generation API 对接说明 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2026-02-09 10:01:15" itemprop="dateCreated datePublished" datetime="2026-02-09T10:01:15+08:00">2026-02-09</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Producer/" itemprop="url" rel="index"><span itemprop="name">Producer</span></a>
+                    </span>
+                  </span>
+                  <span id="/42393.html" class="post-meta-item leancloud_visitors" data-flag-title="Producer Audios Generation API 对接说明" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>26k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>23 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>本文将介绍一种 Producer Audios Generation API 对接说明，它是可以通过输入自定义参数来生成 Producer 官方的音乐。</p>
+                <h2 id="申请流程"><a href="#申请流程" class="headerlink" title="申请流程"></a>申请流程</h2>
+                <p>要使用 API，需要先到 <a href="https://platform.acedata.cloud/documents/producer-audios" target="_blank" rel="noopener">Producer Audios Generation API</a> 对应页面申请对应的服务，进入页面之后，点击「Acquire」按钮，如图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/q6ytrc.png" alt=""></p>
+                <p>如果你尚未登录或注册，会自动跳转到登录页面邀请您来注册和登录，登录注册之后会自动返回当前页面。</p>
+                <p>在首次申请时会有免费额度赠送，可以免费使用该 API。</p>
+                <h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2>
+                <p>想些什么歌曲，可以任意输入一段文字，比如我想生成一个关于圣诞的歌曲，就可以输入 <code>a song for Christmas</code>，如图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/lg9bb0.png" width="600" class="m-auto"></p>
+                <p>可以看到这里我们设置了 Request Headers，包括：</p>
+                <ul>
+                  <li><code>accept</code>：想要接收怎样格式的响应结果，这里填写为 <code>application/json</code>，即 JSON 格式。</li>
+                  <li><code>authorization</code>：调用 API 的密钥，申请之后可以直接下拉选择。</li>
+                </ul>
+                <p>另外 Request Body 的参数包括：</p>
+                <ul>
+                  <li><code>action</code>：此次音乐生成任务的行为，生成歌曲是 <code>generate</code>。</li>
+                  <li><code>model</code>：创建歌曲采用的模型，目前主要有： <strong>FUZZ-2.0 Pro</strong>、<strong>FUZZ-2.0</strong>、<strong>FUZZ-2.0 Raw</strong>,<strong>FUZZ-1.1 Pro</strong>、<strong>FUZZ-1.0 Pro</strong>、<strong>FUZZ-1.0</strong>、<strong>FUZZ-1.1</strong>、<strong>FUZZ-0.8</strong>。</li>
+                  <li><code>lyric</code>：歌曲的歌词内容。</li>
+                  <li><code>custom</code>：是否采用自定义方式生成歌曲。</li>
+                  <li><code>prompt</code>：灵感模式下的提示词。</li>
+                  <li><code>title</code>：歌曲标题信息。</li>
+                  <li><code>audio_id</code>：参考歌曲 ID，用于续写/翻版等操作。</li>
+                  <li><code>continue_at</code>：从指定秒数开始续写歌曲。</li>
+                  <li><code>replace_section_start</code>/<code>replace_section_end</code>：替换片段的起止时间，单位秒。</li>
+                  <li><code>lyrics_strength</code>：歌词强度，表示歌词在音频生成中的影响程度，可选0-1之间，默认0.7。</li>
+                  <li><code>sound_strength</code>：音频提示词强度，可选0.2-1之间，默认0.7。</li>
+                  <li><code>cover_strength</code>：翻唱强度 0.2-1之间，默认1。</li>
+                  <li><code>weirdness</code>：风格奇特度，可选 0-1之间，默认0.5</li>
+                  <li><code>callback_url</code>：需要回调结果的 URL。</li>
+                  <li><code>instrumental</code>：是否为无歌词模式。</li>
+                </ul>
+                <p>选择之后，可以发现右侧也生成了对应代码，如图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/0217zy.png" width="500" class="m-auto"></p>
+                <p>点击「Try」按钮即可进行测试，如上图所示，这里我们就得到了如下结果：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"82fd443a-903a-4f18-8028-12d2f8a0a4be"</span>,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"d85839fa-0bb1-42da-a9fc-cd582c29027d"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"6c947f13-a3c5-4b9c-8609-5639c37cdc2d"</span>,</span><br><span class="line">      <span class="attr">"title"</span>: <span class="string">"Untitled"</span>,</span><br><span class="line">      <span class="attr">"image_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/a853673e-615c-42ae-bdff-16b1add94861/image/6c947f13-a3c5-4b9c-8609-5639c37cdc2d.jpg"</span>,</span><br><span class="line">      <span class="attr">"lyric"</span>: <span class="string">"[Instrumental]"</span>,</span><br><span class="line">      <span class="attr">"audio_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/a853673e-615c-42ae-bdff-16b1add94861/audio/6c947f13-a3c5-4b9c-8609-5639c37cdc2d.m4a"</span>,</span><br><span class="line">      <span class="attr">"video_url"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"image_id"</span>: <span class="string">"6c947f13-a3c5-4b9c-8609-5639c37cdc2d"</span>,</span><br><span class="line">      <span class="attr">"topic"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"seed"</span>: <span class="string">"2450882164"</span>,</span><br><span class="line">      <span class="attr">"sound"</span>: <span class="string">"A song for Christmas"</span>,</span><br><span class="line">      <span class="attr">"created_at"</span>: <span class="string">"2025-12-30T17:18:23.232911Z"</span>,</span><br><span class="line">      <span class="attr">"model"</span>: <span class="string">"FUZZ-2.0 Pro"</span>,</span><br><span class="line">      <span class="attr">"progress"</span>: <span class="string">"100%"</span>,</span><br><span class="line">      <span class="attr">"state"</span>: <span class="string">"succeeded"</span>,</span><br><span class="line">      <span class="attr">"duration"</span>: <span class="string">"181.3014058956916"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>返回结果一共有多个字段，介绍如下：</p>
+                <ul>
+                  <li><code>success</code>，此时音乐生成任务的状态情况。<ul>
+                      <li><code>data</code>，此次音乐任务的结果 <ul>
+                          <li><code>id</code>，此时音乐生成任务的 ID。</li>
+                          <li><code>sound</code>，此时音乐生成任务的提示词。</li>
+                          <li><code>seed</code>，此时音乐生成任务的种子值。</li>
+                          <li><code>audio_url</code>，此时音乐生成任务的音频链接。</li>
+                          <li><code>image_url</code>，此时音乐生成任务的封面链接。</li>
+                          <li><code>image_id</code>，此时音乐生成任务的封面ID。</li>
+                          <li><code>state</code>，此时音乐生成任务的状态。</li>
+                          <li><code>duration</code>，此时音乐的时长信息。</li>
+                          <li><code>progress</code>，此时音乐任务的进度值。</li>
+                          <li><code>model</code>，此时音乐生成任务采用的模型信息。</li>
+                          <li><code>lyric</code>，此时音乐生成任务的歌词信息。</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <p>可以看到我们得到了想生成的音乐信息，我们只需要根据结果中 <code>data</code> 的音乐链接地址获取生成的 Producer 音乐即可。</p>
+                <p>另外如果想生成对应的对接代码，可以直接复制生成，例如 CURL 的代码如下：</p>
+                <figure class="highlight shell">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -X POST 'https://api.acedata.cloud/producer/audios' \</span><br><span class="line">-H 'accept: application/json' \</span><br><span class="line">-H 'authorization: Bearer &#123;token&#125;' \</span><br><span class="line">-H 'content-type: application/json' \</span><br><span class="line">-d '&#123;</span><br><span class="line">  "action": "generate",</span><br><span class="line">  "model": "FUZZ-2.0 Pro",</span><br><span class="line">  "prompt": "A song for Christmas"</span><br><span class="line">&#125;'</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="自定义生成"><a href="#自定义生成" class="headerlink" title="自定义生成"></a>自定义生成</h2>
+                <p>如果想自定义生成歌词，可以输入歌词：</p>
+                <p>这时候 <code>lyric</code> 字段可以传入类似如下内容：</p>
+                <figure class="highlight applescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[Verse]Woke up <span class="keyword">with</span> <span class="keyword">the</span> sun <span class="keyword">in</span> <span class="keyword">my</span> eyesNo clouds <span class="keyword">above</span> just blue <span class="keyword">in</span> <span class="keyword">the</span> skiesShoes <span class="keyword">on</span> <span class="keyword">my</span> feet I’m ready <span class="keyword">to</span> runEvery step feels like a loaded gun[Chorus]Happy days are rolling inLet <span class="keyword">the</span> joy <span class="keyword">beneath</span> <span class="keyword">my</span> skinNo more shadows no more liesJust <span class="keyword">the</span> truth <span class="keyword">that</span> lifts <span class="keyword">me</span> high[Verse <span class="number">2</span>]Dancing <span class="keyword">through</span> <span class="keyword">the</span> city streetsA rhythm pounding <span class="keyword">in</span> <span class="keyword">my</span> heartbeatStrangers smile <span class="keyword">it</span>’s catching onThis world’s a stage we’re all a song[Chorus]Happy days are rolling inLet <span class="keyword">the</span> joy <span class="keyword">beneath</span> <span class="keyword">my</span> skinNo more shadows no more liesJust <span class="keyword">the</span> truth <span class="keyword">that</span> lifts <span class="keyword">me</span> high[Bridge]Throw your worries out <span class="keyword">the</span> doorLet them sink <span class="keyword">to</span> <span class="keyword">the</span> ocean floorWe’re alive <span class="keyword">and</span> <span class="keyword">it</span>’s enoughLife <span class="keyword">is</span> messy <span class="keyword">but</span> <span class="keyword">it</span>’s love[Chorus]Happy days are rolling inLet <span class="keyword">the</span> joy <span class="keyword">beneath</span> <span class="keyword">my</span> skinNo more shadows no more liesJust <span class="keyword">the</span> truth <span class="keyword">that</span> lifts <span class="keyword">me</span> high</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>接下来我们要根据歌词、标题、风格自定义生成歌曲，就可以指定如下内容：</p>
+                <ul>
+                  <li>lyric：歌词文本</li>
+                  <li>custom：填写为 <code>true</code>，代表自定义生成，该参数默认为 false，代表使用 <code>prompt</code> 生成。</li>
+                  <li>title：歌曲的标题。</li>
+                </ul>
+                <p>填写样例如下：</p>
+                <p><img src="https://cdn.acedata.cloud/ruovz5.png" width="500" class="m-auto"></p>
+                <p>填写完毕之后自动生成了代码如下：</p>
+                <p><img src="https://cdn.acedata.cloud/seyxxa.png" width="500" class="m-auto"></p>
+                <p>对应的代码：</p>
+                <figure class="highlight shell">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -X POST 'https://api.acedata.cloud/producer/audios' \</span><br><span class="line">-H 'accept: application/json' \</span><br><span class="line">-H 'authorization: Bearer &#123;token&#125;' \</span><br><span class="line">-H 'content-type: application/json' \</span><br><span class="line">-d '&#123;</span><br><span class="line">  "action": "generate",</span><br><span class="line">  "model": "FUZZ-2.0 Pro",</span><br><span class="line">  "instrumental": false,</span><br><span class="line">  "lyric": "[Verse]\nWoke up with the sun in my eyes\nNo clouds above just blue in the skies\nShoes on my feet I’m ready to run\nEvery step feels like a loaded gun\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Verse 2]\nDancing through the city streets\nA rhythm pounding in my heartbeat\nStrangers smile it’s catching on\nThis world’s a stage we’re all a song\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Bridge]\nThrow your worries out the door\nLet them sink to the ocean floor\nWe’re alive and it’s enough\nLife is messy but it’s love\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high",</span><br><span class="line">  "custom": true</span><br><span class="line">&#125;'</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>测试允许，生成的效果是类似的。</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"9f58bbd4-855a-4233-ac45-b63bf9168e02"</span>,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"145ad117-6ce7-42dd-af12-70751c5284fc"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"38d3b9e2-0dfb-4338-b2a7-15e45656ed32"</span>,</span><br><span class="line">      <span class="attr">"title"</span>: <span class="string">"Woke up with the sun in my eyes"</span>,</span><br><span class="line">      <span class="attr">"image_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/image/38d3b9e2-0dfb-4338-b2a7-15e45656ed32.jpg"</span>,</span><br><span class="line">      <span class="attr">"lyric"</span>: <span class="string">"[Verse]\nWoke up with the sun in my eyes\nNo clouds above just blue in the skies\nShoes on my feet I’m ready to run\nEvery step feels like a loaded gun\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Verse 2]\nDancing through the city streets\nA rhythm pounding in my heartbeat\nStrangers smile it’s catching on\nThis world’s a stage we’re all a song\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Bridge]\nThrow your worries out the door\nLet them sink to the ocean floor\nWe’re alive and it’s enough\nLife is messy but it’s love\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high"</span>,</span><br><span class="line">      <span class="attr">"audio_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/audio/38d3b9e2-0dfb-4338-b2a7-15e45656ed32.m4a"</span>,</span><br><span class="line">      <span class="attr">"video_url"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"image_id"</span>: <span class="string">"38d3b9e2-0dfb-4338-b2a7-15e45656ed32"</span>,</span><br><span class="line">      <span class="attr">"topic"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"seed"</span>: <span class="string">"3789209121"</span>,</span><br><span class="line">      <span class="attr">"sound"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"created_at"</span>: <span class="string">"2025-12-30T17:26:46.357055Z"</span>,</span><br><span class="line">      <span class="attr">"model"</span>: <span class="string">"FUZZ-2.0 Pro"</span>,</span><br><span class="line">      <span class="attr">"progress"</span>: <span class="string">"100%"</span>,</span><br><span class="line">      <span class="attr">"state"</span>: <span class="string">"succeeded"</span>,</span><br><span class="line">      <span class="attr">"duration"</span>: <span class="string">"153.80897959183673"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="翻唱歌曲"><a href="#翻唱歌曲" class="headerlink" title="翻唱歌曲"></a>翻唱歌曲</h2>
+                <p>如果想对已经生成的歌曲进行翻唱操作的操作，可以输入上文生成的歌曲进行翻唱，接下来我们要根据歌词、标题自定义生成歌曲。</p>
+                <p>如果想对自己上传的歌曲进行继续翻唱的话，可以将参数 <code>action</code> 设置为 <code>upload_cover</code> ，并且输入需要继续翻唱自定义上传的歌曲 ID，歌曲 ID 的获取是使用 <a href="https://platform.acedata.cloud/documents/7fd2cb52-772e-4cc4-a018-e2626ff6f447" target="_blank" rel="noopener">Producer Upload API</a>来获取，如下图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/z7r5fd.png" width="500" class="m-auto"></p>
+                <p>就可以指定如下内容：</p>
+                <ul>
+                  <li>action：此次歌曲任务的行为，目前支持：generate、cover、extend、upload_cover、upload_extend、replace_section、swap_vocals、swap_instrumentals、variation，此次翻唱使用<code>cover</code>参数。</li>
+                  <li>lyric：歌词文本</li>
+                  <li>title：歌曲的标题。</li>
+                  <li>custom：是否采用自定义模式生成，默认是false。</li>
+                  <li>audio_id：需要翻唱歌曲的歌曲ID。</li>
+                </ul>
+                <p>填写样例如下：</p>
+                <p><img src="https://cdn.acedata.cloud/6xl82z.png" width="500" class="m-auto"></p>
+                <p>填写完毕之后自动生成了代码如下：</p>
+                <p><img src="https://cdn.acedata.cloud/bxzfrw.png" width="500" class="m-auto"></p>
+                <p>对应的代码：</p>
+                <figure class="highlight shell">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -X POST 'https://api.acedata.cloud/producer/audios' \</span><br><span class="line">-H 'accept: application/json' \</span><br><span class="line">-H 'authorization: Bearer &#123;token&#125;' \</span><br><span class="line">-H 'content-type: application/json' \</span><br><span class="line">-d '&#123;</span><br><span class="line">  "action": "cover",</span><br><span class="line">  "model": "FUZZ-2.0 Pro",</span><br><span class="line">  "lyric": "[Verse]\nWoke up with the sun in my eyes\nNo clouds above just blue in the skies\nShoes on my feet I’m ready to run\nEvery step feels like a loaded gun\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Verse 2]\nDancing through the city streets\nA rhythm pounding in my heartbeat\nStrangers smile it’s catching on\nThis world’s a stage we’re all a song\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Bridge]\nThrow your worries out the door\nLet them sink to the ocean floor\nWe’re alive and it’s enough\nLife is messy but it’s love\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high",</span><br><span class="line">  "audio_id": "38d3b9e2-0dfb-4338-b2a7-15e45656ed32",</span><br><span class="line">  "instrumental": false,</span><br><span class="line">  "custom": true,</span><br><span class="line">  "title": "Cover"</span><br><span class="line">&#125;'</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>测试允许，生成的效果是类似的。</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"dbca350e-6fb9-46ca-9c7e-4c1a9080806f"</span>,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"a39e0fff-ced8-4b31-ae23-aef3badd90fa"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"e52dd729-38b4-4c2f-9031-59eb7953c593"</span>,</span><br><span class="line">      <span class="attr">"title"</span>: <span class="string">"Cover"</span>,</span><br><span class="line">      <span class="attr">"image_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/image/e52dd729-38b4-4c2f-9031-59eb7953c593.jpg"</span>,</span><br><span class="line">      <span class="attr">"lyric"</span>: <span class="string">"[Verse]\nWoke up with the sun in my eyes\nNo clouds above just blue in the skies\nShoes on my feet I’m ready to run\nEvery step feels like a loaded gun\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Verse 2]\nDancing through the city streets\nA rhythm pounding in my heartbeat\nStrangers smile it’s catching on\nThis world’s a stage we’re all a song\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Bridge]\nThrow your worries out the door\nLet them sink to the ocean floor\nWe’re alive and it’s enough\nLife is messy but it’s love\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high"</span>,</span><br><span class="line">      <span class="attr">"audio_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/audio/e52dd729-38b4-4c2f-9031-59eb7953c593.m4a"</span>,</span><br><span class="line">      <span class="attr">"video_url"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"image_id"</span>: <span class="string">"e52dd729-38b4-4c2f-9031-59eb7953c593"</span>,</span><br><span class="line">      <span class="attr">"topic"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"seed"</span>: <span class="string">"358803418"</span>,</span><br><span class="line">      <span class="attr">"sound"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"created_at"</span>: <span class="string">"2025-12-30T17:32:32.951948Z"</span>,</span><br><span class="line">      <span class="attr">"model"</span>: <span class="string">"FUZZ-2.0 Pro"</span>,</span><br><span class="line">      <span class="attr">"progress"</span>: <span class="string">"100%"</span>,</span><br><span class="line">      <span class="attr">"state"</span>: <span class="string">"succeeded"</span>,</span><br><span class="line">      <span class="attr">"duration"</span>: <span class="string">"153.0659410430839"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="续写歌曲"><a href="#续写歌曲" class="headerlink" title="续写歌曲"></a>续写歌曲</h2>
+                <p>如果想续写歌曲的话，我们需要传入<code>action</code>参数值为：<code>extend</code>，接下来我们要根据歌词、标题、风格自定义生成歌曲。</p>
+                <p>如果想对自己上传的歌曲进行继续续写的话，可以将参数 <code>action</code> 设置为 <code>upload_extend</code> ，并且输入需要继续续写自定义上传的歌曲 ID，歌曲 ID 的获取是使用 <a href="https://platform.acedata.cloud/documents/7fd2cb52-772e-4cc4-a018-e2626ff6f447" target="_blank" rel="noopener">Producer Upload API</a>来获取，如下图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/z7r5fd.png" width="500" class="m-auto"></p>
+                <p>填写样例如下：</p>
+                <p><img src="https://cdn.acedata.cloud/r3ux6z.png" width="500" class="m-auto"></p>
+                <p>填写完毕之后自动生成了代码如下：</p>
+                <p><img src="https://cdn.acedata.cloud/fsww0u.png" width="500" class="m-auto"></p>
+                <p>对应的代码：</p>
+                <figure class="highlight shell">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -X POST 'https://api.acedata.cloud/producer/audios' \</span><br><span class="line">-H 'accept: application/json' \</span><br><span class="line">-H 'authorization: Bearer &#123;token&#125;' \</span><br><span class="line">-H 'content-type: application/json' \</span><br><span class="line">-d '&#123;</span><br><span class="line">  "action": "extend",</span><br><span class="line">  "model": "FUZZ-2.0 Pro",</span><br><span class="line">  "instrumental": false,</span><br><span class="line">  "lyric": "[Verse]\nWoke up with the sun in my eyes\nNo clouds above just blue in the skies\nShoes on my feet I’m ready to run\nEvery step feels like a loaded gun\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Verse 2]\nDancing through the city streets\nA rhythm pounding in my heartbeat\nStrangers smile it’s catching on\nThis world’s a stage we’re all a song\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Bridge]\nThrow your worries out the door\nLet them sink to the ocean floor\nWe’re alive and it’s enough\nLife is messy but it’s love\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high",</span><br><span class="line">  "continue_at": 3,</span><br><span class="line">  "audio_id": "38d3b9e2-0dfb-4338-b2a7-15e45656ed32",</span><br><span class="line">  "custom": true,</span><br><span class="line">  "title": "Extend",</span><br><span class="line">  "weirdness": 0.3,</span><br><span class="line">  "sound_strength": 0.3,</span><br><span class="line">  "lyrics_strength": 0.6</span><br><span class="line">&#125;'</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>测试允许，生成的效果是类似的。</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"834983cb-d62d-4750-b1aa-461da137e51f"</span>,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"6923eee2-7403-432c-8bd1-e471086385b0"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"d9ebc609-fb65-4a23-b914-c074747af6a4"</span>,</span><br><span class="line">      <span class="attr">"title"</span>: <span class="string">"Extend"</span>,</span><br><span class="line">      <span class="attr">"image_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/image/d9ebc609-fb65-4a23-b914-c074747af6a4.jpg"</span>,</span><br><span class="line">      <span class="attr">"lyric"</span>: <span class="string">"[Verse]\n[Verse]\nWoke up with the sun in my eyes\nNo clouds above just blue in the skies\nShoes on my feet I’m ready to run\nEvery step feels like a loaded gun\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Verse 2]\nDancing through the city streets\nA rhythm pounding in my heartbeat\nStrangers smile it’s catching on\nThis world’s a stage we’re all a song\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Bridge]\nThrow your worries out the door\nLet them sink to the ocean floor\nWe’re alive and it’s enough\nLife is messy but it’s love\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high"</span>,</span><br><span class="line">      <span class="attr">"audio_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/audio/d9ebc609-fb65-4a23-b914-c074747af6a4.m4a"</span>,</span><br><span class="line">      <span class="attr">"video_url"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"image_id"</span>: <span class="string">"d9ebc609-fb65-4a23-b914-c074747af6a4"</span>,</span><br><span class="line">      <span class="attr">"topic"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"seed"</span>: <span class="string">"4294469624"</span>,</span><br><span class="line">      <span class="attr">"sound"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"created_at"</span>: <span class="string">"2025-12-30T17:36:14.520928Z"</span>,</span><br><span class="line">      <span class="attr">"model"</span>: <span class="string">"FUZZ-2.0 Pro"</span>,</span><br><span class="line">      <span class="attr">"progress"</span>: <span class="string">"100%"</span>,</span><br><span class="line">      <span class="attr">"state"</span>: <span class="string">"succeeded"</span>,</span><br><span class="line">      <span class="attr">"duration"</span>: <span class="string">"173.87102040816328"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="音乐变换"><a href="#音乐变换" class="headerlink" title="音乐变换"></a>音乐变换</h2>
+                <p>如果想根据上一首音乐的seed值生成一首类似效果的新音乐的话，我们需要传入<code>action</code>参数值为：<code>variation</code>，接下来就可以自定义生成一首类似效果的新音乐。</p>
+                <p>填写样例如下：</p>
+                <p><img src="https://cdn.acedata.cloud/bxslxt.png" width="500" class="m-auto"></p>
+                <p>填写完毕之后自动生成了代码如下：</p>
+                <p><img src="https://cdn.acedata.cloud/nojowk.png" width="500" class="m-auto"></p>
+                <p>对应的代码：</p>
+                <figure class="highlight shell">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -X POST 'https://api.acedata.cloud/producer/audios' \</span><br><span class="line">-H 'accept: application/json' \</span><br><span class="line">-H 'authorization: Bearer &#123;token&#125;' \</span><br><span class="line">-H 'content-type: application/json' \</span><br><span class="line">-d '&#123;</span><br><span class="line">  "action": "variation",</span><br><span class="line">  "audio_id": "d9ebc609-fb65-4a23-b914-c074747af6a4",</span><br><span class="line">  "model": "FUZZ-2.0 Pro",</span><br><span class="line">  "instrumental": false,</span><br><span class="line">  "lyric": "[Verse]\nWoke up with the sun in my eyes\nNo clouds above just blue in the skies\nShoes on my feet I’m ready to run\nEvery step feels like a loaded gun\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Verse 2]\nDancing through the city streets\nA rhythm pounding in my heartbeat\nStrangers smile it’s catching on\nThis world’s a stage we’re all a song\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Bridge]\nThrow your worries out the door\nLet them sink to the ocean floor\nWe’re alive and it’s enough\nLife is messy but it’s love\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high",</span><br><span class="line">  "custom": true</span><br><span class="line">&#125;'</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>测试允许，生成的效果是类似的。</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"task_id"</span>: <span class="string">"3a74da6d-a37d-4b5d-b116-821f455bce39"</span>,</span><br><span class="line">    <span class="attr">"trace_id"</span>: <span class="string">"8e28cce0-0400-4bfd-83db-6d27f97422c7"</span>,</span><br><span class="line">    <span class="attr">"data"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"id"</span>: <span class="string">"c14ca458-cd5a-4700-83d4-5249e15f2707"</span>,</span><br><span class="line">            <span class="attr">"title"</span>: <span class="string">"Woke up with the sun in my eyes"</span>,</span><br><span class="line">            <span class="attr">"image_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/image/c14ca458-cd5a-4700-83d4-5249e15f2707.jpg"</span>,</span><br><span class="line">            <span class="attr">"lyric"</span>: <span class="string">"[Verse]\nWoke up with the sun in my eyes\nNo clouds above just blue in the skies\nShoes on my feet I’m ready to run\nEvery step feels like a loaded gun\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Verse 2]\nDancing through the city streets\nA rhythm pounding in my heartbeat\nStrangers smile it’s catching on\nThis world’s a stage we’re all a song\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Bridge]\nThrow your worries out the door\nLet them sink to the ocean floor\nWe’re alive and it’s enough\nLife is messy but it’s love\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high"</span>,</span><br><span class="line">            <span class="attr">"audio_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/audio/c14ca458-cd5a-4700-83d4-5249e15f2707.m4a"</span>,</span><br><span class="line">            <span class="attr">"video_url"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"image_id"</span>: <span class="string">"c14ca458-cd5a-4700-83d4-5249e15f2707"</span>,</span><br><span class="line">            <span class="attr">"topic"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"seed"</span>: <span class="string">"2082104582"</span>,</span><br><span class="line">            <span class="attr">"sound"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"created_at"</span>: <span class="string">"2025-12-30T17:48:40.135187Z"</span>,</span><br><span class="line">            <span class="attr">"model"</span>: <span class="string">"FUZZ-2.0"</span>,</span><br><span class="line">            <span class="attr">"progress"</span>: <span class="string">"100%"</span>,</span><br><span class="line">            <span class="attr">"state"</span>: <span class="string">"succeeded"</span>,</span><br><span class="line">            <span class="attr">"duration"</span>: <span class="string">"173.12798185941043"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="替换片段"><a href="#替换片段" class="headerlink" title="替换片段"></a>替换片段</h2>
+                <p>如果想对歌曲进行替换片段的话，我们需要传入<code>action</code>参数值为：<code>replace_section</code>，接下来我们要根据歌词、标题自定义生成歌曲。</p>
+                <p>如果想对自己上传的歌曲进行继续替换片段的话，可以将参数 <code>action</code> 设置为 <code>upload_replace_section</code> ，并且输入需要继续续写自定义上传的歌曲 ID，歌曲 ID 的获取是使用 <a href="https://platform.acedata.cloud/documents/7fd2cb52-772e-4cc4-a018-e2626ff6f447" target="_blank" rel="noopener">Producer Upload API</a>来获取，如下图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/z7r5fd.png" width="500" class="m-auto"></p>
+                <p>填写样例如下：</p>
+                <p><img src="https://cdn.acedata.cloud/mzo9iw.png" width="500" class="m-auto"></p>
+                <p>填写完毕之后自动生成了代码如下：</p>
+                <p><img src="https://cdn.acedata.cloud/877x6c.png" width="500" class="m-auto"></p>
+                <p>对应的代码：</p>
+                <figure class="highlight shell">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -X POST 'https://api.acedata.cloud/producer/audios' \</span><br><span class="line">-H 'accept: application/json' \</span><br><span class="line">-H 'authorization: Bearer &#123;token&#125;' \</span><br><span class="line">-H 'content-type: application/json' \</span><br><span class="line">-d '&#123;</span><br><span class="line">  "action": "replace_section",</span><br><span class="line">  "model": "FUZZ-2.0 Pro",</span><br><span class="line">  "instrumental": false,</span><br><span class="line">  "lyric": "[Verse]\\nWoke up with the sun in my eyes\\nNo clouds above just blue in the skies\\nShoes on my feet I’m ready to run\\nEvery step feels like a loaded gun\\n[Chorus]\\nHappy days are rolling in\\nLet the joy beneath my skin\\nNo more shadows no more lies\\nJust the truth that lifts me high\\n[Verse 2]\\nDancing through the city streets\\nA rhythm pounding in my heartbeat\\nStrangers smile it’s catching on\\nThis world’s a stage we’re all a song\\n[Chorus]\\nHappy days are rolling in\\nLet the joy beneath my skin\\nNo more shadows no more lies\\nJust the truth that lifts me high\\n[Bridge]\\nThrow your worries out the door\\nLet them sink to the ocean floor\\nWe’re alive and it’s enough\\nLife is messy but it’s love\\n[Chorus]\\nHappy days are rolling in\\nLet the joy beneath my skin\\nNo more shadows no more lies\\nJust the truth that lifts me high",</span><br><span class="line">  "audio_id": "d9ebc609-fb65-4a23-b914-c074747af6a4",</span><br><span class="line">  "replace_section_start": 3,</span><br><span class="line">  "replace_section_end": 70,</span><br><span class="line">  "custom": true</span><br><span class="line">&#125;'</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>测试允许，生成的效果是类似的。</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"task_id"</span>: <span class="string">"3cb5ae96-01b0-4a37-afb0-e582608af56f"</span>,</span><br><span class="line">    <span class="attr">"trace_id"</span>: <span class="string">"3ebc6f63-5093-4499-bf9b-95c239e0da4f"</span>,</span><br><span class="line">    <span class="attr">"data"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"id"</span>: <span class="string">"a54609c6-13e2-4176-be0f-4d7eebc68e1f"</span>,</span><br><span class="line">            <span class="attr">"title"</span>: <span class="string">"Woke up with the sun in my eyes"</span>,</span><br><span class="line">            <span class="attr">"image_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/image/a54609c6-13e2-4176-be0f-4d7eebc68e1f.jpg"</span>,</span><br><span class="line">            <span class="attr">"lyric"</span>: <span class="string">"[Verse]\\nWoke up with the sun in my eyes\\nNo clouds above just blue in the skies\\nShoes on my feet I’m ready to run\\nEvery step feels like a loaded gun\\n[Chorus]\\nHappy days are rolling in\\nLet the joy beneath my skin\\nNo more shadows no more lies\\nJust the truth that lifts me high\\n[Verse 2]\\nDancing through the city streets\\nA rhythm pounding in my heartbeat\\nStrangers smile it’s catching on\\nThis world’s a stage we’re all a song\\n[Chorus]\\nHappy days are rolling in\\nLet the joy beneath my skin\\nNo more shadows no more lies\\nJust the truth that lifts me high\\n[Bridge]\\nThrow your worries out the door\\nLet them sink to the ocean floor\\nWe’re alive and it’s enough\\nLife is messy but it’s love\\n[Chorus]\\nHappy days are rolling in\\nLet the joy beneath my skin\\nNo more shadows no more lies\\nJust the truth that lifts me high"</span>,</span><br><span class="line">            <span class="attr">"audio_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/audio/a54609c6-13e2-4176-be0f-4d7eebc68e1f.m4a"</span>,</span><br><span class="line">            <span class="attr">"video_url"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"image_id"</span>: <span class="string">"a54609c6-13e2-4176-be0f-4d7eebc68e1f"</span>,</span><br><span class="line">            <span class="attr">"topic"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"seed"</span>: <span class="string">"14887454"</span>,</span><br><span class="line">            <span class="attr">"sound"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"created_at"</span>: <span class="string">"2025-12-30T18:01:19.907443Z"</span>,</span><br><span class="line">            <span class="attr">"model"</span>: <span class="string">"FUZZ-2.0 Pro"</span>,</span><br><span class="line">            <span class="attr">"progress"</span>: <span class="string">"100%"</span>,</span><br><span class="line">            <span class="attr">"state"</span>: <span class="string">"succeeded"</span>,</span><br><span class="line">            <span class="attr">"duration"</span>: <span class="string">"174.6140589569161"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="伴奏翻版"><a href="#伴奏翻版" class="headerlink" title="伴奏翻版"></a>伴奏翻版</h2>
+                <p>如果想使用官方的伴奏翻版操作，可以将<code>action</code>参数值设为：<code>swap_instrumentals</code>，接下来我们要根据歌词、标题自定义生成歌曲。</p>
+                <p>填写样例如下：</p>
+                <p><img src="https://cdn.acedata.cloud/7l6976.png" width="500" class="m-auto"></p>
+                <p>填写完毕之后自动生成了代码如下：</p>
+                <p><img src="https://cdn.acedata.cloud/pvi2n3.png" width="500" class="m-auto"></p>
+                <p>对应的代码：</p>
+                <figure class="highlight shell">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -X POST 'https://api.acedata.cloud/producer/audios' \</span><br><span class="line">-H 'accept: application/json' \</span><br><span class="line">-H 'authorization: Bearer &#123;token&#125;' \</span><br><span class="line">-H 'content-type: application/json' \</span><br><span class="line">-d '&#123;</span><br><span class="line">  "action": "swap_instrumentals",</span><br><span class="line">  "model": "FUZZ-2.0 Pro",</span><br><span class="line">  "weirdness": 0.6,</span><br><span class="line">  "prompt": "Happy",</span><br><span class="line">  "audio_id": "d9ebc609-fb65-4a23-b914-c074747af6a4"</span><br><span class="line">&#125;'</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>测试允许，生成的效果是类似的。</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"d17d8376-3a58-451d-a976-404719bac11d"</span>,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"ab596807-910a-4e30-bae2-4647895f7d0b"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"22d7d75c-9e0a-47a8-b22b-eea55eaa0c4b"</span>,</span><br><span class="line">      <span class="attr">"title"</span>: <span class="string">"Extend (Sound swap)"</span>,</span><br><span class="line">      <span class="attr">"image_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/image/22d7d75c-9e0a-47a8-b22b-eea55eaa0c4b.jpg"</span>,</span><br><span class="line">      <span class="attr">"lyric"</span>: <span class="string">"[Verse]\nWoke up with the sun in my eyes\nNo clouds above just blue in the skies\nShoes on my feet I’m ready to run\nEvery step feels like a loaded gun\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Verse 2]\nDancing through the city streets\nA rhythm pounding in my heartbeat\nStrangers smile it’s catching on\nThis world’s a stage we’re all a song\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Bridge]\nThrow your worries out the door\nLet them sink to the ocean floor\nWe’re alive and it’s enough\nLife is messy but it’s love\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high"</span>,</span><br><span class="line">      <span class="attr">"audio_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/audio/22d7d75c-9e0a-47a8-b22b-eea55eaa0c4b.m4a"</span>,</span><br><span class="line">      <span class="attr">"video_url"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"image_id"</span>: <span class="string">"22d7d75c-9e0a-47a8-b22b-eea55eaa0c4b"</span>,</span><br><span class="line">      <span class="attr">"topic"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"seed"</span>: <span class="string">"2157878068"</span>,</span><br><span class="line">      <span class="attr">"sound"</span>: <span class="string">"Happy"</span>,</span><br><span class="line">      <span class="attr">"created_at"</span>: <span class="string">"2025-12-30T18:09:49.594800Z"</span>,</span><br><span class="line">      <span class="attr">"model"</span>: <span class="string">"FUZZ-2.0 Pro"</span>,</span><br><span class="line">      <span class="attr">"progress"</span>: <span class="string">"100%"</span>,</span><br><span class="line">      <span class="attr">"state"</span>: <span class="string">"succeeded"</span>,</span><br><span class="line">      <span class="attr">"duration"</span>: <span class="string">"172.3849433106576"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="人声翻版"><a href="#人声翻版" class="headerlink" title="人声翻版"></a>人声翻版</h2>
+                <p>如果想使用官方的人声翻版操作，可以将<code>action</code>参数值设为：<code>swap_vocals</code>，接下来我们要根据歌词、标题、风格自定义生成歌曲。</p>
+                <p>填写样例如下：</p>
+                <p><img src="https://cdn.acedata.cloud/bk9ino.png" width="500" class="m-auto"></p>
+                <p>填写完毕之后自动生成了代码如下：</p>
+                <p><img src="https://cdn.acedata.cloud/p5b1vg.png" width="500" class="m-auto"></p>
+                <p>对应的代码：</p>
+                <figure class="highlight shell">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -X POST 'https://api.acedata.cloud/producer/audios' \</span><br><span class="line">-H 'accept: application/json' \</span><br><span class="line">-H 'authorization: Bearer &#123;token&#125;' \</span><br><span class="line">-H 'content-type: application/json' \</span><br><span class="line">-d '&#123;</span><br><span class="line">  "action": "swap_vocals",</span><br><span class="line">  "model": "FUZZ-2.0 Pro",</span><br><span class="line">  "instrumental": false,</span><br><span class="line">  "lyric": "[Verse]\nWoke up with the sun in my eyes\nNo clouds above just blue in the skies\nShoes on my feet I’m ready to run\nEvery step feels like a loaded gun\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Verse 2]\nDancing through the city streets\nA rhythm pounding in my heartbeat\nStrangers smile it’s catching on\nThis world’s a stage we’re all a song\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Bridge]\nThrow your worries out the door\nLet them sink to the ocean floor\nWe’re alive and it’s enough\nLife is messy but it’s love\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high",</span><br><span class="line">  "weirdness": 0.6,</span><br><span class="line">  "lyrics_strength": 0.8,</span><br><span class="line">  "audio_id": "d9ebc609-fb65-4a23-b914-c074747af6a4",</span><br><span class="line">  "custom": true</span><br><span class="line">&#125;'</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>测试允许，生成的效果是类似的。</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"a903ac38-f129-4f85-9181-b1dc5579bd32"</span>,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"9953af52-45e0-4808-bf13-88f0b21262c1"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"7b2d653b-aaaa-41b0-b737-aee4c4c5693b"</span>,</span><br><span class="line">      <span class="attr">"title"</span>: <span class="string">"Woke up with the sun in my eyes"</span>,</span><br><span class="line">      <span class="attr">"image_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/image/7b2d653b-aaaa-41b0-b737-aee4c4c5693b.jpg"</span>,</span><br><span class="line">      <span class="attr">"lyric"</span>: <span class="string">"[Verse]\nWoke up with the sun in my eyes\nNo clouds above just blue in the skies\nShoes on my feet I’m ready to run\nEvery step feels like a loaded gun\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Verse 2]\nDancing through the city streets\nA rhythm pounding in my heartbeat\nStrangers smile it’s catching on\nThis world’s a stage we’re all a song\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Bridge]\nThrow your worries out the door\nLet them sink to the ocean floor\nWe’re alive and it’s enough\nLife is messy but it’s love\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high"</span>,</span><br><span class="line">      <span class="attr">"audio_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/7ce2b11a-179f-4b87-b5ff-397613c62c93/audio/7b2d653b-aaaa-41b0-b737-aee4c4c5693b.m4a"</span>,</span><br><span class="line">      <span class="attr">"video_url"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"image_id"</span>: <span class="string">"7b2d653b-aaaa-41b0-b737-aee4c4c5693b"</span>,</span><br><span class="line">      <span class="attr">"topic"</span>: <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">"seed"</span>: <span class="string">"2484735707"</span>,</span><br><span class="line">      <span class="attr">"sound"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"created_at"</span>: <span class="string">"2025-12-30T18:13:01.349875Z"</span>,</span><br><span class="line">      <span class="attr">"model"</span>: <span class="string">"FUZZ-2.0 Pro"</span>,</span><br><span class="line">      <span class="attr">"progress"</span>: <span class="string">"100%"</span>,</span><br><span class="line">      <span class="attr">"state"</span>: <span class="string">"succeeded"</span>,</span><br><span class="line">      <span class="attr">"duration"</span>: <span class="string">"173.12798185941043"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="词曲分离"><a href="#词曲分离" class="headerlink" title="词曲分离"></a>词曲分离</h2>
+                <p>如果想使用官方的词曲分离操作，可以将<code>action</code>参数值设为：<code>stems</code>，接下来我们要根据歌曲ID进行词曲分离。</p>
+                <p>填写样例如下：</p>
+                <p><img src="https://cdn.acedata.cloud/fnpgvc.png" width="500" class="m-auto"></p>
+                <p>填写完毕之后自动生成了代码如下：</p>
+                <p><img src="https://cdn.acedata.cloud/oq5iv5.png" width="500" class="m-auto"></p>
+                <p>对应的代码：</p>
+                <figure class="highlight shell">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -X POST 'https://api.acedata.cloud/producer/audios' \</span><br><span class="line">-H 'accept: application/json' \</span><br><span class="line">-H 'authorization: Bearer &#123;token&#125;' \</span><br><span class="line">-H 'content-type: application/json' \</span><br><span class="line">-d '&#123;</span><br><span class="line">  "action": "stems",</span><br><span class="line">  "audio_id": "a54609c6-13e2-4176-be0f-4d7eebc68e1f"</span><br><span class="line">&#125;'</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>测试允许，生成的效果是类似的。</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"task_id"</span>: <span class="string">"561ac695-b4aa-47cf-978d-fb7be2b9ebfc"</span>,</span><br><span class="line">    <span class="attr">"trace_id"</span>: <span class="string">"66d0d397-2987-4bde-84fb-a60d0023b217"</span>,</span><br><span class="line">    <span class="attr">"data"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"title"</span>: <span class="string">"Woke up with the sun in my eyes"</span>,</span><br><span class="line">            <span class="attr">"lyric"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"stems_url"</span>: <span class="string">"https://platform.cdn.acedata.cloud/producer/561ac695-b4aa-47cf-978d-fb7be2b9ebfc.zip"</span>,</span><br><span class="line">            <span class="attr">"model"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"progress"</span>: <span class="string">"100%"</span>,</span><br><span class="line">            <span class="attr">"state"</span>: <span class="string">"succeeded"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="异步回调"><a href="#异步回调" class="headerlink" title="异步回调"></a>异步回调</h2>
+                <p>由于 Producer Audios Generation API 生成的时间有时候会相对较长，如果 API 长时间无响应，HTTP 请求会一直保持连接，导致额外的系统资源消耗，所以本 API 也提供了异步回调的支持。</p>
+                <p>整体流程是：客户端发起请求的时候，额外指定一个 <code>callback_url</code> 字段，客户端发起 API 请求之后，API 会立马返回一个结果，包含一个 <code>task_id</code> 的字段信息，代表当前的任务 ID。当任务完成之后，生成任务的结果会通过 POST JSON 的形式发送到客户端指定的 <code>callback_url</code>，其中也包括了 <code>task_id</code> 字段，这样任务结果就可以通过 ID 关联起来了。</p>
+                <p>下面我们通过示例来了解下具体怎样操作。</p>
+                <p>首先，Webhook 回调是一个可以接收 HTTP 请求的服务，开发者应该替换为自己搭建的 HTTP 服务器的 URL。此处为了方便演示，使用一个公开的 Webhook 样例网站 <a href="https://webhook.site/" target="_blank" rel="noopener">https://webhook.site/</a>，打开该网站即可得到一个 Webhook URL，如图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/tbcnai.png" alt=""></p>
+                <p>将此 URL 复制下来，就可以作为 Webhook 来使用，此处的样例为 <a href="https://webhook.site/#!/view/0d73431d-f833-4be4-9276-b6e1690d55c1" target="_blank" rel="noopener">https://webhook.site/#!/view/0d73431d-f833-4be4-9276-b6e1690d55c1</a>。</p>
+                <p>接下来，我们可以设置字段 <code>callback_url</code> 为上述 Webhook URL，同时填入相应的参数，具体的内容如图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/wuzd4y.png" width="500" class="m-auto"></p>
+                <p>点击运行，可以发现会立即得到一个结果，如下：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"1a6ac2ad-10f2-4e2b-b500-66ec27fe82ad"</span></span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>稍等片刻，我们可以在 <a href="https://webhook.site/#!/view/0d73431d-f833-4be4-9276-b6e1690d55c1" target="_blank" rel="noopener">https://webhook.site/#!/view/0d73431d-f833-4be4-9276-b6e1690d55c1</a> 上观察到生成任务的结果，如图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/k0kf0y.png" alt=""></p>
+                <p>内容如下：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"task_id"</span>: <span class="string">"1a6ac2ad-10f2-4e2b-b500-66ec27fe82ad"</span>,</span><br><span class="line">    <span class="attr">"trace_id"</span>: <span class="string">"1da03537-4eb8-410d-b849-43f03085a3bb"</span>,</span><br><span class="line">    <span class="attr">"data"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"id"</span>: <span class="string">"1dd08826-478e-43a6-868f-aff5ababac2c"</span>,</span><br><span class="line">            <span class="attr">"title"</span>: <span class="string">"Woke up with the sun in my eyes"</span>,</span><br><span class="line">            <span class="attr">"image_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/3bff6223-fe13-4bef-973e-2cbaef430d5d/image/1dd08826-478e-43a6-868f-aff5ababac2c.jpg"</span>,</span><br><span class="line">            <span class="attr">"lyric"</span>: <span class="string">"[Verse]\nWoke up with the sun in my eyes\nNo clouds above just blue in the skies\nShoes on my feet I’m ready to run\nEvery step feels like a loaded gun\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Verse 2]\nDancing through the city streets\nA rhythm pounding in my heartbeat\nStrangers smile it’s catching on\nThis world’s a stage we’re all a song\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high\n[Bridge]\nThrow your worries out the door\nLet them sink to the ocean floor\nWe’re alive and it’s enough\nLife is messy but it’s love\n[Chorus]\nHappy days are rolling in\nLet the joy beneath my skin\nNo more shadows no more lies\nJust the truth that lifts me high"</span>,</span><br><span class="line">            <span class="attr">"audio_url"</span>: <span class="string">"https://storage.googleapis.com/corpusant-app-public/riffs/3bff6223-fe13-4bef-973e-2cbaef430d5d/audio/1dd08826-478e-43a6-868f-aff5ababac2c.m4a"</span>,</span><br><span class="line">            <span class="attr">"video_url"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"image_id"</span>: <span class="string">"1dd08826-478e-43a6-868f-aff5ababac2c"</span>,</span><br><span class="line">            <span class="attr">"topic"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"seed"</span>: <span class="string">"1490770667"</span>,</span><br><span class="line">            <span class="attr">"sound"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"created_at"</span>: <span class="string">"2025-12-30T18:36:00.994141Z"</span>,</span><br><span class="line">            <span class="attr">"model"</span>: <span class="string">"FUZZ-2.0 Pro"</span>,</span><br><span class="line">            <span class="attr">"progress"</span>: <span class="string">"100%"</span>,</span><br><span class="line">            <span class="attr">"state"</span>: <span class="string">"succeeded"</span>,</span><br><span class="line">            <span class="attr">"duration"</span>: <span class="string">"135.2330158730159"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到结果中有一个 <code>task_id</code> 字段，其他的字段都和上文类似，通过该字段即可实现任务的关联。</p>
+                <h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2>
+                <p>在调用 API 时，如果遇到错误，API 会返回相应的错误代码和信息。例如：</p>
+                <ul>
+                  <li><code>400 token_mismatched</code>：Bad request, possibly due to missing or invalid parameters.</li>
+                  <li><code>400 api_not_implemented</code>：Bad request, possibly due to missing or invalid parameters.</li>
+                  <li><code>401 invalid_token</code>：Unauthorized, invalid or missing authorization token.</li>
+                  <li><code>429 too_many_requests</code>：Too many requests, you have exceeded the rate limit.</li>
+                  <li><code>500 api_error</code>：Internal server error, something went wrong on the server.</li>
+                </ul>
+                <h3 id="错误响应示例"><a href="#错误响应示例" class="headerlink" title="错误响应示例"></a>错误响应示例</h3>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"error"</span>: &#123;</span><br><span class="line">    <span class="attr">"code"</span>: <span class="string">"api_error"</span>,</span><br><span class="line">    <span class="attr">"message"</span>: <span class="string">"fetch failed"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"2cf86e86-22a4-46e1-ac2f-032c0f2a4e89"</span></span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2>
+                <p>通过本文档，您已经了解了如何使用 Producer Audios Generation API 可通过输入提示词来生成音乐。希望本文档能帮助您更好地对接和使用该 API。如有任何问题，请随时联系我们的技术支持团队。</p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/42378.html" rel="bookmark">Producer Audios Generation API 对接说明</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/Producer/" rel="tag"><i class="fa fa-tag"></i> Producer</a>
+                  <a href="/tags/Audios/" rel="tag"><i class="fa fa-tag"></i> Audios</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/42392.html" rel="prev" title="SeeDance Videos Generation API 对接说明">
+                      <i class="fa fa-chevron-left"></i> SeeDance Videos Generation API 对接说明 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/42394.html" rel="next" title="SeeDance Videos Generation API 对接说明"> SeeDance Videos Generation API 对接说明 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#申请流程"><span class="nav-number">1.</span> <span class="nav-text">申请流程</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#基本使用"><span class="nav-number">2.</span> <span class="nav-text">基本使用</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#自定义生成"><span class="nav-number">3.</span> <span class="nav-text">自定义生成</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#翻唱歌曲"><span class="nav-number">4.</span> <span class="nav-text">翻唱歌曲</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#续写歌曲"><span class="nav-number">5.</span> <span class="nav-text">续写歌曲</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#音乐变换"><span class="nav-number">6.</span> <span class="nav-text">音乐变换</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#替换片段"><span class="nav-number">7.</span> <span class="nav-text">替换片段</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#伴奏翻版"><span class="nav-number">8.</span> <span class="nav-text">伴奏翻版</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#人声翻版"><span class="nav-number">9.</span> <span class="nav-text">人声翻版</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#词曲分离"><span class="nav-number">10.</span> <span class="nav-text">词曲分离</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#异步回调"><span class="nav-number">11.</span> <span class="nav-text">异步回调</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#错误处理"><span class="nav-number">12.</span> <span class="nav-text">错误处理</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#错误响应示例"><span class="nav-number">12.1.</span> <span class="nav-text">错误响应示例</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">13.</span> <span class="nav-text">结论</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '6ddb0793de27600dca4a16743acc2b1b',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="2018 年 12 月 11 日 入口页面多了一个连接 早期图片 更新了处理过后的代码（删掉了早期图片的 URL，大家可以自己尝试下载这个页面下的所有套图） 2017 年 8 月 30 日：mzitu.com 更新了防盗链导致下载图片全部失效，已更新处理办法： scrapy 版本也已更新  2017 年 4 月 24 日：用 scrapy 重写了一个 mzitu 的全站爬虫： 小白进阶之 Scra">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="小白爬虫第一弹之抓取妹子图">
+  <meta property="og:url" content="https://cuiqingcai.com/3179.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="2018 年 12 月 11 日 入口页面多了一个连接 早期图片 更新了处理过后的代码（删掉了早期图片的 URL，大家可以自己尝试下载这个页面下的所有套图） 2017 年 8 月 30 日：mzitu.com 更新了防盗链导致下载图片全部失效，已更新处理办法： scrapy 版本也已更新  2017 年 4 月 24 日：用 scrapy 重写了一个 mzitu 的全站爬虫： 小白进阶之 Scra">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/mz01.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161021223818.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161021224219.gif">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161021224731.gif">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/9555112-300x212.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161021230903.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161022193315.gif">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161021230903.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161022200505.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161022200031.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ20161029-1-1024x354.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161023150410-1024x537.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161024203912-1024x559.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161024205256-1024x559.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E5%9B%BE%E7%89%8720161025222942-1024x559.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161025224053-1024x615.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161025224601-1024x604.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161028113340-1024x341.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161028113957-1024x392.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161028114348-1024x454.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161028150438.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161028152315.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161028164035-1024x580.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161028194230.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161028195338-1024x405.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161028200330.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161028205004.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161028215007-1024x646.png">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ%E6%88%AA%E5%9B%BE20161028220006.png">
+  <meta property="article:published_time" content="2016-10-28T14:01:28.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.319Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/mz01.png">
+  <link rel="canonical" href="https://cuiqingcai.com/3179.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>小白爬虫第一弹之抓取妹子图 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/3179.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 小白爬虫第一弹之抓取妹子图 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/哎哟卧槽" class="author" itemprop="url" rel="index">哎哟卧槽</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2016-10-28 22:01:28" itemprop="dateCreated datePublished" datetime="2016-10-28T22:01:28+08:00">2016-10-28</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/3179.html" class="post-meta-item leancloud_visitors" data-flag-title="小白爬虫第一弹之抓取妹子图" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>15k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>14 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>2018 年 12 月 11 日 入口页面多了一个连接 早期图片 更新了处理过后的代码（删掉了早期图片的 URL，大家可以自己尝试下载这个页面下的所有套图） 2017 年 8 月 30 日：mzitu.com 更新了防盗链导致下载图片全部失效，已更新处理办法： scrapy 版本也已更新 <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/mz01.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/mz01.png" alt=""></a> 2017 年 4 月 24 日：用 scrapy 重写了一个 mzitu 的全站爬虫： <a href="http://cuiqingcai.com/4421.html">小白进阶之 Scrapy 第四篇（图片下载管道篇）</a> 2017 年 3 月 31 号 更新 <a href="http://www.mzitu.com/all" target="_blank" rel="noopener">http://www.mzitu.com/all</a> 这个地址已经被站长屏蔽了。下面的代码没法使了哦！仅提供学习方法。 <strong>PS：更改了一个新手比较难理解的坑（切换目录的问题），大陆之外的小伙伴儿 需要翻墙，mzitu.com 对大陆之外好像不可访问。倒数第四个代码块儿是 没有函数的脚本写法，看函数有困难的小伙伴儿，可以先看看这个。</strong> 这是一篇完全给新手写的爬虫教程、也是我第一次写博文···也不知道怎么写（我也是个菜鸟啊！各路大神拍砖轻点儿啊！）<a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021223818.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021223818.jpg" alt="QQ图片20161021223818"></a>由于经常在群里装逼加上群主懒啊（你看有多久没更新文章就知道了），让我来一篇爬虫的教程。<a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021224219.gif" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021224219.gif" alt="QQ图片20161021224219"></a>如此装逼机会怎么能错过，今天我来给大家来一篇基础爬虫教程。 你要问目标是啥？ 要知道 XX 才是学习最大的动力啊！所以目标就是 <a href="http://www.mzitu.com" target="_blank" rel="noopener">mzitu.com</a> , <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021224731.gif" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021224731.gif" alt="QQ图片20161021224731"></a>（废话真多还不开始） ， 下面请各位跟我的教程一步一步走，喂！！说的就是你啊！别看着了，照着教程做啊！<a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/9555112.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/9555112-300x212.jpg" alt="9555112"></a> <strong>1、基础环境部分：</strong> 工欲其事必先利器，要想把心爱的妹子搬进你的给她准备的房子，总得有几把斧子才行啊！下面这就是几把斧子！ <strong>1.1：Python 基础运行环境：本篇教程采用 Python3 来写，所以你需要给你的电脑装上 Python3 才行，我就说说 Windows 的环境（会玩 Linux 的各位应该不需要我多此一举了）。</strong> <strong>anaconda （<a href="https://www.continuum.io/downloads" target="_blank" rel="noopener">点我下载</a>）（这是一个 Python 的科学计算发行版本，作者打包好多好多的包， <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021230903.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021230903.jpg" alt="QQ图片20161021230903"></a>不知道干啥的没关系，你只需要知道拥有它之后，那些 Windows 下 pip 安装包报错的问题将不复存在）</strong> 下载不顺利的同学我已经传到百度云了：<a href="http://pan.baidu.com/s/1boAYaTL" target="_blank" rel="noopener">http://pan.baidu.com/s/1boAYaTL</a> <strong>1.2：Requests</strong> urllib 的升级版本打包了全部功能并简化了使用方法（<a href="http://docs.python-requests.org/zh_CN/latest/user/quickstart.html" target="_blank" rel="noopener">点我查看官方文档</a>） <strong>1.3： beautifulsoup</strong> 是一个可以从 HTML 或 XML 文件中提取数据的 Python 库.它能够通过你喜欢的转换器实现惯用的文档导航,查找,修改文档的方式.（<a href="http://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#" target="_blank" rel="noopener">点我查看官方文档</a>）（<a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161022193315.gif" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161022193315.gif" alt="QQ图片20161022193315"></a>作为一个菜鸟就别去装逼用 正则表达式了，匹配不到想要的内容，容易打击积极性。老老实实的用<strong>beautifulsoup</strong> 吧！虽然性能差了点、但是你会爱上它的。） <strong>1.4：LXML</strong> 一个 HTML 解析包 用于辅助 beautifulsoup 解析网页（如果你不用 anaconda，你会发现这个包在 Windows 下 pip 安装报错，<a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021230903.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161021230903.jpg" alt="QQ图片20161021230903"></a>用了就不会啦。）。 上面的模块需要 单独安装，下面几个就不用啦。 <strong>1.5： OS</strong> 系统内置模块 下面是ＩＤＥ　你喜欢用什么就用什么啦！ <strong>1.6： PyCharm</strong> 一个草鸡好用的 PythonIDE 工具 、真滴！草鸡好用··（<a href="https://www.jetbrains.com/pycharm/download/" target="_blank" rel="noopener">我是下载地址</a>）试用三十天 足够完成这个小爬虫啦。（如果你电脑已经存在 Python 环境 又需要使用 anaconda 的话，请按照下面的图设置一下哦！） <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161022200505.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161022200505.png" alt="QQ图片20161022200505"></a> 好啦、下面开始安装需要的模块。 因为我安装的是<strong>anaconda</strong>这个科学计算的发行版，安装方式是酱紫滴：conda install 包名（当然 pip install 包名也是可以的哦！）</p>
+                <figure class="highlight mipsasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">conda <span class="keyword">install </span>requests</span><br><span class="line">conda <span class="keyword">install </span><span class="keyword">beautifulsoup4</span></span><br><span class="line"><span class="keyword">conda </span><span class="keyword">install </span>lxml</span><br><span class="line">或者</span><br><span class="line">pip <span class="keyword">install </span>requests</span><br><span class="line">pip <span class="keyword">install </span><span class="keyword">beautifulsoup4</span></span><br><span class="line"><span class="keyword">pip </span><span class="keyword">install </span>lxml</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p><a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161022200031.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161022200031.png" alt="QQ图片20161022200031"></a> 大概界面就是上面的样子了。其余类似安装即可，好啦 下面开始正题了 首先我们打开 PyCharm 新建一个 Python 文件，写入以下代码（喂喂！不要复制哦 自己敲一遍 印象更佳啦。）</p>
+                <figure class="highlight clean">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> requests ##导入requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup ##导入bs4中的BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> os</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>好啦！准备工作完了、 我们来开始让妹子到碗里来吧ヽ(●-`Д´-)ノ 一个简单爬虫的诞生大慨需要下面几个步骤。（我知道图很简陋、请务必不要吐槽） <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ20161029-1.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ20161029-1-1024x354.png" alt="QQ20161029-1"></a></p>
+                <ul>
+                  <li>爬虫入口：顾名思义我需要程序从什么地方开始获取网页</li>
+                  <li>存储数据：如果获取的网页有你需要的内容则取出数据保存</li>
+                  <li>找到资料所在的地址：如果你你获取到的网页没有你需要的数据、但是有前往该数据页面的地址 URL、则获取这个地址 URL，再获取该 URL 的页面内容（也就等于当作爬虫入口了）</li>
+                </ul>
+                <p>好啦！图很简陋、将就着看看，现在来开始看看网页找一个爬虫入口（开始爬取的页面） <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161023150410.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161023150410-1024x537.png" alt="QQ截图20161023150410"></a> 良心站长啊！居然有一个页面有整站所有的数据地址是<strong><a href="http://www.mzitu.com/all" target="_blank" rel="noopener">http://www.mzitu.com/all</a></strong> 我们就以这个页面开始爬取（PS：真良心站长） 下面是我们的第一段代码：用作获取<a href="http://www.mzitu.com/all这个页面。" target="_blank" rel="noopener">http://www.mzitu.com/all这个页面。</a></p>
+                <figure class="highlight clean">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> requests ##导入requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup ##导入bs4中的BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>:<span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"</span>&#125;##浏览器请求头（大部分网站没有这个请求头会报错、请务必加上哦）</span><br><span class="line">all_url = <span class="string">'http://www.mzitu.com/all'</span>  ##开始的URL地址</span><br><span class="line">start_html = requests.get(all_url,  headers=headers)  ##使用requests中的get方法来获取all_url(就是：http:<span class="comment">//www.mzitu.com/all这个地址)的内容 headers为上面设置的请求头、请务必参考requests官方文档解释</span></span><br><span class="line">print(start_html.text) ##打印出start_html (请注意，concent是二进制的数据，一般用于下载图片、视频、音频、等多媒体内容是才使用concent, 对于打印网页内容请使用text)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>PS: 如果对 requests.get(all_url, headers=headers)感到不解的各位，请务必去再看一遍官方文档哦（解释得很清楚呢） 你在你的 IDE 中运行的时候会打印出下面的内容： <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161024203912.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161024203912-1024x559.png" alt="QQ截图20161024203912"></a> 第一段部分完成啦！！是不感觉超简单！！！！看懂没？没看懂继续瞅瞅、对于看懂的各位小哥儿（妹儿）我只想说··· 小哥儿（妹儿）！你老牛逼了！！ 没看懂？报错？没关系！看见屏幕右边那个群号没？加它！热心的群友会为你耐心解答滴············ 好啦！第一部分获取网页的部分完成啦！我们来开始第二部分提取我们想要的内容吧！！ 在 Chrome 中打开我们第一部分请求的网址：<a href="http://www.mzitu.com/all" target="_blank" rel="noopener">http://www.mzitu.com/all</a> 、 按下 F12 调出 Chrome 的开发者调试工具（不熟练的同学一定要去了解一下哦！爬虫中绝大部分工作要靠这个来完成呢！是必备技能哦！） 是这样： <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161024205256.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161024205256-1024x559.png" alt="QQ截图20161024205256"></a> 看见图中那句话没？没看见？仔细看看那可是我们必须要使用的工具哦！！好啦下面我们看看使用方法 <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161025222942.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ图片20161025222942-1024x559.png" alt="QQ图片20161025222942"></a> 好啦、我们就是通过这种方法来找到我们需要的数据在那一个标签里面的、方便后面提取出来啦！（实例很简陋 看不懂的童鞋百度一下啦！教程很多的） 你会发现这个页面并没有我们需要的图片地址啊！没有那么怎么办呢？上面那张超级简陋的流程图看了嘛？没看？赶快去瞅瞅·· 你就知道我们该干啥啦！ 嗯，我们需要找到图片地址所在的页面！ <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161025224053.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161025224053-1024x615.png" alt="QQ截图20161025224053"></a> 观察一下网页你会发现图片页面的地址全部都在<li>...</li>标签中、（讲真！这么良心，还这么有规律的网页不多了啊！）不信啊?你展开<li>标签瞅瞅就知道啦 <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161025224601.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161025224601-1024x604.png" alt="QQ截图20161025224601"></a> 点开
+                  <li>标签你会发现图片<strong>页面的地址</strong>在<a>标签的 href 属性中、<strong>主题</strong>在<a>标签中（搞不清楚的这两个的区别的同学、去了解一下 html 的基础啦！） 实现逻辑就是：先找到页面中的全部
+                  <li>标签、然后提取出中间<a>标签的 href 属性值与<a>标签的类容，前者我们用来继续请求 html 看看会不会有我们需要的图片下载地址，后者我们存储的时候给文件夹命名使用。 可能有小哥儿（妹儿）会问，为什么不直接查找<a>标签？ 你观察一下网页就知道呐！还有其他地方使用了<a>标签，如果直接查找<a>标签就会多出很多我们不需要的东西，也不方便我们提取想要的东西，先查找
+                  <li>标签就是限制一下<a>标签的范围啦！ 通过上面的方法、知道了需要的数据的位置！该我们的<strong>beautifulsoup</strong>来大展身手啦！！！加上上面的一段代码现在应该是这样的啦！看不懂？没关系 看注释 看注释。
+                </p>
+                <figure class="highlight clean">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> requests ##导入requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup ##导入bs4中的BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>:<span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"</span>&#125;##浏览器请求头（大部分网站没有这个请求头会报错、请务必加上哦）</span><br><span class="line">all_url = <span class="string">'http://www.mzitu.com/all'</span>  ##开始的URL地址</span><br><span class="line">start_html = requests.get(all_url,  headers=headers)  ##使用requests中的get方法来获取all_url(就是：http:<span class="comment">//www.mzitu.com/all这个地址)的内容 headers为上面设置的请求头、请务必参考requests官方文档解释</span></span><br><span class="line">#print(start_html.text) ##打印出start_html (请注意，concent是二进制的数据，一般用于下载图片、视频、音频、等多媒体内容是才使用concent, 对于打印网页内容请使用text)</span><br><span class="line">Soup = BeautifulSoup(start_html.text, <span class="string">'lxml'</span>) ##使用BeautifulSoup来解析我们获取到的网页（‘lxml’是指定的解析器 具体请参考官方文档哦）</span><br><span class="line">li_list = Soup.find_all(<span class="string">'li'</span>) ##使用BeautifulSoup解析网页过后就可以用找标签呐！（find_all是查找指定网页内的所有标签的意思，find_all返回的是一个列表。）</span><br><span class="line">for li <span class="keyword">in</span> li_list: ##这个不解释了。看不懂的小哥儿回去瞅瞅基础教程</span><br><span class="line">    print(li) ##同上</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行一下试试！ <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028113340.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028113340-1024x341.png" alt="QQ截图20161028113340"></a> 诶！！！不对啊！！抓到了我们不需要的东西啊！！！这可怎么办啊！！ 别急 别急！我们再去看看网页的 F12 瞅瞅。 <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028113957.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028113957-1024x392.png" alt="QQ截图20161028113957"></a> 找到啦！原来有其他地方有<li>标签、观察不仔细啦！现在我们怎么办？ 我们再去 F12 瞅瞅！ <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028114348.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028114348-1024x454.png" alt="QQ截图20161028114348"></a> 哈哈！这就简单了，我们推翻上面的思路 现在我们先找到 <div class="all">这个标签 ， 然后直接找<a>标签！ 诶！不对啊！怎么直接找<a>标签了！上面的
+                  <li>标签呢！！ 你仔细瞅瞅网页！在<div class="all"></div> 这个模块里面的<a>标签的全是我们需要的东西，就不需要
+                  <li>标签来限制提取范围啦！所以就直接扔掉了不用了。也方便写代码啊。 现在我们改改上面的代码！
+                </p>
+                <figure class="highlight clean">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> requests ##导入requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup ##导入bs4中的BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>:<span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"</span>&#125;##浏览器请求头（大部分网站没有这个请求头会报错、请务必加上哦）</span><br><span class="line">all_url = <span class="string">'http://www.mzitu.com/all'</span>  ##开始的URL地址</span><br><span class="line">start_html = requests.get(all_url,  headers=headers)  ##使用requests中的get方法来获取all_url(就是：http:<span class="comment">//www.mzitu.com/all这个地址)的内容 headers为上面设置的请求头、请务必参考requests官方文档解释</span></span><br><span class="line">#print(start_html.text) ##打印出start_html (请注意，concent是二进制的数据，一般用于下载图片、视频、音频、等多媒体内容是才使用concent, 对于打印网页内容请使用text)</span><br><span class="line">Soup = BeautifulSoup(start_html.text, <span class="string">'lxml'</span>) ##使用BeautifulSoup来解析我们获取到的网页（‘lxml’是指定的解析器 具体请参考官方文档哦）</span><br><span class="line">#li_list = Soup.find_all(<span class="string">'li'</span>) ##使用BeautifulSoup解析网页过后就可以用找标签呐！（find_all是查找指定网页内的所有标签的意思，find_all返回的是一个列表。）</span><br><span class="line">#for li <span class="keyword">in</span> li_list: ##这个不解释了。看不懂的效小哥儿回去瞅瞅基础教程</span><br><span class="line">    #print(li) ##同上</span><br><span class="line">all_a = Soup.find(<span class="string">'div'</span>, class_=<span class="string">'all'</span>).find_all(<span class="string">'a'</span>) ##意思是先查找 <span class="keyword">class</span>为 all 的div标签，然后查找所有的&lt;a&gt;标签。</span><br><span class="line">for a <span class="keyword">in</span> all_a:</span><br><span class="line">    print(a)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p><strong>PS: ‘find’ 只查找给定的标签一次，就算后面还有一样的标签也不会提取出来哦！ 而 ‘find_all’ 是在页面中找出所有给定的标签！有十个给定的标签就返回十个（返回的是个 list 哦！！）,想要了解得更详细，就是看看官方文档吧！</strong> 来看看运行结果！ <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028150438.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028150438.png" alt="QQ截图20161028150438"></a> 哇哦！！全是我们需要的类容诶！什么？你的和这个不一样？或者报错了？回头看看 你做的和我有什么不一样······ 实在不行，群里求助吧！ 好啦！现在我们该来提取我们想要的内容了！又该我们 BeautifulSoup 大展身手了。 我们需要提取出<a>标签的 href 属性和文本。怎么做呢？看代码!</p>
+                <figure class="highlight clean">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> requests ##导入requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup ##导入bs4中的BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>:<span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"</span>&#125;##浏览器请求头（大部分网站没有这个请求头会报错、请务必加上哦）</span><br><span class="line">all_url = <span class="string">'http://www.mzitu.com/all'</span>  ##开始的URL地址</span><br><span class="line">start_html = requests.get(all_url,  headers=headers)  ##使用requests中的get方法来获取all_url(就是：http:<span class="comment">//www.mzitu.com/all这个地址)的内容 headers为上面设置的请求头、请务必参考requests官方文档解释</span></span><br><span class="line">#print(start_html.text) ##打印出start_html (请注意，concent是二进制的数据，一般用于下载图片、视频、音频、等多媒体内容是才使用concent, 对于打印网页内容请使用text)</span><br><span class="line">Soup = BeautifulSoup(start_html.text, <span class="string">'lxml'</span>) ##使用BeautifulSoup来解析我们获取到的网页（‘lxml’是指定的解析器 具体请参考官方文档哦）</span><br><span class="line">#li_list = Soup.find_all(<span class="string">'li'</span>) ##使用BeautifulSoup解析网页过后就可以用找标签呐！（find_all是查找指定网页内的所有标签的意思，find_all返回的是一个列表。）</span><br><span class="line">#for li <span class="keyword">in</span> li_list: ##这个不解释了。看不懂的效小哥儿回去瞅瞅基础教程</span><br><span class="line">    #print(li) ##同上</span><br><span class="line">all_a = Soup.find(<span class="string">'div'</span>, class_=<span class="string">'all'</span>).find_all(<span class="string">'a'</span>) ##意思是先查找 <span class="keyword">class</span>为 all 的div标签，然后查找所有的&lt;a&gt;标签。</span><br><span class="line"># 页面更改 多了一个早期图片 需要删掉（小伙伴们 可以自己尝试处理一下这个页面）</span><br><span class="line">all_a.pop(<span class="number">0</span>)</span><br><span class="line"># 上面是删掉列表的第一个元素</span><br><span class="line">for a <span class="keyword">in</span> all_a:</span><br><span class="line">    title = a.get_text() #取出a标签的文本</span><br><span class="line">    href = a[<span class="string">'href'</span>] #取出a标签的href 属性</span><br><span class="line">    print(title, href)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>就多了两行！很方便吧！！为什么这么写？自己去看官方文档啦！（我要全解释了，估计有些小哥儿官方文档都不会去看。这样很不好诶。） 来来！看看结果怎么样 我们来打印一下看看！ <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028152315.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028152315.png" alt="QQ截图20161028152315"></a> 哈哈 果然是我们想要的内容！我们已经找向目标前进了一半了！好啦前面已经把怎么实现的方法讲清楚了哦（如果你觉得什么地方有问题或者不清楚，在群里说说 我好改改）下面就要开始加快节奏了！！（篇幅长了 会被人骂的！） 上面我们找到了 图片的标题（暂时不管，这是后面用来创建文件夹的）和 图片页面的地址（这是我们这一步需要做的），需要做什么请参考最上面那个超简陋的流程图。 先查看一下图片页面有什么东西 你会发现一个页面只有一张图片啊！想要下载一套啊！ 你点一下面的 1 、2、3、4········ 你会发现地址栏里面的 URL 在变化啊！这就是我们的入手的地方了！ <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028164035.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028164035-1024x580.png" alt="QQ截图20161028164035"></a> 页码在<span>标签中，我们只需要获取最后一个页面的页码， 从 1 开始历遍，和我们上面获取的 URL 拼接在一起就是每张图片的页面地址啦！ 在页面的源代码搜一下<span>标签 [![QQ截图20161028191747](http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028191747-1024x554.png)](http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028191747.png) 可以发现最后一个页面的<span>标签是第二十一个标签，因为在 html 中标签是成对的，所以我需要查找的是第十一个<span>标签（BeautifulSoup 是以开始的标签定位，而不是结尾的。开始的标签是这样<>；结束的标签是这样</>） 废话不多说上代码！ <strong>PS：下面的代码我已经把注释掉的删掉了，所以看起来和上面的不太一样。</strong></p>
+                <figure class="highlight clean">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> requests ##导入requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup ##导入bs4中的BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>:<span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"</span>&#125;##浏览器请求头（大部分网站没有这个请求头会报错、请务必加上哦）</span><br><span class="line">all_url = <span class="string">'http://www.mzitu.com/all'</span>  ##开始的URL地址</span><br><span class="line">start_html = requests.get(all_url,  headers=headers)  ##使用requests中的get方法来获取all_url(就是：http:<span class="comment">//www.mzitu.com/all这个地址)的内容 headers为上面设置的请求头、请务必参考requests官方文档解释</span></span><br><span class="line">Soup = BeautifulSoup(start_html.text, <span class="string">'lxml'</span>) ##使用BeautifulSoup来解析我们获取到的网页（‘lxml’是指定的解析器 具体请参考官方文档哦）</span><br><span class="line">all_a = Soup.find(<span class="string">'div'</span>, class_=<span class="string">'all'</span>).find_all(<span class="string">'a'</span>) ##意思是先查找 <span class="keyword">class</span>为 all 的div标签，然后查找所有的&lt;a&gt;标签。</span><br><span class="line"># 页面更改 多了一个早期图片 需要删掉（小伙伴们 可以自己尝试处理一下这个页面）</span><br><span class="line">all_a.pop(<span class="number">0</span>)</span><br><span class="line"># 上面是删掉列表的第一个元素</span><br><span class="line">for a <span class="keyword">in</span> all_a:</span><br><span class="line">    title = a.get_text() #取出a标签的文本</span><br><span class="line">    href = a[<span class="string">'href'</span>] #取出a标签的href 属性</span><br><span class="line">    html = requests.get(href, headers=headers) ##上面说过了</span><br><span class="line">    html_Soup = BeautifulSoup(html.text, <span class="string">'lxml'</span>) ##上面说过了</span><br><span class="line">    max_span = html_Soup.find(<span class="string">'div'</span>, class_=<span class="string">'pagenavi'</span>).find_all(<span class="string">'span'</span>)[<span class="number">-2</span>].get_text() ##查找所有的&lt;span&gt;标签获取第十个的&lt;span&gt;标签中的文本也就是最后一个页面了。</span><br><span class="line">    for page <span class="keyword">in</span> range(<span class="number">1</span>, int(max_span)+<span class="number">1</span>): ##不知道为什么这么用的小哥儿去看看基础教程吧</span><br><span class="line">        page_url = href + <span class="string">'/'</span> + str(page) ##同上</span><br><span class="line">        print(page_url) ##这个page_url就是每张图片的页面地址啦！但还不是实际地址！</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>好啦！运行一下试试！就是下面这样: <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028194230.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028194230.png" alt="QQ截图20161028194230"></a> 完美！！每个页面的地址都出来啦！！！ 下面开始找图片的实际地址啦！ 随意打开上面的地址地用 F12 调试工具试试！ <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028195338.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028195338-1024x405.png" alt="QQ截图20161028195338"></a> 会发现我们需要的地址在
+                <div class="main-image">中的<img>标签的 src 属性中。是不是很眼熟啊！知道怎么写了吧？下面上代码：</p>
+                  <figure class="highlight clean">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre>
+                        </td>
+                        <td class="code">
+                          <pre><span class="line"><span class="keyword">import</span> requests ##导入requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup ##导入bs4中的BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>:<span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"</span>&#125;##浏览器请求头（大部分网站没有这个请求头会报错、请务必加上哦）</span><br><span class="line">all_url = <span class="string">'http://www.mzitu.com/all'</span>  ##开始的URL地址</span><br><span class="line">start_html = requests.get(all_url,  headers=headers)  ##使用requests中的get方法来获取all_url(就是：http:<span class="comment">//www.mzitu.com/all这个地址)的内容 headers为上面设置的请求头、请务必参考requests官方文档解释</span></span><br><span class="line">Soup = BeautifulSoup(start_html.text, <span class="string">'lxml'</span>) ##使用BeautifulSoup来解析我们获取到的网页（‘lxml’是指定的解析器 具体请参考官方文档哦）</span><br><span class="line">all_a = Soup.find(<span class="string">'div'</span>, class_=<span class="string">'all'</span>).find_all(<span class="string">'a'</span>) ##意思是先查找 <span class="keyword">class</span>为 all 的div标签，然后查找所有的&lt;a&gt;标签。</span><br><span class="line"># 页面更改 多了一个早期图片 需要删掉（小伙伴们 可以自己尝试处理一下这个页面）</span><br><span class="line">all_a.pop(<span class="number">0</span>)</span><br><span class="line"># 上面是删掉列表的第一个元素</span><br><span class="line">for a <span class="keyword">in</span> all_a:</span><br><span class="line">    title = a.get_text() #取出a标签的文本</span><br><span class="line">    href = a[<span class="string">'href'</span>] #取出a标签的href 属性</span><br><span class="line">    html = requests.get(href, headers=headers) ##上面说过了</span><br><span class="line">    html_Soup = BeautifulSoup(html.text, <span class="string">'lxml'</span>) ##上面说过了</span><br><span class="line">    max_span = html_Soup.find(<span class="string">'div'</span>, <span class="keyword">class</span>=<span class="string">'pagenavi'</span>).find_all(<span class="string">'span'</span>)[<span class="number">-2</span>].get_text() ##查找所有的&lt;span&gt;标签获取第十个的&lt;span&gt;标签中的文本也就是最后一个页面了。</span><br><span class="line">    for page <span class="keyword">in</span> range(<span class="number">1</span>, int(max_span)+<span class="number">1</span>): ##不知道为什么这么用的小哥儿去看看基础教程吧</span><br><span class="line">        page_url = href + <span class="string">'/'</span> + str(page) ##同上</span><br><span class="line">        img_html = requests.get(page_url, headers=headers)</span><br><span class="line">        img_Soup = BeautifulSoup(img_html.text, <span class="string">'lxml'</span>)</span><br><span class="line">        img_url = img_Soup.find(<span class="string">'div'</span>, class_=<span class="string">'main-image'</span>).find(<span class="string">'img'</span>)[<span class="string">'src'</span>] ##这三行上面都说过啦不解释了哦</span><br><span class="line">        print(img_url)</span><br></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p>运行一下 <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028200330.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028200330.png" alt="QQ截图20161028200330"></a> 完美！就是我们想要的东西，下面开始保存了哦！哈哈！妹子马上就可以到你碗里去了！ 首先我们要给每套图建一个文件夹，然后将下载的图片以 URL 的 xxxxx.jpg 中的 xxxxx 命名保存在这个文件夹里面。直接上代码了！</p>
+                  <figure class="highlight clean">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre>
+                        </td>
+                        <td class="code">
+                          <pre><span class="line"><span class="keyword">import</span> requests ##导入requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup ##导入bs4中的BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>:<span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"</span>&#125;##浏览器请求头（大部分网站没有这个请求头会报错、请务必加上哦）</span><br><span class="line">all_url = <span class="string">'http://www.mzitu.com/all'</span>  ##开始的URL地址</span><br><span class="line">start_html = requests.get(all_url,  headers=headers)  ##使用requests中的get方法来获取all_url(就是：http:<span class="comment">//www.mzitu.com/all这个地址)的内容 headers为上面设置的请求头、请务必参考requests官方文档解释</span></span><br><span class="line">Soup = BeautifulSoup(start_html.text, <span class="string">'lxml'</span>) ##使用BeautifulSoup来解析我们获取到的网页（‘lxml’是指定的解析器 具体请参考官方文档哦）</span><br><span class="line">all_a = Soup.find(<span class="string">'div'</span>, class_=<span class="string">'all'</span>).find_all(<span class="string">'a'</span>) ##意思是先查找 <span class="keyword">class</span>为 all 的div标签，然后查找所有的&lt;a&gt;标签。</span><br><span class="line"># 页面更改 多了一个早期图片 需要删掉（小伙伴们 可以自己尝试处理一下这个页面）</span><br><span class="line">all_a.pop(<span class="number">0</span>)</span><br><span class="line"># 上面是删掉列表的第一个元素</span><br><span class="line">for a <span class="keyword">in</span> all_a:</span><br><span class="line">    title = a.get_text() #取出a标签的文本</span><br><span class="line">    path = str(title).strip() ##去掉空格</span><br><span class="line">    os.makedirs(os.path.join(<span class="string">"D:\mzitu"</span>, path)) ##创建一个存放套图的文件夹</span><br><span class="line">    os.chdir(<span class="string">"D:\mzitu\\"</span>+path) ##切换到上面创建的文件夹</span><br><span class="line">    href = a[<span class="string">'href'</span>] #取出a标签的href 属性</span><br><span class="line">    html = requests.get(href, headers=headers) ##上面说过了</span><br><span class="line">    html_Soup = BeautifulSoup(html.text, <span class="string">'lxml'</span>) ##上面说过了</span><br><span class="line">    max_span = html_Soup.find(<span class="string">'div'</span>, class_=<span class="string">'pagenavi'</span>).find_all(<span class="string">'span'</span>)[<span class="number">-2</span>].get_text() ##查找所有的&lt;span&gt;标签获取第十个的&lt;span&gt;标签中的文本也就是最后一个页面了。</span><br><span class="line">    for page <span class="keyword">in</span> range(<span class="number">1</span>, int(max_span)+<span class="number">1</span>): ##不知道为什么这么用的小哥儿去看看基础教程吧</span><br><span class="line">        page_url = href + <span class="string">'/'</span> + str(page) ##同上</span><br><span class="line">        img_html = requests.get(page_url, headers=headers)</span><br><span class="line">        img_Soup = BeautifulSoup(img_html.text, <span class="string">'lxml'</span>)</span><br><span class="line">        img_url = img_Soup.find(<span class="string">'div'</span>, class_=<span class="string">'main-image'</span>).find(<span class="string">'img'</span>)[<span class="string">'src'</span>] ##这三行上面都说过啦不解释了哦</span><br><span class="line">        name = img_url[<span class="number">-9</span>:<span class="number">-4</span>] ##取URL 倒数第四至第九位 做图片的名字</span><br><span class="line">        img = requests.get(img_url, headers=headers)</span><br><span class="line">        f = open(name+<span class="string">'.jpg'</span>, <span class="string">'ab'</span>)##写入多媒体文件必须要 b 这个参数！！必须要！！</span><br><span class="line">        f.write(img.content) ##多媒体文件要是用conctent哦！</span><br><span class="line">        f.close()</span><br></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p>好了！！来运行一下 <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028205004.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028205004.png" alt="QQ截图20161028205004"></a> 哈哈哈完美！！！以上完毕！下面我们来整理一下代码，弄个函数什么的提示下逼格！加点提示什么的 首先我们上面 requests 一共使用了三次，我们写一个函数复用 （别怕！一点都不难）</p>
+                  <figure class="highlight ruby">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                        </td>
+                        <td class="code">
+                          <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">request</span><span class="params">(url)</span></span><span class="symbol">:</span></span><br><span class="line">    headers = &#123;<span class="string">'User-Agent'</span>: <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"</span>&#125;</span><br><span class="line">    content = requests.get(url, headers=headers)</span><br><span class="line">    <span class="keyword">return</span> content</span><br></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p>当调用 request 的时候会获取 URL 地址的网页然后返回获取到的 response （response 是啥？ 你理解成请求网页地址返回的源码就好了！ 注意：如果请求的是多媒体文件的话 response 返回的是二进制文件哦！） 哈哈！第一个就写好啦，简单吧！ 第二个是创建文件</p>
+                  <figure class="highlight python">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                        </td>
+                        <td class="code">
+                          <pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mkdir</span><span class="params">(self, path)</span>:</span></span><br><span class="line">        path = path.strip()</span><br><span class="line">        isExists = os.path.exists(os.path.join(<span class="string">"D:\mzitu"</span>, path))</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isExists:</span><br><span class="line">            print(<span class="string">u'建了一个名字叫做'</span>, path, <span class="string">u'的文件夹！'</span>)</span><br><span class="line">            os.makedirs(os.path.join(<span class="string">"D:\mzitu"</span>, path))</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">u'名字叫做'</span>, path, <span class="string">u'的文件夹已经存在了！'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p>调用 mkdir 这个函数时，会在 D:\mzitu 文件下创建一个 path 这个<strong>参数</strong>的文件夹（是参数 不是 path 哦！就是你调用的时候传递什么参数给这个函数 就创建什么文件夹！这个函数可以存着，下载东西到本地 都可以用），另外一个好处就是在文件夹已经存在的情况下不会报错退出程序哦！ 不使用就会诶！ 好啦 剩下的我就一股脑的写出来了！ <strong>PS: 感谢<a href="http://weibo.com/nenyah" target="_blank" rel="noopener">Lucibriel</a>的提醒！（因为我的程序就在 D 盘，所以疏忽了 程序没在 D 盘 os.chdir() 不能切换目录的问题、已经就改过来了；非常抱歉。）</strong></p>
+                  <figure class="highlight python">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre>
+                        </td>
+                        <td class="code">
+                          <pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mzitu</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.headers = &#123;<span class="string">'User-Agent'</span>: <span class="string">"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"</span>&#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">all_url</span><span class="params">(self, url)</span>:</span></span><br><span class="line">        html = self.request(url)<span class="comment">##调用request函数把套图地址传进去会返回给我们一个response</span></span><br><span class="line">        all_a = BeautifulSoup(html.text, <span class="string">'lxml'</span>).find(<span class="string">'div'</span>, class_=<span class="string">'all'</span>).find_all(<span class="string">'a'</span>)</span><br><span class="line">        <span class="comment"># 页面更改 多了一个早期图片 需要删掉（小伙伴们 可以自己尝试处理一下这个页面）</span></span><br><span class="line">        all_a.pop(<span class="number">0</span>)</span><br><span class="line">        <span class="comment"># 上面是删掉列表的第一个元素</span></span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> all_a:</span><br><span class="line">            title = a.get_text()</span><br><span class="line">            print(<span class="string">u'开始保存：'</span>, title) <span class="comment">##加点提示不然太枯燥了</span></span><br><span class="line">            path = str(title).replace(<span class="string">"?"</span>, <span class="string">'_'</span>) <span class="comment">##我注意到有个标题带有 ？  这个符号Windows系统是不能创建文件夹的所以要替换掉</span></span><br><span class="line">            self.mkdir(path) <span class="comment">##调用mkdir函数创建文件夹！这儿path代表的是标题title哦！！！！！不要糊涂了哦！</span></span><br><span class="line">            href = a[<span class="string">'href'</span>]</span><br><span class="line">            self.html(href) <span class="comment">##调用html函数把href参数传递过去！href是啥还记的吧？ 就是套图的地址哦！！不要迷糊了哦！</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">html</span><span class="params">(self, href)</span>:</span>   <span class="comment">##这个函数是处理套图地址获得图片的页面地址</span></span><br><span class="line">        html = self.request(href)</span><br><span class="line">        self.headers[<span class="string">'referer'</span>] = href</span><br><span class="line">        max_span = BeautifulSoup(html.text, <span class="string">'lxml'</span>).find(<span class="string">'div'</span>, class_=<span class="string">'pagenavi'</span>).find_all(<span class="string">'span'</span>)[<span class="number">-2</span>].get_text()</span><br><span class="line">        <span class="keyword">for</span> page <span class="keyword">in</span> range(<span class="number">1</span>, int(max_span) + <span class="number">1</span>):</span><br><span class="line">            page_url = href + <span class="string">'/'</span> + str(page)</span><br><span class="line">            self.img(page_url) <span class="comment">##调用img函数</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">img</span><span class="params">(self, page_url)</span>:</span> <span class="comment">##这个函数处理图片页面地址获得图片的实际地址</span></span><br><span class="line">        img_html = self.request(page_url)</span><br><span class="line">        img_url = BeautifulSoup(img_html.text, <span class="string">'lxml'</span>).find(<span class="string">'div'</span>, class_=<span class="string">'main-image'</span>).find(<span class="string">'img'</span>)[<span class="string">'src'</span>]</span><br><span class="line">        self.save(img_url)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">save</span><span class="params">(self, img_url)</span>:</span> <span class="comment">##这个函数保存图片</span></span><br><span class="line">        name = img_url[<span class="number">-9</span>:<span class="number">-4</span>]</span><br><span class="line">        img = self.request(img_url)</span><br><span class="line">        f = open(name + <span class="string">'.jpg'</span>, <span class="string">'ab'</span>)</span><br><span class="line">        f.write(img.content)</span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mkdir</span><span class="params">(self, path)</span>:</span> <span class="comment">##这个函数创建文件夹</span></span><br><span class="line">        path = path.strip()</span><br><span class="line">        isExists = os.path.exists(os.path.join(<span class="string">"D:\mzitu"</span>, path))</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isExists:</span><br><span class="line">            print(<span class="string">u'建了一个名字叫做'</span>, path, <span class="string">u'的文件夹！'</span>)</span><br><span class="line">            os.makedirs(os.path.join(<span class="string">"D:\mzitu"</span>, path))</span><br><span class="line">            os.chdir(os.path.join(<span class="string">"D:\mzitu"</span>, path)) <span class="comment">##切换到目录</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">u'名字叫做'</span>, path, <span class="string">u'的文件夹已经存在了！'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">request</span><span class="params">(self, url)</span>:</span> <span class="comment">##这个函数获取网页的response 然后返回</span></span><br><span class="line">        content = requests.get(url, headers=self.headers)</span><br><span class="line">        <span class="keyword">return</span> content</span><br><span class="line"></span><br><span class="line">Mzitu = mzitu() <span class="comment">##实例化</span></span><br><span class="line">Mzitu.all_url(<span class="string">'http://www.mzitu.com/all'</span>) <span class="comment">##给函数all_url传入参数  你可以当作启动爬虫（就是入口）</span></span><br></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p><a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028215007.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028215007-1024x646.png" alt="QQ截图20161028215007"></a> 完美！！好啦！结束了！ 如果大家觉得还能看懂、还行的话 我后面在写点儿其他的。 给大家看看我的成果 <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028220006.png" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2016/10/QQ截图20161028220006.png" alt="QQ截图20161028220006"></a> 最后感谢 mzitu.com 的站长。 后续几篇：</p>
+                  <h1 id="小白爬虫第二弹之健壮的小爬虫"><a href="#小白爬虫第二弹之健壮的小爬虫" class="headerlink" title="小白爬虫第二弹之健壮的小爬虫"></a><a href="http://cuiqingcai.com/3256.html">小白爬虫第二弹之健壮的小爬虫</a></h1>
+                  <h1 id="小白爬虫第三弹之去重去重"><a href="#小白爬虫第三弹之去重去重" class="headerlink" title="小白爬虫第三弹之去重去重"></a><a href="http://cuiqingcai.com/3314.html">小白爬虫第三弹之去重去重</a></h1>
+                  <h1 id="小白爬虫第四弹之爬虫快跑（多进程-多线程）"><a href="#小白爬虫第四弹之爬虫快跑（多进程-多线程）" class="headerlink" title="小白爬虫第四弹之爬虫快跑（多进程+多线程）"></a><a href="http://cuiqingcai.com/3363.html">小白爬虫第四弹之爬虫快跑（多进程+多线程）</a></h1>
+                  <h1 id="小白进阶之-Scrapy-第一篇"><a href="#小白进阶之-Scrapy-第一篇" class="headerlink" title="小白进阶之 Scrapy 第一篇"></a><strong><a href="http://cuiqingcai.com/3472.html">小白进阶之 Scrapy 第一篇</a></strong></h1>
+                  <h1 id="小白进阶之-Scrapy-第二篇（登录篇）"><a href="#小白进阶之-Scrapy-第二篇（登录篇）" class="headerlink" title="小白进阶之 Scrapy 第二篇（登录篇）"></a><a href="http://cuiqingcai.com/3952.html">小白进阶之 Scrapy 第二篇（登录篇）</a></h1>
+                  <h1 id="Scrapy-分布式的前篇–让-redis-和-MongoDB-安全点"><a href="#Scrapy-分布式的前篇–让-redis-和-MongoDB-安全点" class="headerlink" title="Scrapy 分布式的前篇–让 redis 和 MongoDB 安全点"></a><a href="http://cuiqingcai.com/4020.html">Scrapy 分布式的前篇–让 redis 和 MongoDB 安全点</a></h1>
+                  <h1 id="小白进阶之-Scrapy-第三篇基于-Scrapy-Redis-的分布式以及-cookies-池"><a href="#小白进阶之-Scrapy-第三篇基于-Scrapy-Redis-的分布式以及-cookies-池" class="headerlink" title="小白进阶之 Scrapy 第三篇基于 Scrapy-Redis 的分布式以及 cookies 池"></a><a href="http://cuiqingcai.com/4048.html">小白进阶之 Scrapy 第三篇基于 Scrapy-Redis 的分布式以及 cookies 池</a></h1>
+                </div>
+                <div class="reward-container">
+                  <div></div>
+                  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                  <div id="qr" style="display: none;">
+                    <div style="display: inline-block;">
+                      <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                      <p>微信支付</p>
+                    </div>
+                    <div style="display: inline-block;">
+                      <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                      <p>支付宝</p>
+                    </div>
+                  </div>
+                </div>
+                <footer class="post-footer">
+                  <div class="post-nav">
+                    <div class="post-nav-item">
+                      <a href="/3133.html" rel="prev" title="Web安全学习一之XSS漏洞的利用">
+                        <i class="fa fa-chevron-left"></i> Web安全学习一之XSS漏洞的利用 </a>
+                    </div>
+                    <div class="post-nav-item">
+                      <a href="/3253.html" rel="next" title="BootStrap4提取并编译Flexbox Grid系统"> BootStrap4提取并编译Flexbox Grid系统 <i class="fa fa-chevron-right"></i>
+                      </a>
+                    </div>
+                  </div>
+                </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#小白爬虫第二弹之健壮的小爬虫"><span class="nav-number">1.</span> <span class="nav-text">小白爬虫第二弹之健壮的小爬虫</span></a></li>
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#小白爬虫第三弹之去重去重"><span class="nav-number">2.</span> <span class="nav-text">小白爬虫第三弹之去重去重</span></a></li>
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#小白爬虫第四弹之爬虫快跑（多进程-多线程）"><span class="nav-number">3.</span> <span class="nav-text">小白爬虫第四弹之爬虫快跑（多进程+多线程）</span></a></li>
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#小白进阶之-Scrapy-第一篇"><span class="nav-number">4.</span> <span class="nav-text">小白进阶之 Scrapy 第一篇</span></a></li>
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#小白进阶之-Scrapy-第二篇（登录篇）"><span class="nav-number">5.</span> <span class="nav-text">小白进阶之 Scrapy 第二篇（登录篇）</span></a></li>
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#Scrapy-分布式的前篇–让-redis-和-MongoDB-安全点"><span class="nav-number">6.</span> <span class="nav-text">Scrapy 分布式的前篇–让 redis 和 MongoDB 安全点</span></a></li>
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#小白进阶之-Scrapy-第三篇基于-Scrapy-Redis-的分布式以及-cookies-池"><span class="nav-number">7.</span> <span class="nav-text">小白进阶之 Scrapy 第三篇基于 Scrapy-Redis 的分布式以及 cookies 池</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '86ccc64b4a0ae101f09aa10b930901e5',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="上一节使用了最简单的网络来处理了 MNIST 数据集，但只有 92% 的正确率，接下来我们使用卷积神经网络来实现更高的正确率。 权重初始化 在上一节初始化 w 和 b 的时候，我们使用了置零初始化。但在卷积神经网络中，我们需要在初始化的时候权重加入少量噪声来打破对称性和避免零梯度，偏置项直接使用一个较小的正数来避免节点输出恒为零的问题。 所以权重我们可以使用截尾正态分布函数 truncated_n">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="TensorFlow MNIST高级学习">
+  <meta property="og:url" content="https://cuiqingcai.com/4921.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="上一节使用了最简单的网络来处理了 MNIST 数据集，但只有 92% 的正确率，接下来我们使用卷积神经网络来实现更高的正确率。 权重初始化 在上一节初始化 w 和 b 的时候，我们使用了置零初始化。但在卷积神经网络中，我们需要在初始化的时候权重加入少量噪声来打破对称性和避免零梯度，偏置项直接使用一个较小的正数来避免节点输出恒为零的问题。 所以权重我们可以使用截尾正态分布函数 truncated_n">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="article:published_time" content="2017-12-27T17:51:54.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.293Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://cuiqingcai.com/4921.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>TensorFlow MNIST高级学习 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/4921.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> TensorFlow MNIST高级学习 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2017-12-28 01:51:54" itemprop="dateCreated datePublished" datetime="2017-12-28T01:51:54+08:00">2017-12-28</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/4921.html" class="post-meta-item leancloud_visitors" data-flag-title="TensorFlow MNIST高级学习" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>8.9k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>8 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>上一节使用了最简单的网络来处理了 MNIST 数据集，但只有 92% 的正确率，接下来我们使用卷积神经网络来实现更高的正确率。</p>
+                <h2 id="权重初始化"><a href="#权重初始化" class="headerlink" title="权重初始化"></a>权重初始化</h2>
+                <p>在上一节初始化 w 和 b 的时候，我们使用了置零初始化。但在卷积神经网络中，我们需要在初始化的时候权重加入少量噪声来打破对称性和避免零梯度，偏置项直接使用一个较小的正数来避免节点输出恒为零的问题。 所以权重我们可以使用截尾正态分布函数 truncated_normal() 来生成初始化张量，我们可以给它指定均值或标准差，均值默认是 0， 标准差默认是 1，例如我们生成一个 [10] 的张量，代码如下：</p>
+                <figure class="highlight vim">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">import tensorflow <span class="keyword">as</span> <span class="keyword">tf</span></span><br><span class="line">initial = <span class="keyword">tf</span>.truncated_normal([<span class="number">10</span>], stddev=<span class="number">0.1</span>)</span><br><span class="line">with <span class="keyword">tf</span>.Session() <span class="keyword">as</span> ses<span class="variable">s:</span></span><br><span class="line">    <span class="keyword">print</span>(sess.run(initial))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="number">-0.13058113</span>  <span class="number">0.03201858</span> <span class="number">-0.19349943</span> <span class="number">-0.06061752</span> <span class="number">-0.10267895</span> <span class="number">-0.11079147</span></span><br><span class="line">  <span class="number">0.1881365</span>  <span class="number">-0.01057311</span> <span class="number">-0.02797078</span>  <span class="number">0.01180232</span>]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>另外 constant() 方法是用于生成常量的方法，例如生成一个 [10] 的常量张量，代码如下：</p>
+                <figure class="highlight vim">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">import tensorflow <span class="keyword">as</span> <span class="keyword">tf</span></span><br><span class="line">initial = <span class="keyword">tf</span>.constant(<span class="number">0.2</span>, shape=[<span class="number">10</span>])</span><br><span class="line">with <span class="keyword">tf</span>.Session() <span class="keyword">as</span> ses<span class="variable">s:</span></span><br><span class="line">    <span class="keyword">print</span>(sess.run(initial))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[ <span class="number">0.2</span>  <span class="number">0.2</span>  <span class="number">0.2</span>  <span class="number">0.2</span>  <span class="number">0.2</span>  <span class="number">0.2</span>  <span class="number">0.2</span>  <span class="number">0.2</span>  <span class="number">0.2</span>  <span class="number">0.2</span>]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>所以这里我们可以将这两个方法封装成一个函数来尝试：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def weight(shape, <span class="attribute">stddev</span>=0.1, <span class="attribute">mean</span>=0):</span><br><span class="line">    initial = tf.truncated_normal(<span class="attribute">shape</span>=shape, <span class="attribute">mean</span>=mean, <span class="attribute">stddev</span>=stddev)</span><br><span class="line">    return tf.Variable(initial)</span><br><span class="line"></span><br><span class="line">def bias(shape, value):</span><br><span class="line">    initial = tf.constant(<span class="attribute">value</span>=value, <span class="attribute">shape</span>=shape)</span><br><span class="line">    return tf.Variable(initial)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h2>
+                <p>这次我们需要使用卷积神经网络来处理图片，所以这里的核心部分就是卷积和池化了，首先我们来了解一下卷积和池化。 卷积常用的方法为 conv2d() ，它的 API 如下：</p>
+                <figure class="highlight pgsql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">tf.nn.conv2d(<span class="keyword">input</span>, <span class="keyword">filter</span>, strides, padding, use_cudnn_on_gpu=<span class="keyword">None</span>, <span class="type">name</span>=<span class="keyword">None</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这个方法是 TensorFlow 实现卷积常用的方法，也是搭建卷积神经网络的核心方法，参数介绍如下：</p>
+                <ul>
+                  <li>input，指需要做卷积的输入图像，它要求是一个 Tensor，具有 [batch_size, in_height, in_width, in_channels] 这样的 shape，具体含义是 [batch_size 的图片数量, 图片高度, 图片宽度, 输入图像通道数]，注意这是一个 4 维的 Tensor，要求类型为 float32 和 float64 其中之一。</li>
+                  <li>filter，相当于 CNN 中的卷积核，它要求是一个 Tensor，具有 [filter_height, filter_width, in_channels, out_channels] 这样的shape，具体含义是 [卷积核的高度，卷积核的宽度，输入图像通道数，输出通道数（即卷积核个数）]，要求类型与参数 input 相同，有一个地方需要注意，第三维 in_channels，就是参数 input 的第四维。</li>
+                  <li>strides，卷积时在图像每一维的步长，这是一个一维的向量，长度 4，具有 [stride_batch_size, stride_in_height, stride_in_width, stride_in_channels] 这样的 shape，第一个元素代表在一个样本的特征图上移动，第二三个元素代表在特征图上的高、宽上移动，第四个元素代表在通道上移动。</li>
+                  <li>padding，string 类型的量，只能是 SAME、VALID 其中之一，这个值决定了不同的卷积方式。</li>
+                  <li>use_cudnn_on_gpu，布尔类型，是否使用 cudnn 加速，默认为true。</li>
+                </ul>
+                <p>返回的结果是 [batch_size, out_height, out_width, out_channels] 维度的结果。 我们这里拿一张 3x3 的图片，单通道（通道为1）的图片，拿一个 1x1 的卷积核进行卷积：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">input = tf.Variable(tf.random_normal([1, 3, 3, 1]))</span><br><span class="line">filter = tf.Variable(tf.random_normal([1, 1, 1, 1]))</span><br><span class="line">op = tf.nn.conv2d(input, filter, strides=[1, 1, 1, 1], <span class="attribute">padding</span>=<span class="string">'VALID'</span>)</span><br><span class="line"><span class="builtin-name">print</span>(op.shape)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">1</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>很清晰，一张图片，拿一个 1x1 的核去做卷积，得到的结果输出是 3x3 的，输出通道为 1，batch_size 照旧。 再将卷积核扩大，用一个 3x3 的卷积核：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">input = tf.Variable(tf.random_normal([1, 3, 3, 1]))</span><br><span class="line">filter = tf.Variable(tf.random_normal([3, 3, 1, 1]))</span><br><span class="line">op = tf.nn.conv2d(input, filter, strides=[1, 1, 1, 1], <span class="attribute">padding</span>=<span class="string">'VALID'</span>)</span><br><span class="line"><span class="builtin-name">print</span>(op.shape)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>最后输出的是一个 1x1 的值。 将图片扩大为 7x7，卷积核仍然使用 3x3：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">input = tf.Variable(tf.random_normal([1, 7, 7, 1]))</span><br><span class="line">filter = tf.Variable(tf.random_normal([3, 3, 1, 1]))</span><br><span class="line">op = tf.nn.conv2d(input, filter, strides=[1, 1, 1, 1], <span class="attribute">padding</span>=<span class="string">'VALID'</span>)</span><br><span class="line"><span class="builtin-name">print</span>(op.shape)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">(<span class="number">1</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">1</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>最后输出的是一个 5x5 的值。 这时如果我们把 padding 模式改为 SAME，表示卷积核可以停留在图像边缘：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">input = tf.Variable(tf.random_normal([1, 7, 7, 1]))</span><br><span class="line">filter = tf.Variable(tf.random_normal([3, 3, 1, 1]))</span><br><span class="line">op = tf.nn.conv2d(input, filter, strides=[1, 1, 1, 1], <span class="attribute">padding</span>=<span class="string">'SAME'</span>)</span><br><span class="line"><span class="builtin-name">print</span>(op.shape)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">(<span class="number">1</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">1</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>则输出的内容和原图像是相同的。 这时如果更改 batch_size 和 out_channels，比如 batch_size 修改为 3，out_channels 修改为 6：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">input = tf.Variable(tf.random_normal([3, 7, 7, 1]))</span><br><span class="line">filter = tf.Variable(tf.random_normal([3, 3, 1, 6]))</span><br><span class="line">op = tf.nn.conv2d(input, filter, strides=[1, 1, 1, 1], <span class="attribute">padding</span>=<span class="string">'SAME'</span>)</span><br><span class="line"><span class="builtin-name">print</span>(op.shape)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">(<span class="number">3</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">6</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>输出结果的 batch_size 和 out_channels 会随之变化。 当 strides 的步长不为 1 的时候，我们将 stride_in_height 和 stride_in_width 修改为 2，相当于每次移动两步：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">input = tf.Variable(tf.random_normal([3, 7, 7, 1]))</span><br><span class="line">filter = tf.Variable(tf.random_normal([3, 3, 1, 6]))</span><br><span class="line">op = tf.nn.conv2d(input, filter, strides=[1, 2, 2, 1], <span class="attribute">padding</span>=<span class="string">'VALID'</span>)</span><br><span class="line"><span class="builtin-name">print</span>(op.shape)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">6</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>最后我们用一个例子来感受一下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">import tensorflow as tf</span><br><span class="line"></span><br><span class="line">input = tf.Variable(tf.random_normal([2, 4, 4, 5]))</span><br><span class="line">filter = tf.Variable(tf.random_normal([2, 2, 5, 2]))</span><br><span class="line">op = tf.nn.conv2d(input, filter, strides=[1, 1, 1, 1], <span class="attribute">padding</span>=<span class="string">'VALID'</span>)</span><br><span class="line">sess = tf.InteractiveSession()</span><br><span class="line">tf.global_variables_initializer().<span class="builtin-name">run</span>()</span><br><span class="line"><span class="builtin-name">print</span>(op.shape)</span><br><span class="line"><span class="builtin-name">print</span>(sess.<span class="builtin-name">run</span>(op))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里 input、filter 通过指定 shape 的方式调用 random_normal() 方法进行随机初始化，input 的维度为 [2, 4, 4, 5]，即 batch_size 为 2，图片是 4x4，输入通道数为 5，卷积核大小为 2x2，输入通道 5，输出通道 2，步长为 1，padding 方式选用 VALID，最后输出得到输出的 shape 和结果。 结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">(<span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line">[[[[  <span class="number">2.05039382</span>  <span class="number">-8.82934952</span>]</span><br><span class="line">   [ <span class="number">-9.77668381</span>   <span class="number">3.63882256</span>]</span><br><span class="line">   [ <span class="number">-4.46390772</span>  <span class="number">-5.91670704</span>]]</span><br><span class="line"></span><br><span class="line">  [[  <span class="number">8.41201782</span>  <span class="number">-6.72245312</span>]</span><br><span class="line">   [ <span class="number">-1.47592044</span>  <span class="number">13.03628349</span>]</span><br><span class="line">   [  <span class="number">5.44015312</span>   <span class="number">2.46059227</span>]]</span><br><span class="line"></span><br><span class="line">  [[ <span class="number">-3.18967772</span>   <span class="number">1.24733043</span>]</span><br><span class="line">   [<span class="number">-10.1108532</span>   <span class="number">-6.44734669</span>]</span><br><span class="line">   [  <span class="number">1.99426246</span>   <span class="number">2.91549349</span>]]]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> [[[ <span class="number">-1.66685319</span>   <span class="number">0.32011557</span>]</span><br><span class="line">   [ <span class="number">-5.66163826</span>  <span class="number">-0.37670898</span>]</span><br><span class="line">   [ <span class="number">-0.74658942</span>   <span class="number">1.31723833</span>]]</span><br><span class="line"></span><br><span class="line">  [[ <span class="number">-5.85412216</span>  <span class="number">-0.29930949</span>]</span><br><span class="line">   [ <span class="number">-0.75974303</span>  <span class="number">-1.84006214</span>]</span><br><span class="line">   [ <span class="number">-2.05475235</span>   <span class="number">4.9572196</span> ]]</span><br><span class="line"></span><br><span class="line">  [[ <span class="number">-4.09344864</span>   <span class="number">1.39405775</span>]</span><br><span class="line">   [ <span class="number">-1.28887582</span>  <span class="number">-2.82365012</span>]</span><br><span class="line">   [  <span class="number">4.87360907</span>  <span class="number">10.8071022</span> ]]]]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到 input 维度为 [2, 4, 4, 5]，filter 维度为 [2, 2, 5, 2] 时，生成的结果维度为 [2, 3, 3, 2]。</p>
+                <h2 id="池化"><a href="#池化" class="headerlink" title="池化"></a>池化</h2>
+                <p>池化层往往在卷积层后面，通过池化来降低卷积层输出的特征向量，同时改善结果。 在这里介绍一个常用的最大值池化 max_pool() 方法，其 API 如下：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">tf.nn.max<span class="constructor">_pool(<span class="params">value</span>, <span class="params">ksize</span>, <span class="params">strides</span>, <span class="params">padding</span>, <span class="params">name</span>=None)</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>是CNN当中的最大值池化操作，其实用法和卷积很类似。 参数介绍如下：</p>
+                <ul>
+                  <li>value，需要池化的输入，一般池化层接在卷积层后面，所以输入通常是 feature map，依然是 [batch_size, height, width, channels] 这样的shape。</li>
+                  <li>ksize，池化窗口的大小，取一个四维向量，一般是 [batch_size, height, width, channels]，因为我们不想在 batch 和 channels 上做池化，所以这两个维度设为了1。</li>
+                  <li>strides，和卷积类似，窗口在每一个维度上滑动的步长，一般也是 [stride_batch_size, stride_height, stride_width, stride_channels]。</li>
+                  <li>padding，和卷积类似，可以取 VALID、SAME，返回一个 Tensor，类型不变，shape 仍然是 [batch_size, height, width, channels] 这种形式。</li>
+                </ul>
+                <p>在这里输入为 [3, 7, 7, 2]，池化窗口设置为 [1, 2, 2, 1]，步长为 [1, 1, 1, 1]，padding 模式设置为 VALID。</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">input = tf.Variable(tf.random_normal([<span class="number">3</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">2</span>]))</span><br><span class="line">op = tf.nn.max_pool(input, ksize=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'VALID'</span>)</span><br><span class="line">print(op.shape)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">(<span class="number">3</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">2</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>类似的原理，我们可以得到这样的的结果。</p>
+                <h2 id="卷积和池化"><a href="#卷积和池化" class="headerlink" title="卷积和池化"></a>卷积和池化</h2>
+                <p>所以了解了以上卷积和池化方法的用法，我们可以定义如下两个工具方法：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def conv2d(input, filter, strides=[1, 1, 1, 1], <span class="attribute">padding</span>=<span class="string">'SAME'</span>):</span><br><span class="line">    return tf.nn.conv2d(input, filter, <span class="attribute">strides</span>=strides, <span class="attribute">padding</span>=padding)</span><br><span class="line"></span><br><span class="line">def max_pool(input, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], <span class="attribute">padding</span>=<span class="string">'SAME'</span>):</span><br><span class="line">    return tf.nn.max_pool(input, <span class="attribute">ksize</span>=ksize, <span class="attribute">strides</span>=strides, <span class="attribute">padding</span>=padding)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这两个方法分别实现了卷积和池化，并设置了默认步长和核大小。 接下来就让我们开始神经网络的构建吧。</p>
+                <h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2>
+                <p>首先我们需要初始化一些数据，包括输入的 x 和对一个的标注 y_label：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">x = tf.placeholder(tf.<span class="built_in">float</span>32, shape=[None, <span class="number">784</span>])</span><br><span class="line">y_label = tf.placeholder(tf.<span class="built_in">float</span>32, shape=[None, <span class="number">10</span>])</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="第一层卷积"><a href="#第一层卷积" class="headerlink" title="第一层卷积"></a>第一层卷积</h2>
+                <p>现在我们可以开始实现第一层了。它由一个卷积接一个 max pooling 完成。卷积在每个 5x5 的 patch 中算出 32 个特征。卷积的权重张量形状是 [5, 5, 1, 32]，前两个维度是 patch 的大小，接着是输入的通道数目，最后是输出的通道数目，而对于每一个输出通道都有一个对应的偏置量，我们首先初始化 w 和 b</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">w_conv1 = weight([<span class="number">5</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">32</span>])</span><br><span class="line">b_conv1 = bias([<span class="number">32</span>])</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>为了用这一层，我们把 x 变成一个四维向量，其第 2、3 维对应图片的宽、高，最后一维代表图片的颜色通道数，因为是灰度图所以这里的通道数为 1，如果是彩色图，则为 3。 随后我们需要对图片做 reshape 操作，将其</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">x_reshape = tf.reshape(x, [<span class="number">-1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>])</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>我们把 x_reshape 和权值向量进行卷积，加上偏置项，然后应用 ReLU 激活函数，最后进行 max pooling：</p>
+                <figure class="highlight smali">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">h_conv1 = tf.nn.relu(conv2d(x_reshape, w_conv1) + b_conv1)</span><br><span class="line">h_pool1 = max_pool(h_conv1)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="第二层卷积"><a href="#第二层卷积" class="headerlink" title="第二层卷积"></a>第二层卷积</h2>
+                <p>现在我们已经实现了一层卷积，为了构建一个更深的网络，我们再继续增加一层卷积，将通道数变成 64，所以这里的初始化权重和偏置为：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">w_conv2 = weight([<span class="number">5</span>, <span class="number">5</span>, <span class="number">32</span>, <span class="number">64</span>])</span><br><span class="line">b_conv2 = bias([<span class="number">64</span>])</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>随后我们把上一层池化结果 h_pool1 和权值向量进行卷积，加上偏置项，然后应用 ReLU 激活函数，最后进行 max pooling：</p>
+                <figure class="highlight smali">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">h_conv2 = tf.nn.relu(conv2d(h_pool1, w_conv2) + b_conv2)</span><br><span class="line">h_pool2 = max_pool(h_conv2)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="密集连接层"><a href="#密集连接层" class="headerlink" title="密集连接层"></a>密集连接层</h2>
+                <p>现在，图片尺寸减小到7x7，我们再加入一个有 1024 个神经元的全连接层，用于处理整个图片。我们把池化层输出的张量 reshape 成一些向量，乘上权重矩阵，加上偏置，然后对其使用 ReLU。</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">w_fc1 = weight([<span class="number">7</span> * <span class="number">7</span> * <span class="number">64</span>, <span class="number">1024</span>])</span><br><span class="line">b_fc1 = bias([<span class="number">1024</span>])</span><br><span class="line">h_pool2_flat = tf.reshape(h_pool2, [<span class="number">-1</span>, <span class="number">7</span> * <span class="number">7</span> * <span class="number">64</span>])</span><br><span class="line">h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, w_fc1) + b_fc1)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2>
+                <p>为了减少过拟合，我们在输出层之前加入 dropout。我们用一个 placeholder 来代表一个神经元的输出在 dropout 中保持不变的概率。这样我们可以在训练过程中启用 dropout，在测试过程中关闭 dropout。 TensorFlow 的 tf.nn.dropout 操作除了可以屏蔽神经元的输出外，还会自动处理神经元输出值的 scale，所以用 dropout 的时候可以不用考虑 scale。</p>
+                <figure class="highlight ini">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attr">keep_prob</span> = tf.placeholder(tf.float32)</span><br><span class="line"><span class="attr">h_fc1_dropout</span> = tf.nn.dropout(h_fc1, keep_prob=keep_prob)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="输出层"><a href="#输出层" class="headerlink" title="输出层"></a>输出层</h2>
+                <p>最后，我们添加一个 Softmax 输出层，这里我们需要将 1024 维转为 10 维，所以需要声明一个 [1024, 10] 的权重和 [10] 的偏置：</p>
+                <figure class="highlight ini">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attr">w_fc2</span> = weight([<span class="number">1024</span>, <span class="number">10</span>])</span><br><span class="line"><span class="attr">b_fc1</span> = bias([<span class="number">10</span>])</span><br><span class="line"><span class="attr">y</span> = tf.nn.softmax(tf.matmul(h_fc1_dropout, w_fc2) + b_fc1)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="训练和评估模型"><a href="#训练和评估模型" class="headerlink" title="训练和评估模型"></a>训练和评估模型</h2>
+                <p>为了进行训练和评估，我们使用与之前简单的单层 Softmax 神经网络模型几乎相同的一套代码，只是我们会用更加复杂的 Adam 优化器来做梯度最速下降，在 feed_dict 中加入额外的参数 keep_prob 来控制 dropout 比例，然后每 100次 迭代输出一次日志：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment"># Loss</span></span><br><span class="line">cross_entropy = -tf.reduce_sum(y_label * tf.log(y))</span><br><span class="line">train = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Prediction</span></span><br><span class="line">correct_prediction = tf.equal(tf.argmax(y_label, <span class="attribute">axis</span>=1), tf.argmax(y, <span class="attribute">axis</span>=1))</span><br><span class="line">accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Train</span></span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">    sess.<span class="builtin-name">run</span>(tf.global_variables_initializer())</span><br><span class="line">    <span class="keyword">for</span> <span class="keyword">step</span> <span class="keyword">in</span> range(total_steps + 1):</span><br><span class="line">        batch = mnist.train.next_batch(batch_size)</span><br><span class="line">        sess.<span class="builtin-name">run</span>(train, feed_dict=&#123;x: batch[0], y_label: batch[1], keep_prob: dropout_keep_prob&#125;)</span><br><span class="line">        # Train accuracy</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">step</span> % steps_per_test == 0:</span><br><span class="line">            <span class="builtin-name">print</span>(<span class="string">'Training Accuracy'</span>, <span class="keyword">step</span>,</span><br><span class="line">                  sess.<span class="builtin-name">run</span>(accuracy, feed_dict=&#123;x: batch[0], y_label: batch[1], keep_prob: 1&#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Final Test</span></span><br><span class="line"><span class="builtin-name">print</span>(<span class="string">'Test Accuracy'</span>, sess.<span class="builtin-name">run</span>(accuracy, feed_dict=&#123;x: mnist.test.images, y_label: mnist.test.labels, keep_prob: 1&#125;))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2>
+                <p>以上代码，在最终测试集上的准确率大概是99.2%。 运行结果：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Training Accuracy <span class="number">0</span> <span class="number">0.05</span></span><br><span class="line">Training Accuracy <span class="number">100</span> <span class="number">0.7</span></span><br><span class="line">Training Accuracy <span class="number">200</span> <span class="number">0.85</span></span><br><span class="line">Training Accuracy <span class="number">300</span> <span class="number">0.9</span></span><br><span class="line">Training Accuracy <span class="number">400</span> <span class="number">0.93</span></span><br><span class="line">Training Accuracy <span class="number">500</span> <span class="number">0.91</span></span><br><span class="line">Training Accuracy <span class="number">600</span> <span class="number">0.94</span></span><br><span class="line">Training Accuracy <span class="number">700</span> <span class="number">0.95</span></span><br><span class="line">Training Accuracy <span class="number">800</span> <span class="number">0.95</span></span><br><span class="line">Training Accuracy <span class="number">900</span> <span class="number">0.95</span></span><br><span class="line">Training Accuracy <span class="number">1000</span> <span class="number">0.97</span></span><br><span class="line">Training Accuracy <span class="number">1100</span> <span class="number">0.95</span></span><br><span class="line">Training Accuracy <span class="number">1200</span> <span class="number">0.96</span></span><br><span class="line">Training Accuracy <span class="number">1300</span> <span class="number">0.99</span></span><br><span class="line">Training Accuracy <span class="number">1400</span> <span class="number">0.98</span></span><br><span class="line">Training Accuracy <span class="number">1500</span> <span class="number">0.95</span></span><br><span class="line">Training Accuracy <span class="number">1600</span> <span class="number">0.97</span></span><br><span class="line">Training Accuracy <span class="number">1700</span> <span class="number">1.0</span></span><br><span class="line">Training Accuracy <span class="number">1800</span> <span class="number">0.95</span></span><br><span class="line">Training Accuracy <span class="number">1900</span> <span class="number">0.95</span></span><br><span class="line">Training Accuracy <span class="number">2000</span> <span class="number">0.95</span></span><br><span class="line">Training Accuracy <span class="number">2100</span> <span class="number">0.96</span></span><br><span class="line">Training Accuracy <span class="number">2200</span> <span class="number">0.96</span></span><br><span class="line">Training Accuracy <span class="number">2300</span> <span class="number">0.98</span></span><br><span class="line">Training Accuracy <span class="number">2400</span> <span class="number">0.97</span></span><br><span class="line">Training Accuracy <span class="number">2500</span> <span class="number">0.96</span></span><br><span class="line">Training Accuracy <span class="number">2600</span> <span class="number">0.99</span></span><br><span class="line">Training Accuracy <span class="number">2700</span> <span class="number">0.96</span></span><br><span class="line">Training Accuracy <span class="number">2800</span> <span class="number">0.98</span></span><br><span class="line">Training Accuracy <span class="number">2900</span> <span class="number">0.95</span></span><br><span class="line">Training Accuracy <span class="number">3000</span> <span class="number">0.99</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+                <p>本节我们实现了卷积神经网络来处理图像相关问题，将准确率大大提高，可见神经网络是非常强大的。</p>
+                <h2 id="本节代码"><a href="#本节代码" class="headerlink" title="本节代码"></a>本节代码</h2>
+                <p>本节代码地址为：<a href="https://github.com/AIDeepLearning/MNIST" target="_blank" rel="noopener">https://github.com/AIDeepLearning/MNIST</a>。</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/4898.html" rel="prev" title="TensorFlow MNIST初级学习">
+                      <i class="fa fa-chevron-left"></i> TensorFlow MNIST初级学习 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/4925.html" rel="next" title="TensorFlow RNN Cell源码解析"> TensorFlow RNN Cell源码解析 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#权重初始化"><span class="nav-number">1.</span> <span class="nav-text">权重初始化</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#卷积"><span class="nav-number">2.</span> <span class="nav-text">卷积</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#池化"><span class="nav-number">3.</span> <span class="nav-text">池化</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#卷积和池化"><span class="nav-number">4.</span> <span class="nav-text">卷积和池化</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">5.</span> <span class="nav-text">初始化</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#第一层卷积"><span class="nav-number">6.</span> <span class="nav-text">第一层卷积</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#第二层卷积"><span class="nav-number">7.</span> <span class="nav-text">第二层卷积</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#密集连接层"><span class="nav-number">8.</span> <span class="nav-text">密集连接层</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#Dropout"><span class="nav-number">9.</span> <span class="nav-text">Dropout</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#输出层"><span class="nav-number">10.</span> <span class="nav-text">输出层</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#训练和评估模型"><span class="nav-number">11.</span> <span class="nav-text">训练和评估模型</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#运行"><span class="nav-number">12.</span> <span class="nav-text">运行</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">13.</span> <span class="nav-text">结语</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#本节代码"><span class="nav-number">14.</span> <span class="nav-text">本节代码</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '78a9691cee09ce62e6ce017e3aa069df',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

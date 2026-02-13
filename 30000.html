@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="之前的时候都是用 JavaScript 开发，但是最近发现随着项目的推进，一些项目越来越多地要求使用 TypeScript 来开发，所以不得不来专门学习一下 TypeScript 了，本篇文章就简单记录下学习 TypeScript 的过程。 介绍 先看看 TypeScript 的官方介绍：    Typed JavaScript at Any Scale.   TypeScript extends">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="TypeScript教程一之基本类型">
+  <meta property="og:url" content="https://cuiqingcai.com/30000.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="之前的时候都是用 JavaScript 开发，但是最近发现随着项目的推进，一些项目越来越多地要求使用 TypeScript 来开发，所以不得不来专门学习一下 TypeScript 了，本篇文章就简单记录下学习 TypeScript 的过程。 介绍 先看看 TypeScript 的官方介绍：    Typed JavaScript at Any Scale.   TypeScript extends">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/eg15j.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/qkhwz.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/ricrd.png">
+  <meta property="article:published_time" content="2020-12-28T18:16:52.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.294Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/eg15j.png">
+  <link rel="canonical" href="https://cuiqingcai.com/30000.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>TypeScript教程一之基本类型 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/30000.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> TypeScript教程一之基本类型 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2020-12-29 02:16:52" itemprop="dateCreated datePublished" datetime="2020-12-29T02:16:52+08:00">2020-12-29</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/TypeScript/" itemprop="url" rel="index"><span itemprop="name">TypeScript</span></a>
+                    </span>
+                  </span>
+                  <span id="/30000.html" class="post-meta-item leancloud_visitors" data-flag-title="TypeScript教程一之基本类型" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>9.1k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>8 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>之前的时候都是用 JavaScript 开发，但是最近发现随着项目的推进，一些项目越来越多地要求使用 TypeScript 来开发，所以不得不来专门学习一下 TypeScript 了，本篇文章就简单记录下学习 TypeScript 的过程。</p>
+                <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2>
+                <p>先看看 TypeScript 的官方介绍：</p>
+                <blockquote>
+                  <p>Typed JavaScript at Any Scale.</p>
+                  <p>TypeScript extends JavaScript by adding types. By understanding JavaScript, TypeScript saves you time catching errors and providing fixes before you run code. Any browser, any OS, anywhere JavaScript runs. Entirely Open Source.</p>
+                </blockquote>
+                <p>我们知道 JavaScript 是弱类型的语言，而实际上说白了就是加上类型标识的 JavaScript 语言，加上类型标识之后，可以帮助我们减少开发的调试成本，尽早发现错误，节省更多时间。同时 TypeScript 是完全开源的，它编译后得到的 JavaScript 支持任何浏览器和操作系统运行。</p>
+                <p>截止本文撰写的时间，TypeScript 已经更新到 4.1 版本，官方文档地址：<a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html。" target="_blank" rel="noopener">https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html。</a></p>
+                <h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2>
+                <p>学习 TypeScript 当然要看原汁原味的资料，推荐 TypeScript 官方的 Handbook，链接为：<a href="https://www.typescriptlang.org/docs/handbook/intro.html。" target="_blank" rel="noopener">https://www.typescriptlang.org/docs/handbook/intro.html。</a></p>
+                <p>本文所总结的内容基于 Handbook 的内容加上个人的一些修改而成。</p>
+                <p>另外本节的代码推荐大家直接在 TypeScript 提供的 Playgroud 里面运行即可，不用自己再初始化 Node 和 TypeScript 环境，简单方便，链接为：<a href="https://www.typescriptlang.org/play，大家直接打开就行了，预览如下：" target="_blank" rel="noopener">https://www.typescriptlang.org/play，大家直接打开就行了，预览如下：</a></p>
+                <p><img src="https://cdn.cuiqingcai.com/eg15j.png" alt="image-20201228234110415"></p>
+                <p>比如默认情况下就有两行初始化代码：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">const</span> anExampleVariable = <span class="string">"Hello World"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(anExampleVariable);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>点击 Run 之后就可以直接运行，控制台输出结果显示在右侧，内容如下：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="symbol">LOG</span>]: <span class="link">"Hello World"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果你运行成功了，那我们就可以开始接下来的学习了。</p>
+                <p>下面正式开始介绍。</p>
+                <p>TypeScript 主要就是在 JavaScript 基础上扩展了一些类型，所以这里就分各种类型来进行介绍。</p>
+                <h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2>
+                <h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h3>
+                <p>最常见的基本类型就是布尔类型了，其值就是 true 或者 false，类型声明用 boolean 就好了，在 TypeScript 中，声明一个 boolean 类型的变量写法如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">let</span> isDone: <span class="built_in">boolean</span> = <span class="literal">false</span>;</span><br><span class="line"><span class="built_in">console</span>.log(isDone, <span class="keyword">typeof</span> isDone);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里注意到，声明类型可以在变量名的后面加上一个冒号，然后跟一个类型声明，和 Python 的 Type Hint 非常像。然后我们用 console 的 log 方法输出了这个变量，并用 typeof 输出了它的类型。</p>
+                <p>运行结果如下：</p>
+                <figure class="highlight autoit">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="built_in">LOG</span>]: <span class="literal">false</span>,  <span class="string">"boolean"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到运行结果就被输出出来了，同时 typeof 就是这个变量的类型，结果是一个字符串，就是 boolean。</p>
+                <p>是不是很简单？基本套路就是在变量的后面跟一个冒号再跟一个类型声明就好了。</p>
+                <h3 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h3>
+                <p>Number 即数值类型，对于这个类型，TypeScript 和 JavaScript 是一样的，Number 可以代表整数、浮点数、大整数。其中大整数需要单独用 bigint 来表示。另外 Number 还可以代表十六进制、八进制、二进制。</p>
+                <p>示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">let</span> decimal: <span class="built_in">number</span> = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">let</span> hex: <span class="built_in">number</span> = <span class="number">0xf00d</span>;</span><br><span class="line"><span class="keyword">let</span> binary: <span class="built_in">number</span> = <span class="number">0b1010</span>;</span><br><span class="line"><span class="keyword">let</span> octal: <span class="built_in">number</span> = <span class="number">0o744</span>;</span><br><span class="line"><span class="keyword">let</span> big: bigint = <span class="number">100n</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(hex, <span class="keyword">typeof</span> hex);</span><br><span class="line"><span class="built_in">console</span>.log(big, <span class="keyword">typeof</span> big);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>其中 bigint 需要 ES2020 的支持，需要在 TS Config 里面设置下：</p>
+                <p><img src="https://cdn.cuiqingcai.com/qkhwz.png" alt="image-20201228235911831"></p>
+                <p>运行结果如下：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="symbol">LOG</span>]: <span class="link">61453,  "number"</span></span><br><span class="line">[<span class="symbol">LOG</span>]: <span class="link">100,  "bigint"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里输出了 hex 和 big 变量的值和类型，其中 hex 本身是用十六进制声明的，打印输出的时候被转化为了十进制，同时其类型为 number。</p>
+                <p>另外对于 bigint 类型来说，值的后面需要加一个 n，即 100 和 100n 代表的类型是不一样的，后者的类型是 bigint，前者的类型是 number。</p>
+                <p>假如把 bigint 类型的变量声明为 number 类型是会报错的，比如这样就是错误的：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">let</span> big: <span class="built_in">number</span> = <span class="number">100n</span>;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>报错内容如下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Type <span class="string">'bigint'</span> is <span class="keyword">not</span> assignable <span class="keyword">to</span><span class="built_in"> type </span><span class="string">'number'</span>.</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3>
+                <p>String 即字符串类型，需要用 string 来声明类型。字符串可以用单引号或者双引号或者斜引号声明，其中斜引号就是模板字符串。</p>
+                <p>示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">let</span> color: <span class="built_in">string</span> = <span class="string">"blue"</span>;</span><br><span class="line">color = <span class="string">"red"</span>;</span><br><span class="line"><span class="keyword">let</span> fullName: <span class="built_in">string</span> = <span class="string">`Bob Bobbington`</span>;</span><br><span class="line"><span class="keyword">let</span> age: <span class="built_in">number</span> = <span class="number">37</span>;</span><br><span class="line"><span class="keyword">let</span> sentence: <span class="built_in">string</span> = <span class="string">`Hello, my name is <span class="subst">$&#123;fullName&#125;</span>. I'll be <span class="subst">$&#123;</span></span></span><br><span class="line"><span class="string"><span class="subst">  age + <span class="number">1</span></span></span></span><br><span class="line"><span class="string"><span class="subst">&#125;</span> years old next month.`</span>;</span><br><span class="line"><span class="built_in">console</span>.log(sentence, <span class="keyword">typeof</span> sentence);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下：</p>
+                <figure class="highlight 1c">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="built_in">LOG</span>]: <span class="string">"Hello, my name is Bob Bobbington. I'll be 38 years old next month."</span>,  <span class="string">"string"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>嗯，没什么特殊的，就是字符串类型。</p>
+                <h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3>
+                <p>Array 即数组，声明可以有两种方式，一种是 <code>type[]</code> 这样的形式，一种是 Generics 泛型的形式，示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">let</span> list: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> list2: <span class="built_in">Array</span>&lt;<span class="built_in">number</span>&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> list3: <span class="built_in">Array</span>&lt;<span class="built_in">any</span>&gt; = [<span class="number">1</span>, <span class="string">"2"</span>, <span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(list, <span class="keyword">typeof</span> list);</span><br><span class="line"><span class="built_in">console</span>.log(list2, <span class="keyword">typeof</span> list2);</span><br><span class="line"><span class="built_in">console</span>.log(list3, <span class="keyword">typeof</span> list3);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>其中 list 就是使用了 <code>type[]</code> 这样的声明方式，声明为 <code>number[]</code>，那么数组里面的每个元素都必须要是 number 类型，list2 则是使用了泛型类型的声明，和 list 的效果是一样的，另外 list3 使用了 any 泛型类型，所以其值可以不仅仅为 number，因此这里 list3 的第二个元素设置为了字符串 2。</p>
+                <p>运行结果如下：</p>
+                <figure class="highlight prolog">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="symbol">LOG</span>]: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],  <span class="string">"object"</span></span><br><span class="line">[<span class="symbol">LOG</span>]: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],  <span class="string">"object"</span></span><br><span class="line">[<span class="symbol">LOG</span>]: [<span class="number">1</span>, <span class="string">"2"</span>, <span class="number">3</span>],  <span class="string">"object"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果的 typeof 输出的结果可能让人意外，不应该是输出其声明的类型吗，怎么是 object？这是因为浏览器真正执行的是刚才的 TypeScript 编译生成的 JavaScript，而 JavaScript 本身的 Array 和 Object 等类型，typeof 都统一返回 object 类型，因此得到的结果就是 object 了。</p>
+                <h3 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h3>
+                <p>Tuple 即元组，它可以允许我们声明固定数量和顺序的 Array，来看个例子就懂了：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">let</span> x: [<span class="built_in">string</span>, <span class="built_in">number</span>];</span><br><span class="line">x = [<span class="number">1</span>, <span class="number">2</span>]; <span class="comment">// Error</span></span><br><span class="line">x = [<span class="string">"Hello"</span>, <span class="number">2</span>]; <span class="comment">// Correct</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>比如这里声明了一个变量 x，x 必须是一个 Array，按照顺序来说，其第一个元素必须要是 string，第二个元素必须要是 number，所以第二行的声明就会报错，第三行的声明才是正确的。</p>
+                <p>有了类型声明之后，在编译阶段就能发现错误或者编辑器给出方法输入提示。比如：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="built_in">console</span>.log(x[<span class="number">0</span>].substring(<span class="number">1</span>)); <span class="comment">// Correct</span></span><br><span class="line"><span class="built_in">console</span>.log(x[<span class="number">1</span>].substring(<span class="number">1</span>)); <span class="comment">// Error, Property 'substring' does not exist on type 'number'.</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>比如这里第一行我们在敲 substring 的时候，编辑器根据类型判断出 <code>x[0]</code> 是 string 类型，那就可以给出 substring 的提示。而对于第二行代码的 <code>x[1]</code>，编译器会直接检查出其中存在错误，这有助于我们在静态类型检查时候及时发现问题，减少 Bug 出现的概率。</p>
+                <h3 id="Enum"><a href="#Enum" class="headerlink" title="Enum"></a>Enum</h3>
+                <p>Enum 即枚举类型，这个非常有用，有时候我们想定义的变量其实就只有某几种取值，那完全可以定义为枚举类型。</p>
+                <p>用法如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">enum</span> Stage &#123;</span><br><span class="line">  Debug,</span><br><span class="line">  Info,</span><br><span class="line">  Warning,</span><br><span class="line">  <span class="built_in">Error</span>,</span><br><span class="line">  Critical,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stage: Stage = Stage.Critical;</span><br><span class="line"><span class="built_in">console</span>.log(stage, <span class="keyword">typeof</span> stage);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们声明了一个枚举类型，其名称叫做 Stage，值有五个。然后声明的变量直接用 Stage 修饰即可，值则可以直接取 Stage 的某个值，这里取值为 <code>Stage.Critical</code>。</p>
+                <p>最后打印输出该变量，结果如下：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="symbol">LOG</span>]: <span class="link">4,  "number"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>结果居然是 4，这个怎么情况？</p>
+                <p>原来是因为枚举类型，它会按照枚举值的声明顺序自动编号，比如 Debug 的值就是 0，Info 就是 1，以此类推。默认情况下是从 0 开始编号的，不过我们也可以手动更改编号的起始值，比如 Debug 从 1 开始编号，可以声明如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">enum</span> Stage &#123;</span><br><span class="line">  Debug = <span class="number">1</span>,</span><br><span class="line">  Info,</span><br><span class="line">  Warning,</span><br><span class="line">  <span class="built_in">Error</span>,</span><br><span class="line">  Critical,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stage: Stage = Stage.Critical;</span><br><span class="line"><span class="built_in">console</span>.log(stage, <span class="keyword">typeof</span> stage);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>最后可以看到 Critical 的编号就变成 5 了，运行结果如下：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="symbol">LOG</span>]: <span class="link">5,  "number"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>有点意思。</p>
+                <p>那既然它是按照顺序来赋值的，那我如果在前面的值设置大一点，会不会出现后面的值和前面的值相等的情况？比如：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">enum</span> Stage &#123;</span><br><span class="line">  Debug = <span class="number">1</span>,</span><br><span class="line">  Info = <span class="number">3</span>,</span><br><span class="line">  Warning = <span class="number">2</span>,</span><br><span class="line">  <span class="built_in">Error</span>,</span><br><span class="line">  Critical,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stage: Stage = Stage.Error;</span><br><span class="line"><span class="keyword">let</span> stage2: Stage = Stage.Info;</span><br><span class="line"><span class="built_in">console</span>.log(stage, <span class="keyword">typeof</span> stage);</span><br><span class="line"><span class="built_in">console</span>.log(stage2, <span class="keyword">typeof</span> stage2);</span><br><span class="line"><span class="built_in">console</span>.log(stage == stage2);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>看看这样会发生什么？这里 Error 按照常理来说会从 Warning 开始自增，值应该为 3，那 Info 我也设置为 3，二者会是相等吗？</p>
+                <p>运行结果如下：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="symbol">LOG</span>]: <span class="link">3,  "number"</span></span><br><span class="line">[<span class="symbol">LOG</span>]: <span class="link">3,  "number"</span></span><br><span class="line">[<span class="symbol">LOG</span>]: <span class="link">true</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>果不其然，二者还都是 3，而且它们就是相等的。所以，对于枚举类型，我们一定要注意声明值的时候最好不要引起自增值和设定值之间的冲突，不然会引入不必要的麻烦。</p>
+                <p>另外对于枚举类型，我们还可以根据值进行查询，比如对于上述声明，我们不知道哪个值等于 2 或者 3，那可以直接将值传给 Stage 进行查询，得到的结果是一个字符串，示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">enum</span> Stage &#123;</span><br><span class="line">  Debug = <span class="number">1</span>,</span><br><span class="line">  Info = <span class="number">3</span>,</span><br><span class="line">  Warning = <span class="number">2</span>,</span><br><span class="line">  <span class="built_in">Error</span>,</span><br><span class="line">  Critical,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stage: <span class="built_in">string</span> = Stage[<span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(stage, <span class="keyword">typeof</span> stage);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> stage2: <span class="built_in">string</span> = Stage[<span class="number">2</span>];</span><br><span class="line"><span class="built_in">console</span>.log(stage2, <span class="keyword">typeof</span> stage2);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下：</p>
+                <figure class="highlight 1c">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="built_in">LOG</span>]: <span class="string">"Error"</span>,  <span class="string">"string"</span></span><br><span class="line">[<span class="built_in">LOG</span>]: <span class="string">"Warning"</span>,  <span class="string">"string"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>比如这里 <code>Stage[2]</code> 就是查找枚举值等于 2 的枚举名称，结果是 Warning。那值相同的咋办呢？比如 3，看结果它返回的是 Error，看来 Error 把 Info 覆盖掉了，查询的结果是最新的一个枚举名称。注意这里返回的结果是字符串类型，不是枚举类型，它仅仅代表枚举的名称而已。</p>
+                <h3 id="Unknown"><a href="#Unknown" class="headerlink" title="Unknown"></a>Unknown</h3>
+                <p>Unknown 即未知类型，一般在类型不确定的情况下可以声明为 unknown 类型。比如说一个数据可能是 API 返回的，它可能是数值类型也可能是字符串类型，并不知道，这时候我们就可以将其声明为 unknown 类型。</p>
+                <p>示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">let</span> notSure: unknown = <span class="number">4</span>;</span><br><span class="line">notSure = <span class="string">"maybe a string instead"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// OK, definitely a boolean</span></span><br><span class="line">notSure = <span class="literal">false</span>;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>比如这里 notSure 就声明了 unknown 类型，一开始它是数值类型，但当然也可以是字符串或者布尔类型。</p>
+                <p>那这样不就没啥用了吗？和 JavaScript 有啥不同吗？其实 unknown 还有其他用处，比如说编译器可以在一些判定条件下对 unknown 的值进行精确化处理，比如说一个 if 条件，判定了类型为布尔类型，那么其他和该类型相关的变量都会执行静态类型检查。示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">declare</span> <span class="keyword">const</span> maybe: unknown;</span><br><span class="line"><span class="comment">// 'maybe' could be a string, object, boolean, undefined, or other types</span></span><br><span class="line"><span class="keyword">const</span> aNumber: <span class="built_in">number</span> = maybe;</span><br><span class="line"><span class="comment">// Type 'unknown' is not assignable to type 'number'.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (maybe === <span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="comment">// TypeScript knows that maybe is a boolean now</span></span><br><span class="line">  <span class="keyword">const</span> aBoolean: <span class="built_in">boolean</span> = maybe;</span><br><span class="line">  <span class="comment">// So, it cannot be a string</span></span><br><span class="line">  <span class="keyword">const</span> aString: <span class="built_in">string</span> = maybe;</span><br><span class="line">  <span class="comment">// Type 'boolean' is not assignable to type 'string'.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> maybe === <span class="string">"string"</span>) &#123;</span><br><span class="line">  <span class="comment">// TypeScript knows that maybe is a string</span></span><br><span class="line">  <span class="keyword">const</span> aString: <span class="built_in">string</span> = maybe;</span><br><span class="line">  <span class="comment">// So, it cannot be a boolean</span></span><br><span class="line">  <span class="keyword">const</span> aBoolean: <span class="built_in">boolean</span> = maybe;</span><br><span class="line">  <span class="comment">// Type 'string' is not assignable to type 'boolean'.</span></span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里使用 declare 声明了一个类型变量，然后通过类型变量里面的判定条件就能配合检查其他变量的类型了。</p>
+                <h3 id="Any"><a href="#Any" class="headerlink" title="Any"></a>Any</h3>
+                <p>和 Unknown 的情形类似，我们还可以使用 any 来代表任意的类型，示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">declare</span> <span class="function"><span class="keyword">function</span> <span class="title">getValue</span>(<span class="params">key: <span class="built_in">string</span></span>): <span class="title">any</span></span>;</span><br><span class="line"><span class="comment">// OK, return value of 'getValue' is not checked</span></span><br><span class="line"><span class="keyword">const</span> str: <span class="built_in">string</span> = getValue(<span class="string">"myString"</span>);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里声明了一个方法，返回类型就是 any，这样的话返回类型就可以是任意的结果了。</p>
+                <p>那 any 和 unknown 有什么不同呢？any 的自由度会更高一点，如果声明为 any，那么静态类型检查都会通过，即使某个变量的属性不存在。示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">let</span> looselyTyped: <span class="built_in">any</span> = <span class="number">4</span>;</span><br><span class="line"><span class="comment">// OK, ifItExists might exist at runtime</span></span><br><span class="line">looselyTyped.ifItExists();</span><br><span class="line"><span class="comment">// OK, toFixed exists (but the compiler doesn't check)</span></span><br><span class="line">looselyTyped.toFixed();</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> strictlyTyped: unknown = <span class="number">4</span>;</span><br><span class="line">strictlyTyped.toFixed();</span><br><span class="line"><span class="comment">// Error, Object is of type 'unknown'.</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到，前两行的静态类型检查是能过的，但是 unknown 就过不了。</p>
+                <p>所以，什么时候用 unknown 什么时候用 any 呢？可以从含义上来进行区分：如果某个变量我确实就不知道它的类型，即我没办法知道它的类型，那就用 unknown；如果某个值但其实我确实有办法知道可能的类型，但确实它的类型自由度比较高，那就可以被声明为 any。</p>
+                <p>但在不必要的情况下，尽量减少 any 类型的使用。</p>
+                <h3 id="Void"><a href="#Void" class="headerlink" title="Void"></a>Void</h3>
+                <p>Void 一般用于声明方法的返回值，如果一个方法不返回任何结果，那就用 Void，示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">warnUser</span>(<span class="params"></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"This is my warning message"</span>);</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="Null-和-Undefined"><a href="#Null-和-Undefined" class="headerlink" title="Null 和 Undefined"></a>Null 和 Undefined</h3>
+                <p>其实 TypeScript 还专门为 null 和 undefined 声明了类型，一般 null 就声明为 null 类型，undefined 就声明为 undefined 类型，不过这两个并不太常用，示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment">// Not much else we can assign to these variables!</span></span><br><span class="line"><span class="keyword">let</span> u: <span class="literal">undefined</span> = <span class="literal">undefined</span>;</span><br><span class="line"><span class="keyword">let</span> n: <span class="literal">null</span> = <span class="literal">null</span>;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>另外对于其他类型来说，其值也可以是 null 或者 undefined，比如 number 类型的变量，其值为 null 也是完全可以的。不过这里有个前提条件就是，TS Config 里面的 strictNullChecks 应该是关闭状态，不然会报错的。</p>
+                <p>设置如下：</p>
+                <p><img src="https://cdn.cuiqingcai.com/ricrd.png" alt="image-20201229014015393"></p>
+                <p>比如：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">let</span> a: <span class="built_in">number</span> = <span class="literal">undefined</span>;</span><br><span class="line"><span class="keyword">let</span> b: <span class="built_in">string</span> = <span class="literal">null</span>;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样就是没问题的了。</p>
+                <h3 id="Never"><a href="#Never" class="headerlink" title="Never"></a>Never</h3>
+                <p>这个类型也比较特殊，它代表你永远得不到它的结果。比如一个方法始终抛出一个异常，或者处于一个无限循环中，那么就可以声明为 never，示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="comment">// Function returning never must not have a reachable end point</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">error</span>(<span class="params">message: <span class="built_in">string</span></span>): <span class="title">never</span> </span>&#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(message);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Inferred return type is never</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fail</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> error(<span class="string">"Something failed"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Function returning never must not have a reachable end point</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">infiniteLoop</span>(<span class="params"></span>): <span class="title">never</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3>
+                <p>Object 是 JavaScript 本身带有的类型，它表示非原始型的类型，即任何不是 number、string、boolean、bigint、symbol、null、undefined 的类型。</p>
+                <p>示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">declare</span> <span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params">o: object | <span class="literal">null</span></span>): <span class="title">void</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// OK</span></span><br><span class="line">create(&#123; prop: <span class="number">0</span> &#125;);</span><br><span class="line">create(<span class="literal">null</span>);</span><br><span class="line">create(<span class="number">42</span>);</span><br><span class="line"><span class="comment">// Error, Argument of type '42' is not assignable to parameter of type 'object | null'.</span></span><br><span class="line">create(<span class="string">"string"</span>);</span><br><span class="line"><span class="comment">// Error, Argument of type '"string"' is not assignable to parameter of type 'object | null'.</span></span><br><span class="line">create(<span class="literal">false</span>);</span><br><span class="line"><span class="comment">// Error, Argument of type 'false' is not assignable to parameter of type 'object | null'.</span></span><br><span class="line">create(<span class="literal">undefined</span>);</span><br><span class="line"><span class="comment">// Error, Argument of type 'undefined' is not assignable to parameter of type 'object | null'.</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>不过，一般不用。</p>
+                <h3 id="Type-assertions"><a href="#Type-assertions" class="headerlink" title="Type assertions"></a>Type assertions</h3>
+                <p>一般情况下，我们确确实实知道某个变量属于什么类型，或者在某种情况下确实需要这种类型的转化，则可以显式的声明某个类型，示例如下：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">let</span> someValue: unknown = <span class="string">"this is a string"</span>;</span><br><span class="line"><span class="keyword">let</span> strLength: <span class="built_in">number</span> = (someValue <span class="keyword">as</span> <span class="built_in">string</span>).length;</span><br><span class="line"><span class="keyword">let</span> someValue2: unknown = <span class="string">"this is a string"</span>;</span><br><span class="line"><span class="keyword">let</span> strLength2: <span class="built_in">number</span> = (&lt;<span class="built_in">string</span>&gt;someValue2).length;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里有两种使用方式，一种是 as，一种是尖括号声明。</p>
+                <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2>
+                <p>另外值得注意到是，以上的一些类型声明，使用大写形式 <code>Number</code>, <code>String</code>, <code>Boolean</code>, <code>Symbol</code> and <code>Object</code> 也是可以的，不过不推荐这么做，推荐还是用小写的形式。</p>
+                <p>比如这样其实是可以的：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reverse</span>(<span class="params">s: <span class="built_in">String</span></span>): <span class="title">String</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> s.split(<span class="string">""</span>).reverse().join(<span class="string">""</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">reverse(<span class="string">"hello world"</span>);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>但更推荐使用小写，写成如下形式：</p>
+                <figure class="highlight typescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reverse</span>(<span class="params">s: <span class="built_in">string</span></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> s.split(<span class="string">""</span>).reverse().join(<span class="string">""</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">reverse(<span class="string">"hello world"</span>);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+                <p>以上便是一些基本的类型声明方式，暂时先总结这么多，后面还会继续整理更高级的用法，比如 Function、Interface、Class 等。</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/23858.html" rel="prev" title="腾讯云容器服务Docker容器存储爆满解决方案">
+                      <i class="fa fa-chevron-left"></i> 腾讯云容器服务Docker容器存储爆满解决方案 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/30001.html" rel="next" title="TypeScript教程二之接口"> TypeScript教程二之接口 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#相关资料"><span class="nav-number">2.</span> <span class="nav-text">相关资料</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#基本类型"><span class="nav-number">3.</span> <span class="nav-text">基本类型</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Boolean"><span class="nav-number">3.1.</span> <span class="nav-text">Boolean</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Number"><span class="nav-number">3.2.</span> <span class="nav-text">Number</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#String"><span class="nav-number">3.3.</span> <span class="nav-text">String</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Array"><span class="nav-number">3.4.</span> <span class="nav-text">Array</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Tuple"><span class="nav-number">3.5.</span> <span class="nav-text">Tuple</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Enum"><span class="nav-number">3.6.</span> <span class="nav-text">Enum</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Unknown"><span class="nav-number">3.7.</span> <span class="nav-text">Unknown</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Any"><span class="nav-number">3.8.</span> <span class="nav-text">Any</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Void"><span class="nav-number">3.9.</span> <span class="nav-text">Void</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Null-和-Undefined"><span class="nav-number">3.10.</span> <span class="nav-text">Null 和 Undefined</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Never"><span class="nav-number">3.11.</span> <span class="nav-text">Never</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Object"><span class="nav-number">3.12.</span> <span class="nav-text">Object</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#Type-assertions"><span class="nav-number">3.13.</span> <span class="nav-text">Type assertions</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">4.</span> <span class="nav-text">注意</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'c73ce53d4e1c76a35f14a9af8edd4ddf',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

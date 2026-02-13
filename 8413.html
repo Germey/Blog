@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="13.10 Scrapy 通用爬虫 通过 Scrapy，我们可以轻松地完成一个站点爬虫的编写。但如果抓取的站点量非常大，比如爬取各大媒体的新闻信息，多个 Spider 则可能包含很多重复代码。 如果我们将各个站点的 Spider 的公共部分保留下来，不同的部分提取出来作为单独的配置，如爬取规则、页面解析方式等抽离出来做成一个配置文件，那么我们在新增一个爬虫的时候，只需要实现这些网站的爬取规则和提取">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="[Python3网络爬虫开发实战] 13.10–Scrapy 通用爬虫">
+  <meta property="og:url" content="https://cuiqingcai.com/8413.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="13.10 Scrapy 通用爬虫 通过 Scrapy，我们可以轻松地完成一个站点爬虫的编写。但如果抓取的站点量非常大，比如爬取各大媒体的新闻信息，多个 Spider 则可能包含很多重复代码。 如果我们将各个站点的 Spider 的公共部分保留下来，不同的部分提取出来作为单独的配置，如爬取规则、页面解析方式等抽离出来做成一个配置文件，那么我们在新增一个爬虫的时候，只需要实现这些网站的爬取规则和提取">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-11-27-034144.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-11-27-034532.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-11-27-034527.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-11-27-034519.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-11-27-034515.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-11-27-034510.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-11-27-034503.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-11-27-034600.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-11-27-034606.jpg">
+  <meta property="article:published_time" content="2019-12-06T01:30:05.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.299Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/2019-11-27-034144.png">
+  <link rel="canonical" href="https://cuiqingcai.com/8413.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>[Python3网络爬虫开发实战] 13.10–Scrapy 通用爬虫 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/8413.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> [Python3网络爬虫开发实战] 13.10–Scrapy 通用爬虫 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2019-12-06 09:30:05" itemprop="dateCreated datePublished" datetime="2019-12-06T09:30:05+08:00">2019-12-06</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/8413.html" class="post-meta-item leancloud_visitors" data-flag-title="[Python3网络爬虫开发实战] 13.10–Scrapy 通用爬虫" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>18k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>16 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <h1 id="13-10-Scrapy-通用爬虫"><a href="#13-10-Scrapy-通用爬虫" class="headerlink" title="13.10 Scrapy 通用爬虫"></a>13.10 Scrapy 通用爬虫</h1>
+                <p>通过 Scrapy，我们可以轻松地完成一个站点爬虫的编写。但如果抓取的站点量非常大，比如爬取各大媒体的新闻信息，多个 Spider 则可能包含很多重复代码。 如果我们将各个站点的 Spider 的公共部分保留下来，不同的部分提取出来作为单独的配置，如爬取规则、页面解析方式等抽离出来做成一个配置文件，那么我们在新增一个爬虫的时候，只需要实现这些网站的爬取规则和提取规则即可。 本节我们就来探究一下 Scrapy 通用爬虫的实现方法。</p>
+                <h3 id="1-CrawlSpider"><a href="#1-CrawlSpider" class="headerlink" title="1. CrawlSpider"></a>1. CrawlSpider</h3>
+                <p>在实现通用爬虫之前我们需要先了解一下 CrawlSpider，其官方文档链接为：<a href="http://scrapy.readthedocs.io/en/latest/topics/spiders.html#crawlspider" target="_blank" rel="noopener">http://scrapy.readthedocs.io/en/latest/topics/spiders.html#crawlspider</a>。 CrawlSpider 是 Scrapy 提供的一个通用 Spider。在 Spider 里，我们可以指定一些爬取规则来实现页面的提取，这些爬取规则由一个专门的数据结构 Rule 表示。Rule 里包含提取和跟进页面的配置，Spider 会根据 Rule 来确定当前页面中的哪些链接需要继续爬取、哪些页面的爬取结果需要用哪个方法解析等。 CrawlSpider 继承自 Spider 类。除了 Spider 类的所有方法和属性，它还提供了一个非常重要的属性和方法。</p>
+                <ul>
+                  <li>rules，它是爬取规则属性，是包含一个或多个 Rule 对象的列表。每个 Rule 对爬取网站的动作都做了定义，CrawlSpider 会读取 rules 的每一个 Rule 并进行解析。</li>
+                  <li>parse_start_url()，它是一个可重写的方法。当 start_urls 里对应的 Request 得到 Response 时，该方法被调用，它会分析 Response 并必须返回 Item 对象或者 Request 对象。</li>
+                </ul>
+                <p>这里最重要的内容莫过于 Rule 的定义了，它的定义和参数如下所示：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">class scrapy.contrib.spiders.Rule(link_extractor, <span class="attribute">callback</span>=None, <span class="attribute">cb_kwargs</span>=None, <span class="attribute">follow</span>=None, <span class="attribute">process_links</span>=None, <span class="attribute">process_request</span>=None)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>下面对其参数依次说明：</p>
+                <ul>
+                  <li>link_extractor，是一个 Link Extractor 对象。通过它，Spider 可以知道从爬取的页面中提取哪些链接。提取出的链接会自动生成 Request。它又是一个数据结构，一般常用 LxmlLinkExtractor 对象作为参数，其定义和参数如下所示：</li>
+                </ul>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">class scrapy.linkextractors.lxmlhtml.LxmlLinkExtractor(allow=(), deny=(), allow_domains=(), deny_domains=(), <span class="attribute">deny_extensions</span>=None, restrict_xpaths=(), restrict_css=(), tags=(<span class="string">'a'</span>, <span class="string">'area'</span>), attrs=(<span class="string">'href'</span>,), <span class="attribute">canonicalize</span>=<span class="literal">False</span>, <span class="attribute">unique</span>=<span class="literal">True</span>, <span class="attribute">process_value</span>=None, <span class="attribute">strip</span>=<span class="literal">True</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>allow 是一个正则表达式或正则表达式列表，它定义了从当前页面提取出的链接哪些是符合要求的，只有符合要求的链接才会被跟进。deny 则相反。allow_domains 定义了符合要求的域名，只有此域名的链接才会被跟进生成新的 Request，它相当于域名白名单。deny_domains 则相反，相当于域名黑名单。restrict_xpaths 定义了从当前页面中 XPath 匹配的区域提取链接，其值是 XPath 表达式或 XPath 表达式列表。restrict_css 定义了从当前页面中 CSS 选择器匹配的区域提取链接，其值是 CSS 选择器或 CSS 选择器列表。还有一些其他参数代表了提取链接的标签、是否去重、链接的处理等内容，使用的频率不高。可以参考文档的参数说明：<a href="http://scrapy.readthedocs.io/en/latest/topics/link-extractors.html#module-scrapy.linkextractors.lxmlhtml" target="_blank" rel="noopener">http://scrapy.readthedocs.io/en/latest/topics/link-extractors.html#module-scrapy.linkextractors.lxmlhtml</a>。</p>
+                <ul>
+                  <li>callback，即回调函数，和之前定义 Request 的 callback 有相同的意义。每次从 link_extractor 中获取到链接时，该函数将会调用。该回调函数接收一个 response 作为其第一个参数，并返回一个包含 Item 或 Request 对象的列表。注意，避免使用 parse() 作为回调函数。由于 CrawlSpider 使用 parse() 方法来实现其逻辑，如果 parse() 方法覆盖了，CrawlSpider 将会运行失败。</li>
+                  <li>cb_kwargs，字典，它包含传递给回调函数的参数。</li>
+                  <li>follow，布尔值，即 True 或 False，它指定根据该规则从 response 提取的链接是否需要跟进。如果 callback 参数为 None，follow 默认设置为 True，否则默认为 False。</li>
+                  <li>process_links，指定处理函数，从 link_extractor 中获取到链接列表时，该函数将会调用，它主要用于过滤。</li>
+                  <li>process_request，同样是指定处理函数，根据该 Rule 提取到每个 Request 时，该函数都会调用，对 Request 进行处理。该函数必须返回 Request 或者 None。</li>
+                </ul>
+                <p>以上内容便是 CrawlSpider 中的核心 Rule 的基本用法。但这些内容可能还不足以完成一个 CrawlSpider 爬虫。下面我们利用 CrawlSpider 实现新闻网站的爬取实例，来更好地理解 Rule 的用法。</p>
+                <h3 id="2-Item-Loader"><a href="#2-Item-Loader" class="headerlink" title="2. Item Loader"></a>2. Item Loader</h3>
+                <p>我们了解了利用 CrawlSpider 的 Rule 来定义页面的爬取逻辑，这是可配置化的一部分内容。但是，Rule 并没有对 Item 的提取方式做规则定义。对于 Item 的提取，我们需要借助另一个模块 Item Loader 来实现。 Item Loader 提供一种便捷的机制来帮助我们方便地提取 Item。它提供的一系列 API 可以分析原始数据对 Item 进行赋值。Item 提供的是保存抓取数据的容器，而 Item Loader 提供的是填充容器的机制。有了它，数据的提取会变得更加规则化。 Item Loader 的 API 如下所示：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">class</span> scrapy.loader.<span class="constructor">ItemLoader([<span class="params">item</span>, <span class="params">selector</span>, <span class="params">response</span>,] <span class="operator">**</span><span class="params">kwargs</span>)</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>Item Loader 的 API 返回一个新的 Item Loader 来填充给定的 Item。如果没有给出 Item，则使用 default_item_class 中的类自动实例化。另外，它传入 selector 和 response 参数来使用选择器或响应参数实例化。 下面将依次说明 Item Loader 的 API 参数。</p>
+                <ul>
+                  <li>item，Item 对象，可以调用 add_xpath()、add_css() 或 add_value() 等方法来填充 Item 对象。</li>
+                  <li>selector，Selector 对象，用来提取填充数据的选择器。</li>
+                  <li>response，Response 对象，用于使用构造选择器的 Response。</li>
+                </ul>
+                <p>一个比较典型的 Item Loader 实例如下：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">from scrapy.loader import ItemLoader</span><br><span class="line">from project.items import Product</span><br><span class="line"></span><br><span class="line">def parse(self, response):</span><br><span class="line">    loader = <span class="constructor">ItemLoader(<span class="params">item</span>=Product()</span>, response=response)</span><br><span class="line">    loader.add<span class="constructor">_xpath('<span class="params">name</span>', '<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">class</span>=<span class="string">"product_name"</span>]')</span></span><br><span class="line">    loader.add<span class="constructor">_xpath('<span class="params">name</span>', '<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">class</span>=<span class="string">"product_title"</span>]')</span></span><br><span class="line">    loader.add<span class="constructor">_xpath('<span class="params">price</span>', '<span class="operator">/</span><span class="operator">/</span><span class="params">p</span>[@<span class="params">id</span>=<span class="string">"price"</span>]')</span></span><br><span class="line">    loader.add<span class="constructor">_css('<span class="params">stock</span>', '<span class="params">p</span>#<span class="params">stock</span>]')</span></span><br><span class="line">    loader.add<span class="constructor">_value('<span class="params">last_updated</span>', '<span class="params">today</span>')</span></span><br><span class="line">    return loader.load<span class="constructor">_item()</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里首先声明一个 Product Item，用该 Item 和 Response 对象实例化 ItemLoader，调用 add_xpath() 方法把来自两个不同位置的数据提取出来，分配给 name 属性，再用 add_xpath()、add_css()、add_value() 等方法对不同属性依次赋值，最后调用 load_item() 方法实现 Item 的解析。这种方式比较规则化，我们可以把一些参数和规则单独提取出来做成配置文件或存到数据库，即可实现可配置化。 另外，Item Loader 每个字段中都包含了一个 Input Processor（输入处理器）和一个 Output Processor（输出处理器）。Input Processor 收到数据时立刻提取数据，Input Processor 的结果被收集起来并且保存在 ItemLoader 内，但是不分配给 Item。收集到所有的数据后，load_item() 方法被调用来填充再生成 Item 对象。在调用时会先调用 Output Processor 来处理之前收集到的数据，然后再存入 Item 中，这样就生成了 Item。 下面将介绍一些内置的 Processor。</p>
+                <h4 id="Identity"><a href="#Identity" class="headerlink" title="Identity"></a>Identity</h4>
+                <p>Identity 是最简单的 Processor，不进行任何处理，直接返回原来的数据。</p>
+                <h4 id="TakeFirst"><a href="#TakeFirst" class="headerlink" title="TakeFirst"></a>TakeFirst</h4>
+                <p>TakeFirst 返回列表的第一个非空值，类似 extract_first() 的功能，常用作 Output Processor，如下所示：</p>
+                <figure class="highlight stylus">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">from scrapy<span class="selector-class">.loader</span><span class="selector-class">.processors</span> import TakeFirst</span><br><span class="line">processor = TakeFirst()</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(processor([<span class="string">''</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span></span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>输出结果如下所示：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="number">1</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>经过此 Processor 处理后的结果返回了第一个不为空的值。</p>
+                <h4 id="Join"><a href="#Join" class="headerlink" title="Join"></a>Join</h4>
+                <p>Join 方法相当于字符串的 join() 方法，可以把列表拼合成字符串，字符串默认使用空格分隔，如下所示：</p>
+                <figure class="highlight gradle">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> scrapy.loader.processors <span class="keyword">import</span> <span class="keyword">Join</span></span><br><span class="line">processor = <span class="keyword">Join</span>()</span><br><span class="line"><span class="keyword">print</span>(processor([<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>]))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>输出结果如下所示：</p>
+                <figure class="highlight livecodeserver">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="literal">one</span> <span class="literal">two</span> <span class="literal">three</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>它也可以通过参数更改默认的分隔符，例如改成逗号：</p>
+                <figure class="highlight gradle">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> scrapy.loader.processors <span class="keyword">import</span> <span class="keyword">Join</span></span><br><span class="line">processor = <span class="keyword">Join</span>(<span class="string">','</span>)</span><br><span class="line"><span class="keyword">print</span>(processor([<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>]))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下所示：</p>
+                <figure class="highlight livecodeserver">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="literal">one</span>,<span class="literal">two</span>,<span class="literal">three</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h4 id="Compose"><a href="#Compose" class="headerlink" title="Compose"></a>Compose</h4>
+                <p>Compose 是用给定的多个函数的组合而构造的 Processor，每个输入值被传递到第一个函数，其输出再传递到第二个函数，依次类推，直到最后一个函数返回整个处理器的输出，如下所示：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">from scrapy.loader.processors import Compose</span><br><span class="line">processor = <span class="constructor">Compose(<span class="params">str</span>.<span class="params">upper</span>, <span class="params">lambda</span> <span class="params">s</span>: <span class="params">s</span>.<span class="params">strip</span>()</span>)</span><br><span class="line">print(processor(' hello world'))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下所示：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">HELLO WORLD</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里我们构造了一个 Compose Processor，传入一个开头带有空格的字符串。Compose Processor 的参数有两个：第一个是 str.upper，它可以将字母全部转为大写；第二个是一个匿名函数，它调用 strip() 方法去除头尾空白字符。Compose 会顺次调用两个参数，最后返回结果的字符串全部转化为大写并且去除了开头的空格。</p>
+                <h4 id="MapCompose"><a href="#MapCompose" class="headerlink" title="MapCompose"></a>MapCompose</h4>
+                <p>与 Compose 类似，MapCompose 可以迭代处理一个列表输入值，如下所示：</p>
+                <figure class="highlight stylus">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">from scrapy<span class="selector-class">.loader</span><span class="selector-class">.processors</span> import MapCompose</span><br><span class="line">processor = MapCompose(str<span class="selector-class">.upper</span>, lambda s: s.strip())</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(processor([<span class="string">'Hello'</span>, <span class="string">'World'</span>, <span class="string">'Python'</span>])</span></span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下所示：</p>
+                <figure class="highlight scheme">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="symbol">'HELLO</span>', <span class="symbol">'WORLD</span>', <span class="symbol">'PYTHON</span>']</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>被处理的内容是一个可迭代对象，MapCompose 会将该对象遍历然后依次处理。</p>
+                <h4 id="SelectJmes"><a href="#SelectJmes" class="headerlink" title="SelectJmes"></a>SelectJmes</h4>
+                <p>SelectJmes 可以查询 JSON，传入 Key，返回查询所得的 Value。不过需要先安装 jmespath 库才可以使用它，命令如下所示：</p>
+                <figure class="highlight cmake">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">pip3 <span class="keyword">install</span> jmespath</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>安装好 jmespath 之后，便可以使用这个 Processor 了，如下所示：</p>
+                <figure class="highlight isbl">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="variable">from</span> <span class="variable">scrapy.loader.processors</span> <span class="variable">import</span> <span class="variable">SelectJmes</span></span><br><span class="line"><span class="variable">proc</span> = <span class="function"><span class="title">SelectJmes</span>(<span class="string">'foo'</span>)</span></span><br><span class="line"><span class="variable">processor</span> = <span class="function"><span class="title">SelectJmes</span>(<span class="string">'foo'</span>)</span></span><br><span class="line"><span class="function"><span class="title">print</span>(<span class="title">processor</span>(&#123;<span class="string">'foo'</span>: <span class="string">'bar'</span>&#125;))</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">bar</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>以上内容便是一些常用的 Processor，在本节的实例中我们会使用 Processor 来进行数据的处理。 接下来，我们用一个实例来了解 Item Loader 的用法。</p>
+                <h3 id="3-本节目标"><a href="#3-本节目标" class="headerlink" title="3. 本节目标"></a>3. 本节目标</h3>
+                <p>我们以中华网科技类新闻为例，来了解 CrawlSpider 和 Item Loader 的用法，再提取其可配置信息实现可配置化。官网链接为：<a href="http://tech.china.com/。我们需要爬取它的科技类新闻内容，链接为：http://tech.china.com/articles/，页面如图" target="_blank" rel="noopener">http://tech.china.com/。我们需要爬取它的科技类新闻内容，链接为：http://tech.china.com/articles/，页面如图</a> 13-19 所示。 我们要抓取新闻列表中的所有分页的新闻详情，包括标题、正文、时间、来源等信息。 <img src="https://cdn.cuiqingcai.com/2019-11-27-034144.png" alt=""> 图 13-19 爬取站点</p>
+                <h3 id="4-新建项目"><a href="#4-新建项目" class="headerlink" title="4. 新建项目"></a>4. 新建项目</h3>
+                <p>首先新建一个 Scrapy 项目，名为 scrapyuniversal，如下所示：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">scrapy startproject scrapyuniversal</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>创建一个 CrawlSpider，需要先制定一个模板。我们可以先看看有哪些可用模板，命令如下所示：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">scrapy genspider -l</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下所示：</p>
+                <figure class="highlight armasm">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="symbol">Available</span> templates:</span><br><span class="line">  <span class="keyword">basic</span></span><br><span class="line"><span class="keyword"> </span> crawl</span><br><span class="line">  csvfeed</span><br><span class="line">  xmlfeed</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>之前创建 Spider 的时候，我们默认使用了第一个模板 basic。这次要创建 CrawlSpider，就需要使用第二个模板 crawl，创建命令如下所示：</p>
+                <figure class="highlight css">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="selector-tag">scrapy</span> <span class="selector-tag">genspider</span> <span class="selector-tag">-t</span> <span class="selector-tag">crawl</span> <span class="selector-tag">china</span> <span class="selector-tag">tech</span><span class="selector-class">.china</span><span class="selector-class">.com</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行之后便会生成一个 CrawlSpider，其内容如下所示：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> scrapy.linkextractors <span class="keyword">import</span> LinkExtractor</span><br><span class="line"><span class="keyword">from</span> scrapy.spiders <span class="keyword">import</span> CrawlSpider, Rule</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChinaSpider</span><span class="params">(CrawlSpider)</span>:</span></span><br><span class="line">    name = <span class="string">'china'</span></span><br><span class="line">    allowed_domains = [<span class="string">'tech.china.com'</span>]</span><br><span class="line">    start_urls = [<span class="string">'http://tech.china.com/'</span>]</span><br><span class="line"></span><br><span class="line">    rules = (Rule(LinkExtractor(allow=<span class="string">r'Items/'</span>), callback=<span class="string">'parse_item'</span>, follow=<span class="literal">True</span>),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_item</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        i = &#123;&#125;</span><br><span class="line">        <span class="comment">#i['domain_id'] = response.xpath('//input[@id="sid"]/@value').extract()</span></span><br><span class="line">        <span class="comment">#i['name'] = response.xpath('//div[@id="name"]').extract()</span></span><br><span class="line">        <span class="comment">#i['description'] = response.xpath('//div[@id="description"]').extract()</span></span><br><span class="line">        <span class="keyword">return</span> i</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这次生成的 Spider 内容多了一个 rules 属性的定义。Rule 的第一个参数是 LinkExtractor，就是上文所说的 LxmlLinkExtractor，只是名称不同。同时，默认的回调函数也不再是 parse，而是 parse_item。</p>
+                <h3 id="5-定义-Rule"><a href="#5-定义-Rule" class="headerlink" title="5. 定义 Rule"></a>5. 定义 Rule</h3>
+                <p>要实现新闻的爬取，我们需要做的就是定义好 Rule，然后实现解析函数。下面我们就来一步步实现这个过程。 首先将 start_urls 修改为起始链接，代码如下所示：</p>
+                <figure class="highlight ini">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attr">start_urls</span> = [<span class="string">'http://tech.china.com/articles/'</span>]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>之后，Spider 爬取 start_urls 里面的每一个链接。所以这里第一个爬取的页面就是我们刚才所定义的链接。得到 Response 之后，Spider 就会根据每一个 Rule 来提取这个页面内的超链接，去生成进一步的 Request。接下来，我们就需要定义 Rule 来指定提取哪些链接。 当前页面如图 13-20 所示： <img src="https://cdn.cuiqingcai.com/2019-11-27-034532.png" alt=""> 图 13-20 页面内容 这是新闻的列表页，下一步自然就是将列表中的每条新闻详情的链接提取出来。这里直接指定这些链接所在区域即可。查看源代码，所有链接都在 ID 为 left_side 的节点内，具体来说是它内部的 class 为 con_item 的节点，如图 13-21 所示。 <img src="https://cdn.cuiqingcai.com/2019-11-27-034527.jpg" alt=""> 图 13-21 列表源码 此处我们可以用 LinkExtractor 的 restrict_xpaths 属性来指定，之后 Spider 就会从这个区域提取所有的超链接并生成 Request。但是，每篇文章的导航中可能还有一些其他的超链接标签，我们只想把需要的新闻链接提取出来。真正的新闻链接路径都是以 article 开头的，我们用一个正则表达式将其匹配出来再赋值给 allow 参数即可。另外，这些链接对应的页面其实就是对应的新闻详情页，而我们需要解析的就是新闻的详情信息，所以此处还需要指定一个回调函数 callback。 到现在我们就可以构造出一个 Rule 了，代码如下所示：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="constructor">Rule(LinkExtractor(<span class="params">allow</span>='<span class="params">article</span><span class="operator">/</span>.<span class="operator">*</span>.<span class="params">html</span>', <span class="params">restrict_xpaths</span>='<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">id</span>=<span class="string">"left_side"</span>]<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">class</span>=<span class="string">"con_item"</span>]')</span>, callback='parse_item')</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>接下来，我们还要让当前页面实现分页功能，所以还需要提取下一页的链接。分析网页源码之后可以发现下一页链接是在 ID 为 pageStyle 的节点内，如图 13-22 所示。 <img src="https://cdn.cuiqingcai.com/2019-11-27-034519.jpg" alt=""> 图 13-22 分页源码 但是，下一页节点和其他分页链接区分度不高，要取出此链接我们可以直接用 XPath 的文本匹配方式，所以这里我们直接用 LinkExtractor 的 restrict_xpaths 属性来指定提取的链接即可。另外，我们不需要像新闻详情页一样去提取此分页链接对应的页面详情信息，也就是不需要生成 Item，所以不需要加 callback 参数。另外这下一页的页面如果请求成功了就需要继续像上述情况一样分析，所以它还需要加一个 follow 参数为 True，代表继续跟进匹配分析。其实，follow 参数也可以不加，因为当 callback 为空的时候，follow 默认为 True。此处 Rule 定义为如下所示：</p>
+                <figure class="highlight lisp">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Rule(<span class="name">LinkExtractor</span>(<span class="name">restrict_xpaths=</span>'//div[@id=<span class="string">"pageStyle"</span>]//a[contains(., <span class="string">"下一页"</span>)]'))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>所以现在 rules 就变成了：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">rules = (<span class="constructor">Rule(LinkExtractor(<span class="params">allow</span>='<span class="params">article</span><span class="operator">/</span>.<span class="operator">*</span>.<span class="params">html</span>', <span class="params">restrict_xpaths</span>='<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">id</span>=<span class="string">"left_side"</span>]<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">class</span>=<span class="string">"con_item"</span>]')</span>, callback='parse_item'),</span><br><span class="line">    <span class="constructor">Rule(LinkExtractor(<span class="params">restrict_xpaths</span>='<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">id</span>=<span class="string">"pageStyle"</span>]<span class="operator">/</span><span class="operator">/</span><span class="params">a</span>[<span class="params">contains</span>(., <span class="string">"下一页"</span>)</span>]'))</span><br><span class="line">)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>接着我们运行一下代码，命令如下：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">scrapy crawl china</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>现在已经实现页面的翻页和详情页的抓取了，我们仅仅通过定义了两个 Rule 即实现了这样的功能，运行效果如图 13-23 所示。 <img src="https://cdn.cuiqingcai.com/2019-11-27-034515.jpg" alt=""> 图 13-23 运行效果</p>
+                <h3 id="6-解析页面"><a href="#6-解析页面" class="headerlink" title="6. 解析页面"></a>6. 解析页面</h3>
+                <p>接下来我们需要做的就是解析页面内容了，将标题、发布时间、正文、来源提取出来即可。首先定义一个 Item，如下所示：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> Field, Item</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="symbol">NewsItem</span>(<span class="symbol">Item</span>):</span><br><span class="line">    <span class="symbol">title</span> = <span class="symbol">Field</span>()</span><br><span class="line">    <span class="symbol">url</span> = <span class="symbol">Field</span>()</span><br><span class="line">    <span class="symbol">text</span> = <span class="symbol">Field</span>()</span><br><span class="line">    <span class="symbol">datetime</span> = <span class="symbol">Field</span>()</span><br><span class="line">    <span class="symbol">source</span> = <span class="symbol">Field</span>()</span><br><span class="line">    <span class="symbol">website</span> = <span class="symbol">Field</span>()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里的字段分别指新闻标题、链接、正文、发布时间、来源、站点名称，其中站点名称直接赋值为中华网。因为既然是通用爬虫，肯定还有很多爬虫也来爬取同样结构的其他站点的新闻内容，所以需要一个字段来区分一下站点名称。 详情页的预览图如图 13-24 所示。 <img src="https://cdn.cuiqingcai.com/2019-11-27-034510.png" alt=""> 图 13-24 详情页面 如果像之前一样提取内容，就直接调用 response 变量的 xpath()、css() 等方法即可。这里 parse_item() 方法的实现如下所示：</p>
+                <figure class="highlight xquery">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def parse_item(self, response):</span><br><span class="line">    <span class="type">item</span> = NewsItem()</span><br><span class="line">    <span class="type">item</span>[<span class="string">'title'</span>] = response.xpath(<span class="string">'//h1[@id="chan_newsTitle"]/text()'</span>).extract_first()</span><br><span class="line">    <span class="type">item</span>[<span class="string">'url'</span>] = response.url</span><br><span class="line">    <span class="type">item</span>[<span class="string">'text'</span>] = <span class="string">''</span>.join(response.xpath(<span class="string">'//div[@id="chan_newsDetail"]//text()'</span>).extract()).<span class="keyword">strip</span>()</span><br><span class="line">    <span class="type">item</span>[<span class="string">'datetime'</span>] = response.xpath(<span class="string">'//div[@id="chan_newsInfo"]/text()'</span>).re_first(<span class="string">'(d+-d+-d+sd+:d+:d+)'</span>)</span><br><span class="line">    <span class="type">item</span>[<span class="string">'source'</span>] = response.xpath(<span class="string">'//div[@id="chan_newsInfo"]/text()'</span>).re_first(<span class="string">' 来源：(.*)'</span>).<span class="keyword">strip</span>()</span><br><span class="line">    <span class="type">item</span>[<span class="string">'website'</span>] = <span class="string">' 中华网 '</span></span><br><span class="line">    yield <span class="type">item</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样我们就把每条新闻的信息提取形成了一个 NewsItem 对象。 这时实际上我们就已经完成了 Item 的提取。再运行一下 Spider，如下所示：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">scrapy crawl china</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>输出内容如图 13-25 所示： <img src="https://cdn.cuiqingcai.com/2019-11-27-034503.jpg" alt=""> 图 13-25 输出内容 现在我们就可以成功将每条新闻的信息提取出来。 不过我们发现这种提取方式非常不规整。下面我们再用 Item Loader，通过 add_xpath()、add_css()、add_value() 等方式实现配置化提取。我们可以改写 parse_item()，如下所示：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def parse<span class="constructor">_item(<span class="params">self</span>, <span class="params">response</span>)</span>:</span><br><span class="line">    loader = <span class="constructor">ChinaLoader(<span class="params">item</span>=NewsItem()</span>, response=response)</span><br><span class="line">    loader.add<span class="constructor">_xpath('<span class="params">title</span>', '<span class="operator">/</span><span class="operator">/</span><span class="params">h1</span>[@<span class="params">id</span>=<span class="string">"chan_newsTitle"</span>]<span class="operator">/</span><span class="params">text</span>()</span>')</span><br><span class="line">    loader.add<span class="constructor">_value('<span class="params">url</span>', <span class="params">response</span>.<span class="params">url</span>)</span></span><br><span class="line">    loader.add<span class="constructor">_xpath('<span class="params">text</span>', '<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">id</span>=<span class="string">"chan_newsDetail"</span>]<span class="operator">/</span><span class="operator">/</span><span class="params">text</span>()</span>')</span><br><span class="line">    loader.add<span class="constructor">_xpath('<span class="params">datetime</span>', '<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">id</span>=<span class="string">"chan_newsInfo"</span>]<span class="operator">/</span><span class="params">text</span>()</span>', re='(d+-d+-d+sd+:d+:d+)')</span><br><span class="line">    loader.add<span class="constructor">_xpath('<span class="params">source</span>', '<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">id</span>=<span class="string">"chan_newsInfo"</span>]<span class="operator">/</span><span class="params">text</span>()</span>', re=' 来源：(.*)')</span><br><span class="line">    loader.add<span class="constructor">_value('<span class="params">website</span>', ' 中华网 ')</span></span><br><span class="line">    yield loader.load<span class="constructor">_item()</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们定义了一个 ItemLoader 的子类，名为 ChinaLoader，其实现如下所示：</p>
+                <figure class="highlight haskell">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="title">from</span> scrapy.loader <span class="keyword">import</span> ItemLoader</span><br><span class="line"><span class="title">from</span> scrapy.loader.processors <span class="keyword">import</span> TakeFirst, Join, Compose</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="type">NewsLoader</span>(<span class="type">ItemLoader</span>):</span></span><br><span class="line"><span class="class">    default_output_processor = <span class="type">TakeFirst</span>()</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="type">ChinaLoader</span>(<span class="type">NewsLoader</span>):</span></span><br><span class="line"><span class="class">    text_out = <span class="type">Compose</span>(<span class="type">Join</span>(), lambda s: s.strip())</span></span><br><span class="line"><span class="class">    source_out = <span class="type">Compose</span>(<span class="type">Join</span>(), lambda s: s.strip())</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>ChinaLoader 继承了 NewsLoader 类，其内定义了一个通用的 Out Processor 为 TakeFirst，这相当于之前所定义的 extract_first() 方法的功能。我们在 ChinaLoader 中定义了 text_out 和 source_out 字段。这里使用了一个 Compose Processor，它有两个参数：第一个参数 Join 也是一个 Processor，它可以把列表拼合成一个字符串；第二个参数是一个匿名函数，可以将字符串的头尾空白字符去掉。经过这一系列处理之后，我们就将列表形式的提取结果转化为去除头尾空白字符的字符串。 代码重新运行，提取效果是完全一样的。 至此，我们已经实现了爬虫的半通用化配置。</p>
+                <h3 id="7-通用配置抽取"><a href="#7-通用配置抽取" class="headerlink" title="7. 通用配置抽取"></a>7. 通用配置抽取</h3>
+                <p>为什么现在只做到了半通用化？如果我们需要扩展其他站点，仍然需要创建一个新的 CrawlSpider，定义这个站点的 Rule，单独实现 parse_item() 方法。还有很多代码是重复的，如 CrawlSpider 的变量、方法名几乎都是一样的。那么我们可不可以把多个类似的几个爬虫的代码共用，把完全不相同的地方抽离出来，做成可配置文件呢？ 当然可以。那我们可以抽离出哪些部分？所有的变量都可以抽取，如 name、allowed_domains、start_urls、rules 等。这些变量在 CrawlSpider 初始化的时候赋值即可。我们就可以新建一个通用的 Spider 来实现这个功能，命令如下所示：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">scrapy genspider -t crawl universal universal</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这个全新的 Spider 名为 universal。接下来，我们将刚才所写的 Spider 内的属性抽离出来配置成一个 JSON，命名为 china.json，放到 configs 文件夹内，和 spiders 文件夹并列，代码如下所示：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"spider"</span>: <span class="string">"universal"</span>,</span><br><span class="line">  <span class="attr">"website"</span>: <span class="string">"中华网科技"</span>,</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"新闻"</span>,</span><br><span class="line">  <span class="attr">"index"</span>: <span class="string">"http://tech.china.com/"</span>,</span><br><span class="line">  <span class="attr">"settings"</span>: &#123;<span class="attr">"USER_AGENT"</span>: <span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"start_urls"</span>: [<span class="string">"http://tech.china.com/articles/"</span>],</span><br><span class="line">  <span class="attr">"allowed_domains"</span>: [<span class="string">"tech.china.com"</span>],</span><br><span class="line">  <span class="attr">"rules"</span>: <span class="string">"china"</span></span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>第一个字段 spider 即 Spider 的名称，在这里是 universal。后面是站点的描述，比如站点名称、类型、首页等。随后的 settings 是该 Spider 特有的 settings 配置，如果要覆盖全局项目，settings.py 内的配置可以单独为其配置。随后是 Spider 的一些属性，如 start_urls、allowed_domains、rules 等。rules 也可以单独定义成一个 rules.py 文件，做成配置文件，实现 Rule 的分离，如下所示：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">from scrapy.linkextractors import LinkExtractor</span><br><span class="line">from scrapy.spiders import Rule</span><br><span class="line"></span><br><span class="line">rules = &#123;</span><br><span class="line">    'china': (<span class="constructor">Rule(LinkExtractor(<span class="params">allow</span>='<span class="params">article</span><span class="operator">/</span>.<span class="operator">*</span>.<span class="params">html</span>', <span class="params">restrict_xpaths</span>='<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">id</span>=<span class="string">"left_side"</span>]<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">class</span>=<span class="string">"con_item"</span>]')</span>,</span><br><span class="line">             callback='parse_item'),</span><br><span class="line">        <span class="constructor">Rule(LinkExtractor(<span class="params">restrict_xpaths</span>='<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">id</span>=<span class="string">"pageStyle"</span>]<span class="operator">/</span><span class="operator">/</span><span class="params">a</span>[<span class="params">contains</span>(., <span class="string">"下一页"</span>)</span>]'))</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这样我们将基本的配置抽取出来。如果要启动爬虫，只需要从该配置文件中读取然后动态加载到 Spider 中即可。所以我们需要定义一个读取该 JSON 文件的方法，如下所示：</p>
+                <figure class="highlight xl">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">from os.<span class="built_in">path</span> <span class="keyword">import</span> realpath, dirname</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line">def get_config(<span class="keyword">name</span>):</span><br><span class="line">    <span class="built_in">path</span> = dirname(realpath(__file__)) + <span class="string">'/configs/'</span> + <span class="keyword">name</span> + <span class="string">'.json'</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="built_in">path</span>, <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        return json.loads(f.read())</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>定义了 get_config() 方法之后，我们只需要向其传入 JSON 配置文件的名称即可获取此 JSON 配置信息。随后我们定义入口文件 run.py，把它放在项目根目录下，它的作用是启动 Spider，如下所示：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">import sys</span><br><span class="line"><span class="keyword">from</span> scrapy.utils.project import get_project_settings</span><br><span class="line"><span class="keyword">from</span> scrapyuniversal.spiders.universal import UniversalSpider</span><br><span class="line"><span class="keyword">from</span> scrapyuniversal.utils import get_config</span><br><span class="line"><span class="keyword">from</span> scrapy.crawler import CrawlerProcess</span><br><span class="line"></span><br><span class="line">def <span class="builtin-name">run</span>():</span><br><span class="line">    name = sys.argv[1]</span><br><span class="line">    custom_settings = get_config(name)</span><br><span class="line">    # 爬取使用的 Spider 名称</span><br><span class="line">    spider = custom_settings.<span class="builtin-name">get</span>(<span class="string">'spider'</span>, <span class="string">'universal'</span>)</span><br><span class="line">    project_settings = get_project_settings()</span><br><span class="line">   <span class="built_in"> settings </span>= dict(project_settings.copy())</span><br><span class="line">    # 合并配置</span><br><span class="line">    settings.update(custom_settings.<span class="builtin-name">get</span>(<span class="string">'settings'</span>))</span><br><span class="line">    process = CrawlerProcess(settings)</span><br><span class="line">    # 启动爬虫</span><br><span class="line">    process.crawl(spider, **&#123;<span class="string">'name'</span>: name&#125;)</span><br><span class="line">    process.start()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="builtin-name">run</span>()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行入口为 run()。首先获取命令行的参数并赋值为 name，name 就是 JSON 文件的名称，其实就是要爬取的目标网站的名称。我们首先利用 get_config() 方法，传入该名称读取刚才定义的配置文件。获取爬取使用的 spider 的名称、配置文件中的 settings 配置，然后将获取到的 settings 配置和项目全局的 settings 配置做了合并。新建一个 CrawlerProcess，传入爬取使用的配置。调用 crawl() 和 start() 方法即可启动爬取。 在 universal 中，我们新建一个<strong>init</strong>() 方法，进行初始化配置，实现如下所示：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> scrapy.linkextractors import LinkExtractor</span><br><span class="line"><span class="keyword">from</span> scrapy.spiders import CrawlSpider, Rule</span><br><span class="line"><span class="keyword">from</span> scrapyuniversal.utils import get_config</span><br><span class="line"><span class="keyword">from</span> scrapyuniversal.rules import rules</span><br><span class="line"></span><br><span class="line">class UniversalSpider(CrawlSpider):</span><br><span class="line">    name = <span class="string">'universal'</span></span><br><span class="line">    def __init__(self, name, <span class="number">*a</span>rgs, **kwargs):</span><br><span class="line">       <span class="built_in"> config </span>= get_config(name)</span><br><span class="line">        self.config = config</span><br><span class="line">        self.rules = rules.<span class="builtin-name">get</span>(config.<span class="builtin-name">get</span>(<span class="string">'rules'</span>))</span><br><span class="line">        self.start_urls = config.<span class="builtin-name">get</span>(<span class="string">'start_urls'</span>)</span><br><span class="line">        self.allowed_domains = config.<span class="builtin-name">get</span>(<span class="string">'allowed_domains'</span>)</span><br><span class="line">        super(UniversalSpider, self).__init__(<span class="number">*a</span>rgs, **kwargs)</span><br><span class="line"></span><br><span class="line">    def parse_item(self, response):</span><br><span class="line">        i = &#123;&#125;</span><br><span class="line">        return i</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在 <strong>init</strong>() 方法中，start_urls、allowed_domains、rules 等属性被赋值。其中，rules 属性另外读取了 rules.py 的配置，这样就成功实现爬虫的基础配置。 接下来，执行如下命令运行爬虫：</p>
+                <figure class="highlight dockerfile">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">python3 <span class="keyword">run</span>.<span class="bash">py china</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>程序会首先读取 JSON 配置文件，将配置中的一些属性赋值给 Spider，然后启动爬取。运行效果完全相同，运行结果如图 13-26 所示。 <img src="https://cdn.cuiqingcai.com/2019-11-27-034600.jpg" alt=""> 图 13-26 运行结果 现在我们已经对 Spider 的基础属性实现了可配置化。剩下的解析部分同样需要实现可配置化，原来的解析函数如下所示：</p>
+                <figure class="highlight reasonml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def parse<span class="constructor">_item(<span class="params">self</span>, <span class="params">response</span>)</span>:</span><br><span class="line">    loader = <span class="constructor">ChinaLoader(<span class="params">item</span>=NewsItem()</span>, response=response)</span><br><span class="line">    loader.add<span class="constructor">_xpath('<span class="params">title</span>', '<span class="operator">/</span><span class="operator">/</span><span class="params">h1</span>[@<span class="params">id</span>=<span class="string">"chan_newsTitle"</span>]<span class="operator">/</span><span class="params">text</span>()</span>')</span><br><span class="line">    loader.add<span class="constructor">_value('<span class="params">url</span>', <span class="params">response</span>.<span class="params">url</span>)</span></span><br><span class="line">    loader.add<span class="constructor">_xpath('<span class="params">text</span>', '<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">id</span>=<span class="string">"chan_newsDetail"</span>]<span class="operator">/</span><span class="operator">/</span><span class="params">text</span>()</span>')</span><br><span class="line">    loader.add<span class="constructor">_xpath('<span class="params">datetime</span>', '<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">id</span>=<span class="string">"chan_newsInfo"</span>]<span class="operator">/</span><span class="params">text</span>()</span>', re='(d+-d+-d+sd+:d+:d+)')</span><br><span class="line">    loader.add<span class="constructor">_xpath('<span class="params">source</span>', '<span class="operator">/</span><span class="operator">/</span><span class="params">div</span>[@<span class="params">id</span>=<span class="string">"chan_newsInfo"</span>]<span class="operator">/</span><span class="params">text</span>()</span>', re=' 来源：(.*)')</span><br><span class="line">    loader.add<span class="constructor">_value('<span class="params">website</span>', ' 中华网 ')</span></span><br><span class="line">    yield loader.load<span class="constructor">_item()</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>我们需要将这些配置也抽离出来。这里的变量主要有 Item Loader 类的选用、Item 类的选用、Item Loader 方法参数的定义，我们可以在 JSON 文件中添加如下 item 的配置：</p>
+                <figure class="highlight prolog">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="string">"item"</span>: &#123;</span><br><span class="line">  <span class="string">"class"</span>: <span class="string">"NewsItem"</span>,</span><br><span class="line">  <span class="string">"loader"</span>: <span class="string">"ChinaLoader"</span>,</span><br><span class="line">  <span class="string">"attrs"</span>: &#123;</span><br><span class="line">    <span class="string">"title"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"method"</span>: <span class="string">"xpath"</span>,</span><br><span class="line">        <span class="string">"args"</span>: [<span class="string">"//h1[@id='chan_newsTitle']/text()"</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"url"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"method"</span>: <span class="string">"attr"</span>,</span><br><span class="line">        <span class="string">"args"</span>: [<span class="string">"url"</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"text"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"method"</span>: <span class="string">"xpath"</span>,</span><br><span class="line">        <span class="string">"args"</span>: [<span class="string">"//div[@id='chan_newsDetail']//text()"</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"datetime"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"method"</span>: <span class="string">"xpath"</span>,</span><br><span class="line">        <span class="string">"args"</span>: [<span class="string">"//div[@id='chan_newsInfo']/text()"</span>],</span><br><span class="line">        <span class="string">"re"</span>: <span class="string">"(\\d+-\\d+-\\d+\\s\\d+:\\d+:\\d+)"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"source"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"method"</span>: <span class="string">"xpath"</span>,</span><br><span class="line">        <span class="string">"args"</span>: [<span class="string">"//div[@id='chan_newsInfo']/text()"</span>],</span><br><span class="line">        <span class="string">"re"</span>: <span class="string">"来源：(.*)"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"website"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"method"</span>: <span class="string">"value"</span>,</span><br><span class="line">        <span class="string">"args"</span>: [<span class="string">"中华网"</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里定义了 class 和 loader 属性，它们分别代表 Item 和 Item Loader 所使用的类。定义了 attrs 属性来定义每个字段的提取规则，例如，title 定义的每一项都包含一个 method 属性，它代表使用的提取方法，如 xpath 即代表调用 Item Loader 的 add_xpath() 方法。args 即参数，就是 add_xpath() 的第二个参数，即 XPath 表达式。针对 datetime 字段，我们还用了一次正则提取，所以这里还可以定义一个 re 参数来传递提取时所使用的正则表达式。 我们还要将这些配置之后动态加载到 parse_item() 方法里。最后，最重要的就是实现 parse_item() 方法，如下所示：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def parse_item(self, response):</span><br><span class="line">   item = self.config.<span class="builtin-name">get</span>(<span class="string">'item'</span>)</span><br><span class="line">   <span class="keyword">if</span> item:</span><br><span class="line">       cls = eval(item.<span class="builtin-name">get</span>(<span class="string">'class'</span>))()</span><br><span class="line">       loader = eval(item.<span class="builtin-name">get</span>(<span class="string">'loader'</span>))(cls, <span class="attribute">response</span>=response)</span><br><span class="line">       # 动态获取属性配置</span><br><span class="line">       <span class="keyword">for</span> key, value <span class="keyword">in</span> item.<span class="builtin-name">get</span>(<span class="string">'attrs'</span>).items():</span><br><span class="line">           <span class="keyword">for</span> extractor <span class="keyword">in</span> value:</span><br><span class="line">               <span class="keyword">if</span> extractor.<span class="builtin-name">get</span>(<span class="string">'method'</span>) == <span class="string">'xpath'</span>:</span><br><span class="line">                   loader.add_xpath(key, <span class="number">*e</span>xtractor.<span class="builtin-name">get</span>(<span class="string">'args'</span>), **&#123;<span class="string">'re'</span>: extractor.<span class="builtin-name">get</span>(<span class="string">'re'</span>)&#125;)</span><br><span class="line">               <span class="keyword">if</span> extractor.<span class="builtin-name">get</span>(<span class="string">'method'</span>) == <span class="string">'css'</span>:</span><br><span class="line">                   loader.add_css(key, <span class="number">*e</span>xtractor.<span class="builtin-name">get</span>(<span class="string">'args'</span>), **&#123;<span class="string">'re'</span>: extractor.<span class="builtin-name">get</span>(<span class="string">'re'</span>)&#125;)</span><br><span class="line">               <span class="keyword">if</span> extractor.<span class="builtin-name">get</span>(<span class="string">'method'</span>) == <span class="string">'value'</span>:</span><br><span class="line">                   loader.add_value(key, <span class="number">*e</span>xtractor.<span class="builtin-name">get</span>(<span class="string">'args'</span>), **&#123;<span class="string">'re'</span>: extractor.<span class="builtin-name">get</span>(<span class="string">'re'</span>)&#125;)</span><br><span class="line">               <span class="keyword">if</span> extractor.<span class="builtin-name">get</span>(<span class="string">'method'</span>) == <span class="string">'attr'</span>:</span><br><span class="line">                   loader.add_value(key, getattr(response, <span class="number">*e</span>xtractor.<span class="builtin-name">get</span>(<span class="string">'args'</span>)))</span><br><span class="line">       yield loader.load_item()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里首先获取 Item 的配置信息，然后获取 class 的配置，将其初始化，初始化 Item Loader，遍历 Item 的各个属性依次进行提取。判断 method 字段，调用对应的处理方法进行处理。如 method 为 css，就调用 Item Loader 的 add_css() 方法进行提取。所有配置动态加载完毕之后，调用 load_item() 方法将 Item 提取出来。 重新运行程序，结果如图 13-27 所示。 <img src="https://cdn.cuiqingcai.com/2019-11-27-034606.jpg" alt=""> 图 13-27 运行结果 运行结果是完全相同的。 我们再回过头看一下 start_urls 的配置。这里 start_urls 只可以配置具体的链接。如果这些链接有 100 个、1000 个，我们总不能将所有的链接全部列出来吧？在某些情况下，start_urls 也需要动态配置。我们将 start_urls 分成两种，一种是直接配置 URL 列表，一种是调用方法生成，它们分别定义为 static 和 dynamic 类型。 本例中的 start_urls 很明显是 static 类型的，所以 start_urls 配置改写如下所示： ```json”start_urls”: {“type”:”static”,”value”: [“<a href="http://tech.china.com/articles/" target="_blank" rel="noopener">http://tech.china.com/articles/</a>“] }</p>
+                <figure class="highlight autohotkey">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">如果 start_urls 是动态生成的，我们可以调用方法传参数，如下所示：</span><br><span class="line">```json</span><br><span class="line"><span class="string">"start_urls"</span>: &#123;</span><br><span class="line">  <span class="string">"type"</span>: <span class="string">"dynamic"</span>,</span><br><span class="line">  <span class="string">"method"</span>: <span class="string">"china"</span>,</span><br><span class="line">  <span class="string">"args"</span>: [<span class="number">5</span>, <span class="number">10</span>]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里 start_urls 定义为 dynamic 类型，指定方法为 urls_china()，然后传入参数 5 和 10，来生成第 5 到 10 页的链接。这样我们只需要实现该方法即可，统一新建一个 urls.py 文件，如下所示：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def china(start, end):</span><br><span class="line">    <span class="keyword">for</span><span class="built_in"> page </span><span class="keyword">in</span> range(start, end + 1):</span><br><span class="line">        yield <span class="string">'http://tech.china.com/articles/index_'</span> + str(page) + <span class="string">'.html'</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>其他站点可以自行配置。如某些链接需要用到时间戳，加密参数等，均可通过自定义方法实现。 接下来在 Spider 的 <strong>init</strong>() 方法中，start_urls 的配置改写如下所示：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> scrapyuniversal import urls</span><br><span class="line"></span><br><span class="line">start_urls = config.<span class="builtin-name">get</span>(<span class="string">'start_urls'</span>)</span><br><span class="line"><span class="keyword">if</span> start_urls:</span><br><span class="line">    <span class="keyword">if</span> start_urls.<span class="builtin-name">get</span>(<span class="string">'type'</span>) == <span class="string">'static'</span>:</span><br><span class="line">        self.start_urls = start_urls.<span class="builtin-name">get</span>(<span class="string">'value'</span>)</span><br><span class="line">    elif start_urls.<span class="builtin-name">get</span>(<span class="string">'type'</span>) == <span class="string">'dynamic'</span>:</span><br><span class="line">        self.start_urls = list(eval(<span class="string">'urls.'</span> + start_urls.<span class="builtin-name">get</span>(<span class="string">'method'</span>))(*start_urls.<span class="builtin-name">get</span>(<span class="string">'args'</span>, [])))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里通过判定 start_urls 的类型分别进行不同的处理，这样我们就可以实现 start_urls 的配置了。 至此，Spider 的设置、起始链接、属性、提取方法都已经实现了全部的可配置化。 综上所述，整个项目的配置包括如下内容。</p>
+                <ul>
+                  <li>spider，指定所使用的 Spider 的名称。</li>
+                  <li>settings，可以专门为 Spider 定制配置信息，会覆盖项目级别的配置。</li>
+                  <li>start_urls，指定爬虫爬取的起始链接。</li>
+                  <li>allowed_domains，允许爬取的站点。</li>
+                  <li>rules，站点的爬取规则。</li>
+                  <li>item，数据的提取规则。</li>
+                </ul>
+                <p>我们实现了 Scrapy 的通用爬虫，每个站点只需要修改 JSON 文件即可实现自由配置。</p>
+                <h3 id="7-本节代码"><a href="#7-本节代码" class="headerlink" title="7. 本节代码"></a>7. 本节代码</h3>
+                <p>本节代码地址为：<a href="https://github.com/Python3WebSpider/ScrapyUniversal" target="_blank" rel="noopener">https://github.com/Python3WebSpider/ScrapyUniversal</a>。</p>
+                <h3 id="8-结语"><a href="#8-结语" class="headerlink" title="8. 结语"></a>8. 结语</h3>
+                <p>本节介绍了 Scrapy 通用爬虫的实现。我们将所有配置抽离出来，每增加一个爬虫，就只需要增加一个 JSON 文件配置。之后我们只需要维护这些配置文件即可。如果要更加方便的管理，可以将规则存入数据库，再对接可视化管理页面即可。</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/8410.html" rel="prev" title="[Python3网络爬虫开发实战] 13.9–Scrapy 对接 Splash">
+                      <i class="fa fa-chevron-left"></i> [Python3网络爬虫开发实战] 13.9–Scrapy 对接 Splash </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/8418.html" rel="next" title="阿里云服务器活动！阿里云代金券 + 1 折优惠码"> 阿里云服务器活动！阿里云代金券 + 1 折优惠码 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#13-10-Scrapy-通用爬虫"><span class="nav-number">1.</span> <span class="nav-text">13.10 Scrapy 通用爬虫</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#1-CrawlSpider"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. CrawlSpider</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#2-Item-Loader"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. Item Loader</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#Identity"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">Identity</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#TakeFirst"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">TakeFirst</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#Join"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">Join</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#Compose"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">Compose</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#MapCompose"><span class="nav-number">1.0.2.5.</span> <span class="nav-text">MapCompose</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#SelectJmes"><span class="nav-number">1.0.2.6.</span> <span class="nav-text">SelectJmes</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-本节目标"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 本节目标</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#4-新建项目"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. 新建项目</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#5-定义-Rule"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. 定义 Rule</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#6-解析页面"><span class="nav-number">1.0.6.</span> <span class="nav-text">6. 解析页面</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#7-通用配置抽取"><span class="nav-number">1.0.7.</span> <span class="nav-text">7. 通用配置抽取</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#7-本节代码"><span class="nav-number">1.0.8.</span> <span class="nav-text">7. 本节代码</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#8-结语"><span class="nav-number">1.0.9.</span> <span class="nav-text">8. 结语</span></a></li>
+                    </ol>
+                  </li>
+                </ol>
+                </li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'e043cccee7c784dd630e7e11ae9428da',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

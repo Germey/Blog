@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="本文转载自：陈文管的博客-微信公众号文章爬取之：服务端数据采集 本篇内容介绍微信公众号文章服务端数据爬取的实现，配合上一篇微信公众号文章采集之：微信自动化，构成完整的微信公众号文章数据采集系统。  公众号文章爬取系统架构图 一、AnyProxy 配置（Mac） AnyProxy是一个开放式的HTTP代理服务器，官方文档：http:&#x2F;&#x2F;anyproxy.io&#x2F;cn&#x2F; Github主页：https:&#x2F;">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="微信公众号文章爬取之：服务端数据采集">
+  <meta property="og:url" content="https://cuiqingcai.com/6761.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="本文转载自：陈文管的博客-微信公众号文章爬取之：服务端数据采集 本篇内容介绍微信公众号文章服务端数据爬取的实现，配合上一篇微信公众号文章采集之：微信自动化，构成完整的微信公众号文章数据采集系统。  公众号文章爬取系统架构图 一、AnyProxy 配置（Mac） AnyProxy是一个开放式的HTTP代理服务器，官方文档：http:&#x2F;&#x2F;anyproxy.io&#x2F;cn&#x2F; Github主页：https:&#x2F;">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/06/wechat-gzh-spider-system.png">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/10/anyproxy-download-rootca-1024x168.png">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/10/android-device-monitor-network-proxy-1024x646.png">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/10/anyproxy-gui-wechat-proxy-url-1024x567.png">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/10/anyproxy-gui-wechat-proxy-url-detail-1024x567.png">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/10/anyproxy-gui-wechat-post-detail-1024x567.png">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2019/04/wechat-spider-getappmsgext-intercept-request-body-1024x481.jpg">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2019/04/wechat-spider-getappmsgext-intercept-read-like-1024x488.jpg">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/10/intellij-idea-wechat-spider-class-254x300.png">
+  <meta property="og:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/10/intellij-idea-wechat-spider-resources-288x300.png">
+  <meta property="article:published_time" content="2019-07-02T03:06:34.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.321Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://www.chenwenguan.com/wp-content/uploads/2018/06/wechat-gzh-spider-system.png">
+  <link rel="canonical" href="https://cuiqingcai.com/6761.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>微信公众号文章爬取之：服务端数据采集 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/6761.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 微信公众号文章爬取之：服务端数据采集 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2019-07-02 11:06:34" itemprop="dateCreated datePublished" datetime="2019-07-02T11:06:34+08:00">2019-07-02</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/6761.html" class="post-meta-item leancloud_visitors" data-flag-title="微信公众号文章爬取之：服务端数据采集" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>8.4k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>8 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>本文转载自：<a href="https://www.chenwenguan.com/wechat-spider-server/" target="_blank" rel="noopener">陈文管的博客-微信公众号文章爬取之：服务端数据采集</a> 本篇内容介绍微信公众号文章服务端数据爬取的实现，配合上一篇<a href="https://www.chenwenguan.com/wechat-browse-automation/" target="_blank" rel="noopener">微信公众号文章采集之：微信自动化</a>，构成完整的微信公众号文章数据采集系统。</p>
+                <p><a href="https://www.chenwenguan.com/wechat-spider-server/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/06/wechat-gzh-spider-system.png" alt="公众号文章爬取系统架构图"></a></p>
+                <p>公众号文章爬取系统架构图</p>
+                <h3 id="一、AnyProxy-配置（Mac）"><a href="#一、AnyProxy-配置（Mac）" class="headerlink" title="一、AnyProxy 配置（Mac）"></a>一、AnyProxy 配置（Mac）</h3>
+                <p>AnyProxy是一个开放式的HTTP代理服务器，官方文档：<a href="http://anyproxy.io/cn/" target="_blank" rel="noopener">http://anyproxy.io/cn/</a> Github主页：<a href="https://github.com/alibaba/anyproxy" target="_blank" rel="noopener">https://github.com/alibaba/anyproxy</a> 主要特性包括： 基于Node.js，开放二次开发能力，允许自定义请求处理逻辑 支持Https的解析 提供GUI界面，用以观察请求</p>
+                <h4 id="1、安装NodeJS"><a href="#1、安装NodeJS" class="headerlink" title="1、安装NodeJS"></a>1、安装NodeJS</h4>
+                <p>在安装Anyproxy之前，需要先安装Nodejs。Nodejs下载地址：<a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a>。 下载安装完之后可以在终端执行以下命令查看所安装的版本：</p>
+                <figure class="highlight crmsh">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"> <span class="keyword">node</span> <span class="title">--version</span>       查看<span class="keyword">node</span><span class="title">安装版本</span></span><br><span class="line"><span class="title">npm</span> -v               查看npm安装版本</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h4 id="2、AnyProxy安装配置"><a href="#2、AnyProxy安装配置" class="headerlink" title="2、AnyProxy安装配置"></a>2、AnyProxy安装配置</h4>
+                <h5 id="1-Mac端的安装配置"><a href="#1-Mac端的安装配置" class="headerlink" title="1) Mac端的安装配置"></a>1) Mac端的安装配置</h5>
+                <p>AnyProxy 不要安装最新的版本，因为接口变动较大，不便于在原来的基础上重写接口，如果已经安装最新的版本，先执行以下命令卸载：</p>
+                <figure class="highlight coffeescript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo <span class="built_in">npm</span> uninstall -g anyproxy</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>之后安装3.X版本：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo npm install  <span class="symbol">anyproxy@</span><span class="number">3.</span>x  -g</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>接着安装相应的证书：</p>
+                <figure class="highlight ada">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">anyproxy <span class="comment">--root</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h5 id="2-AnyProxy-rule-default-js-文件的配置"><a href="#2-AnyProxy-rule-default-js-文件的配置" class="headerlink" title="2) AnyProxy rule_default.js 文件的配置"></a>2) AnyProxy rule_default.js 文件的配置</h5>
+                <p>直接拷贝如下的配置覆盖AnyProxy rule_default.js配置文件即可，具体可参考知乎大神的文章：<a href="https://zhuanlan.zhihu.com/c_65943221" target="_blank" rel="noopener">微信公众号内容的批量采集与应用</a> ，其中关于图片的优化，配置的fs.readFileSync()参数替换成自己的图片放置路径。将公众号里面的所有图片替换成本地图片的目的是减轻网络传输压力和浏览器占用的内存，有效的提高运行效率，可以自己制作一张1×1像素的png透明图片。 这边跟知乎文章不同的是，在replaceServerResDataAsync中只需要把拦截的微信文章URL地址转发到自己的服务器，因为自动化浏览脚本是直接进入到公众号文章的详情页面，就不需要像知乎文章介绍的那样那么麻烦。 TIPS： 在2019.5.6-2019.5.12时间段之间，微信公众号更新了公众号文章的请求加载方式。 在replaceServerResDataAsync接口中拦截URL的方式已经行不通， 通过AnyProxy拦截的URL参数可以看到已经没有了”/s?__biz=”开头的URL， 但是从</p>
+                <figure class="highlight awk">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">“<span class="regexp">/mp/g</span>etappmsgext?”和“<span class="regexp">/mp/g</span>etappmsgad?“</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>开头的请求链接点击进去还是可以看到文章的请求链接地址。 如果是2019.5.12号之前的时间点，拦截URL接口在replaceServerResDataAsync，对应的AnyProxy rule_default.js配置文件为：<a href="https://github.com/wenguan0927/WechatSpider/blob/master/rule_default_js/rule_default_before20190512.js" target="_blank" rel="noopener">rule_default_before20190512.js</a> 在2019.5.12号之后的时间点，拦截URL的接口变动到shouldUseLocalResponse : function(req,reqBody)，只要把request body发送到后台服务器，再加上”<a href="https://mp.weixin.qq.com/s?”前缀进行拼接就行，对应的AnyProxy" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?”前缀进行拼接就行，对应的AnyProxy</a> rule_default.js配置文件应该改为：<a href="https://github.com/wenguan0927/WechatSpider/blob/master/rule_default_js/rule_default_after20190512.js" target="_blank" rel="noopener">rule_default_after20190512.js</a> 如果忘记了AnyProxy的安装路径，用命令查找rule_default.js文件即可：</p>
+                <figure class="highlight nginx">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">find</span> <span class="regexp">~ -iname</span> <span class="string">"rule_default.js"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h5 id="3）AnyProxy启动"><a href="#3）AnyProxy启动" class="headerlink" title="3）AnyProxy启动"></a>3）AnyProxy启动</h5>
+                <p>在终端执行命令启动AnyProxy：</p>
+                <figure class="highlight ebnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">anyproxy -i</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果遇到如下的异常说明缺少写文件夹的权限：</p>
+                <figure class="highlight crystal">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">the default rule <span class="keyword">for</span> AnyProxy.</span><br><span class="line">Anyproxy rules initialize finished, have <span class="function"><span class="keyword">fun</span>!</span></span><br><span class="line"><span class="function"><span class="title">The</span></span> WebSocket will not work properly in the https intercept mode :(</span><br><span class="line">fs.<span class="symbol">js:</span><span class="number">885</span></span><br><span class="line">  <span class="keyword">return</span> binding.mkdir(pathModule._makeLong(path),</span><br><span class="line">                 ^</span><br><span class="line"><span class="symbol">Error:</span> <span class="symbol">EACCES:</span> permission denied, mkdir <span class="string">'/Users/chenwenguan/.anyproxy/cache_r929590'</span></span><br><span class="line">     at Object.fs.mkdirSync (fs.<span class="symbol">js:</span><span class="number">885</span>:<span class="number">18</span>)</span><br><span class="line">     at Object<span class="class">.<span class="keyword">module</span>.<span class="title">exports</span>.<span class="title">generateCacheDir</span> (/<span class="title">Users</span>/<span class="title">chenwenguan</span>/.<span class="title">nvm</span>/<span class="title">versions</span>/<span class="title">node</span>/<span class="title">v8</span>.9.3/<span class="title">lib</span>/<span class="title">node_modules</span>/<span class="title">anyproxy</span>/<span class="title">lib</span>/<span class="title">util</span>.<span class="title">js</span>:54:8)</span></span><br><span class="line">     at new Recorder (<span class="regexp">/Users/chenwenguan</span><span class="regexp">/.nvm/versions</span><span class="regexp">/node/v</span>8.<span class="number">9.3</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">node_modules</span>/<span class="title">anyproxy</span>/<span class="title">lib</span>/<span class="title">recorder</span>.<span class="title">js</span>:16:31)</span></span><br><span class="line">     at /Users/chenwenguan/.nvm/versions/node/v8.<span class="number">9.3</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">node_modules</span>/<span class="title">anyproxy</span>/<span class="title">proxy</span>.<span class="title">js</span>:116:43</span></span><br><span class="line">     at ChildProcess.exithandler (child_process.<span class="symbol">js:</span><span class="number">282</span>:<span class="number">5</span>)</span><br><span class="line">     at emitTwo (events.<span class="symbol">js:</span><span class="number">126</span>:<span class="number">13</span>)</span><br><span class="line">     at ChildProcess.emit (events.<span class="symbol">js:</span><span class="number">214</span>:<span class="number">7</span>)</span><br><span class="line">     at maybeClose (internal/child_process.<span class="symbol">js:</span><span class="number">925</span>:<span class="number">16</span>)</span><br><span class="line">     at Socket.stream.socket.on (internal/child_process.<span class="symbol">js:</span><span class="number">346</span>:<span class="number">11</span>)</span><br><span class="line">    at emitOne (events.<span class="symbol">js:</span><span class="number">116</span>:<span class="number">13</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>用以下命令修改下文件夹权限即可：</p>
+                <figure class="highlight autohotkey">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo chown -R `whoami` /Users/chenwenguan/.anyproxy</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h5 id="4）Android虚拟机上的配置"><a href="#4）Android虚拟机上的配置" class="headerlink" title="4）Android虚拟机上的配置"></a>4）Android虚拟机上的配置</h5>
+                <p>AnyProxy启动完成后，访问GUI地址：<a href="http://192.168.1.101:8002/" target="_blank" rel="noopener">http://192.168.1.101:8002</a></p>
+                <p><a href="https://www.chenwenguan.com/wechat-spider-server/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/10/anyproxy-download-rootca-1024x168.png" alt="下载AnyProxy证书文件"></a></p>
+                <p>下载AnyProxy证书文件</p>
+                <p>点击下载rootCA.crt文件，可以在虚拟机SD卡根目录下新建一个rootCA文件夹，把文件用adb命令的方式Push到虚拟机的sdcard目录下：</p>
+                <figure class="highlight gradle">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">adb <span class="keyword">push</span> rootCA.crt <span class="regexp">/sdcard/</span>rootCA<span class="regexp">/</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>之后进入Android虚拟机系统设置界面，进入安全设置项，选择从SD卡安装（从SD卡安装证书）设置项，选择Push到sd卡下的证书文件安装，如果没有做这个操作，在微信加载WebView的时候会不断地弹出警告弹窗。 如果没有在模拟器找到系统设置或WI-FI网络设置的入口，可用adb命令调用进入，直接进入网络设置页面命令如下：</p>
+                <figure class="highlight stylus">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">adb shell am start -<span class="selector-tag">a</span> android<span class="selector-class">.intent</span><span class="selector-class">.action</span><span class="selector-class">.MAIN</span> -n com<span class="selector-class">.android</span>.settings/<span class="selector-class">.wifi</span>.WifiSettings</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>进入模拟器系统设置页面命令：</p>
+                <figure class="highlight vim">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">adb <span class="keyword">shell</span> <span class="keyword">am</span> start <span class="keyword">com</span>.android.settings/<span class="keyword">com</span>.android.settings.Settings</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在Android模拟器上还要设置网络代理，长按WIFI网络设置项，弹窗选择修改网络选项，IP地址就写电脑的IP，端口填8001。</p>
+                <p><a href="https://www.chenwenguan.com/wechat-spider-server/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/10/android-device-monitor-network-proxy-1024x646.png" alt="安卓虚拟机网络代理设置"></a></p>
+                <p>安卓虚拟机网络代理设置</p>
+                <p>在以上都配置完毕之后，进入微信应用查看公众号文章，就可以在GUI界面上看到AnyProxy拦截到的所有请求URL地址信息。 如文章前面的说明，在2019.5.12时间点之前还可以看到”/s?__biz=”开头的URL请求参数。</p>
+                <p><a href="https://www.chenwenguan.com/wechat-spider-server/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/10/anyproxy-gui-wechat-proxy-url-1024x567.png" alt="AnyProxy 拦截的URL信息"></a></p>
+                <p>AnyProxy 拦截的URL信息</p>
+                <p>上面/s?__biz=开头的URL就是微信公众号文章详细的URL地址，可以点击查看具体的详细信息：</p>
+                <p><a href="https://www.chenwenguan.com/wechat-spider-server/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/10/anyproxy-gui-wechat-proxy-url-detail-1024x567.png" alt="微信公众号文章URL详细信息"></a></p>
+                <p>微信公众号文章URL详细信息</p>
+                <p>页面往下滑动，查看请求到的公众号文章详细字段信息，服务端爬虫就是从这些字段参数定义的值来截取需要的信息。</p>
+                <p><a href="https://www.chenwenguan.com/wechat-spider-server/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/10/anyproxy-gui-wechat-post-detail-1024x567.png" alt="AnyProxy解析的公众号文章详细信息"></a></p>
+                <p>AnyProxy解析的公众号文章详细信息</p>
+                <p>目前在服务端实现保存的字段只是一些基本的信息，如标题、作者、文章发布时间等，如果需要其他信息可以参考上图的一些字段做正则匹配。 在2015.5.12时间点，微信变动公众号文章加载方式之后，文章的实际地址参数在“/mp/getappmsgext?”开头的请求链接里面，包括点赞和阅读数据也在这个请求返回的结构体里面。在“ /mp/getappmsgad?“开头的请求链接request body也是文章的链接地址，但选择“/mp/getappmsgext?”开头的URL来拦截处理比较好。</p>
+                <p><a href="https://www.chenwenguan.com/wechat-spider-server/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2019/04/wechat-spider-getappmsgext-intercept-request-body-1024x481.jpg" alt="拦截getappmsgext的请求结构体就是文章实际地址"></a></p>
+                <p>拦截getappmsgext的请求结构体就是文章实际地址</p>
+                <p>在getappmsgext拦截的页面往下滑动到response body就可以看到文章的阅读和点赞数据，因为这边没有阅读和点赞的数据解析需求，有需要的自行研究下从rule_default.js配置文件哪个接口拦截转发数据。</p>
+                <p><a href="https://www.chenwenguan.com/wechat-spider-server/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2019/04/wechat-spider-getappmsgext-intercept-read-like-1024x488.jpg" alt="拦截getappmsgext的请求返回的数据包括阅读和点赞数"></a></p>
+                <p>拦截getappmsgext的请求返回的数据包括阅读和点赞数</p>
+                <h3 id="二、JavaWeb-服务端实现"><a href="#二、JavaWeb-服务端实现" class="headerlink" title="二、JavaWeb 服务端实现"></a>二、JavaWeb 服务端实现</h3>
+                <h4 id="1、运行环境配置"><a href="#1、运行环境配置" class="headerlink" title="1、运行环境配置"></a>1、运行环境配置</h4>
+                <p>Intellij IDEA 官网下载地址：<a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener">https://www.jetbrains.com/idea/</a> 破解方法参考：<a href="https://blog.csdn.net/u013673242/article/details/72243066?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="noopener">IntelliJ IDEA 2017 完美注册方法</a> <strong>TIPS</strong>：要先打开IDEA之后再做如下配置，否则会被识别为文件已损坏</p>
+                <figure class="highlight groovy">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">-<span class="string">javaagent:</span><span class="regexp">/Applications/</span>IntelliJ IDEA.app<span class="regexp">/Contents/</span>bin/JetbrainsCrack<span class="number">-2.7</span>-release-str.jar</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h4 id="2、服务端实现"><a href="#2、服务端实现" class="headerlink" title="2、服务端实现"></a>2、服务端实现</h4>
+                <p><strong>爬虫服务端实现GitHub源码地址：</strong></p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="string">https://github.com/wenguan0927/WechatSpider</span>](<span class="link">https://github.com/wenguan0927/WechatSpider</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h5 id="1）实现类说明"><a href="#1）实现类说明" class="headerlink" title="1）实现类说明"></a>1）实现类说明</h5>
+                <p><a href="https://www.chenwenguan.com/wechat-spider-server/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/10/intellij-idea-wechat-spider-class-254x300.png" alt="公众号爬虫服务端实现源码类说明"></a></p>
+                <p>公众号爬虫服务端实现源码类说明</p>
+                <p>WechatController类做AnyProxy转发的文章链接接收和JSP页面显示的逻辑处理。 mapper文件夹下的两个类是数据库操作的映射操作类，通过配置文件自动生成，只是手动加了几个数据查询方法的实现，PostKeyWordMapper用来操作存储公众号文章关键词的数据，WechatPostMapper用来操作存储公众号文章详细数据。 model文件夹下PostJSP只是用来JSP页面显示数据的一个中间类，在JSP页面中去拼接包含较多特殊字符的文本内容容易出问题，我这边的实现是要直接生成MarkDown文档的格式，所以做了一层转化处理。PostKeyWord是公众号关键字的类，WechatPost是公众号文章详细数据类。 spider文件夹下的类就是公众号文章关键字和公众号文章详细信息的爬取解析处理类。 util文件夹下放的是工具类，SimHash只是用来测试通过关键字计算公众号文章关联性实现类，有兴趣可以自己做下挖掘。</p>
+                <h5 id="2）配置文件说明"><a href="#2）配置文件说明" class="headerlink" title="2）配置文件说明"></a>2）配置文件说明</h5>
+                <p><a href="https://www.chenwenguan.com/wechat-spider-server/" target="_blank" rel="noopener"><img src="https://www.chenwenguan.com/wp-content/uploads/2018/10/intellij-idea-wechat-spider-resources-288x300.png" alt="公众号爬虫服务端实现配置文件说明"></a></p>
+                <p>公众号爬虫服务端实现配置文件说明</p>
+                <p>mybatis-mapper文件夹下的两个文件是数据库映射XML资源文件，通过generator.properties和generatorConfig.xml两个配置文件自动生成，具体可参考：<a href="https://www.cnblogs.com/kangoroo/p/7495873.html" target="_blank" rel="noopener">数据库表反向生成(一) MyBatis-generator与IDEA的集成</a> 。 这边需要注意的是，如果要在反向生成的数据库映射操作文件中增加方法实现，不要在Mapper.xml文件里面添加方法，要加的话在Mapper.java的类中加，可参考WechatPostMapper.java 类中末尾几个方法，通过在函数上添加注解的方式实现。 generator.properties文件中的jdbc.driverLocation改成自己电脑的connector实际路径，jdbc.userId和jdbc.password改成自己数据库的用户名和密码。 jdbc.properties文件中的数据库参数也改成自己配置的值。 其他文件只是常规的Web实现配置，此处不做多余赘述。</p>
+                <h5 id="3）实现过程中遇到的问题"><a href="#3）实现过程中遇到的问题" class="headerlink" title="3）实现过程中遇到的问题"></a>3）实现过程中遇到的问题</h5>
+                <p>1）@Autowired注解的Mapper类报NullPointException异常</p>
+                <figure class="highlight aspectj">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> WechatPostMapper wechatPostMapper;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">     <span class="keyword">private</span> PostKeywordMapper postKeywordMapper;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这边需要注意的是通过@Autowired注解声明的类不能在一个new出来的类中使用，@Autowired只能在通过框架注解生成的类中使用，在一个new出来的类中使用注解在框架生成的类中是找不到的，所以会报空指针异常。其他异常可参考：<a href="https://www.jianshu.com/p/0e0421c81e6a" target="_blank" rel="noopener">@Autowired注解和静态方法</a> 2）Intellj（IDEA） warning no artifacts configured 异常 参考文章：<a href="https://blog.csdn.net/small_mouse0/article/details/77506060" target="_blank" rel="noopener">【错误解决】Intellj（IDEA） warning no artifacts configured</a> 3）Intellij 代理端口占用异常</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">错误: 代理抛出异常错误: </span><br><span class="line">java.rmi.server.ExportException:<span class="built_in"> Port </span>already <span class="keyword">in</span> use: 1099; nested exception is: </span><br><span class="line">java.net.BindException:<span class="built_in"> Address </span>already <span class="keyword">in</span> use</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>终端输入命令查看端口所在进程：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo lsof -i :<span class="number">1099</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>之后可看到如下类似的结果：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">COMMAND PID       <span class="built_in"> USER </span>  FD  <span class="built_in"> TYPE </span>            DEVICE SIZE/OFF NODE NAME</span><br><span class="line">java    582 chenwenguan   23u <span class="built_in"> IPv6 </span>0x38b6c6251709a7d3      0t0  TCP *:rmiregistry (LISTEN)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>终端输命令杀进程：kill 582 4）<a href="http://java.sun.com/jsp/jstl/core" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/core</a> cannot be resolved 如果配置的jstl版本是1.2， 不需要通过导入jstl.jar和standard.jar包的方式，如果配置的是1.2以下的版本，可参考文章： <a href="https://blog.csdn.net/BlueBlueSkyZ/article/details/54926096" target="_blank" rel="noopener">core cannot be resolved</a>。 jar包的下载地址：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[<span class="string">http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/</span>](<span class="link">http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>5） Warning:The/usr/local/mysql/data directory is not owned by the ‘mysql’ or ‘_mysql’</p>
+                <p>如果因Mac系统更新导致MySQL提示以上异常，执行以下命令解决：</p>
+                <figure class="highlight groovy">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">sudo chown -R  <span class="string">_mysql:</span>wheel  <span class="regexp">/usr/</span>local<span class="regexp">/mysql/</span>data</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>参考博文：<a href="https://blog.csdn.net/lvsijian8/article/details/60779386" target="_blank" rel="noopener">Mac在偏好设置启动MySQL失败</a> 6）注解中的数据库IN查询语句实现</p>
+                <figure class="highlight less">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="variable">@Select</span>(&#123;<span class="string">"&lt;script&gt;"</span>,</span><br><span class="line">          <span class="string">"select"</span>,</span><br><span class="line">          <span class="string">"id, biz, appmsgid, title, digest, contenturl, sourceurl, cover, datetime, readnum, "</span>,</span><br><span class="line">          <span class="string">"likenum, isspider, author, nickname, weight, posttype, content"</span>,</span><br><span class="line">          <span class="string">"from postTable where nickname in "</span>,</span><br><span class="line">          <span class="string">"&lt;foreach item='item' collection='nickname' open='(' close=')' separator=','&gt;"</span>,</span><br><span class="line">          <span class="string">"#&#123;item&#125;"</span>,</span><br><span class="line">          <span class="string">"&lt;/foreach&gt;"</span>,</span><br><span class="line">          <span class="string">" and datetime &gt;=#&#123;datetime,jdbcType=TIMESTAMP&#125;"</span>,</span><br><span class="line">          <span class="string">"order by weight DESC"</span>,</span><br><span class="line">          <span class="string">"&lt;/script&gt;"</span></span><br><span class="line"> &#125;)</span><br><span class="line"> <span class="variable">@ResultMap</span>(<span class="string">"ResultMapWithBLOBs"</span>)</span><br><span class="line">List&lt;WechatPost&gt; getATAPosts(<span class="variable">@Param</span>(<span class="string">"nickname"</span>) List&lt;String&gt; nickname, <span class="variable">@Param</span>(<span class="string">"datetime"</span>) Date time);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果是要在注解中实现IN多条件查询，需要如上面的方式去实现，直接按照原生SQL语句的方式实现是行不通的。 参考博文：<a href="https://www.cnblogs.com/a8457013/p/9097742.html" target="_blank" rel="noopener">SpringBoot使用Mybatis注解开发教程-分页-动态sql</a></p>
+                <h5 id="4-数据库实现"><a href="#4-数据库实现" class="headerlink" title="4) 数据库实现"></a>4) 数据库实现</h5>
+                <p>公众号文章详情数据表实现：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">CREATE TABLE `postTable` (</span><br><span class="line">  `id` int(11) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `biz` tinytext,</span><br><span class="line">  `appmsgid` tinytext,</span><br><span class="line">  `title` tinytext,</span><br><span class="line">  `digest` longtext,</span><br><span class="line">  `contenturl` longtext,</span><br><span class="line">  `sourceurl` longtext,</span><br><span class="line">  `cover` longtext,</span><br><span class="line">  `datetime` datetime<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `readnum` int(11)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `likenum` int(11)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `isspider` int(11)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `author` tinytext,</span><br><span class="line">  `nickname` tinytext,</span><br><span class="line">  `weight` int(11)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `posttype` int(11)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `content` longtext,</span><br><span class="line">  PRIMARY KEY (`id`)</span><br><span class="line">) <span class="attribute">ENGINE</span>=InnoDB <span class="attribute">AUTO_INCREMENT</span>=199<span class="built_in"> DEFAULT </span><span class="attribute">CHARSET</span>=utf8</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>公众号关键字数据表实现：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">CREATE TABLE `keywordTable` (</span><br><span class="line">  `id` int(11) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `wordtext` varchar(45)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `wordfrequency` int(11)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  `wordtype` int(11)<span class="built_in"> DEFAULT </span><span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY KEY (`id`)</span><br><span class="line">) <span class="attribute">ENGINE</span>=InnoDB <span class="attribute">AUTO_INCREMENT</span>=3525<span class="built_in"> DEFAULT </span><span class="attribute">CHARSET</span>=utf8</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h5 id="5）遗留问题"><a href="#5）遗留问题" class="headerlink" title="5）遗留问题"></a>5）遗留问题</h5>
+                <p>公众号文章的分类目前没有很好地实现，也就是，目前爬取的公众号文章我要分为三大类，新闻类、Android开发、技术扩展，一开始的想法是根据以往发布的每周技术周报文章内容，提取每个类别文章的关键词数据，生成一个关键词数据库，之后爬取的文章，可以通过提取文章的关键词跟历史记录文章的关键词词库进行对比，计算它们的相关性来进行归类。 目前用HanLP开源代码来做测试，提取的关键词都是中文的关键词，在做关联性计算的时候并不能达到理想的效果，因为开发类的文章有很多英文的词汇，HanLP里面并不包括英文词汇的词库，所以下一步要做的是做一个技术类文章的分词词库来实现文章的归类处理。 这边给出一些参考文章的链接资源，有兴趣可以自己做一下深挖。 <a href="http://www.hankcs.com/nlp/textrank-algorithm-to-extract-the-keywords-java-implementation.html" target="_blank" rel="noopener">TextRank算法提取关键词的Java实现</a> <a href="http://xiaosheng.me/2017/04/08/article49/" target="_blank" rel="noopener">TextRank算法提取关键词和摘要</a> <a href="https://blog.csdn.net/whzhaochao/article/details/50637300" target="_blank" rel="noopener">计算两组标签/关键词相似度算法</a> <a href="http://www.hankcs.com/nlp/hanlp.html" target="_blank" rel="noopener">HanLP自然语言处理包开源</a> <a href="https://zhuanlan.zhihu.com/p/33605700" target="_blank" rel="noopener">文本关键词提取算法解析</a> <a href="https://www.cnblogs.com/xlturing/p/6136690.html" target="_blank" rel="noopener">NLP点滴——文本相似度</a> <a href="https://www.cnblogs.com/shaosks/p/9121774.html" target="_blank" rel="noopener">文本相似性计算总结（余弦定理，simhash）及代码</a> <a href="https://segmentfault.com/a/1190000013466886" target="_blank" rel="noopener">如何实现一个基本的微信文章分类器</a> <a href="https://github.com/hankcs/HanLP" target="_blank" rel="noopener">HanLP GitHub开源代码</a></p>
+                <h3 id="三、其他参考资料"><a href="#三、其他参考资料" class="headerlink" title="三、其他参考资料"></a>三、其他参考资料</h3>
+                <p><a href="https://www.cnblogs.com/guogangj/p/3725371.html" target="_blank" rel="noopener">Mac OS X上IntelliJ IDEA 13与Tomcat 8的Java Web开发环境搭建</a> <a href="https://www.cnblogs.com/wql025/p/5215570.html" target="_blank" rel="noopener">IntelliJ IDEA 15 创建maven项目</a> <a href="http://www.mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">MyBatis官网</a> <a href="http://www.runoob.com/w3cnote/intellij-idea-usage.html" target="_blank" rel="noopener">Intellij IDEA 使用教程</a> <a href="https://liuxufei.com/weblog/jishu/71.html" target="_blank" rel="noopener">HTML语言中括号(尖括号)的字符编码</a> <a href="https://segmentfault.com/a/1190000010383923" target="_blank" rel="noopener">mac下mongodb的安装与配置</a> <a href="https://www.jianshu.com/p/2d0a1ecd0c82" target="_blank" rel="noopener">mac下mongodb的安装和使用(使用终端操作)</a> <a href="https://github.com/dboissier/mongo4idea" target="_blank" rel="noopener">Intellij Mongo配置</a> <a href="https://www.cnblogs.com/lwy19998273333/p/5793141.html" target="_blank" rel="noopener">Java连接MongoDB进行增删改查</a> <a href="https://www.cnblogs.com/jeffen/p/6027970.html" target="_blank" rel="noopener">IntelliJ IDEA手动配置连接MySQL数据库</a> <a href="http://www.mongodb.org.cn/" target="_blank" rel="noopener">MongoDB中文教程</a> <a href="https://docs.mongodb.com/manual/core/document/" target="_blank" rel="noopener">MongoDB官方文档</a> <a href="http://webmagic.io/docs/zh/" target="_blank" rel="noopener">WebMagic 爬虫框架</a></p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/6759.html" rel="prev" title="2019 WordPress 必备插件推荐">
+                      <i class="fa fa-chevron-left"></i> 2019 WordPress 必备插件推荐 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/6763.html" rel="next" title="微信公众号文章爬取之：微信自动化"> 微信公众号文章爬取之：微信自动化 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#一、AnyProxy-配置（Mac）"><span class="nav-number">1.</span> <span class="nav-text">一、AnyProxy 配置（Mac）</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-4"><a class="nav-link" href="#1、安装NodeJS"><span class="nav-number">1.1.</span> <span class="nav-text">1、安装NodeJS</span></a></li>
+                      <li class="nav-item nav-level-4"><a class="nav-link" href="#2、AnyProxy安装配置"><span class="nav-number">1.2.</span> <span class="nav-text">2、AnyProxy安装配置</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#1-Mac端的安装配置"><span class="nav-number">1.2.1.</span> <span class="nav-text">1) Mac端的安装配置</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#2-AnyProxy-rule-default-js-文件的配置"><span class="nav-number">1.2.2.</span> <span class="nav-text">2) AnyProxy rule_default.js 文件的配置</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#3）AnyProxy启动"><span class="nav-number">1.2.3.</span> <span class="nav-text">3）AnyProxy启动</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#4）Android虚拟机上的配置"><span class="nav-number">1.2.4.</span> <span class="nav-text">4）Android虚拟机上的配置</span></a></li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#二、JavaWeb-服务端实现"><span class="nav-number">2.</span> <span class="nav-text">二、JavaWeb 服务端实现</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-4"><a class="nav-link" href="#1、运行环境配置"><span class="nav-number">2.1.</span> <span class="nav-text">1、运行环境配置</span></a></li>
+                      <li class="nav-item nav-level-4"><a class="nav-link" href="#2、服务端实现"><span class="nav-number">2.2.</span> <span class="nav-text">2、服务端实现</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#1）实现类说明"><span class="nav-number">2.2.1.</span> <span class="nav-text">1）实现类说明</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#2）配置文件说明"><span class="nav-number">2.2.2.</span> <span class="nav-text">2）配置文件说明</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#3）实现过程中遇到的问题"><span class="nav-number">2.2.3.</span> <span class="nav-text">3）实现过程中遇到的问题</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#4-数据库实现"><span class="nav-number">2.2.4.</span> <span class="nav-text">4) 数据库实现</span></a></li>
+                          <li class="nav-item nav-level-5"><a class="nav-link" href="#5）遗留问题"><span class="nav-number">2.2.5.</span> <span class="nav-text">5）遗留问题</span></a></li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#三、其他参考资料"><span class="nav-number">3.</span> <span class="nav-text">三、其他参考资料</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'a7af7244648383328356b88ae16fe4ea',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

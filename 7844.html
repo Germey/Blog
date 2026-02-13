@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="前面讲解了代理池的维护和付费代理的相关使用方法，接下来我们进行一下实战演练，利用代理来爬取微信公众号的文章。 1. 本节目标 我们的主要目标是利用代理爬取微信公众号的文章，提取正文、发表日期、公众号等内容，爬取来源是搜狗微信，其链接为 http:&#x2F;&#x2F;weixin.sogou.com&#x2F;，然后把爬取结果保存到 MySQL 数据库。 2. 准备工作 首先需要准备并正常运行前文中所介绍的代理池。这里需要用">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="[Python3网络爬虫开发实战] 9.5-使用代理爬取微信公众号文章">
+  <meta property="og:url" content="https://cuiqingcai.com/7844.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="前面讲解了代理池的维护和付费代理的相关使用方法，接下来我们进行一下实战演练，利用代理来爬取微信公众号的文章。 1. 本节目标 我们的主要目标是利用代理爬取微信公众号的文章，提取正文、发表日期、公众号等内容，爬取来源是搜狗微信，其链接为 http:&#x2F;&#x2F;weixin.sogou.com&#x2F;，然后把爬取结果保存到 MySQL 数据库。 2. 准备工作 首先需要准备并正常运行前文中所介绍的代理池。这里需要用">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-055950.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-060001.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-060006.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-060011.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-060018.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-060026.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-060049.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-060055.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-060111.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/2019-10-20-060114.jpg">
+  <meta property="article:published_time" content="2019-10-20T06:15:26.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.305Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/2019-10-20-055950.png">
+  <link rel="canonical" href="https://cuiqingcai.com/7844.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>[Python3网络爬虫开发实战] 9.5-使用代理爬取微信公众号文章 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/7844.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> [Python3网络爬虫开发实战] 9.5-使用代理爬取微信公众号文章 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2019-10-20 14:15:26" itemprop="dateCreated datePublished" datetime="2019-10-20T14:15:26+08:00">2019-10-20</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span>
+                  </span>
+                  <span id="/7844.html" class="post-meta-item leancloud_visitors" data-flag-title="[Python3网络爬虫开发实战] 9.5-使用代理爬取微信公众号文章" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>16k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>14 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p>前面讲解了代理池的维护和付费代理的相关使用方法，接下来我们进行一下实战演练，利用代理来爬取微信公众号的文章。</p>
+                <h3 id="1-本节目标"><a href="#1-本节目标" class="headerlink" title="1. 本节目标"></a>1. 本节目标</h3>
+                <p>我们的主要目标是利用代理爬取微信公众号的文章，提取正文、发表日期、公众号等内容，爬取来源是搜狗微信，其链接为 <a href="http://weixin.sogou.com/，然后把爬取结果保存到" target="_blank" rel="noopener">http://weixin.sogou.com/，然后把爬取结果保存到</a> MySQL 数据库。</p>
+                <h3 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2. 准备工作"></a>2. 准备工作</h3>
+                <p>首先需要准备并正常运行前文中所介绍的代理池。这里需要用的 Python 库有 aiohttp、requests、redis-py、pyquery、Flask、PyMySQL，如这些库没有安装可以参考第 1 章的安装说明。</p>
+                <h3 id="3-爬取分析"><a href="#3-爬取分析" class="headerlink" title="3. 爬取分析"></a>3. 爬取分析</h3>
+                <p>搜狗对微信公众平台的公众号和文章做了整合。我们可以通过上面的链接搜索到相关的公众号和文章，例如搜索 NBA，可以搜索到最新的文章，如图 9-21 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-055950.png" alt=""> 图 9-21 搜索结果 点击搜索后，搜索结果的 URL 中其实有很多无关 GET 请求参数，将无关的参数去掉，只保留 type 和 query 参数，例如 <a href="http://weixin.sogou.com/weixin?type=2&amp;query=NBA，搜索关键词为" target="_blank" rel="noopener">http://weixin.sogou.com/weixin?type=2&amp;query=NBA，搜索关键词为</a> NBA，类型为 2，2 代表搜索微信文章。 下拉网页，点击下一页即可翻页，如图 9-22 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-060001.jpg" alt=""> 图 9-22 翻页列表 注意，如果没有输入账号登录，那只能看到 10 页的内容，登录之后可以看到 100 页内容，如图 9-23 和图 9-24 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-060006.jpg" alt=""> 图 9-23 不登录的结果 <img src="https://cdn.cuiqingcai.com/2019-10-20-060011.jpg" alt=""> 图 9-24 登录后的结果 如果需要爬取更多内容，就需要登录并使用 Cookies 来爬取。 搜狗微信站点的反爬虫能力很强，如连续刷新，站点就会弹出类似如图 9-25 所示的验证。 <img src="https://cdn.cuiqingcai.com/2019-10-20-060018.png" alt=""> 图 9-25 验证码页面 网络请求出现了 302 跳转，返回状态码为 302，跳转的链接开头为 <a href="http://weixin.sogou.com/antispider/，这很明显就是一个反爬虫的验证页面。所以我们得出结论，如果服务器返回状态码为" target="_blank" rel="noopener">http://weixin.sogou.com/antispider/，这很明显就是一个反爬虫的验证页面。所以我们得出结论，如果服务器返回状态码为</a> 302 而非 200，则 IP 访问次数太高，IP 被封禁，此请求就是失败了。 如果遇到这种情况，我们可以选择识别验证码并解封，也可以使用代理直接切换 IP。在这里我们采用第二种方法，使用代理直接跳过这个验证。代理使用上一节所讲的代理池，还需要更改检测的 URL 为搜狗微信的站点。 对于这种反爬能力很强的网站来说，如果我们遇到此种返回状态就需要重试。所以我们采用另一种爬取方式，借助数据库构造一个爬取队列，待爬取的请求都放到队列里，如果请求失败了重新放回队列，就会被重新调度爬取。 在这里我们可以采用 Redis 的队列数据结构，新的请求就加入队列，或者有需要重试的请求也放回队列。调度的时候如果队列不为空，那就把一个个请求取出来执行，得到响应后再进行解析，提取出我们想要的结果。 这次我们采用 MySQL 存储，借助 PyMySQL 库，将爬取结果构造为一个字典，实现动态存储。 综上所述，我们本节实现的功能有如下几点。</p>
+                <ul>
+                  <li>修改代理池检测链接为搜狗微信站点</li>
+                  <li>构造 Redis 爬取队列，用队列实现请求的存取</li>
+                  <li>实现异常处理，失败的请求重新加入队列</li>
+                  <li>实现翻页和提取文章列表并把对应请求加入队列</li>
+                  <li>实现微信文章的信息的提取</li>
+                  <li>将提取到的信息保存到 MySQL</li>
+                </ul>
+                <p>好，那么接下来我们就用代码来实现一下。</p>
+                <h3 id="4-构造-Request"><a href="#4-构造-Request" class="headerlink" title="4. 构造 Request"></a>4. 构造 Request</h3>
+                <p>既然我们要用队列来存储请求，那么肯定要实现一个请求 Request 的数据结构，这个请求需要包含一些必要信息，如请求链接、请求头、请求方式、超时时间。另外对于某个请求，我们需要实现对应的方法来处理它的响应，所以需要再加一个 Callback 回调函数。每次翻页请求需要代理来实现，所以还需要一个参数 NeedProxy。如果一个请求失败次数太多，那就不再重新请求了，所以还需要加失败次数的记录。 这些字段都需要作为 Request 的一部分，组成一个完整的 Request 对象放入队列去调度，这样从队列获取出来的时候直接执行这个 Request 对象就好了。 我们可以采用继承 reqeusts 库中的 Request 对象的方式来实现这个数据结构。requests 库中已经有了 Request 对象，它将请求 Request 作为一个整体对象去执行，得到响应后再返回。其实 requests 库的 get()、post() 等方法都是通过执行 Request 对象实现的。 我们首先看看 Request 对象的源码：</p>
+                <figure class="highlight oxygene">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">class</span> Request(RequestHooksMixin):</span><br><span class="line">    def __init__(<span class="keyword">self</span>,</span><br><span class="line">            <span class="function"><span class="keyword">method</span>=<span class="title">None</span>, <span class="title">url</span>=<span class="title">None</span>, <span class="title">headers</span>=<span class="title">None</span>, <span class="title">files</span>=<span class="title">None</span>, <span class="title">data</span>=<span class="title">None</span>,</span></span><br><span class="line"><span class="function">            <span class="title">params</span>=<span class="title">None</span>, <span class="title">auth</span>=<span class="title">None</span>, <span class="title">cookies</span>=<span class="title">None</span>, <span class="title">hooks</span>=<span class="title">None</span>, <span class="title">json</span>=<span class="title">None</span>):</span></span><br><span class="line"></span><br><span class="line">        # <span class="keyword">Default</span> <span class="keyword">empty</span> dicts <span class="keyword">for</span> dict <span class="keyword">params</span>.</span><br><span class="line">        data = [] <span class="keyword">if</span> data <span class="keyword">is</span> None <span class="keyword">else</span> data</span><br><span class="line">        files = [] <span class="keyword">if</span> files <span class="keyword">is</span> None <span class="keyword">else</span> files</span><br><span class="line">        headers = <span class="comment">&#123;&#125;</span> <span class="keyword">if</span> headers <span class="keyword">is</span> None <span class="keyword">else</span> headers</span><br><span class="line">        <span class="keyword">params</span> = <span class="comment">&#123;&#125;</span> <span class="keyword">if</span> <span class="keyword">params</span> <span class="keyword">is</span> None <span class="keyword">else</span> <span class="keyword">params</span></span><br><span class="line">        hooks = <span class="comment">&#123;&#125;</span> <span class="keyword">if</span> hooks <span class="keyword">is</span> None <span class="keyword">else</span> hooks</span><br><span class="line"></span><br><span class="line">        <span class="keyword">self</span>.hooks = default_hooks()</span><br><span class="line">        <span class="keyword">for</span> (k, v) <span class="keyword">in</span> list(hooks.items()):</span><br><span class="line">            <span class="keyword">self</span>.register_hook(<span class="keyword">event</span>=k, hook=v)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">self</span><span class="function">.<span class="keyword">method</span> = <span class="title">method</span></span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">url</span> = <span class="title">url</span></span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">headers</span> = <span class="title">headers</span></span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">files</span> = <span class="title">files</span></span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">data</span> = <span class="title">data</span></span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">json</span> = <span class="title">json</span></span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">params</span> = <span class="title">params</span></span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">auth</span> = <span class="title">auth</span></span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">cookies</span> = <span class="title">cookies</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这是 requests 库中 Request 对象的构造方法。这个 Request 已经包含了请求方式、请求链接、请求头这几个属性，但是相比我们需要的还差了几个。我们需要实现一个特定的数据结构，在原先基础上加入上文所提到的额外几个属性。这里我们需要继承 Request 对象重新实现一个请求，将它定义为 WeixinRequest，实现如下：</p>
+                <figure class="highlight oxygene">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">TIMEOUT = <span class="number">10</span></span><br><span class="line"><span class="keyword">from</span> requests import Request</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> WeixinRequest(Request):</span><br><span class="line">    def __init__(<span class="keyword">self</span>, url, callback, <span class="function"><span class="keyword">method</span>='<span class="title">GET</span>', <span class="title">headers</span>=<span class="title">None</span>, <span class="title">need_proxy</span>=<span class="title">False</span>, <span class="title">fail_time</span>=0, <span class="title">timeout</span>=<span class="title">TIMEOUT</span>):</span></span><br><span class="line">        Request.__init__(<span class="keyword">self</span>, <span class="function"><span class="keyword">method</span>, <span class="title">url</span>, <span class="title">headers</span>)</span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">callback</span> = <span class="title">callback</span></span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">need_proxy</span> = <span class="title">need_proxy</span></span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">fail_time</span> = <span class="title">fail_time</span></span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">timeout</span> = <span class="title">timeout</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里我们实现了 WeixinRequest 数据结构。<strong>init</strong>() 方法先调用了 Request 的<strong>init</strong>() 方法，然后加入额外的几个参数，定义为 callback、need_proxy、fail_time、timeout，分别代表回调函数、是否需要代理爬取、失败次数、超时时间。 我们就可以将 WeixinRequest 作为一个整体来执行，一个个 WeixinRequest 对象都是独立的，每个请求都有自己的属性。例如，我们可以调用它的 callback，就可以知道这个请求的响应应该用什么方法来处理，调用 fail_time 就可以知道这个请求失败了多少次，判断失败次数是不是到了阈值，该不该丢弃这个请求。这里我们采用了面向对象的一些思想。</p>
+                <h3 id="5-实现请求队列"><a href="#5-实现请求队列" class="headerlink" title="5. 实现请求队列"></a>5. 实现请求队列</h3>
+                <p>接下来我们就需要构造请求队列，实现请求的存取。存取无非就是两个操作，一个是放，一个是取，所以这里利用 Redis 的 rpush() 和 lpop() 方法即可。 另外还需要注意，存取不能直接存 Request 对象，Redis 里面存的是字符串。所以在存 Request 对象之前我们先把它序列化，取出来的时候再将其反序列化，这个过程可以利用 pickle 模块实现。</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> pickle <span class="keyword">import</span> dumps, loads</span><br><span class="line"><span class="keyword">from</span> request <span class="keyword">import</span> WeixinRequest</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RedisQueue</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""初始化 Redis"""</span></span><br><span class="line">        self.db = StrictRedis(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self, request)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        向队列添加序列化后的 Request</span></span><br><span class="line"><span class="string">        :param request: 请求对象</span></span><br><span class="line"><span class="string">        :param fail_time: 失败次数</span></span><br><span class="line"><span class="string">        :return: 添加结果</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(request, WeixinRequest):</span><br><span class="line">            <span class="keyword">return</span> self.db.rpush(REDIS_KEY, dumps(request))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        取出下一个 Request 并反序列化</span></span><br><span class="line"><span class="string">        :return: Request or None</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> self.db.llen(REDIS_KEY):</span><br><span class="line">            <span class="keyword">return</span> loads(self.db.lpop(REDIS_KEY))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">empty</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.db.llen(REDIS_KEY) == <span class="number">0</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里实现了一个 RedisQueue，它的 <strong>init</strong>() 构造方法里面初始化了一个 StrictRedis 对象。随后实现了 add() 方法，首先判断 Request 的类型，如果是 WeixinRequest，那么就把程序就会用 pickle 的 dumps() 方法序列化，然后再调用 rpush() 方法加入队列。pop() 方法则相反，调用 lpop() 方法将请求从队列取出，然后再用 pickle 的 loads() 方法将其转为 WeixinRequest 对象。另外，empty() 方法返回队列是否为空，只需要判断队列长度是否为 0 即可。 在调度的时候，我们只需要新建一个 RedisQueue 对象，然后调用 add() 方法，传入 WeixinRequest 对象，即可将 WeixinRequest 加入队列，调用 pop() 方法，即可取出下一个 WeixinRequest 对象，非常简单易用。</p>
+                <h3 id="6-修改代理池"><a href="#6-修改代理池" class="headerlink" title="6. 修改代理池"></a>6. 修改代理池</h3>
+                <p>接下来我们要生成请求并开始爬取。在此之前还需要做一件事，那就是先找一些可用代理。 之前代理池检测的 URL 并不是搜狗微信站点，所以我们需要将代理池检测的 URL 修改成搜狗微信站点，以便于把被搜狗微信站点封禁的代理剔除掉，留下可用代理。 现在将代理池的设置文件中的 TEST_URL 修改一下，如 <a href="http://weixin.sogou.com/weixin?type=2&amp;amp" target="_blank" rel="noopener">http://weixin.sogou.com/weixin?type=2&amp;amp</a>; query=nba，被本站点封的代理就会减分，正常请求的代理就会赋值为 100，最后留下的就是可用代理。 修改之后将获取模块、检测模块、接口模块的开关都设置为 True，让代理池运行一会，如图 9-26 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-060026.jpg" alt=""> 图 9-26 代理池运行结果 这样，数据库中留下的 100 分的代理就是针对搜狗微信的可用代理了，如图 9-27 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-060049.jpg" alt=""> 图 9-27 可用代理列表 同时访问代理接口，接口设置为 5555，访问 <a href="http://127.0.0.1:5555/random，即可获取到随机可用代理，如图" target="_blank" rel="noopener">http://127.0.0.1:5555/random，即可获取到随机可用代理，如图</a> 9-28 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-060055.jpg" alt=""> 图 9-28 代理接口 再定义一个函数来获取随机代理：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">PROXY_POOL_URL = <span class="string">'http://127.0.0.1:5555/random'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_proxy</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    从代理池获取代理</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        response = requests.get(PROXY_POOL_URL)</span><br><span class="line">        <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">            print(<span class="string">'Get Proxy'</span>, response.text)</span><br><span class="line">            <span class="keyword">return</span> response.text</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">except</span> requests.ConnectionError:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="7-第一个请求"><a href="#7-第一个请求" class="headerlink" title="7. 第一个请求"></a>7. 第一个请求</h3>
+                <p>一切准备工作都做好，下面我们就可以构造第一个请求放到队列里以供调度了。定义一个 Spider 类，实现 start() 方法的代码如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> requests <span class="keyword">import</span> Session</span><br><span class="line"><span class="keyword">from</span> db <span class="keyword">import</span> RedisQueue</span><br><span class="line"><span class="keyword">from</span> request <span class="keyword">import</span> WeixinRequest</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlencode</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Spider</span><span class="params">()</span>:</span></span><br><span class="line">    base_url = <span class="string">'http://weixin.sogou.com/weixin'</span></span><br><span class="line">    keyword = <span class="string">'NBA'</span></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'</span>,</span><br><span class="line">        <span class="string">'Accept-Encoding'</span>: <span class="string">'gzip, deflate'</span>,</span><br><span class="line">        <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2,mt;q=0.2'</span>,</span><br><span class="line">        <span class="string">'Cache-Control'</span>: <span class="string">'max-age=0'</span>,</span><br><span class="line">        <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span>,</span><br><span class="line">        <span class="string">'Cookie'</span>: <span class="string">'IPLOC=CN1100; SUID=6FEDCF3C541C940A000000005968CF55; SUV=1500041046435211; ABTEST=0|1500041048|v1; SNUID=CEA85AE02A2F7E6EAFF9C1FE2ABEBE6F; weixinIndexVisited=1; JSESSIONID=aaar_m7LEIW-jg_gikPZv; ld=Wkllllllll2BzGMVlllllVOo8cUlllll5G@HbZllll9lllllRklll5@@@@@@@@@@'</span>,</span><br><span class="line">        <span class="string">'Host'</span>: <span class="string">'weixin.sogou.com'</span>,</span><br><span class="line">        <span class="string">'Upgrade-Insecure-Requests'</span>: <span class="string">'1'</span>,</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'</span></span><br><span class="line">    &#125;</span><br><span class="line">    session = Session()</span><br><span class="line">    queue = RedisQueue()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""初始化工作"""</span></span><br><span class="line">        <span class="comment"># 全局更新 Headers</span></span><br><span class="line">        self.session.headers.update(self.headers)</span><br><span class="line">        start_url = self.base_url + <span class="string">'?'</span> + urlencode(&#123;<span class="string">'query'</span>: self.keyword, <span class="string">'type'</span>: <span class="number">2</span>&#125;)</span><br><span class="line">        weixin_request = WeixinRequest(url=start_url, callback=self.parse_index, need_proxy=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># 调度第一个请求</span></span><br><span class="line">        self.queue.add(weixin_request)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里定义了 Spider 类，设置了很多全局变量，比如 keyword 设置为 NBA，headers 就是请求头。在浏览器里登录账号，然后在开发者工具里将请求头复制出来，记得带上 Cookie 字段，这样才能爬取 100 页的内容。然后初始化了 Session 和 RedisQueue 对象，它们分别用来执行请求和存储请求。 首先，start() 方法全局更新了 headers，使得所有请求都能应用 Cookies。然后构造了一个起始 URL：<a href="http://weixin.sogou.com/weixin?type=2&amp;query=NBA，随后用改" target="_blank" rel="noopener">http://weixin.sogou.com/weixin?type=2&amp;query=NBA，随后用改</a> URL 构造了一个 WeixinRequest 对象。回调函数是 Spider 类的 parse_index() 方法，也就是当这个请求成功之后就用 parse_index() 来处理和解析。need_proxy 参数设置为 True，代表执行这个请求需要用到代理。随后我们调用了 RedisQueue 的 add() 方法，将这个请求加入队列，等待调度。</p>
+                <h3 id="8-调度请求"><a href="#8-调度请求" class="headerlink" title="8. 调度请求"></a>8. 调度请求</h3>
+                <p>加入第一个请求之后，调度开始了。我们首先从队列中取出这个请求，将它的结果解析出来，生成新的请求加入队列，然后拿出新的请求，将结果解析，再生成新的请求加入队列，这样循环往复执行，直到队列中没有请求，则代表爬取结束。我们用代码实现如下：</p>
+                <figure class="highlight php">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">VALID_STATUSES = [<span class="number">200</span>]</span><br><span class="line"></span><br><span class="line">def schedule(<span class="keyword">self</span>):</span><br><span class="line">    <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">    调度请求</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    "</span><span class="string">""</span></span><br><span class="line">    <span class="keyword">while</span> not <span class="keyword">self</span>.queue.<span class="keyword">empty</span>():</span><br><span class="line">        weixin_request = <span class="keyword">self</span>.queue.pop()</span><br><span class="line">        callback = weixin_request.callback</span><br><span class="line">        <span class="keyword">print</span>(<span class="string">'Schedule'</span>, weixin_request.url)</span><br><span class="line">        response = <span class="keyword">self</span>.request(weixin_request)</span><br><span class="line">        <span class="keyword">if</span> response <span class="keyword">and</span> response.status_code in VALID_STATUSES:</span><br><span class="line">            results = <span class="keyword">list</span>(callback(response))</span><br><span class="line">            <span class="keyword">if</span> results:</span><br><span class="line">                <span class="keyword">for</span> result in results:</span><br><span class="line">                    <span class="keyword">print</span>(<span class="string">'New Result'</span>, result)</span><br><span class="line">                    <span class="keyword">if</span> isinstance(result, WeixinRequest):</span><br><span class="line">                        <span class="keyword">self</span>.queue.add(result)</span><br><span class="line">                    <span class="keyword">if</span> isinstance(result, dict):</span><br><span class="line">                        <span class="keyword">self</span>.mysql.insert(<span class="string">'articles'</span>, result)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">self</span>.error(weixin_request)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">self</span>.error(weixin_request)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>在这里实现了一个 schedule() 方法，其内部是一个循环，循环的判断是队列不为空。 当队列不为空时，调用 pop() 方法取出下一个请求，调用 request() 方法执行这个请求，request() 方法的实现如下：</p>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> requests import ReadTimeout, ConnectionError</span><br><span class="line"></span><br><span class="line">def request(self, weixin_request):</span><br><span class="line">    <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">    执行请求</span></span><br><span class="line"><span class="string">    :param weixin_request: 请求</span></span><br><span class="line"><span class="string">    :return: 响应</span></span><br><span class="line"><span class="string">    "</span><span class="string">""</span></span><br><span class="line">    try:</span><br><span class="line">        <span class="keyword">if</span> weixin_request.need_proxy:</span><br><span class="line">           <span class="built_in"> proxy </span>= get_proxy()</span><br><span class="line">            <span class="keyword">if</span> proxy:</span><br><span class="line">                proxies = &#123;</span><br><span class="line">                    <span class="string">'http'</span>: <span class="string">'http://'</span> + proxy,</span><br><span class="line">                    <span class="string">'https'</span>: <span class="string">'https://'</span> + proxy</span><br><span class="line">                &#125;</span><br><span class="line">                return self.session.send(weixin_request.prepare(),</span><br><span class="line">                                         <span class="attribute">timeout</span>=weixin_request.timeout, <span class="attribute">allow_redirects</span>=<span class="literal">False</span>, <span class="attribute">proxies</span>=proxies)</span><br><span class="line">        return self.session.send(weixin_request.prepare(), <span class="attribute">timeout</span>=weixin_request.timeout, <span class="attribute">allow_redirects</span>=<span class="literal">False</span>)</span><br><span class="line">    except (ConnectionError, ReadTimeout) as e:</span><br><span class="line">        <span class="builtin-name">print</span>(e.args)</span><br><span class="line">        return <span class="literal">False</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里首先判断这个请求是否需要代理，如果需要代理，则调用 get_proxy() 方法获取代理，然后调用 Session 的 send() 方法执行这个请求。这里的请求调用了 prepare() 方法转化为 Prepared Request，具体的用法可以参考 <a href="http://docs.python-requests.org/en/master/user/advanced/#prepared-requests，同时设置" target="_blank" rel="noopener">http://docs.python-requests.org/en/master/user/advanced/#prepared-requests，同时设置</a> allow_redirects 为 False，timeout 是该请求的超时时间，最后响应返回。 执行 request() 方法之后会得到两种结果：一种是 False，即请求失败，连接错误；另一种是 Response 对象，还需要判断状态码，如果状态码合法，那么就进行解析，否则重新将请求加回队列。 如果状态码合法，解析的时候就会调用 WeixinRequest 的回调函数进行解析。比如这里的回调函数是 parse_index()，其实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> pyquery <span class="keyword">import</span> PyQuery <span class="keyword">as</span> pq</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_index</span><span class="params">(self, response)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    解析索引页</span></span><br><span class="line"><span class="string">    :param response: 响应</span></span><br><span class="line"><span class="string">    :return: 新的响应</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    doc = pq(response.text)</span><br><span class="line">    items = doc(<span class="string">'.news-box .news-list li .txt-box h3 a'</span>).items()</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">        url = item.attr(<span class="string">'href'</span>)</span><br><span class="line">        weixin_request = WeixinRequest(url=url, callback=self.parse_detail)</span><br><span class="line">        <span class="keyword">yield</span> weixin_request</span><br><span class="line">    next = doc(<span class="string">'#sogou_next'</span>).attr(<span class="string">'href'</span>)</span><br><span class="line">    <span class="keyword">if</span> next:</span><br><span class="line">        url = self.base_url + str(next)</span><br><span class="line">        weixin_request = WeixinRequest(url=url, callback=self.parse_index, need_proxy=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">yield</span> weixin_request</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>此方法做了两件事：一件事就是获取本页的所有微信文章链接，另一件事就是获取下一页的链接，再构造成 WeixinRequest 之后 yield 返回。 然后，schedule() 方法将返回的结果进行遍历，利用 isinstance() 方法判断返回结果，如果返回结果是 WeixinRequest，就将其重新加入队列。 至此，第一次循环结束。 这时 while 循环会继续执行。队列已经包含第一页内容的文章详情页请求和下一页的请求，所以第二次循环得到的下一个请求就是文章详情页的请求，程序重新调用 request() 方法获取其响应，然后调用其对应的回调函数解析。这时详情页请求的回调方法就不同了，这次是 parse_detail() 方法，此方法实现如下：</p>
+                <figure class="highlight ceylon">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">def parse<span class="number">_</span>detail(self, response):</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    解析详情页</span></span><br><span class="line"><span class="string">    :param response: 响应</span></span><br><span class="line"><span class="string">    :return: 微信公众号文章</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="meta">doc</span> = pq(response.text)</span><br><span class="line">    data = &#123;<span class="string">'title'</span>: <span class="meta">doc</span>(<span class="string">'.rich_media_title'</span>).text(),</span><br><span class="line">        <span class="string">'content'</span>: <span class="meta">doc</span>(<span class="string">'.rich_media_content'</span>).text(),</span><br><span class="line">        <span class="string">'date'</span>: <span class="meta">doc</span>(<span class="string">'#post-date'</span>).text(),</span><br><span class="line">        <span class="string">'nickname'</span>: <span class="meta">doc</span>(<span class="string">'#js_profile_qrcode&gt; div &gt; strong'</span>).text(),</span><br><span class="line">        <span class="string">'wechat'</span>: <span class="meta">doc</span>(<span class="string">'#js_profile_qrcode&gt; div &gt; p:nth-child(3) &gt; span'</span>).text()&#125;</span><br><span class="line">    yield data</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这个方法解析了微信文章详情页的内容，提取出它的标题、正文文本、发布日期、发布人昵称、微信公众号名称，将这些信息组合成一个字典返回。 结果返回之后还需要判断类型，如是字典类型，程序就调用 mysql 对象的 insert() 方法将数据存入数据库。 这样，第二次循环执行完毕。 第三次循环、第四次循环，循环往复，每个请求都有各自的回调函数，索引页解析完毕之后会继续生成后续请求，详情页解析完毕之后会返回结果以便存储，直到爬取完毕。 现在，整个调度就完成了。 我们完善一下整个 Spider 代码，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">from</span> requests <span class="keyword">import</span> Session</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> db <span class="keyword">import</span> RedisQueue</span><br><span class="line"><span class="keyword">from</span> mysql <span class="keyword">import</span> MySQL</span><br><span class="line"><span class="keyword">from</span> request <span class="keyword">import</span> WeixinRequest</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlencode</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> pyquery <span class="keyword">import</span> PyQuery <span class="keyword">as</span> pq</span><br><span class="line"><span class="keyword">from</span> requests <span class="keyword">import</span> ReadTimeout, ConnectionError</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Spider</span><span class="params">()</span>:</span></span><br><span class="line">    base_url = <span class="string">'http://weixin.sogou.com/weixin'</span></span><br><span class="line">    keyword = <span class="string">'NBA'</span></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'</span>,</span><br><span class="line">        <span class="string">'Accept-Encoding'</span>: <span class="string">'gzip, deflate'</span>,</span><br><span class="line">        <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2,mt;q=0.2'</span>,</span><br><span class="line">        <span class="string">'Cache-Control'</span>: <span class="string">'max-age=0'</span>,</span><br><span class="line">        <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span>,</span><br><span class="line">        <span class="string">'Cookie'</span>: <span class="string">'IPLOC=CN1100; SUID=6FEDCF3C541C940A000000005968CF55; SUV=1500041046435211; ABTEST=0|1500041048|v1; SNUID=CEA85AE02A2F7E6EAFF9C1FE2ABEBE6F; weixinIndexVisited=1; JSESSIONID=aaar_m7LEIW-jg_gikPZv; ld=Wkllllllll2BzGMVlllllVOo8cUlllll5G@HbZllll9lllllRklll5@@@@@@@@@@'</span>,</span><br><span class="line">        <span class="string">'Host'</span>: <span class="string">'weixin.sogou.com'</span>,</span><br><span class="line">        <span class="string">'Upgrade-Insecure-Requests'</span>: <span class="string">'1'</span>,</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'</span></span><br><span class="line">    &#125;</span><br><span class="line">    session = Session()</span><br><span class="line">    queue = RedisQueue()</span><br><span class="line">    mysql = MySQL()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_proxy</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        从代理池获取代理</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = requests.get(PROXY_POOL_URL)</span><br><span class="line">            <span class="keyword">if</span> response.status_code == <span class="number">200</span>:</span><br><span class="line">                print(<span class="string">'Get Proxy'</span>, response.text)</span><br><span class="line">                <span class="keyword">return</span> response.text</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">except</span> requests.ConnectionError:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""初始化工作"""</span></span><br><span class="line">        <span class="comment"># 全局更新 Headers</span></span><br><span class="line">        self.session.headers.update(self.headers)</span><br><span class="line">        start_url = self.base_url + <span class="string">'?'</span> + urlencode(&#123;<span class="string">'query'</span>: self.keyword, <span class="string">'type'</span>: <span class="number">2</span>&#125;)</span><br><span class="line">        weixin_request = WeixinRequest(url=start_url, callback=self.parse_index, need_proxy=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># 调度第一个请求</span></span><br><span class="line">        self.queue.add(weixin_request)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_index</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        解析索引页</span></span><br><span class="line"><span class="string">        :param response: 响应</span></span><br><span class="line"><span class="string">        :return: 新的响应</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        doc = pq(response.text)</span><br><span class="line">        items = doc(<span class="string">'.news-box .news-list li .txt-box h3 a'</span>).items()</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">            url = item.attr(<span class="string">'href'</span>)</span><br><span class="line">            weixin_request = WeixinRequest(url=url, callback=self.parse_detail)</span><br><span class="line">            <span class="keyword">yield</span> weixin_request</span><br><span class="line">        next = doc(<span class="string">'#sogou_next'</span>).attr(<span class="string">'href'</span>)</span><br><span class="line">        <span class="keyword">if</span> next:</span><br><span class="line">            url = self.base_url + str(next)</span><br><span class="line">            weixin_request = WeixinRequest(url=url, callback=self.parse_index, need_proxy=<span class="literal">True</span>)</span><br><span class="line">            <span class="keyword">yield</span> weixin_request</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_detail</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        解析详情页</span></span><br><span class="line"><span class="string">        :param response: 响应</span></span><br><span class="line"><span class="string">        :return: 微信公众号文章</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        doc = pq(response.text)</span><br><span class="line">        data = &#123;<span class="string">'title'</span>: doc(<span class="string">'.rich_media_title'</span>).text(),</span><br><span class="line">            <span class="string">'content'</span>: doc(<span class="string">'.rich_media_content'</span>).text(),</span><br><span class="line">            <span class="string">'date'</span>: doc(<span class="string">'#post-date'</span>).text(),</span><br><span class="line">            <span class="string">'nickname'</span>: doc(<span class="string">'#js_profile_qrcode&gt; div &gt; strong'</span>).text(),</span><br><span class="line">            <span class="string">'wechat'</span>: doc(<span class="string">'#js_profile_qrcode&gt; div &gt; p:nth-child(3) &gt; span'</span>).text()&#125;</span><br><span class="line">        <span class="keyword">yield</span> data</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">request</span><span class="params">(self, weixin_request)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        执行请求</span></span><br><span class="line"><span class="string">        :param weixin_request: 请求</span></span><br><span class="line"><span class="string">        :return: 响应</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> weixin_request.need_proxy:</span><br><span class="line">                proxy = self.get_proxy()</span><br><span class="line">                <span class="keyword">if</span> proxy:</span><br><span class="line">                    proxies = &#123;</span><br><span class="line">                        <span class="string">'http'</span>: <span class="string">'http://'</span> + proxy,</span><br><span class="line">                        <span class="string">'https'</span>: <span class="string">'https://'</span> + proxy</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">return</span> self.session.send(weixin_request.prepare(),</span><br><span class="line">                                             timeout=weixin_request.timeout, allow_redirects=<span class="literal">False</span>, proxies=proxies)</span><br><span class="line">            <span class="keyword">return</span> self.session.send(weixin_request.prepare(), timeout=weixin_request.timeout, allow_redirects=<span class="literal">False</span>)</span><br><span class="line">        <span class="keyword">except</span> (ConnectionError, ReadTimeout) <span class="keyword">as</span> e:</span><br><span class="line">            print(e.args)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self, weixin_request)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        错误处理</span></span><br><span class="line"><span class="string">        :param weixin_request: 请求</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        weixin_request.fail_time = weixin_request.fail_time + <span class="number">1</span></span><br><span class="line">        print(<span class="string">'Request Failed'</span>, weixin_request.fail_time, <span class="string">'Times'</span>, weixin_request.url)</span><br><span class="line">        <span class="keyword">if</span> weixin_request.fail_time &lt; MAX_FAILED_TIME:</span><br><span class="line">            self.queue.add(weixin_request)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">schedule</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        调度请求</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> self.queue.empty():</span><br><span class="line">            weixin_request = self.queue.pop()</span><br><span class="line">            callback = weixin_request.callback</span><br><span class="line">            print(<span class="string">'Schedule'</span>, weixin_request.url)</span><br><span class="line">            response = self.request(weixin_request)</span><br><span class="line">            <span class="keyword">if</span> response <span class="keyword">and</span> response.status_code <span class="keyword">in</span> VALID_STATUSES:</span><br><span class="line">                results = list(callback(response))</span><br><span class="line">                <span class="keyword">if</span> results:</span><br><span class="line">                    <span class="keyword">for</span> result <span class="keyword">in</span> results:</span><br><span class="line">                        print(<span class="string">'New Result'</span>, result)</span><br><span class="line">                        <span class="keyword">if</span> isinstance(result, WeixinRequest):</span><br><span class="line">                            self.queue.add(result)</span><br><span class="line">                        <span class="keyword">if</span> isinstance(result, dict):</span><br><span class="line">                            self.mysql.insert(<span class="string">'articles'</span>, result)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    self.error(weixin_request)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.error(weixin_request)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        入口</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.start()</span><br><span class="line">        self.schedule()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    spider = Spider()</span><br><span class="line">    spider.run()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>最后，我们加了一个 run() 方法作为入口，启动的时候只需要执行 Spider 的 run() 方法即可。</p>
+                <h3 id="9-MySQL-存储"><a href="#9-MySQL-存储" class="headerlink" title="9. MySQL 存储"></a>9. MySQL 存储</h3>
+                <p>整个调度模块完成了，上面还没提及到的就是存储模块，在这里还需要定义一个 MySQL 类供存储数据，实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">REDIS_HOST = <span class="string">'localhost'</span></span><br><span class="line">REDIS_PORT = <span class="number">6379</span></span><br><span class="line">REDIS_PASSWORD = <span class="string">'foobared'</span></span><br><span class="line">REDIS_KEY = <span class="string">'weixin'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySQL</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, host=MYSQL_HOST, username=MYSQL_USER, password=MYSQL_PASSWORD, port=MYSQL_PORT,</span></span></span><br><span class="line"><span class="function"><span class="params">                 database=MYSQL_DATABASE)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        MySQL 初始化</span></span><br><span class="line"><span class="string">        :param host:</span></span><br><span class="line"><span class="string">        :param username:</span></span><br><span class="line"><span class="string">        :param password:</span></span><br><span class="line"><span class="string">        :param port:</span></span><br><span class="line"><span class="string">        :param database:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.db = pymysql.connect(host, username, password, database, charset=<span class="string">'utf8'</span>, port=port)</span><br><span class="line">            self.cursor = self.db.cursor()</span><br><span class="line">        <span class="keyword">except</span> pymysql.MySQLError <span class="keyword">as</span> e:</span><br><span class="line">            print(e.args)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(self, table, data)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        插入数据</span></span><br><span class="line"><span class="string">        :param table:</span></span><br><span class="line"><span class="string">        :param data:</span></span><br><span class="line"><span class="string">        :return:</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        keys = <span class="string">', '</span>.join(data.keys())</span><br><span class="line">        values = <span class="string">', '</span>.join([<span class="string">'% s'</span>] * len(data))</span><br><span class="line">        sql_query = <span class="string">'insert into % s (% s) values (% s)'</span> % (table, keys, values)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.cursor.execute(sql_query, tuple(data.values()))</span><br><span class="line">            self.db.commit()</span><br><span class="line">        <span class="keyword">except</span> pymysql.MySQLError <span class="keyword">as</span> e:</span><br><span class="line">            print(e.args)</span><br><span class="line">            self.db.rollback()</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p><strong>init</strong>() 方法初始化了 MySQL 连接，需要 MySQL 的用户、密码、端口、数据库名等信息。数据库名为 weixin，需要自己创建。 insert() 方法传入表名和字典即可动态构造 SQL，在 5.2 节中也有讲到，SQL 构造之后执行即可插入数据。 我们还需要提前建立一个数据表，表名为 articles，建表的 SQL 语句如下：</p>
+                <figure class="highlight sql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`articles`</span> (<span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`title`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`content`</span> <span class="built_in">text</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`date`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`wechat`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`nickname`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line">) <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`articles`</span> <span class="keyword">ADD</span> PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>现在，我们的整个爬虫就算完成了。</p>
+                <h3 id="10-运行"><a href="#10-运行" class="headerlink" title="10. 运行"></a>10. 运行</h3>
+                <p>示例运行结果如图 9-29 所示： <img src="https://cdn.cuiqingcai.com/2019-10-20-060111.jpg" alt=""> 图 9-29 运行结果 程序首先调度了第一页结果对应的请求，获取了代理执行此请求，随后得到了 11 个新请求，请求都是 WeixinRequest 类型，将其再加入队列。随后继续调度新加入的请求，也就是文章详情页对应的请求，再执行，得到的就是文章详情对应的提取结果，提取结果是字典类型。 程序循环往复，不断爬取，直至所有结果爬取完毕，程序终止，爬取完成。 爬取结果如图 9-30 所示。 <img src="https://cdn.cuiqingcai.com/2019-10-20-060114.jpg" alt=""> 图 9-30 爬取结果 我们可以看到，相关微信文章都已被存储到数据库里了。</p>
+                <h3 id="11-本节代码"><a href="#11-本节代码" class="headerlink" title="11. 本节代码"></a>11. 本节代码</h3>
+                <p>本节代码地址为：<a href="https://github.com/Python3WebSpider/Weixin" target="_blank" rel="noopener">https://github.com/Python3WebSpider/Weixin</a>，运行之前请先配置好代理池。</p>
+                <h3 id="12-结语"><a href="#12-结语" class="headerlink" title="12. 结语"></a>12. 结语</h3>
+                <p>以上内容便是使用代理爬取微信公众号文章的方法，涉及的新知识点不少，希望大家可以好好消化。</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/7842.html" rel="prev" title="[Python3网络爬虫开发实战] 9.4-ADSL 拨号代理">
+                      <i class="fa fa-chevron-left"></i> [Python3网络爬虫开发实战] 9.4-ADSL 拨号代理 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/8012.html" rel="next" title="实战！手把手带你搭建图像分类 AI 服务"> 实战！手把手带你搭建图像分类 AI 服务 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#1-本节目标"><span class="nav-number">1.</span> <span class="nav-text">1. 本节目标</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#2-准备工作"><span class="nav-number">2.</span> <span class="nav-text">2. 准备工作</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#3-爬取分析"><span class="nav-number">3.</span> <span class="nav-text">3. 爬取分析</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#4-构造-Request"><span class="nav-number">4.</span> <span class="nav-text">4. 构造 Request</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#5-实现请求队列"><span class="nav-number">5.</span> <span class="nav-text">5. 实现请求队列</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#6-修改代理池"><span class="nav-number">6.</span> <span class="nav-text">6. 修改代理池</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#7-第一个请求"><span class="nav-number">7.</span> <span class="nav-text">7. 第一个请求</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#8-调度请求"><span class="nav-number">8.</span> <span class="nav-text">8. 调度请求</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#9-MySQL-存储"><span class="nav-number">9.</span> <span class="nav-text">9. MySQL 存储</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#10-运行"><span class="nav-number">10.</span> <span class="nav-text">10. 运行</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#11-本节代码"><span class="nav-number">11.</span> <span class="nav-text">11. 本节代码</span></a></li>
+                  <li class="nav-item nav-level-3"><a class="nav-link" href="#12-结语"><span class="nav-number">12.</span> <span class="nav-text">12. 结语</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'eac8288e52ae76bfcf34b9e0842a1413',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

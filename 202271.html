@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="爬虫,爬虫教程,网络爬虫,2022,协程,异步">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="爬虫系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有《">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="【2022 年】Python3 爬虫教程 - 协程的基本原理">
+  <meta property="og:url" content="https://cuiqingcai.com/202271.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="爬虫系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有《">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="article:published_time" content="2022-02-18T00:11:31.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.310Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="网络爬虫">
+  <meta property="article:tag" content="2022">
+  <meta property="article:tag" content="协程">
+  <meta property="article:tag" content="异步">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://cuiqingcai.com/202271.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>【2022 年】Python3 爬虫教程 - 协程的基本原理 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/202271.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 【2022 年】Python3 爬虫教程 - 协程的基本原理 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2022-02-18 08:11:31" itemprop="dateCreated datePublished" datetime="2022-02-18T08:11:31+08:00">2022-02-18</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span> ， <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a>
+                    </span>
+                  </span>
+                  <span id="/202271.html" class="post-meta-item leancloud_visitors" data-flag-title="【2022 年】Python3 爬虫教程 - 协程的基本原理" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>17k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>15 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <blockquote>
+                  <p>爬虫系列文章总目录：<a href="https://cuiqingcai.com/17777.html">【2022 年】Python3 爬虫学习教程</a>，本教程内容多数来自于《Python3网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">《Python3 网络爬虫开发实战（第二版）》</a>一书了，<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">点击了解详情</a>。</p>
+                </blockquote>
+                <p>我们知道爬虫是 IO 密集型任务，比如如果我们使用 requests 库来爬取某个站点的话，发出一个请求之后，程序必须要等待网站返回响应之后才能接着运行，而在等待响应的过程中，整个爬虫程序是一直在等待的，实际上没有做任何事情。对于这种情况，我们有没有优化方案呢？</p>
+                <p>当然有，下面我们就来了解一下异步爬虫的基本概念和实现。</p>
+                <p>要实现异步机制的爬虫，那自然和协程脱不了关系。</p>
+                <h2 id="1-案例引入"><a href="#1-案例引入" class="headerlink" title="1. 案例引入"></a>1. 案例引入</h2>
+                <p>在介绍协程之前，我们先来看一个案例网站，链接地址为：<a href="https://httpbin.org/delay/5" target="_blank" rel="noopener">https://httpbin.org/delay/5</a>，如果我们访问这个链接，需要等待五秒之后才能得到结果，这是因为服务器强制等待了 5 秒的时间才返回响应。</p>
+                <p>平时我们浏览网页的时候，绝大部分网页响应速度还是很快的，如果我们写爬虫来爬取的话，发出 Request 到收到 Response 的时间不会很长，因此我们需要等待的时间并不多。</p>
+                <p>然而像上面这个网站，一次 Request 就需要 5 秒才能得到 Response，如果我们用 requests 写爬虫来爬取的话，那每次 requests 都要等待 5 秒才能拿到结果了。</p>
+                <p>我们来测试下，下面我们来用 requests 写一个遍历程序，直接遍历 100 次试试看，实现代码如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.INFO,</span><br><span class="line">                    format=<span class="string">'%(asctime)s - %(levelname)s: %(message)s'</span>)</span><br><span class="line"></span><br><span class="line">TOTAL_NUMBER = <span class="number">100</span></span><br><span class="line">URL = <span class="string">'https://httpbin.org/delay/5'</span></span><br><span class="line"></span><br><span class="line">start_time = time.time()</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">1</span>, TOTAL_NUMBER + <span class="number">1</span>):</span><br><span class="line">    logging.info(<span class="string">'scraping %s'</span>, URL)</span><br><span class="line">    response = requests.get(URL)</span><br><span class="line">end_time = time.time()</span><br><span class="line">logging.info(<span class="string">'total time %s seconds'</span>, end_time - start_time)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们直接用循环的方式构造了 100 个 Request，使用的是 requests 单线程，在爬取之前和爬取之后记录了时间，最后输出爬取了 100 个页面消耗的时间。</p>
+                <p>运行结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-03</span> <span class="number">01</span>:<span class="number">01</span>:<span class="number">36</span>,<span class="number">781</span> - INFO: scraping https:<span class="comment">//httpbin.org/delay/5</span></span><br><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-03</span> <span class="number">01</span>:<span class="number">01</span>:<span class="number">43</span>,<span class="number">410</span> - INFO: scraping https:<span class="comment">//httpbin.org/delay/5</span></span><br><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-03</span> <span class="number">01</span>:<span class="number">01</span>:<span class="number">50</span>,<span class="number">029</span> - INFO: scraping https:<span class="comment">//httpbin.org/delay/5</span></span><br><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-03</span> <span class="number">01</span>:<span class="number">01</span>:<span class="number">56</span>,<span class="number">702</span> - INFO: scraping https:<span class="comment">//httpbin.org/delay/5</span></span><br><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-03</span> <span class="number">01</span>:<span class="number">02</span>:<span class="number">03</span>,<span class="number">345</span> - INFO: scraping https:<span class="comment">//httpbin.org/delay/5</span></span><br><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-03</span> <span class="number">01</span>:<span class="number">02</span>:<span class="number">09</span>,<span class="number">958</span> - INFO: scraping https:<span class="comment">//httpbin.org/delay/5</span></span><br><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-03</span> <span class="number">01</span>:<span class="number">02</span>:<span class="number">16</span>,<span class="number">500</span> - INFO: scraping https:<span class="comment">//httpbin.org/delay/5</span></span><br><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-03</span> <span class="number">01</span>:<span class="number">02</span>:<span class="number">23</span>,<span class="number">143</span> - INFO: scraping https:<span class="comment">//httpbin.org/delay/5</span></span><br><span class="line">...</span><br><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-03</span> <span class="number">01</span>:<span class="number">12</span>:<span class="number">19</span>,<span class="number">867</span> - INFO: scraping https:<span class="comment">//httpbin.org/delay/5</span></span><br><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-03</span> <span class="number">01</span>:<span class="number">12</span>:<span class="number">26</span>,<span class="number">479</span> - INFO: scraping https:<span class="comment">//httpbin.org/delay/5</span></span><br><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-03</span> <span class="number">01</span>:<span class="number">12</span>:<span class="number">33</span>,<span class="number">083</span> - INFO: scraping https:<span class="comment">//httpbin.org/delay/5</span></span><br><span class="line"><span class="number">2020</span><span class="number">-08</span><span class="number">-03</span> <span class="number">01</span>:<span class="number">12</span>:<span class="number">39</span>,<span class="number">758</span> - INFO: total time <span class="number">662.9764430522919</span> seconds</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>由于每个页面至少要等待 5 秒才能加载出来，因此 100 个页面至少要花费 500 秒的时间，加上网站本身负载的问题，总的爬取时间最终为 663 秒，大约 11 分钟。</p>
+                <p>这在实际情况下是很常见的，有些网站本身加载速度就比较慢，稍慢的可能 1~3 秒，更慢的说不定 10 秒以上。如果我们用 requests 单线程这么爬取的话，总的耗时是非常多的。此时如果我们开了多线程或多进程来爬取的话，其爬取速度确实会成倍提升，那是否有更好的解决方案呢？</p>
+                <p>本节就来了解一下使用协程来加速的方法，此种方法对于 IO 密集型任务非常有效。如将其应用到网络爬虫中，爬取效率甚至可以成百倍地提升。</p>
+                <h2 id="2-基础知识"><a href="#2-基础知识" class="headerlink" title="2. 基础知识"></a>2. 基础知识</h2>
+                <p>在了解协程之前，我们首先了解一些基础概念，如阻塞和非阻塞、同步和异步、多进程和协程。</p>
+                <h3 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h3>
+                <p>阻塞状态指程序未得到所需计算资源时被挂起的状态。程序在等待某个操作完成期间，自身无法继续干别的事情，则称该程序在该操作上是阻塞的。</p>
+                <p>常见的阻塞形式有：网络 I/O 阻塞、磁盘 I/O 阻塞、用户输入阻塞等。阻塞是无处不在的，包括 CPU 切换上下文时，所有的进程都无法真正干事情，它们也会被阻塞。如果是多核 CPU，则正在执行上下文切换操作的核不可被利用。</p>
+                <h3 id="非阻塞"><a href="#非阻塞" class="headerlink" title="非阻塞"></a>非阻塞</h3>
+                <p>程序在等待某操作的过程中，自身不被阻塞，可以继续运行干别的事情，则称该程序在该操作上是非阻塞的。</p>
+                <p>非阻塞并不是在任何程序级别、任何情况下都存在的。仅当程序封装的级别可以囊括独立的子程序单元时，它才可能存在非阻塞状态。</p>
+                <p>非阻塞的存在是因为阻塞存在，正因为某个操作阻塞导致的耗时与效率低下，我们才要把它变成非阻塞的。</p>
+                <h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3>
+                <p>不同程序单元为了完成某个任务，在执行过程中需靠某种通信方式以协调一致，此时这些程序单元是同步执行的。</p>
+                <p>例如在购物系统中更新商品库存时，需要用“行锁”作为通信信号，让不同的更新请求强制排队顺序执行，那更新库存的操作是同步的。</p>
+                <p>简言之，同步意味着有序。</p>
+                <h3 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h3>
+                <p>为了完成某个任务，有时不同程序单元之间无须通信协调也能完成任务，此时不相关的程序单元之间可以是异步的。</p>
+                <p>例如，爬取下载网页。调度程序调用下载程序后，即可调度其他任务，而无须与该下载任务保持通信以协调行为。不同网页的下载、保存等操作都是无关的，也无须相互通知协调。这些异步操作的完成时刻并不确定。</p>
+                <p>简言之，异步意味着无序。</p>
+                <h3 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h3>
+                <p>多进程就是利用 CPU 的多核优势，在同一时间并行执行多个任务，可以大大提高执行效率。</p>
+                <h3 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h3>
+                <p>协程，英文叫作 coroutine，又称微线程、纤程，它是一种用户态的轻量级线程。</p>
+                <p>协程拥有自己的寄存器上下文和栈。协程调度切换时，将寄存器上下文和栈保存到其他地方，在切回来的时候，恢复先前保存的寄存器上下文和栈。因此，协程能保留上一次调用时的状态，即所有局部状态的一个特定组合，每次过程重入时，就相当于进入上一次调用的状态。</p>
+                <p>协程本质上是个单进程，它相对于多进程来说，无须线程上下文切换的开销，无须原子操作锁定及同步的开销，编程模型也非常简单。</p>
+                <p>我们可以使用协程来实现异步操作，比如在网络爬虫场景下，我们发出一个请求之后，需要等待一定时间才能得到响应，但其实在这个等待过程中，程序可以干许多其他事情，等到响应得到之后才切换回来继续处理，这样可以充分利用 CPU 和其他资源，这就是协程的优势。</p>
+                <h2 id="3-协程的用法"><a href="#3-协程的用法" class="headerlink" title="3. 协程的用法"></a>3. 协程的用法</h2>
+                <p>接下来，让我们来了解一下协程的实现。从 Python 3.4 开始，Python 中加入了协程的概念，但这个版本的协程还是以生成器对象为基础，Python 3.5 则增加了 <code>async</code>/<code>await</code>，使得协程的实现更加方便。</p>
+                <p>Python 中使用协程最常用的库莫过于 asyncio，所以本节会以 asyncio 为基础来介绍协程的用法。</p>
+                <p>首先，我们需要了解下面几个概念：</p>
+                <ul>
+                  <li><code>event_loop</code>：事件循环，相当于一个无限循环，我们可以把一些函数注册到这个事件循环上，当满足条件发生的时候，就会调用对应的处理方法。</li>
+                  <li><code>coroutine</code>：中文翻译叫协程，在 Python 中常指代协程对象类型，我们可以将协程对象注册到时间循环中，它会被事件循环调用。我们可以使用 <code>async</code> 关键字来定义一个方法，这个方法在调用时不会立即被执行，而是返回一个协程对象。</li>
+                  <li><code>task</code>：任务，它是对协程对象的进一步封装，包含了任务的各个状态。</li>
+                  <li><code>future</code>：代表将来执行或没有执行的任务的结果，实际上和 <code>task</code> 没有本质区别。</li>
+                </ul>
+                <p>另外，我们还需要了解 <code>async</code>/<code>await</code> 关键字，它是从 Python 3.5 才出现的，专门用于定义协程。其中，<code>async</code> 定义一个协程，<code>await</code> 用来挂起阻塞方法的执行。</p>
+                <h2 id="4-准备工作"><a href="#4-准备工作" class="headerlink" title="4. 准备工作"></a>4. 准备工作</h2>
+                <p>在本节开始之前，请确保安装的 Python 版本为 3.5 及以上，如果版本是 3.4 及以下，则下方的案例是不能运行的。</p>
+                <p>具体的安装方法可以参考：<a href="https://setup.scrape.center/python。" target="_blank" rel="noopener">https://setup.scrape.center/python。</a></p>
+                <p>安装好合适的 Python 版本之后我们就可以开始本节的学习了。</p>
+                <h2 id="5-定义协程"><a href="#5-定义协程" class="headerlink" title="5. 定义协程"></a>5. 定义协程</h2>
+                <p>首先，我们来定义一个协程，体验一下它和普通进程在实现上的不同之处，代码如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">execute</span><span class="params">(x)</span>:</span></span><br><span class="line">    print(<span class="string">'Number:'</span>, x)</span><br><span class="line"></span><br><span class="line">coroutine = execute(<span class="number">1</span>)</span><br><span class="line">print(<span class="string">'Coroutine:'</span>, coroutine)</span><br><span class="line">print(<span class="string">'After calling execute'</span>)</span><br><span class="line"></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">loop.run_until_complete(coroutine)</span><br><span class="line">print(<span class="string">'After calling loop'</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Coroutine: &lt;coroutine object execute at <span class="number">0x1034cf830</span>&gt;</span><br><span class="line">After calling execute</span><br><span class="line">Number: <span class="number">1</span></span><br><span class="line">After calling loop</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>首先，我们引入了 asyncio 这个包，这样我们才可以使用 <code>async</code> 和 <code>await</code>，然后使用 <code>async</code> 定义了一个 <code>execute</code> 方法，该方法接收一个数字参数，执行之后会打印这个数字。</p>
+                <p>随后我们直接调用了这个方法，然而这个方法并没有执行，而是返回了一个 <code>coroutine</code> 协程对象。随后我们使用 <code>get_event_loop</code> 方法创建了一个事件循环 <code>loop</code>，并调用了 <code>loop</code> 对象的 <code>run_until_complete</code> 方法将协程注册到事件循环 <code>loop</code> 中，然后启动。最后，我们才看到 <code>execute</code> 方法打印了输出结果。</p>
+                <p>可见，<code>async</code> 定义的方法就会变成一个无法直接执行的 <code>coroutine</code> 对象，必须将其注册到事件循环中才可以执行。</p>
+                <p>前面我们还提到了 <code>task</code>，它是对 <code>coroutine</code> 对象的进一步封装，比 <code>coroutine</code> 对象多了运行状态，比如 <code>running</code>、<code>finished</code> 等，我们可以用这些状态来获取协程对象的执行情况。</p>
+                <p>在上面的例子中，当我们将 <code>coroutine</code> 对象传递给 <code>run_until_complete</code> 方法的时候，实际上它进行了一个操作，就是将 <code>coroutine</code> 封装成了 <code>task</code> 对象。我们也可以显式地进行声明，如下所示：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">execute</span><span class="params">(x)</span>:</span></span><br><span class="line">    print(<span class="string">'Number:'</span>, x)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">coroutine = execute(<span class="number">1</span>)</span><br><span class="line">print(<span class="string">'Coroutine:'</span>, coroutine)</span><br><span class="line">print(<span class="string">'After calling execute'</span>)</span><br><span class="line"></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">task = loop.create_task(coroutine)</span><br><span class="line">print(<span class="string">'Task:'</span>, task)</span><br><span class="line">loop.run_until_complete(task)</span><br><span class="line">print(<span class="string">'Task:'</span>, task)</span><br><span class="line">print(<span class="string">'After calling loop'</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Coroutine: &lt;coroutine object execute at <span class="number">0x10e0f7830</span>&gt;</span><br><span class="line">After calling execute</span><br><span class="line">Task: &lt;Task pending coro=&lt;execute() running at demo.py:<span class="number">4</span>&gt;&gt;</span><br><span class="line">Number: <span class="number">1</span></span><br><span class="line">Task: &lt;Task finished coro=&lt;execute() done, defined at demo.py:<span class="number">4</span>&gt; result=<span class="number">1</span>&gt;</span><br><span class="line">After calling loop</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们定义了 <code>loop</code> 对象之后，接着调用了它的 <code>create_task</code> 方法将 <code>coroutine</code> 对象转化为 <code>task</code> 对象，随后我们打印输出一下，发现它是 <code>pending</code> 状态。接着，我们将 <code>task</code> 对象添加到事件循环中执行，随后打印输出 <code>task</code> 对象，发现它的状态变成了 <code>finished</code>，同时还可以看到其 <code>result</code> 变成了 1，也就是我们定义的 <code>execute</code> 方法的返回结果。</p>
+                <p>另外，定义 <code>task</code> 对象还有一种方式，就是直接通过 asyncio 的 <code>ensure_future</code> 方法，返回结果也是 <code>task</code> 对象，这样的话我们就可以不借助 <code>loop</code> 来定义。即使我们还没有声明 <code>loop</code>，也可以提前定义好 <code>task</code> 对象，写法如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">execute</span><span class="params">(x)</span>:</span></span><br><span class="line">    print(<span class="string">'Number:'</span>, x)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">coroutine = execute(<span class="number">1</span>)</span><br><span class="line">print(<span class="string">'Coroutine:'</span>, coroutine)</span><br><span class="line">print(<span class="string">'After calling execute'</span>)</span><br><span class="line"></span><br><span class="line">task = asyncio.ensure_future(coroutine)</span><br><span class="line">print(<span class="string">'Task:'</span>, task)</span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">loop.run_until_complete(task)</span><br><span class="line">print(<span class="string">'Task:'</span>, task)</span><br><span class="line">print(<span class="string">'After calling loop'</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Coroutine: &lt;coroutine object execute at <span class="number">0x10aa33830</span>&gt;</span><br><span class="line">After calling execute</span><br><span class="line">Task: &lt;Task pending coro=&lt;execute() running at demo.py:<span class="number">4</span>&gt;&gt;</span><br><span class="line">Number: <span class="number">1</span></span><br><span class="line">Task: &lt;Task finished coro=&lt;execute() done, defined at demo.py:<span class="number">4</span>&gt; result=<span class="number">1</span>&gt;</span><br><span class="line">After calling loop</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以发现，其运行效果都是一样的。</p>
+                <h2 id="6-绑定回调"><a href="#6-绑定回调" class="headerlink" title="6. 绑定回调"></a>6. 绑定回调</h2>
+                <p>另外，我们也可以为某个 <code>task</code> 绑定一个回调方法。比如，我们来看下面的例子：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">request</span><span class="params">()</span>:</span></span><br><span class="line">    url = <span class="string">'https://www.baidu.com'</span></span><br><span class="line">    status = requests.get(url)</span><br><span class="line">    <span class="keyword">return</span> status</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">callback</span><span class="params">(task)</span>:</span></span><br><span class="line">    print(<span class="string">'Status:'</span>, task.result())</span><br><span class="line"></span><br><span class="line">coroutine = request()</span><br><span class="line">task = asyncio.ensure_future(coroutine)</span><br><span class="line">task.add_done_callback(callback)</span><br><span class="line">print(<span class="string">'Task:'</span>, task)</span><br><span class="line"></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">loop.run_until_complete(task)</span><br><span class="line">print(<span class="string">'Task:'</span>, task)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们定义了一个 <code>request</code> 方法，请求了百度，获取其状态码，但是这个方法里面我们没有任何 <code>print</code> 语句。随后我们定义了一个 <code>callback</code> 方法，这个方法接收一个参数，是 <code>task</code> 对象，然后调用 <code>print</code> 方法打印了 <code>task</code> 对象的结果。这样我们就定义好了一个 <code>coroutine</code> 对象和一个回调方法。我们现在希望的效果是，当 <code>coroutine</code> 对象执行完毕之后，就去执行声明的 <code>callback</code> 方法。</p>
+                <p>那么它们两者怎样关联起来呢？很简单，只需要调用 <code>add_done_callback</code> 方法即可。我们将 <code>callback</code> 方法传递给封装好的 <code>task</code> 对象，这样当 <code>task</code> 执行完毕之后，就可以调用 <code>callback</code> 方法了。同时 <code>task</code> 对象还会作为参数传递给 <code>callback</code> 方法，调用 <code>task</code> 对象的 <code>result</code> 方法就可以获取返回结果了。</p>
+                <p>运行结果如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Task: &lt;Task pending coro=&lt;request() running at demo.py:<span class="number">5</span>&gt; cb=[callback() at demo.py:<span class="number">11</span>]&gt;</span><br><span class="line">Status: &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Task: &lt;Task finished coro=&lt;request() done, defined at demo.py:<span class="number">5</span>&gt; result=&lt;Response [<span class="number">200</span>]&gt;&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>实际上不用回调方法，直接在 <code>task</code> 运行完毕之后，也可以直接调用 <code>result</code> 方法获取结果，如下所示：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">request</span><span class="params">()</span>:</span></span><br><span class="line">    url = <span class="string">'https://www.baidu.com'</span></span><br><span class="line">    status = requests.get(url)</span><br><span class="line">    <span class="keyword">return</span> status</span><br><span class="line"></span><br><span class="line">coroutine = request()</span><br><span class="line">task = asyncio.ensure_future(coroutine)</span><br><span class="line">print(<span class="string">'Task:'</span>, task)</span><br><span class="line"></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">loop.run_until_complete(task)</span><br><span class="line">print(<span class="string">'Task:'</span>, task)</span><br><span class="line">print(<span class="string">'Task Result:'</span>, task.result())</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果是一样的：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Task: &lt;Task pending coro=&lt;request() running at demo.py:<span class="number">4</span>&gt;&gt;</span><br><span class="line">Task: &lt;Task finished coro=&lt;request() done, defined at demo.py:<span class="number">4</span>&gt; result=&lt;Response [<span class="number">200</span>]&gt;&gt;</span><br><span class="line">Task Result: &lt;Response [<span class="number">200</span>]&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="7-多任务协程"><a href="#7-多任务协程" class="headerlink" title="7. 多任务协程"></a>7. 多任务协程</h2>
+                <p>上面的例子我们只执行了一次请求，如果想执行多次请求，应该怎么办呢？我们可以定义一个 <code>task</code> 列表，然后使用 asyncio 的 <code>wait</code> 方法即可执行。看下面的例子：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">request</span><span class="params">()</span>:</span></span><br><span class="line">    url = <span class="string">'https://www.baidu.com'</span></span><br><span class="line">    status = requests.get(url)</span><br><span class="line">    <span class="keyword">return</span> status</span><br><span class="line"></span><br><span class="line">tasks = [asyncio.ensure_future(request()) <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">5</span>)]</span><br><span class="line">print(<span class="string">'Tasks:'</span>, tasks)</span><br><span class="line"></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> task <span class="keyword">in</span> tasks:</span><br><span class="line">    print(<span class="string">'Task Result:'</span>, task.result())</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们使用一个 <code>for</code> 循环创建了 5 个 <code>task</code>，组成了一个列表，然后把这个列表首先传递给了 asyncio 的 <code>wait</code> 方法，再将其注册到时间循环中，就可以发起 5 个任务了。最后，我们再将任务的运行结果输出出来，具体如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Tasks: [&lt;Task pending coro=&lt;request() running at demo.py:<span class="number">5</span>&gt;&gt;, &lt;Task pending coro=&lt;request() running at demo.py:<span class="number">5</span>&gt;&gt;, &lt;Task pending coro=&lt;request() running at demo.py:<span class="number">5</span>&gt;&gt;, &lt;Task pending coro=&lt;request() running at demo.py:<span class="number">5</span>&gt;&gt;, &lt;Task pending coro=&lt;request() running at demo.py:<span class="number">5</span>&gt;&gt;]</span><br><span class="line">Task Result: &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Task Result: &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Task Result: &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Task Result: &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Task Result: &lt;Response [<span class="number">200</span>]&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到，5 个任务被顺次执行了，并得到了运行结果。</p>
+                <h2 id="8-协程实现"><a href="#8-协程实现" class="headerlink" title="8. 协程实现"></a>8. 协程实现</h2>
+                <p>前面说了这么一通，又是 <code>async</code>，又是 <code>coroutine</code>，又是 <code>task</code>，又是 <code>callback</code>，但似乎并没有看出协程的优势？反而写法上更加奇怪和麻烦了。别急，上面的案例只是为后面的使用作铺垫。接下来，我们正式来看下协程在解决 IO 密集型任务上有怎样的优势。</p>
+                <p>在上面的代码中，我们用一个网络请求作为示例，这就是一个耗时等待操作，因为我们请求网页之后需要等待页面响应并返回结果。耗时等待操作一般都是 IO 操作，比如文件读取、网络请求等。协程对于处理这种操作是有很大优势的，当遇到需要等待的情况时，程序可以暂时挂起，转而去执行其他操作，从而避免一直等待一个程序而耗费过多的时间，充分利用资源。</p>
+                <p>为了表现出协程的优势，我们还是以本节开头介绍的网站 <a href="https://httpbin.org/delay/5" target="_blank" rel="noopener">https://httpbin.org/delay/5</a> 为例，因为该网站响应比较慢，所以我们可以通过爬取时间来直观感受到爬取速度的提升。</p>
+                <p>为了让大家更好地理解协程的正确使用方法，这里我们先来看看大家使用协程时常犯的错误，后面再给出正确的例子来对比一下。</p>
+                <p>首先，我们还是拿之前的 requests 库来进行网页请求，接下来再重新使用上面的方法请求一遍：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">start = time.time()</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">request</span><span class="params">()</span>:</span></span><br><span class="line">    url = <span class="string">'https://httpbin.org/delay/5'</span></span><br><span class="line">    print(<span class="string">'Waiting for'</span>, url)</span><br><span class="line">    response = requests.get(url)</span><br><span class="line">    print(<span class="string">'Get response from'</span>, url, <span class="string">'response'</span>, response)</span><br><span class="line"></span><br><span class="line">tasks = [asyncio.ensure_future(request()) <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line"></span><br><span class="line">end = time.time()</span><br><span class="line">print(<span class="string">'Cost time:'</span>, end - start)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们还是创建了 10 个 <code>task</code>，然后将 <code>task</code> 列表传给 <code>wait</code> 方法并注册到时间循环中执行。</p>
+                <p>运行结果如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Get response <span class="keyword">from</span> https://httpbin.org/delay/<span class="number">5</span> response &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">...</span><br><span class="line">Get response <span class="keyword">from</span> https://httpbin.org/delay/<span class="number">5</span> response &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Get response <span class="keyword">from</span> https://httpbin.org/delay/<span class="number">5</span> response &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Get response <span class="keyword">from</span> https://httpbin.org/delay/<span class="number">5</span> response &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Cost time: <span class="number">66.64284420013428</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以发现，这和正常的请求并没有什么区别，依然还是顺次执行的，耗时 66 秒，平均一个请求耗时 6.6 秒，说好的异步处理呢？</p>
+                <p>其实，要实现异步处理，我们得先要有挂起的操作，当一个任务需要等待 IO 结果的时候，可以挂起当前任务，转而去执行其他任务，这样我们才能充分利用好资源。上面的方法都是一本正经地串行走下来，连个挂起都没有，怎么可能实现异步？想太多了。</p>
+                <p>要实现异步，接下来我们再了解一下 <code>await</code> 的用法，它可以将耗时等待的操作挂起，让出控制权。当协程执行的时候遇到 <code>await</code>，时间循环就会将本协程挂起，转而去执行别的协程，直到其他协程挂起或执行完毕。</p>
+                <p>所以，我们可能会将代码中的 <code>request</code> 方法改成如下的样子：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">request</span><span class="params">()</span>:</span></span><br><span class="line">    url = <span class="string">'https://httpbin.org/delay/5'</span></span><br><span class="line">    print(<span class="string">'Waiting for'</span>, url)</span><br><span class="line">    response = <span class="keyword">await</span> requests.get(url)</span><br><span class="line">    print(<span class="string">'Get response from'</span>, url, <span class="string">'response'</span>, response)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>仅仅是在 requests 前面加了一个关键字 <code>await</code>，然而此时执行代码，会得到如下报错：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">...</span><br><span class="line">Task exception was never retrieved</span><br><span class="line">future: &lt;Task finished coro=&lt;request() done, defined at demo.py:<span class="number">8</span>&gt; exception=TypeError(<span class="string">"object Response can't be used in 'await' expression"</span>)&gt;</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"demo.py"</span>, line <span class="number">11</span>, <span class="keyword">in</span> request</span><br><span class="line">    response = <span class="keyword">await</span> requests.get(url)</span><br><span class="line">TypeError: object Response can<span class="string">'t be used in '</span><span class="keyword">await</span><span class="string">' expression</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这次它遇到 <code>await</code> 方法确实挂起了，也等待了，但是最后却报了这个错误。这个错误的意思是 requests 返回的 <code>Response</code> 对象不能和 <code>await</code> 一起使用，为什么呢？因为根据官方文档说明，<code>await</code> 后面的对象必须是如下格式之一（具体可以参见 <a href="https://www.python.org/dev/peps/pep-0492/#await-expression" target="_blank" rel="noopener">https://www.python.org/dev/peps/pep-0492/#await-expression</a>）：</p>
+                <ul>
+                  <li>一个原生 coroutine 对象；</li>
+                  <li>一个由 <code>types.coroutine</code> 修饰的生成器，这个生成器可以返回 <code>coroutine</code> 对象；</li>
+                  <li>一个包含 <code>__await__</code> 方法的对象返回的一个迭代器。</li>
+                </ul>
+                <p>reqeusts 返回的 <code>Response</code> 对象不符合上面任一条件，因此就会报上面的错误了。</p>
+                <p>有的读者可能已经发现了，既然 <code>await</code> 后面可以跟一个 <code>coroutine</code> 对象，那么我用 <code>async</code> 把请求的方法改成 <code>coroutine</code> 对象不就可以了吗？所以就改写成如下的样子：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">start = time.time()</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(url)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> requests.get(url)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">request</span><span class="params">()</span>:</span></span><br><span class="line">    url = <span class="string">'https://httpbin.org/delay/5'</span></span><br><span class="line">    print(<span class="string">'Waiting for'</span>, url)</span><br><span class="line">    response = <span class="keyword">await</span> get(url)</span><br><span class="line">    print(<span class="string">'Get response from'</span>, url, <span class="string">'response'</span>, response)</span><br><span class="line"></span><br><span class="line">tasks = [asyncio.ensure_future(request()) <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line"></span><br><span class="line">end = time.time()</span><br><span class="line">print(<span class="string">'Cost time:'</span>, end - start)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们将请求页面的方法独立出来，并用 <code>async</code> 修饰，这样就得到了一个 <code>coroutine</code> 对象。运行一下看看：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Get response fromhttps://httpbin.org/delay/<span class="number">5</span> response &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Get response <span class="keyword">from</span> https://httpbin.org/delay/<span class="number">5</span> response &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">...</span><br><span class="line">Get response <span class="keyword">from</span> https://httpbin.org/delay/<span class="number">5</span> response &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Get response <span class="keyword">from</span> https://httpbin.org/delay/<span class="number">5</span> response &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Get response <span class="keyword">from</span> https://httpbin.org/delay/<span class="number">5</span> response &lt;Response [<span class="number">200</span>]&gt;</span><br><span class="line">Cost time: <span class="number">65.394437756259273</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>还是不行，它还不是异步执行的，也就是说我们仅仅将涉及 IO 操作的代码封装到 <code>async</code> 修饰的方法里面是不可行的。我们必须要使用支持异步操作的请求方式才可以实现真正的异步，所以这里就需要 aiohttp 派上用场了。</p>
+                <h2 id="9-使用-aiohttp"><a href="#9-使用-aiohttp" class="headerlink" title="9. 使用 aiohttp"></a>9. 使用 aiohttp</h2>
+                <p>aiohttp 是一个支持异步请求的库，配合使用它和 asyncio，我们可以非常方便地实现异步请求操作。我们使用 pip3 安装即可：</p>
+                <figure class="highlight cmake">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">pip3 <span class="keyword">install</span> aiohttp</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>具体的安装方法可以参考：<a href="https://setup.scrape.center/aiohttp。" target="_blank" rel="noopener">https://setup.scrape.center/aiohttp。</a></p>
+                <p>aiohttp 的官方文档链接为 <a href="https://aiohttp.readthedocs.io/" target="_blank" rel="noopener">https://aiohttp.readthedocs.io/</a>，它分为两部分，一部分是 Client，一部分是 Server，详细的内容可以参考官方文档。</p>
+                <p>下面我们将 aiohttp 用上来，将代码改成如下样子：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> aiohttp</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">start = time.time()</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(url)</span>:</span></span><br><span class="line">    session = aiohttp.ClientSession()</span><br><span class="line">    response = <span class="keyword">await</span> session.get(url)</span><br><span class="line">    <span class="keyword">await</span> response.text()</span><br><span class="line">    <span class="keyword">await</span> session.close()</span><br><span class="line">    <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">request</span><span class="params">()</span>:</span></span><br><span class="line">    url = <span class="string">'https://httpbin.org/delay/5'</span></span><br><span class="line">    print(<span class="string">'Waiting for'</span>, url)</span><br><span class="line">    response = <span class="keyword">await</span> get(url)</span><br><span class="line">    print(<span class="string">'Get response from'</span>, url, <span class="string">'response'</span>, response)</span><br><span class="line"></span><br><span class="line">tasks = [asyncio.ensure_future(request()) <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line"></span><br><span class="line">end = time.time()</span><br><span class="line">print(<span class="string">'Cost time:'</span>, end - start)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里我们将请求库由 requests 改成了 aiohttp，通过 aiohttp 的 <code>ClientSession</code> 类的 <code>get</code> 方法进行请求，结果如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">Waiting <span class="keyword">for</span> https://httpbin.org/delay/<span class="number">5</span></span><br><span class="line">...</span><br><span class="line">Get response <span class="keyword">from</span> https://httpbin.org/delay/<span class="number">5</span> response &lt;ClientResponse(https://httpbin.org/delay/<span class="number">5</span>) [<span class="number">200</span> OK]&gt;</span><br><span class="line">&lt;CIMultiDictProxy(<span class="string">'Date'</span>: <span class="string">'Sun, 09 Aug 2020 14:30:22 GMT'</span>, <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>, <span class="string">'Content-Length'</span>: <span class="string">'360'</span>, <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span>, <span class="string">'Server'</span>: <span class="string">'gunicorn/19.9.0'</span>, <span class="string">'Access-Control-Allow-Origin'</span>: <span class="string">'*'</span>, <span class="string">'Access-Control-Allow-Credentials'</span>: <span class="string">'true'</span>)&gt;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">Get response <span class="keyword">from</span> https://httpbin.org/delay/<span class="number">5</span> response &lt;ClientResponse(https://httpbin.org/delay/<span class="number">5</span>) [<span class="number">200</span> OK]&gt;</span><br><span class="line">&lt;CIMultiDictProxy(<span class="string">'Date'</span>: <span class="string">'Sun, 09 Aug 2020 14:30:22 GMT'</span>, <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>, <span class="string">'Content-Length'</span>: <span class="string">'360'</span>, <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span>, <span class="string">'Server'</span>: <span class="string">'gunicorn/19.9.0'</span>, <span class="string">'Access-Control-Allow-Origin'</span>: <span class="string">'*'</span>, <span class="string">'Access-Control-Allow-Credentials'</span>: <span class="string">'true'</span>)&gt;</span><br><span class="line">Cost time: <span class="number">6.033240079879761</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>成功了！我们发现这次请求的耗时由 51 秒直接变成了 6 秒，耗费时间减少了非常多。</p>
+                <p>在代码里面，我们使用了 <code>await</code>，后面跟了 <code>get</code> 方法。在执行这 10 个协程的时候，如果遇到了 <code>await</code>，就会将当前协程挂起，转而去执行其他协程，直到其他协程也挂起或执行完毕，再执行下一个协程。</p>
+                <p>开始运行时，时间循环会运行第一个 <code>task</code>。针对第一个 <code>task</code> 来说，当执行到第一个 <code>await</code> 跟着的 <code>get</code> 方法时，它被挂起，但这个 <code>get</code> 方法第一步的执行是非阻塞的，挂起之后立马被唤醒，所以立即又进入执行，创建了 <code>ClientSession</code> 对象，接着遇到了第二个 <code>await</code>，调用了 <code>session.get</code> 请求方法，然后就被挂起了。由于请求需要耗时很久，所以一直没有被唤醒，好在第一个 <code>task</code> 被挂起了，那么接下来该怎么办呢？事件循环会寻找当前未被挂起的协程继续执行，于是就转而执行第二个 <code>task</code> 了，也是一样的流程操作，直到执行了第十个 <code>task</code> 的 <code>session.get</code> 方法之后，全部的 <code>task</code> 都被挂起了。所有 <code>task</code> 都已经处于挂起状态，那咋办？只好等待了。5 秒之后，几个请求几乎同时都有了响应，然后几个 <code>task</code> 也被唤醒接着执行，输出请求结果，最后总耗时 6 秒！</p>
+                <p>怎么样？这就是异步操作的便捷之处，当遇到阻塞式操作时，任务被挂起，程序接着去执行其他任务，而不是傻傻地等着，这样可以充分利用 CPU 时间，而不必把时间浪费在等待 IO 上。</p>
+                <p>有人会说，既然这样的话，在上面的例子中，在发出网络请求后，既然接下来的 5 秒都是在等待的，在 5 秒之内，CPU 可以处理的 <code>task</code> 数量远不止这些，那么岂不是我们放 10 个、20 个、50 个、100 个、1000 个 <code>task</code> 一起执行，最后得到所有结果的耗时不都是差不多的吗？因为这几个任务被挂起后都是一起等待的。</p>
+                <p>理论来说，确实是这样的，不过有个前提，那就是服务器在同一时刻接受无限次请求都能保证正常返回结果，也就是服务器无限抗压。另外，还要忽略 IO 传输时延，确实可以做到无限 <code>task</code> 一起执行且在预想时间内得到结果。但由于不同服务器处理的实现机制不同，可能某些服务器并不能承受这么高的并发，因此响应速度也会减慢。</p>
+                <p>这里我们以百度为例，测试一下并发数量为 1、3、5、10…500 的情况下的耗时情况，代码如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> aiohttp</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(number)</span>:</span></span><br><span class="line">    start = time.time()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(url)</span>:</span></span><br><span class="line">        session = aiohttp.ClientSession()</span><br><span class="line">        response = <span class="keyword">await</span> session.get(url)</span><br><span class="line">        <span class="keyword">await</span> response.text()</span><br><span class="line">        <span class="keyword">await</span> session.close()</span><br><span class="line">        <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">request</span><span class="params">()</span>:</span></span><br><span class="line">        url = <span class="string">'https://www.baidu.com/'</span></span><br><span class="line">        <span class="keyword">await</span> get(url)</span><br><span class="line"></span><br><span class="line">    tasks = [asyncio.ensure_future(request()) <span class="keyword">for</span> _ <span class="keyword">in</span> range(number)]</span><br><span class="line">    loop = asyncio.get_event_loop()</span><br><span class="line">    loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line"></span><br><span class="line">    end = time.time()</span><br><span class="line">    print(<span class="string">'Number:'</span>, number, <span class="string">'Cost time:'</span>, end - start)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> number <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">30</span>, <span class="number">50</span>, <span class="number">75</span>, <span class="number">100</span>, <span class="number">200</span>, <span class="number">500</span>]:</span><br><span class="line">    test(number)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下：</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">Number: <span class="number">1</span> Cost time: <span class="number">0.05885505676269531</span></span><br><span class="line">Number: <span class="number">3</span> Cost time: <span class="number">0.05773782730102539</span></span><br><span class="line">Number: <span class="number">5</span> Cost time: <span class="number">0.05768704414367676</span></span><br><span class="line">Number: <span class="number">10</span> Cost time: <span class="number">0.15174412727355957</span></span><br><span class="line">Number: <span class="number">15</span> Cost time: <span class="number">0.09603095054626465</span></span><br><span class="line">Number: <span class="number">30</span> Cost time: <span class="number">0.17843103408813477</span></span><br><span class="line">Number: <span class="number">50</span> Cost time: <span class="number">0.3741800785064697</span></span><br><span class="line">Number: <span class="number">75</span> Cost time: <span class="number">0.2894289493560791</span></span><br><span class="line">Number: <span class="number">100</span> Cost time: <span class="number">0.6185381412506104</span></span><br><span class="line">Number: <span class="number">200</span> Cost time: <span class="number">1.0894129276275635</span></span><br><span class="line">Number: <span class="number">500</span> Cost time: <span class="number">1.8213098049163818</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到，即使我们增加了并发数量，但在服务器能承受高并发的前提下，其爬取速度几乎不太受影响。</p>
+                <p>综上所述，使用了异步请求之后，我们几乎可以在相同的时间内实现成百上千倍次的网络请求，把这个运用在爬虫中，速度提升可谓是非常可观了。</p>
+                <h2 id="10-总结"><a href="#10-总结" class="headerlink" title="10. 总结"></a>10. 总结</h2>
+                <p>以上便是 Python 中协程的基本原理和用法，在后面一节中我们会详细介绍 aiohttp 的用法和爬取实战，实现快速高并发的爬取。</p>
+                <p>本节代码：<a href="https://github.com/Python3WebSpider/AsyncTest" target="_blank" rel="noopener">https://github.com/Python3WebSpider/AsyncTest</a></p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/5052.html" rel="bookmark">Python3网络爬虫开发实战教程</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202252.html" rel="bookmark">【2022 年】Python3 爬虫教程 - Ajax 分析方法</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202253.html" rel="bookmark">【2022 年】Python3 爬虫教程 - Ajax 案例爬取实战</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202212.html" rel="bookmark">【2022 年】Python3 爬虫教程 - HTTP 基本原理</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202213.html" rel="bookmark">【2022 年】Python3 爬虫教程 - Web网页基础</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+                  <a href="/tags/%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 爬虫教程</a>
+                  <a href="/tags/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 网络爬虫</a>
+                  <a href="/tags/2022/" rel="tag"><i class="fa fa-tag"></i> 2022</a>
+                  <a href="/tags/%E5%8D%8F%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 协程</a>
+                  <a href="/tags/%E5%BC%82%E6%AD%A5/" rel="tag"><i class="fa fa-tag"></i> 异步</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/202262.html" rel="prev" title="【2022 年】Python3 爬虫教程 - 新兴动态渲染工具 Playwright 的使用">
+                      <i class="fa fa-chevron-left"></i> 【2022 年】Python3 爬虫教程 - 新兴动态渲染工具 Playwright 的使用 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/202246.html" rel="next" title="【2022 年】Python3 爬虫教程 - 便于高效检索的 Elasticsearch 存储"> 【2022 年】Python3 爬虫教程 - 便于高效检索的 Elasticsearch 存储 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#1-案例引入"><span class="nav-number">1.</span> <span class="nav-text">1. 案例引入</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#2-基础知识"><span class="nav-number">2.</span> <span class="nav-text">2. 基础知识</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞"><span class="nav-number">2.1.</span> <span class="nav-text">阻塞</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#非阻塞"><span class="nav-number">2.2.</span> <span class="nav-text">非阻塞</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#同步"><span class="nav-number">2.3.</span> <span class="nav-text">同步</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#异步"><span class="nav-number">2.4.</span> <span class="nav-text">异步</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#多进程"><span class="nav-number">2.5.</span> <span class="nav-text">多进程</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#协程"><span class="nav-number">2.6.</span> <span class="nav-text">协程</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#3-协程的用法"><span class="nav-number">3.</span> <span class="nav-text">3. 协程的用法</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#4-准备工作"><span class="nav-number">4.</span> <span class="nav-text">4. 准备工作</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#5-定义协程"><span class="nav-number">5.</span> <span class="nav-text">5. 定义协程</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#6-绑定回调"><span class="nav-number">6.</span> <span class="nav-text">6. 绑定回调</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#7-多任务协程"><span class="nav-number">7.</span> <span class="nav-text">7. 多任务协程</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#8-协程实现"><span class="nav-number">8.</span> <span class="nav-text">8. 协程实现</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#9-使用-aiohttp"><span class="nav-number">9.</span> <span class="nav-text">9. 使用 aiohttp</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#10-总结"><span class="nav-number">10.</span> <span class="nav-text">10. 总结</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '33cb1085d05ab229ec00b7935329b11e',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

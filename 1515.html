@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="综述 PHP 的图像处理主要有下面几个用途，一个是验证码的操作，另一个就是图像水印操作，这里我们一起来学习一下吧。 图像处理基础 1.总体流程 首先，我们必须先了解 PHP 图像处理的基本函数的用法。总体来说分为以下四个步骤 （1）创建画布，创建资源类型，指定 高度 宽度                         12                       resource image">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="PHP高级特性六之图像处理">
+  <meta property="og:url" content="https://cuiqingcai.com/1515.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="综述 PHP 的图像处理主要有下面几个用途，一个是验证码的操作，另一个就是图像水印操作，这里我们一起来学习一下吧。 图像处理基础 1.总体流程 首先，我们必须先了解 PHP 图像处理的基本函数的用法。总体来说分为以下四个步骤 （1）创建画布，创建资源类型，指定 高度 宽度                         12                       resource image">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328153220-e1427528691389.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/QQ%E6%88%AA%E5%9B%BE20150328154707.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328155313.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328155846.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328160304.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328161138.jpg">
+  <meta property="og:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328163147.jpg">
+  <meta property="article:published_time" content="2015-03-28T08:34:50.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.285Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta property="article:tag" content="爬虫书">
+  <meta property="article:tag" content="静觅">
+  <meta property="article:tag" content="崔庆才">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328153220-e1427528691389.jpg">
+  <link rel="canonical" href="https://cuiqingcai.com/1515.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>PHP高级特性六之图像处理 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/1515.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> PHP高级特性六之图像处理 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2015-03-28 16:34:50" itemprop="dateCreated datePublished" datetime="2015-03-28T16:34:50+08:00">2015-03-28</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                    </span>
+                  </span>
+                  <span id="/1515.html" class="post-meta-item leancloud_visitors" data-flag-title="PHP高级特性六之图像处理" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>6.8k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>6 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2>
+                <p>PHP 的图像处理主要有下面几个用途，一个是验证码的操作，另一个就是图像水印操作，这里我们一起来学习一下吧。</p>
+                <h2 id="图像处理基础"><a href="#图像处理基础" class="headerlink" title="图像处理基础"></a>图像处理基础</h2>
+                <h3 id="1-总体流程"><a href="#1-总体流程" class="headerlink" title="1.总体流程"></a>1.总体流程</h3>
+                <p>首先，我们必须先了解 PHP 图像处理的基本函数的用法。总体来说分为以下四个步骤</p>
+                <h4 id="（1）创建画布，创建资源类型，指定-高度-宽度"><a href="#（1）创建画布，创建资源类型，指定-高度-宽度" class="headerlink" title="（1）创建画布，创建资源类型，指定 高度 宽度"></a>（1）创建画布，创建资源类型，指定 高度 宽度</h4>
+                <figure class="highlight routeros">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">resource imagecreate ( int x_size, int y_size )</span><br><span class="line">resource imagecreatetruecolor ( int x_size, int y_size )</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>imagecreate() 返回一个图像标识符，代表了一幅大小为 x_size 和 y_size 的空白图像。不过推荐使用 imagecreatetruecolor()，这个是新建一个真彩色图像。</p>
+                <h4 id="（2）绘制图像"><a href="#（2）绘制图像" class="headerlink" title="（2）绘制图像"></a>（2）绘制图像</h4>
+                <p>制定各种颜色，矩形， 圆， 点， 线段， 扇形， 画字（字符， 字符串， freetype），每一个形状和字符绘制对应一个函数，这部分我们后面详细介绍。</p>
+                <h4 id="（3）输出图像-保存处理好的图像"><a href="#（3）输出图像-保存处理好的图像" class="headerlink" title="（3）输出图像/保存处理好的图像"></a>（3）输出图像/保存处理好的图像</h4>
+                <figure class="highlight abnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">imagegif()<span class="comment">;</span></span><br><span class="line">imagejpeg()<span class="comment">;</span></span><br><span class="line">imagepng()<span class="comment">;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>例如，imagegif() 则将其保存为 gif 格式的图像。 <strong>bool imagegif ( resource image [, string filename] )</strong></p>
+                <blockquote>
+                  <p>imagegif() 从 image 图像以 filename 为文件名创建一个 GIF 图像。image 参数是 imagecreatetruecolor() 函数的返回值。 filename 参数为可选，如果省略，则原始图像流将被直接输出。通过 header() 发送 Content-type: image/gif 可以使 PHP 脚本直接输出 GIF 图像。</p>
+                </blockquote>
+                <h4 id="（4）释放资源"><a href="#（4）释放资源" class="headerlink" title="（4）释放资源"></a>（4）释放资源</h4>
+                <figure class="highlight arcade">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">imagedestroy(<span class="symbol">$img</span>);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>所以，我们创建图像的一般流程用代码可以总结如下</p>
+                <figure class="highlight xml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">	<span class="comment">//创建图片资源</span></span></span><br><span class="line"><span class="php">	$img = imagecreatetruecolor( <span class="number">200</span>, <span class="number">200</span>);</span></span><br><span class="line"><span class="php">	<span class="comment">//绘制图形</span></span></span><br><span class="line"><span class="php">	$red = imagecolorallocate($img, <span class="number">0xFF</span>, <span class="number">0</span>, <span class="number">0</span>);</span></span><br><span class="line"><span class="php">	imagechar($img, <span class="number">5</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="string">"A"</span>, $red);</span></span><br><span class="line"><span class="php">	<span class="comment">//输出图像</span></span></span><br><span class="line"><span class="php">	header(<span class="string">"Content-Type:image/gif"</span>);</span></span><br><span class="line"><span class="php">	imagegif($img);</span></span><br><span class="line"><span class="php">	<span class="comment">//释放资源</span></span></span><br><span class="line"><span class="php">	imagedestroy($img);</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>输出的结果如下，它直接在浏览器中显示如下，背景默认为黑色。 <img src="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328153220-e1427528691389.jpg" alt="20150328153220"> 如果我们不加 header，那么则会显示字符乱码，所以一定要记得下面这句话。</p>
+                <figure class="highlight abnf">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">header(<span class="string">"Content-Type:image/gif"</span>)<span class="comment">;</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="2-设置色彩"><a href="#2-设置色彩" class="headerlink" title="2.设置色彩"></a>2.设置色彩</h3>
+                <p>我们主要用到下面这个函数 <strong>int imagecolorallocate ( resource image, int red, int green, int blue )</strong> imagecolorallocate() 返回一个标识符，代表了由给定的 RGB 成分组成的颜色。image 参数是 imagecreatetruecolor() 函数的返回值。red，green 和 blue 分别是所需要的颜色的红，绿，蓝成分。这些参数是 0 到 255 的整数或者十六进制的 0x00 到 0xFF。imagecolorallocate() 必须被调用以创建每一种用在 image 所代表的图像中的颜色。 例如下面的例子</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&lt;?php</span><br><span class="line">	<span class="comment">//十进制方式</span></span><br><span class="line">	$red = imagecolorallocate($img, <span class="number">0xFF</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	$white = imagecolorallocate($im, <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>);</span><br><span class="line">	$black = imagecolorallocate($im, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="comment">// 十六进制方式</span></span><br><span class="line">	$gray = imagecolorallocate($img, <span class="number">0xEE</span>, <span class="number">0xEE</span>, <span class="number">0xEE</span>);</span><br><span class="line">	$white = imagecolorallocate($im, <span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>);</span><br><span class="line">	$black = imagecolorallocate($im, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>);</span><br><span class="line">?&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="3-区域填充色彩"><a href="#3-区域填充色彩" class="headerlink" title="3.区域填充色彩"></a>3.区域填充色彩</h3>
+                <p><strong>bool imagefill ( resource image, int x, int y, int color )</strong> imagefill() 在 image 图像的坐标 x，y（图像左上角为 0, 0）处用 color 颜色执行区域填充（即与 x, y 点颜色相同且相邻的点都会被填充）。 好，让我们尝试一下填充背景色吧</p>
+                <figure class="highlight xml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php">	<span class="comment">//创建图片资源</span></span></span><br><span class="line"><span class="php">	$img = imagecreatetruecolor( <span class="number">200</span>, <span class="number">200</span>);</span></span><br><span class="line"><span class="php">	<span class="comment">//绘制图形</span></span></span><br><span class="line"><span class="php">	$red = imagecolorallocate($img, <span class="number">0xFF</span>, <span class="number">0</span>, <span class="number">0</span>);</span></span><br><span class="line"><span class="php">	imagefill($img,<span class="number">0</span>,<span class="number">0</span>,$red);</span></span><br><span class="line"><span class="php">	<span class="comment">//输出图像</span></span></span><br><span class="line"><span class="php">	header(<span class="string">"Content-Type:image/gif"</span>);</span></span><br><span class="line"><span class="php">	imagegif($img);</span></span><br><span class="line"><span class="php">	<span class="comment">//释放资源</span></span></span><br><span class="line"><span class="php">	imagedestroy($img);</span></span><br><span class="line"><span class="php"><span class="meta">?&gt;</span></span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>运行结果如下，背景被填充为了红色。 <a href="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/QQ截图20150328154707.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/QQ截图20150328154707.jpg" alt="20150328154707"></a></p>
+                <h3 id="4-画各种元素"><a href="#4-画各种元素" class="headerlink" title="4.画各种元素"></a>4.画各种元素</h3>
+                <h4 id="（1）画空心矩形"><a href="#（1）画空心矩形" class="headerlink" title="（1）画空心矩形"></a>（1）画空心矩形</h4>
+                <p><strong>bool imagerectangle ( resource image, int x1, int y1, int x2, int y2, int col )</strong> imagerectangle() 用 col 颜色在 image 图像中画一个矩形，其左上角坐标为 x1, y1，右下角坐标为 x2, y2。图像的左上角坐标为 0, 0。</p>
+                <h4 id="（2）画填充矩形"><a href="#（2）画填充矩形" class="headerlink" title="（2）画填充矩形"></a>（2）画填充矩形</h4>
+                <p><strong>bool imagefilledrectangle ( resource image, int x1, int y1, int x2, int y2, int color )</strong> imagefilledrectangle() 在 image 图像中画一个用 color 颜色填充了的矩形，其左上角坐标为 x1，y1，右下角坐标为 x2，y2。0, 0 是图像的最左上角。</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&lt;?php</span><br><span class="line">	<span class="comment">//创建图片资源</span></span><br><span class="line">	$img = imagecreatetruecolor( <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">	<span class="comment">//声明颜色</span></span><br><span class="line">	$red=imagecolorallocate($img, <span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	$yellow=imagecolorallocate($img, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>);</span><br><span class="line">	$green=imagecolorallocate($img, <span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>);</span><br><span class="line">	$blue=imagecolorallocate($img, <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>);</span><br><span class="line">	<span class="comment">//填充背景</span></span><br><span class="line">	imagefill($img,<span class="number">0</span>,<span class="number">0</span>,$yellow);</span><br><span class="line">	<span class="comment">//画一个矩形并填充</span></span><br><span class="line">	imagefilledrectangle($img, <span class="number">10</span>, <span class="number">10</span>, <span class="number">80</span>, <span class="number">80</span>, $green);</span><br><span class="line">	<span class="comment">//画一个矩形</span></span><br><span class="line">	imagerectangle($img, <span class="number">90</span>, <span class="number">10</span>, <span class="number">190</span>, <span class="number">80</span>, $green);</span><br><span class="line">	<span class="comment">//输出图像</span></span><br><span class="line">	header(<span class="string">"Content-Type:image/gif"</span>);</span><br><span class="line">	imagegif($img);</span><br><span class="line">	<span class="comment">//释放资源</span></span><br><span class="line">	imagedestroy($img);</span><br><span class="line">?&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p><a href="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328155313.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328155313.jpg" alt="20150328155313"></a></p>
+                <h4 id="（3）画一条线段"><a href="#（3）画一条线段" class="headerlink" title="（3）画一条线段"></a>（3）画一条线段</h4>
+                <p><strong>bool imageline ( resource image, int x1, int y1, int x2, int y2, int color )</strong> imageline() 用 color 颜色在图像 image 中从坐标 x1，y1 到 x2，y2（图像左上角为 0, 0）画一条线段。</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&lt;?php</span><br><span class="line">	<span class="comment">//创建图片资源</span></span><br><span class="line">	$img = imagecreatetruecolor( <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">	<span class="comment">//声明颜色</span></span><br><span class="line">	$red=imagecolorallocate($img, <span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	$yellow=imagecolorallocate($img, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>);</span><br><span class="line">	$green=imagecolorallocate($img, <span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>);</span><br><span class="line">	$blue=imagecolorallocate($img, <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>);</span><br><span class="line">	<span class="comment">//填充背景</span></span><br><span class="line">	imagefill($img,<span class="number">0</span>,<span class="number">0</span>,$yellow);</span><br><span class="line">	<span class="comment">//线段</span></span><br><span class="line">	imageline($img,<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">200</span> ,$blue);</span><br><span class="line">	imageline($img,<span class="number">200</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, $blue);</span><br><span class="line">	<span class="comment">//输出图像</span></span><br><span class="line">	header(<span class="string">"Content-Type:image/gif"</span>);</span><br><span class="line">	imagegif($img);</span><br><span class="line">	<span class="comment">//释放资源</span></span><br><span class="line">	imagedestroy($img);</span><br><span class="line">?&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p><a href="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328155846.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328155846.jpg" alt="20150328155846"></a></p>
+                <h4 id="（4）画点"><a href="#（4）画点" class="headerlink" title="（4）画点"></a>（4）画点</h4>
+                <p><strong>bool imagesetpixel ( resource image, int x, int y, int color )</strong> imagesetpixel() 在 image 图像中用 color 颜色在 x，y 坐标（图像左上角为 0，0）上画一个点。</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&lt;?php</span><br><span class="line">	<span class="comment">//创建图片资源</span></span><br><span class="line">	$img = imagecreatetruecolor( <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">	<span class="comment">//声明颜色</span></span><br><span class="line">	$red=imagecolorallocate($img, <span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	$yellow=imagecolorallocate($img, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>);</span><br><span class="line">	$green=imagecolorallocate($img, <span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>);</span><br><span class="line">	$blue=imagecolorallocate($img, <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>);</span><br><span class="line">	<span class="comment">//填充背景</span></span><br><span class="line">	imagefill($img,<span class="number">0</span>,<span class="number">0</span>,$yellow);</span><br><span class="line">	<span class="comment">//点</span></span><br><span class="line">	imagesetpixel($img,<span class="number">50</span>, <span class="number">50</span> ,$red);</span><br><span class="line">	imagesetpixel($img,<span class="number">55</span>, <span class="number">50</span> ,$red);</span><br><span class="line">	imagesetpixel($img,<span class="number">59</span>, <span class="number">50</span> ,$red);</span><br><span class="line">	imagesetpixel($img,<span class="number">64</span>, <span class="number">50</span> ,$red);</span><br><span class="line">	imagesetpixel($img,<span class="number">72</span>, <span class="number">50</span> ,$red);</span><br><span class="line">	<span class="comment">//输出图像</span></span><br><span class="line">	header(<span class="string">"Content-Type:image/gif"</span>);</span><br><span class="line">	imagegif($img);</span><br><span class="line">	<span class="comment">//释放资源</span></span><br><span class="line">	imagedestroy($img);</span><br><span class="line">?&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p><a href="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328160304.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328160304.jpg" alt="20150328160304"></a></p>
+                <h4 id="（5）画空心圆"><a href="#（5）画空心圆" class="headerlink" title="（5）画空心圆"></a>（5）画空心圆</h4>
+                <p><strong>bool imageellipse ( resource image, int cx, int cy, int w, int h, int color )</strong> imageellipse() 在 image 所代表的图像中画一个中心为 cx，cy（图像左上角为 0, 0）的椭圆。w 和 h 分别指定了椭圆的宽度和高度，椭圆的颜色由 color 指定。</p>
+                <h4 id="（6）画实心圆"><a href="#（6）画实心圆" class="headerlink" title="（6）画实心圆"></a>（6）画实心圆</h4>
+                <p><strong>bool imagefilledellipse ( resource image, int cx, int cy, int w, int h, int color )</strong> imagefilledellipse() 在 image 所代表的图像中以 cx，cy（图像左上角为 0, 0）为中心画一个椭圆。w 和 h 分别指定了椭圆的宽和高。椭圆用 color 颜色填充。如果成功则返回 TRUE，失败则返回 FALSE。</p>
+                <figure class="highlight angelscript">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&lt;?php</span><br><span class="line">	<span class="comment">//创建图片资源</span></span><br><span class="line">	$img = imagecreatetruecolor( <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">	<span class="comment">//声明颜色</span></span><br><span class="line">	$red=imagecolorallocate($img, <span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	$yellow=imagecolorallocate($img, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>);</span><br><span class="line">	$green=imagecolorallocate($img, <span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>);</span><br><span class="line">	$blue=imagecolorallocate($img, <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>);</span><br><span class="line">	<span class="comment">//填充背景</span></span><br><span class="line">	imagefill($img,<span class="number">0</span>,<span class="number">0</span>,$yellow);</span><br><span class="line">	<span class="comment">//圆</span></span><br><span class="line">	imageellipse($img, <span class="number">100</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">100</span>,$green);</span><br><span class="line">	<span class="comment">//实心圆</span></span><br><span class="line">	imagefilledellipse($img, <span class="number">100</span>, <span class="number">100</span>, <span class="number">10</span>, <span class="number">10</span>,$blue);</span><br><span class="line">	<span class="comment">//输出图像</span></span><br><span class="line">	header(<span class="string">"Content-Type:image/gif"</span>);</span><br><span class="line">	imagegif($img);</span><br><span class="line">	<span class="comment">//释放资源</span></span><br><span class="line">	imagedestroy($img);</span><br><span class="line">?&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p><a href="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328161138.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328161138.jpg" alt="20150328161138"></a></p>
+                <h4 id="（7）水平画一个字符"><a href="#（7）水平画一个字符" class="headerlink" title="（7）水平画一个字符"></a>（7）水平画一个字符</h4>
+                <p><strong>bool imagechar ( resource image, int font, int x, int y, string c, int color )</strong> imagechar() 将字符串 c 的第一个字符画在 image 指定的图像中，其左上角位于 x，y（图像左上角为 0, 0），颜色为 color。如果 font 是 1，2，3，4 或 5，则使用内置的字体（更大的数字对应于更大的字体）。 <strong>bool imagestring ( resource image, int font, int x, int y, string s, int col )</strong> imagestring() 用 col 颜色将字符串 s 画到 image 所代表的图像的 x，y 坐标处（这是字符串左上角坐标，整幅图像的左上角为 0，0）。如果 font 是 1，2，3，4 或 5，则使用内置字体。</p>
+                <h4 id="（8）竖直画一个字符"><a href="#（8）竖直画一个字符" class="headerlink" title="（8）竖直画一个字符"></a>（8）竖直画一个字符</h4>
+                <p><strong>bool imagecharup ( resource image, int font, int x, int y, string c, int color )</strong> imagecharup() 将字符 c 垂直地画在 image 指定的图像上，位于 x，y（图像左上角为 0, 0），颜色为 color。如果 font 为 1，2，3，4 或 5，则使用内置的字体。 <strong>bool imagestringup ( resource image, int font, int x, int y, string s, int col )</strong> imagestring() 用 col 颜色将字符串 s 垂直地画到 image 所代表的图像的 x, y 座标处（图像的左上角为 0, 0）。如果 font 是 1，2，3，4 或 5，则使用内置字体。</p>
+                <h4 id="（9）带字体写入字符"><a href="#（9）带字体写入字符" class="headerlink" title="（9）带字体写入字符"></a>（9）带字体写入字符</h4>
+                <p><strong>array imagettftext ( resource image, float size, float angle, int x, int y, int color, string fontfile, string text )</strong></p>
+                <blockquote>
+                  <p>image：图像资源。见 imagecreatetruecolor()。 size： 字体大小。根据 GD 版本不同，应该以像素大小指定（GD1）或点大小（GD2）。 angle： 角度制表示的角度，0 度为从左向右读的文本。更高数值表示逆时针旋转。例如 90 度表示从下向上读的文本。 x： 由 x，y 所表示的坐标定义了第一个字符的基本点（大概是字符的左下角）。这和 imagestring() 不同，其 x，y 定义了第一个字符的左上角。例如 “top left” 为 0, 0。 y： Y 坐标。它设定了字体基线的位置，不是字符的最底端。 color： 颜色索引。使用负的颜色索引值具有关闭防锯齿的效果。见 imagecolorallocate()。 fontfile： 是想要使用的 TrueType 字体的路径。 text： 文本字符串。</p>
+                </blockquote>
+                <p>imagettftext() 返回一个含有 8 个单元的数组表示了文本外框的四个角，顺序为坐下角，右下角，右上角，左上角。这些点是相对于文本的而和角度无关，因此“左上角”指的是以水平方向看文字时其左上角。</p>
+                <figure class="highlight lsl">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&lt;?php</span><br><span class="line">	<span class="comment">//创建图片资源</span></span><br><span class="line">	$img = imagecreatetruecolor( <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">	<span class="comment">//声明颜色</span></span><br><span class="line">	$red=imagecolorallocate($img, <span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	$yellow=imagecolorallocate($img, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>);</span><br><span class="line">	$green=imagecolorallocate($img, <span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>);</span><br><span class="line">	$blue=imagecolorallocate($img, <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>);</span><br><span class="line">	$navy=imagecolorallocate($img, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x80</span>);</span><br><span class="line">	<span class="comment">//填充背景</span></span><br><span class="line">	imagefill($img,<span class="number">0</span>,<span class="number">0</span>,$yellow);</span><br><span class="line">	<span class="comment">//画字符</span></span><br><span class="line">	imagechar($img, <span class="number">2</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="string">"A"</span>, $red);</span><br><span class="line">	imagechar($img, <span class="number">5</span>, <span class="number">120</span>, <span class="number">120</span>, <span class="string">"B"</span>, $red);</span><br><span class="line">	imagecharup($img, <span class="number">4</span>, <span class="number">60</span>, <span class="number">60</span>, <span class="string">"C"</span>, $red);</span><br><span class="line">	imagecharup($img, <span class="number">5</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="string">"D"</span>, $red);</span><br><span class="line">	imagestring($img, <span class="number">3</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="string">"Hello"</span>, $navy);</span><br><span class="line">	imagestringup($img, <span class="number">3</span>, <span class="number">10</span>, <span class="number">80</span>, <span class="string">"Hello"</span>, $navy);</span><br><span class="line">	imagettftext($img, <span class="number">25</span>, <span class="number">60</span>, <span class="number">150</span>, <span class="number">150</span>, $blue, <span class="string">"simkai.ttf"</span>, <span class="string">"Hello"</span>);</span><br><span class="line">	imagettftext($img, <span class="number">12</span>, <span class="number">-60</span>, <span class="number">50</span>, <span class="number">150</span>, $green, <span class="string">"simli.ttf"</span>, <span class="string">"Nihao"</span>);</span><br><span class="line">	<span class="comment">//输出图像</span></span><br><span class="line">	header(<span class="string">"Content-Type:image/gif"</span>);</span><br><span class="line">	imagegif($img);</span><br><span class="line">	<span class="comment">//释放资源</span></span><br><span class="line">	imagedestroy($img);</span><br><span class="line">?&gt;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p><a href="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328163147.jpg" target="_blank" rel="noopener"><img src="http://cdn.cuiqingcai.com/wp-content/uploads/2015/03/20150328163147.jpg" alt="20150328163147"></a></p>
+                <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+                <p>以上我们总结了 PHP 图像绘图的相关函数的使用，在后面我们将应用于实际，比如验证码和图像水印操作中。 希望对大家有帮助！</p>
+              </div>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/1491.html" rel="prev" title="使用CSS3自定义网页字体的方法">
+                      <i class="fa fa-chevron-left"></i> 使用CSS3自定义网页字体的方法 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/1527.html" rel="next" title="PHP高级特性七之验证码操作"> PHP高级特性七之验证码操作 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#综述"><span class="nav-number">1.</span> <span class="nav-text">综述</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#图像处理基础"><span class="nav-number">2.</span> <span class="nav-text">图像处理基础</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#1-总体流程"><span class="nav-number">2.1.</span> <span class="nav-text">1.总体流程</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（1）创建画布，创建资源类型，指定-高度-宽度"><span class="nav-number">2.1.1.</span> <span class="nav-text">（1）创建画布，创建资源类型，指定 高度 宽度</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（2）绘制图像"><span class="nav-number">2.1.2.</span> <span class="nav-text">（2）绘制图像</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（3）输出图像-保存处理好的图像"><span class="nav-number">2.1.3.</span> <span class="nav-text">（3）输出图像&#x2F;保存处理好的图像</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（4）释放资源"><span class="nav-number">2.1.4.</span> <span class="nav-text">（4）释放资源</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#2-设置色彩"><span class="nav-number">2.2.</span> <span class="nav-text">2.设置色彩</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-区域填充色彩"><span class="nav-number">2.3.</span> <span class="nav-text">3.区域填充色彩</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#4-画各种元素"><span class="nav-number">2.4.</span> <span class="nav-text">4.画各种元素</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（1）画空心矩形"><span class="nav-number">2.4.1.</span> <span class="nav-text">（1）画空心矩形</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（2）画填充矩形"><span class="nav-number">2.4.2.</span> <span class="nav-text">（2）画填充矩形</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（3）画一条线段"><span class="nav-number">2.4.3.</span> <span class="nav-text">（3）画一条线段</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（4）画点"><span class="nav-number">2.4.4.</span> <span class="nav-text">（4）画点</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（5）画空心圆"><span class="nav-number">2.4.5.</span> <span class="nav-text">（5）画空心圆</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（6）画实心圆"><span class="nav-number">2.4.6.</span> <span class="nav-text">（6）画实心圆</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（7）水平画一个字符"><span class="nav-number">2.4.7.</span> <span class="nav-text">（7）水平画一个字符</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（8）竖直画一个字符"><span class="nav-number">2.4.8.</span> <span class="nav-text">（8）竖直画一个字符</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#（9）带字体写入字符"><span class="nav-number">2.4.9.</span> <span class="nav-text">（9）带字体写入字符</span></a></li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '376922a32bee4ad7908eed0ea840a561',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

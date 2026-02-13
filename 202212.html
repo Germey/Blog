@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="爬虫,Python爬虫,爬虫教程,网络爬虫,2022,HTTP,Python爬虫教程">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有《P">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="【2022 年】Python3 爬虫教程 - HTTP 基本原理">
+  <meta property="og:url" content="https://cuiqingcai.com/202212.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="系列文章总目录：【2022 年】Python3 爬虫学习教程，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有《P">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/l7600.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/aod7o.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/rc3jq.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/lwt4l.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/0utz7.png">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/4tinn.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/6sq5o.jpg">
+  <meta property="og:image" content="https://cdn.cuiqingcai.com/y0vea.png">
+  <meta property="article:published_time" content="2022-02-10T16:38:31.000Z">
+  <meta property="article:modified_time" content="2026-02-13T19:05:00.308Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="爬虫">
+  <meta property="article:tag" content="Python爬虫">
+  <meta property="article:tag" content="爬虫教程">
+  <meta property="article:tag" content="网络爬虫">
+  <meta property="article:tag" content="2022">
+  <meta property="article:tag" content="HTTP">
+  <meta property="article:tag" content="Python爬虫教程">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.cuiqingcai.com/l7600.jpg">
+  <link rel="canonical" href="https://cuiqingcai.com/202212.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>【2022 年】Python3 爬虫教程 - HTTP 基本原理 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/202212.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 【2022 年】Python3 爬虫教程 - HTTP 基本原理 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2022-02-11 00:38:31" itemprop="dateCreated datePublished" datetime="2022-02-11T00:38:31+08:00">2022-02-11</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                    </span> ， <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/Python/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a>
+                    </span>
+                  </span>
+                  <span id="/202212.html" class="post-meta-item leancloud_visitors" data-flag-title="【2022 年】Python3 爬虫教程 - HTTP 基本原理" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>13k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>12 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <blockquote>
+                  <p>系列文章总目录：<a href="https://cuiqingcai.com/17777.html">【2022 年】Python3 爬虫学习教程</a>，本教程内容多数来自于《Python3 网络爬虫开发实战（第二版）》一书，目前截止 2022 年，可以将爬虫基本技术进行系统讲解，同时将最新前沿爬虫技术如异步、JavaScript 逆向、AST、安卓逆向、Hook、智能解析、群控技术、WebAssembly、大规模分布式、Docker、Kubernetes 等，市面上目前就仅有<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">《Python3 网络爬虫开发实战（第二版）》</a>一书了，<a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">点击了解详情</a>。</p>
+                </blockquote>
+                <p>在正式学习网络爬虫之前，我们需要详细了解 HTTP 的基本原理，了解在浏览器中敲入 URL 到获取网页内容之间发生了什么。了解这些内容，有助于我们进一步了解爬虫的基本原理。</p>
+                <h1 id="1-1-HTTP-基本原理"><a href="#1-1-HTTP-基本原理" class="headerlink" title="1.1 HTTP 基本原理"></a>1.1 HTTP 基本原理</h1>
+                <p>在本节中，我们会详细了解 HTTP 的基本原理，了解在浏览器中敲入 URL 到获取网页内容之间发生了什么。了解这些内容，有助于我们进一步了解爬虫的基本原理。</p>
+                <h2 id="1-URI-和-URL"><a href="#1-URI-和-URL" class="headerlink" title="1. URI 和 URL"></a>1. URI 和 URL</h2>
+                <p>这里我们先了解一下 URI 和 URL。URI 的全称为 Uniform Resource Identifier，即统一资源标志符；而 URL 的全称为 Universal Resource Locator，即统一资源定位符。举例来说，<a href="https://github.com/favicon.ico" target="_blank" rel="noopener">https://github.com/favicon.ico</a> 是一个 URL，也是一个 URI。即有这样一个图标资源，我们用 URL/URI 来唯一指定了它的访问方式，这其中包括了访问协议 https、访问路径（即根目录）和资源名称 favicon.ico。通过这样一个链接，我们便可以从互联网上找到这个资源，这就是 URL/URI。</p>
+                <p>URL 是 URI 的子集，也就是说每个 URL 都是 URI，但不是每个 URI 都是 URL。那么，怎样的 URI 不是 URL 呢？URI 还包括一个子类，叫作 URN，它的全称为 Universal Resource Name，即统一资源名称。URN 只命名资源而不指定如何定位资源，比如 urn:isbn:0451450523 指定了一本书的 ISBN，可以唯一标识这本书，但是没有指定到哪里定位这本书，这就是 URN。URL、URN 和 URI 的关系可以用图 1-1 表示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/l7600.jpg" alt="URL、URN 和 URI 关系图"></p>
+                <p>但是在目前的互联网，URN 使用得非常少，几乎所有的 URI 都是 URL，所以对于一般的网页链接，我们既可以称之为 URL，也可以称之为 URI，我个人习惯称之为 URL。</p>
+                <p>但 URL 也不是随便写的，它也是需要遵循一定的格式规范的，基本的组成格式如下：</p>
+                <figure class="highlight markdown">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">scheme://[<span class="string">username:password@</span>]hostname[<span class="string">:port</span>][<span class="symbol">/path</span>][<span class="string">;parameters</span>][<span class="symbol">?query</span>][<span class="string">#fragment</span>]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>其中这里中括号包括的内容代表非必要部分，比如 <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> 这个 URL，这里就只包含了 scheme 和 host 两部分，其他的 port、path、parameters、query、fragment 都没有。</p>
+                <p>这里我们分别介绍下几部分代表的含义和作用：</p>
+                <ul>
+                  <li>scheme：协议。比如常用的协议有 http、https、ftp 等等，另外 scheme 也被常称作 protocol，都代表协议的意思。</li>
+                  <li>username、password：用户名和密码。在某些情况下 URL 需要提供用户名和密码才能访问，这时候可以把用户名密码放在 host 前面。比如 <a href="https://ssr3.scrape.center" target="_blank" rel="noopener">https://ssr3.scrape.center</a> 这个 URL 需要用户名密码才能访问，那么可以直接写为 <a href="https://admin:admin@ssr3.scrape.center" target="_blank" rel="noopener">https://admin:admin@ssr3.scrape.center</a> 则可以直接访问。</li>
+                  <li>hostname：主机地址。可以是域名或 IP 地址，比如 <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> 这个 URL 中的 hostname 就是 www.baidu.com，这就是百度的二级域名。比如 <a href="https://8.8.8.8" target="_blank" rel="noopener">https://8.8.8.8</a> 这个 URL 中 hostname 就是 8.8.8.8，它是一个 IP 地址。</li>
+                  <li>port：端口。这是服务器设定的服务端口，比如 <a href="https://8.8.8.8:12345" target="_blank" rel="noopener">https://8.8.8.8:12345</a> 这个 URL 中的端口就是 12345。但是有些 URL 中没有端口信息，这是使用了默认的端口，http 协议的默认端口是 80，https 协议的默认端口是 443。所以 <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> 其实相当于 <a href="https://www.baidu.com:443，而">https://www.baidu.com:443，而</a> <a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a> 其实相当于 <a href="http://www.baidu.com:80。">http://www.baidu.com:80。</a></li>
+                  <li>path：路径。指的是网络资源在服务器中的指定地址，比如 <a href="https://github.com/favicon.ico" target="_blank" rel="noopener">https://github.com/favicon.ico</a> 这里 path 就是 favicon.ico，指的就是访问 GitHub 上的根目录下的 favicon.ico 这个资源。</li>
+                  <li>parameters：参数。用来制定访问某个资源的时候的附加信息，比如 <a href="https://8.8.8.8:12345/hello;user" target="_blank" rel="noopener">https://8.8.8.8:12345/hello;user</a> 这里的 user 就是 parameters。但是 parameters 现在用得很少，所以目前很多人会把该参数后面的 query 部分称为参数，甚至把 parameters 和 query 混用。严格意义上来说，parameters 是分号 ; 后面的内容。</li>
+                  <li>query：查询。用来查询某类资源，如果有多个查询，则用 &amp; 隔开。query 其实非常常见，比如 <a href="https://www.baidu.com/s?wd=nba&amp;ie=utf-8，这里的" target="_blank" rel="noopener">https://www.baidu.com/s?wd=nba&amp;ie=utf-8，这里的</a> query 部分就是 wd=nba&amp;ie=utf-8，这里指定了 wd 是 nba，ie 是 utf-8。由于 query 比刚才所说的 parameters 使用频率高太多，所以平时我们见到的参数、GET 请求参数、parameters、params 等称呼多数情况指代的也是 query。严格意义上来说，其实应该用 query 来表示。</li>
+                  <li>fragment：片段。它是对资源描述的部分补充，可以理解为资源内部的书签。目前它有两个主要应用，一个是用作单页面路由，比如 现代前端框架 Vue、React 都可以借助它来做路由管理；另外一个应用是用作 HTML 锚点，用它可以控制一个页面打开时自动下滑滚动到某个特定的位置。</li>
+                </ul>
+                <p>以上我们就简单了解了 URL 的基本概念和构成，后文我们会结合多个实战案例练习来帮助加深其理解。</p>
+                <h2 id="2-HTTP-和-HTTPS"><a href="#2-HTTP-和-HTTPS" class="headerlink" title="2. HTTP 和 HTTPS"></a>2. HTTP 和 HTTPS</h2>
+                <p>刚才我们了解了 URL 的基本构成，其支持的协议有很多，比如 http、https、ftp、sftp、smb 等等。</p>
+                <p>在爬虫中，我们抓取的页面通常基于 http 或 https 协议，这里首先我们先来了解一下这两个协议的含义。</p>
+                <p>HTTP 的全称是 Hyper Text Transfer Protocol，中文名叫作超文本传输协议。HTTP 协议是用于从网络传输超文本数据到本地浏览器的传送协议，它能保证高效而准确地传送超文本文档。HTTP 由万维网协会（World Wide Web Consortium）和 Internet 工作小组 IETF（Internet Engineering Task Force）共同合作制定的规范，目前广泛使用的是 HTTP 1.1 版本，当然 HTTP 2.0 现在不少网站也增加了支持。</p>
+                <p>其发展历史见下表：</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>版本</th>
+                        <th>产生时间</th>
+                        <th>主要特点</th>
+                        <th>发展现状</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>HTTP/0.9</td>
+                        <td>1991 年</td>
+                        <td>不涉及数据包传输，规定客户端和服务器之间通信格式，只能 GET 请求</td>
+                        <td>没有作为正式的标准</td>
+                      </tr>
+                      <tr>
+                        <td>HTTP/1.0</td>
+                        <td>1996 年</td>
+                        <td>传输内容格式不限制，增加 PUT、PATCH、HEAD、 OPTIONS、DELETE 命令</td>
+                        <td>正式作为标准</td>
+                      </tr>
+                      <tr>
+                        <td>HTTP/1.1</td>
+                        <td>1997 年</td>
+                        <td>持久连接(长连接)、节约带宽、HOST 域、管道机制、分块传输编码</td>
+                        <td>正式作为标准并广泛使用</td>
+                      </tr>
+                      <tr>
+                        <td>HTTP/2.0</td>
+                        <td>2015 年</td>
+                        <td>多路复用、服务器推送、头信息压缩、二进制协议等</td>
+                        <td>逐渐覆盖市场</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>HTTPS 的全称是 Hyper Text Transfer Protocol over Secure Socket Layer，是以安全为目标的 HTTP 通道，简单讲是 HTTP 的安全版，即在 HTTP 下加入 SSL 层，简称为 HTTPS。</p>
+                <p>HTTPS 的安全基础是 SSL，因此通过它传输的内容都是经过 SSL 加密的，它的主要作用分为以下两种。</p>
+                <ul>
+                  <li>建立一个信息安全通道，保证数据传输的安全性。</li>
+                  <li>确认网站的真实性。凡是使用了 https 的网站，都可以通过点击浏览器地址栏的锁头标志来查看网站认证之后的真实信息，也可以通过 CA 机构颁发的安全签章来查询。</li>
+                </ul>
+                <p>现在越来越多的网站和 App 都已经向 HTTPS 方向发展，举例如下。</p>
+                <ul>
+                  <li>苹果公司强制所有 iOS App 在 2017 年 1 月 1 日前全部改为使用 HTTPS 加密，否则 App 就无法在应用商店上架。</li>
+                  <li>谷歌从 2017 年 1 月推出的 Chrome 56 开始，对未进行 HTTPS 加密的网址亮出风险提示，即在地址栏的显著位置提醒用户 “此网页不安全”。</li>
+                  <li>腾讯微信小程序的官方需求文档要求后台使用 HTTPS 请求进行网络通信，不满足条件的域名和协议无法请求。</li>
+                </ul>
+                <p>因此，HTTPS 已经是大势所趋。</p>
+                <blockquote>
+                  <p>注：HTTP 和 HTTPS 协议都属于计算机网络中的应用层协议，其下层是基于 TCP 协议实现的，TCP 协议属于计算机网络中的传输层协议，包括建立连接时的三次握手和断开时的四次挥手等过程。但本书主要讲的是网络爬虫相关，主要爬取的是 HTTP/HTTPS 协议相关的内容，所以这里就不再展开深入讲解 TCP、IP 等相关知识了，感兴趣的读者可以搜索相关资料了解下，如《计算机网络》、《图解 HTTP》等书籍。</p>
+                </blockquote>
+                <h2 id="3-HTTP-请求过程"><a href="#3-HTTP-请求过程" class="headerlink" title="3. HTTP 请求过程"></a>3. HTTP 请求过程</h2>
+                <p>我们在浏览器中输入一个 URL，回车之后便会在浏览器中观察到页面内容。</p>
+                <p>实际上，这个过程是浏览器向网站所在的服务器发送了一个请求，网站服务器接收到这个请求后进行处理和解析，然后返回对应的响应，接着传回给浏览器。</p>
+                <p>由于响应里包含页面的源代码等内容，浏览器再对其进行解析，便将网页呈现了出来，流程如图 1-3 所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/aod7o.jpg" alt="模型图"></p>
+                <p>此处客户端即代表我们自己的 PC 或手机浏览器，服务器即要访问的网站所在的服务器。</p>
+                <p>为了更直观地说明这个过程，这里用 Chrome 浏览器开发者模式下的 Network 监听组件来做下演示，它可以显示访问当前请求网页时发生的所有网络请求和响应。</p>
+                <p>打开 Chrome 浏览器，访问百度 <a href="http://www.baidu.com/" target="_blank" rel="noopener">http://www.baidu.com/</a>，这时候鼠标右键并选择“检查”菜单（或直接按快捷键 F12），即可打开浏览器的开发者工具，如下图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/rc3jq.png" alt="打开浏览器的开发者工具"></p>
+                <p>我们切换到 Network 面板，然后重新刷新网页，这时候就可以看到在 Network 面板下方出现了很多个条目，其中一个条目就代表一次发送请求和接收响应的过程，如图所示：</p>
+                <p><img src="https://cdn.cuiqingcai.com/lwt4l.png" alt="请求和接收响应的过程"></p>
+                <p>我们先观察第一个网络请求，即 www.baidu.com，其中各列的含义如下。</p>
+                <ul>
+                  <li>第一列 Name：请求的名称，一般会将 URL 的最后一部分内容当作名称。</li>
+                  <li>第二列 Status：响应的状态码，这里显示为 200，代表响应是正常的。通过状态码，我们可以判断发送了请求之后是否得到了正常的响应。</li>
+                  <li>第三列 Protocol：请求的协议类型，这里 http/1.1 代表是 HTTP 1.1 版本，h2 代表 HTTP 2.0 版本。</li>
+                  <li>第四列 Type：请求的文档类型。这里为 document，代表我们这次请求的是一个 HTML 文档，内容就是一些 HTML 代码。</li>
+                  <li>第五列 Initiator：请求源。用来标记请求是由哪个对象或进程发起的。</li>
+                  <li>第六列 Size：从服务器下载的文件和请求的资源大小。如果是从缓存中取得的资源，则该列会显示 from cache。</li>
+                  <li>第七列 Time：发起请求到获取响应所用的总时间。</li>
+                  <li>第八列 Waterfall：网络请求的可视化瀑布流。</li>
+                </ul>
+                <p>我们点击这个条目，即可看到其更详细的信息，如图所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/0utz7.png" alt="更详细的信息"></p>
+                <p>首先是 General 部分，其中 Request URL 为请求的 URL，Request Method 为请求的方法，Status Code 为响应状态码，Remote Address 为远程服务器的地址和端口，Referrer Policy 为 Referrer 判别策略。</p>
+                <p>再继续往下可以看到，有 Response Headers 和 Request Headers，它们分别代表响应头和请求头。请求头里带有许多请求信息，例如浏览器标识、Cookie、Host 等信息，这是请求的一部分，服务器会根据请求头内的信息判断请求是否合法，进而作出对应的响应。图 1-5 中看到的 Response Headers 就是响应的一部分，其中包含了服务器的类型、文档类型、日期等信息，浏览器接收到响应后，会解析响应内容，进而呈现网页内容。</p>
+                <p>下面我们分别来介绍一下请求和响应都包含哪些内容。</p>
+                <h2 id="4-请求（Request）"><a href="#4-请求（Request）" class="headerlink" title="4. 请求（Request）"></a>4. 请求（Request）</h2>
+                <p>请求，英文为 Request，由客户端向服务器发出，可以分为 4 部分内容：请求方法（Request Method）、请求的网址（Request URL）、请求头（Request Headers）、请求体（Request Body）。</p>
+                <p>下面我们分别予以介绍。</p>
+                <h3 id="请求方法（Request-Method）"><a href="#请求方法（Request-Method）" class="headerlink" title="请求方法（Request Method）"></a>请求方法（Request Method）</h3>
+                <p>请求方法，英文为 Request Method，用于标识请求客户端请求服务端的方式，常见的请求方法有两种：GET 和 POST。</p>
+                <p>在浏览器中直接输入 URL 并回车，这便发起了一个 GET 请求，请求的参数会直接包含到 URL 里。例如，在百度中搜索 Python，这就是一个 GET 请求，链接为 <a href="https://www.baidu.com/s?wd=Python" target="_blank" rel="noopener">https://www.baidu.com/s?wd=Python</a>，其中 URL 中包含了请求的 query 信息，这里的参数 wd 表示要搜寻的关键字。POST 请求大多在表单提交时发起。比如，对于一个登录表单，输入用户名和密码后，点击 “登录” 按钮，这通常会发起一个 POST 请求，其数据通常以表单的形式传输，而不会体现在 URL 中。</p>
+                <p>GET 和 POST 请求方法有如下区别：</p>
+                <ul>
+                  <li>GET 请求中的参数包含在 URL 里面，数据可以在 URL 中看到；而 POST 请求的 URL 不会包含这些数据，数据都是通过表单形式传输的，会包含在请求体中。</li>
+                  <li>GET 请求提交的数据最多只有 1024 字节，而 POST 方式没有限制。</li>
+                </ul>
+                <p>一般来说，登录时，需要提交用户名和密码，其中包含了敏感信息，使用 GET 方式请求的话，密码就会暴露在 URL 里面，造成密码泄露，所以这里最好以 POST 方式发送。上传文件时，由于文件内容比较大，也会选用 POST 方式。</p>
+                <p>我们平常遇到的绝大部分请求都是 GET 或 POST 请求。另外，还有一些请求方法，如 GET、HEAD、POST、PUT、DELETE、CONNECT、OPTIONS、TRACE 等，我们简单将其总结为下表。</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th style="text-align:left">方　　法</th>
+                        <th style="text-align:left">描　　述</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style="text-align:left">GET</td>
+                        <td style="text-align:left">请求页面，并返回页面内容</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">HEAD</td>
+                        <td style="text-align:left">类似于 GET 请求，只不过返回的响应中没有具体的内容，用于获取报头</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">POST</td>
+                        <td style="text-align:left">大多用于提交表单或上传文件，数据包含在请求体中</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">PUT</td>
+                        <td style="text-align:left">从客户端向服务器传送的数据取代指定文档中的内容</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">DELETE</td>
+                        <td style="text-align:left">请求服务器删除指定的页面</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">CONNECT</td>
+                        <td style="text-align:left">把服务器当作跳板，让服务器代替客户端访问其他网页</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">OPTIONS</td>
+                        <td style="text-align:left">允许客户端查看服务器的性能</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">TRACE</td>
+                        <td style="text-align:left">回显服务器收到的请求，主要用于测试或诊断</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>本表参考：<a href="http://www.runoob.com/http/http-methods.html" target="_blank" rel="noopener">http://www.runoob.com/http/http-methods.html</a>。</p>
+                <h3 id="请求的网址（Request-URL）"><a href="#请求的网址（Request-URL）" class="headerlink" title="请求的网址（Request URL）"></a>请求的网址（Request URL）</h3>
+                <p>请求的网址，英文为 Reqeust URL，它可以唯一确定我们想请求的资源。关于 URL 的构成和各个部分的功能我们在前文已经提及到了，这里就不再赘述。</p>
+                <h3 id="请求头（Request-Headers）"><a href="#请求头（Request-Headers）" class="headerlink" title="请求头（Request Headers）"></a>请求头（Request Headers）</h3>
+                <p>请求头，英文为 Request Headers，用来说明服务器要使用的附加信息，比较重要的信息有 Cookie、Referer、User-Agent 等。</p>
+                <p>下面简要说明一些常用的头信息：</p>
+                <ul>
+                  <li>Accept：请求报头域，用于指定客户端可接受哪些类型的信息。</li>
+                  <li>Accept-Language：指定客户端可接受的语言类型。</li>
+                  <li>Accept-Encoding：指定客户端可接受的内容编码。</li>
+                  <li>Host：用于指定请求资源的主机 IP 和端口号，其内容为请求 URL 的原始服务器或网关的位置。从 HTTP 1.1 版本开始，请求必须包含此内容。</li>
+                  <li>Cookie：也常用复数形式 Cookies，这是网站为了辨别用户进行会话跟踪而存储在用户本地的数据。它的主要功能是维持当前访问会话。例如，我们输入用户名和密码成功登录某个网站后，服务器会用会话保存登录状态信息，后面我们每次刷新或请求该站点的其他页面时，会发现都是登录状态，这就是 Cookie 的功劳。Cookie 里有信息标识了我们所对应的服务器的会话，每次浏览器在请求该站点的页面时，都会在请求头中加上 Cookie 并将其发送给服务器，服务器通过 Cookie 识别出是我们自己，并且查出当前状态是登录状态，所以返回结果就是登录之后才能看到的网页内容。</li>
+                  <li>Referer：此内容用来标识这个请求是从哪个页面发过来的，服务器可以拿到这一信息并做相应的处理，如做来源统计、防盗链处理等。</li>
+                  <li>User-Agent：简称 UA，它是一个特殊的字符串头，可以使服务器识别客户使用的操作系统及版本、浏览器及版本等信息。在做爬虫时加上此信息，可以伪装为浏览器；如果不加，很可能会被识别为爬虫。</li>
+                  <li>Content-Type：也叫互联网媒体类型（Internet Media Type）或者 MIME 类型，在 HTTP 协议消息头中，它用来表示具体请求中的媒体类型信息。例如，text/html 代表 HTML 格式，image/gif 代表 GIF 图片，application/json 代表 JSON 类型，更多对应关系可以查看此对照表：<a href="http://tool.oschina.net/commons" target="_blank" rel="noopener">http://tool.oschina.net/commons</a>。</li>
+                </ul>
+                <p>因此，请求头是请求的重要组成部分，在写爬虫时，大部分情况下都需要设定请求头。</p>
+                <h3 id="请求体（Request-Body）"><a href="#请求体（Request-Body）" class="headerlink" title="请求体（Request Body）"></a>请求体（Request Body）</h3>
+                <p>请求体，即 Request Body 一般承载的内容是 POST 请求中的表单数据，而对于 GET 请求，请求体则为空。</p>
+                <p>例如，这里我登录 GitHub 时捕获到的请求和响应如图 1-6 所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/4tinn.jpg" alt="请求和响应"></p>
+                <p>登录之前，我们填写了用户名和密码信息，提交时这些内容就会以表单数据的形式提交给服务器，此时需要注意 Request Headers 中指定 Content-Type 为 application/x-www-form-urlencoded。只有设置 Content-Type 为 application/x-www-form-urlencoded，才会以表单数据的形式提交。另外，我们也可以将 Content-Type 设置为 application/json 来提交 JSON 数据，或者设置为 multipart/form-data 来上传文件。</p>
+                <p>如下表是 Content-Type 和 POST 提交数据方式的关系</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th style="text-align:left">Content-Type</th>
+                        <th style="text-align:left">提交数据的方式</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style="text-align:left">application/x-www-form-urlencoded</td>
+                        <td style="text-align:left">表单数据</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">multipart/form-data</td>
+                        <td style="text-align:left">表单文件上传</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">application/json</td>
+                        <td style="text-align:left">序列化 JSON 数据</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">text/xml</td>
+                        <td style="text-align:left">XML 数据</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>在爬虫中，如果要构造 POST 请求，需要使用正确的 Content-Type，并了解各种请求库的各个参数设置时使用的是哪种 Content-Type，不然可能会导致 POST 提交后无法正常响应。</p>
+                <h2 id="5-响应（Response）"><a href="#5-响应（Response）" class="headerlink" title="5. 响应（Response）"></a>5. 响应（Response）</h2>
+                <p>响应，即 Response，由服务器返回给客户端，可以分为三部分：响应状态码（Response Status Code）、响应头（Response Headers）和响应体（Response Body）。</p>
+                <h3 id="响应状态码（Response-Status-Code）"><a href="#响应状态码（Response-Status-Code）" class="headerlink" title="响应状态码（Response Status Code）"></a>响应状态码（Response Status Code）</h3>
+                <p>响应状态码，即 Response Status Code，表示服务器的响应状态，如 200 代表服务器正常响应，404 代表页面未找到，500 代表服务器内部发生错误。在爬虫中，我们可以根据状态码来判断服务器响应状态，如状态码为 200，则证明成功返回数据，再进行进一步的处理，否则直接忽略。下表列出了常见的错误代码及错误原因。</p>
+                <p>常见的错误代码及错误原因</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th style="text-align:left">状态码</th>
+                        <th style="text-align:left">说　　明</th>
+                        <th style="text-align:left">详　　情</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style="text-align:left">100</td>
+                        <td style="text-align:left">继续</td>
+                        <td style="text-align:left">请求者应当继续提出请求。服务器已收到请求的一部分，正在等待其余部分</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">101</td>
+                        <td style="text-align:left">切换协议</td>
+                        <td style="text-align:left">请求者已要求服务器切换协议，服务器已确认并准备切换</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">200</td>
+                        <td style="text-align:left">成功</td>
+                        <td style="text-align:left">服务器已成功处理了请求</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">201</td>
+                        <td style="text-align:left">已创建</td>
+                        <td style="text-align:left">请求成功并且服务器创建了新的资源</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">202</td>
+                        <td style="text-align:left">已接受</td>
+                        <td style="text-align:left">服务器已接受请求，但尚未处理</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">203</td>
+                        <td style="text-align:left">非授权信息</td>
+                        <td style="text-align:left">服务器已成功处理了请求，但返回的信息可能来自另一个源</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">204</td>
+                        <td style="text-align:left">无内容</td>
+                        <td style="text-align:left">服务器成功处理了请求，但没有返回任何内容</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">205</td>
+                        <td style="text-align:left">重置内容</td>
+                        <td style="text-align:left">服务器成功处理了请求，内容被重置</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">206</td>
+                        <td style="text-align:left">部分内容</td>
+                        <td style="text-align:left">服务器成功处理了部分请求</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">300</td>
+                        <td style="text-align:left">多种选择</td>
+                        <td style="text-align:left">针对请求，服务器可执行多种操作</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">301</td>
+                        <td style="text-align:left">永久移动</td>
+                        <td style="text-align:left">请求的网页已永久移动到新位置，即永久重定向</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">302</td>
+                        <td style="text-align:left">临时移动</td>
+                        <td style="text-align:left">请求的网页暂时跳转到其他页面，即暂时重定向</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">303</td>
+                        <td style="text-align:left">查看其他位置</td>
+                        <td style="text-align:left">如果原来的请求是 POST，重定向目标文档应该通过 GET 提取</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">304</td>
+                        <td style="text-align:left">未修改</td>
+                        <td style="text-align:left">此次请求返回的网页未修改，继续使用上次的资源</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">305</td>
+                        <td style="text-align:left">使用代理</td>
+                        <td style="text-align:left">请求者应该使用代理访问该网页</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">307</td>
+                        <td style="text-align:left">临时重定向</td>
+                        <td style="text-align:left">请求的资源临时从其他位置响应</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">400</td>
+                        <td style="text-align:left">错误请求</td>
+                        <td style="text-align:left">服务器无法解析该请求</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">401</td>
+                        <td style="text-align:left">未授权</td>
+                        <td style="text-align:left">请求没有进行身份验证或验证未通过</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">403</td>
+                        <td style="text-align:left">禁止访问</td>
+                        <td style="text-align:left">服务器拒绝此请求</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">404</td>
+                        <td style="text-align:left">未找到</td>
+                        <td style="text-align:left">服务器找不到请求的网页</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">405</td>
+                        <td style="text-align:left">方法禁用</td>
+                        <td style="text-align:left">服务器禁用了请求中指定的方法</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">406</td>
+                        <td style="text-align:left">不接受</td>
+                        <td style="text-align:left">无法使用请求的内容响应请求的网页</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">407</td>
+                        <td style="text-align:left">需要代理授权</td>
+                        <td style="text-align:left">请求者需要使用代理授权</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">408</td>
+                        <td style="text-align:left">请求超时</td>
+                        <td style="text-align:left">服务器请求超时</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">409</td>
+                        <td style="text-align:left">冲突</td>
+                        <td style="text-align:left">服务器在完成请求时发生冲突</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">410</td>
+                        <td style="text-align:left">已删除</td>
+                        <td style="text-align:left">请求的资源已永久删除</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">411</td>
+                        <td style="text-align:left">需要有效长度</td>
+                        <td style="text-align:left">服务器不接受不含有效内容长度标头字段的请求</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">412</td>
+                        <td style="text-align:left">未满足前提条件</td>
+                        <td style="text-align:left">服务器未满足请求者在请求中设置的其中一个前提条件</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">413</td>
+                        <td style="text-align:left">请求实体过大</td>
+                        <td style="text-align:left">请求实体过大，超出服务器的处理能力</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">414</td>
+                        <td style="text-align:left">请求 URI 过长</td>
+                        <td style="text-align:left">请求网址过长，服务器无法处理</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">415</td>
+                        <td style="text-align:left">不支持类型</td>
+                        <td style="text-align:left">请求格式不被请求页面支持</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">416</td>
+                        <td style="text-align:left">请求范围不符</td>
+                        <td style="text-align:left">页面无法提供请求的范围</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">417</td>
+                        <td style="text-align:left">未满足期望值</td>
+                        <td style="text-align:left">服务器未满足期望请求标头字段的要求</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">500</td>
+                        <td style="text-align:left">服务器内部错误</td>
+                        <td style="text-align:left">服务器遇到错误，无法完成请求</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">501</td>
+                        <td style="text-align:left">未实现</td>
+                        <td style="text-align:left">服务器不具备完成请求的功能</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">502</td>
+                        <td style="text-align:left">错误网关</td>
+                        <td style="text-align:left">服务器作为网关或代理，从上游服务器收到无效响应</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">503</td>
+                        <td style="text-align:left">服务不可用</td>
+                        <td style="text-align:left">服务器目前无法使用</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">504</td>
+                        <td style="text-align:left">网关超时</td>
+                        <td style="text-align:left">服务器作为网关或代理，但是没有及时从上游服务器收到请求</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align:left">505</td>
+                        <td style="text-align:left">HTTP 版本不支持</td>
+                        <td style="text-align:left">服务器不支持请求中所用的 HTTP 协议版本</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3 id="响应头（Response-Headers）"><a href="#响应头（Response-Headers）" class="headerlink" title="响应头（Response Headers）"></a>响应头（Response Headers）</h3>
+                <p>响应头，即 Response Headers，包含了服务器对请求的应答信息，如 Content-Type、Server、Set-Cookie 等。下面简要说明一些常用的头信息。</p>
+                <ul>
+                  <li>Date：标识响应产生的时间。</li>
+                  <li>Last-Modified：指定资源的最后修改时间。</li>
+                  <li>Content-Encoding：指定响应内容的编码。</li>
+                  <li>Server：包含服务器的信息，比如名称、版本号等。</li>
+                  <li>Content-Type：文档类型，指定返回的数据类型是什么，如 text/html 代表返回 HTML 文档，application/x-javascript 则代表返回 JavaScript 文件，image/jpeg 则代表返回图片。</li>
+                  <li>Set-Cookie：设置 Cookie。响应头中的 Set-Cookie 告诉浏览器需要将此内容放在 Cookie 中，下次请求携带 Cookie 请求。</li>
+                  <li>Expires：指定响应的过期时间，可以使代理服务器或浏览器将加载的内容更新到缓存中。如果再次访问时，就可以直接从缓存中加载，降低服务器负载，缩短加载时间。</li>
+                </ul>
+                <h3 id="响应体（Response-Body）"><a href="#响应体（Response-Body）" class="headerlink" title="响应体（Response Body）"></a>响应体（Response Body）</h3>
+                <p>响应体，即 Response Body，这可以说是最关键的部分了，响应的正文数据都在响应体中，比如请求网页时，它的响应体就是网页的 HTML 代码；请求一张图片时，它的响应体就是图片的二进制数据。我们做爬虫请求网页后，要解析的内容就是响应体，如图 1-7 所示。</p>
+                <p><img src="https://cdn.cuiqingcai.com/6sq5o.jpg" alt="响应体"></p>
+                <p>在浏览器开发者工具中点击 Preview，就可以看到网页的源代码，也就是响应体的内容，它是解析的目标。</p>
+                <p>在做爬虫时，我们主要通过响应体得到网页的源代码、JSON 数据等，然后从中做相应内容的提取。</p>
+                <p>本节中，我们了解了 HTTP 的基本原理，大概了解了访问网页时背后的请求和响应过程。本节涉及的知识点需要好好掌握，后面分析网页请求时会经常用到。</p>
+                <h2 id="6-HTTP-2-0"><a href="#6-HTTP-2-0" class="headerlink" title="6. HTTP/2.0"></a>6. HTTP/2.0</h2>
+                <p>前面我们也提到了 HTTP 协议从 2015 年起发布了 2.0 版本，相比 HTTP/1.1 来说，HTTP/2.0 变得更快、更简单、更稳定，HTTP/2.0 在传输层做了很多优化，HTTP/2.0 的主要目标是通过支持完整的请求与响应复用来减少延迟，并通过有效压缩 HTTP 请求头字段将协议开销降至最低，同时增加对请求优先级和服务器推送的支持，这些优化一笔勾销了 HTTP/1.1 为做传输优化想出的一系列“歪招”。</p>
+                <p>有读者这时候可能会问，为什么不叫 HTTP/1.2 而叫 HTTP/2.0 呢？因为 HTTP/2.0 在内部实现上新的二进制分帧层，这是没法与之前的 HTTP/1.x 的服务器和客户端实现向后兼容的，所以直接修改了主版本号为 2.0。</p>
+                <p>下面我们就来了解下 HTTP/2.0 相比 HTTP/1.1 来说做了哪些优化吧。</p>
+                <h3 id="二进制分帧层"><a href="#二进制分帧层" class="headerlink" title="二进制分帧层"></a>二进制分帧层</h3>
+                <p>HTTP/2.0 所有性能增强的核心就在于这个新的二进制分帧层。在 HTTP/1.x 中，不管是请求（Request）还是响应（Response），它们都是用文本格式传输的，其头部（Headers）、实体（Body）之间也是用文本换行符分隔开的。HTTP/2.0 对其做了优化，将文本格式修改为了二进制格式，使得解析起来更加高效。同时将请求和响应数据分割为更小的帧，并采用二进制编码。</p>
+                <p>所以这里就引入了几个新的概念：</p>
+                <ul>
+                  <li>帧：只存在于 HTTP/2.0 中的概念，是数据通信的最小单位，比如一个请求被分为了请求头帧（Request Headers frame）和请求体/数据帧（Request Data frame）。</li>
+                  <li>数据流：一个虚拟通道，可以承载双向的消息，每个流都有一个唯一的整数 ID 来标识。</li>
+                  <li>消息：与逻辑请求或响应消息对应的完整的一系列帧。</li>
+                </ul>
+                <p>在 HTTP/2.0 中，同域名下的所有通信都可以在单个连接上完成，该连接可以承载任意数量的双向数据流，数据流是用于承载双向消息的，每条消息都是一条逻辑 HTTP 消息（例如请求或响应），它可以包含一个或多个帧。</p>
+                <p>简而言之，HTTP/2.0 将 HTTP 协议通信分解为二进制编码帧的交换，这些帧对应着特定数据流中的消息，所有这些都在一个 TCP 连接内复用，这是 HTTP/2.0 协议所有其他功能和性能优化的基础。</p>
+                <h3 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h3>
+                <p>在 HTTP/1.x 中，如果客户端要想发起多个并行请求以提升性能，则必须使用多个 TCP 连接，而且浏览器位了控制资源，还会对单个域名有 6-8 个 TCP 连接请求的限制。但在 HTTP/2.0 中，由于又了二进制分帧技术的加持，HTTP/2.0 不用再以来 TCP 连接去实现多路并行了，客户端和服务器可以将 HTTP 消息分解为互不依赖的帧，然后交错发送，最后再在另一端把它们重新组装起来，让我们可以:</p>
+                <ul>
+                  <li>并行交错地发送多个请求，请求之间互不影响。</li>
+                  <li>并行交错地发送多个响应，响应之间互不干扰。</li>
+                  <li>使用一个连接并行发送多个请求和响应。</li>
+                  <li>不必再为绕过 HTTP/1.x 限制而做很多工作。</li>
+                  <li>消除不必要的延迟和提高现有网络容量的利用率，从而减少页面加载时间。</li>
+                </ul>
+                <p>这样以来，整个数据传输使性能就有了极大提升：</p>
+                <ul>
+                  <li>同个域名只需要占用一个 TCP 连接，使用一个连接并行发送多个请求和响应，消除了因多个 TCP 连接而带来的延时和内存消耗。</li>
+                  <li>并行交错地发送多个请求和详情，而且之间互不影响。</li>
+                  <li>在 HTTP/2.0 中，每个请求都可以带一个 31bit 的优先值，0 表示最高优先级， 数值越大优先级越低。有了这个优先值，客户端和服务器就可以在处理不同的流时采取不同的策略，以最优的方式发送流、消息和帧。</li>
+                </ul>
+                <h3 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h3>
+                <p>流控制是一种阻止发送方向接收方发送大量数据的机制，以免超出后者的需求或处理能力。可以理解为，接收方已经太繁忙了，来不及处理收到的消息了，但是发送方还在一直大量发送消息，这样就会出现一些问题。</p>
+                <p>比如说，客户端可能请求了一个具有较高优先级的大型视频流，但是用户已经暂停视频，客户端现在希望暂停或限制从服务器的传输，以免提取和缓冲不必要的数据。 再比如，一个代理服务器可能具有较快的下游连接和较慢的上游连接，并且也希望调节下游连接传输数据的速度以匹配上游连接的速度来控制其资源利用率等等。</p>
+                <p>由于 HTTP 是基于 TCP 实现的，虽然 TCP 原生有流量控制机制，但是由于 HTTP/2.0 数据流在一个 TCP 连接内复用，TCP 流控制既不够精细，也无法提供必要的应用级 API 来调节各个数据流的传输。</p>
+                <p>为了解决这一问题，HTTP/2.0 提供了一组简单的构建块，这些构建块允许客户端和服务器实现其自己的数据流和连接级流控制:</p>
+                <ul>
+                  <li>流控制具有方向性。 每个接收方都可以根据自身需要选择为每个数据流和整个连接设置任意的窗口大小。</li>
+                  <li>流控制基于信用。 每个接收方都可以公布其初始连接和数据流流控制窗口（以字节为单位），每当发送方发出 <code>DATA</code> 帧时都会减小，在接收方发出 <code>WINDOW_UPDATE</code> 帧时增大。</li>
+                  <li>流控制无法停用。 建立 HTTP/2.0 连接后，客户端将与服务器交换 <code>SETTINGS</code> 帧，这会在两个方向上设置流控制窗口。 流控制窗口的默认值设为 65535 字节，但是接收方可以设置一个较大的最大窗口大小（<code>2^31-1</code> 字节），并在接收到任意数据时通过发送 <code>WINDOW_UPDATE</code> 帧来维持这一大小。</li>
+                  <li>流控制为逐跃点控制，而非端到端控制。 即，可信中介可以使用它来控制资源使用，以及基于自身条件和启发式算法实现资源分配机制。</li>
+                </ul>
+                <p>由此可见，HTTP/2.0 提供了简单的构建块实现了自定义策略来调节资源使用和分配，以及实现新传输能力，同时提升了网页应用的实际性能和感知性能。</p>
+                <h3 id="服务端推送"><a href="#服务端推送" class="headerlink" title="服务端推送"></a>服务端推送</h3>
+                <p>HTTP/2.0 新增的另一个强大的新功能是，服务器可以对一个客户端请求发送多个响应。 换句话说，除了对最初请求的响应外，服务器还可以向客户端推送额外资源，而无需客户端明确地请求。</p>
+                <p>如果某些资源客户端是一定会请求的，这时就可以采取服务端推送的技术，在客户端发起一次请求后，额外提前给客户端推送必要的资源，这样就可以相对减少一点延迟时间。例如，服务端可以主动把 JS 和 CSS 文件推送给客户端，而不需要客户端解析 HTML 时再发送这些请求。</p>
+                <p><img src="https://cdn.cuiqingcai.com/y0vea.png" alt="服务端推送"></p>
+                <p>服务端可以主动推送，当然客户端也有权利选择是否接收。如果服务端推送的资源已经被浏览器缓存过，浏览器可以通过发送 RST_STREAM 帧来拒收。</p>
+                <p>另外主动推送也遵守同源策略，即服务器不能随便将第三方资源推送给客户端，而必须是经过双方确认才行，这样也能保证一定的安全性。</p>
+                <h3 id="HTTP-2-0-发展现状"><a href="#HTTP-2-0-发展现状" class="headerlink" title="HTTP/2.0 发展现状"></a>HTTP/2.0 发展现状</h3>
+                <p>HTTP/2.0 的普及是一件任重而道远的事情，一些主流的网站现在已经支持了 HTTP/2.0，主流浏览器现在都已经实现了 HTTP/2.0 的支持，但总的来看，目前大部分网站依然还是以 HTTP/1.1 为主。</p>
+                <p>另外一些编程语言的库还没有完全支持 HTTP/2.0，比如对于 Python 来说，hyper、httpx 等库已经支持了 HTTP/2.0，但广泛使用的 requests 库依然还是只支持 HTTP/1.1。</p>
+                <h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h2>
+                <p>本节介绍了关于 HTTP 的一些基础知识，内容不少，需要好好掌握，这些知识对于后面我们编写和理解网络爬虫具有非常大的帮助。</p>
+                <p>由于本节的内容多数为概念介绍，内容参考了很多书籍、文档、博客，来源如下：</p>
+                <ul>
+                  <li>书籍 - 《HTTP 权威指南》- 作者 David Gourley / Brian Totty</li>
+                  <li>文档 - HTTP - 维基百科：<a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol</a></li>
+                  <li>文档 - HTTP - 百度百科：<a href="https://baike.baidu.com/item/HTTP/243074" target="_blank" rel="noopener">https://baike.baidu.com/item/HTTP/243074</a></li>
+                  <li>文档 - HTTP - MDN Web Docs：<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/HTTP</a></li>
+                  <li>文档 - HTTP/2 简介 - Google 开发文档：<a href="https://developers.google.com/web/fundamentals/performance/http2" target="_blank" rel="noopener">https://developers.google.com/web/fundamentals/performance/http2</a></li>
+                  <li>博客 - 一文读懂 HTTP/2 及 HTTP/3 特性：<a href="https://blog.fundebug.com/2019/03/07/understand-http2-and-http3/" target="_blank" rel="noopener">https://blog.fundebug.com/2019/03/07/understand-http2-and-http3/</a></li>
+                  <li>博客 - 一文读懂 HTTP/2 特性：<a href="https://zhuanlan.zhihu.com/p/26559480" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26559480</a></li>
+                </ul>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202213.html" rel="bookmark">【2022 年】Python3 爬虫教程 - Web网页基础</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202215.html" rel="bookmark">【2022 年】Python3 爬虫教程 - 1.5 代理的基本原理</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202246.html" rel="bookmark">【2022 年】Python3 爬虫教程 - 便于高效检索的 Elasticsearch 存储</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202232.html" rel="bookmark">【2022 年】Python3 爬虫教程 - parsel 的使用</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/202211.html" rel="bookmark">【2022 年】Python3 爬虫教程 - 爬虫是什么？</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+                  <a href="/tags/Python%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> Python爬虫</a>
+                  <a href="/tags/%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 爬虫教程</a>
+                  <a href="/tags/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 网络爬虫</a>
+                  <a href="/tags/2022/" rel="tag"><i class="fa fa-tag"></i> 2022</a>
+                  <a href="/tags/HTTP/" rel="tag"><i class="fa fa-tag"></i> HTTP</a>
+                  <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> Python爬虫教程</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/36051.html" rel="prev" title="用 Markdown 做 PPT，就是这么简单！">
+                      <i class="fa fa-chevron-left"></i> 用 Markdown 做 PPT，就是这么简单！ </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/202213.html" rel="next" title="【2022 年】Python3 爬虫教程 - Web网页基础"> 【2022 年】Python3 爬虫教程 - Web网页基础 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-1"><a class="nav-link" href="#1-1-HTTP-基本原理"><span class="nav-number">1.</span> <span class="nav-text">1.1 HTTP 基本原理</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#1-URI-和-URL"><span class="nav-number">1.1.</span> <span class="nav-text">1. URI 和 URL</span></a></li>
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#2-HTTP-和-HTTPS"><span class="nav-number">1.2.</span> <span class="nav-text">2. HTTP 和 HTTPS</span></a></li>
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#3-HTTP-请求过程"><span class="nav-number">1.3.</span> <span class="nav-text">3. HTTP 请求过程</span></a></li>
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#4-请求（Request）"><span class="nav-number">1.4.</span> <span class="nav-text">4. 请求（Request）</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#请求方法（Request-Method）"><span class="nav-number">1.4.1.</span> <span class="nav-text">请求方法（Request Method）</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#请求的网址（Request-URL）"><span class="nav-number">1.4.2.</span> <span class="nav-text">请求的网址（Request URL）</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#请求头（Request-Headers）"><span class="nav-number">1.4.3.</span> <span class="nav-text">请求头（Request Headers）</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#请求体（Request-Body）"><span class="nav-number">1.4.4.</span> <span class="nav-text">请求体（Request Body）</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#5-响应（Response）"><span class="nav-number">1.5.</span> <span class="nav-text">5. 响应（Response）</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#响应状态码（Response-Status-Code）"><span class="nav-number">1.5.1.</span> <span class="nav-text">响应状态码（Response Status Code）</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#响应头（Response-Headers）"><span class="nav-number">1.5.2.</span> <span class="nav-text">响应头（Response Headers）</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#响应体（Response-Body）"><span class="nav-number">1.5.3.</span> <span class="nav-text">响应体（Response Body）</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#6-HTTP-2-0"><span class="nav-number">1.6.</span> <span class="nav-text">6. HTTP&#x2F;2.0</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#二进制分帧层"><span class="nav-number">1.6.1.</span> <span class="nav-text">二进制分帧层</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#多路复用"><span class="nav-number">1.6.2.</span> <span class="nav-text">多路复用</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#流量控制"><span class="nav-number">1.6.3.</span> <span class="nav-text">流量控制</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#服务端推送"><span class="nav-number">1.6.4.</span> <span class="nav-text">服务端推送</span></a></li>
+                          <li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-2-0-发展现状"><span class="nav-number">1.6.5.</span> <span class="nav-text">HTTP&#x2F;2.0 发展现状</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-2"><a class="nav-link" href="#7-总结"><span class="nav-number">1.7.</span> <span class="nav-text">7. 总结</span></a></li>
+                    </ol>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">710</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">260</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Luma/">Luma</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">303</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 19px;">API</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 11px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 11px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 11px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Luma/" style="font-size: 10px;">Luma</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 12px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 11px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 11px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 11px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 11px;">Producer</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 17px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 11px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 12px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 18px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 12px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 15px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 11px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 14px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 12px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 11px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora/" style="font-size: 10px;">Sora</a> <a href="/tags/Sora2/" style="font-size: 11px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 11px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 11px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 13px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 12px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 11px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.5m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">52:30</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '6ab7a38e5ebc3df547b9670b95305311',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>
