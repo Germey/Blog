@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="API,Riffusion">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="申请和使用 要使用 Pixverse Videos Generation API，首先可以到 Pixverse Videos Generation API 页面点击「Acquire」按钮，获取请求所需要的凭证：  如果你尚未登录或注册，会自动跳转到登录页面邀请您来注册和登录，登录注册之后会自动返回当前页面。 在首次申请时会有免费额度赠送，可以免费使用该 API。 基本使用 可以根据提示词来生成视频">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Pixverse 视频生成 API 对接说明">
+  <meta property="og:url" content="https://cuiqingcai.com/42372.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="申请和使用 要使用 Pixverse Videos Generation API，首先可以到 Pixverse Videos Generation API 页面点击「Acquire」按钮，获取请求所需要的凭证：  如果你尚未登录或注册，会自动跳转到登录页面邀请您来注册和登录，登录注册之后会自动返回当前页面。 在首次申请时会有免费额度赠送，可以免费使用该 API。 基本使用 可以根据提示词来生成视频">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.acedata.cloud/nyq0xz.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/azz8d3.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/g5j3f2.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/c7zzmb.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/fqd8br.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/4ea6pa.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/yfzxxn.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/pwbyma.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/gb09le.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/kwcdyg.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/hio4x5.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/ts5xif.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/xj2l9e.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/bouy2j.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/fwfqin.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/au5m49.png">
+  <meta property="og:image" content="https://cdn.acedata.cloud/vwfrmz.png">
+  <meta property="article:published_time" content="2025-06-24T12:01:22.000Z">
+  <meta property="article:modified_time" content="2026-07-02T05:02:31.542Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="API">
+  <meta property="article:tag" content="Riffusion">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.acedata.cloud/nyq0xz.png">
+  <link rel="canonical" href="https://cuiqingcai.com/42372.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>Pixverse 视频生成 API 对接说明 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/42372.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> Pixverse 视频生成 API 对接说明 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2025-06-24 20:01:22" itemprop="dateCreated datePublished" datetime="2025-06-24T20:01:22+08:00">2025-06-24</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/API/" itemprop="url" rel="index"><span itemprop="name">API</span></a>
+                    </span>
+                  </span>
+                  <span id="/42372.html" class="post-meta-item leancloud_visitors" data-flag-title="Pixverse 视频生成 API 对接说明" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>31k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>28 分钟</span>
+                  </span>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <h2 id="申请和使用"><a href="#申请和使用" class="headerlink" title="申请和使用"></a>申请和使用</h2>
+                <p>要使用 Pixverse Videos Generation API，首先可以到 <a href="https://platform.acedata.cloud/documents/00f200b3-709d-4783-ac56-3d27cc70b73d" target="_blank" rel="noopener">Pixverse Videos Generation API</a> 页面点击「Acquire」按钮，获取请求所需要的凭证：</p>
+                <p><img src="https://cdn.acedata.cloud/nyq0xz.png" alt=""></p>
+                <p>如果你尚未登录或注册，会自动跳转到登录页面邀请您来注册和登录，登录注册之后会自动返回当前页面。</p>
+                <p>在首次申请时会有免费额度赠送，可以免费使用该 API。</p>
+                <h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2>
+                <p>可以根据提示词来生成视频，比如可以输入 <code>quiver</code>，如图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/azz8d3.png" width="500" class="m-auto"></p>
+                <p>生成的代码如下：</p>
+                <p><img src="https://cdn.acedata.cloud/g5j3f2.png" width="500" class="m-auto"></p>
+                <p>可以点击「Try」按钮直接测试 API，稍等 1-2 分钟，结果如下：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"69e677ca-f1de-419f-99a4-cb39ea0cb5fc"</span>,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"e544f904-ac13-4b42-a26e-2de69d9ac06b"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="number">317982208110208</span>,</span><br><span class="line">      <span class="attr">"first_frame"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"video_width"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"video_height"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"prompt"</span>: <span class="string">"quiver"</span>,</span><br><span class="line">      <span class="attr">"model"</span>: <span class="string">"v3.5"</span>,</span><br><span class="line">      <span class="attr">"quality"</span>: <span class="string">"360p"</span>,</span><br><span class="line">      <span class="attr">"motion"</span>: <span class="string">"normal"</span>,</span><br><span class="line">      <span class="attr">"video_url"</span>: <span class="string">"https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2F77e48783-3dc9-48ab-84a0-0e310ff9b83d_seed0.mp4"</span>,</span><br><span class="line">      <span class="attr">"template_id"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"template_name"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"style"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"aspect_ratio"</span>: <span class="string">"16:9"</span>,</span><br><span class="line">      <span class="attr">"duration"</span>: <span class="number">5</span>,</span><br><span class="line">      <span class="attr">"extended"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"last_frame"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"seed"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"asset_id"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"asset_name"</span>: <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到这时候我们就得到了一个视频的内容，包括视频ID、视频链接、视频清晰度、视频时长等内容。</p>
+                <p>字段说明如下：</p>
+                <ul>
+                  <li>success：生成是否成功，如果成功则为 <code>true</code>，否则为 <code>false</code></li>
+                  <li>task_id：此次生成任务的ID</li>
+                  <li>trace_id：此次生成任务的追踪ID</li>
+                  <li>data：是一个列表，包含了生成的视频的详细信息。<ul>
+                      <li>id： 生成视频的唯一ID，后续可以根据此ID进行扩展生成</li>
+                      <li>first_frame：视频的首帧图片链接</li>
+                      <li>last_frame：视频的尾帧图片链接</li>
+                      <li>video_width：此次视频结果的宽度</li>
+                      <li>video_height：此次视频结果的长度</li>
+                      <li>prompt：此次视频生成任务的提示词</li>
+                      <li>model：此次视频生成任务采用的模型</li>
+                      <li>video_url：此次视频生成任务的视频链接</li>
+                      <li>template_id：视频采用的模版特效ID</li>
+                      <li>template_name：视频采用的模版特效名称</li>
+                      <li>asset_id：视频采用的角色ID</li>
+                      <li>asset_name：视频采用的角色名称</li>
+                      <li>style：此次视频生成任务的风格</li>
+                      <li>aspect_ratio：此次视频的尺寸大小</li>
+                      <li>extended：此次视频是否为扩展生成的，0为不是扩展生成的，反之为扩展生成的</li>
+                    </ul>
+                  </li>
+                </ul>
+                <h2 id="自定义首尾帧生成视频"><a href="#自定义首尾帧生成视频" class="headerlink" title="自定义首尾帧生成视频"></a>自定义首尾帧生成视频</h2>
+                <p>如果想自定义首尾帧生成视频，可以输入首尾帧图片链接：</p>
+                <p>这时候 <code>frame</code> 字段可以传入类似如下内容：</p>
+                <ul>
+                  <li>
+                    <p>首帧图片</p>
+                    <p><img src="https://cdn.acedata.cloud/c7zzmb.png" width="500" class="m-auto"></p>
+                  </li>
+                  <li>
+                    <p>尾帧图片</p>
+                    <p><img src="https://cdn.acedata.cloud/fqd8br.png" width="500" class="m-auto"></p>
+                  </li>
+                </ul>
+                <p>接下来我们要根据歌词、标题、风格自定义生成歌曲，就可以指定如下内容：</p>
+                <ul>
+                  <li>action：此次视频生成任务的行为，分为俩种：生成视频 <code>action</code>、扩展视频 <code>extend</code></li>
+                  <li>prompt：此次视频生成任务的提示词。</li>
+                  <li>frame：此次视频生成的首尾帧视频链接数组。</li>
+                </ul>
+                <p>填写样例如下：</p>
+                <p><img src="https://cdn.acedata.cloud/4ea6pa.png" width="500" class="m-auto"></p>
+                <p>填写完毕之后自动生成了代码如下：</p>
+                <p><img src="https://cdn.acedata.cloud/yfzxxn.png" width="500" class="m-auto"></p>
+                <p>对应的Shell代码：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -X POST <span class="string">'https://api.acedata.cloud/pixverse/videos'</span> \</span><br><span class="line">-H <span class="string">'accept: application/json'</span> \</span><br><span class="line">-H <span class="string">'authorization: Bearer &#123;token&#125;'</span> \</span><br><span class="line">-H <span class="string">'content-type: application/json'</span> \</span><br><span class="line">-d <span class="string">'&#123;</span></span><br><span class="line"><span class="string">  "action": "generate",</span></span><br><span class="line"><span class="string">  "prompt": "gradation",</span></span><br><span class="line"><span class="string">  "frame": ["https://cdn.acedata.cloud/c7zzmb.png","https://cdn.acedata.cloud/fqd8br.png"]</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>测试允许，生成的效果是类似的。</p>
+                <h2 id="自定义视频模板特效生成"><a href="#自定义视频模板特效生成" class="headerlink" title="自定义视频模板特效生成"></a>自定义视频模板特效生成</h2>
+                <p>如果想使用特定的视频模板特效来生成视频的话，我们只需要添加一个模板ID字段 <code>template_id</code> 来指定模板特效，我们提供了以下几个模板特效，<br>具体的模板特效如下图所示：<br>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Muscle Surge"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"muscle_241128"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">308621408717184</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fwithbaby.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"hot"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-11-28T17:53:21Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Show off your strong muscles and have everyone hooked."</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"成为肌肉猛男\",\"display_prompt\":\"体验猛男快乐\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113750602,\"img_url\":\"https://media.pixverse.ai/upload%2F920dc791-8c9f-4518-8761-82958a827190.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;,&#123;\"img_id\":113750791,\"img_url\":\"https://media.pixverse.ai/upload%2Ff2853009-8238-4e0f-93ec-cfc68fee28b7.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Hug Your Love"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"hug_love_241030"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">303624424723200</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fhug2.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"hot"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-10-31T12:07:47Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2025-01-06T05:32:42Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Hug each other\t"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"爱的抱抱\",\"display_prompt\":\"互相拥抱在一起\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113741803,\"img_url\":\"https://media.pixverse.ai/upload%2Fb2626bc2-050d-4ea6-a864-e2054c012df5.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Alive Art"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"alive_art_241028"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">302325299721280</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Faliveart.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-10-24T03:55:29Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2025-01-06T05:32:53Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"The [OBJECT] comes to life and walks out of the [SCENE]"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"活灵活现\",\"display_prompt\":\"它活了！\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Sheep Curls"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"sheep_241208"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">310371322329472</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2FSheepCurls.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"new"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-12-08T15:14:11Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Change hairstyle for a better mood"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"万物皆可羊毛卷\",\"display_prompt\":\"心情不好，换个发型看看\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113741803,\"img_url\":\"https://media.pixverse.ai/upload%2Fb2626bc2-050d-4ea6-a864-e2054c012df5.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Sailor Moon"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"meishaonv_241225"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">313359138372032</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fmeishaonv2.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-12-25T12:29:05Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2025-01-06T05:32:33Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Moon Prism Power, Make Up!"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"成为美少女战士\",\"display_prompt\":\"月之水晶力量，变身！\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Black Myth: Wukong"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"heiwukong_241225"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">313359209531840</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fmonkey.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-12-25T12:29:40Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2025-01-06T05:32:25Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"I am Sun Wukong, the Victorious Fighting Buddha!"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"黑悟空引擎\",\"display_prompt\":\"放马西行，直面天命！\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Santa's Secret Gifts"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"santa_gift_241213"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">311521768592256</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fgift111.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"new"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-12-15T03:16:32Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-30T06:08:16Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"I want a："</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"圣诞礼物盲盒\",\"display_prompt\":\"我想要：\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113741803,\"img_url\":\"https://media.pixverse.ai/upload%2Fb2626bc2-050d-4ea6-a864-e2054c012df5.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Where is Santa?"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"where_is_santa_241213"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">311521879229312</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fwheresanta.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"new"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-12-15T03:17:26Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-30T06:08:24Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Discovering Santa Claus in the parallel world!"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"圣诞老人藏在哪？\",\"display_prompt\":\"“发现”世界各处的圣诞老人\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":119280295,\"img_url\":\"https://media.pixverse.ai/upload%2Fde34a072-325e-4d86-88d9-2daef292e1b4.jpeg\"&#125;,&#123;\"img_id\":119280616,\"img_url\":\"https://media.pixverse.ai/upload%2F5b4da0a2-86c3-4204-adda-74bfa7c3d0d1.jpg\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Christmas OOTD"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"tobe_santa_241219"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">312314911869312</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fbesanta33.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"new"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-12-19T14:51:09Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-30T06:08:08Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Dress up as a Christmas star"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"圣诞战袍\",\"display_prompt\":\"测测什么圣诞装适合你\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113741803,\"img_url\":\"https://media.pixverse.ai/upload%2Fb2626bc2-050d-4ea6-a864-e2054c012df5.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"We Are Venom!"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"venom_241030"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">303624537709312</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2FWeAreVenom.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-10-31T12:08:42Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Transform into a [BLACK] Venom"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"毒液变身！\",\"display_prompt\":\"变身成为【黑色】毒液\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113750602,\"img_url\":\"https://media.pixverse.ai/upload%2F920dc791-8c9f-4518-8761-82958a827190.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;,&#123;\"img_id\":113750791,\"img_url\":\"https://media.pixverse.ai/upload%2Ff2853009-8238-4e0f-93ec-cfc68fee28b7.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Hot Harley Quinn"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"harley_quinn_241121"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">307489434436288</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2FHotHarleyQuinn.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-11-22T08:21:19Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-26T07:40:43Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Transform into Harley Quinn, mastering allure and chaos"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"小丑女哈莉·奎茵变身\",\"display_prompt\":\"化身小丑女哈莉·奎茵，掌控魅惑与疯狂\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113741803,\"img_url\":\"https://media.pixverse.ai/upload%2Fb2626bc2-050d-4ea6-a864-e2054c012df5.png\"&#125;,&#123;\"img_id\":113742000,\"img_url\":\"https://media.pixverse.ai/upload%2F19090035-612e-40ed-9c8d-a7aaf781d492.png\"&#125;,&#123;\"img_id\":113742074,\"img_url\":\"https://media.pixverse.ai/upload%2F50ed9020-7b58-4dd9-aa39-ff06b9e0df12.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Crazy Cat Woman"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"cat_woman_241121"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">307489548427968</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2FCrazyCatWoman.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-11-22T08:22:15Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-26T07:40:24Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Transform into a Crazy Cat Woman and slay"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"疯狂猫女变身\",\"display_prompt\":\"变身妖娆猫女，撩翻全场！\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113742074,\"img_url\":\"https://media.pixverse.ai/upload%2F50ed9020-7b58-4dd9-aa39-ff06b9e0df12.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;,&#123;\"img_id\":113750791,\"img_url\":\"https://media.pixverse.ai/upload%2Ff2853009-8238-4e0f-93ec-cfc68fee28b7.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Wonder Woman"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"wonder_woman_241202"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">309283958194560</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2FWonderWoman.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-12-02T11:45:11Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-26T07:40:35Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Transform into Wonder Woman and conquer the impossible"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"神奇女侠变身\",\"display_prompt\":\"成为神奇女侠，征服一切不可能\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113742074,\"img_url\":\"https://media.pixverse.ai/upload%2F50ed9020-7b58-4dd9-aa39-ff06b9e0df12.png\"&#125;,&#123;\"img_id\":113750791,\"img_url\":\"https://media.pixverse.ai/upload%2Ff2853009-8238-4e0f-93ec-cfc68fee28b7.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Hulk"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"hulk_241106"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">304826314164992</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2FHulk.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-11-07T07:08:47Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-26T07:38:48Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Unleash the Beast"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"召唤绿巨人\",\"display_prompt\":\"变身成绿巨人并捶爆一切\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113750602,\"img_url\":\"https://media.pixverse.ai/upload%2F920dc791-8c9f-4518-8761-82958a827190.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;,&#123;\"img_id\":113750791,\"img_url\":\"https://media.pixverse.ai/upload%2Ff2853009-8238-4e0f-93ec-cfc68fee28b7.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Joker's Rebirth"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"joker_241106"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">304826126435072</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_joker.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-11-07T07:07:16Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-26T07:38:54Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Transform into a Joker"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"小丑重生\",\"display_prompt\":\"变身成小丑，诡异地微笑\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113750602,\"img_url\":\"https://media.pixverse.ai/upload%2F920dc791-8c9f-4518-8761-82958a827190.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;,&#123;\"img_id\":113750791,\"img_url\":\"https://media.pixverse.ai/upload%2Ff2853009-8238-4e0f-93ec-cfc68fee28b7.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Batman"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"bat_man_241106"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">304826374632192</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_batman.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-11-07T07:09:17Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-26T07:39:00Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Transform into a Batman and embrace the night"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"蝙蝠侠归来\",\"display_prompt\":\"变身成蝙蝠侠并守护黑夜\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113741803,\"img_url\":\"https://media.pixverse.ai/upload%2Fb2626bc2-050d-4ea6-a864-e2054c012df5.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Iron Man"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"iron_man_241106"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">304826054394624</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_ironman.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-11-07T07:06:40Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-26T07:39:06Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Activate Iron Mode"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"钢铁侠变身\",\"display_prompt\":\"激活钢铁模式\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113741803,\"img_url\":\"https://media.pixverse.ai/upload%2Fb2626bc2-050d-4ea6-a864-e2054c012df5.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Hair Growth Magic"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"hair_magic_241128"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">308552687706496</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_hairgrowth.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-11-28T08:34:06Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Grow lots of hair. Never be bald."</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"发量王者\",\"display_prompt\":\"长出迷人秀发，永无秃头困扰。\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113750602,\"img_url\":\"https://media.pixverse.ai/upload%2F920dc791-8c9f-4518-8761-82958a827190.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;,&#123;\"img_id\":113750791,\"img_url\":\"https://media.pixverse.ai/upload%2Ff2853009-8238-4e0f-93ec-cfc68fee28b7.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"COLORFUL Venom!"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"random_venom_241104"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">304358279051648</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_colorfulvenom.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-11-04T15:39:54Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Transform into a [COLORFUL] Venom"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"毒液！(彩色盲盒版)\",\"display_prompt\":\"变身成为【彩色】毒液\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113741803,\"img_url\":\"https://media.pixverse.ai/upload%2Fb2626bc2-050d-4ea6-a864-e2054c012df5.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Who is Venom?"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"who_is_venom_241112"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">305714097668480</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_whoisvenom.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-11-12T07:33:35Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Which one of you guys is Venom? "</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"测测谁是毒液？\",\"display_prompt\":\"两人之中，必有一毒，速速现出原形\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":111917190,\"img_url\":\"https://media.pixverse.ai/upload%2F6a6a0f6a-99be-4eac-83a1-9d265ca65823.png\"&#125;,&#123;\"img_id\":111917753,\"img_url\":\"https://media.pixverse.ai/upload%2F079945d6-01aa-4688-9e9a-02e308c01db5.png\"&#125;,&#123;\"img_id\":111917942,\"img_url\":\"https://media.pixverse.ai/upload%2F814307ed-4123-4f6b-a32e-4072b55378cb.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Get a Venom buddy"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"baby_venom_241114"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">306059795500352</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_venombuddy.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-11-14T06:26:53Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"Your Venom buddy appears and gives you a hug"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"召唤毒液兄弟\",\"display_prompt\":\"你的毒液兄弟回到你身边，并与你深情相拥\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">"[&#123;\"img_id\":113741803,\"img_url\":\"https://media.pixverse.ai/upload%2Fb2626bc2-050d-4ea6-a864-e2054c012df5.png\"&#125;,&#123;\"img_id\":113750690,\"img_url\":\"https://media.pixverse.ai/upload%2Fddd29e75-beeb-461c-9388-3e14c2709e73.png\"&#125;]"</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Wicked Shots"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"wicked_paintings_241028"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">303788802773760</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_wickedshot.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-11-01T10:25:30Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"The [SUBJECT] in the picture smiles wickedly and starts firing"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"扫射一切\",\"display_prompt\":\"邪魅一笑，并掏出一把机关枪开始扫射\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Squish It"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"squish_it_241028"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">302325299692608</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_squishit.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-10-24T03:55:29Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"A pair of hands appears and squishes the [OBJECT] as if it's slime"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"捏捏更解压\",\"display_prompt\":\"变成可以捏捏的软泥\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Lego Blast"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"lego_blast_241028"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">302325299702848</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_legoblast.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-10-24T03:55:29Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"The [OBJECT] shatters into pieces of Legos"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"乐高大爆炸\",\"display_prompt\":\"爆炸并碎裂成一片片乐高积木\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Leggy Run"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"leggy_run_241028"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">302325299711040</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_leggyrun.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"hot"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-10-24T03:55:29Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"The [OBJECT] grows legs and runs away"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"全员腿精\",\"display_prompt\":\"长出了一双腿然后开始乱跑\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Monster Invades"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"monster_invasion_241028"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">302325299682368</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_monster.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"default"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-10-24T03:55:29Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"A monster suddenly appears in the [SCENE] and starts walking around"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"怪兽入侵\",\"display_prompt\":\"场景中突然出现了一只怪兽\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Wizard Hat"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"animal_wizard_241028"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">302325299661888</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_wizardhat.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"hot"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-10-24T03:55:29Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"The [SUBJECT] wears a magic wizard hat"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"戴上魔法帽\",\"display_prompt\":\"头顶出现了一顶可爱的魔法帽\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Zombie Hand"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"zombie_hand_241028"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">302325299672128</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_weirdhand.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"hot"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-10-24T03:55:29Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"A zombie hand appears in the [SCENE]"</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"僵尸手出没\",\"display_prompt\":\"从图片中的场景中钻出一只僵尸的手\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"display_name"</span>: <span class="string">"Zombie Mode"</span>,</span><br><span class="line">        <span class="attr">"workflow_tag"</span>: <span class="string">"zombie_mode_241028"</span>,</span><br><span class="line">        <span class="attr">"template_id"</span>: <span class="number">302325299651648</span>,</span><br><span class="line">        <span class="attr">"thumbnail_path"</span>: <span class="string">"https://media.pixverse.ai/asset%2Ftemplate%2Fcapcut_zombiemode.gif"</span>,</span><br><span class="line">        <span class="attr">"thumbnail_video_path"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"marker"</span>: <span class="string">"hot"</span>,</span><br><span class="line">        <span class="attr">"created_at"</span>: <span class="string">"2024-10-24T03:55:29Z"</span>,</span><br><span class="line">        <span class="attr">"updated_at"</span>: <span class="string">"2024-12-25T10:19:28Z"</span>,</span><br><span class="line">        <span class="attr">"display_prompt"</span>: <span class="string">"The [SUBJECT] suddenly transforms into a zombie."</span>,</span><br><span class="line">        <span class="attr">"i18n_json"</span>: <span class="string">"&#123;\"zh-CN\":&#123;\"display_name\":\"坏了，我变僵尸了\",\"display_prompt\":\"突然变成僵尸\"&#125;&#125;"</span>,</span><br><span class="line">        <span class="attr">"example_list"</span>: <span class="string">""</span>,</span><br><span class="line">        <span class="attr">"qualities"</span>: [</span><br><span class="line">            <span class="string">"360p"</span>,</span><br><span class="line">            <span class="string">"540p"</span>,</span><br><span class="line">            <span class="string">"720p"</span>,</span><br><span class="line">            <span class="string">"1080p"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                </p>
+                <p>我们可以在上面选择一个 <code>template_id</code> 来生成视频，我们以<code>302325299651648</code>为示例生成视频，其他参数与基本使用类似，具体的参数如下图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/pwbyma.png" width="500" class="m-auto"></p>
+                <p>填写完毕之后自动生成了代码如下：</p>
+                <p><img src="https://cdn.acedata.cloud/gb09le.png" width="500" class="m-auto"></p>
+                <p>对应的 Python 代码：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">"https://api.acedata.cloud/pixverse/videos"</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">"accept"</span>: <span class="string">"application/json"</span>,</span><br><span class="line">    <span class="string">"authorization"</span>: <span class="string">"Bearer &#123;token&#125;"</span>,</span><br><span class="line">    <span class="string">"content-type"</span>: <span class="string">"application/json"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">payload = &#123;</span><br><span class="line">    <span class="string">"action"</span>: <span class="string">"generate"</span>,</span><br><span class="line">    <span class="string">"prompt"</span>: <span class="string">"A group of people began to dance"</span>,</span><br><span class="line">    <span class="string">"template_id"</span>: <span class="number">302325299651648</span>,</span><br><span class="line">    <span class="string">"image_url"</span>: <span class="string">"https://cdn.acedata.cloud/n3r1mc.png"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">response = requests.post(url, json=payload, headers=headers)</span><br><span class="line">print(response.text)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>点击运行，可以发现会得到一个结果，如下：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"cf127eee-d23d-44c9-945c-793e68f86720"</span>,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"aa7ed21d-8363-4eeb-a46a-a120e31b4fde"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="number">318162170958272</span>,</span><br><span class="line">      <span class="attr">"first_frame"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"video_width"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"video_height"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"prompt"</span>: <span class="string">"A group of people began to dance"</span>,</span><br><span class="line">      <span class="attr">"model"</span>: <span class="string">"v3.5"</span>,</span><br><span class="line">      <span class="attr">"quality"</span>: <span class="string">"360p"</span>,</span><br><span class="line">      <span class="attr">"motion"</span>: <span class="string">"normal"</span>,</span><br><span class="line">      <span class="attr">"video_url"</span>: <span class="string">"https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2F18d7fef6-2e59-48a5-a655-046464f34603_seed0.mp4"</span>,</span><br><span class="line">      <span class="attr">"template_id"</span>: <span class="number">302325299651648</span>,</span><br><span class="line">      <span class="attr">"template_name"</span>: <span class="string">"Zombie Mode"</span>,</span><br><span class="line">      <span class="attr">"style"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"aspect_ratio"</span>: <span class="string">"16:9"</span>,</span><br><span class="line">      <span class="attr">"duration"</span>: <span class="number">5</span>,</span><br><span class="line">      <span class="attr">"extended"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"last_frame"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"seed"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"asset_id"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"asset_name"</span>: <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看出，结果内容与是与视频模板特效一样的，这也就实现使用模板特效来生成视频的功能。</p>
+                <h2 id="继续扩展视频生成功能"><a href="#继续扩展视频生成功能" class="headerlink" title="继续扩展视频生成功能"></a>继续扩展视频生成功能</h2>
+                <p>如果想对已经生成的Pixverse视频进行扩展生成的话，可以将参数 <code>action</code> 设置为 <code>extend</code> ，并且输入需要扩展生成视频的 ID，视频 ID 的获取是根据基本使用来获取，如下图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/kwcdyg.png" width="500" class="m-auto"></p>
+                <p>这时候可以看到视频的 ID 为：</p>
+                <figure class="highlight yaml">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attr">"id":</span> <span class="number">317989274748288</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <blockquote>
+                  <p>注意，这里的视频中 <code>id</code> 是生成后视频的 ID，如果你不知道如何生成视频，可以参考上文的基本使用来生成视频。</p>
+                </blockquote>
+                <p>接下来我们要必须填歌词、风格自定义生成歌曲，就可以指定如下内容：</p>
+                <ul>
+                  <li>action：此次视频生成任务的行为，一般有普通生成 <code>generate</code> 和扩展视频 <code>extend</code>。</li>
+                  <li>prompt：此次视频生成的提示词。</li>
+                  <li>video_id：此次扩展视频任务的参考视频ID。</li>
+                </ul>
+                <p>填写样例如下：</p>
+                <p><img src="https://cdn.acedata.cloud/hio4x5.png" width="500" class="m-auto"></p>
+                <p>填写完毕之后自动生成了代码如下：</p>
+                <p><img src="https://cdn.acedata.cloud/ts5xif.png" width="500" class="m-auto"></p>
+                <p>对应的 Python 代码：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">"https://api.acedata.cloud/pixverse/videos"</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">"accept"</span>: <span class="string">"application/json"</span>,</span><br><span class="line">    <span class="string">"authorization"</span>: <span class="string">"Bearer &#123;token&#125;"</span>,</span><br><span class="line">    <span class="string">"content-type"</span>: <span class="string">"application/json"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">payload = &#123;</span><br><span class="line">    <span class="string">"action"</span>: <span class="string">"extend"</span>,</span><br><span class="line">    <span class="string">"prompt"</span>: <span class="string">"A group of people began to dance"</span>,</span><br><span class="line">    <span class="string">"video_id"</span>: <span class="number">317989274748288</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">response = requests.post(url, json=payload, headers=headers)</span><br><span class="line">print(response.text)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>点击运行，可以发现会得到一个结果，如下：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"38b6d70d-eea2-40da-9f8b-945df93e831b"</span>,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"b105bbb6-faf1-4d86-9c10-4b8a8e638d05"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="number">318162960027008</span>,</span><br><span class="line">      <span class="attr">"first_frame"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"video_width"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"video_height"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"prompt"</span>: <span class="string">"A group of people began to dance"</span>,</span><br><span class="line">      <span class="attr">"model"</span>: <span class="string">"v3.5"</span>,</span><br><span class="line">      <span class="attr">"quality"</span>: <span class="string">"360p"</span>,</span><br><span class="line">      <span class="attr">"motion"</span>: <span class="string">"normal"</span>,</span><br><span class="line">      <span class="attr">"video_url"</span>: <span class="string">"https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2F2368ad8b-81dc-4a2f-9b6c-e0ac205351f9_seed0.mp4"</span>,</span><br><span class="line">      <span class="attr">"template_id"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"template_name"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"style"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"aspect_ratio"</span>: <span class="string">"16:9"</span>,</span><br><span class="line">      <span class="attr">"duration"</span>: <span class="number">5</span>,</span><br><span class="line">      <span class="attr">"extended"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"last_frame"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"seed"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"asset_id"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"asset_name"</span>: <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看出，结果内容与上文的是一致的，这也就实现视频的扩展生成功能。</p>
+                <h2 id="自定义角色生成视频"><a href="#自定义角色生成视频" class="headerlink" title="自定义角色生成视频"></a>自定义角色生成视频</h2>
+                <p>如果想对根据一张图片角色来生成视频的话，需要额外输入根据图片创建的角色<br> ID字段 <code>asset_id</code>，字段 <code>asset_id</code> 的获取是使用 <a href="https://platform.acedata.cloud/documents/32f3dd45-7000-49c2-a38e-285bd02ae334" target="_blank" rel="noopener">Pixverse Character API</a>来获取，具体的结果如下图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/xj2l9e.png" width="500" class="m-auto"></p>
+                <p>当生成角色ID之后就可以按照基本使用来生成视频了，这里以 <code>asset_id</code>= <code>318174747147968</code> 为示例，下面是具体的参数：</p>
+                <p><img src="https://cdn.acedata.cloud/bouy2j.png" width="500" class="m-auto"></p>
+                <p>点击运行后可以生成自定义角色的视频结果，具体的结果如下图所示：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"d39994c7-53ba-4c3f-ae8f-44287c487d51"</span>,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"32da3212-2d4c-4302-87ef-01ecb903a92b"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="number">318175009783232</span>,</span><br><span class="line">      <span class="attr">"first_frame"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"video_width"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"video_height"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"prompt"</span>: <span class="string">"A group of people began to dance"</span>,</span><br><span class="line">      <span class="attr">"model"</span>: <span class="string">"v3.5"</span>,</span><br><span class="line">      <span class="attr">"quality"</span>: <span class="string">"360p"</span>,</span><br><span class="line">      <span class="attr">"motion"</span>: <span class="string">"normal"</span>,</span><br><span class="line">      <span class="attr">"video_url"</span>: <span class="string">"https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2F61d477e4-3dab-4322-962d-18980b4e6f8c_seed0.mp4"</span>,</span><br><span class="line">      <span class="attr">"template_id"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"template_name"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"style"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"aspect_ratio"</span>: <span class="string">"16:9"</span>,</span><br><span class="line">      <span class="attr">"duration"</span>: <span class="number">5</span>,</span><br><span class="line">      <span class="attr">"extended"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"last_frame"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"seed"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"asset_id"</span>: <span class="number">318174747147968</span>,</span><br><span class="line">      <span class="attr">"asset_name"</span>: <span class="string">"my-46169546-a9c0-4437-96ee-a9750bbd489f"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>生成的结果与上文类似，这就完成了按照角色来生成视频的过程。</p>
+                <h2 id="目前所支持的特效模板"><a href="#目前所支持的特效模板" class="headerlink" title="目前所支持的特效模板"></a>目前所支持的特效模板</h2>
+                <h3 id="模版id以及对应的效果："><a href="#模版id以及对应的效果：" class="headerlink" title="模版id以及对应的效果："></a>模版id以及对应的效果：</h3>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>模版id</th>
+                        <th>效果</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>321958627120000</td>
+                        <td>AI发对象咯</td>
+                      </tr>
+                      <tr>
+                        <td>324641581197696</td>
+                        <td>一起摇摆！</td>
+                      </tr>
+                      <tr>
+                        <td>324641385496960</td>
+                        <td>360°旋转微波炉</td>
+                      </tr>
+                      <tr>
+                        <td>325367418993728</td>
+                        <td>樱花乌托邦</td>
+                      </tr>
+                      <tr>
+                        <td>325501134629952</td>
+                        <td>北极熊出没！</td>
+                      </tr>
+                      <tr>
+                        <td>315447659476032</td>
+                        <td>不打不相识</td>
+                      </tr>
+                      <tr>
+                        <td>324640938615168</td>
+                        <td>万物皆可毛绒玩具</td>
+                      </tr>
+                      <tr>
+                        <td>308621408717184</td>
+                        <td>成为肌肉猛男</td>
+                      </tr>
+                      <tr>
+                        <td>313358700761536</td>
+                        <td>万物皆可变形金刚</td>
+                      </tr>
+                      <tr>
+                        <td>316645675647872</td>
+                        <td>雪茄大佬</td>
+                      </tr>
+                      <tr>
+                        <td>321956810449792</td>
+                        <td>奥斯卡影帝</td>
+                      </tr>
+                      <tr>
+                        <td>323578865822784</td>
+                        <td>性别转换器</td>
+                      </tr>
+                      <tr>
+                        <td>303624424723200</td>
+                        <td>爱的抱抱</td>
+                      </tr>
+                      <tr>
+                        <td>313555098280384</td>
+                        <td>换上比基尼</td>
+                      </tr>
+                      <tr>
+                        <td>313649491716544</td>
+                        <td>猛虎的抱抱</td>
+                      </tr>
+                      <tr>
+                        <td>313649622731200</td>
+                        <td>天使之翼</td>
+                      </tr>
+                      <tr>
+                        <td>316826014376384</td>
+                        <td>拥抱耶稣</td>
+                      </tr>
+                      <tr>
+                        <td>315446315336768</td>
+                        <td>爱的亲亲</td>
+                      </tr>
+                      <tr>
+                        <td>322852853601344</td>
+                        <td>万物皆可走红毯</td>
+                      </tr>
+                      <tr>
+                        <td>304826314164992</td>
+                        <td>绿巨人变身</td>
+                      </tr>
+                      <tr>
+                        <td>315447659476032</td>
+                        <td>黑悟空引擎</td>
+                      </tr>
+                      <tr>
+                        <td>313359138372032</td>
+                        <td>成为美少女战士</td>
+                      </tr>
+                      <tr>
+                        <td>308552687706496</td>
+                        <td>发量王者</td>
+                      </tr>
+                      <tr>
+                        <td>307489548427968</td>
+                        <td>疯狂猫女变身</td>
+                      </tr>
+                      <tr>
+                        <td>304826126435072</td>
+                        <td>小丑重生</td>
+                      </tr>
+                      <tr>
+                        <td>304826374632192</td>
+                        <td>蝙蝠侠归来</td>
+                      </tr>
+                      <tr>
+                        <td>304358279051648</td>
+                        <td>毒液！(彩色盲盒版)</td>
+                      </tr>
+                      <tr>
+                        <td>304826054394624</td>
+                        <td>钢铁侠变身</td>
+                      </tr>
+                      <tr>
+                        <td>317013509917440</td>
+                        <td>新年战裙</td>
+                      </tr>
+                      <tr>
+                        <td>313358844899776</td>
+                        <td>做自己的财神</td>
+                      </tr>
+                      <tr>
+                        <td>313359048325568</td>
+                        <td>蛇年的第一个贴贴</td>
+                      </tr>
+                      <tr>
+                        <td>307489434436288</td>
+                        <td>小丑女哈莉·奎茵变身</td>
+                      </tr>
+                      <tr>
+                        <td>311521768592256</td>
+                        <td>圣诞礼物盲盒</td>
+                      </tr>
+                      <tr>
+                        <td>311521879229312</td>
+                        <td>圣诞老人藏在哪？</td>
+                      </tr>
+                      <tr>
+                        <td>312314911869312</td>
+                        <td>圣诞战袍</td>
+                      </tr>
+                      <tr>
+                        <td>306059795500352</td>
+                        <td>召唤毒液兄弟</td>
+                      </tr>
+                      <tr>
+                        <td>303788802773760</td>
+                        <td>扫射一切</td>
+                      </tr>
+                      <tr>
+                        <td>302325299702848</td>
+                        <td>乐高大爆炸</td>
+                      </tr>
+                      <tr>
+                        <td>302325299682368</td>
+                        <td>怪兽入侵</td>
+                      </tr>
+                      <tr>
+                        <td>302325299661888</td>
+                        <td>戴上魔法帽</td>
+                      </tr>
+                      <tr>
+                        <td>302325299651648</td>
+                        <td>坏了，我变僵尸了</td>
+                      </tr>
+                      <tr>
+                        <td>302325299672128</td>
+                        <td>僵尸手出没</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3 id="风格："><a href="#风格：" class="headerlink" title="风格："></a>风格：</h3>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>动作模式</th>
+                        <th>效果</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>normal</td>
+                        <td>普通模式</td>
+                      </tr>
+                      <tr>
+                        <td>fast</td>
+                        <td>性能模式</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3 id="运镜"><a href="#运镜" class="headerlink" title="运镜"></a>运镜</h3>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>参数</th>
+                        <th>效果</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>horizontal_left</td>
+                        <td>水平向左</td>
+                      </tr>
+                      <tr>
+                        <td>horizontal_right</td>
+                        <td>水平向右</td>
+                      </tr>
+                      <tr>
+                        <td>vertical_up</td>
+                        <td>垂直向上</td>
+                      </tr>
+                      <tr>
+                        <td>vertical_down</td>
+                        <td>垂直向下</td>
+                      </tr>
+                      <tr>
+                        <td>crane_up</td>
+                        <td>上升镜头</td>
+                      </tr>
+                      <tr>
+                        <td>hitchcock</td>
+                        <td>希区柯克变焦</td>
+                      </tr>
+                      <tr>
+                        <td>zoom_in</td>
+                        <td>放大</td>
+                      </tr>
+                      <tr>
+                        <td>zoom_out</td>
+                        <td>缩小</td>
+                      </tr>
+                      <tr>
+                        <td>quickly_zoom_in</td>
+                        <td>快速推进</td>
+                      </tr>
+                      <tr>
+                        <td>quickly_zoom_out</td>
+                        <td>快速拉远</td>
+                      </tr>
+                      <tr>
+                        <td>smooth_zoom_in</td>
+                        <td>平滑推进</td>
+                      </tr>
+                      <tr>
+                        <td>super_dolly_out</td>
+                        <td>超级拉远</td>
+                      </tr>
+                      <tr>
+                        <td>left_follow</td>
+                        <td>左侧跟拍</td>
+                      </tr>
+                      <tr>
+                        <td>right_follow</td>
+                        <td>右侧跟拍</td>
+                      </tr>
+                      <tr>
+                        <td>pan_left</td>
+                        <td>左侧环弧</td>
+                      </tr>
+                      <tr>
+                        <td>pan_right</td>
+                        <td>右侧环弧</td>
+                      </tr>
+                      <tr>
+                        <td>fix_bg</td>
+                        <td>固定镜头</td>
+                      </tr>
+                      <tr>
+                        <td>camera_rotation</td>
+                        <td>镜头旋转</td>
+                      </tr>
+                      <tr>
+                        <td>robo_arm</td>
+                        <td>机械臂运动</td>
+                      </tr>
+                      <tr>
+                        <td>whip_pan</td>
+                        <td>快速摇镜</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h2 id="异步回调"><a href="#异步回调" class="headerlink" title="异步回调"></a>异步回调</h2>
+                <p>由于 Pixverse 生成音乐的时间相对较长，大约需要 1-2 分钟，如果 API 长时间无响应，HTTP 请求会一直保持连接，导致额外的系统资源消耗，所以本 API 也提供了异步回调的支持。</p>
+                <p>整体流程是：客户端发起请求的时候，额外指定一个 <code>callback_url</code> 字段，客户端发起 API 请求之后，API 会立马返回一个结果，包含一个 <code>task_id</code> 的字段信息，代表当前的任务 ID。当任务完成之后，生成音乐的结果会通过 POST JSON 的形式发送到客户端指定的 <code>callback_url</code>，其中也包括了 <code>task_id</code> 字段，这样任务结果就可以通过 ID 关联起来了。</p>
+                <p>下面我们通过示例来了解下具体怎样操作。</p>
+                <p>首先，Webhook 回调是一个可以接收 HTTP 请求的服务，开发者应该替换为自己搭建的 HTTP 服务器的 URL。此处为了方便演示，使用一个公开的 Webhook 样例网站 <a href="https://webhook.site/，打开该网站即可得到一个" target="_blank" rel="noopener">https://webhook.site/，打开该网站即可得到一个</a> Webhook URL，如图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/fwfqin.png" alt=""></p>
+                <p>将此 URL 复制下来，就可以作为 Webhook 来使用，此处的样例为 <code>https://webhook.site/8dc4cd74-4f4c-49ab-95c8-fa503cca5534</code>。</p>
+                <p>接下来，我们可以设置字段 <code>callback_url</code> 为上述 Webhook URL，同时填入 <code>prompt</code>，如图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/au5m49.png" width="500" class="m-auto"></p>
+                <p>点击运行，可以发现会立即得到一个结果，如下：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"84acf7e2-66a7-407a-8295-f0cc7a58579b"</span></span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>稍等片刻，我们可以在 <code>https://webhook.site/8dc4cd74-4f4c-49ab-95c8-fa503cca5534</code> 上观察到生成歌曲的结果，如图所示：</p>
+                <p><img src="https://cdn.acedata.cloud/vwfrmz.png" alt=""></p>
+                <p>内容如下：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"84acf7e2-66a7-407a-8295-f0cc7a58579b"</span>,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"a4b9b5d5-10fe-4a8e-8cd4-642056908fe8"</span>,</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="number">318175621179584</span>,</span><br><span class="line">      <span class="attr">"first_frame"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"video_width"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"video_height"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"prompt"</span>: <span class="string">"quiver"</span>,</span><br><span class="line">      <span class="attr">"model"</span>: <span class="string">"v3.5"</span>,</span><br><span class="line">      <span class="attr">"quality"</span>: <span class="string">"360p"</span>,</span><br><span class="line">      <span class="attr">"motion"</span>: <span class="string">"normal"</span>,</span><br><span class="line">      <span class="attr">"video_url"</span>: <span class="string">"https://media.pixverse.ai/pixverse%2Fmp4%2Fmedia%2Fweb%2Ff1739bd1-a005-48f8-8464-0b6e4ba7b071_seed0.mp4"</span>,</span><br><span class="line">      <span class="attr">"template_id"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"template_name"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"style"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"aspect_ratio"</span>: <span class="string">"16:9"</span>,</span><br><span class="line">      <span class="attr">"duration"</span>: <span class="number">5</span>,</span><br><span class="line">      <span class="attr">"extended"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"last_frame"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="attr">"seed"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"asset_id"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"asset_name"</span>: <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>可以看到结果中有一个 <code>task_id</code> 字段，其他的字段都和上文类似，通过该字段即可实现任务的关联。</p>
+                <h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2>
+                <p>如果发生错误，您将得到类似如下的错误信息：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"success"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"error"</span>: &#123;</span><br><span class="line">    <span class="attr">"code"</span>: <span class="string">"forbidden"</span>,</span><br><span class="line">    <span class="attr">"message"</span>: <span class="string">"Song Description contained artist name: eminem"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"trace_id"</span>: <span class="string">"9bb7c2f4-3b7b-4965-b50a-f663874b1b6f"</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="string">"9bb3a2a6-c438-436d-a9f3-fa466abc077c"</span></span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/42384.html" rel="bookmark">0代码生成4K高清图！ACE Data Platform × SeeDream 专属方案：小白商家闭眼冲”</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/42385.html" rel="bookmark">10秒解锁电影级视频！ACE Data Platform Sora2 API：0代码量产，小白/商家必藏</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/42389.html" rel="bookmark">ACE Data Platform Google SERP API：3秒解锁全球搜索流量密码，SEO/跨境人必藏</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/42399.html" rel="bookmark">99.9可用性！ACE Data Platform Google SERP API：3秒解锁全球搜索流量密码，SEO/跨境人必藏</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/42398.html" rel="bookmark">Claude Code for VS Code 使用教程</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/API/" rel="tag"><i class="fa fa-tag"></i> API</a>
+                  <a href="/tags/Riffusion/" rel="tag"><i class="fa fa-tag"></i> Riffusion</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/42371.html" rel="prev" title="人脸年龄变化 API 对接说明">
+                      <i class="fa fa-chevron-left"></i> 人脸年龄变化 API 对接说明 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/42373.html" rel="next" title="Veo Videos Generation API 对接说明"> Veo Videos Generation API 对接说明 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#申请和使用"><span class="nav-number">1.</span> <span class="nav-text">申请和使用</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#基本使用"><span class="nav-number">2.</span> <span class="nav-text">基本使用</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#自定义首尾帧生成视频"><span class="nav-number">3.</span> <span class="nav-text">自定义首尾帧生成视频</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#自定义视频模板特效生成"><span class="nav-number">4.</span> <span class="nav-text">自定义视频模板特效生成</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#继续扩展视频生成功能"><span class="nav-number">5.</span> <span class="nav-text">继续扩展视频生成功能</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#自定义角色生成视频"><span class="nav-number">6.</span> <span class="nav-text">自定义角色生成视频</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#目前所支持的特效模板"><span class="nav-number">7.</span> <span class="nav-text">目前所支持的特效模板</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#模版id以及对应的效果："><span class="nav-number">7.1.</span> <span class="nav-text">模版id以及对应的效果：</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#风格："><span class="nav-number">7.2.</span> <span class="nav-text">风格：</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#运镜"><span class="nav-number">7.3.</span> <span class="nav-text">运镜</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#异步回调"><span class="nav-number">8.</span> <span class="nav-text">异步回调</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#错误处理"><span class="nav-number">9.</span> <span class="nav-text">错误处理</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">809</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">46</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">259</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API-%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/">API 开发教程</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Gemini/">Gemini</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/MCP-%E6%95%99%E7%A8%8B/">MCP 教程</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">302</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%A7%E5%93%81%E6%8E%A8%E5%B9%BF/">产品推广</a><span class="category-list-count">30</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a><span class="category-list-count">11</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">96</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 19.09px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/ACE-Data/" style="font-size: 12.73px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/API/" style="font-size: 18.18px;">API</a> <a href="/tags/AceData-Cloud/" style="font-size: 20px;">AceData Cloud</a> <a href="/tags/Ajax/" style="font-size: 11.82px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 10.91px;">Audios</a> <a href="/tags/Bootstrap/" style="font-size: 10.91px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 10.91px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Flux/" style="font-size: 10px;">Flux</a> <a href="/tags/Gemini/" style="font-size: 10px;">Gemini</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 12.73px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 10.91px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 10px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 13.64px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Midjourney/" style="font-size: 10.91px;">Midjourney</a> <a href="/tags/MongoDB/" style="font-size: 10.91px;">MongoDB</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/NBA/" style="font-size: 10px;">NBA</a> <a href="/tags/Nano-Banana/" style="font-size: 10.91px;">Nano Banana</a> <a href="/tags/Nexior/" style="font-size: 10px;">Nexior</a> <a href="/tags/OCR/" style="font-size: 10px;">OCR</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/PHP/" style="font-size: 10.91px;">PHP</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/PS/" style="font-size: 10px;">PS</a> <a href="/tags/Pathlib/" style="font-size: 10px;">Pathlib</a> <a href="/tags/PhantomJS/" style="font-size: 10px;">PhantomJS</a> <a href="/tags/Playwright/" style="font-size: 10px;">Playwright</a> <a href="/tags/Producer/" style="font-size: 10.91px;">Producer</a> <a href="/tags/Python/" style="font-size: 15.45px;">Python</a> <a href="/tags/Python-%E7%88%AC%E8%99%AB/" style="font-size: 16.36px;">Python 爬虫</a> <a href="/tags/Python3/" style="font-size: 10.91px;">Python3</a> <a href="/tags/Python3%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 11.82px;">Python3爬虫教程</a> <a href="/tags/Pythonic/" style="font-size: 10px;">Pythonic</a> <a href="/tags/Python%E7%88%AC%E8%99%AB/" style="font-size: 17.27px;">Python爬虫</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E4%B9%A6/" style="font-size: 11.82px;">Python爬虫书</a> <a href="/tags/Python%E7%88%AC%E8%99%AB%E6%95%99%E7%A8%8B/" style="font-size: 14.55px;">Python爬虫教程</a> <a href="/tags/QQ/" style="font-size: 10px;">QQ</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/ReCAPTCHA/" style="font-size: 10px;">ReCAPTCHA</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Riffusion/" style="font-size: 10px;">Riffusion</a> <a href="/tags/SAE/" style="font-size: 10px;">SAE</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/SVG/" style="font-size: 10px;">SVG</a> <a href="/tags/Scrapy-redis/" style="font-size: 10px;">Scrapy-redis</a> <a href="/tags/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">Scrapy分布式</a> <a href="/tags/SeeDance/" style="font-size: 13.64px;">SeeDance</a> <a href="/tags/SeeDream/" style="font-size: 10.91px;">SeeDream</a> <a href="/tags/Selenium/" style="font-size: 10.91px;">Selenium</a> <a href="/tags/Session/" style="font-size: 10px;">Session</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Sora2/" style="font-size: 10px;">Sora2</a> <a href="/tags/Suno/" style="font-size: 10.91px;">Suno</a> <a href="/tags/TKE/" style="font-size: 10px;">TKE</a> <a href="/tags/TXT/" style="font-size: 10px;">TXT</a> <a href="/tags/Terminal/" style="font-size: 10px;">Terminal</a> <a href="/tags/Ubuntu/" style="font-size: 10.91px;">Ubuntu</a> <a href="/tags/VS-Code/" style="font-size: 10px;">VS Code</a> <a href="/tags/Veo/" style="font-size: 12.73px;">Veo</a> <a href="/tags/Vercel/" style="font-size: 10px;">Vercel</a> <a href="/tags/Videos/" style="font-size: 11.82px;">Videos</a> <a href="/tags/Vs-Code/" style="font-size: 10px;">Vs Code</a> <a href="/tags/Vue/" style="font-size: 10.91px;">Vue</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Web%E7%BD%91%E9%A1%B5/" style="font-size: 10px;">Web网页</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Winpcap/" style="font-size: 10px;">Winpcap</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">3.9m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">58:33</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '8e0a133b9de95c5e8ddf9c2f957777dd',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>
