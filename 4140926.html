@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="API,AceDataCloud,Kling,Lip Sync,数字人,音乐视频,视频制作">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="已有演唱视频和 MP3，如何制作新的对口型片段，并组合成完整 MV？本文介绍 Ace Data Cloud Kling Lip Sync 的素材复用、单步 API、固定成功调用计费及异步集成方案，并给出 3 分钟作品的预算示例与制作边界。">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="让表演素材持续创造价值：用 Ace Data Cloud Kling Lip Sync 构建音乐视频生产流程">
+  <meta property="og:url" content="https://cuiqingcai.com/4140926.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="已有演唱视频和 MP3，如何制作新的对口型片段，并组合成完整 MV？本文介绍 Ace Data Cloud Kling Lip Sync 的素材复用、单步 API、固定成功调用计费及异步集成方案，并给出 3 分钟作品的预算示例与制作边界。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.acedata2.cloud/gpt-image/978f502b4e38ace3de3b33e8103bb038f503c547fe1be14f87795e248152bc80.png">
+  <meta property="article:published_time" content="2026-10-21T10:16:00.000Z">
+  <meta property="article:modified_time" content="2026-11-07T05:48:40.000Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="API">
+  <meta property="article:tag" content="AceDataCloud">
+  <meta property="article:tag" content="Kling">
+  <meta property="article:tag" content="Lip Sync">
+  <meta property="article:tag" content="数字人">
+  <meta property="article:tag" content="音乐视频">
+  <meta property="article:tag" content="视频制作">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.acedata2.cloud/gpt-image/978f502b4e38ace3de3b33e8103bb038f503c547fe1be14f87795e248152bc80.png">
+  <link rel="canonical" href="https://cuiqingcai.com/4140926.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>让表演素材持续创造价值：用 Ace Data Cloud Kling Lip Sync 构建音乐视频生产流程 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/4140926.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 让表演素材持续创造价值：用 Ace Data Cloud Kling Lip Sync 构建音乐视频生产流程 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2026-10-21 18:16:00" itemprop="dateCreated datePublished" datetime="2026-10-21T18:16:00+08:00">2026-10-21</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90/" itemprop="url" rel="index"><span itemprop="name">产品推荐</span></a>
+                    </span>
+                  </span>
+                  <span id="/4140926.html" class="post-meta-item leancloud_visitors" data-flag-title="让表演素材持续创造价值：用 Ace Data Cloud Kling Lip Sync 构建音乐视频生产流程" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>4k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>4 分钟</span>
+                  </span>
+                  <div class="post-description">已有演唱视频和 MP3，如何制作新的对口型片段，并组合成完整 MV？本文介绍 Ace Data Cloud Kling Lip Sync 的素材复用、单步 API、固定成功调用计费及异步集成方案，并给出 3 分钟作品的预算示例与制作边界。</div>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p><img src="https://cdn.acedata2.cloud/gpt-image/978f502b4e38ace3de3b33e8103bb038f503c547fe1be14f87795e248152bc80.png" alt="Ace Data Cloud Kling Lip Sync 音乐视频制作主题封面：虚构歌手、音频波形与可复用视频片段，AI 概念配图，非实测截图"></p>
+                <p>音乐已经完成，歌手形象也已确定。下一步，如何让画面中的人物唱出这首歌？</p>
+                <a id="more"></a>
+                <p>对持续发布音乐内容的创作者而言，每次从零拍摄或生成所有画面，并不总是最合适的路线。另一种思路是：保留已有的表演素材，把口型适配交给专门的处理环节，再通过剪辑完成新的作品。</p>
+                <p><strong><a href="https://platform.acedata.cloud/" target="_blank" rel="noopener">Ace Data Cloud</a> Kling Lip Sync 面向的正是这一环节：将符合要求的短视频与音频结合，生成新的对口型片段。它的价值不是“一次生成无限长视频”，而是让素材复用、成本估算和程序化处理更容易组织起来。</strong></p>
+                <blockquote>
+                  <p>本文是一份基于公开接入文档的制作方案，不是实测案例。文中费用为按文档单价计算的示例，不包含拍摄、基础视频生成、音频处理、存储、剪辑或重生成费用。能力与价格以实际调用时的服务说明为准。</p>
+                  <p>封面与正文配图均为 AI 生成的概念图或流程示意图，不是 Kling Lip Sync 的实测输出或产品界面截图。</p>
+                </blockquote>
+                <h2 id="一、从一段表演视频开始，而不是每次从零开始"><a href="#一、从一段表演视频开始，而不是每次从零开始" class="headerlink" title="一、从一段表演视频开始，而不是每次从零开始"></a>一、从一段表演视频开始，而不是每次从零开始</h2>
+                <p><img src="https://cdn.acedata.cloud/uploads/5dc3d6ae-44f2-4bcb-a5bf-00e29693cb21.png" alt="图片描述"></p>
+                <p>设想你正在运营一个原创音乐明星 IP：人物的造型、录音棚环境和表演风格已经确定，希望持续发布不同歌曲的副歌片段、短视频和 MV。</p>
+                <p>可以把制作流程拆成两层：</p>
+                <ul>
+                  <li><strong>表演素材层</strong>：准备人物、服装、镜头和身体动作。</li>
+                  <li><strong>口型适配层</strong>：根据每首歌曲的人声片段，处理对应画面。</li>
+                </ul>
+                <p>这样，已经满意的表演素材就有机会用于后续作品，而不必每次都重新制作基础画面。是否适合复用，仍需通过试片检查表情、动作和歌曲情绪的匹配程度。</p>
+                <p>可灵官方 Lip Sync 指南明确包含上传配音或演唱音频的使用方式，因此这条路线不仅适用于说话视频，也可以用于演唱片段。
+                  <acite id="2" url="https://kling.ai/quickstart/ai-lip-sync-guide" title="Kling AI Lip Sync Guide" source="Kling AI" />
+                </p>
+                <h2 id="二、Ace-Data-Cloud-的四个实用优势"><a href="#二、Ace-Data-Cloud-的四个实用优势" class="headerlink" title="二、Ace Data Cloud 的四个实用优势"></a>二、Ace Data Cloud 的四个实用优势</h2>
+                <h3 id="1-两种视频输入方式，便于接入已有素材流程"><a href="#1-两种视频输入方式，便于接入已有素材流程" class="headerlink" title="1. 两种视频输入方式，便于接入已有素材流程"></a>1. 两种视频输入方式，便于接入已有素材流程</h3>
+                <p>Ace Data Cloud 的封装支持两条输入路径：
+                  <acite id="1" url="https://platform.acedata.cloud/documents/kling-lip-sync-integration" title="Ace Data Cloud Kling Lip Sync 集成指南" source="Ace Data Cloud" />
+                </p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>输入方式</th>
+                        <th>适用素材</th>
+                        <th>主要约束</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>video_id</code></td>
+                        <td>已生成的可灵视频</td>
+                        <td>近 30 天生成，5 秒或 10 秒</td>
+                      </tr>
+                      <tr>
+                        <td><code>video_url</code></td>
+                        <td>公网可访问的外部视频</td>
+                        <td>MP4 / MOV，2～10 秒，不超过 100 MB；720p / 1080p，边长 720～1920 像素</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p><code>video_id</code> 与 <code>video_url</code> 二选一，不能同时传入。外部视频入口为符合规格的实拍素材提供了接入路径，但这不意味着任意拍摄内容都能取得同样效果；建议先验证单人、清晰正面的素材。</p>
+                <p>如果只有人物图片，也可以先使用图生视频流程准备基础片段，再进行口型处理。基础画面生成是独立环节，应单独计入预算。
+                  <acite id="1" url="https://platform.acedata.cloud/documents/kling-lip-sync-integration" title="Ace Data Cloud Kling Lip Sync 集成指南" source="Ace Data Cloud" />
+                </p>
+                <h3 id="2-单步封装，减少常见任务的接入步骤"><a href="#2-单步封装，减少常见任务的接入步骤" class="headerlink" title="2. 单步封装，减少常见任务的接入步骤"></a>2. 单步封装，减少常见任务的接入步骤</h3>
+                <p>Ace Data Cloud 提供 <code>POST /kling/lip-sync</code>，通过 <code>audio2video</code> 模式提交视频与驱动音频。已有歌曲的场景不必先转换成文本，也不需要为了口型处理重新合成歌声。
+                  <acite id="1" url="https://platform.acedata.cloud/documents/kling-lip-sync-integration" title="Ace Data Cloud Kling Lip Sync 集成指南" source="Ace Data Cloud" />
+                </p>
+                <p>需要区分的是：<strong>这是 Ace Data Cloud 为常见场景提供的单步便利封装，不是可灵官方“人脸识别 → Advanced Lip Sync”多步接口的字段镜像，也不是 Avatar 2.0。</strong></p>
+                <p>接入时应使用本接口的参数和时长限制，不应直接套用其他产品的功能说明。
+                  <acite id="1" url="https://platform.acedata.cloud/documents/kling-lip-sync-integration" title="Ace Data Cloud Kling Lip Sync 集成指南" source="Ace Data Cloud" />
+                </p>
+                <h3 id="3-固定成功调用计费，预算更直观"><a href="#3-固定成功调用计费，预算更直观" class="headerlink" title="3. 固定成功调用计费，预算更直观"></a>3. 固定成功调用计费，预算更直观</h3>
+                <p>当前接入文档标示，Kling Lip Sync 每次成功调用固定消耗 <strong>2.45 Credits</strong>；参数校验失败的 4xx 请求不计费，任务查询免费。
+                  <acite id="1" url="https://platform.acedata.cloud/documents/kling-lip-sync-integration" title="Ace Data Cloud Kling Lip Sync 集成指南" source="Ace Data Cloud" />
+                </p>
+                <p>对于已有基础视频的项目，可以先估算片段数量：</p>
+                <p><strong>对口型预算 = 成功处理次数 × 2.45 Credits</strong></p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>累计处理时长</th>
+                        <th>假设每段 10 秒、一次通过</th>
+                        <th>对口型消耗</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>30 秒</td>
+                        <td>3 次</td>
+                        <td>7.35 Credits</td>
+                      </tr>
+                      <tr>
+                        <td>60 秒</td>
+                        <td>6 次</td>
+                        <td>14.70 Credits</td>
+                      </tr>
+                      <tr>
+                        <td>180 秒</td>
+                        <td>18 次</td>
+                        <td>44.10 Credits</td>
+                      </tr>
+                      <tr>
+                        <td>300 秒</td>
+                        <td>30 次</td>
+                        <td>73.50 Credits</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>以上是按文档单价进行的算术估算，不代表单次可生成上述长视频。如果按乐句切成更多短段，或对同一段生成多个候选，消耗也会增加。任务成功但效果未达到创作要求时，再生成仍可能产生新的费用。</p>
+                <p><strong>素材复用的成本优势，来自减少重复制作基础画面的需要，而不是宣称所有任务都比其他平台便宜。</strong></p>
+                <p>Credits 的实际货币成本取决于所购套餐与结算条件，不能直接与其他平台的积分等同。</p>
+                <h3 id="4-异步任务与回调，便于组织批量处理"><a href="#4-异步任务与回调，便于组织批量处理" class="headerlink" title="4. 异步任务与回调，便于组织批量处理"></a>4. 异步任务与回调，便于组织批量处理</h3>
+                <p>接口支持 <code>async: true</code> 或 <code>callback_url</code>。异步提交后返回任务 ID，可通过 <code>/kling/tasks</code> 查询，或等待回调结果。
+                  <acite id="1" url="https://platform.acedata.cloud/documents/kling-lip-sync-integration" title="Ace Data Cloud Kling Lip Sync 集成指南" source="Ace Data Cloud" />
+                </p>
+                <p>对于开发团队，这可以用于构建“片段入队 → 提交任务 → 记录状态 → 收集结果 → 人工验收”的流程。但异步不等于无限并发，仍应遵守限流要求；遇到任务仍在处理时，应继续查询原任务，而不是盲目重复提交。</p>
+                <p><img src="https://cdn.acedata2.cloud/gpt-image/4ecdac7994d5dbd993a1fc1cc2c4a175d113dc60f035852ea696951304f5f099.png" alt="Ace Data Cloud Kling Lip Sync 异步任务架构：片段队列、提交、任务 ID、查询或回调、收集结果、人工验收和剪辑导出"></p>
+                <p><em>图 1｜异步处理架构示意（AI 生成）：处理中继续查询原任务，成功后收集结果并人工验收；异步不等于无限并发。</em></p>
+                <h2 id="三、一首歌曲的推荐制作流程"><a href="#三、一首歌曲的推荐制作流程" class="headerlink" title="三、一首歌曲的推荐制作流程"></a>三、一首歌曲的推荐制作流程</h2>
+                <p><img src="https://cdn.acedata2.cloud/gpt-image/2a7c9a32518c35a6286d4833d9758823ad0acc32cb7c696c969b00ff216c1ad2.png" alt="从短片到完整 MV：原始表演视频与歌曲人声分段对口型，输出片段回到原曲时间轴剪辑"></p>
+                <p><em>图 2｜音乐视频制作流程示意（AI 生成）：短片分别处理，再通过后期剪辑形成完整作品，不代表接口单次生成长视频。</em></p>
+                <h3 id="1-准备适合演唱的原始素材"><a href="#1-准备适合演唱的原始素材" class="headerlink" title="1. 准备适合演唱的原始素材"></a>1. 准备适合演唱的原始素材</h3>
+                <p>建议建立一个小型素材库，而不是只循环同一条 10 秒视频：</p>
+                <ul>
+                  <li>主歌：自然、克制的半身表演。</li>
+                  <li>副歌：情绪更强、身体律动适中的表演。</li>
+                  <li>间奏：呼吸、看向远处或舞台远景。</li>
+                  <li>备用：同造型的近景与不同景别。</li>
+                </ul>
+                <p>拍摄时尽量保持嘴部可见，麦克风和防喷罩不要挡住嘴唇。先使用固定机位、稳定光线和单人正面画面，再逐步测试更复杂的镜头。文档同样建议清晰正面、单人输入。
+                  <acite id="1" url="https://platform.acedata.cloud/documents/kling-lip-sync-integration" title="Ace Data Cloud Kling Lip Sync 集成指南" source="Ace Data Cloud" />
+                </p>
+                <h3 id="2-准备驱动音频"><a href="#2-准备驱动音频" class="headerlink" title="2. 准备驱动音频"></a>2. 准备驱动音频</h3>
+                <p>已有完整歌曲时，建议优先测试干净的主唱人声，并保留原始完整 MP3 作为最终音轨。不要改变分离后人声的速度或原始时间位置。</p>
+                <p>接口支持 MP3、WAV、M4A、AAC，文件不超过 5 MB，音频时长不应超过对应视频长度。歌曲裁切应在提交之前完成；本接口参数表没有整首歌曲的起止时间选择字段。
+                  <acite id="1" url="https://platform.acedata.cloud/documents/kling-lip-sync-integration" title="Ace Data Cloud Kling Lip Sync 集成指南" source="Ace Data Cloud" />
+                </p>
+                <h3 id="3-按乐句匹配视频与音频"><a href="#3-按乐句匹配视频与音频" class="headerlink" title="3. 按乐句匹配视频与音频"></a>3. 按乐句匹配视频与音频</h3>
+                <p>可以按以下结构管理片段：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">片段编号 | 歌曲起点 | 歌曲终点 | 原始视频 | 驱动人声 | 任务 ID | 输出视频</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>优先在呼吸、停顿或换镜头处切分，避免为了凑满 10 秒，把一个长音截成两段。若复用素材，每次尽量使用未处理的原始视频，而不是把上一轮对口型成片继续反复加工。</p>
+                <h3 id="4-调用接口并检查结果"><a href="#4-调用接口并检查结果" class="headerlink" title="4. 调用接口并检查结果"></a>4. 调用接口并检查结果</h3>
+                <p>下面是说明性请求示例。<code>YOUR_PUBLIC_VIDEO_URL</code> 和 <code>YOUR_PUBLIC_AUDIO_URL</code> 是占位符，必须替换成符合约束、可访问的真实素材链接；示例并非已执行任务。</p>
+                <figure class="highlight bash">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -X POST <span class="string">'https://api.acedata.cloud/kling/lip-sync'</span> \</span><br><span class="line">  -H <span class="string">"authorization: Bearer <span class="variable">$&#123;API_KEY&#125;</span>"</span> \</span><br><span class="line">  -H <span class="string">'content-type: application/json'</span> \</span><br><span class="line">  -d <span class="string">'&#123;</span></span><br><span class="line"><span class="string">    "mode": "audio2video",</span></span><br><span class="line"><span class="string">    "video_url": "YOUR_PUBLIC_VIDEO_URL",</span></span><br><span class="line"><span class="string">    "audio_type": "url",</span></span><br><span class="line"><span class="string">    "audio_url": "YOUR_PUBLIC_AUDIO_URL",</span></span><br><span class="line"><span class="string">    "async": true</span></span><br><span class="line"><span class="string">  &#125;'</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>取得任务 ID 后，按文档查询同一个任务：
+                  <acite id="1" url="https://platform.acedata.cloud/documents/kling-lip-sync-integration" title="Ace Data Cloud Kling Lip Sync 集成指南" source="Ace Data Cloud" />
+                </p>
+                <figure class="highlight bash">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -X POST <span class="string">'https://api.acedata.cloud/kling/tasks'</span> \</span><br><span class="line">  -H <span class="string">"authorization: Bearer <span class="variable">$&#123;API_KEY&#125;</span>"</span> \</span><br><span class="line">  -H <span class="string">'content-type: application/json'</span> \</span><br><span class="line">  -d <span class="string">'&#123;"action":"retrieve","id":"YOUR_TASK_ID"&#125;'</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>验收时重点观察歌词咬字、长音、无声段落、面部稳定性以及麦克风附近的画面。不要把接口返回成功直接等同于最终可发布。</p>
+                <h3 id="5-回到原曲时间轴，剪辑完整作品"><a href="#5-回到原曲时间轴，剪辑完整作品" class="headerlink" title="5. 回到原曲时间轴，剪辑完整作品"></a>5. 回到原曲时间轴，剪辑完整作品</h3>
+                <p>多次调用得到的是独立片段，不是自动延长的一镜到底视频。把结果放回原曲对应位置，统一帧率和分辨率，再用一条连续的完整歌曲作为最终音轨。</p>
+                <p>应检查实际输出时长，不要假设每段都精确等于预设时长。接入文档的返回示例中包含 <code>4.966</code> 秒这样的时长值。
+                  <acite id="1" url="https://platform.acedata.cloud/documents/kling-lip-sync-integration" title="Ace Data Cloud Kling Lip Sync 集成指南" source="Ace Data Cloud" />
+                </p>
+                <p>对于口型片段之间的接缝，可以用近景、半身、舞台远景交替处理。看不清嘴部的镜头不必机械地全部进行口型处理。</p>
+                <h2 id="四、先了解边界，才能把优势用在正确的地方"><a href="#四、先了解边界，才能把优势用在正确的地方" class="headerlink" title="四、先了解边界，才能把优势用在正确的地方"></a>四、先了解边界，才能把优势用在正确的地方</h2>
+                <ul>
+                  <li><strong>不是长视频延长器</strong>：当前外部视频单次输入为 2～10 秒，长作品需要分段处理与剪辑。</li>
+                  <li><strong>不是换脸或完整角色训练接口</strong>：如果需要另一个虚拟明星形象，应先完成相应的基础素材制作。</li>
+                  <li><strong>不保证重新编排身体表演</strong>：动作、表情与歌曲是否匹配，仍需要创作者选择素材。</li>
+                  <li><strong>不保证片段间自动连续</strong>：同一动作反复出现、首尾姿态跳变，需要通过素材库和剪辑解决。</li>
+                  <li><strong>文档能力不等于素材实测通过</strong>：实拍人物、复杂遮挡、快速歌词和高音长音，都建议先做小样。</li>
+                </ul>
+                <p>以上时长及接口范围依据当前接入文档；拍摄、分镜与验收部分为制作建议。
+                  <acite id="1" url="https://platform.acedata.cloud/documents/kling-lip-sync-integration" title="Ace Data Cloud Kling Lip Sync 集成指南" source="Ace Data Cloud" />
+                </p>
+                <p>使用真人肖像、录音和歌曲前，应取得相应授权，并遵守发布平台对合成内容的标识要求。素材链接应具备足够的任务访问有效期，但不应暴露私有存储凭据或在前端嵌入 API 密钥。</p>
+                <h2 id="五、从一个-30-秒试片，验证你的生产流程"><a href="#五、从一个-30-秒试片，验证你的生产流程" class="headerlink" title="五、从一个 30 秒试片，验证你的生产流程"></a>五、从一个 30 秒试片，验证你的生产流程</h2>
+                <p>推荐第一轮只做三段测试：</p>
+                <ol>
+                  <li>准备一条嘴部无遮挡的 10 秒表演素材。</li>
+                  <li>选择三段对应长度的人声：普通歌词、较快歌词、长音各一段。</li>
+                  <li>分别提交处理，比较口型、表演匹配和面部稳定性。</li>
+                  <li>将结果放到原曲时间线上，验证剪辑与音画同步。</li>
+                  <li>确认通过后，再扩充素材库、批量提交和制作完整 MV。</li>
+                </ol>
+                <p><strong>Ace Data Cloud Kling Lip Sync 的实用价值，是让创作者在已有素材基础上增加新的口型版本，并让开发团队以明确的接口、计费和任务机制组织这一步。</strong></p>
+                <p>从一条短片到一套可复用的制作流程，先验证，再扩展，比一开始就重做整场表演更容易控制项目风险。</p>
+                <p>了解参数、输入规范和接入方式，请查阅 <a href="https://platform.acedata.cloud/documents/kling-lip-sync-integration" target="_blank" rel="noopener">Kling Lip Sync 集成指南</a>，并通过 <a href="https://platform.acedata.cloud/console/applications" target="_blank" rel="noopener">Ace Data Cloud 控制台</a> 管理接入凭据。</p>
+                <hr>
+                <p><em>产品说明：本文介绍 Ace Data Cloud 提供的 Kling Lip Sync 接入封装。Kling 为相应权利人的产品及商标，本文不暗示双方存在官方合作或背书关系。价格与能力以实际调用时的服务说明为准。</em></p>
+                <h2 id="相关服务与使用入口"><a href="#相关服务与使用入口" class="headerlink" title="相关服务与使用入口"></a>相关服务与使用入口</h2>
+                <ul>
+                  <li><a href="https://platform.acedata.cloud/services/kling" target="_blank" rel="noopener">Kling 服务</a></li>
+                  <li><a href="https://studio.acedata.cloud/kling" target="_blank" rel="noopener">在 Studio 使用 Kling</a></li>
+                </ul>
+                <hr>
+                <p>本文同步自 <a href="https://platform.acedata.cloud/blog/kling-lip-sync-reusable-performance-music-video-workflow?lang=zh-cn" target="_blank" rel="noopener">Ace Data Cloud 博客</a>。</p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4477343.html" rel="bookmark">API 返回 401、403、429 怎么处理？认证、权限与限流排障指南</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4733335.html" rel="bookmark">从“会回答”到“能执行”：如何用 GLM API 构建生产级 AI Agent</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4089164.html" rel="bookmark">4K 不该是加价项：GPT Image 2 约 ¥0.075/张，1K、2K、4K 同价</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4928808.html" rel="bookmark">Nano Banana 2.1 的优势，不只是更快出图</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/42384.html" rel="bookmark">0代码生成4K高清图！ACE Data Platform × SeeDream 专属方案：小白商家闭眼冲”</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/API/" rel="tag"><i class="fa fa-tag"></i> API</a>
+                  <a href="/tags/AceDataCloud/" rel="tag"><i class="fa fa-tag"></i> AceDataCloud</a>
+                  <a href="/tags/Kling/" rel="tag"><i class="fa fa-tag"></i> Kling</a>
+                  <a href="/tags/Lip-Sync/" rel="tag"><i class="fa fa-tag"></i> Lip Sync</a>
+                  <a href="/tags/%E6%95%B0%E5%AD%97%E4%BA%BA/" rel="tag"><i class="fa fa-tag"></i> 数字人</a>
+                  <a href="/tags/%E9%9F%B3%E4%B9%90%E8%A7%86%E9%A2%91/" rel="tag"><i class="fa fa-tag"></i> 音乐视频</a>
+                  <a href="/tags/%E8%A7%86%E9%A2%91%E5%88%B6%E4%BD%9C/" rel="tag"><i class="fa fa-tag"></i> 视频制作</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/4611739.html" rel="prev" title="论文越找越多，资料却越来越乱？聊聊 Nature 期刊论文数据集">
+                      <i class="fa fa-chevron-left"></i> 论文越找越多，资料却越来越乱？聊聊 Nature 期刊论文数据集 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/4109026.html" rel="next" title="公众号更新，少一点重复劳动：Ace Data Cloud Studio 自动化实操指南"> 公众号更新，少一点重复劳动：Ace Data Cloud Studio 自动化实操指南 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#一、从一段表演视频开始，而不是每次从零开始"><span class="nav-number">1.</span> <span class="nav-text">一、从一段表演视频开始，而不是每次从零开始</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#二、Ace-Data-Cloud-的四个实用优势"><span class="nav-number">2.</span> <span class="nav-text">二、Ace Data Cloud 的四个实用优势</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#1-两种视频输入方式，便于接入已有素材流程"><span class="nav-number">2.1.</span> <span class="nav-text">1. 两种视频输入方式，便于接入已有素材流程</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#2-单步封装，减少常见任务的接入步骤"><span class="nav-number">2.2.</span> <span class="nav-text">2. 单步封装，减少常见任务的接入步骤</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-固定成功调用计费，预算更直观"><span class="nav-number">2.3.</span> <span class="nav-text">3. 固定成功调用计费，预算更直观</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#4-异步任务与回调，便于组织批量处理"><span class="nav-number">2.4.</span> <span class="nav-text">4. 异步任务与回调，便于组织批量处理</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#三、一首歌曲的推荐制作流程"><span class="nav-number">3.</span> <span class="nav-text">三、一首歌曲的推荐制作流程</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#1-准备适合演唱的原始素材"><span class="nav-number">3.1.</span> <span class="nav-text">1. 准备适合演唱的原始素材</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#2-准备驱动音频"><span class="nav-number">3.2.</span> <span class="nav-text">2. 准备驱动音频</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-按乐句匹配视频与音频"><span class="nav-number">3.3.</span> <span class="nav-text">3. 按乐句匹配视频与音频</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#4-调用接口并检查结果"><span class="nav-number">3.4.</span> <span class="nav-text">4. 调用接口并检查结果</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#5-回到原曲时间轴，剪辑完整作品"><span class="nav-number">3.5.</span> <span class="nav-text">5. 回到原曲时间轴，剪辑完整作品</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#四、先了解边界，才能把优势用在正确的地方"><span class="nav-number">4.</span> <span class="nav-text">四、先了解边界，才能把优势用在正确的地方</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#五、从一个-30-秒试片，验证你的生产流程"><span class="nav-number">5.</span> <span class="nav-text">五、从一个 30 秒试片，验证你的生产流程</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#相关服务与使用入口"><span class="nav-number">6.</span> <span class="nav-text">相关服务与使用入口</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">964</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">46</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">431</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API-%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/">API 开发教程</a><span class="category-list-count">119</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/MCP-%E6%95%99%E7%A8%8B/">MCP 教程</a><span class="category-list-count">8</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">302</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%A7%E5%93%81%E6%8E%A8%E5%B9%BF/">产品推广</a><span class="category-list-count">41</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90/">产品推荐</a><span class="category-list-count">13</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">10</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a><span class="category-list-count">76</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">99</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 17px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/401/" style="font-size: 10px;">401</a> <a href="/tags/403/" style="font-size: 10px;">403</a> <a href="/tags/429/" style="font-size: 10px;">429</a> <a href="/tags/4K/" style="font-size: 10px;">4K</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI-API/" style="font-size: 11px;">AI API</a> <a href="/tags/AI-Agent/" style="font-size: 13px;">AI Agent</a> <a href="/tags/AI-Customer-Service/" style="font-size: 10px;">AI Customer Service</a> <a href="/tags/AI-%E5%86%85%E5%AE%B9%E5%B7%A5%E4%BD%9C%E6%B5%81/" style="font-size: 10px;">AI 内容工作流</a> <a href="/tags/AI-%E5%86%85%E5%AE%B9%E7%94%9F%E4%BA%A7/" style="font-size: 10px;">AI 内容生产</a> <a href="/tags/AI-%E5%8A%A9%E6%89%8B/" style="font-size: 10px;">AI 助手</a> <a href="/tags/AI-%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/" style="font-size: 11px;">AI 图像生成</a> <a href="/tags/AI-%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI 工具</a> <a href="/tags/AI-%E5%B7%A5%E5%85%B7%E7%AB%99/" style="font-size: 10px;">AI 工具站</a> <a href="/tags/AI-%E5%BB%BA%E7%AB%99/" style="font-size: 10px;">AI 建站</a> <a href="/tags/AI-%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI 编程</a> <a href="/tags/AI-%E7%BF%BB%E5%94%B1/" style="font-size: 10px;">AI 翻唱</a> <a href="/tags/AI-%E8%A7%86%E9%A2%91/" style="font-size: 11px;">AI 视频</a> <a href="/tags/AI-%E9%9F%B3%E4%B9%90/" style="font-size: 11px;">AI 音乐</a> <a href="/tags/AI-%E9%9F%B3%E4%B9%90%E5%BA%94%E7%94%A8/" style="font-size: 10px;">AI 音乐应用</a> <a href="/tags/AI%E5%88%9B%E4%BD%9C/" style="font-size: 10px;">AI创作</a> <a href="/tags/AI%E5%89%AF%E4%B8%9A/" style="font-size: 10px;">AI副业</a> <a href="/tags/AI%E5%8F%98%E7%8E%B0/" style="font-size: 10px;">AI变现</a> <a href="/tags/AI%E5%AE%89%E5%85%A8/" style="font-size: 10px;">AI安全</a> <a href="/tags/AI%E5%AE%9E%E6%88%98/" style="font-size: 10px;">AI实战</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/AI%E7%BF%BB%E5%94%B1/" style="font-size: 10px;">AI翻唱</a> <a href="/tags/AI%E8%A7%86%E9%A2%91/" style="font-size: 10px;">AI视频</a> <a href="/tags/AI%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" style="font-size: 10px;">AI视频生成</a> <a href="/tags/AI%E9%85%8D%E9%9F%B3/" style="font-size: 10px;">AI配音</a> <a href="/tags/API/" style="font-size: 16px;">API</a> <a href="/tags/API-Key/" style="font-size: 11px;">API Key</a> <a href="/tags/API-Platform/" style="font-size: 10px;">API Platform</a> <a href="/tags/Ace-Data-Cloud/" style="font-size: 15px;">Ace Data Cloud</a> <a href="/tags/Ace-Data-Cloud-Studio/" style="font-size: 14px;">Ace Data Cloud Studio</a> <a href="/tags/Ace-Data-Studio/" style="font-size: 11px;">Ace Data Studio</a> <a href="/tags/Ace-Gift-Card/" style="font-size: 10px;">Ace Gift Card</a> <a href="/tags/AceData-Cloud/" style="font-size: 19px;">AceData Cloud</a> <a href="/tags/AceData-Studio/" style="font-size: 11px;">AceData Studio</a> <a href="/tags/AceDataCloud/" style="font-size: 18px;">AceDataCloud</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 10px;">Audios</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Claude-Code/" style="font-size: 11px;">Claude Code</a> <a href="/tags/Codex/" style="font-size: 11px;">Codex</a> <a href="/tags/Codex-CLI/" style="font-size: 10px;">Codex CLI</a> <a href="/tags/Coding-Plan/" style="font-size: 10px;">Coding Plan</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Credits/" style="font-size: 10px;">Credits</a> <a href="/tags/David-Robinson/" style="font-size: 10px;">David Robinson</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FFmpeg/" style="font-size: 10px;">FFmpeg</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Fish-TTS/" style="font-size: 10px;">Fish TTS</a> <a href="/tags/Function-Calling/" style="font-size: 10px;">Function Calling</a> <a href="/tags/GEO/" style="font-size: 10px;">GEO</a> <a href="/tags/GIF/" style="font-size: 11px;">GIF</a> <a href="/tags/GLM/" style="font-size: 10px;">GLM</a> <a href="/tags/GPT-Image/" style="font-size: 11px;">GPT Image</a> <a href="/tags/GPT-Image-2/" style="font-size: 12px;">GPT Image 2</a> <a href="/tags/GPT-Image-2-5/" style="font-size: 10px;">GPT Image 2.5</a> <a href="/tags/GPT-Image-2-6/" style="font-size: 12px;">GPT Image 2.6</a> <a href="/tags/GPT-6/" style="font-size: 10px;">GPT-6</a> <a href="/tags/GPT-6-Astra/" style="font-size: 11px;">GPT-6 Astra</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 12px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 11px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 10px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/Kimi-Code/" style="font-size: 10px;">Kimi Code</a> <a href="/tags/Kling/" style="font-size: 10px;">Kling</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Lip-Sync/" style="font-size: 10px;">Lip Sync</a> <a href="/tags/MCP/" style="font-size: 12px;">MCP</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">4.4m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">66:38</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'c47866d381d478d21015ed720a740f63',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

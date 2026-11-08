@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="API,AceDataCloud,HTTP,401,403,429,Node.js,故障排查">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="调用 API 时遇到 401、403 或 429？本文解释三种状态码的区别、常见原因和排障步骤，并提供 curl 与 Node.js 示例，帮助开发者正确处理认证失败、访问拒绝和 API 限流。">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="API 返回 401、403、429 怎么处理？认证、权限与限流排障指南">
+  <meta property="og:url" content="https://cuiqingcai.com/4477343.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="调用 API 时遇到 401、403 或 429？本文解释三种状态码的区别、常见原因和排障步骤，并提供 curl 与 Node.js 示例，帮助开发者正确处理认证失败、访问拒绝和 API 限流。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.acedata2.cloud/gpt-image/c2fc4e57f83a29d4fbadff279d95e497b74d2095ffb8547adb25c13cd7d0254e.png">
+  <meta property="article:published_time" content="2026-10-20T01:33:00.000Z">
+  <meta property="article:modified_time" content="2026-11-07T05:48:40.000Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="API">
+  <meta property="article:tag" content="AceDataCloud">
+  <meta property="article:tag" content="HTTP">
+  <meta property="article:tag" content="401">
+  <meta property="article:tag" content="403">
+  <meta property="article:tag" content="429">
+  <meta property="article:tag" content="Node.js">
+  <meta property="article:tag" content="故障排查">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.acedata2.cloud/gpt-image/c2fc4e57f83a29d4fbadff279d95e497b74d2095ffb8547adb25c13cd7d0254e.png">
+  <link rel="canonical" href="https://cuiqingcai.com/4477343.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>API 返回 401、403、429 怎么处理？认证、权限与限流排障指南 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/4477343.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> API 返回 401、403、429 怎么处理？认证、权限与限流排障指南 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2026-10-20 09:33:00" itemprop="dateCreated datePublished" datetime="2026-10-20T09:33:00+08:00">2026-10-20</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">技术教程</span></a>
+                    </span>
+                  </span>
+                  <span id="/4477343.html" class="post-meta-item leancloud_visitors" data-flag-title="API 返回 401、403、429 怎么处理？认证、权限与限流排障指南" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>6.4k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>6 分钟</span>
+                  </span>
+                  <div class="post-description">调用 API 时遇到 401、403 或 429？本文解释三种状态码的区别、常见原因和排障步骤，并提供 curl 与 Node.js 示例，帮助开发者正确处理认证失败、访问拒绝和 API 限流。</div>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p><img src="https://cdn.acedata2.cloud/gpt-image/c2fc4e57f83a29d4fbadff279d95e497b74d2095ffb8547adb25c13cd7d0254e.png" alt="API Errors 401, 403 &amp; 429 — authentication, authorization, and rate limiting"></p>
+                <p>调用 API 时，<code>401 Unauthorized</code>、<code>403 Forbidden</code> 和 <code>429 Too Many Requests</code> 是最常见的三类错误。</p>
+                <a id="more"></a>
+                <p>它们都属于 <code>4xx</code> 客户端错误，但解决方法完全不同：</p>
+                <ul>
+                  <li><strong>401：认证失败</strong>——服务器无法确认“你是谁”</li>
+                  <li><strong>403：访问被拒绝</strong>——服务器理解请求，但不允许执行</li>
+                  <li><strong>429：请求过多</strong>——调用速度或用量超过限制</li>
+                </ul>
+                <p>如果不区分错误类型就直接重试，不仅无法解决问题，还可能制造重试风暴，甚至导致接口被进一步限制。</p>
+                <p>本文将通过排障清单、curl 命令和 Node.js 代码，说明遇到这三类错误时应该如何处理。</p>
+                <h2 id="一张表看懂-401、403-和-429"><a href="#一张表看懂-401、403-和-429" class="headerlink" title="一张表看懂 401、403 和 429"></a>一张表看懂 401、403 和 429</h2>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>状态码</th>
+                        <th>核心含义</th>
+                        <th>常见原因</th>
+                        <th>是否应该立即重试</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>401 Unauthorized</code></td>
+                        <td>缺少有效认证凭证</td>
+                        <td>API Key 错误、Token 过期、认证头格式错误</td>
+                        <td>不应该原样重试</td>
+                      </tr>
+                      <tr>
+                        <td><code>403 Forbidden</code></td>
+                        <td>服务器拒绝处理请求</td>
+                        <td>权限不足、IP 或地域限制、资源策略、WAF 拦截</td>
+                        <td>通常不应该</td>
+                      </tr>
+                      <tr>
+                        <td><code>429 Too Many Requests</code></td>
+                        <td>请求超过速率或配额限制</td>
+                        <td>并发过高、QPS 超限、额度耗尽</td>
+                        <td>等待后重试</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>需要注意，虽然 401 的英文名称是 <code>Unauthorized</code>，但在实际排障时，更适合把它理解为“未通过认证”；403 才通常与授权或访问策略有关。</p>
+                <h2 id="一、401-Unauthorized：先检查认证凭证"><a href="#一、401-Unauthorized：先检查认证凭证" class="headerlink" title="一、401 Unauthorized：先检查认证凭证"></a>一、401 Unauthorized：先检查认证凭证</h2>
+                <p><img src="https://cdn.acedata2.cloud/gpt-image/15943f2a4d1d724070973f453d318095b193364ae3bf41dadf75fd282806b6e7.png" alt="HTTP 401：API 凭证缺失、无效或已经过期"></p>
+                <p>HTTP <code>401 Unauthorized</code> 表示请求缺少目标资源所需的有效认证凭证。标准的 401 响应通常会通过 <code>WWW-Authenticate</code> 响应头告诉客户端服务器期望使用的认证方案。</p>
+                <h3 id="常见原因"><a href="#常见原因" class="headerlink" title="常见原因"></a>常见原因</h3>
+                <ol>
+                  <li>没有发送 <code>Authorization</code> 请求头</li>
+                  <li>API Key 或 Access Token 填写错误</li>
+                  <li>Token 已过期或被撤销</li>
+                  <li>认证方案错误，例如遗漏 <code>Bearer</code></li>
+                  <li>环境变量没有正确加载</li>
+                  <li>使用了错误环境的密钥</li>
+                  <li>请求被代理或网关转发时，认证头丢失</li>
+                  <li>客户端与服务器时间偏差过大，导致签名失效</li>
+                </ol>
+                <h3 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h3>
+                <p>接口要求 Bearer Token：</p>
+                <figure class="highlight http">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">Authorization</span>: Bearer YOUR_ACCESS_TOKEN</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>但客户端发送成了：</p>
+                <figure class="highlight http">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">Authorization</span>: YOUR_ACCESS_TOKEN</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>或者错误地写成：</p>
+                <figure class="highlight http">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">Authentication</span>: Bearer YOUR_ACCESS_TOKEN</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这两种情况都可能返回 401。</p>
+                <h3 id="使用-curl-排查"><a href="#使用-curl-排查" class="headerlink" title="使用 curl 排查"></a>使用 curl 排查</h3>
+                <p>不要一开始只查看响应体。加上 <code>-i</code>，同时检查状态码和响应头：</p>
+                <figure class="highlight bash">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -i <span class="string">"https://api.example.com/v1/profile"</span> \</span><br><span class="line">  -H <span class="string">"Authorization: Bearer <span class="variable">$API_TOKEN</span>"</span> \</span><br><span class="line">  -H <span class="string">"Accept: application/json"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>重点检查：</p>
+                <ul>
+                  <li>是否确实发送了 <code>Authorization</code></li>
+                  <li>认证方案是否正确</li>
+                  <li>Token 前后是否存在空格或换行</li>
+                  <li><code>WWW-Authenticate</code> 返回了什么</li>
+                  <li>响应体中是否有 <code>invalid_token</code>、<code>expired_token</code> 等错误信息</li>
+                </ul>
+                <p>如需查看更详细的请求过程，可以使用：</p>
+                <figure class="highlight bash">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -v <span class="string">"https://api.example.com/v1/profile"</span> \</span><br><span class="line">  -H <span class="string">"Authorization: Bearer <span class="variable">$API_TOKEN</span>"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <blockquote>
+                  <p>注意：调试日志可能包含 Token。不要把完整日志直接发到公开 Issue、群聊或工单中。</p>
+                </blockquote>
+                <h3 id="401-应该重试吗？"><a href="#401-应该重试吗？" class="headerlink" title="401 应该重试吗？"></a>401 应该重试吗？</h3>
+                <p><strong>不要使用同一份无效凭证反复重试。</strong></p>
+                <p>推荐流程：</p>
+                <ol>
+                  <li>检查请求是否携带认证信息</li>
+                  <li>检查 Token 是否过期、撤销或复制错误</li>
+                  <li>如果支持 Refresh Token，刷新一次访问令牌</li>
+                  <li>使用新 Token 重试一次</li>
+                  <li>如果仍然返回 401，停止重试并记录错误</li>
+                </ol>
+                <p>如果使用固定 API Key，则应检查密钥状态或更换有效密钥，而不是循环重试。</p>
+                <h2 id="二、403-Forbidden：认证可能成功，但请求仍被拒绝"><a href="#二、403-Forbidden：认证可能成功，但请求仍被拒绝" class="headerlink" title="二、403 Forbidden：认证可能成功，但请求仍被拒绝"></a>二、403 Forbidden：认证可能成功，但请求仍被拒绝</h2>
+                <p><img src="https://cdn.acedata2.cloud/gpt-image/b1cc5baeddd4bad9161c36136819599629372508908f13417fb2a58f81a89da9.png" alt="HTTP 403：请求因权限或访问策略被拒绝"></p>
+                <p><code>403 Forbidden</code> 表示服务器已经理解请求，但拒绝处理。对于典型的权限错误，即使重新认证，也不会自动解决问题；如果不修改请求或权限配置，重复请求通常仍会失败。</p>
+                <h3 id="常见原因-1"><a href="#常见原因-1" class="headerlink" title="常见原因"></a>常见原因</h3>
+                <ul>
+                  <li>当前账号或密钥缺少所需权限</li>
+                  <li>Token 的 Scope 不足</li>
+                  <li>访问了不属于当前项目或租户的资源</li>
+                  <li>来源 IP 不在白名单内</li>
+                  <li>请求来源地域受到限制</li>
+                  <li>WAF、防火墙或反滥用系统拦截</li>
+                  <li>账号、项目或资源被停用</li>
+                  <li>接口仅向特定套餐或角色开放</li>
+                  <li>签名有效，但签名中的资源范围不匹配</li>
+                  <li>浏览器场景下受到 CSRF、Origin 或 Referer 策略限制</li>
+                </ul>
+                <h3 id="401-与-403-的区别"><a href="#401-与-403-的区别" class="headerlink" title="401 与 403 的区别"></a>401 与 403 的区别</h3>
+                <p>可以用两句话快速判断：</p>
+                <ul>
+                  <li><strong>401：服务器无法确认你是谁</strong></li>
+                  <li><strong>403：服务器知道或理解你的身份与请求，但不允许你这么做</strong></li>
+                </ul>
+                <p>例如，一个普通成员携带有效 Token 调用“删除组织”接口：</p>
+                <figure class="highlight bash">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -i -X DELETE \</span><br><span class="line">  <span class="string">"https://api.example.com/v1/organizations/org_123"</span> \</span><br><span class="line">  -H <span class="string">"Authorization: Bearer <span class="variable">$API_TOKEN</span>"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果 Token 有效，但账号不是组织管理员，服务器可能返回：</p>
+                <figure class="highlight">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">HTTP/1.1 <span class="number">403</span> Forbidden</span><br><span class="line"><span class="attribute">Content-Type</span>: application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  "error": "insufficient_permissions",</span><br><span class="line">  "message": "Administrator role is required."</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="403-排障顺序"><a href="#403-排障顺序" class="headerlink" title="403 排障顺序"></a>403 排障顺序</h3>
+                <h4 id="1-阅读响应体"><a href="#1-阅读响应体" class="headerlink" title="1. 阅读响应体"></a>1. 阅读响应体</h4>
+                <p>优先寻找错误代码、缺少的角色或权限、所需 Scope、被拒绝的资源 ID，以及 IP、地域或安全策略提示。</p>
+                <h4 id="2-检查-Token-Scope"><a href="#2-检查-Token-Scope" class="headerlink" title="2. 检查 Token Scope"></a>2. 检查 Token Scope</h4>
+                <p>例如，读取数据可能只需要 <code>data:read</code>，但创建数据可能需要 <code>data:write</code>。Token 有效不代表拥有全部权限。</p>
+                <h4 id="3-检查资源归属"><a href="#3-检查资源归属" class="headerlink" title="3. 检查资源归属"></a>3. 检查资源归属</h4>
+                <p>确认项目 ID、组织 ID、租户 ID、用户 ID、区域或环境与当前凭证属于同一个账号或授权范围。</p>
+                <h4 id="4-检查网络和安全策略"><a href="#4-检查网络和安全策略" class="headerlink" title="4. 检查网络和安全策略"></a>4. 检查网络和安全策略</h4>
+                <p>如果代码在本地运行正常，部署后却返回 403，应重点检查服务器出口 IP、IP 白名单、代理配置、CDN、WAF、请求来源地域和相关请求头。</p>
+                <h3 id="不要只凭状态码下结论"><a href="#不要只凭状态码下结论" class="headerlink" title="不要只凭状态码下结论"></a>不要只凭状态码下结论</h3>
+                <p>现实中的 API 实现不一定完全一致。某些平台在触发限流时可能返回 <code>403</code>，而不是 <code>429</code>。例如，GitHub REST API 可能在超过速率限制时返回 403 或 429，并通过 <code>x-ratelimit-remaining</code>、<code>x-ratelimit-reset</code> 或 <code>retry-after</code> 等响应头说明限制状态。</p>
+                <p>因此，遇到 403 时还要综合检查：</p>
+                <ul>
+                  <li>响应体中的业务错误码</li>
+                  <li><code>Retry-After</code></li>
+                  <li><code>X-RateLimit-Remaining</code></li>
+                  <li><code>X-RateLimit-Reset</code></li>
+                  <li>平台官方文档</li>
+                </ul>
+                <h3 id="403-应该重试吗？"><a href="#403-应该重试吗？" class="headerlink" title="403 应该重试吗？"></a>403 应该重试吗？</h3>
+                <p>对于权限不足、IP 限制或资源策略导致的 403，<strong>原样重试没有意义</strong>。</p>
+                <p>正确做法是修改权限或 Token Scope、使用正确账号或项目、调整白名单与安全策略、修正资源 ID，并确认服务或套餐是否支持该接口。只有在平台明确说明该 403 实际代表临时限流时，才应按限流规则等待后重试。</p>
+                <h2 id="三、429-Too-Many-Requests：先减速，再重试"><a href="#三、429-Too-Many-Requests：先减速，再重试" class="headerlink" title="三、429 Too Many Requests：先减速，再重试"></a>三、429 Too Many Requests：先减速，再重试</h2>
+                <p><img src="https://cdn.acedata2.cloud/gpt-image/57a6c6a5c705923dc59ccf380574332e5266c4de991a047ed6f2392ddebe2740.png" alt="HTTP 429：API 请求受到限流，应等待并退避重试"></p>
+                <p><code>429 Too Many Requests</code> 表示客户端在一段时间内发送了过多请求，也就是触发了速率限制。服务器可以通过 <code>Retry-After</code> 告诉客户端应等待多长时间再重试。</p>
+                <h3 id="常见原因-2"><a href="#常见原因-2" class="headerlink" title="常见原因"></a>常见原因</h3>
+                <ul>
+                  <li>短时间内请求次数过多</li>
+                  <li>并发任务数量过高</li>
+                  <li>多个服务共享同一 API Key</li>
+                  <li>重试代码没有等待机制</li>
+                  <li>定时任务在同一时刻集中执行</li>
+                  <li>请求没有缓存，重复获取相同数据</li>
+                  <li>单个账号、IP 或项目的配额已耗尽</li>
+                  <li>套餐用量或余额限制</li>
+                </ul>
+                <h3 id="首先检查响应头"><a href="#首先检查响应头" class="headerlink" title="首先检查响应头"></a>首先检查响应头</h3>
+                <figure class="highlight bash">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -i <span class="string">"https://api.example.com/v1/resources"</span> \</span><br><span class="line">  -H <span class="string">"Authorization: Bearer <span class="variable">$API_TOKEN</span>"</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>重点关注：</p>
+                <figure class="highlight http">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">Retry-After</span>: 30</span><br><span class="line"><span class="attribute">X-RateLimit-Limit</span>: 100</span><br><span class="line"><span class="attribute">X-RateLimit-Remaining</span>: 0</span><br><span class="line"><span class="attribute">X-RateLimit-Reset</span>: 1710000000</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>不同平台的响应头名称可能不同，应以平台文档为准。</p>
+                <h3 id="正确处理-Retry-After"><a href="#正确处理-Retry-After" class="headerlink" title="正确处理 Retry-After"></a>正确处理 Retry-After</h3>
+                <p><code>Retry-After</code> 常见的两种格式是秒数或 HTTP 日期：</p>
+                <figure class="highlight http">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">Retry-After</span>: 30</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <figure class="highlight http">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="attribute">Retry-After</span>: Wed, 21 Oct 2026 07:28:00 GMT</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>客户端最好同时兼容这两种格式。</p>
+                <h3 id="为什么不能立即重试？"><a href="#为什么不能立即重试？" class="headerlink" title="为什么不能立即重试？"></a>为什么不能立即重试？</h3>
+                <p>如果请求被限流后立即重试，新请求仍会被限流；多个客户端还可能同时重试，形成“惊群”。更稳妥的方法是：</p>
+                <ol>
+                  <li>优先遵守 <code>Retry-After</code></li>
+                  <li>没有明确等待时间时，使用指数退避</li>
+                  <li>在等待时间中加入随机抖动</li>
+                  <li>设置最大重试次数</li>
+                  <li>达到上限后返回明确错误</li>
+                </ol>
+                <h2 id="Node-js：安全处理-429"><a href="#Node-js：安全处理-429" class="headerlink" title="Node.js：安全处理 429"></a>Node.js：安全处理 429</h2>
+                <p>下面的示例使用 Node.js 内置的 <code>fetch</code>，优先解析 <code>Retry-After</code>；如果服务器没有提供该响应头，则使用带随机抖动的指数退避。</p>
+                <figure class="highlight js">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">const</span> sleep = <span class="function">(<span class="params">ms</span>) =&gt;</span></span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> setTimeout(resolve, ms));</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseRetryAfter</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!value) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> seconds = <span class="built_in">Number</span>(value);</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Number</span>.isFinite(seconds) &amp;&amp; seconds &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> seconds * <span class="number">1000</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> timestamp = <span class="built_in">Date</span>.parse(value);</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">Number</span>.isNaN(timestamp)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max(<span class="number">0</span>, timestamp - <span class="built_in">Date</span>.now());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fetchWithRetry</span>(<span class="params">url, options = &#123;&#125;, config = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    maxRetries = <span class="number">3</span>,</span><br><span class="line">    baseDelayMs = <span class="number">1000</span>,</span><br><span class="line">    maxDelayMs = <span class="number">30</span>_000,</span><br><span class="line">  &#125; = config;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> attempt = <span class="number">0</span>; attempt &lt;= maxRetries; attempt++) &#123;</span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(url, options);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (response.status !== <span class="number">429</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> response;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (attempt === maxRetries) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">        <span class="string">`请求持续受到限流，已达到最大重试次数：<span class="subst">$&#123;maxRetries&#125;</span>`</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> retryAfterMs = parseRetryAfter(</span><br><span class="line">      response.headers.get(<span class="string">"retry-after"</span>)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> backoffCap = <span class="built_in">Math</span>.min(</span><br><span class="line">      maxDelayMs,</span><br><span class="line">      baseDelayMs * <span class="number">2</span> ** attempt</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> jitterMs = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * backoffCap);</span><br><span class="line">    <span class="keyword">const</span> delayMs = retryAfterMs ?? jitterMs;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.warn(</span><br><span class="line">      <span class="string">`收到 429，第 <span class="subst">$&#123;attempt + <span class="number">1</span>&#125;</span> 次等待 <span class="subst">$&#123;delayMs&#125;</span>ms 后重试`</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">await</span> sleep(delayMs);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"请求失败"</span>);</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>调用示例：</p>
+                <figure class="highlight js">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">const</span> response = <span class="keyword">await</span> fetchWithRetry(</span><br><span class="line">  <span class="string">"https://api.example.com/v1/resources"</span>,</span><br><span class="line">  &#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">      Authorization: <span class="string">`Bearer <span class="subst">$&#123;process.env.API_TOKEN&#125;</span>`</span>,</span><br><span class="line">      Accept: <span class="string">"application/json"</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    maxRetries: <span class="number">3</span>,</span><br><span class="line">    baseDelayMs: <span class="number">1000</span>,</span><br><span class="line">    maxDelayMs: <span class="number">30</span>_000,</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!response.ok) &#123;</span><br><span class="line">  <span class="keyword">const</span> errorBody = <span class="keyword">await</span> response.text();</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`API 请求失败：<span class="subst">$&#123;response.status&#125;</span> <span class="subst">$&#123;errorBody&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> data = <span class="keyword">await</span> response.json();</span><br><span class="line"><span class="built_in">console</span>.log(data);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h2 id="POST-请求重试时，还要考虑幂等性"><a href="#POST-请求重试时，还要考虑幂等性" class="headerlink" title="POST 请求重试时，还要考虑幂等性"></a>POST 请求重试时，还要考虑幂等性</h2>
+                <p>并非所有请求都适合自动重试。<code>GET</code>、<code>HEAD</code> 等读取请求通常更容易安全重试。对于创建订单、扣款、发送消息等 <code>POST</code> 请求，客户端可能已经成功提交，但因为网络中断没有收到响应。此时直接重试，可能造成重复操作。</p>
+                <p>如果平台支持，应为写操作设置幂等键：</p>
+                <figure class="highlight bash">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">curl -i -X POST <span class="string">"https://api.example.com/v1/orders"</span> \</span><br><span class="line">  -H <span class="string">"Authorization: Bearer <span class="variable">$API_TOKEN</span>"</span> \</span><br><span class="line">  -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  -H <span class="string">"Idempotency-Key: order-20260331-0001"</span> \</span><br><span class="line">  -d <span class="string">'&#123;</span></span><br><span class="line"><span class="string">    "product_id": "prod_123",</span></span><br><span class="line"><span class="string">    "quantity": 1</span></span><br><span class="line"><span class="string">  &#125;'</span></span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>幂等键的请求头名称和有效期由具体平台决定，应参考相应 API 文档。</p>
+                <h2 id="生产环境排障清单"><a href="#生产环境排障清单" class="headerlink" title="生产环境排障清单"></a>生产环境排障清单</h2>
+                <h3 id="收到-401"><a href="#收到-401" class="headerlink" title="收到 401"></a>收到 401</h3>
+                <ul>
+                  <li>[ ] 请求中是否包含认证头</li>
+                  <li>[ ] <code>Bearer</code> 等认证方案是否正确</li>
+                  <li>[ ] Token 是否过期、撤销或复制错误</li>
+                  <li>[ ] 是否使用了正确环境的密钥</li>
+                  <li>[ ] 代理或网关是否删除了认证头</li>
+                  <li>[ ] 客户端时间是否准确</li>
+                  <li>[ ] 是否可以安全地刷新一次 Token</li>
+                </ul>
+                <h3 id="收到-403"><a href="#收到-403" class="headerlink" title="收到 403"></a>收到 403</h3>
+                <ul>
+                  <li>[ ] Token 是否具有所需 Scope</li>
+                  <li>[ ] 当前账号是否具备所需角色</li>
+                  <li>[ ] 资源是否属于当前项目或租户</li>
+                  <li>[ ] 出口 IP 是否在白名单中</li>
+                  <li>[ ] 是否受到地域、WAF 或安全策略限制</li>
+                  <li>[ ] 响应体是否明确提示权限或限流</li>
+                  <li>[ ] 响应头中是否存在限流信息</li>
+                </ul>
+                <h3 id="收到-429"><a href="#收到-429" class="headerlink" title="收到 429"></a>收到 429</h3>
+                <ul>
+                  <li>[ ] 是否读取了 <code>Retry-After</code></li>
+                  <li>[ ] 是否检查限流相关响应头</li>
+                  <li>[ ] 是否使用指数退避和随机抖动</li>
+                  <li>[ ] 是否设置最大重试次数</li>
+                  <li>[ ] 是否限制并发</li>
+                  <li>[ ] 是否缓存重复查询结果</li>
+                  <li>[ ] 是否可以合并或批量发送请求</li>
+                  <li>[ ] 是否达到套餐配额或账户用量上限</li>
+                </ul>
+                <h2 id="建议记录哪些诊断信息？"><a href="#建议记录哪些诊断信息？" class="headerlink" title="建议记录哪些诊断信息？"></a>建议记录哪些诊断信息？</h2>
+                <p>建议在日志中记录请求时间、API 主机名和路径、HTTP 方法、状态码、业务错误代码、<code>request-id</code> 或 <code>trace-id</code>、<code>Retry-After</code>、限流剩余额度与重置时间、重试次数和实际等待时间。</p>
+                <p>但不要记录完整 API Key、完整 Access Token、Refresh Token、用户密码或请求体中的敏感个人信息。</p>
+                <h2 id="最后的判断口诀"><a href="#最后的判断口诀" class="headerlink" title="最后的判断口诀"></a>最后的判断口诀</h2>
+                <blockquote>
+                  <p><strong>401：先修凭证，不要拿旧 Token 重试。</strong><br><br><strong>403：先修权限或策略，不要原样重复请求。</strong><br><br><strong>429：尊重等待时间，退避、降速、限并发。</strong></p>
+                </blockquote>
+                <p>状态码只是排障入口，不是全部答案。可靠的处理方式，是同时结合 HTTP 状态码、响应体中的业务错误代码、相关响应头、平台文档、请求 ID 和服务端日志，把“接口报错”变成一套可观察、可恢复、可维护的工程机制。</p>
+                <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2>
+                <ul>
+                  <li><a href="https://httpwg.org/specs/rfc9110.html" target="_blank" rel="noopener">RFC 9110: HTTP Semantics</a></li>
+                  <li><a href="https://www.rfc-editor.org/rfc/rfc6585.html" target="_blank" rel="noopener">RFC 6585: Additional HTTP Status Codes</a></li>
+                  <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/401" target="_blank" rel="noopener">MDN: 401 Unauthorized</a></li>
+                  <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/403" target="_blank" rel="noopener">MDN: 403 Forbidden</a></li>
+                  <li><a href="https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api" target="_blank" rel="noopener">GitHub REST API rate limits</a></li>
+                  <li><a href="https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html" target="_blank" rel="noopener">AWS SDK retry behavior</a></li>
+                </ul>
+                <h2 id="相关服务与使用入口"><a href="#相关服务与使用入口" class="headerlink" title="相关服务与使用入口"></a>相关服务与使用入口</h2>
+                <ul>
+                  <li><a href="https://platform.acedata.cloud/" target="_blank" rel="noopener">Ace Data Cloud</a></li>
+                  <li><a href="https://platform.acedata.cloud/console/credentials" target="_blank" rel="noopener">API Key 管理</a></li>
+                  <li><a href="https://platform.acedata.cloud/console/usages" target="_blank" rel="noopener">API 使用记录</a></li>
+                </ul>
+                <hr>
+                <p>本文同步自 <a href="https://platform.acedata.cloud/blog/api-401-403-429-troubleshooting?lang=zh-cn" target="_blank" rel="noopener">Ace Data Cloud 博客</a>。</p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4733335.html" rel="bookmark">从“会回答”到“能执行”：如何用 GLM API 构建生产级 AI Agent</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4089164.html" rel="bookmark">4K 不该是加价项：GPT Image 2 约 ¥0.075/张，1K、2K、4K 同价</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4140926.html" rel="bookmark">让表演素材持续创造价值：用 Ace Data Cloud Kling Lip Sync 构建音乐视频生产流程</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4928808.html" rel="bookmark">Nano Banana 2.1 的优势，不只是更快出图</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/42384.html" rel="bookmark">0代码生成4K高清图！ACE Data Platform × SeeDream 专属方案：小白商家闭眼冲”</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/API/" rel="tag"><i class="fa fa-tag"></i> API</a>
+                  <a href="/tags/AceDataCloud/" rel="tag"><i class="fa fa-tag"></i> AceDataCloud</a>
+                  <a href="/tags/HTTP/" rel="tag"><i class="fa fa-tag"></i> HTTP</a>
+                  <a href="/tags/401/" rel="tag"><i class="fa fa-tag"></i> 401</a>
+                  <a href="/tags/403/" rel="tag"><i class="fa fa-tag"></i> 403</a>
+                  <a href="/tags/429/" rel="tag"><i class="fa fa-tag"></i> 429</a>
+                  <a href="/tags/Node-js/" rel="tag"><i class="fa fa-tag"></i> Node.js</a>
+                  <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/" rel="tag"><i class="fa fa-tag"></i> 故障排查</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/4395059.html" rel="prev" title="2026 AI 变现指南：普通人、开发者和内容创作者分别怎么做？">
+                      <i class="fa fa-chevron-left"></i> 2026 AI 变现指南：普通人、开发者和内容创作者分别怎么做？ </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/4611739.html" rel="next" title="论文越找越多，资料却越来越乱？聊聊 Nature 期刊论文数据集"> 论文越找越多，资料却越来越乱？聊聊 Nature 期刊论文数据集 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#一张表看懂-401、403-和-429"><span class="nav-number">1.</span> <span class="nav-text">一张表看懂 401、403 和 429</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#一、401-Unauthorized：先检查认证凭证"><span class="nav-number">2.</span> <span class="nav-text">一、401 Unauthorized：先检查认证凭证</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#常见原因"><span class="nav-number">2.1.</span> <span class="nav-text">常见原因</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#常见错误"><span class="nav-number">2.2.</span> <span class="nav-text">常见错误</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#使用-curl-排查"><span class="nav-number">2.3.</span> <span class="nav-text">使用 curl 排查</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#401-应该重试吗？"><span class="nav-number">2.4.</span> <span class="nav-text">401 应该重试吗？</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#二、403-Forbidden：认证可能成功，但请求仍被拒绝"><span class="nav-number">3.</span> <span class="nav-text">二、403 Forbidden：认证可能成功，但请求仍被拒绝</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#常见原因-1"><span class="nav-number">3.1.</span> <span class="nav-text">常见原因</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#401-与-403-的区别"><span class="nav-number">3.2.</span> <span class="nav-text">401 与 403 的区别</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#403-排障顺序"><span class="nav-number">3.3.</span> <span class="nav-text">403 排障顺序</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#1-阅读响应体"><span class="nav-number">3.3.1.</span> <span class="nav-text">1. 阅读响应体</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#2-检查-Token-Scope"><span class="nav-number">3.3.2.</span> <span class="nav-text">2. 检查 Token Scope</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#3-检查资源归属"><span class="nav-number">3.3.3.</span> <span class="nav-text">3. 检查资源归属</span></a></li>
+                          <li class="nav-item nav-level-4"><a class="nav-link" href="#4-检查网络和安全策略"><span class="nav-number">3.3.4.</span> <span class="nav-text">4. 检查网络和安全策略</span></a></li>
+                        </ol>
+                      </li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#不要只凭状态码下结论"><span class="nav-number">3.4.</span> <span class="nav-text">不要只凭状态码下结论</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#403-应该重试吗？"><span class="nav-number">3.5.</span> <span class="nav-text">403 应该重试吗？</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#三、429-Too-Many-Requests：先减速，再重试"><span class="nav-number">4.</span> <span class="nav-text">三、429 Too Many Requests：先减速，再重试</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#常见原因-2"><span class="nav-number">4.1.</span> <span class="nav-text">常见原因</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#首先检查响应头"><span class="nav-number">4.2.</span> <span class="nav-text">首先检查响应头</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#正确处理-Retry-After"><span class="nav-number">4.3.</span> <span class="nav-text">正确处理 Retry-After</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#为什么不能立即重试？"><span class="nav-number">4.4.</span> <span class="nav-text">为什么不能立即重试？</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#Node-js：安全处理-429"><span class="nav-number">5.</span> <span class="nav-text">Node.js：安全处理 429</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#POST-请求重试时，还要考虑幂等性"><span class="nav-number">6.</span> <span class="nav-text">POST 请求重试时，还要考虑幂等性</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#生产环境排障清单"><span class="nav-number">7.</span> <span class="nav-text">生产环境排障清单</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#收到-401"><span class="nav-number">7.1.</span> <span class="nav-text">收到 401</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#收到-403"><span class="nav-number">7.2.</span> <span class="nav-text">收到 403</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#收到-429"><span class="nav-number">7.3.</span> <span class="nav-text">收到 429</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#建议记录哪些诊断信息？"><span class="nav-number">8.</span> <span class="nav-text">建议记录哪些诊断信息？</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#最后的判断口诀"><span class="nav-number">9.</span> <span class="nav-text">最后的判断口诀</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">10.</span> <span class="nav-text">参考资料</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#相关服务与使用入口"><span class="nav-number">11.</span> <span class="nav-text">相关服务与使用入口</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">964</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">46</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">431</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API-%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/">API 开发教程</a><span class="category-list-count">119</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/MCP-%E6%95%99%E7%A8%8B/">MCP 教程</a><span class="category-list-count">8</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">302</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%A7%E5%93%81%E6%8E%A8%E5%B9%BF/">产品推广</a><span class="category-list-count">41</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90/">产品推荐</a><span class="category-list-count">13</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">10</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a><span class="category-list-count">76</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">99</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 17px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/401/" style="font-size: 10px;">401</a> <a href="/tags/403/" style="font-size: 10px;">403</a> <a href="/tags/429/" style="font-size: 10px;">429</a> <a href="/tags/4K/" style="font-size: 10px;">4K</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI-API/" style="font-size: 11px;">AI API</a> <a href="/tags/AI-Agent/" style="font-size: 13px;">AI Agent</a> <a href="/tags/AI-Customer-Service/" style="font-size: 10px;">AI Customer Service</a> <a href="/tags/AI-%E5%86%85%E5%AE%B9%E5%B7%A5%E4%BD%9C%E6%B5%81/" style="font-size: 10px;">AI 内容工作流</a> <a href="/tags/AI-%E5%86%85%E5%AE%B9%E7%94%9F%E4%BA%A7/" style="font-size: 10px;">AI 内容生产</a> <a href="/tags/AI-%E5%8A%A9%E6%89%8B/" style="font-size: 10px;">AI 助手</a> <a href="/tags/AI-%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/" style="font-size: 11px;">AI 图像生成</a> <a href="/tags/AI-%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI 工具</a> <a href="/tags/AI-%E5%B7%A5%E5%85%B7%E7%AB%99/" style="font-size: 10px;">AI 工具站</a> <a href="/tags/AI-%E5%BB%BA%E7%AB%99/" style="font-size: 10px;">AI 建站</a> <a href="/tags/AI-%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI 编程</a> <a href="/tags/AI-%E7%BF%BB%E5%94%B1/" style="font-size: 10px;">AI 翻唱</a> <a href="/tags/AI-%E8%A7%86%E9%A2%91/" style="font-size: 11px;">AI 视频</a> <a href="/tags/AI-%E9%9F%B3%E4%B9%90/" style="font-size: 11px;">AI 音乐</a> <a href="/tags/AI-%E9%9F%B3%E4%B9%90%E5%BA%94%E7%94%A8/" style="font-size: 10px;">AI 音乐应用</a> <a href="/tags/AI%E5%88%9B%E4%BD%9C/" style="font-size: 10px;">AI创作</a> <a href="/tags/AI%E5%89%AF%E4%B8%9A/" style="font-size: 10px;">AI副业</a> <a href="/tags/AI%E5%8F%98%E7%8E%B0/" style="font-size: 10px;">AI变现</a> <a href="/tags/AI%E5%AE%89%E5%85%A8/" style="font-size: 10px;">AI安全</a> <a href="/tags/AI%E5%AE%9E%E6%88%98/" style="font-size: 10px;">AI实战</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/AI%E7%BF%BB%E5%94%B1/" style="font-size: 10px;">AI翻唱</a> <a href="/tags/AI%E8%A7%86%E9%A2%91/" style="font-size: 10px;">AI视频</a> <a href="/tags/AI%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" style="font-size: 10px;">AI视频生成</a> <a href="/tags/AI%E9%85%8D%E9%9F%B3/" style="font-size: 10px;">AI配音</a> <a href="/tags/API/" style="font-size: 16px;">API</a> <a href="/tags/API-Key/" style="font-size: 11px;">API Key</a> <a href="/tags/API-Platform/" style="font-size: 10px;">API Platform</a> <a href="/tags/Ace-Data-Cloud/" style="font-size: 15px;">Ace Data Cloud</a> <a href="/tags/Ace-Data-Cloud-Studio/" style="font-size: 14px;">Ace Data Cloud Studio</a> <a href="/tags/Ace-Data-Studio/" style="font-size: 11px;">Ace Data Studio</a> <a href="/tags/Ace-Gift-Card/" style="font-size: 10px;">Ace Gift Card</a> <a href="/tags/AceData-Cloud/" style="font-size: 19px;">AceData Cloud</a> <a href="/tags/AceData-Studio/" style="font-size: 11px;">AceData Studio</a> <a href="/tags/AceDataCloud/" style="font-size: 18px;">AceDataCloud</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 10px;">Audios</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Claude-Code/" style="font-size: 11px;">Claude Code</a> <a href="/tags/Codex/" style="font-size: 11px;">Codex</a> <a href="/tags/Codex-CLI/" style="font-size: 10px;">Codex CLI</a> <a href="/tags/Coding-Plan/" style="font-size: 10px;">Coding Plan</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Credits/" style="font-size: 10px;">Credits</a> <a href="/tags/David-Robinson/" style="font-size: 10px;">David Robinson</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FFmpeg/" style="font-size: 10px;">FFmpeg</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Fish-TTS/" style="font-size: 10px;">Fish TTS</a> <a href="/tags/Function-Calling/" style="font-size: 10px;">Function Calling</a> <a href="/tags/GEO/" style="font-size: 10px;">GEO</a> <a href="/tags/GIF/" style="font-size: 11px;">GIF</a> <a href="/tags/GLM/" style="font-size: 10px;">GLM</a> <a href="/tags/GPT-Image/" style="font-size: 11px;">GPT Image</a> <a href="/tags/GPT-Image-2/" style="font-size: 12px;">GPT Image 2</a> <a href="/tags/GPT-Image-2-5/" style="font-size: 10px;">GPT Image 2.5</a> <a href="/tags/GPT-Image-2-6/" style="font-size: 12px;">GPT Image 2.6</a> <a href="/tags/GPT-6/" style="font-size: 10px;">GPT-6</a> <a href="/tags/GPT-6-Astra/" style="font-size: 11px;">GPT-6 Astra</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 12px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 11px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 10px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/Kimi-Code/" style="font-size: 10px;">Kimi Code</a> <a href="/tags/Kling/" style="font-size: 10px;">Kling</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Lip-Sync/" style="font-size: 10px;">Lip Sync</a> <a href="/tags/MCP/" style="font-size: 12px;">MCP</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">4.4m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">66:38</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'ff5b35968c64d5e2f9b9719bf4973cfe',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

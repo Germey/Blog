@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="AceDataCloud,GPT Image,AI 视频,AceData Studio,分镜,Seedance,创作教程">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="从 Claude 开源 MV 的分镜方法出发，在 AceData Studio 实际生成原创三格分镜、16:9 首帧和亮灯版参考图，再拆解图生视频的提交、检查与迭代。附原始视频案例、真实图片结果和可复制提示词，明确区分已完成创作与待执行的视频步骤。">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="用 Ace Data Cloud Studio 从一张分镜做起：《最后一盏灯》创作实录">
+  <meta property="og:url" content="https://cuiqingcai.com/4755643.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="从 Claude 开源 MV 的分镜方法出发，在 AceData Studio 实际生成原创三格分镜、16:9 首帧和亮灯版参考图，再拆解图生视频的提交、检查与迭代。附原始视频案例、真实图片结果和可复制提示词，明确区分已完成创作与待执行的视频步骤。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.acedata.cloud/uploads/blog-covers/52733edc8fd70410833a981197affe26ebc456fe2ac02c5bd59951a742349ed9.webp">
+  <meta property="article:published_time" content="2026-10-06T01:13:00.000Z">
+  <meta property="article:modified_time" content="2026-11-07T05:48:40.000Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="AceDataCloud">
+  <meta property="article:tag" content="GPT Image">
+  <meta property="article:tag" content="AI 视频">
+  <meta property="article:tag" content="AceData Studio">
+  <meta property="article:tag" content="分镜">
+  <meta property="article:tag" content="Seedance">
+  <meta property="article:tag" content="创作教程">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.acedata.cloud/uploads/blog-covers/52733edc8fd70410833a981197affe26ebc456fe2ac02c5bd59951a742349ed9.webp">
+  <link rel="canonical" href="https://cuiqingcai.com/4755643.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>用 Ace Data Cloud Studio 从一张分镜做起：《最后一盏灯》创作实录 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/4755643.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 用 Ace Data Cloud Studio 从一张分镜做起：《最后一盏灯》创作实录 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2026-10-06 09:13:00" itemprop="dateCreated datePublished" datetime="2026-10-06T09:13:00+08:00">2026-10-06</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">技术教程</span></a>
+                    </span>
+                  </span>
+                  <span id="/4755643.html" class="post-meta-item leancloud_visitors" data-flag-title="用 Ace Data Cloud Studio 从一张分镜做起：《最后一盏灯》创作实录" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>6.6k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>6 分钟</span>
+                  </span>
+                  <div class="post-description">从 Claude 开源 MV 的分镜方法出发，在 AceData Studio 实际生成原创三格分镜、16:9 首帧和亮灯版参考图，再拆解图生视频的提交、检查与迭代。附原始视频案例、真实图片结果和可复制提示词，明确区分已完成创作与待执行的视频步骤。</div>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p><img src="https://cdn.acedata.cloud/uploads/blog-covers/52733edc8fd70410833a981197affe26ebc456fe2ac02c5bd59951a742349ed9.webp" alt="原创短片《最后一盏灯》的 AI 生成首帧：黄色小机器人站在夜色中的灯塔门旁"></p>
+                <p>一座灯塔熄灭了。海面很安静，一个小机器人站在门口，抬头看了看黑下来的灯室。</p>
+                <a id="more"></a>
+                <p>它想做的事很小：<strong>让这盏灯重新亮起来。</strong></p>
+                <p>这就是我们今天的创作题目——《最后一盏灯》。不用先写宏大的世界观，不用凑几十个镜头，也不必上来就生成三分钟 MV。先把一个动作、一段因果和一个结尾做清楚。</p>
+                <p><img src="https://platform2.cdn.acedata.cloud/gpt-image/1b17a021-0f7f-4c56-a50f-07cb1005af83_0.png" alt="《最后一盏灯》原创首帧：夜色、灯塔与门旁的小机器人"></p>
+                <p><em>本次通过 <a href="https://platform.acedata.cloud/" target="_blank" rel="noopener">AceDataCloud</a> 的 GPT Image 能力实际生成的静态首帧，也作为本文封面。不是视频截帧。</em></p>
+                <blockquote>
+                  <p><strong>先说明本篇的完成范围。</strong> 本次实际完成了三格概念分镜、独立首帧、参考图编辑，以及辅助视觉检查；没有执行新的 Seedance 视频生成，也没有制作最终配乐成片。下面把已完成的图片创作与可继续执行的视频操作分开标注。文中的播放器展示已有的公开案例，不冒充《最后一盏灯》的结果。文中提示词为便于阅读整理的中文版，不保证重复生成相同图片。</p>
+                </blockquote>
+                <h2 id="先看一个源案例：值得学的不是“一句话”，而是制作顺序"><a href="#先看一个源案例：值得学的不是“一句话”，而是制作顺序" class="headerlink" title="先看一个源案例：值得学的不是“一句话”，而是制作顺序"></a>先看一个源案例：值得学的不是“一句话”，而是制作顺序</h2>
+                <p>JohnHeibel 的开源项目 <strong>PDoomVideo</strong>，为《I’m Upping My P(doom)》制作了程序化 MV。项目 README 写明：它经过两轮生成，使用 p5.js、p5.brush 绘制，通过 headless Chrome 渲染帧，再用 FFmpeg 编码。仓库里还保留了分镜、角色、章节和时间线代码。[1]</p>
+                <p><img src="https://github.com/user-attachments/assets/7d6164ff-6706-40bb-bdf5-099d86e583e1" alt="PDoomVideo 作者在 GitHub README 中公开的演示动图"></p>
+                <p><em>来源：JohnHeibel / PDoomVideo，作者公开的 README 演示素材，外链引用，仅用于案例讲解；不是 AceData Studio 生成结果。</em></p>
+                <p><a href="https://youtu.be/8j-hR4fJywU" target="_blank" rel="noopener">观看作者发布的原始 MV：I’m Upping My P(doom)</a> · <a href="https://github.com/JohnHeibel/PDoomVideo" target="_blank" rel="noopener">阅读项目源码</a></p>
+                <p>作者后来整理的 ClaudeAnimationBase 更有教学价值：先给分镜，再逐镜头制作，渲染检查图，发现问题后继续修改。它的动画指南特别强调：每个镜头都要发生一件事，并给观众留出看见和理解的时间。[2][3]</p>
+                <p>我们借用的是这套<strong>先设计、再制作、再检查</strong>的方法，而不是宣称下面的图片和视频也由代码逐帧绘制。</p>
+                <p>本文的路线是：</p>
+                <p><strong>Studio 对话梳理故事 → GPT Image 生成与修改图片 → 按需进入 Seedance 图生视频 → 观看样片并提出具体修改。</strong></p>
+                <p>这是一条结合生成模型的创作路线，与原项目的纯程序绘制不同。也不要把网上所有“Claude 做的视频”混为一谈：例如 anabology 的公开帖就明确提到了 Midjourney。[4]</p>
+                <h2 id="第一步｜进入-Studio，但先别按生成"><a href="#第一步｜进入-Studio，但先别按生成" class="headerlink" title="第一步｜进入 Studio，但先别按生成"></a>第一步｜进入 Studio，但先别按生成</h2>
+                <p>打开 <a href="https://studio.acedata.cloud" target="_blank" rel="noopener">AceData Studio</a>，登录后，从首页创作分类或能力导航进入聊天、图片、视频等工作区。官方说明也建议先用小任务验证流程，再做高分辨率、长视频或批量生成。[5]</p>
+                <p><img src="https://cdn.acedata.cloud/uploads/34c26779-82a4-4a9b-b81b-fb98ccd525be" alt="AceData Studio 官方文档中的首页界面"></p>
+                <p><em>Studio 官方文档中的界面图；布局、功能入口和模型选项可能随版本、账号与站点配置变化，以当前页面为准。</em></p>
+                <p>本篇主要用三个入口：</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>要做什么</th>
+                        <th>Studio 入口</th>
+                        <th>本次是否执行</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>讨论故事、整理提示词</td>
+                        <td>首页的 AI 对话</td>
+                        <td>本文提供可复制创作要求</td>
+                      </tr>
+                      <tr>
+                        <td>生成分镜、首帧，修改参考图</td>
+                        <td><a href="https://studio.acedata.cloud/openai-image" target="_blank" rel="noopener">GPT Image 图片工作区</a></td>
+                        <td>已通过对应连接器执行</td>
+                      </tr>
+                      <tr>
+                        <td>把首帧变成动态样片</td>
+                        <td><a href="https://studio.acedata.cloud/seedance" target="_blank" rel="noopener">Seedance 视频工作区</a></td>
+                        <td>提供后续操作，未提交新任务</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>如果习惯在助手对话中完成任务，可以在 <a href="https://studio.acedata.cloud/console/connectors" target="_blank" rel="noopener">连接器页面</a> 启用所需能力。图片生成与视频生成是不同服务；连接图片服务，不代表已经授权视频服务。</p>
+                <p><strong>本篇不假设 Studio 自带通用剪辑时间线，也不假设普通对话自动拥有本地 Chrome、Node.js 或 FFmpeg。</strong> 如果你要逐行复现原开源项目，需要另行准备它的执行环境，不是把仓库地址贴进普通聊天就算完成渲染。</p>
+                <h3 id="写一张创作任务卡"><a href="#写一张创作任务卡" class="headerlink" title="写一张创作任务卡"></a>写一张创作任务卡</h3>
+                <p>在开始前，把下面这段发给 Studio 助手，或保存在你的项目笔记里：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">我要创作一个约 15 秒的原创短片《最后一盏灯》。</span><br><span class="line"></span><br><span class="line">故事：海岛灯塔熄灭了，一个黄色小机器人触发门旁开关，</span><br><span class="line">灯塔重新发光，机器人留在门旁望向海面。</span><br><span class="line"></span><br><span class="line">受众：普通短视频观众。</span><br><span class="line">风格：手绘水彩与剪纸质感，不要照片级写实。</span><br><span class="line">画幅：16:9。</span><br><span class="line">角色：一个圆形黄色机器人，两只黑眼睛，两只短脚。</span><br><span class="line">场景：一座奶油色灯塔、红门、红色尖顶、深蓝海面。</span><br><span class="line">限制：不新增人物或船，不加文字，不做复杂追逐。</span><br><span class="line"></span><br><span class="line">先给我三段叙事节拍：发现问题、触发变化、看到结果。</span><br><span class="line">每段说明：发生什么、观众需要看懂什么、哪里可能失败。</span><br><span class="line">暂时不要生成视频，也不要自动调用付费工具。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>注意最后一句。<strong>先讨论方案，不等于马上提交生成。</strong> 先把故事规模收住，后续每一次生成才有明确目的。</p>
+                <h2 id="第二步｜把“温暖治愈”翻译成观众看得见的动作"><a href="#第二步｜把“温暖治愈”翻译成观众看得见的动作" class="headerlink" title="第二步｜把“温暖治愈”翻译成观众看得见的动作"></a>第二步｜把“温暖治愈”翻译成观众看得见的动作</h2>
+                <p>“做一支温暖治愈的短片”很容易得到漂亮但空泛的画面。我们给它增加一条清楚的因果链：<strong>灯不亮 → 机器人操作 → 灯亮了。</strong></p>
+                <p>这是本篇采用的文字分镜。时间是编辑计划，不是视频模型保证精确执行的时间码。</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>计划时间</th>
+                        <th>画面事件</th>
+                        <th>观众要理解的内容</th>
+                        <th>检查重点</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>0—4 秒</td>
+                        <td>机器人抬头看没有发光的灯室</td>
+                        <td>它发现了问题</td>
+                        <td>一开始不能已经亮灯</td>
+                      </tr>
+                      <tr>
+                        <td>4—9 秒</td>
+                        <td>机器人靠近门旁低位开关，用身体轻推</td>
+                        <td>它主动触发变化</td>
+                        <td>开关够得到，动作与结果有先后</td>
+                      </tr>
+                      <tr>
+                        <td>9—15 秒</td>
+                        <td>灯室亮起，暖光照向右侧海面</td>
+                        <td>它成功了</td>
+                        <td>光束不过曝，结尾留出停顿</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>为什么不设计“爬楼梯、打开机器、维修线路、跑回门口”？因为每多一个动作，就多一个需要表现清楚的空间关系。第一次做短片，先让一个动作成立。</p>
+                <h3 id="实际生成：三格概念分镜"><a href="#实际生成：三格概念分镜" class="headerlink" title="实际生成：三格概念分镜"></a>实际生成：三格概念分镜</h3>
+                <p>在 GPT Image 工作区选择当前可用的图像模型。本次使用 <strong>gpt-image-2</strong>，生成尺寸为 <strong>1536 × 1024</strong>。若你的页面只显示比例预设，选择接近的横向比例即可，不必为了教程中的数字寻找不存在的输入框。</p>
+                <p>可以直接输入：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">为原创短片《最后一盏灯》生成三格概念分镜。</span><br><span class="line">横向画布，三幅宽画面自上而下排列，只标 01、02、03。</span><br><span class="line"></span><br><span class="line">统一美术：深蓝夜海、奶油色灯塔、红门与红色尖顶，</span><br><span class="line">一个黄色圆形小机器人，两只黑眼睛、两只短脚。</span><br><span class="line">手绘水彩和剪纸质感，不要照片级写实。</span><br><span class="line"></span><br><span class="line">01：远景。灯塔在左，机器人站在门旁，灯塔未亮。</span><br><span class="line">02：近景。机器人靠近墙上圆形开关，准备触发它。</span><br><span class="line">03：远景。灯塔亮起，柔和暖光照向右侧海面。</span><br><span class="line"></span><br><span class="line">不加对话、字幕、品牌标志或软件界面。</span><br><span class="line">这是用于讨论故事的静态分镜图，不是最终视频。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>下面是本次实际生成的分镜概念图：</p>
+                <p><img src="https://platform2.cdn.acedata.cloud/gpt-image/e9b6c39b-6a58-4268-af7f-d14cace9959d_0.png" alt="《最后一盏灯》三格概念分镜：发现、操作与亮灯"></p>
+                <h3 id="这张图没有直接过关：我们发现了什么？"><a href="#这张图没有直接过关：我们发现了什么？" class="headerlink" title="这张图没有直接过关：我们发现了什么？"></a>这张图没有直接过关：我们发现了什么？</h3>
+                <p>图片生成成功，不代表故事设计已经成功。把概念图与下一步的独立首帧并排检查时，辅助视觉检查指出：概念分镜中的操作镜头，把开关画得较大、较高；角色眼睛的可见数量也随角度与简化方式变化。它适合讨论情节，但还不适合当作严格一致的角色设定表。</p>
+                <p>因此，后续制作采用更简单的操作设定：<strong>开关在门旁低位，机器人用身体就能轻推；角色外观以独立首帧为准。</strong></p>
+                <p>这不是把概念图包装成完美结果，而是明确它的用途和缺陷。不要把整张三格图直接当作图生视频的起始画面。</p>
+                <h2 id="第三步｜生成独立首帧：先把场景和角色定下来"><a href="#第三步｜生成独立首帧：先把场景和角色定下来" class="headerlink" title="第三步｜生成独立首帧：先把场景和角色定下来"></a>第三步｜生成独立首帧：先把场景和角色定下来</h2>
+                <p>分镜负责讲清楚故事，首帧负责告诉后面的生成任务“从什么画面开始”。两者不要混用。</p>
+                <p>仍然在 GPT Image 工作区，新建一张 <strong>16:9 单场景图片</strong>。本次实际使用 1536 × 864，并明确要求不要分格。</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">为《最后一盏灯》生成一张独立的 16:9 首帧，不要拼图。</span><br><span class="line"></span><br><span class="line">一座奶油色灯塔位于画面左侧三分之一处，</span><br><span class="line">红色尖顶，只有一扇红门，灯室关闭，不发出光束。</span><br><span class="line">右侧留出深蓝色海面。</span><br><span class="line"></span><br><span class="line">一个黄色圆形机器人站在门旁，</span><br><span class="line">两只黑色眼睛、两只短脚，没有可见手臂。</span><br><span class="line">门旁墙上有一个较低的黄铜圆形开关，</span><br><span class="line">机器人用身体就能够触及。</span><br><span class="line"></span><br><span class="line">手绘水彩、纸张纹理、剪纸边缘，轮廓简单清楚。</span><br><span class="line">保持安静夜色；不要文字、船只、额外角色、标志或边框。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p><img src="https://platform2.cdn.acedata.cloud/gpt-image/1b17a021-0f7f-4c56-a50f-07cb1005af83_0.png" alt="实际生成的独立首帧：门旁低位开关与黄色机器人"></p>
+                <p><em>本次真实图片输出。文字提示是创作要求，是否满足仍需检查；不能因为提示里写了“两只眼睛”，就跳过看图。</em></p>
+                <p>第一轮只检查四件事：</p>
+                <ul>
+                  <li>是否是一张连续场景，而不是三格拼图？</li>
+                  <li>灯塔是否真的没有发出光束？</li>
+                  <li>机器人是否仍然容易辨认，开关是否靠近它？</li>
+                  <li>右侧是否有空间容纳后面的灯光变化？</li>
+                </ul>
+                <p>保存这张图片及其生成要求。后续修改尽量带上它，不要每次只用文字重新抽一张“差不多的灯塔”。</p>
+                <h2 id="第四步｜不是重画一张，而是把同一座灯塔点亮"><a href="#第四步｜不是重画一张，而是把同一座灯塔点亮" class="headerlink" title="第四步｜不是重画一张，而是把同一座灯塔点亮"></a>第四步｜不是重画一张，而是把同一座灯塔点亮</h2>
+                <p>现在我们需要一个结尾参考：不是换岛、换机器人，而是在同一场景里开灯。</p>
+                <p>在支持参考图编辑的 GPT Image 流程中，上传或选择刚才的首帧；如果从 Studio 助手操作，附上图片或可访问的图片地址，并明确“编辑这张图”。不要只发一段新的文字描述。</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">编辑我提供的这张首帧，不要重新设计场景。</span><br><span class="line"></span><br><span class="line">保留镜头、岛屿轮廓、灯塔、红门、屋顶、月亮、纸张纹理，</span><br><span class="line">以及黄色机器人的身份和位置。</span><br><span class="line"></span><br><span class="line">只把灯塔顶部的灯从关闭变为开启，</span><br><span class="line">让一束柔和、半透明的琥珀色光照向右侧海面。</span><br><span class="line">不要把海面照成白色，不新增物体，不改变角色造型。</span><br><span class="line">这是一张静态结尾参考图，不是视频。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>本次以首帧为输入，实际执行了图像编辑，得到下面的亮灯版：</p>
+                <p><img src="https://platform2.cdn.acedata.cloud/gpt-image/e643a55a-1fa2-427a-bfe8-4dfb0c43e875_0.png" alt="参考首帧编辑得到的亮灯版：暖色光束照向右侧海面"></p>
+                <p>辅助视觉比对认为，主要布局和机器人外观基本保留，明显变化集中在灯光及附近增亮区域。<strong>这不是逐像素一致性检测，也不能证明未来视频中的动作一定稳定。</strong> 人工仍应放大检查门、屋顶、角色边缘和海岸线。</p>
+                <p>这次我们拿到的不是成片，而是一个更明确的创作条件：从“灯灭”开始，到“灯亮”结束。</p>
+                <h2 id="第五步｜进入视频工作区：先做一个五秒样片"><a href="#第五步｜进入视频工作区：先做一个五秒样片" class="headerlink" title="第五步｜进入视频工作区：先做一个五秒样片"></a>第五步｜进入视频工作区：先做一个五秒样片</h2>
+                <p><strong>以下是可继续执行的操作。本次没有提交这一步的新视频任务。</strong></p>
+                <p>在做自己的样片前，可以先看一个已有的 Studio 相关视频示例，理解“小动作、简单场景、克制运镜”怎样被写进要求。</p>
+                <video controls preload="none" playsinline src="https://cdn.acedata.cloud/de34c29169.mp4" style="max-width:100%;height:auto"></video>
+                <p><a href="https://cdn.acedata.cloud/de34c29169.mp4" target="_blank" rel="noopener">打开 Seedance 纸船示例视频</a></p>
+                <p><em>来源：AceDataCloud 的 Seedance 使用文档。该视频是已有示例，不是本次生成；文档给出的创作方向是黄昏水面的纸船、细小涟漪和缓慢推进。[6]</em></p>
+                <p>回到我们的灯塔。先不要把全部三段情节塞进五秒钟。第一段样片只测试：<strong>灯室从暗到亮，海面有一点运动，角色和建筑不变形。</strong></p>
+                <h3 id="方式-A：直接使用视频工作区"><a href="#方式-A：直接使用视频工作区" class="headerlink" title="方式 A：直接使用视频工作区"></a>方式 A：直接使用视频工作区</h3>
+                <ol>
+                  <li>打开 <a href="https://studio.acedata.cloud/seedance" target="_blank" rel="noopener">Seedance 工作区</a>。</li>
+                  <li>选择当前页面支持图生视频的模型与模式。</li>
+                  <li>将上面的独立首帧作为起始图片，不要上传三格分镜拼图。</li>
+                  <li>如果所选模式明确支持首尾帧，再把亮灯版设为尾帧；如果没有该选项，先只用首帧，把亮灯版留作人工验收参考。</li>
+                  <li>首轮选择页面支持的低成本测试规格，例如 5 秒、720p、16:9。若当前模型不接受这些组合，按页面允许值调整。</li>
+                  <li>检查价格、音频选项和素材后再提交。</li>
+                </ol>
+                <p><strong>首帧、尾帧、角色参考不是同一种输入。</strong> 官方文档说明，首尾帧模式与多模态参考模式不能混用；不同模型的支持范围也不同。[6] 不要为了把两张图都塞进去，随意选择一个不匹配的参考类型。</p>
+                <p>样片提示词：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">以提供的灯塔图片为起始画面，生成一个短样片。</span><br><span class="line">保持构图、机器人造型、灯塔结构、海岛轮廓和纸张风格。</span><br><span class="line"></span><br><span class="line">只表现一个主要变化：灯塔顶部由暗变亮，</span><br><span class="line">柔和的琥珀色光束逐渐照向右侧海面，随后稳定。</span><br><span class="line">海面只有轻微波动。机器人留在门旁，不新增手臂。</span><br><span class="line">镜头固定，不绕行，不切镜头。</span><br><span class="line"></span><br><span class="line">不要新增船只、人物、字幕和标志；不要白色过曝，</span><br><span class="line">不要改变门窗数量，不要让建筑或机器人融化变形。</span><br><span class="line">如当前模式支持音频，只保留轻微海浪声，不要旁白。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这段样片<strong>没有包含推开关的完整动作</strong>。它先验证视觉稳定性；通过后，再单独处理更难的因果动作，或尝试页面支持的较长时长。</p>
+                <h3 id="方式-B：在-Studio-助手里操作"><a href="#方式-B：在-Studio-助手里操作" class="headerlink" title="方式 B：在 Studio 助手里操作"></a>方式 B：在 Studio 助手里操作</h3>
+                <p>连接 Seedance 后，也可以把首帧、提示词和规格交给助手：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">请用已连接的 Seedance 制作灯塔亮灯样片。</span><br><span class="line">使用我附上的独立首帧，不使用三格分镜图。</span><br><span class="line">先核实当前模型是否支持 5 秒、720p、16:9 和首帧输入，</span><br><span class="line">告诉我将使用的模式与参数，确认后再提交。</span><br><span class="line"></span><br><span class="line">提交后记录任务 ID，继续查询同一个任务，</span><br><span class="line">直到成功或失败。不要因为等待较久就重复创建新任务。</span><br><span class="line">成功后给我视频地址；如果失败，说明返回的原因。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>任务 ID 代表“已受理”，不是“已成片”。等待期间保留任务记录；如果出现失败，先确认原因，再决定是否修改参数重试。</p>
+                <h2 id="第六步｜验收时不要说“再好看一点”"><a href="#第六步｜验收时不要说“再好看一点”" class="headerlink" title="第六步｜验收时不要说“再好看一点”"></a>第六步｜验收时不要说“再好看一点”</h2>
+                <p>真正有用的反馈，应该指出<strong>哪一段、哪个对象、什么问题</strong>。这与开源动画指南里的“实际看渲染结果，再修复”是同一种工作习惯。[3]</p>
+                <p>拿到自己的样片后，按下面的表检查：</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>观察位置</th>
+                        <th>要检查什么</th>
+                        <th>发现问题后的具体反馈</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>开头</td>
+                        <td>首帧是否被遵守</td>
+                        <td>开头保持灯室关闭，不要第一帧就亮灯</td>
+                      </tr>
+                      <tr>
+                        <td>变化发生处</td>
+                        <td>灯光是否渐亮、是否过曝</td>
+                        <td>减少亮灯强度，保留海面纹理，不要白色闪屏</td>
+                      </tr>
+                      <tr>
+                        <td>全程</td>
+                        <td>门窗、屋顶、机器人是否变化</td>
+                        <td>保留原图结构，不新增手臂，不改变眼睛数量</td>
+                      </tr>
+                      <tr>
+                        <td>结尾</td>
+                        <td>结果是否有停留时间</td>
+                        <td>光束稳定后留出短暂停顿，不要刚亮就结束</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>如果接下来做完整故事，再增加一个检查项：<strong>灯光有没有先于机器人操作发生？</strong> 如果因果顺序乱了，先减少动作，别继续堆特效。</p>
+                <p>可以这样写修改要求：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">只修正这次样片的两个问题：</span><br><span class="line">1. 亮灯时海面过曝，降低光束亮度并保持半透明。</span><br><span class="line">2. 机器人在结尾变形，尽量保持参考图外观与位置。</span><br><span class="line">其他构图和风格不变。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里的“只修正”是你的目标，<strong>不是对模型局部编辑能力的保证</strong>。有的模式需要重生成，有的支持参考视频编辑；先核实当前工具能做什么。重新生成的视频也可能改变其他区域，仍需复查。</p>
+                <h2 id="第七步｜从样片走向完整短片，先守住边界"><a href="#第七步｜从样片走向完整短片，先守住边界" class="headerlink" title="第七步｜从样片走向完整短片，先守住边界"></a>第七步｜从样片走向完整短片，先守住边界</h2>
+                <p>样片通过后，再尝试前面的约 15 秒故事计划：发现问题、靠近开关、触发灯光、留在门旁。优先让一个连续场景成立，不急着加入复杂的多镜头调度。</p>
+                <p>如果你选择分别制作三段素材，需要后续组接。本篇<strong>没有验证 Studio 内置通用时间线剪辑功能</strong>，因此不写“拖进去自动剪好”。可使用你已经确认可用的剪辑工具；如果要改用自动成片服务，须另行核实它能否接收这些素材，以及是否会重新生成画面。</p>
+                <p>配乐也建议放在后面。如果你的 Studio 已启用 Suno，可以尝试这样的方向：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">为《最后一盏灯》创作一段无歌词背景音乐。</span><br><span class="line">克制的钢琴、柔和铺底、安静海岛的感觉。</span><br><span class="line">从轻微孤独过渡到温暖，不要宏大鼓点，不要人声。</span><br><span class="line">我要用于短片，请给出便于选段的音乐结果。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这是可选提示，不是本次已执行步骤；不要把“想要 15 秒配乐”当作模型必然精确输出 15 秒。截取、淡入淡出和音画同步，需要在确实支持这些功能的工具中完成。音乐不是越满越好——灯亮起来之后，留一点海浪声，往往比再加一层鼓点更适合这个故事。</p>
+                <h2 id="收工前，留下的不应该只有一张好看的图"><a href="#收工前，留下的不应该只有一张好看的图" class="headerlink" title="收工前，留下的不应该只有一张好看的图"></a>收工前，留下的不应该只有一张好看的图</h2>
+                <p>建议为这个小项目保留六样东西：</p>
+                <ul>
+                  <li>创作任务卡：故事、角色、风格和限制；</li>
+                  <li>文字分镜：每段发生什么、观众要看懂什么；</li>
+                  <li>三格概念图：用于讨论，不充当严格角色设定；</li>
+                  <li>独立首帧与亮灯版：作为起点与验收参考；</li>
+                  <li>视频任务记录：模型、模式、参数、任务 ID 与结果；</li>
+                  <li>修改记录：哪个问题改过，哪些仍未解决。</li>
+                </ul>
+                <p>本次已经得到三张原创图片，也做出了一项具体取舍：<strong>概念分镜只用来讨论故事，实际画面以带低位开关的独立首帧为准，再参考它编辑亮灯版。</strong> 这比“让 AI 自动做一切”更像真正的创作——看见差异，决定保留什么，再把下一步交代清楚。</p>
+                <p>公开的源案例展示了另一条值得探索的道路：程序可以成为动画工程的一部分。但对第一次使用 Studio 的创作者来说，不必一开始就搭建渲染器。先从一个小故事、一张可用首帧和一次可检查的变化开始。</p>
+                <p><strong>今天的目标不是让 AI 拍大片，而是让这盏灯，按你设计的方式亮起来。</strong></p>
+                <p><a href="https://studio.acedata.cloud" target="_blank" rel="noopener">打开 AceData Studio，开始你的第一张分镜</a></p>
+                <hr>
+                <h2 id="使用与发布提醒"><a href="#使用与发布提醒" class="headerlink" title="使用与发布提醒"></a>使用与发布提醒</h2>
+                <ul>
+                  <li>生成前查看当前价格与支持参数；本文不承诺固定耗时、费用或一次成功率。</li>
+                  <li>本文原创图片为 AI 生成；原项目动图和原视频以外链注明作者，仅供讲解。公开可访问不等于可自由商用，使用他人音乐、角色和素材前需核实授权。</li>
+                  <li>本次通过 Studio 可用的对应连接器执行图片生成与编辑，并使用视觉模型辅助检查；不是逐项点击 Web 界面的录像，辅助检查也不能代替人工审片。</li>
+                  <li>本篇尚无《最后一盏灯》的新视频、配乐或最终成片；文中对视频的时序和质量要求均为创作计划或验收建议。</li>
+                </ul>
+                <h2 id="资料与英文原文"><a href="#资料与英文原文" class="headerlink" title="资料与英文原文"></a>资料与英文原文</h2>
+                <ol>
+                  <li><a href="https://github.com/JohnHeibel/PDoomVideo" target="_blank" rel="noopener">JohnHeibel / PDoomVideo：README、制作说明与源码</a>；<a href="https://youtu.be/8j-hR4fJywU" target="_blank" rel="noopener">原始 MV</a>；<a href="https://github.com/JohnHeibel/PDoomVideo/blob/main/STORYBOARD.md" target="_blank" rel="noopener">STORYBOARD.md</a>。</li>
+                  <li><a href="https://github.com/JohnHeibel/ClaudeAnimationBase" target="_blank" rel="noopener">ClaudeAnimationBase：从分镜到渲染的起步项目</a>。</li>
+                  <li><a href="https://github.com/JohnHeibel/ClaudeAnimationBase/blob/main/ANIMATION_GUIDE.md" target="_blank" rel="noopener">ANIMATION_GUIDE.md：叙事节奏、连续帧检查与制作规范</a>。</li>
+                  <li><a href="https://x.com/anabology/status/2103534482930491441" target="_blank" rel="noopener">anabology 的原帖：明确提到 Midjourney 与 moodboard</a>。</li>
+                  <li><a href="https://platform.acedata.cloud/documents/studio-overview" target="_blank" rel="noopener">Ace Data Cloud Studio 官方说明</a>。</li>
+                  <li><a href="https://platform.acedata.cloud/documents/promotion-article-seedance" target="_blank" rel="noopener">Seedance 使用文档及已有视频示例</a>；<a href="https://platform.acedata.cloud/documents/seedance-videos" target="_blank" rel="noopener">Seedance 视频接口文档</a>。</li>
+                  <li><a href="https://www.remotion.dev/docs/ai/claude-code" target="_blank" rel="noopener">Remotion：Prompting videos with coding agents</a>，供想继续探索程序化视频的读者参考；本文未使用 Remotion 渲染。</li>
+                  <li><a href="https://mp.weixin.qq.com/s/gAoW_1QWCrS6mgzCSM-UUg" target="_blank" rel="noopener">本篇选题起点：微信原文</a>。</li>
+                </ol>
+                <h2 id="相关服务与使用入口"><a href="#相关服务与使用入口" class="headerlink" title="相关服务与使用入口"></a>相关服务与使用入口</h2>
+                <ul>
+                  <li><a href="https://platform.acedata.cloud/services/seedance" target="_blank" rel="noopener">Seedance 服务</a></li>
+                </ul>
+                <hr>
+                <p>本文同步自 <a href="https://platform.acedata.cloud/blog/studio-storyboard-to-video-last-light-tutorial?lang=zh-cn" target="_blank" rel="noopener">Ace Data Cloud 博客</a>。</p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4319385.html" rel="bookmark">使用 Ace Data Cloud Studio 为专辑创建封面：从歌词到 Image 2／2.5 创作实战</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4028677.html" rel="bookmark">从博客到视频：我用 Ace Data Cloud Studio 完成了一次完整创作</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4663330.html" rel="bookmark">Ace Data Cloud Studio 多平台内容创作指南：从初稿到发布</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4395059.html" rel="bookmark">2026 AI 变现指南：普通人、开发者和内容创作者分别怎么做？</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4443242.html" rel="bookmark">最高 24% 返佣，到底意味着什么？拆开看 AI API 推广的真实生意</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/AceDataCloud/" rel="tag"><i class="fa fa-tag"></i> AceDataCloud</a>
+                  <a href="/tags/GPT-Image/" rel="tag"><i class="fa fa-tag"></i> GPT Image</a>
+                  <a href="/tags/AI-%E8%A7%86%E9%A2%91/" rel="tag"><i class="fa fa-tag"></i> AI 视频</a>
+                  <a href="/tags/AceData-Studio/" rel="tag"><i class="fa fa-tag"></i> AceData Studio</a>
+                  <a href="/tags/%E5%88%86%E9%95%9C/" rel="tag"><i class="fa fa-tag"></i> 分镜</a>
+                  <a href="/tags/Seedance/" rel="tag"><i class="fa fa-tag"></i> Seedance</a>
+                  <a href="/tags/%E5%88%9B%E4%BD%9C%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 创作教程</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/4077317.html" rel="prev" title="把微信接入 Claude Code：WeChat Bot 配置实战，让消息自动变成工作流">
+                      <i class="fa fa-chevron-left"></i> 把微信接入 Claude Code：WeChat Bot 配置实战，让消息自动变成工作流 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/4151208.html" rel="next" title="写了12次安全报告之后，他离开了OpenAI：谁来确保警报响起后，AI真的会停下来？"> 写了12次安全报告之后，他离开了OpenAI：谁来确保警报响起后，AI真的会停下来？ <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#先看一个源案例：值得学的不是“一句话”，而是制作顺序"><span class="nav-number">1.</span> <span class="nav-text">先看一个源案例：值得学的不是“一句话”，而是制作顺序</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#第一步｜进入-Studio，但先别按生成"><span class="nav-number">2.</span> <span class="nav-text">第一步｜进入 Studio，但先别按生成</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#写一张创作任务卡"><span class="nav-number">2.1.</span> <span class="nav-text">写一张创作任务卡</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#第二步｜把“温暖治愈”翻译成观众看得见的动作"><span class="nav-number">3.</span> <span class="nav-text">第二步｜把“温暖治愈”翻译成观众看得见的动作</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#实际生成：三格概念分镜"><span class="nav-number">3.1.</span> <span class="nav-text">实际生成：三格概念分镜</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#这张图没有直接过关：我们发现了什么？"><span class="nav-number">3.2.</span> <span class="nav-text">这张图没有直接过关：我们发现了什么？</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#第三步｜生成独立首帧：先把场景和角色定下来"><span class="nav-number">4.</span> <span class="nav-text">第三步｜生成独立首帧：先把场景和角色定下来</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#第四步｜不是重画一张，而是把同一座灯塔点亮"><span class="nav-number">5.</span> <span class="nav-text">第四步｜不是重画一张，而是把同一座灯塔点亮</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#第五步｜进入视频工作区：先做一个五秒样片"><span class="nav-number">6.</span> <span class="nav-text">第五步｜进入视频工作区：先做一个五秒样片</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#方式-A：直接使用视频工作区"><span class="nav-number">6.1.</span> <span class="nav-text">方式 A：直接使用视频工作区</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#方式-B：在-Studio-助手里操作"><span class="nav-number">6.2.</span> <span class="nav-text">方式 B：在 Studio 助手里操作</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#第六步｜验收时不要说“再好看一点”"><span class="nav-number">7.</span> <span class="nav-text">第六步｜验收时不要说“再好看一点”</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#第七步｜从样片走向完整短片，先守住边界"><span class="nav-number">8.</span> <span class="nav-text">第七步｜从样片走向完整短片，先守住边界</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#收工前，留下的不应该只有一张好看的图"><span class="nav-number">9.</span> <span class="nav-text">收工前，留下的不应该只有一张好看的图</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#使用与发布提醒"><span class="nav-number">10.</span> <span class="nav-text">使用与发布提醒</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#资料与英文原文"><span class="nav-number">11.</span> <span class="nav-text">资料与英文原文</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#相关服务与使用入口"><span class="nav-number">12.</span> <span class="nav-text">相关服务与使用入口</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">964</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">46</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">431</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API-%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/">API 开发教程</a><span class="category-list-count">119</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/MCP-%E6%95%99%E7%A8%8B/">MCP 教程</a><span class="category-list-count">8</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">302</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%A7%E5%93%81%E6%8E%A8%E5%B9%BF/">产品推广</a><span class="category-list-count">41</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90/">产品推荐</a><span class="category-list-count">13</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">10</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a><span class="category-list-count">76</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">99</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 17px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/401/" style="font-size: 10px;">401</a> <a href="/tags/403/" style="font-size: 10px;">403</a> <a href="/tags/429/" style="font-size: 10px;">429</a> <a href="/tags/4K/" style="font-size: 10px;">4K</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI-API/" style="font-size: 11px;">AI API</a> <a href="/tags/AI-Agent/" style="font-size: 13px;">AI Agent</a> <a href="/tags/AI-Customer-Service/" style="font-size: 10px;">AI Customer Service</a> <a href="/tags/AI-%E5%86%85%E5%AE%B9%E5%B7%A5%E4%BD%9C%E6%B5%81/" style="font-size: 10px;">AI 内容工作流</a> <a href="/tags/AI-%E5%86%85%E5%AE%B9%E7%94%9F%E4%BA%A7/" style="font-size: 10px;">AI 内容生产</a> <a href="/tags/AI-%E5%8A%A9%E6%89%8B/" style="font-size: 10px;">AI 助手</a> <a href="/tags/AI-%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/" style="font-size: 11px;">AI 图像生成</a> <a href="/tags/AI-%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI 工具</a> <a href="/tags/AI-%E5%B7%A5%E5%85%B7%E7%AB%99/" style="font-size: 10px;">AI 工具站</a> <a href="/tags/AI-%E5%BB%BA%E7%AB%99/" style="font-size: 10px;">AI 建站</a> <a href="/tags/AI-%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI 编程</a> <a href="/tags/AI-%E7%BF%BB%E5%94%B1/" style="font-size: 10px;">AI 翻唱</a> <a href="/tags/AI-%E8%A7%86%E9%A2%91/" style="font-size: 11px;">AI 视频</a> <a href="/tags/AI-%E9%9F%B3%E4%B9%90/" style="font-size: 11px;">AI 音乐</a> <a href="/tags/AI-%E9%9F%B3%E4%B9%90%E5%BA%94%E7%94%A8/" style="font-size: 10px;">AI 音乐应用</a> <a href="/tags/AI%E5%88%9B%E4%BD%9C/" style="font-size: 10px;">AI创作</a> <a href="/tags/AI%E5%89%AF%E4%B8%9A/" style="font-size: 10px;">AI副业</a> <a href="/tags/AI%E5%8F%98%E7%8E%B0/" style="font-size: 10px;">AI变现</a> <a href="/tags/AI%E5%AE%89%E5%85%A8/" style="font-size: 10px;">AI安全</a> <a href="/tags/AI%E5%AE%9E%E6%88%98/" style="font-size: 10px;">AI实战</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/AI%E7%BF%BB%E5%94%B1/" style="font-size: 10px;">AI翻唱</a> <a href="/tags/AI%E8%A7%86%E9%A2%91/" style="font-size: 10px;">AI视频</a> <a href="/tags/AI%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" style="font-size: 10px;">AI视频生成</a> <a href="/tags/AI%E9%85%8D%E9%9F%B3/" style="font-size: 10px;">AI配音</a> <a href="/tags/API/" style="font-size: 16px;">API</a> <a href="/tags/API-Key/" style="font-size: 11px;">API Key</a> <a href="/tags/API-Platform/" style="font-size: 10px;">API Platform</a> <a href="/tags/Ace-Data-Cloud/" style="font-size: 15px;">Ace Data Cloud</a> <a href="/tags/Ace-Data-Cloud-Studio/" style="font-size: 14px;">Ace Data Cloud Studio</a> <a href="/tags/Ace-Data-Studio/" style="font-size: 11px;">Ace Data Studio</a> <a href="/tags/Ace-Gift-Card/" style="font-size: 10px;">Ace Gift Card</a> <a href="/tags/AceData-Cloud/" style="font-size: 19px;">AceData Cloud</a> <a href="/tags/AceData-Studio/" style="font-size: 11px;">AceData Studio</a> <a href="/tags/AceDataCloud/" style="font-size: 18px;">AceDataCloud</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 10px;">Audios</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Claude-Code/" style="font-size: 11px;">Claude Code</a> <a href="/tags/Codex/" style="font-size: 11px;">Codex</a> <a href="/tags/Codex-CLI/" style="font-size: 10px;">Codex CLI</a> <a href="/tags/Coding-Plan/" style="font-size: 10px;">Coding Plan</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Credits/" style="font-size: 10px;">Credits</a> <a href="/tags/David-Robinson/" style="font-size: 10px;">David Robinson</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FFmpeg/" style="font-size: 10px;">FFmpeg</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Fish-TTS/" style="font-size: 10px;">Fish TTS</a> <a href="/tags/Function-Calling/" style="font-size: 10px;">Function Calling</a> <a href="/tags/GEO/" style="font-size: 10px;">GEO</a> <a href="/tags/GIF/" style="font-size: 11px;">GIF</a> <a href="/tags/GLM/" style="font-size: 10px;">GLM</a> <a href="/tags/GPT-Image/" style="font-size: 11px;">GPT Image</a> <a href="/tags/GPT-Image-2/" style="font-size: 12px;">GPT Image 2</a> <a href="/tags/GPT-Image-2-5/" style="font-size: 10px;">GPT Image 2.5</a> <a href="/tags/GPT-Image-2-6/" style="font-size: 12px;">GPT Image 2.6</a> <a href="/tags/GPT-6/" style="font-size: 10px;">GPT-6</a> <a href="/tags/GPT-6-Astra/" style="font-size: 11px;">GPT-6 Astra</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 12px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 11px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 10px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/Kimi-Code/" style="font-size: 10px;">Kimi Code</a> <a href="/tags/Kling/" style="font-size: 10px;">Kling</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Lip-Sync/" style="font-size: 10px;">Lip Sync</a> <a href="/tags/MCP/" style="font-size: 12px;">MCP</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">4.4m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">66:38</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: '2592a7dff666102cabfc8a3f2450471a',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

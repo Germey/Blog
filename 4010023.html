@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="Suno,AceDataCloud,AI 音乐应用,系统架构,成本控制,版权合规">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="生成只是开始。本文从异步等待、提示词控制、成本流水、音频存储和版权授权等实际问题出发，拆解 Suno 音乐应用从 Demo 走向正式上线时最容易踩的坑。">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Suno 应用看起来不难，真正上线会卡在哪？">
+  <meta property="og:url" content="https://cuiqingcai.com/4010023.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="生成只是开始。本文从异步等待、提示词控制、成本流水、音频存储和版权授权等实际问题出发，拆解 Suno 音乐应用从 Demo 走向正式上线时最容易踩的坑。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.acedata2.cloud/gpt-image/7ef734dfbfc8fef23ad2a1fb5551d27791ad9c1fcc71c3cace42153c5b43c051.png">
+  <meta property="article:published_time" content="2026-10-22T10:33:00.000Z">
+  <meta property="article:modified_time" content="2026-11-07T05:48:40.000Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="Suno">
+  <meta property="article:tag" content="AceDataCloud">
+  <meta property="article:tag" content="AI 音乐应用">
+  <meta property="article:tag" content="系统架构">
+  <meta property="article:tag" content="成本控制">
+  <meta property="article:tag" content="版权合规">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.acedata2.cloud/gpt-image/7ef734dfbfc8fef23ad2a1fb5551d27791ad9c1fcc71c3cace42153c5b43c051.png">
+  <link rel="canonical" href="https://cuiqingcai.com/4010023.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>Suno 应用看起来不难，真正上线会卡在哪？ | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/4010023.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> Suno 应用看起来不难，真正上线会卡在哪？ </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2026-10-22 18:33:00" itemprop="dateCreated datePublished" datetime="2026-10-22T18:33:00+08:00">2026-10-22</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">技术教程</span></a>
+                    </span>
+                  </span>
+                  <span id="/4010023.html" class="post-meta-item leancloud_visitors" data-flag-title="Suno 应用看起来不难，真正上线会卡在哪？" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>4.4k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>4 分钟</span>
+                  </span>
+                  <div class="post-description">生成只是开始。本文从异步等待、提示词控制、成本流水、音频存储和版权授权等实际问题出发，拆解 Suno 音乐应用从 Demo 走向正式上线时最容易踩的坑。</div>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p><img src="https://cdn.acedata2.cloud/gpt-image/7ef734dfbfc8fef23ad2a1fb5551d27791ad9c1fcc71c3cace42153c5b43c051.png" alt="Suno 应用上线真正会卡在哪里——任务、成本、存储与版权实战封面"></p>
+                <p>做一个 Suno 应用的 Demo，可能只需要一个下午。</p>
+                <a id="more"></a>
+                <p>页面放一个输入框、一个生成按钮，再加一个音频播放器，看起来已经很完整。可一旦把它交给真实用户，问题会从意想不到的地方冒出来。</p>
+                <p>有人重复点击按钮，生成了六首几乎相同的歌；有人关掉页面以后再也找不到结果；有人上传了一段来源不明的音乐，要求“完全照这个歌手的声音来唱”；还有人生成失败，却发现额度已经扣掉了。</p>
+                <p>这些问题都不是音乐模型能替你解决的。它们属于产品、后端和运营共同面对的上线问题。</p>
+                <p>下面不谈抽象概念，就从最常见的现场说起。</p>
+                <h2 id="用户最先抱怨的，通常不是音质，而是“怎么还没好”"><a href="#用户最先抱怨的，通常不是音质，而是“怎么还没好”" class="headerlink" title="用户最先抱怨的，通常不是音质，而是“怎么还没好”"></a>用户最先抱怨的，通常不是音质，而是“怎么还没好”</h2>
+                <p>文本接口常常几秒内返回，而完整歌曲生成需要更长时间。<a href="https://platform.acedata.cloud/" target="_blank" rel="noopener">Ace Data Cloud</a> 的集成文档建议使用异步任务，并提供 <code>task_id</code>、回调和后续查询机制。</p>
+                <p>如果页面只放一个一直旋转的 Loading，用户很快会怀疑程序卡住了。</p>
+                <p>更好的交互不是显示虚假的百分比，而是告诉用户任务正在经历什么：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">正在提交创作要求</span><br><span class="line">        ↓</span><br><span class="line">任务已经进入队列</span><br><span class="line">        ↓</span><br><span class="line">正在生成两个候选版本</span><br><span class="line">        ↓</span><br><span class="line">正在保存音频和封面</span><br><span class="line">        ↓</span><br><span class="line">可以试听了</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>前端可以使用明确的状态文字：</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>后端状态</th>
+                        <th>用户看到的提示</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>submitted</code></td>
+                        <td>已收到你的创作要求</td>
+                      </tr>
+                      <tr>
+                        <td><code>pending</code></td>
+                        <td>正在排队，请稍候</td>
+                      </tr>
+                      <tr>
+                        <td><code>running</code></td>
+                        <td>正在生成音乐</td>
+                      </tr>
+                      <tr>
+                        <td><code>succeeded</code></td>
+                        <td>歌曲候选已经完成</td>
+                      </tr>
+                      <tr>
+                        <td><code>failed</code></td>
+                        <td>本次生成未完成，额度已返还</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>这里有一个很重要的小细节：用户刷新页面以后，仍然应该看到同一个任务，而不是自动创建新任务。</p>
+                <p>这就需要后端先写数据库，再调用生成服务，并使用幂等键拦截重复请求。</p>
+                <figure class="highlight js">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">if</span> (<span class="keyword">await</span> taskExists(idempotencyKey)) &#123;</span><br><span class="line">  <span class="keyword">return</span> getExistingTask(idempotencyKey);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> task = <span class="keyword">await</span> createLocalTask();</span><br><span class="line"><span class="keyword">const</span> upstream = <span class="keyword">await</span> submitToSuno(task);</span><br><span class="line"><span class="keyword">await</span> bindProviderTaskId(task.id, upstream.task_id);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>生成任务是一个长期存在的业务对象，不是一次临时网络请求。理解这一点，等待、重试和历史记录都会容易很多。</p>
+                <h2 id="用户说“做一首开心的歌”，系统未必知道他想要什么"><a href="#用户说“做一首开心的歌”，系统未必知道他想要什么" class="headerlink" title="用户说“做一首开心的歌”，系统未必知道他想要什么"></a>用户说“做一首开心的歌”，系统未必知道他想要什么</h2>
+                <p>音乐提示词有很大的解释空间。</p>
+                <p>“开心”可以是儿童歌曲、电子舞曲、轻快民谣，也可以是广告里常见的明亮背景音乐。如果应用只提供一个大输入框，用户得到不满意的结果后，往往不知道该改哪句话。</p>
+                <p>可以把创作要求拆成几项更容易回答的问题：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">这首音乐用在哪里？</span><br><span class="line">短视频 &#x2F; 播客 &#x2F; 游戏 &#x2F; 广告 &#x2F; 个人歌曲</span><br><span class="line"></span><br><span class="line">希望听起来是什么感觉？</span><br><span class="line">轻松 &#x2F; 热烈 &#x2F; 温暖 &#x2F; 神秘 &#x2F; 克制</span><br><span class="line"></span><br><span class="line">是否需要人声？</span><br><span class="line">完整歌曲 &#x2F; 少量人声 &#x2F; 纯音乐</span><br><span class="line"></span><br><span class="line">有哪些不想出现的元素？</span><br><span class="line">重金属 &#x2F; 尖锐合成器 &#x2F; 激烈鼓点 &#x2F; 夸张唱腔</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>最终再由后端拼成提示词：</p>
+                <figure class="highlight js">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">buildPrompt</span>(<span class="params">form</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [</span><br><span class="line">    <span class="string">`用途：<span class="subst">$&#123;form.useCase&#125;</span>`</span>,</span><br><span class="line">    <span class="string">`风格：<span class="subst">$&#123;form.genre&#125;</span>`</span>,</span><br><span class="line">    <span class="string">`情绪：<span class="subst">$&#123;form.mood&#125;</span>`</span>,</span><br><span class="line">    <span class="string">`主要乐器：<span class="subst">$&#123;form.instruments.join(<span class="string">", "</span>)&#125;</span>`</span>,</span><br><span class="line">    <span class="string">`结构要求：<span class="subst">$&#123;form.structure&#125;</span>`</span>,</span><br><span class="line">    <span class="string">`避免出现：<span class="subst">$&#123;form.negative.join(<span class="string">", "</span>)&#125;</span>`</span></span><br><span class="line">  ].join(<span class="string">"；"</span>);</span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>对于更专业的用户，再开放 <code>style</code>、<code>negative_tags</code>、<code>vocal_gender</code>、<code>weirdness</code> 和 <code>style_influence</code> 等参数。普通用户不需要看到底层字段，只需要看到更自然的产品语言。</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>底层控制</th>
+                        <th>界面文案</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>style_influence</code></td>
+                        <td>更贴近所选风格</td>
+                      </tr>
+                      <tr>
+                        <td><code>weirdness</code></td>
+                        <td>更大胆、更实验</td>
+                      </tr>
+                      <tr>
+                        <td><code>negative_tags</code></td>
+                        <td>不希望出现的元素</td>
+                      </tr>
+                      <tr>
+                        <td><code>vocal_gender</code></td>
+                        <td>偏好的演唱声音</td>
+                      </tr>
+                      <tr>
+                        <td><code>instrumental</code></td>
+                        <td>不需要人声</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>这样既保留控制力，也不会把接口文档原样搬到用户面前。</p>
+                <h2 id="成本最怕的不是贵，而是不知道花到哪里去了"><a href="#成本最怕的不是贵，而是不知道花到哪里去了" class="headerlink" title="成本最怕的不是贵，而是不知道花到哪里去了"></a>成本最怕的不是贵，而是不知道花到哪里去了</h2>
+                <p>音乐应用的调用成本不只来自首次生成。</p>
+                <p>用户可能继续续写、替换片段、翻唱、分轨或导出其他格式。不同操作的 Credit 消耗也不完全一样。Ace Data Cloud 的标准生成、增强模式、片段替换和多轨分离等操作适用不同计费规则，最终应以实时服务价格为准。</p>
+                <p>所以，应用最好不要只保存“用户还剩多少次”，而是建立自己的额度流水：</p>
+                <figure class="highlight sql">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> credit_ledger (</span><br><span class="line">  <span class="keyword">id</span>          <span class="keyword">UUID</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">  user_id     <span class="keyword">UUID</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  task_id     <span class="keyword">UUID</span>,</span><br><span class="line">  <span class="keyword">type</span>        <span class="built_in">VARCHAR</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  amount      <span class="built_in">DECIMAL</span>(<span class="number">10</span>, <span class="number">4</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  description <span class="built_in">TEXT</span>,</span><br><span class="line">  created_at  <span class="built_in">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NOW</span>()</span><br><span class="line">);</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>一次生成可以经历这样的账务变化：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">提交任务     -0.56  预扣</span><br><span class="line">生成成功      0.00  确认消耗</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">提交任务     -0.56  预扣</span><br><span class="line">生成失败     +0.56  自动返还</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这里的数字仅用于说明流水设计，实际消耗应在请求前读取当前服务价格。</p>
+                <p>用户界面也应在点击前告诉他这次操作可能消耗多少内部额度。清楚的成本提示，往往比把价格藏起来更能建立信任。</p>
+                <p>如果产品采用会员模式，可以根据工作流设计套餐，而不是简单照搬上游 Credits：</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>套餐方向</th>
+                        <th>可以包含的权益</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>入门版</td>
+                        <td>每月若干次标准生成</td>
+                      </tr>
+                      <tr>
+                        <td>创作者版</td>
+                        <td>更多生成次数、续写、翻唱</td>
+                      </tr>
+                      <tr>
+                        <td>专业版</td>
+                        <td>分轨、WAV、MIDI、批量任务</td>
+                      </tr>
+                      <tr>
+                        <td>团队版</td>
+                        <td>共享项目、成员额度、商业工作流</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h2 id="音频链接拿到了，不代表文件就永远安全了"><a href="#音频链接拿到了，不代表文件就永远安全了" class="headerlink" title="音频链接拿到了，不代表文件就永远安全了"></a>音频链接拿到了，不代表文件就永远安全了</h2>
+                <p>生成成功以后，如果数据库里只保存上游 <code>audio_url</code>，短期内可能看不出问题。等用户过几天回来下载，链接可能已经变化或不可用。</p>
+                <p>Ace Data Cloud 的接口文档提示，平台会优先返回 CDN 地址；如果持久化失败，也可能返回原始媒体地址，因此应及时下载和保存结果。</p>
+                <p>比较稳妥的处理过程是：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">生成成功</span><br><span class="line">   ↓</span><br><span class="line">检查音频 URL</span><br><span class="line">   ↓</span><br><span class="line">后台下载到自己的对象存储</span><br><span class="line">   ↓</span><br><span class="line">记录文件大小与哈希</span><br><span class="line">   ↓</span><br><span class="line">生成自己的访问地址</span><br><span class="line">   ↓</span><br><span class="line">前端展示和下载</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>保存时可以记录：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"provider_audio_id"</span>: <span class="string">"audio_xxx"</span>,</span><br><span class="line">  <span class="attr">"source_url"</span>: <span class="string">"https://..."</span>,</span><br><span class="line">  <span class="attr">"storage_key"</span>: <span class="string">"music/user-42/project-18/audio-x.mp3"</span>,</span><br><span class="line">  <span class="attr">"sha256"</span>: <span class="string">"f91d..."</span>,</span><br><span class="line">  <span class="attr">"duration"</span>: <span class="number">154.92</span>,</span><br><span class="line">  <span class="attr">"mime_type"</span>: <span class="string">"audio/mpeg"</span>,</span><br><span class="line">  <span class="attr">"saved_at"</span>: <span class="string">"2026-10-12T08:30:00Z"</span></span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>如果歌曲后续用于续写或翻唱，还要继续保存其平台音频 ID。自己的存储地址用于播放和下载，平台音频 ID 用于继续调用创作能力，两者用途并不相同。</p>
+                <h2 id="最容易被忽略的，往往是上传和版权"><a href="#最容易被忽略的，往往是上传和版权" class="headerlink" title="最容易被忽略的，往往是上传和版权"></a>最容易被忽略的，往往是上传和版权</h2>
+                <p>只做文生音乐时，版权问题似乎离产品还比较远。一旦开放音频上传、翻唱、Persona 或自定义声音，风险会明显增加。</p>
+                <p>产品至少需要问清楚：</p>
+                <ul>
+                  <li>这段音频是不是用户本人创作或录制的？</li>
+                  <li>用户是否有权允许平台处理和生成衍生内容？</li>
+                  <li>音频中是否包含未经授权的歌手声音？</li>
+                  <li>用户是否试图模仿现实人物并误导他人？</li>
+                  <li>发生投诉时，平台能否定位和下架相关内容？</li>
+                </ul>
+                <p>上传按钮附近可以放置明确声明：</p>
+                <blockquote>
+                  <p>上传即表示你确认拥有该音频的必要权利，或已获得版权所有者、表演者及声音权利人的授权。请勿上传未经许可的商业录音或使用他人声音进行冒充。</p>
+                </blockquote>
+                <p>还可以把授权信息存入任务记录：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"source_type"</span>: <span class="string">"user_upload"</span>,</span><br><span class="line">  <span class="attr">"rights_confirmed"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"rights_version"</span>: <span class="string">"2026-10"</span>,</span><br><span class="line">  <span class="attr">"confirmed_at"</span>: <span class="string">"2026-10-12T08:00:00Z"</span></span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>Suno 表示，付费订阅期间创作并下载的歌曲可获得商业使用相关权益，但这种商业使用许可并不等于作品一定能获得所在地法律下的版权保护。</p>
+                <p>Suno 提供 Free、Pro 和 Premier 计划。免费版、付费版所含 Credits 与权益可能调整，应以 Suno 官方账户和价格页面显示为准。</p>
+                <p>这些规则适合帮助团队理解 Suno 面向创作者的权益，但应用自己的商业条款、上传规则和地区合规问题，仍应单独设计。</p>
+                <h2 id="一张图看懂可上线的架构"><a href="#一张图看懂可上线的架构" class="headerlink" title="一张图看懂可上线的架构"></a>一张图看懂可上线的架构</h2>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">┌──────────────┐</span><br><span class="line">│ Web &#x2F; App    │</span><br><span class="line">│ 创作与播放器 │</span><br><span class="line">└──────┬───────┘</span><br><span class="line">       │</span><br><span class="line">┌──────▼────────┐</span><br><span class="line">│ 业务 API       │</span><br><span class="line">│ 用户、项目、额度│</span><br><span class="line">└───┬────────┬──┘</span><br><span class="line">    │        │</span><br><span class="line">    │        └──────────────┐</span><br><span class="line">    │                       │</span><br><span class="line">┌───▼────────┐      ┌──────▼───────┐</span><br><span class="line">│ 任务队列    │      │ PostgreSQL   │</span><br><span class="line">│ 重试与补偿  │      │ 任务与流水   │</span><br><span class="line">└───┬────────┘      └──────────────┘</span><br><span class="line">    │</span><br><span class="line">┌───▼────────────────┐</span><br><span class="line">│ Ace Data Cloud     │</span><br><span class="line">│ Suno API &#x2F; MCP     │</span><br><span class="line">└───┬────────────────┘</span><br><span class="line">    │ 回调</span><br><span class="line">┌───▼───────────────┐</span><br><span class="line">│ 结果处理 Worker    │</span><br><span class="line">│ 保存音频、写状态   │</span><br><span class="line">└───┬───────────────┘</span><br><span class="line">    │</span><br><span class="line">┌───▼───────────────┐</span><br><span class="line">│ 对象存储与 CDN     │</span><br><span class="line">└───────────────────┘</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>这套架构并不复杂，但比“前端直接请求音乐接口”多解决了几件很关键的事：Token 不会暴露、任务不会丢失、额度有记录、文件能长期保存、失败也能补偿。</p>
+                <h2 id="真正影响用户留下来的，是生成之外的体验"><a href="#真正影响用户留下来的，是生成之外的体验" class="headerlink" title="真正影响用户留下来的，是生成之外的体验"></a>真正影响用户留下来的，是生成之外的体验</h2>
+                <p>Suno 应用最难的地方，通常不是音乐生成本身。</p>
+                <p>真正影响用户是否愿意留下来的，是等待过程中有没有安全感，失败后额度会不会消失，生成结果能不能继续改，历史作品能不能找回来，以及上传内容有没有清楚的权利边界。</p>
+                <p>把这些问题处理好，一个简单的生成页面才有机会成长为真正的音乐产品。</p>
+                <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2>
+                <ul>
+                  <li><a href="https://suno.com/pricing" target="_blank" rel="noopener">Suno 官方套餐</a></li>
+                  <li><a href="https://help.suno.com/en/articles/2417089" target="_blank" rel="noopener">Suno 订阅 Credits 说明</a></li>
+                  <li><a href="https://help.suno.com/en/articles/9601665" target="_blank" rel="noopener">Suno 付费订阅商业使用说明</a></li>
+                  <li><a href="https://platform.acedata.cloud/services/suno" target="_blank" rel="noopener">Ace Data Cloud Suno 服务</a></li>
+                  <li><a href="https://platform.acedata.cloud/documents/suno-audios" target="_blank" rel="noopener">Suno Audios Generation API</a></li>
+                  <li><a href="https://platform.acedata.cloud/documents/suno-audios-integration" target="_blank" rel="noopener">Suno 歌曲生成 API 集成指南</a></li>
+                  <li><a href="https://platform.acedata.cloud/documents/suno-upload" target="_blank" rel="noopener">Suno Upload API</a></li>
+                  <li><a href="https://platform.acedata.cloud/documents/claude-code-mcp-suno" target="_blank" rel="noopener">Claude Code 对接 Suno MCP</a></li>
+                </ul>
+                <h2 id="相关服务与使用入口"><a href="#相关服务与使用入口" class="headerlink" title="相关服务与使用入口"></a>相关服务与使用入口</h2>
+                <ul>
+                  <li><a href="https://studio.acedata.cloud/suno" target="_blank" rel="noopener">在 Studio 使用 Suno</a></li>
+                </ul>
+                <hr>
+                <p>本文同步自 <a href="https://platform.acedata.cloud/blog/suno-app-production-challenges-and-solutions?lang=zh-cn" target="_blank" rel="noopener">Ace Data Cloud 博客</a>。</p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4241518.html" rel="bookmark">用 Ace Data Cloud Studio 和 Suno 改编歌曲：动感流行版实录</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4381962.html" rel="bookmark">不懂编曲也能尝试歌曲改编：用 Ace Data Cloud Studio 接入 Suno</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/42390.html" rel="bookmark">Suno API 的申请及使用</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/42348.html" rel="bookmark">Suno API 的申请及使用</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4395059.html" rel="bookmark">2026 AI 变现指南：普通人、开发者和内容创作者分别怎么做？</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/Suno/" rel="tag"><i class="fa fa-tag"></i> Suno</a>
+                  <a href="/tags/AceDataCloud/" rel="tag"><i class="fa fa-tag"></i> AceDataCloud</a>
+                  <a href="/tags/AI-%E9%9F%B3%E4%B9%90%E5%BA%94%E7%94%A8/" rel="tag"><i class="fa fa-tag"></i> AI 音乐应用</a>
+                  <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag"><i class="fa fa-tag"></i> 系统架构</a>
+                  <a href="/tags/%E6%88%90%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag"><i class="fa fa-tag"></i> 成本控制</a>
+                  <a href="/tags/%E7%89%88%E6%9D%83%E5%90%88%E8%A7%84/" rel="tag"><i class="fa fa-tag"></i> 版权合规</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/4109026.html" rel="prev" title="公众号更新，少一点重复劳动：Ace Data Cloud Studio 自动化实操指南">
+                      <i class="fa fa-chevron-left"></i> 公众号更新，少一点重复劳动：Ace Data Cloud Studio 自动化实操指南 </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/4247308.html" rel="next" title="面向开发者和企业，怎样快速搭建自己的 AI API 平台？不用从零开发，也能拥有独立品牌"> 面向开发者和企业，怎样快速搭建自己的 AI API 平台？不用从零开发，也能拥有独立品牌 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#用户最先抱怨的，通常不是音质，而是“怎么还没好”"><span class="nav-number">1.</span> <span class="nav-text">用户最先抱怨的，通常不是音质，而是“怎么还没好”</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#用户说“做一首开心的歌”，系统未必知道他想要什么"><span class="nav-number">2.</span> <span class="nav-text">用户说“做一首开心的歌”，系统未必知道他想要什么</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#成本最怕的不是贵，而是不知道花到哪里去了"><span class="nav-number">3.</span> <span class="nav-text">成本最怕的不是贵，而是不知道花到哪里去了</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#音频链接拿到了，不代表文件就永远安全了"><span class="nav-number">4.</span> <span class="nav-text">音频链接拿到了，不代表文件就永远安全了</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#最容易被忽略的，往往是上传和版权"><span class="nav-number">5.</span> <span class="nav-text">最容易被忽略的，往往是上传和版权</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#一张图看懂可上线的架构"><span class="nav-number">6.</span> <span class="nav-text">一张图看懂可上线的架构</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#真正影响用户留下来的，是生成之外的体验"><span class="nav-number">7.</span> <span class="nav-text">真正影响用户留下来的，是生成之外的体验</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">8.</span> <span class="nav-text">参考链接</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#相关服务与使用入口"><span class="nav-number">9.</span> <span class="nav-text">相关服务与使用入口</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">964</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">46</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">431</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API-%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/">API 开发教程</a><span class="category-list-count">119</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/MCP-%E6%95%99%E7%A8%8B/">MCP 教程</a><span class="category-list-count">8</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">302</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%A7%E5%93%81%E6%8E%A8%E5%B9%BF/">产品推广</a><span class="category-list-count">41</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90/">产品推荐</a><span class="category-list-count">13</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">10</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a><span class="category-list-count">76</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">99</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 17px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/401/" style="font-size: 10px;">401</a> <a href="/tags/403/" style="font-size: 10px;">403</a> <a href="/tags/429/" style="font-size: 10px;">429</a> <a href="/tags/4K/" style="font-size: 10px;">4K</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI-API/" style="font-size: 11px;">AI API</a> <a href="/tags/AI-Agent/" style="font-size: 13px;">AI Agent</a> <a href="/tags/AI-Customer-Service/" style="font-size: 10px;">AI Customer Service</a> <a href="/tags/AI-%E5%86%85%E5%AE%B9%E5%B7%A5%E4%BD%9C%E6%B5%81/" style="font-size: 10px;">AI 内容工作流</a> <a href="/tags/AI-%E5%86%85%E5%AE%B9%E7%94%9F%E4%BA%A7/" style="font-size: 10px;">AI 内容生产</a> <a href="/tags/AI-%E5%8A%A9%E6%89%8B/" style="font-size: 10px;">AI 助手</a> <a href="/tags/AI-%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/" style="font-size: 11px;">AI 图像生成</a> <a href="/tags/AI-%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI 工具</a> <a href="/tags/AI-%E5%B7%A5%E5%85%B7%E7%AB%99/" style="font-size: 10px;">AI 工具站</a> <a href="/tags/AI-%E5%BB%BA%E7%AB%99/" style="font-size: 10px;">AI 建站</a> <a href="/tags/AI-%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI 编程</a> <a href="/tags/AI-%E7%BF%BB%E5%94%B1/" style="font-size: 10px;">AI 翻唱</a> <a href="/tags/AI-%E8%A7%86%E9%A2%91/" style="font-size: 11px;">AI 视频</a> <a href="/tags/AI-%E9%9F%B3%E4%B9%90/" style="font-size: 11px;">AI 音乐</a> <a href="/tags/AI-%E9%9F%B3%E4%B9%90%E5%BA%94%E7%94%A8/" style="font-size: 10px;">AI 音乐应用</a> <a href="/tags/AI%E5%88%9B%E4%BD%9C/" style="font-size: 10px;">AI创作</a> <a href="/tags/AI%E5%89%AF%E4%B8%9A/" style="font-size: 10px;">AI副业</a> <a href="/tags/AI%E5%8F%98%E7%8E%B0/" style="font-size: 10px;">AI变现</a> <a href="/tags/AI%E5%AE%89%E5%85%A8/" style="font-size: 10px;">AI安全</a> <a href="/tags/AI%E5%AE%9E%E6%88%98/" style="font-size: 10px;">AI实战</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/AI%E7%BF%BB%E5%94%B1/" style="font-size: 10px;">AI翻唱</a> <a href="/tags/AI%E8%A7%86%E9%A2%91/" style="font-size: 10px;">AI视频</a> <a href="/tags/AI%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" style="font-size: 10px;">AI视频生成</a> <a href="/tags/AI%E9%85%8D%E9%9F%B3/" style="font-size: 10px;">AI配音</a> <a href="/tags/API/" style="font-size: 16px;">API</a> <a href="/tags/API-Key/" style="font-size: 11px;">API Key</a> <a href="/tags/API-Platform/" style="font-size: 10px;">API Platform</a> <a href="/tags/Ace-Data-Cloud/" style="font-size: 15px;">Ace Data Cloud</a> <a href="/tags/Ace-Data-Cloud-Studio/" style="font-size: 14px;">Ace Data Cloud Studio</a> <a href="/tags/Ace-Data-Studio/" style="font-size: 11px;">Ace Data Studio</a> <a href="/tags/Ace-Gift-Card/" style="font-size: 10px;">Ace Gift Card</a> <a href="/tags/AceData-Cloud/" style="font-size: 19px;">AceData Cloud</a> <a href="/tags/AceData-Studio/" style="font-size: 11px;">AceData Studio</a> <a href="/tags/AceDataCloud/" style="font-size: 18px;">AceDataCloud</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 10px;">Audios</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Claude-Code/" style="font-size: 11px;">Claude Code</a> <a href="/tags/Codex/" style="font-size: 11px;">Codex</a> <a href="/tags/Codex-CLI/" style="font-size: 10px;">Codex CLI</a> <a href="/tags/Coding-Plan/" style="font-size: 10px;">Coding Plan</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Credits/" style="font-size: 10px;">Credits</a> <a href="/tags/David-Robinson/" style="font-size: 10px;">David Robinson</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FFmpeg/" style="font-size: 10px;">FFmpeg</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Fish-TTS/" style="font-size: 10px;">Fish TTS</a> <a href="/tags/Function-Calling/" style="font-size: 10px;">Function Calling</a> <a href="/tags/GEO/" style="font-size: 10px;">GEO</a> <a href="/tags/GIF/" style="font-size: 11px;">GIF</a> <a href="/tags/GLM/" style="font-size: 10px;">GLM</a> <a href="/tags/GPT-Image/" style="font-size: 11px;">GPT Image</a> <a href="/tags/GPT-Image-2/" style="font-size: 12px;">GPT Image 2</a> <a href="/tags/GPT-Image-2-5/" style="font-size: 10px;">GPT Image 2.5</a> <a href="/tags/GPT-Image-2-6/" style="font-size: 12px;">GPT Image 2.6</a> <a href="/tags/GPT-6/" style="font-size: 10px;">GPT-6</a> <a href="/tags/GPT-6-Astra/" style="font-size: 11px;">GPT-6 Astra</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 12px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 11px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 10px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/Kimi-Code/" style="font-size: 10px;">Kimi Code</a> <a href="/tags/Kling/" style="font-size: 10px;">Kling</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Lip-Sync/" style="font-size: 10px;">Lip Sync</a> <a href="/tags/MCP/" style="font-size: 12px;">MCP</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">4.4m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">66:38</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'e1438fc6667dfa92caee2336b948da5e',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>

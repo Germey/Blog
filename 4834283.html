@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta name="theme-color" content="#222">
+  <meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+  <script id="hexo-configurations">
+    var NexT = window.NexT ||
+    {};
+    var CONFIG = {
+      "hostname": "cuiqingcai.com",
+      "root": "/",
+      "scheme": "Pisces",
+      "version": "7.8.0",
+      "exturl": false,
+      "sidebar":
+      {
+        "position": "right",
+        "width": 360,
+        "display": "post",
+        "padding": 18,
+        "offset": 12,
+        "onmobile": false,
+        "widgets": [
+          {
+            "type": "image",
+            "name": "阿布云",
+            "enable": false,
+            "url": "https://www.abuyun.com/http-proxy/introduce.html",
+            "src": "https://cdn.cuiqingcai.com/88au8.jpg",
+            "width": "100%"
+      },
+          {
+            "type": "image",
+            "name": "爬虫书",
+            "url": "https://item.jd.com/13527222.html",
+            "src": "https://cdn.cuiqingcai.com/ei5og.jpg",
+            "width": "100%",
+            "enable": true
+      },
+          {
+            "type": "categories",
+            "name": "分类",
+            "enable": true
+      },
+          {
+            "type": "image",
+            "name": "IPIDEA",
+            "url": "http://www.ipidea.net/?utm-source=cqc&utm-keyword=?cqc",
+            "src": "https://cdn.cuiqingcai.com/0ywun.png",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "image",
+            "name": "Storm Proxies",
+            "src": "https://cdn.cuiqingcai.com/a2zad8.png",
+            "url": "https://www.stormproxies.cn/?keyword=jingmi",
+            "width": "100%",
+            "enable": false
+      },
+          {
+            "type": "friends",
+            "name": "友情链接",
+            "enable": true
+      },
+          {
+            "type": "hot",
+            "name": "猜你喜欢",
+            "enable": true
+      },
+          {
+            "type": "tags",
+            "name": "标签云",
+            "enable": true
+      }]
+      },
+      "copycode":
+      {
+        "enable": true,
+        "show_result": true,
+        "style": "mac"
+      },
+      "back2top":
+      {
+        "enable": true,
+        "sidebar": false,
+        "scrollpercent": true
+      },
+      "bookmark":
+      {
+        "enable": false,
+        "color": "#222",
+        "save": "auto"
+      },
+      "fancybox": false,
+      "mediumzoom": false,
+      "lazyload": false,
+      "pangu": true,
+      "comments":
+      {
+        "style": "tabs",
+        "active": "gitalk",
+        "storage": true,
+        "lazyload": false,
+        "nav": null,
+        "activeClass": "gitalk"
+      },
+      "algolia":
+      {
+        "hits":
+        {
+          "per_page": 10
+        },
+        "labels":
+        {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      },
+      "localsearch":
+      {
+        "enable": true,
+        "trigger": "auto",
+        "top_n_per_article": 10,
+        "unescape": false,
+        "preload": false
+      },
+      "motion":
+      {
+        "enable": false,
+        "async": false,
+        "transition":
+        {
+          "post_block": "bounceDownIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      "path": "search.xml"
+    };
+
+  </script>
+  <meta name="keywords" content="Python,AceDataCloud,GPT Image 2,GPT-6 Astra,皇室战争,提示词工程,AI实战">
+  <meta name="robots" content="index,follow">
+  <meta name="GOOGLEBOT" content="index,follow">
+  <meta name="author" content="静觅丨崔庆才的个人站点">
+  <meta name="description" content="以3.5费巨人防守反击卡组为例，完整展示需求约束、GPT-6 Astra结构化复核、Python费用校验、攻防方案和Image 2.0教学海报生成流程，构建可解释、可复现的AI策略工作流。">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="用 GPT-6 Astra 构建《皇室战争》基础卡组：从策略分析到 4K 教学海报">
+  <meta property="og:url" content="https://cuiqingcai.com/4834283.html">
+  <meta property="og:site_name" content="静觅">
+  <meta property="og:description" content="以3.5费巨人防守反击卡组为例，完整展示需求约束、GPT-6 Astra结构化复核、Python费用校验、攻防方案和Image 2.0教学海报生成流程，构建可解释、可复现的AI策略工作流。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://cdn.acedata.cloud/uploads/blog-covers/7cc10c15efe43c012e633f59ff1d772f6cd9a0e941ee4fd75bcc63c910a61de3.webp">
+  <meta property="article:published_time" content="2026-10-07T01:13:00.000Z">
+  <meta property="article:modified_time" content="2026-11-07T05:48:40.000Z">
+  <meta property="article:author" content="崔庆才">
+  <meta property="article:tag" content="Python">
+  <meta property="article:tag" content="AceDataCloud">
+  <meta property="article:tag" content="GPT Image 2">
+  <meta property="article:tag" content="GPT-6 Astra">
+  <meta property="article:tag" content="皇室战争">
+  <meta property="article:tag" content="提示词工程">
+  <meta property="article:tag" content="AI实战">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://cdn.acedata.cloud/uploads/blog-covers/7cc10c15efe43c012e633f59ff1d772f6cd9a0e941ee4fd75bcc63c910a61de3.webp">
+  <link rel="canonical" href="https://cuiqingcai.com/4834283.html">
+  <script id="page-configurations">
+    // https://hexo.io/docs/variables.html
+    CONFIG.page = {
+      sidebar: "",
+      isHome: false,
+      isPost: true,
+      lang: 'zh-CN'
+    };
+
+  </script>
+  <title>用 GPT-6 Astra 构建《皇室战争》基础卡组：从策略分析到 4K 教学海报 | 静觅</title>
+  <meta name="google-site-verification" content="p_bIcnvirkFzG2dYKuNDivKD8-STet5W7D-01woA2fc" />
+  <meta name="sogou_site_verification" content="kBOV53NQqT" />
+  <noscript>
+    <style>
+      .use-motion .brand,
+      .use-motion .menu-item,
+      .sidebar-inner,
+      .use-motion .post-block,
+      .use-motion .pagination,
+      .use-motion .comments,
+      .use-motion .post-header,
+      .use-motion .post-body,
+      .use-motion .collection-header
+      {
+        opacity: initial;
+      }
+
+      .use-motion .site-title,
+      .use-motion .site-subtitle
+      {
+        opacity: initial;
+        top: initial;
+      }
+
+      .use-motion .logo-line-before i
+      {
+        left: initial;
+      }
+
+      .use-motion .logo-line-after i
+      {
+        right: initial;
+      }
+
+    </style>
+  </noscript>
+  <link rel="alternate" href="/atom.xml" title="静觅" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-container">
+          <div class="site-nav-toggle">
+            <div class="toggle" aria-label="切换导航栏">
+              <span class="toggle-line toggle-line-first"></span>
+              <span class="toggle-line toggle-line-middle"></span>
+              <span class="toggle-line toggle-line-last"></span>
+            </div>
+          </div>
+          <div class="site-meta">
+            <a href="/" class="brand" rel="start">
+              <span class="logo-line-before"><i></i></span>
+              <h1 class="site-title">静觅 <span class="site-subtitle"> 崔庆才的个人站点 - Python爬虫教程 </span>
+              </h1>
+              <span class="logo-line-after"><i></i></span>
+            </a>
+          </div>
+          <div class="site-nav-right">
+            <div class="toggle popup-trigger">
+              <i class="fa fa-search fa-fw fa-lg"></i>
+            </div>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <ul id="menu" class="main-menu menu">
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">首页</a>
+            </li>
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">文章列表</a>
+            </li>
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">文章标签</a>
+            </li>
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">文章分类</a>
+            </li>
+            <li class="menu-item menu-item-about">
+              <a href="/about/" rel="section">关于博主</a>
+            </li>
+            <li class="menu-item menu-item-message">
+              <a href="/message/" rel="section">给我留言</a>
+            </li>
+            <li class="menu-item menu-item-search">
+              <a role="button" class="popup-trigger">搜索 </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="search-pop-overlay">
+          <div class="popup search-popup">
+            <div class="search-header">
+              <span class="search-icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+              </div>
+              <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+              </span>
+            </div>
+            <div id="search-result">
+              <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span>0%</span>
+    </div>
+    <div class="reading-progress-bar"></div>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div class="topbanner">
+            <a href="https://item.jd.com/13527222.html" target="_blank">
+              <img src="https://cdn.cuiqingcai.com/prwgs.png">
+            </a>
+          </div>
+          <div class="content post posts-expand">
+            <article itemscope itemtype="http://schema.org/Article" class="post-block single" lang="zh-CN">
+              <link itemprop="mainEntityOfPage" href="https://cuiqingcai.com/4834283.html">
+              <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <meta itemprop="image" content="/images/avatar.png">
+                <meta itemprop="name" content="崔庆才">
+                <meta itemprop="description" content="静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。">
+              </span>
+              <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="静觅">
+              </span>
+              <header class="post-header">
+                <h1 class="post-title" itemprop="name headline"> 用 GPT-6 Astra 构建《皇室战争》基础卡组：从策略分析到 4K 教学海报 </h1>
+                <div class="post-meta">
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-user"></i>
+                    </span>
+                    <span class="post-meta-item-text">作者</span>
+                    <span><a href="/authors/崔庆才" class="author" itemprop="url" rel="index">崔庆才</a></span>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-calendar"></i>
+                    </span>
+                    <span class="post-meta-item-text">发表于</span>
+                    <time title="创建时间：2026-10-07 09:13:00" itemprop="dateCreated datePublished" datetime="2026-10-07T09:13:00+08:00">2026-10-07</time>
+                  </span>
+                  <span class="post-meta-item">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-folder"></i>
+                    </span>
+                    <span class="post-meta-item-text">分类于</span>
+                    <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                      <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">技术教程</span></a>
+                    </span>
+                  </span>
+                  <span id="/4834283.html" class="post-meta-item leancloud_visitors" data-flag-title="用 GPT-6 Astra 构建《皇室战争》基础卡组：从策略分析到 4K 教学海报" title="阅读次数">
+                    <span class="post-meta-item-icon">
+                      <i class="fa fa-eye"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读次数：</span>
+                    <span class="leancloud-visitors-count"></span>
+                  </span>
+                  <span class="post-meta-item" title="本文字数">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-file-word"></i>
+                    </span>
+                    <span class="post-meta-item-text">本文字数：</span>
+                    <span>8.2k</span>
+                  </span>
+                  <span class="post-meta-item" title="阅读时长">
+                    <span class="post-meta-item-icon">
+                      <i class="far fa-clock"></i>
+                    </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                    <span>7 分钟</span>
+                  </span>
+                  <div class="post-description">以3.5费巨人防守反击卡组为例，完整展示需求约束、GPT-6 Astra结构化复核、Python费用校验、攻防方案和Image 2.0教学海报生成流程，构建可解释、可复现的AI策略工作流。</div>
+                </div>
+              </header>
+              <div class="post-body" itemprop="articleBody">
+                <div class="advertisements">
+                </div>
+                <p><img src="https://cdn.acedata.cloud/uploads/blog-covers/7cc10c15efe43c012e633f59ff1d772f6cd9a0e941ee4fd75bcc63c910a61de3.webp" alt="用GPT-6 Astra构建皇室战争卡组：AI策略分析与巨人防守反击的4K横版封面"></p>
+                <p>让 AI 推荐一套《皇室战争》卡组并不难。真正有价值的问题是：<strong>为什么选择这八张卡？它们如何互相配合？进攻和防守时应该怎样出牌？推荐结果又该如何验证？</strong></p>
+                <a id="more"></a>
+                <p>本文以一套平均圣水消耗为 <strong>3.5 费的巨人防守反击卡组</strong>为例，介绍如何把自然语言需求转化为结构化的策略分析，再通过代码校验和图像生成，得到一份可以理解、练习和迭代的教学方案。</p>
+                <p>整个流程不是让模型随口给出“最强卡组”，而是将工作拆成四部分：</p>
+                <p><strong>明确约束 → 分析卡组 → 校验结果 → 制作可视化教程。</strong></p>
+                <h2 id="一、先明确：我们希望-AI-解决什么问题？"><a href="#一、先明确：我们希望-AI-解决什么问题？" class="headerlink" title="一、先明确：我们希望 AI 解决什么问题？"></a>一、先明确：我们希望 AI 解决什么问题？</h2>
+                <p>“帮我配一套容易赢的卡组”看似明确，实际上缺少大量必要条件：玩家处于哪个竞技场？已经解锁哪些卡牌？卡牌等级是否接近？是否使用进化卡牌、英雄技能或特殊塔兵？玩家更熟悉快速轮转，还是防守反击？所谓“容易”，指操作简单，还是对特定对手优势明显？</p>
+                <p>如果这些信息没有提供，模型很容易给出一套理论上合理、实际却不适合玩家账号的阵容。因此，本案例先设置以下边界：</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>维度</th>
+                        <th>本次约束</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>卡牌选择</td>
+                        <td>优先基础、常见的普通与稀有卡牌</td>
+                      </tr>
+                      <tr>
+                        <td>卡牌形态</td>
+                        <td>普通形态，不依赖进化或英雄技能</td>
+                      </tr>
+                      <tr>
+                        <td>塔兵条件</td>
+                        <td>普通公主塔</td>
+                      </tr>
+                      <tr>
+                        <td>等级条件</td>
+                        <td>默认双方卡牌等级接近</td>
+                      </tr>
+                      <tr>
+                        <td>操作目标</td>
+                        <td>分工明确，适合学习</td>
+                      </tr>
+                      <tr>
+                        <td>战术方向</td>
+                        <td>防守成功后组织反击</td>
+                      </tr>
+                      <tr>
+                        <td>评价边界</td>
+                        <td>不宣称实时版本最强，不虚构胜率</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>这些约束决定了后续分析方向：我们寻找的是<strong>容易理解、职责互补的基础方案</strong>，而不是一套未经实战验证的“必胜公式”。</p>
+                <h2 id="二、让-GPT-6-Astra-负责分析，让程序负责校验"><a href="#二、让-GPT-6-Astra-负责分析，让程序负责校验" class="headerlink" title="二、让 GPT-6 Astra 负责分析，让程序负责校验"></a>二、让 GPT-6 Astra 负责分析，让程序负责校验</h2>
+                <p>本案例通过 <a href="https://platform.acedata.cloud/" target="_blank" rel="noopener">AceDataCloud</a> 的 Chat Completions 接口调用 GPT-6 Astra，请求中的模型标识为 <code>gpt-6-astra</code>。接口地址、认证方式与消息结构遵循<a href="https://platform.acedata.cloud/documents/openai-chat-completions-integration" target="_blank" rel="noopener">平台接入文档</a>；模型可用性与参数应以调用时的平台配置为准。这里使用的是平台提供的模型标识，不由此推断其他服务入口的可用性。</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>工具</th>
+                        <th>负责的工作</th>
+                        <th>不应承担的工作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>GPT-6 Astra</td>
+                        <td>解释卡牌分工、分析配合、组织攻防步骤</td>
+                        <td>代替真实对战数据证明胜率</td>
+                      </tr>
+                      <tr>
+                        <td>Python</td>
+                        <td>校验卡牌数量、重复项、费用与组合成本</td>
+                        <td>仅凭加法判断实战强弱</td>
+                      </tr>
+                      <tr>
+                        <td>GPT Image 2</td>
+                        <td>将战术方案转化为教学海报</td>
+                        <td>作为游戏机制的权威来源</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>还需要区分<strong>历史过程与复现方法</strong>：本案例的八张卡组已在前期分析中形成，随后实际调用 GPT-6 Astra 对它进行了结构化复核；并不是让 Astra 从完整卡池中搜索出全局最优解。教学海报则由 Image 2.0 生成。</p>
+                <p>这样记录过程，既便于复现，也避免把“模型参与了分析”夸大为“模型证明了最优”。</p>
+                <h2 id="三、提示词设计：从“推荐卡组”变成“约束下的推理”"><a href="#三、提示词设计：从“推荐卡组”变成“约束下的推理”" class="headerlink" title="三、提示词设计：从“推荐卡组”变成“约束下的推理”"></a>三、提示词设计：从“推荐卡组”变成“约束下的推理”</h2>
+                <h3 id="1-开放式组牌提示词"><a href="#1-开放式组牌提示词" class="headerlink" title="1. 开放式组牌提示词"></a>1. 开放式组牌提示词</h3>
+                <p>如果从自己的卡池开始，可以使用下面的模板：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">你是一名严谨的《皇室战争》教学分析助手。</span><br><span class="line"></span><br><span class="line">目标：</span><br><span class="line">从我提供的可用卡牌中，选择一套适合基础玩家的八张卡组。</span><br><span class="line"></span><br><span class="line">条件：</span><br><span class="line">1. 只使用我已解锁的卡牌。</span><br><span class="line">2. 不依赖进化或英雄技能。</span><br><span class="line">3. 默认普通公主塔，卡牌等级接近。</span><br><span class="line">4. 优先职责互补、操作简单、方便学习的体系。</span><br><span class="line">5. 必须说明主要拆塔手段、对空、清群和防守方式。</span><br><span class="line"></span><br><span class="line">输入：</span><br><span class="line">- 我的竞技场与杯数：……</span><br><span class="line">- 可用卡牌及等级：……</span><br><span class="line">- 常见对手：……</span><br><span class="line">- 我的操作偏好：……</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">- 八张卡牌及职责</span><br><span class="line">- 总费用与平均费用</span><br><span class="line">- 选择理由</span><br><span class="line">- 进攻与防守步骤</span><br><span class="line">- 明确的弱点和替换代价</span><br><span class="line"></span><br><span class="line">不得编造胜率。</span><br><span class="line">若没有实时资料，不得声称这是当前版本最强卡组。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>关键不是提示词有多长，而是有没有提供<strong>允许选择的范围、优化目标和必须承认的限制</strong>。</p>
+                <h3 id="2-本案例使用的复核提示词"><a href="#2-本案例使用的复核提示词" class="headerlink" title="2. 本案例使用的复核提示词"></a>2. 本案例使用的复核提示词</h3>
+                <p>为了检验已有方案，本次进一步收紧任务。下面是实际复核要求的整理版：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">请复核以下卡组，而不是重新寻找全卡池最优解：</span><br><span class="line"></span><br><span class="line">巨人5、迷你皮卡4、火枪手4、炸弹兵2、</span><br><span class="line">亡灵3、加农炮3、万箭齐发3、火球4。</span><br><span class="line"></span><br><span class="line">默认：</span><br><span class="line">卡等接近、普通公主塔、普通形态，</span><br><span class="line">无进化、无英雄技能。</span><br><span class="line"></span><br><span class="line">请返回一个有效的 json 对象，包含：</span><br><span class="line">deck、total_elixir、average_elixir、</span><br><span class="line">advantages、attack_steps、defense_cases、</span><br><span class="line">limitations、validation_note。</span><br><span class="line"></span><br><span class="line">要求：</span><br><span class="line">- 说明每张卡的职责。</span><br><span class="line">- 区分“利用防守残兵”和“免费获得单位”。</span><br><span class="line">- 不得把11费组合说成满10费即可立即全部部署。</span><br><span class="line">- 不承诺无伤防守。</span><br><span class="line">- 不提供没有来源的精确伤害或胜率。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>本次实际调用得到的核心结论是：卡组分工清楚，适合练习防守反击，但对空单位需要保护，推进阶段也必须保留应对另一侧进攻的资源。这属于<strong>基于给定机制的理论分析</strong>，并不等于模拟器测试或天梯统计。</p>
+                <h2 id="四、通过-API-获取结构化分析"><a href="#四、通过-API-获取结构化分析" class="headerlink" title="四、通过 API 获取结构化分析"></a>四、通过 API 获取结构化分析</h2>
+                <p><a href="https://platform.acedata.cloud/documents/openai-chat-completions" target="_blank" rel="noopener">Chat Completions 接口</a>使用 Bearer Token 认证，生成的文本可以从 <code>choices[0].message.content</code> 读取。</p>
+                <p>下面是一个精简的 Python 复现示例。运行前安装 <code>requests</code>，并在自己的运行环境中配置 <code>ACEDATACLOUD_API_KEY</code>。不要把密钥写进代码仓库或浏览器前端。实际案例通过 MCP 工具调用；以下代码演示对应的 HTTP 接入方式，并非声称这段脚本已在读者环境测试。</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">URL = <span class="string">"https://api.acedata.cloud/openai/chat/completions"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 本案例已核对的输入快照。</span></span><br><span class="line"><span class="comment"># 实际项目应维护版本化卡牌资料，不要依赖模型猜测费用。</span></span><br><span class="line">cards = [</span><br><span class="line">    &#123;<span class="string">"name"</span>: <span class="string">"巨人"</span>, <span class="string">"elixir"</span>: <span class="number">5</span>, <span class="string">"role"</span>: <span class="string">"只攻击建筑的高血量前排"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"name"</span>: <span class="string">"迷你皮卡"</span>, <span class="string">"elixir"</span>: <span class="number">4</span>, <span class="string">"role"</span>: <span class="string">"地面单体高伤"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"name"</span>: <span class="string">"火枪手"</span>, <span class="string">"elixir"</span>: <span class="number">4</span>, <span class="string">"role"</span>: <span class="string">"远程对地对空"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"name"</span>: <span class="string">"炸弹兵"</span>, <span class="string">"elixir"</span>: <span class="number">2</span>, <span class="string">"role"</span>: <span class="string">"地面范围伤害"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"name"</span>: <span class="string">"亡灵"</span>, <span class="string">"elixir"</span>: <span class="number">3</span>, <span class="string">"role"</span>: <span class="string">"空中部队，可对地对空"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"name"</span>: <span class="string">"加农炮"</span>, <span class="string">"elixir"</span>: <span class="number">3</span>, <span class="string">"role"</span>: <span class="string">"仅对地的防守建筑"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"name"</span>: <span class="string">"万箭齐发"</span>, <span class="string">"elixir"</span>: <span class="number">3</span>, <span class="string">"role"</span>: <span class="string">"清理脆皮群"</span>&#125;,</span><br><span class="line">    &#123;<span class="string">"name"</span>: <span class="string">"火球"</span>, <span class="string">"elixir"</span>: <span class="number">4</span>, <span class="string">"role"</span>: <span class="string">"范围伤害与补伤害"</span>&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">task = <span class="string">"""</span></span><br><span class="line"><span class="string">请复核输入卡组，返回有效的 json 对象。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">输出字段：</span></span><br><span class="line"><span class="string">deck（每项包含 name、elixir、role）、</span></span><br><span class="line"><span class="string">total_elixir、average_elixir、advantages、</span></span><br><span class="line"><span class="string">attack_steps、defense_cases、limitations、validation_note。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">默认卡等接近、普通公主塔、普通形态，无进化无英雄。</span></span><br><span class="line"><span class="string">这是已有卡组复核，不是全卡池最优搜索。</span></span><br><span class="line"><span class="string">没有实时对战数据，不得编造胜率、无伤承诺或精确伤害。</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line">response = requests.post(</span><br><span class="line">    URL,</span><br><span class="line">    headers=&#123;</span><br><span class="line">        <span class="string">"Authorization"</span>: <span class="string">f"Bearer <span class="subst">&#123;os.environ[<span class="string">'ACEDATACLOUD_API_KEY'</span>]&#125;</span>"</span>,</span><br><span class="line">        <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    json=&#123;</span><br><span class="line">        <span class="string">"model"</span>: <span class="string">"gpt-6-astra"</span>,</span><br><span class="line">        <span class="string">"messages"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">"role"</span>: <span class="string">"system"</span>,</span><br><span class="line">                <span class="string">"content"</span>: (</span><br><span class="line">                    <span class="string">"Return a valid json object. "</span></span><br><span class="line">                    <span class="string">"你是严谨的游戏教学助手，只基于给定事实分析。"</span></span><br><span class="line">                ),</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">"role"</span>: <span class="string">"user"</span>,</span><br><span class="line">                <span class="string">"content"</span>: task + <span class="string">"\n输入卡组：\n"</span></span><br><span class="line">                + json.dumps(cards, ensure_ascii=<span class="literal">False</span>),</span><br><span class="line">            &#125;,</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"response_format"</span>: &#123;<span class="string">"type"</span>: <span class="string">"json_object"</span>&#125;,</span><br><span class="line">        <span class="string">"max_tokens"</span>: <span class="number">2200</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    timeout=(<span class="number">10</span>, <span class="number">180</span>),</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">response.raise_for_status()</span><br><span class="line">body = response.json()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> body.get(<span class="string">"error"</span>):</span><br><span class="line">    <span class="keyword">raise</span> RuntimeError(body[<span class="string">"error"</span>])</span><br><span class="line"></span><br><span class="line">choice = body[<span class="string">"choices"</span>][<span class="number">0</span>]</span><br><span class="line"><span class="keyword">if</span> choice.get(<span class="string">"finish_reason"</span>) != <span class="string">"stop"</span>:</span><br><span class="line">    <span class="keyword">raise</span> RuntimeError(<span class="string">"输出未正常结束，请检查返回状态或调整输出预算"</span>)</span><br><span class="line"></span><br><span class="line">content = choice[<span class="string">"message"</span>].get(<span class="string">"content"</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> content:</span><br><span class="line">    <span class="keyword">raise</span> RuntimeError(<span class="string">"没有获得可解析的分析内容"</span>)</span><br><span class="line"></span><br><span class="line">result = json.loads(content)</span><br><span class="line">print(json.dumps(result, ensure_ascii=<span class="literal">False</span>, indent=<span class="number">2</span>))</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="一个实际遇到的接口细节"><a href="#一个实际遇到的接口细节" class="headerlink" title="一个实际遇到的接口细节"></a>一个实际遇到的接口细节</h3>
+                <p>本次调用中，首次 JSON 模式请求被服务端拒绝，错误提示要求输入消息包含 <code>json</code>。将英文指令 <code>Return a valid json object.</code> 明确加入消息后，请求成功。</p>
+                <p>这里不需要推断失败一定由大小写或其他因素造成。工程上更稳妥的处理是：明确要求输出 JSON，同时设置返回格式，检查结束状态，解析后继续验证字段和数值。</p>
+                <p><strong>能解析为 JSON，只说明语法成立，不代表游戏分析正确。</strong></p>
+                <h2 id="五、最终卡组：3-5-费巨人防守反击"><a href="#五、最终卡组：3-5-费巨人防守反击" class="headerlink" title="五、最终卡组：3.5 费巨人防守反击"></a>五、最终卡组：3.5 费巨人防守反击</h2>
+                <p>本次方案如下。费用来自对应卡牌资料，职责与配合则用于解释本套卡组的设计。</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>卡牌</th>
+                        <th style="text-align:right">圣水</th>
+                        <th>主要职责</th>
+                        <th>使用注意</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><a href="https://www.noff.gg/clash-royale/card/giant" target="_blank" rel="noopener">巨人</a></td>
+                        <td style="text-align:right">5</td>
+                        <td>承伤、推进、攻击建筑</td>
+                        <td>不负责清除敌方部队</td>
+                      </tr>
+                      <tr>
+                        <td><a href="https://www.noff.gg/clash-royale/card/mini-pekka" target="_blank" rel="noopener">迷你皮卡</a></td>
+                        <td style="text-align:right">4</td>
+                        <td>处理高血量地面目标</td>
+                        <td>容易被小兵围住或拉走</td>
+                      </tr>
+                      <tr>
+                        <td><a href="https://www.noff.gg/clash-royale/card/musketeer" target="_blank" rel="noopener">火枪手</a></td>
+                        <td style="text-align:right">4</td>
+                        <td>远程输出、主力对空</td>
+                        <td>需要保护，避免与其他后排扎堆</td>
+                      </tr>
+                      <tr>
+                        <td><a href="https://www.noff.gg/clash-royale/card/bomber" target="_blank" rel="noopener">炸弹兵</a></td>
+                        <td style="text-align:right">2</td>
+                        <td>清理地面群体</td>
+                        <td>不能对空</td>
+                      </tr>
+                      <tr>
+                        <td><a href="https://www.noff.gg/clash-royale/card/minions" target="_blank" rel="noopener">亡灵</a></td>
+                        <td style="text-align:right">3</td>
+                        <td>第二道对空、补充输出</td>
+                        <td>怕箭雨和范围伤害</td>
+                      </tr>
+                      <tr>
+                        <td><a href="https://www.noff.gg/clash-royale/card/cannon" target="_blank" rel="noopener">加农炮</a></td>
+                        <td style="text-align:right">3</td>
+                        <td>中场拉扯、辅助防守</td>
+                        <td>不能攻击空中单位</td>
+                      </tr>
+                      <tr>
+                        <td><a href="https://www.noff.gg/clash-royale/card/arrows" target="_blank" rel="noopener">万箭齐发</a></td>
+                        <td style="text-align:right">3</td>
+                        <td>清除脆皮群</td>
+                        <td>应针对实际目标使用</td>
+                      </tr>
+                      <tr>
+                        <td><a href="https://www.noff.gg/clash-royale/card/fireball" target="_blank" rel="noopener">火球</a></td>
+                        <td style="text-align:right">4</td>
+                        <td>打集中后排、补伤害</td>
+                        <td>不默认能秒杀同级火枪手</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>这套牌的价值不是单卡稀有度，而是职责互补：巨人提供主要拆塔压力，迷你皮卡处理地面威胁，炸弹兵清理干扰单体输出的小兵，火枪手与亡灵提供两个持续对空点，加农炮争取输出时间，两张法术负责清障与补伤害。</p>
+                <h3 id="用代码验证费用"><a href="#用代码验证费用" class="headerlink" title="用代码验证费用"></a>用代码验证费用</h3>
+                <p>不要只读取模型返回的 <code>average_elixir</code>。更可靠的方法是：<strong>用已核对的输入资料重新计算，并与模型输出交叉检查。</strong></p>
+                <p>把下面代码接在前面的示例之后：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">trusted_costs = &#123;card[<span class="string">"name"</span>]: card[<span class="string">"elixir"</span>] <span class="keyword">for</span> card <span class="keyword">in</span> cards&#125;</span><br><span class="line"></span><br><span class="line">deck = result[<span class="string">"deck"</span>]</span><br><span class="line">names = [card[<span class="string">"name"</span>] <span class="keyword">for</span> card <span class="keyword">in</span> deck]</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> len(names) != <span class="number">8</span> <span class="keyword">or</span> len(set(names)) != <span class="number">8</span>:</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">"卡组必须恰好包含8张不同卡牌"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> set(names) != set(trusted_costs):</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">"模型更改了本次要求复核的卡组"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> card <span class="keyword">in</span> deck:</span><br><span class="line">    <span class="keyword">if</span> card[<span class="string">"elixir"</span>] != trusted_costs[card[<span class="string">"name"</span>]]:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">f"费用不一致：<span class="subst">&#123;card[<span class="string">'name'</span>]&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">total = sum(trusted_costs[name] <span class="keyword">for</span> name <span class="keyword">in</span> names)</span><br><span class="line">average = total / len(names)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> result[<span class="string">"total_elixir"</span>] != total:</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">"模型返回的总费用不一致"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> abs(float(result[<span class="string">"average_elixir"</span>]) - average) &gt; <span class="number">1e-9</span>:</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">"模型返回的平均费用不一致"</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">f"总费用：<span class="subst">&#123;total&#125;</span>，平均费用：<span class="subst">&#123;average&#125;</span>"</span>)</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>本例的独立费用检查结果为：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">总费用：5 + 4 + 4 + 2 + 3 + 3 + 3 + 4 &#x3D; 28</span><br><span class="line">平均费用：28 ÷ 8 &#x3D; 3.5</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>还可以继续检查常用组合：</p>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>组合</th>
+                        <th style="text-align:right">总费用</th>
+                        <th>用途</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>巨人＋炸弹兵</td>
+                        <td style="text-align:right">7</td>
+                        <td>应对地面小兵的轻推进</td>
+                      </tr>
+                      <tr>
+                        <td>巨人＋火枪手</td>
+                        <td style="text-align:right">9</td>
+                        <td>有对空能力的常规推进</td>
+                      </tr>
+                      <tr>
+                        <td>迷你皮卡＋炸弹兵</td>
+                        <td style="text-align:right">6</td>
+                        <td>分别处理肉盾与地面小兵</td>
+                      </tr>
+                      <tr>
+                        <td>加农炮＋火枪手</td>
+                        <td style="text-align:right">7</td>
+                        <td>拉扯与远程输出</td>
+                      </tr>
+                      <tr>
+                        <td>巨人＋火枪手＋炸弹兵</td>
+                        <td style="text-align:right">11</td>
+                        <td>利用残兵或回费逐步形成完整推进</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>最后一项尤其值得注意：<strong>11 费组合不能在仅有 10 点圣水时立即全部部署</strong>。它更适合由防守存活的火枪手或炸弹兵，配合新部署的巨人形成，而不是把三张牌一次性堆出去。组合费用只是投入成本，并不证明能稳定赚费。</p>
+                <h2 id="六、将分析转化为能执行的攻防方案"><a href="#六、将分析转化为能执行的攻防方案" class="headerlink" title="六、将分析转化为能执行的攻防方案"></a>六、将分析转化为能执行的攻防方案</h2>
+                <h3 id="进攻：先守住，再把残兵变成压力"><a href="#进攻：先守住，再把残兵变成压力" class="headerlink" title="进攻：先守住，再把残兵变成压力"></a>进攻：先守住，再把残兵变成压力</h3>
+                <p>这套卡组的主线不是开局就投入巨人，而是：</p>
+                <ol>
+                  <li>用加农炮或部队处理敌方进攻。</li>
+                  <li>观察存活单位的血量、位置与当前费用。</li>
+                  <li>条件合适时，在残兵前方补巨人。</li>
+                  <li>看见对方解牌后，再决定补部队还是交法术。</li>
+                  <li>保留处理另一条路进攻的能力。</li>
+                </ol>
+                <p>例如，火枪手防守后仍然存活，在她过桥前部署巨人，让巨人先承受伤害，火枪手继续输出。这里的资源收益来自<strong>一张已付费单位同时参与防守和反击</strong>，而不是凭空获得了一张免费火枪手。</p>
+                <h3 id="防守：按威胁选择组件"><a href="#防守：按威胁选择组件" class="headerlink" title="防守：按威胁选择组件"></a>防守：按威胁选择组件</h3>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>对手威胁</th>
+                        <th>优先处理思路</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>野猪骑士等建筑目标单位</td>
+                        <td>及时用加农炮中场拉扯，视支援情况补牌</td>
+                      </tr>
+                      <tr>
+                        <td>高血量地面目标</td>
+                        <td>迷你皮卡配合塔输出，必要时先用建筑改变路径</td>
+                      </tr>
+                      <tr>
+                        <td>地面小兵群</td>
+                        <td>炸弹兵处理，或在合适时机使用万箭齐发</td>
+                      </tr>
+                      <tr>
+                        <td>空中进攻</td>
+                        <td>火枪手与亡灵分散部署，避免同时被范围伤害清除</td>
+                      </tr>
+                      <tr>
+                        <td>聚集的后排支援</td>
+                        <td>火球补伤害，再由部队接手</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>这些方案都依赖位置、等级、时机和敌方支援，不能理解为固定的无伤公式。加农炮虽然可吸引只攻击建筑的空中单位，但自身不能对空输出。</p>
+                <h3 id="必须保留的弱点说明"><a href="#必须保留的弱点说明" class="headerlink" title="必须保留的弱点说明"></a>必须保留的弱点说明</h3>
+                <p>一份合格的 AI 策略输出，应该明确告诉玩家什么时候会难打：</p>
+                <ul>
+                  <li><strong>火枪手和亡灵被处理后，对空压力会明显增加。</strong></li>
+                  <li><strong>本套没有重置类法术，面对地狱系防守时不能盲目堆兵。</strong></li>
+                  <li><strong>巨人投入后，另一条路可能成为对方施压的目标。</strong></li>
+                  <li><strong>3.5 费不等于极限速转，关键防守牌交错时，未必能及时回手。</strong></li>
+                </ul>
+                <p>因此，模型提供的是练习起点，后续仍应结合自己的卡等、常见对手和对战记录调整。</p>
+                <h2 id="七、把战术方案生成-4K-教学海报"><a href="#七、把战术方案生成-4K-教学海报" class="headerlink" title="七、把战术方案生成 4K 教学海报"></a>七、把战术方案生成 4K 教学海报</h2>
+                <p>文字适合解释原因，图片则更适合展示站位关系和出牌顺序。本案例没有采用八张大卡牌机械排列的方式，而是将画面设计成三个相连的教学阶段：</p>
+                <p><strong>低费防守 → 巨人顶前、残兵跟进 → 看清解牌、补充支援。</strong></p>
+                <p>下图是本次由 Image 2.0 生成的教学海报。图片文件的尺寸经检查为 <strong>3840×2160，16:9</strong>。</p>
+                <p><img src="https://cdn.acedata2.cloud/gpt-image/b3c2d50039f8f3bc36c30e023716fa562e7e8cc5f33c71209e30eed363b0c114.png" alt="3.5费巨人防守反击教学海报：八张基础卡牌、费用与防守反击步骤"></p>
+                <p><em>图：AI 生成的战术教学示意，不是游戏实战截图，也不用于表达精确射程与逐格站位。</em></p>
+                <h3 id="提示词要写“教学关系”，不只是“画面风格”"><a href="#提示词要写“教学关系”，不只是“画面风格”" class="headerlink" title="提示词要写“教学关系”，不只是“画面风格”"></a>提示词要写“教学关系”，不只是“画面风格”</h3>
+                <p>“4K、细节丰富、电影感”只能描述视觉方向，不能保证生成结果有教学价值。因此，提示词应同时包含：</p>
+                <ul>
+                  <li><strong>角色关系</strong>：巨人在前，火枪手与炸弹兵在后。</li>
+                  <li><strong>阶段关系</strong>：左侧防守，右侧反击，用箭头连接。</li>
+                  <li><strong>机制约束</strong>：巨人只攻击建筑；加农炮与炸弹兵不能对空。</li>
+                  <li><strong>信息层级</strong>：标题、三步教程、卡组列表、费用、注意事项。</li>
+                  <li><strong>边界说明</strong>：普通形态教学，效果受卡等和操作影响。</li>
+                </ul>
+                <p>下面是适合复现思路的精简提示词，并非原始长提示词的逐字记录：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">制作一张16:9横版、3840×2160的中文战术教学海报。</span><br><span class="line"></span><br><span class="line">主题：皇室战争“3.5费巨人防守反击”。</span><br><span class="line">画面不是卡牌网格，而是生动的3D卡通竞技场教学场景。</span><br><span class="line"></span><br><span class="line">左侧：加农炮中场拉扯，迷你皮卡处理地面肉盾，</span><br><span class="line">火枪手对空，炸弹兵清理地面小兵。</span><br><span class="line"></span><br><span class="line">右侧：巨人在最前方向敌方建筑推进，</span><br><span class="line">防守存活的火枪手和炸弹兵在后方分散跟进，</span><br><span class="line">亡灵提供空中支援。</span><br><span class="line"></span><br><span class="line">用清晰箭头表达：</span><br><span class="line">低费防守 → 补巨人反击 → 看清解牌再补支援。</span><br><span class="line"></span><br><span class="line">底部展示八张卡及费用：</span><br><span class="line">巨人5、迷你皮卡4、火枪手4、炸弹兵2、</span><br><span class="line">亡灵3、加农炮3、万箭齐发3、火球4。</span><br><span class="line"></span><br><span class="line">标注：</span><br><span class="line">平均圣水3.5；</span><br><span class="line">巨人＋炸弹兵＝7费；</span><br><span class="line">巨人＋火枪手＝9费。</span><br><span class="line"></span><br><span class="line">提醒：</span><br><span class="line">保留防守圣水、后排分散站位、先看解牌再交法术。</span><br><span class="line"></span><br><span class="line">确保中文清晰、战术指向准确。</span><br><span class="line">不要画巨人攻击部队，不要画加农炮或炸弹兵攻击空中。</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="图像接口配置"><a href="#图像接口配置" class="headerlink" title="图像接口配置"></a>图像接口配置</h3>
+                <p><a href="https://platform.acedata.cloud/documents/openai-images-generations-integration" target="_blank" rel="noopener">图像生成接口文档</a>支持通过 <code>size</code> 指定像素尺寸，16:9 的 4K 规格为 <code>3840x2160</code>；仅在提示词里写“4K”，不能替代尺寸参数。</p>
+                <p>请求体的核心配置如下，其中 <code>prompt</code> 应替换为完整的海报描述：</p>
+                <figure class="highlight json">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"model"</span>: <span class="string">"gpt-image-2"</span>,</span><br><span class="line">  <span class="attr">"prompt"</span>: <span class="string">"此处填写完整的战术教学海报提示词"</span>,</span><br><span class="line">  <span class="attr">"size"</span>: <span class="string">"3840x2160"</span>,</span><br><span class="line">  <span class="attr">"quality"</span>: <span class="string">"high"</span>,</span><br><span class="line">  <span class="attr">"n"</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"output_format"</span>: <span class="string">"png"</span>,</span><br><span class="line">  <span class="attr">"response_format"</span>: <span class="string">"url"</span></span><br><span class="line">&#125;</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>对应接口为：</p>
+                <figure class="highlight plain">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <pre><span class="line">1</span><br></pre>
+                      </td>
+                      <td class="code">
+                        <pre><span class="line">POST https:&#x2F;&#x2F;api.acedata.cloud&#x2F;openai&#x2F;images&#x2F;generations</span><br></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <h3 id="实际生成过程中的失败与切换"><a href="#实际生成过程中的失败与切换" class="headerlink" title="实际生成过程中的失败与切换"></a>实际生成过程中的失败与切换</h3>
+                <p>本次最初使用 Image 2.5，但任务以明确的上游服务错误结束，没有产出图片。随后在确认切换后，改用 <code>gpt-image-2</code>，保留 4K 和 16:9 规格，最终生成成功。</p>
+                <p>这里有一个重要的工程原则：</p>
+                <blockquote>
+                  <p><strong>任务还在运行时，查询同一个任务；任务明确失败后，再决定是否重试或切换模型。</strong></p>
+                </blockquote>
+                <p>本次使用的 MCP 图像工具以异步任务方式执行：提交后获取任务 ID，再查询至成功或失败。直接调用 HTTP 接口时，则应按对应文档处理同步返回或异步回调，不要把不同调用方式的返回结构混用。</p>
+                <h2 id="八、如何进一步做成可持续迭代的工具？"><a href="#八、如何进一步做成可持续迭代的工具？" class="headerlink" title="八、如何进一步做成可持续迭代的工具？"></a>八、如何进一步做成可持续迭代的工具？</h2>
+                <p>如果要将这个案例扩展为真正的卡组助手，可以增加三层能力。</p>
+                <h3 id="1-版本化资料"><a href="#1-版本化资料" class="headerlink" title="1. 版本化资料"></a>1. 版本化资料</h3>
+                <p>记录卡牌名称、费用、攻击目标、等级与资料更新时间。对于伤害、血量、射程等容易变化的数据，使用有来源的资料，而不是依赖模型记忆。</p>
+                <h3 id="2-用户卡池约束"><a href="#2-用户卡池约束" class="headerlink" title="2. 用户卡池约束"></a>2. 用户卡池约束</h3>
+                <p>把用户已解锁卡牌和等级作为输入。等级差距很大时，理论搭配合理不一定意味着实际表现更好。</p>
+                <h3 id="3-对战反馈"><a href="#3-对战反馈" class="headerlink" title="3. 对战反馈"></a>3. 对战反馈</h3>
+                <p>持续记录对手主要进攻手段、自己在哪个阶段失去圣水优势、关键对空牌是否交错，以及问题来自卡组结构还是摆位与时机。</p>
+                <p>再让模型根据这些记录提出<strong>一次只改一两个变量</strong>的调整建议，而不是每输一局就换整套卡组。</p>
+                <p>海报也应进行独立验收：检查八张牌是否完整、中文是否正确、费用是否一致、箭头是否指向正确目标。<strong>生成成功不等于内容验收通过，分辨率正确也不等于战术图示完全准确。</strong></p>
+                <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2>
+                <p>这个案例展示的不是“AI 自动算出最强卡组”，而是一套更可靠的使用方法：</p>
+                <p><strong>用约束限定任务，用 GPT-6 Astra 解释配合，用代码验证数值，用 Image 2.0 展示战术，再用实战反馈修正方案。</strong></p>
+                <p>最终得到的巨人卡组，核心思路可以浓缩为一句话：</p>
+                <blockquote>
+                  <p><strong>加农炮拉扯，迷你皮卡处理肉盾，火枪手对空，炸弹兵清群；守住以后，让巨人顶到前面。</strong></p>
+                </blockquote>
+                <p>比起只拿到八张卡的名字，这种方式更有价值的地方在于：玩家不仅知道“带什么”，也能理解“为什么这样带，以及什么时候应该这样打”。</p>
+                <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2>
+                <ul>
+                  <li><a href="https://platform.acedata.cloud/documents/openai-chat-completions-integration" target="_blank" rel="noopener">Chat Completions API 集成指南</a></li>
+                  <li><a href="https://platform.acedata.cloud/documents/openai-chat-completions" target="_blank" rel="noopener">Chat Completions API 参数文档</a></li>
+                  <li><a href="https://platform.acedata.cloud/documents/openai-images-generations-integration" target="_blank" rel="noopener">GPT Image 图像生成集成指南</a></li>
+                  <li><a href="https://platform.acedata.cloud/documents/openai-images-generations" target="_blank" rel="noopener">图像生成 API 参数文档</a></li>
+                  <li>卡牌费用参考见卡组表中各卡牌资料链接；实战数值与可用功能以当前游戏内信息为准。</li>
+                </ul>
+                <p><em>本文为 AI 辅助策略与开发实践案例，非 Supercell 官方攻略。封面与教学海报为 AI 生成示意图；《皇室战争》相关角色与商标归相应权利人所有。</em></p>
+                <h2 id="相关服务与使用入口"><a href="#相关服务与使用入口" class="headerlink" title="相关服务与使用入口"></a>相关服务与使用入口</h2>
+                <ul>
+                  <li><a href="https://platform.acedata.cloud/services/openai" target="_blank" rel="noopener">OpenAI 服务</a></li>
+                  <li><a href="https://studio.acedata.cloud/chatgpt/conversations" target="_blank" rel="noopener">在 Studio 使用 Studio</a></li>
+                  <li><a href="https://studio.acedata.cloud/openai-image" target="_blank" rel="noopener">在 Studio 使用 GPT Image</a></li>
+                </ul>
+                <hr>
+                <p>本文同步自 <a href="https://platform.acedata.cloud/blog/gpt-6-astra-clash-royale-deck-4k-tutorial?lang=zh-cn" target="_blank" rel="noopener">Ace Data Cloud 博客</a>。</p>
+              </div>
+              <div class="popular-posts-header">相关文章</div>
+              <ul class="popular-posts">
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4055938.html" rel="bookmark">不想维护搜索爬虫，怎么每天跟踪关键词排名？用 SERP API 做一个 SEO 监测脚本</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4815066.html" rel="bookmark">Ace Data Cloud Studio 对战 WorkBuddy：谁更懂《你是一切》的封面创意？</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4240470.html" rel="bookmark">GPT-6 Astra API：让深度推理与图片理解进入可控成本区间</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4089164.html" rel="bookmark">4K 不该是加价项：GPT Image 2 约 ¥0.075/张，1K、2K、4K 同价</a></div>
+                </li>
+                <li class="popular-posts-item">
+                  <div class="popular-posts-title"><a href="/4320.html" rel="bookmark">Python3爬虫视频学习教程</a></div>
+                </li>
+              </ul>
+              <div class="reward-container">
+                <div></div>
+                <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';"> 打赏 </button>
+                <div id="qr" style="display: none;">
+                  <div style="display: inline-block;">
+                    <img src="/images/wechatpay.jpg" alt="崔庆才 微信支付">
+                    <p>微信支付</p>
+                  </div>
+                  <div style="display: inline-block;">
+                    <img src="/images/alipay.jpg" alt="崔庆才 支付宝">
+                    <p>支付宝</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="post-footer">
+                <div class="post-tags">
+                  <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+                  <a href="/tags/AceDataCloud/" rel="tag"><i class="fa fa-tag"></i> AceDataCloud</a>
+                  <a href="/tags/GPT-Image-2/" rel="tag"><i class="fa fa-tag"></i> GPT Image 2</a>
+                  <a href="/tags/GPT-6-Astra/" rel="tag"><i class="fa fa-tag"></i> GPT-6 Astra</a>
+                  <a href="/tags/%E7%9A%87%E5%AE%A4%E6%88%98%E4%BA%89/" rel="tag"><i class="fa fa-tag"></i> 皇室战争</a>
+                  <a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 提示词工程</a>
+                  <a href="/tags/AI%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> AI实战</a>
+                </div>
+                <div class="post-nav">
+                  <div class="post-nav-item">
+                    <a href="/4151208.html" rel="prev" title="写了12次安全报告之后，他离开了OpenAI：谁来确保警报响起后，AI真的会停下来？">
+                      <i class="fa fa-chevron-left"></i> 写了12次安全报告之后，他离开了OpenAI：谁来确保警报响起后，AI真的会停下来？ </a>
+                  </div>
+                  <div class="post-nav-item">
+                    <a href="/4663330.html" rel="next" title="Ace Data Cloud Studio 多平台内容创作指南：从初稿到发布"> Ace Data Cloud Studio 多平台内容创作指南：从初稿到发布 <i class="fa fa-chevron-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </footer>
+            </article>
+          </div>
+          <div class="comments" id="gitalk-container"></div>
+          <script>
+            window.addEventListener('tabs:register', () =>
+            {
+              let
+              {
+                activeClass
+              } = CONFIG.comments;
+              if (CONFIG.comments.storage)
+              {
+                activeClass = localStorage.getItem('comments_active') || activeClass;
+              }
+              if (activeClass)
+              {
+                let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+                if (activeTab)
+                {
+                  activeTab.click();
+                }
+              }
+            });
+            if (CONFIG.comments.storage)
+            {
+              window.addEventListener('tabs:click', event =>
+              {
+                if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+                let commentClass = event.target.classList[1];
+                localStorage.setItem('comments_active', commentClass);
+              });
+            }
+
+          </script>
+        </div>
+        <div class="toggle sidebar-toggle">
+          <span class="toggle-line toggle-line-first"></span>
+          <span class="toggle-line toggle-line-middle"></span>
+          <span class="toggle-line toggle-line-last"></span>
+        </div>
+        <aside class="sidebar">
+          <div class="sidebar-inner">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc"> 文章目录 </li>
+              <li class="sidebar-nav-overview"> 站点概览 </li>
+            </ul>
+            <!--noindex-->
+            <div class="post-toc-wrap sidebar-panel">
+              <div class="post-toc motion-element">
+                <ol class="nav">
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#一、先明确：我们希望-AI-解决什么问题？"><span class="nav-number">1.</span> <span class="nav-text">一、先明确：我们希望 AI 解决什么问题？</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#二、让-GPT-6-Astra-负责分析，让程序负责校验"><span class="nav-number">2.</span> <span class="nav-text">二、让 GPT-6 Astra 负责分析，让程序负责校验</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#三、提示词设计：从“推荐卡组”变成“约束下的推理”"><span class="nav-number">3.</span> <span class="nav-text">三、提示词设计：从“推荐卡组”变成“约束下的推理”</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#1-开放式组牌提示词"><span class="nav-number">3.1.</span> <span class="nav-text">1. 开放式组牌提示词</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#2-本案例使用的复核提示词"><span class="nav-number">3.2.</span> <span class="nav-text">2. 本案例使用的复核提示词</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#四、通过-API-获取结构化分析"><span class="nav-number">4.</span> <span class="nav-text">四、通过 API 获取结构化分析</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#一个实际遇到的接口细节"><span class="nav-number">4.1.</span> <span class="nav-text">一个实际遇到的接口细节</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#五、最终卡组：3-5-费巨人防守反击"><span class="nav-number">5.</span> <span class="nav-text">五、最终卡组：3.5 费巨人防守反击</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#用代码验证费用"><span class="nav-number">5.1.</span> <span class="nav-text">用代码验证费用</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#六、将分析转化为能执行的攻防方案"><span class="nav-number">6.</span> <span class="nav-text">六、将分析转化为能执行的攻防方案</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#进攻：先守住，再把残兵变成压力"><span class="nav-number">6.1.</span> <span class="nav-text">进攻：先守住，再把残兵变成压力</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#防守：按威胁选择组件"><span class="nav-number">6.2.</span> <span class="nav-text">防守：按威胁选择组件</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#必须保留的弱点说明"><span class="nav-number">6.3.</span> <span class="nav-text">必须保留的弱点说明</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#七、把战术方案生成-4K-教学海报"><span class="nav-number">7.</span> <span class="nav-text">七、把战术方案生成 4K 教学海报</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#提示词要写“教学关系”，不只是“画面风格”"><span class="nav-number">7.1.</span> <span class="nav-text">提示词要写“教学关系”，不只是“画面风格”</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#图像接口配置"><span class="nav-number">7.2.</span> <span class="nav-text">图像接口配置</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#实际生成过程中的失败与切换"><span class="nav-number">7.3.</span> <span class="nav-text">实际生成过程中的失败与切换</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#八、如何进一步做成可持续迭代的工具？"><span class="nav-number">8.</span> <span class="nav-text">八、如何进一步做成可持续迭代的工具？</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#1-版本化资料"><span class="nav-number">8.1.</span> <span class="nav-text">1. 版本化资料</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#2-用户卡池约束"><span class="nav-number">8.2.</span> <span class="nav-text">2. 用户卡池约束</span></a></li>
+                      <li class="nav-item nav-level-3"><a class="nav-link" href="#3-对战反馈"><span class="nav-number">8.3.</span> <span class="nav-text">3. 对战反馈</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">9.</span> <span class="nav-text">结语</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">10.</span> <span class="nav-text">参考资料</span></a></li>
+                  <li class="nav-item nav-level-2"><a class="nav-link" href="#相关服务与使用入口"><span class="nav-number">11.</span> <span class="nav-text">相关服务与使用入口</span></a></li>
+                </ol>
+              </div>
+            </div>
+            <!--/noindex-->
+            <div class="site-overview-wrap sidebar-panel">
+              <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img class="site-author-image" itemprop="image" alt="崔庆才" src="/images/avatar.png">
+                <p class="site-author-name" itemprop="name">崔庆才</p>
+                <div class="site-description" itemprop="description">静觅丨崔庆才的个人站点专业为您提供爬虫教程,爬虫,Python,Python爬虫,Python爬虫教程,爬虫书的相关信息，想要了解更多详情，请联系我们。</div>
+              </div>
+              <div class="site-state-wrap motion-element">
+                <nav class="site-state">
+                  <div class="site-state-item site-state-posts">
+                    <a href="/archives/">
+                      <span class="site-state-item-count">964</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/">
+                      <span class="site-state-item-count">46</span>
+                      <span class="site-state-item-name">分类</span></a>
+                  </div>
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/">
+                      <span class="site-state-item-count">431</span>
+                      <span class="site-state-item-name">标签</span></a>
+                  </div>
+                </nav>
+              </div>
+              <div class="links-of-author motion-element">
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Germey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Germey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="mailto:cqc@cuiqingcai.com.com" title="邮件 → mailto:cqc@cuiqingcai.com.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>邮件</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/cuiqingcai" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;cuiqingcai" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+                </span>
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/Germey" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;Germey" rel="noopener" target="_blank"><i class="fa fa-magic fa-fw"></i>知乎</a>
+                </span>
+              </div>
+            </div>
+            <div style=" width: 100%;" class="sidebar-panel sidebar-panel-image sidebar-panel-active">
+              <a href="https://item.jd.com/13527222.html" target="_blank" rel="noopener">
+                <img src="https://cdn.cuiqingcai.com/ei5og.jpg" style=" width: 100%;">
+              </a>
+            </div>
+            <div class="sidebar-panel sidebar-panel-categories sidebar-panel-active">
+              <h4 class="name"> 分类 </h4>
+              <div class="content">
+                <ul class="category-list">
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API/">API</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/API-%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/">API 开发教程</a><span class="category-list-count">119</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">23</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Claude/">Claude</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Google-SERP/">Google SERP</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">5</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">14</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/MCP-%E6%95%99%E7%A8%8B/">MCP 教程</a><span class="category-list-count">8</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Midjourney/">Midjourney</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nano-Banana/">Nano Banana</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Net/">Net</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Nexior/">Nexior</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">40</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">27</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Paper/">Paper</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Producer/">Producer</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">302</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDance/">SeeDance</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/SeeDream/">SeeDream</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Sora/">Sora</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/TypeScript/">TypeScript</a><span class="category-list-count">2</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/Veo/">Veo</a><span class="category-list-count">3</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/nano-banana/">nano-banana</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%B1%95%E7%A4%BA/">个人展示</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%97%A5%E8%AE%B0/">个人日记</a><span class="category-list-count">9</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a><span class="category-list-count">21</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%A7%E5%93%81%E6%8E%A8%E5%B9%BF/">产品推广</a><span class="category-list-count">41</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90/">产品推荐</a><span class="category-list-count">13</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">10</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">安装配置</a><span class="category-list-count">59</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a><span class="category-list-count">76</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a><span class="category-list-count">99</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%88%AC%E8%99%AB/">爬虫</a><span class="category-list-count">4</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E7%AC%94%E8%AE%B0/">生活笔记</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A6%8F%E5%88%A9%E4%B8%93%E5%8C%BA/">福利专区</a><span class="category-list-count">6</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E4%BD%8D%E6%8E%A8%E8%8D%90/">职位推荐</a><span class="category-list-count">1</span></li>
+                  <li class="category-list-item"><a class="category-list-link" href="/categories/%E8%89%BA%E6%9C%AF%E4%BA%8C%E7%BB%B4%E7%A0%81/">艺术二维码</a><span class="category-list-count">1</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="sidebar-panel sidebar-panel-friends sidebar-panel-active">
+              <h4 class="name"> 友情链接 </h4>
+              <ul class="friends">
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/j2dub.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.findhao.net/" target="_blank" rel="noopener">FindHao</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/6apxu.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.51dev.com/" target="_blank" rel="noopener">IT技术社区</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/bqlbs.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.urselect.com/" target="_blank" rel="noopener">优社电商</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/8s88c.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yuanrenxue.com/" target="_blank" rel="noopener">猿人学</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/2wgg5.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.yunlifang.cn/" target="_blank" rel="noopener">云立方</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="http://qianxunclub.com/favicon.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://qianxunclub.com/" target="_blank" rel="noopener">千寻啊千寻</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/0044u.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://kodcloud.com/" target="_blank" rel="noopener">可道云</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/ygnpn.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.kunkundashen.cn/" target="_blank" rel="noopener">坤坤大神</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/x714o.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.hubwiz.com/" target="_blank" rel="noopener">汇智网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/44hxf.png">
+                  </span>
+                  <span class="link">
+                    <a href="http://redstonewill.com/" target="_blank" rel="noopener">红色石头</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/wkaus.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://zhaoshuai.me/" target="_blank" rel="noopener">碎念</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/pgo0r.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.chenwenguan.com/" target="_blank" rel="noopener">陈文管的博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/kk82a.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.lxlinux.net/" target="_blank" rel="noopener">良许Linux教程网</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/lj0t2.jpg">
+                  </span>
+                  <span class="link">
+                    <a href="https://tanqingbo.cn/" target="_blank" rel="noopener">IT码农</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/i8cdr.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://junyiseo.com/" target="_blank" rel="noopener">均益个人博客</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://cdn.cuiqingcai.com/chwv2.png">
+                  </span>
+                  <span class="link">
+                    <a href="https://brucedone.com/" target="_blank" rel="noopener">大鱼的鱼塘</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://www.91vps.com/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="http://www.91vps.com/" target="_blank" rel="noopener">91VPS</a>
+                  </span>
+                </li>
+                <li class="friend">
+                  <span class="logo">
+                    <img src="https://webpage.qidian.qq.com/qidian/chatv3-gray/favicon.ico">
+                  </span>
+                  <span class="link">
+                    <a href="https://www.qg.net/" target="_blank" rel="noopener">青果网络</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-panel sidebar-panel-tags sidebar-panel-active">
+              <h4 class="name"> 标签云 </h4>
+              <div class="content">
+                <a href="/tags/2022/" style="font-size: 17px;">2022</a> <a href="/tags/2048/" style="font-size: 10px;">2048</a> <a href="/tags/401/" style="font-size: 10px;">401</a> <a href="/tags/403/" style="font-size: 10px;">403</a> <a href="/tags/429/" style="font-size: 10px;">429</a> <a href="/tags/4K/" style="font-size: 10px;">4K</a> <a href="/tags/ACE-Data/" style="font-size: 13px;">ACE Data</a> <a href="/tags/ADSL/" style="font-size: 10px;">ADSL</a> <a href="/tags/AI/" style="font-size: 20px;">AI</a> <a href="/tags/AI-API/" style="font-size: 11px;">AI API</a> <a href="/tags/AI-Agent/" style="font-size: 13px;">AI Agent</a> <a href="/tags/AI-Customer-Service/" style="font-size: 10px;">AI Customer Service</a> <a href="/tags/AI-%E5%86%85%E5%AE%B9%E5%B7%A5%E4%BD%9C%E6%B5%81/" style="font-size: 10px;">AI 内容工作流</a> <a href="/tags/AI-%E5%86%85%E5%AE%B9%E7%94%9F%E4%BA%A7/" style="font-size: 10px;">AI 内容生产</a> <a href="/tags/AI-%E5%8A%A9%E6%89%8B/" style="font-size: 10px;">AI 助手</a> <a href="/tags/AI-%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/" style="font-size: 11px;">AI 图像生成</a> <a href="/tags/AI-%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">AI 工具</a> <a href="/tags/AI-%E5%B7%A5%E5%85%B7%E7%AB%99/" style="font-size: 10px;">AI 工具站</a> <a href="/tags/AI-%E5%BB%BA%E7%AB%99/" style="font-size: 10px;">AI 建站</a> <a href="/tags/AI-%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI 编程</a> <a href="/tags/AI-%E7%BF%BB%E5%94%B1/" style="font-size: 10px;">AI 翻唱</a> <a href="/tags/AI-%E8%A7%86%E9%A2%91/" style="font-size: 11px;">AI 视频</a> <a href="/tags/AI-%E9%9F%B3%E4%B9%90/" style="font-size: 11px;">AI 音乐</a> <a href="/tags/AI-%E9%9F%B3%E4%B9%90%E5%BA%94%E7%94%A8/" style="font-size: 10px;">AI 音乐应用</a> <a href="/tags/AI%E5%88%9B%E4%BD%9C/" style="font-size: 10px;">AI创作</a> <a href="/tags/AI%E5%89%AF%E4%B8%9A/" style="font-size: 10px;">AI副业</a> <a href="/tags/AI%E5%8F%98%E7%8E%B0/" style="font-size: 10px;">AI变现</a> <a href="/tags/AI%E5%AE%89%E5%85%A8/" style="font-size: 10px;">AI安全</a> <a href="/tags/AI%E5%AE%9E%E6%88%98/" style="font-size: 10px;">AI实战</a> <a href="/tags/AI%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">AI编程</a> <a href="/tags/AI%E7%BF%BB%E5%94%B1/" style="font-size: 10px;">AI翻唱</a> <a href="/tags/AI%E8%A7%86%E9%A2%91/" style="font-size: 10px;">AI视频</a> <a href="/tags/AI%E8%A7%86%E9%A2%91%E7%94%9F%E6%88%90/" style="font-size: 10px;">AI视频生成</a> <a href="/tags/AI%E9%85%8D%E9%9F%B3/" style="font-size: 10px;">AI配音</a> <a href="/tags/API/" style="font-size: 16px;">API</a> <a href="/tags/API-Key/" style="font-size: 11px;">API Key</a> <a href="/tags/API-Platform/" style="font-size: 10px;">API Platform</a> <a href="/tags/Ace-Data-Cloud/" style="font-size: 15px;">Ace Data Cloud</a> <a href="/tags/Ace-Data-Cloud-Studio/" style="font-size: 14px;">Ace Data Cloud Studio</a> <a href="/tags/Ace-Data-Studio/" style="font-size: 11px;">Ace Data Studio</a> <a href="/tags/Ace-Gift-Card/" style="font-size: 10px;">Ace Gift Card</a> <a href="/tags/AceData-Cloud/" style="font-size: 19px;">AceData Cloud</a> <a href="/tags/AceData-Studio/" style="font-size: 11px;">AceData Studio</a> <a href="/tags/AceDataCloud/" style="font-size: 18px;">AceDataCloud</a> <a href="/tags/Ajax/" style="font-size: 12px;">Ajax</a> <a href="/tags/Audios/" style="font-size: 10px;">Audios</a> <a href="/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/tags/Bootstrap/" style="font-size: 11px;">Bootstrap</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CQC/" style="font-size: 10px;">CQC</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CSS-%E5%8F%8D%E7%88%AC%E8%99%AB/" style="font-size: 10px;">CSS 反爬虫</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Claude-Code/" style="font-size: 11px;">Claude Code</a> <a href="/tags/Codex/" style="font-size: 11px;">Codex</a> <a href="/tags/Codex-CLI/" style="font-size: 10px;">Codex CLI</a> <a href="/tags/Coding-Plan/" style="font-size: 10px;">Coding Plan</a> <a href="/tags/Cookie/" style="font-size: 10px;">Cookie</a> <a href="/tags/Credits/" style="font-size: 10px;">Credits</a> <a href="/tags/David-Robinson/" style="font-size: 10px;">David Robinson</a> <a href="/tags/Django/" style="font-size: 10px;">Django</a> <a href="/tags/Eclipse/" style="font-size: 11px;">Eclipse</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/FFmpeg/" style="font-size: 10px;">FFmpeg</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/Fish-TTS/" style="font-size: 10px;">Fish TTS</a> <a href="/tags/Function-Calling/" style="font-size: 10px;">Function Calling</a> <a href="/tags/GEO/" style="font-size: 10px;">GEO</a> <a href="/tags/GIF/" style="font-size: 11px;">GIF</a> <a href="/tags/GLM/" style="font-size: 10px;">GLM</a> <a href="/tags/GPT-Image/" style="font-size: 11px;">GPT Image</a> <a href="/tags/GPT-Image-2/" style="font-size: 12px;">GPT Image 2</a> <a href="/tags/GPT-Image-2-5/" style="font-size: 10px;">GPT Image 2.5</a> <a href="/tags/GPT-Image-2-6/" style="font-size: 12px;">GPT Image 2.6</a> <a href="/tags/GPT-6/" style="font-size: 10px;">GPT-6</a> <a href="/tags/GPT-6-Astra/" style="font-size: 11px;">GPT-6 Astra</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 13px;">GitHub</a> <a href="/tags/Google-SERP/" style="font-size: 12px;">Google SERP</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTTP/" style="font-size: 11px;">HTTP</a> <a href="/tags/Hailuo/" style="font-size: 10px;">Hailuo</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Hook/" style="font-size: 10px;">Hook</a> <a href="/tags/IP/" style="font-size: 10px;">IP</a> <a href="/tags/IT/" style="font-size: 10px;">IT</a> <a href="/tags/Images/" style="font-size: 10px;">Images</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/JavaScript/" style="font-size: 14px;">JavaScript</a> <a href="/tags/K8s/" style="font-size: 10px;">K8s</a> <a href="/tags/Kimi-Code/" style="font-size: 10px;">Kimi Code</a> <a href="/tags/Kling/" style="font-size: 10px;">Kling</a> <a href="/tags/LOGO/" style="font-size: 10px;">LOGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Lip-Sync/" style="font-size: 10px;">Lip Sync</a> <a href="/tags/MCP/" style="font-size: 12px;">MCP</a> <a href="/tags/MIUI/" style="font-size: 10px;">MIUI</a>
+              </div>
+              <script>
+                const tagsColors = ['#00a67c', '#5cb85c', '#d9534f', '#567e95', '#b37333', '#f4843d', '#15a287']
+                const tagsElements = document.querySelectorAll('.sidebar-panel-tags .content a')
+                tagsElements.forEach((item) =>
+                {
+                  item.style.backgroundColor = tagsColors[Math.floor(Math.random() * tagsColors.length)]
+                })
+
+              </script>
+            </div>
+          </div>
+        </aside>
+        <div id="sidebar-dimmer"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+          <span class="author" itemprop="copyrightHolder">崔庆才丨静觅</span> &copy; <span itemprop="copyrightYear">2026</span>
+          <span class="with-love">
+            <i class="fa fa-heart"></i>
+          </span>
+          <a href="https://cuiqingcai.com/sitemap.xml" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <a href="https://cuiqingcai.com/sitemap.html" style="display:none" title="爬虫教程" target="_blank"><strong>爬虫教程</strong></a>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-chart-area"></i>
+          </span>
+          <span title="站点总字数">4.4m</span>
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-coffee"></i>
+          </span>
+          <span title="站点阅读时长">66:38</span>
+        </div>
+        <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动 </div>
+        <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备18015597号-1 </a>
+        </div>
+        <script>
+          (function ()
+          {
+            function leancloudSelector(url)
+            {
+              url = encodeURI(url);
+              return document.getElementById(url).querySelector('.leancloud-visitors-count');
+            }
+
+            function addCount(Counter)
+            {
+              var visitors = document.querySelector('.leancloud_visitors');
+              var url = decodeURI(visitors.id);
+              var title = visitors.dataset.flagTitle;
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                if (results.length > 0)
+                {
+                  var counter = results[0];
+                  leancloudSelector(url).innerText = counter.time + 1;
+                  Counter('put', '/classes/Counter/' + counter.objectId,
+                  {
+                    time:
+                    {
+                      '__op': 'Increment',
+                      'amount': 1
+                    }
+                  }).catch(error =>
+                  {
+                    console.error('Failed to save visitor count', error);
+                  });
+                }
+                else
+                {
+                  Counter('post', '/classes/Counter',
+                  {
+                    title,
+                    url,
+                    time: 1
+                  }).then(response => response.json()).then(() =>
+                  {
+                    leancloudSelector(url).innerText = 1;
+                  }).catch(error =>
+                  {
+                    console.error('Failed to create', error);
+                  });
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+
+            function showTime(Counter)
+            {
+              var visitors = document.querySelectorAll('.leancloud_visitors');
+              var entries = [...visitors].map(element =>
+              {
+                return decodeURI(element.id);
+              });
+              Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify(
+              {
+                url:
+                {
+                  '$in': entries
+                }
+              }))).then(response => response.json()).then((
+              {
+                results
+              }) =>
+              {
+                for (let url of entries)
+                {
+                  let target = results.find(item => item.url === url);
+                  leancloudSelector(url).innerText = target ? target.time : 0;
+                }
+              }).catch(error =>
+              {
+                console.error('LeanCloud Counter Error', error);
+              });
+            }
+            let
+            {
+              app_id,
+              app_key,
+              server_url
+            } = {
+              "enable": true,
+              "app_id": "6X5dRQ0pnPWJgYy8SXOg0uID-gzGzoHsz",
+              "app_key": "ziLDVEy73ne5HtFTiGstzHMS",
+              "server_url": "https://6x5drq0p.lc-cn-n1-shared.com",
+              "security": false
+            };
+
+            function fetchData(api_server)
+            {
+              var Counter = (method, url, data) =>
+              {
+                return fetch(`${api_server}/1.1${url}`,
+                {
+                  method,
+                  headers:
+                  {
+                    'X-LC-Id': app_id,
+                    'X-LC-Key': app_key,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(data)
+                });
+              };
+              if (CONFIG.page.isPost)
+              {
+                if (CONFIG.hostname !== location.hostname) return;
+                addCount(Counter);
+              }
+              else if (document.querySelectorAll('.post-title-link').length >= 1)
+              {
+                showTime(Counter);
+              }
+            }
+            let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+            if (api_server)
+            {
+              fetchData(api_server);
+            }
+            else
+            {
+              fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id).then(response => response.json()).then((
+              {
+                api_server
+              }) =>
+              {
+                fetchData('https://' + api_server);
+              });
+            }
+          })();
+
+        </script>
+      </div>
+      <div class="footer-stat">
+        <span id="cnzz_stat_icon_1279355174"></span>
+        <script type="text/javascript">
+          document.write(unescape("%3Cspan id='cnzz_stat_icon_1279355174'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279355174%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));
+
+        </script>
+      </div>
+    </footer>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/schemes/pisces.js"></script>
+  <script src="/.js"></script>
+  <script src="/js/next-boot.js"></script>
+  <script src="/.js"></script>
+  <script>
+    (function ()
+    {
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x = document.getElementsByTagName("link");
+      //Find the last canonical URL
+      if (x.length > 0)
+      {
+        for (i = 0; i < x.length; i++)
+        {
+          if (x[i].rel.toLowerCase() == 'canonical' && x[i].href)
+          {
+            canonicalURL = x[i].href;
+          }
+        }
+      }
+      //Get protocol
+      if (!canonicalURL)
+      {
+        curProtocol = window.location.protocol.split(':')[0];
+      }
+      else
+      {
+        curProtocol = canonicalURL.split(':')[0];
+      }
+      //Get current URL if the canonical URL does not exist
+      if (!canonicalURL) canonicalURL = window.location.href;
+      //Assign script content. Replace current URL with the canonical URL
+      ! function ()
+      {
+        var e = /([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,
+          r = canonicalURL,
+          t = document.referrer;
+        if (!e.test(r))
+        {
+          var n = (String(curProtocol).toLowerCase() === 'https') ? "https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif" : "//api.share.baidu.com/s.gif";
+          t ? (n += "?r=" + encodeURIComponent(document.referrer), r && (n += "&l=" + r)) : r && (n += "?l=" + r);
+          var i = new Image;
+          i.src = n
+        }
+      }(window);
+    })();
+
+  </script>
+  <script src="/js/local-search.js"></script>
+  <script src="/.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+  <script>
+    NexT.utils.loadComments(document.querySelector('#gitalk-container'), () =>
+    {
+      NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () =>
+      {
+        var gitalk = new Gitalk(
+        {
+          perPage: : 100,
+          clientID: '4c86ce1d7c4fbb3b277c',
+          clientSecret: '4927beb0f90e2c07e66c99d9d2529cf3eb8ac8e4',
+          repo: 'Blog',
+          owner: 'germey',
+          admin: ['germey'],
+          id: 'e40c5821e82f933a5d9f43940aa5e444',
+          language: 'zh-CN',
+          distractionFreeMode: true
+        });
+        gitalk.render('gitalk-container');
+      }, window.Gitalk);
+    });
+
+  </script>
+</body>
+
+</html>
